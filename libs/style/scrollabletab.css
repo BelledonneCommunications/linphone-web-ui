@@ -1,0 +1,76 @@
+/*scrollable tabs css*/
+.ui-scrollable-tabs {
+	overflow: hidden;
+	position: relative;
+}
+
+.ui-scrollable-tabs .ui-tabs-nav {
+	width: 1000000px;
+	padding: 1px 0 0 1px;
+	border-left: none;
+	border-right: none;
+	padding-top: 1px;
+	position: relative;
+}
+
+.ui-scrollable-tabs .ui-tabs .ui-tabs-closable li a {
+	padding-right: 5px;
+}
+
+.ui-scrollable-tabs .ui-tabs-nav-arrows {
+	left: 0;
+	margin: 0;
+	margin: 0 5px;
+	padding: 0;
+	position: absolute;
+	right: 0;
+	top: 5px;
+	height: 25px;
+}
+
+/*IE7 fix*/
+*:first-child+html .ui-scrollable-tabs .ui-tabs-nav-arrows {
+	z-index: 1;
+}
+
+.ui-scrollable-tabs .ui-tabs .ui-tabs-nav li {
+	margin: 0 1px 0;
+}
+
+.ui-tabs-nav li .ui-tabs-close {
+	float: left;
+	margin-top: 3px;
+	margin-right: 4px;
+	border: none;
+	cursor: pointer;
+}
+
+.ui-scrollable-tabs .ui-tabs-nav-arrows .ui-tabs-arrow-next {
+	float: right;
+}
+
+.ui-scrollable-tabs .ui-tabs-nav-arrows .ui-tabs-arrow-previous {
+	float: left;
+}
+
+.ui-scrollable-tabs .ui-tabs-nav-arrows li {
+	list-style: none;
+	position: relative;
+	cursor: pointer;
+	margin: 0;
+	padding: 0;
+	display: none;
+	z-index: 1;
+	height: 23px;
+}
+
+.ui-scrollable-tabs .ui-tabs-nav-arrows li a {
+	display: block;
+	margin-top: 3px;
+}
+
+.ui-scrollable-tabs .ui-tabs-nav-arrows li a:focus {
+	outline: 0px;
+}
+
+/*End of scrollable tabs css*/

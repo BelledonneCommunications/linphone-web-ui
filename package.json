@@ -1,0 +1,23 @@
+{
+  "name": "linphone-js",
+  "title": "Linphone JS",
+  "description": "",
+  "version": "0.0.1e",
+  "homepage": "",
+  "author": {
+    "name": "AUTHORS.txt"
+  },
+  "repository": {
+  },
+  "bugs": {
+  },
+  "licenses": [
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "0.3.9",
+    "grunt-css": "0.1.1",
+    "grunt-html": "0.1.1"
+  },
+  "keywords": []
+}
