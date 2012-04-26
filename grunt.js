@@ -150,7 +150,7 @@ var
   grunt.registerTask('default', 'concat min cssmin copy');
   
   // Dev mode
-  grunt.registerTask('dev', 'server watch');
+  grunt.registerTask('dev', 'default server watch');
   
   grunt.registerMultiTask('copy', 'Copy files to destination folder and replace @VERSION with pkg.version', function() {
 	function replaceVersion( source ) {
