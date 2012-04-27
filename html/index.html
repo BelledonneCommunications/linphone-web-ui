@@ -1,6 +1,4 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<!-- saved from url=(0013)about:internet -->
-<!-- The above comment makes IE treat this as a web page -->
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
 <title>Linphone-JS</title>
@@ -18,6 +16,7 @@
 <script type="text/javascript" src="js/jquery-ui-1.8.17.custom.min.js"></script>
 <script type="text/javascript" src="js/jquery.scrollabletab.js"></script>
 <script type="text/javascript" src="js/jquery.metadata.js"></script>
+<script type="text/javascript" src="js/jquery.client.js"></script>
 <script type="text/javascript" src="js/jsrender.js"></script>
 <script type="text/javascript" src="js/i18n.js"></script>
 <script type="text/javascript" src="js/linphone-core.js"></script>
@@ -236,7 +235,11 @@ body {
 
 	<script type="text/javascript">
 		// Utils 
-		var _objectCodeBase = "http://site.foo/plugin.exe"
+		var _objectCodeBase = ""
+		if(jQuery.client.os == "Windows")
+		   _objectCodeBase = "linphone-web.msi"
+		else if(jQuery.client.os == "Linux" && jQuery.client.browser == "Firefox")
+		   _objectCodeBase = "linphone-web.xpi"
 		var _coreTemplate = '<object id="core" type="application/x-linphone-web" width="0" height="0" codebase="'+_objectCodeBase+'"> \
 							 	<param name="onload" value="_coreLoad" /> \
 							 	Linphone Core \
@@ -993,6 +996,11 @@ body {
 				jQuery('.linphone .window .install').hide()
 				jQuery('.linphone .window .load').show()
 				return true
+			} else {
+				if(jQuery.client.os == "Linux" && jQuery.client.browser == "Firefox") {
+					if (InstallTrigger.updateEnabled())
+  						InstallTrigger.install({"Linphone Web": _objectCodeBase});
+				}
 			}
 			return false
 		}
