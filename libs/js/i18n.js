@@ -4,7 +4,6 @@ jQuery.i18n.data = {}
 jQuery.i18n.change = function(locale) {
 	if (locale != jQuery.i18n.locale) {
 		jQuery.i18n.locale = locale
-		console.log('Change locale: ' + jQuery.i18n.locale)
 		jQuery.i18n.update(jQuery('*'))
 	}
 }

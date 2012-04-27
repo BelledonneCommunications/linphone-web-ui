@@ -290,13 +290,13 @@ body {
 			var locale = (navigator.language) ? navigator.language : navigator.userLanguage
 			locale = locale.replace('-', '_')
 			consoleLog('Browser language: ' + locale)
-
 			if (localData()['locale'] != null) {
 				jQuery.i18n.change(localData()['locale'])
 			} else {
 				// Excat Match 
 				for (a in jQuery.linphone.locales) {
 					if (jQuery.linphone.locales[a].locale == locale) {
+						consoleLog('Change locale: ' + jQuery.linphone.locales[a].locale)
 						jQuery.i18n.change(jQuery.linphone.locales[a].locale)
 						return;
 					}
@@ -305,6 +305,7 @@ body {
 				// Start Match 
 				for (a in jQuery.linphone.locales) {
 					if (jQuery.linphone.locales[a].locale.search(locale) == 0) {
+						consoleLog('Change locale: ' + jQuery.linphone.locales[a].locale)
 						jQuery.i18n.change(jQuery.linphone.locales[a].locale)
 						return;
 					}
