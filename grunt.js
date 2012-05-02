@@ -156,10 +156,12 @@ var
   grunt.loadNpmTasks( "grunt-html" );  
 
   // Default task.
+  grunt.registerTask('compile', 'concat min cssmin copy');
+ 
   grunt.registerTask('default', 'concat lint csslint min cssmin copy');
-  
+ 
   // Dev mode
-  grunt.registerTask('dev', 'default server watch');
+  grunt.registerTask('dev', 'compile server watch');
   
   grunt.registerMultiTask('copy', 'Copy files to destination folder and replace @VERSION with pkg.version', function() {
 	function replaceVersion( source ) {
