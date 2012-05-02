@@ -623,31 +623,6 @@ body {
 			// Tabs 
 			jQuery('.linphone .window .codecs-options .content .tabs').tabs({})
 
-			jQuery(".linphone .window .tools .hp-slider").slider({
-				orientation : 'vertical',
-				change : function(event, ui) {
-					if (localData())
-						localData()['play_level'] = ui.value
-					core().setPlayLevel(ui.value)
-				}
-			});
-			jQuery(".linphone .window .tools .mic-slider").slider({
-				orientation : 'vertical',
-				change : function(event, ui) {
-					if (localData())
-						localData()['rec_level'] = ui.value
-					core().setRecLevel(ui.value)
-				}
-			});
-			jQuery(".linphone .window .tools .bell-slider").slider({
-				orientation : 'vertical',
-				change : function(event, ui) {
-					if (localData())
-						localData()['ring_level'] = ui.value
-					core().setRingLevel(ui.value)
-				}
-			});
-
 			jQuery(document).on('click', '.linphone .window .dial-button', function(event) {
 				call_invite(jQuery(event.target).parent().find('.dest').val())
 			})

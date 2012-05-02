@@ -5,24 +5,25 @@ var
 
   coreModules = [
     'linphone.core',
-    'linpĥone.core.enums'
+    'linphone.core.enums'
   ],
   uiModules = [
     'linphone.ui',
-    'linphone.i18n'
+    'linphone.ui.slider',
+    'linphone.ui.i18n'
   ],
 
   coreJSFiles = coreModules.map(function( module ) {
         return 'core/' + module + '.js';
-  }).concat(grunt.file.expandFiles( "core/*.js" )),
+  }),
 
   uiJSFiles = uiModules.map(function( module ) {
 	return 'ui/' + module + '.js';
-  }).concat(grunt.file.expandFiles( "ui/*.js" )),
+  }),
 
   uiCSSFiles = uiModules.map(function( module ) {
         return 'ui/' + module + '.css';
-  }).concat(grunt.file.expandFiles( "ui/*.css" ));
+  });
 
   function stripBanner( files ) {
 	return files.map(function( file ) {

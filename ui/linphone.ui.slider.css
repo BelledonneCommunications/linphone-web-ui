@@ -1,0 +1,61 @@
+/* 
+ *
+ * Sliders stuff
+ *
+ */
+.linphone .window .tools .mic-icon {
+	display: inline-block;
+	background-image: url('images/microphone.png');
+	margin-left: 1px;
+	margin-right: 1px;
+	position: relative;
+}
+
+.linphone .window .tools .mic-slider {
+	display: none;
+	position: absolute;
+	height: 100px;
+	bottom: 0px;
+	margin-bottom: 100%;
+	margin-left: 50%;
+	left: -6px;
+	width: 10px;
+}
+
+.linphone .window .tools .hp-icon {
+	display: inline-block;
+	background-image: url('images/headphone.png');
+	margin-left: 1px;
+	margin-right: 1px;
+	position: relative;
+}
+
+.linphone .window .tools .hp-slider {
+	display: none;
+	position: absolute;
+	height: 100px;
+	bottom: 0px;
+	margin-bottom: 100%;
+	margin-left: 50%;
+	left: -6px;
+	width: 10px;
+}
+
+.linphone .window .tools .bell-icon {
+	display: inline-block;
+	background-image: url('images/bell.png');
+	margin-left: 1px;
+	margin-right: 1px;
+	position: relative;
+}
+
+.linphone .window .tools .bell-slider {
+	display: none;
+	position: absolute;
+	height: 100px;
+	bottom: 0px;
+	margin-bottom: 100%;
+	margin-left: 50%;
+	left: -6px;
+	width: 10px;
+}
