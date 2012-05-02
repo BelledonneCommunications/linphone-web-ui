@@ -267,7 +267,7 @@ body {
 		}
 
 		function _videoLoad(obj) {
-			jQuery.linphone.video_data[obj.magic](obj)
+			linphone.instance.video_data[obj.magic](obj)
 		}
 
 		var _addEvent;
@@ -286,7 +286,7 @@ body {
 		}
 
 		function loadLinphoneI18n() {
-			jQuery.i18n.data = jQuery.linphone.i18n
+			jQuery.i18n.data = linphone.ui.i18n
 			var locale = (navigator.language) ? navigator.language : navigator.userLanguage
 			locale = locale.replace('-', '_')
 			consoleLog('Browser language: ' + locale)
@@ -294,25 +294,25 @@ body {
 				jQuery.i18n.change(localData()['locale'])
 			} else {
 				// Excat Match 
-				for (a in jQuery.linphone.locales) {
-					if (jQuery.linphone.locales[a].locale == locale) {
-						consoleLog('Change locale: ' + jQuery.linphone.locales[a].locale)
-						jQuery.i18n.change(jQuery.linphone.locales[a].locale)
+				for (a in linphone.instance.locales) {
+					if (linphone.instance.locales[a].locale == locale) {
+						consoleLog('Change locale: ' + linphone.instance.locales[a].locale)
+						jQuery.i18n.change(linphone.instance.locales[a].locale)
 						return;
 					}
 				}
 
 				// Start Match 
-				for (a in jQuery.linphone.locales) {
-					if (jQuery.linphone.locales[a].locale.search(locale) == 0) {
-						consoleLog('Change locale: ' + jQuery.linphone.locales[a].locale)
-						jQuery.i18n.change(jQuery.linphone.locales[a].locale)
+				for (a in linphone.instance.locales) {
+					if (linphone.instance.locales[a].locale.search(locale) == 0) {
+						consoleLog('Change locale: ' + linphone.instance.locales[a].locale)
+						jQuery.i18n.change(linphone.instance.locales[a].locale)
 						return;
 					}
 				}
 
 				// Take default (first) 
-				jQuery.i18n.change(jQuery.linphone.locales[0].locale)
+				jQuery.i18n.change(linphone.instance.locales[0].locale)
 			}
 		}
 
@@ -361,12 +361,12 @@ body {
 			element.parent().appendTo(jQuery('.linphone'))
 			element.dialog("open")
 			var template = jQuery(jQuery('#Linphone-Video').render({
-				magic : jQuery.linphone.video_number
+				magic : linphone.instance.video_number
 			}))
 			var object = template.find('object')
-			consoleLog('Create VideoView ' + jQuery.linphone.video_number)
-			jQuery.linphone.video_data[jQuery.linphone.video_number] = onOpen
-			jQuery.linphone.video_number = jQuery.linphone.video_number + 1
+			consoleLog('Create VideoView ' + linphone.instance.video_number)
+			linphone.instance.video_data[linphone.instance.video_number] = onOpen
+			linphone.instance.video_number = linphone.instance.video_number + 1
 			element.append(template)
 			return element
 		}
@@ -374,7 +374,7 @@ body {
 		function destroyVideoView(element) {
 			var object = element.find('object').get(0)
 			consoleLog('Destroy VideoView ' + object.magic)
-			jQuery.linphone.video_data.splice(object.magic, 1);
+			linphone.instance.video_data.splice(object.magic, 1);
 			element.dialog('destroy')
 			element.remove()
 		}
@@ -426,7 +426,7 @@ body {
 
 		function updateVideoView() {
 			if (localData()['enable_video'] == 1) {
-				jQuery.linphone.video_view = createVideoView('video', function(object) {
+				linphone.instance.video_view = createVideoView('video', function(object) {
 					consoleLog('Load VideoView ' + object.magic)
 					object.setBackgroundColor(0, 0, 0)
 					core().setNativeVideoWindowId(object.window)
@@ -436,18 +436,18 @@ body {
 					updateSelfView()
 				})
 			} else {
-				if (jQuery.linphone.video_view != null) {
+				if (linphone.instance.video_view != null) {
 					core().enableVideo(false)
 					core().setNativeVideoWindowId(0)
-					destroyVideoView(jQuery.linphone.video_view)
-					jQuery.linphone.video_view = null
+					destroyVideoView(linphone.instance.video_view)
+					linphone.instance.video_view = null
 				}
 			}
 		}
 
 		function updateSelfView() {
 			if (localData()['enable_video'] == 1 && localData()['enable_video_self'] == 1) {
-				jQuery.linphone.self_view = createVideoView('locale', function(object) {
+				linphone.instance.self_view = createVideoView('locale', function(object) {
 					consoleLog('Load VideoView ' + object.magic)
 					object.setBackgroundColor(0, 0, 0)
 					core().setNativePreviewWindowId(object.window)
@@ -457,11 +457,11 @@ body {
 					updateSelfView()
 				})
 			} else {
-				if (jQuery.linphone.self_view != null) {
+				if (linphone.self_view != null) {
 					core().enableVideoPreview(false)
 					core().setNativePreviewWindowId(0)
-					destroyVideoView(jQuery.linphone.self_view)
-					jQuery.linphone.self_view = null
+					destroyVideoView(linphone.instance.self_view)
+					linphone.instance.self_view = null
 				}
 			}
 		}
@@ -487,7 +487,7 @@ body {
 		function globalStateChanged(state, message) {
 			addLog('State(' + state + '): ' + message)
 			jQuery('.linphone .window > .footer > .status').html(
-					jQuery.i18n.get('globalstatetext.' + LinphoneGlobalStateText[state]))
+					jQuery.i18n.get('globalstatetext.' + linphone.core.enum.getGlobalStateText(state)))
 		}
 
 		function callStateChanged(call, state, message) {
@@ -500,7 +500,7 @@ body {
 
 			var element = findCallTab(call);
 			if (element) {
-				var content = jQuery('#Linphone-Call-' + LinphoneCallStateText[state]).render(element.data('data'))
+				var content = jQuery('#Linphone-Call-' + linphone.core.enum.getCallStateText(state)).render(element.data('data'))
 				element.html(content)
 				jQuery.i18n.update(element, true)
 			} else {
@@ -545,7 +545,7 @@ body {
 
 		function create_call(obj, template) {
 			if (obj) {
-				var call_number = jQuery.linphone.call_number
+				var call_number = linphone.instance.call_number
 				consoleLog('Add tab call-' + call_number)
 				var div = jQuery('<div id="call-'+call_number+'" class="tab"></div>')
 				jQuery('#linphone .window > .content .tabs').append(div).tabs('add', '#call-' + call_number,
@@ -557,7 +557,7 @@ body {
 				var content = jQuery(template).render(obj)
 				element.html(content)
 				jQuery.i18n.update(element, true)
-				jQuery.linphone.call_number++
+				linphone.instance.call_number++
 			}
 		}
 		
@@ -569,8 +569,8 @@ body {
 			// Locales
 			var menu = jQuery('.linphone .window .tools .locales-menu')
 			menu.empty()
-			for (a in jQuery.linphone.locales) {
-				var item = jQuery.linphone.locales[a]
+			for (a in linphone.ui.locales) {
+				var item = linphone.ui.locales[a]
 				var element = jQuery(jQuery('#Linphone-LocaleItem').render(item))
 				element.find('a').data('data', item)
 				menu.append(element)
@@ -579,7 +579,7 @@ body {
 		
 		jQuery.views.registerHelpers({
 			getLinphoneRegistrationStateText: function(val) {
-				return LinphoneRegistrationStateText[val];
+				return linphone.core.enum.getRegistrationStateText(val);
 			}
 		});
 		
@@ -600,12 +600,13 @@ body {
 				});
 			};
 
-			jQuery.linphone.call_number = 1
-			jQuery.linphone.video_number = 1
-			jQuery.linphone.video_data = new Array()
-			jQuery.linphone.self_view = null
-			jQuery.linphone.video_view = null
-			jQuery.linphone.current_proxy_config = null
+			linphone.instance = {}
+			linphone.instance.call_number = 1
+			linphone.instance.video_number = 1
+			linphone.instance.video_data = new Array()
+			linphone.instance.self_view = null
+			linphone.instance.video_view = null
+			linphone.instance.current_proxy_config = null
 			
 			// Tabs 
 			jQuery('.linphone .window > .content .tabs').tabs({
@@ -682,7 +683,7 @@ body {
 			})
 
 			jQuery(document).on('click', '.linphone .window .accounts-options .add', function(event) {
-				jQuery.linphone.current_proxy_config = null
+				linphone.instance.current_proxy_config = null
 				jQuery('.linphone .window .account-form .content button.remove').hide()
 				jQuery('.linphone .window .account-form .content input.identity').val("sip:")
 				jQuery('.linphone .window .account-form .content input.proxy').val("sip:")
@@ -694,7 +695,7 @@ body {
 			
 			jQuery(document).on('click', '.linphone .window .accounts-options .content tbody tr', function(event) {
 				data = jQuery(this).data('data')
-				jQuery.linphone.current_proxy_config = data
+				linphone.instance.current_proxy_config = data
 				jQuery('.linphone .window .account-form .content button.remove').show()
 				jQuery('.linphone .window .account-form .content input.identity').val(data.getIdentity())
 				jQuery('.linphone .window .account-form .content input.proxy').val(data.getServerAddr())
@@ -706,7 +707,7 @@ body {
 			
 			jQuery(document).on('click', '.linphone .window .account-form .remove', function(event) {
 				consoleLog('Remove ProxyConfig')
-				var proxyConfig = jQuery.linphone.current_proxy_config
+				var proxyConfig = linphone.instance.current_proxy_config
 				core().removeProxyConfig(proxyConfig)
 				
 				refreshAccountList()
@@ -754,13 +755,13 @@ body {
 					}
 					
 					var proxyConfig = null
-					if(jQuery.linphone.current_proxy_config == null) {
+					if(linphone.instance.current_proxy_config == null) {
 						consoleLog('New ProxyConfig')
 						proxyConfig = core().newProxyConfig()
 					} else {
 						consoleLog('Use ProxyConfig')
-						proxyConfig = jQuery.linphone.current_proxy_config
-						jQuery.linphone.current_proxy_config.edit()
+						proxyConfig = linphone.instance.current_proxy_config
+						linphone.instance.current_proxy_config.edit()
 					}
 					
 					// Set values 
@@ -770,10 +771,10 @@ body {
 					proxyConfig.setExpires(expires)
 					proxyConfig.enableRegister(register)
 					
-					if(jQuery.linphone.current_proxy_config == null) {
+					if(linphone.instance.current_proxy_config == null) {
 						core().addProxyConfig(proxyConfig)
 					} else {
-						jQuery.linphone.current_proxy_config.done()
+						linphone.instance.current_proxy_config.done()
 					}
 					
 					refreshAccountList()

@@ -4,24 +4,32 @@ var
   theme = 'default',
 
   coreModules = [
-    'linphone',
-    'linphone.i18n'
+    'linphone.core',
+    'linpĥone.core.enum'
   ],
   uiModules = [
-    'linphone'
+    'linphone.ui',
+    'linphone.i18n'
   ],
 
   coreJSFiles = coreModules.map(function( module ) {
         return 'core/' + module + '.js';
-  }),
+  }).concat(grunt.file.expandFiles( "core/*.js" )),
 
   uiJSFiles = uiModules.map(function( module ) {
 	return 'ui/' + module + '.js';
-  }),
+  }).concat(grunt.file.expandFiles( "ui/*.js" )),
 
   uiCSSFiles = uiModules.map(function( module ) {
         return 'ui/' + module + '.css';
-  });
+  }).concat(grunt.file.expandFiles( "ui/*.css" ));
+
+  function stripBanner( files ) {
+	return files.map(function( file ) {
+		return file;
+		//return '<strip_all_banners:' + file + '>';
+	});
+  };
 
   // Project configuration.
   grunt.initConfig({
@@ -48,15 +56,15 @@ var
     },
     concat: {
       coreJS: {
-	src: ['<banner:meta.banner>', coreJSFiles],
+	src: ['<banner:meta.banner>', stripBanner(coreJSFiles)],
         dest: 'dist/js/linphone-core.js'
       },
       uiJS: {
-        src: ['<banner:meta.banner>', uiJSFiles],
+        src: ['<banner:meta.banner>', stripBanner(uiJSFiles)],
         dest: 'dist/js/linphone-ui.js'
       },
       uiCSS: {
-        src: ['<banner:meta.banner>', uiCSSFiles],
+        src: ['<banner:meta.banner>', stripBanner(uiCSSFiles)],
         dest: 'dist/style/linphone-ui.css'
       }
     },
