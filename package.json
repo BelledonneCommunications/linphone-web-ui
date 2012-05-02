@@ -12,6 +12,10 @@
   "bugs": {
   },
   "licenses": [
+    {
+      "type": "GPL",
+      "url": "http://www.opensource.org/licenses/GPL-2.0"
+    }
   ],
   "dependencies": {},
   "devDependencies": {

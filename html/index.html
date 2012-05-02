@@ -294,25 +294,25 @@ body {
 				jQuery.i18n.change(localData()['locale'])
 			} else {
 				// Excat Match 
-				for (a in linphone.instance.locales) {
-					if (linphone.instance.locales[a].locale == locale) {
-						consoleLog('Change locale: ' + linphone.instance.locales[a].locale)
-						jQuery.i18n.change(linphone.instance.locales[a].locale)
+				for (a in linphone.ui.locales) {
+					if (linphone.ui.locales[a].locale == locale) {
+						consoleLog('Change locale: ' + linphone.ui.locales[a].locale)
+						jQuery.i18n.change(linphone.ui.locales[a].locale)
 						return;
 					}
 				}
 
 				// Start Match 
-				for (a in linphone.instance.locales) {
-					if (linphone.instance.locales[a].locale.search(locale) == 0) {
-						consoleLog('Change locale: ' + linphone.instance.locales[a].locale)
-						jQuery.i18n.change(linphone.instance.locales[a].locale)
+				for (a in linphone.ui.locales) {
+					if (linphone.ui.locales[a].locale.search(locale) == 0) {
+						consoleLog('Change locale: ' + linphone.ui.locales[a].locale)
+						jQuery.i18n.change(linphone.ui.locales[a].locale)
 						return;
 					}
 				}
 
 				// Take default (first) 
-				jQuery.i18n.change(linphone.instance.locales[0].locale)
+				jQuery.i18n.change(linphone.ui.locales[0].locale)
 			}
 		}
 
@@ -864,6 +864,7 @@ body {
 						localData()['enable_video'] = 1
 						core().enableVideo(true)
 					}
+					updateVideoView()
 					updateSelfView()
 					jQuery('.linphone .window .tools .video-menu').fadeOut('fast');
 					jQuery('.linphone .window .tools .settings-menu').fadeOut('fast');
