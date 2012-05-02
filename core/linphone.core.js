@@ -1,2 +1,2 @@
-linphone = {}
-linphone.core = {}
+var linphone = {};
+linphone.core = {};

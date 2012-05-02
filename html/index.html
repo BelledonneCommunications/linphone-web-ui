@@ -487,7 +487,7 @@ body {
 		function globalStateChanged(state, message) {
 			addLog('State(' + state + '): ' + message)
 			jQuery('.linphone .window > .footer > .status').html(
-					jQuery.i18n.get('globalstatetext.' + linphone.core.enum.getGlobalStateText(state)))
+					jQuery.i18n.get('globalstatetext.' + linphone.core.enums.getGlobalStateText(state)))
 		}
 
 		function callStateChanged(call, state, message) {
@@ -500,7 +500,7 @@ body {
 
 			var element = findCallTab(call);
 			if (element) {
-				var content = jQuery('#Linphone-Call-' + linphone.core.enum.getCallStateText(state)).render(element.data('data'))
+				var content = jQuery('#Linphone-Call-' + linphone.core.enums.getCallStateText(state)).render(element.data('data'))
 				element.html(content)
 				jQuery.i18n.update(element, true)
 			} else {
@@ -579,7 +579,7 @@ body {
 		
 		jQuery.views.registerHelpers({
 			getLinphoneRegistrationStateText: function(val) {
-				return linphone.core.enum.getRegistrationStateText(val);
+				return linphone.core.enums.getRegistrationStateText(val);
 			}
 		});
 		

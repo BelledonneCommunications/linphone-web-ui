@@ -1,4 +1,5 @@
-linphone.ui = {}
+/*globals linphone */
+linphone.ui = {};
 
 linphone.ui.locales = [ {
 	name : 'English(US)',
@@ -16,4 +17,4 @@ linphone.ui.locales = [ {
 	name : 'Italiano',
 	locale : 'it_IT',
 	icon : 'style/images/flags/it.png'
-} ]
+} ];

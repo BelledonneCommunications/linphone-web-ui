@@ -5,7 +5,7 @@ var
 
   coreModules = [
     'linphone.core',
-    'linpĥone.core.enum'
+    'linpĥone.core.enums'
   ],
   uiModules = [
     'linphone.ui',
@@ -43,7 +43,8 @@ var
         ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */'
     },
     lint: {
-      files: ['grunt.js'] + coreJSFiles + uiJSFiles
+      core: coreJSFiles,
+      ui: uiJSFiles
     },
     csslint: {
       files: [] + uiCSSFiles
@@ -155,7 +156,7 @@ var
   grunt.loadNpmTasks( "grunt-html" );  
 
   // Default task.
-  grunt.registerTask('default', 'concat min cssmin copy');
+  grunt.registerTask('default', 'concat lint csslint min cssmin copy');
   
   // Dev mode
   grunt.registerTask('dev', 'default server watch');
