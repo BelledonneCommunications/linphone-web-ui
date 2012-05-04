@@ -51,17 +51,23 @@ body {
 		<div class="linphone ui-widget" id="linphone">
 			<div class="window ui-corner-all">
 				<div class="error overall ui-corner-all">
-					<div class="text"></div>
-					<button type="button" onclick="refresh()">Refresh</button>
+					<div class="text {translate: 'base.error.text'}"></div>
+					<button type="button" onclick="refresh()" class="reload {translate: 'base.error.reload'}"></button>
 				</div>
 				<div class="install overall ui-corner-all">
-					<div class="text">Install !</div>
-					<button type="button" onclick="refresh()">Refresh</button>
+					<div class="text {translate: 'base.install.text'}"></div>
+					<div class="unavailable {translate: 'base.install.unavailable'}"></div>
+					<div class="buttons"></div>
+					<br/><br/><button type="button" onclick="refresh()" class="reload {translate: 'base.install.reload'}"></button>
 				</div>
-				<div class="load ui-corner-all">
+				<div class="load overall ui-corner-all">
 					<img src="style/images/loading.gif" alt="..."
 						style="width: 50px; height: 50px; position: absolute; top: 50%; left: 50%; margin-left: -25px; margin-top: -25px;"></img>
 				</div>
+				<div class="javascript overall ui-corner-all">
+					<div class="text">Vous devez activer le Javascript pour utiliser le plugin<br/>You have to enable Javascript in order to use the plugin</div>
+				</div>
+				
 				<div class="header ui-corner-top">
 					<div class="text">Linphone</div>
 				</div>
@@ -234,17 +240,62 @@ body {
 	</div>
 
 	<script type="text/javascript">
+		var javascriptDetect = function () {
+			jQuery('.linphone .window .javascript').hide()
+		}		
+		
+		javascriptDetect()
+	
 		// Utils 
-		var _objectCodeBase = ""
-		//_objectCodeBase = "linphone-web.msi"
-		if(jQuery.client.os == "Windows")
-		   _objectCodeBase = "linphone-web.cab#Version=1,0,0,0"
-		else if(jQuery.client.os == "Linux" && jQuery.client.browser == "Firefox")
-		   _objectCodeBase = "linphone-web.xpi"
+		var _objectFiles = {
+			'Windows': {
+				'Explorer': 'linphone-web.cab',
+				'DEFAULT': 'linphone-web.msi'
+			},
+			'Linux': {
+				'Firefox': 'linphone-web.xpi',
+				'DEFAULT': 'linphone-web.tar.gz'
+			}
+		}
+		var _objectName = 'Linphone-Web'
+		var _objectVersion = '1.0.0.0'
+		var _objectFile = null
+		var _objectDetect = function (){
+			if(typeof _objectFiles[jQuery.client.os] !== 'undefined') {
+				if(typeof _objectFiles[jQuery.client.os][jQuery.client.browser] !== 'undefined') {
+					_objectFile = _objectFiles[jQuery.client.os][jQuery.client.browser]
+				} else {
+					_objectFile = _objectFiles[jQuery.client.os]['DEFAULT']
+				}
+			}
+			if(_objectFile !== null) {
+				var content = ''
+				content = '<button type="button" onclick="downloadPlugin(\''+_objectFile+'\')" class="{translate: \'base.install.download\'}">Download !</button>'
+				jQuery('.linphone .window .install .buttons').html(content)
+				jQuery.i18n.update(jQuery('.linphone .window .install .button'), true)
+			} else {
+				jQuery('.linphone .window .install .text').hide()
+				jQuery('.linphone .window .install .refresh').hide()
+				jQuery('.linphone .window .install .unavailable').show()
+			}
+		}
+		_objectDetect()
+		
+		var _objectCodeBase = ''
+		if(jQuery.client.os == 'Windows' && jQuery.client.browser == 'Explorer')
+		   _objectCodeBase = _objectFile + '#Version=' + _objectVersion.replace('.', ',')
+		else if(jQuery.client.os == 'Linux' && jQuery.client.browser == 'Firefox')
+		   _objectCodeBase = _objectFile
 		var _coreTemplate = '<object id="core" type="application/x-linphone-web" width="0" height="0" codebase="'+_objectCodeBase+'"> \
 							 	<param name="onload" value="_coreLoad" /> \
 							 	Linphone Core \
 							 </object>'
+			
+		function downloadPlugin(file) {
+			window.open(file, '_blank');
+		}		
+		//
+							 
 		var _localData = {}
 		function localData() {
 			if (typeof window['localStorage'] !== 'undefined')
@@ -323,12 +374,12 @@ body {
 
 		// Init functions 
 		function init2() {
-			loadLinphoneI18n()
 			populate_locales_menu()
 			jQuery(".linphone .window .tools .locales-menu").menu();
 		}
 
 		function init() {
+			loadLinphoneI18n()
 			consoleLog('Init LinphoneJS')
 			try
 			{
@@ -382,6 +433,8 @@ body {
 
 		function coreLoad() {
 			consoleLog('Load Core')
+			jQuery('.linphone .window .install').hide() // Force
+			
 			jQuery('#version_number').text(core().version)
 			addEvent(core(), 'globalStateChanged', globalStateChanged)
 			addEvent(core(), 'callStateChanged', callStateChanged)
@@ -950,12 +1003,13 @@ body {
 					data.enabled = !data.enabled
 				}
 			});
-			
+		
 			init()
 			refresh()
 		})
 
 		function detect() {
+			consoleLog('Detect')
 			if (typeof core() !== 'undefined' && typeof core().valid !== 'undefined' && core().valid) {
 				jQuery('.linphone .window .install').hide()
 				jQuery('.linphone .window .load').show()
@@ -970,6 +1024,7 @@ body {
 		}
 
 		function refresh() {
+			consoleLog('Refresh')
 			jQuery('.linphone .window .error').hide()
 			jQuery('#core').remove()
 			navigator.plugins.refresh(false);

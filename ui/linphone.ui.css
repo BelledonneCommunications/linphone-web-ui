@@ -41,15 +41,18 @@
 	text-align: center;
 }
 
+.linphone .window .install .unavailable {
+	display: none;
+}
+
 .linphone .window .load {
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	left: 0px;
-	right: 0px;
-	background-color: #FFFFFF;
 	z-index: 9997;
 	display: none;
+}
+
+.linphone .window .javascript {
+	text-align: center;
+	z-index: 10000;
 }
 
 /* 

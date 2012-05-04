@@ -1,5 +1,35 @@
 /*globals linphone */
 linphone.ui.i18n = {
+	base : {
+		error : {
+			text : {
+				en_US : 'An error occurs !',
+				fr_FR : 'Une erreur s\'est produite !'
+			},
+			reload : {
+				en_US : 'Reload',
+				fr_FR : 'Recharger'
+			}
+		},
+		install : {
+			text : {
+				en_US : 'The plugin is not installed. Please download it using the following button.',
+				fr_FR : 'Le plugin n\'est pas installé. Veuillez le télécharger en utilisant le bouton suivant.',
+			},
+			unavailable : {
+				en_US : 'Your operating system or your browser is not supported.',
+				fr_FR : 'Votre système d\'exploitation ou votre navigateur n\'est pas supporté.'
+			},
+			reload : {
+				en_US : 'Reload',
+				fr_FR : 'Recharger'
+			},
+			download : {
+				en_US : 'Download plugin',
+				fr_FR : 'Télécharger le plugin'
+			}
+		}
+	},
 	errors : {
 		core : {
 			1 : {
