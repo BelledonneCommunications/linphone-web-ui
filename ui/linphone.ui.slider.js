@@ -35,18 +35,21 @@ jQuery(function() {
 jQuery('html').click(function(event) {
 	var target = jQuery(event.target);
 
-	if (!target.is('.linphone .window .tools .hp-icon'))
+	if (!target.is('.linphone .window .tools .hp-icon')) {
 		jQuery('.linphone .window .tools .hp-slider').fadeOut('fast');
-	else
+	} else {
 		jQuery('.linphone .window .tools .hp-slider').fadeToggle('fast');
-
-	if (!target.is('.linphone .window .tools .mic-icon'))
+	}
+	
+	if (!target.is('.linphone .window .tools .mic-icon')) {
 		jQuery('.linphone .window .tools .mic-slider').fadeOut('fast');
-	else
+	} else {
 		jQuery('.linphone .window .tools .mic-slider').fadeToggle('fast');
-
-	if (!target.is('.linphone .window .tools .bell-icon'))
+	}
+	
+	if (!target.is('.linphone .window .tools .bell-icon')) {
 		jQuery('.linphone .window .tools .bell-slider').fadeOut('fast');
-	else
+	} else {
 		jQuery('.linphone .window .tools .bell-slider').fadeToggle('fast');
+	}
 });

@@ -236,8 +236,9 @@ body {
 	<script type="text/javascript">
 		// Utils 
 		var _objectCodeBase = ""
+		//_objectCodeBase = "linphone-web.msi"
 		if(jQuery.client.os == "Windows")
-		   _objectCodeBase = "linphone-web.msi"
+		   _objectCodeBase = "linphone-web.cab#Version=1,0,0,0"
 		else if(jQuery.client.os == "Linux" && jQuery.client.browser == "Firefox")
 		   _objectCodeBase = "linphone-web.xpi"
 		var _coreTemplate = '<object id="core" type="application/x-linphone-web" width="0" height="0" codebase="'+_objectCodeBase+'"> \
