@@ -1,4 +1,4 @@
-/* globals core, localData, jQuery */
+/*globals core,localData,jQuery*/
 
 // Transform hp/mic/bell div to slider
 jQuery(function() {

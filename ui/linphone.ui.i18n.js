@@ -1,4 +1,4 @@
-/*globals linphone */
+/*globals linphone*/
 linphone.ui.i18n = {
 	base : {
 		error : {
@@ -14,7 +14,7 @@ linphone.ui.i18n = {
 		install : {
 			text : {
 				en_US : 'The plugin is not installed. Please download it using the following button.',
-				fr_FR : 'Le plugin n\'est pas installé. Veuillez le télécharger en utilisant le bouton suivant.',
+				fr_FR : 'Le plugin n\'est pas installé. Veuillez le télécharger en utilisant le bouton suivant.'
 			},
 			unavailable : {
 				en_US : 'Your operating system or your browser is not supported.',

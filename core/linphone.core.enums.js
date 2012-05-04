@@ -1,4 +1,4 @@
-/*globals linphone */
+/*globals linphone*/
 linphone.core.enums = {
 
 	registrationState : {
