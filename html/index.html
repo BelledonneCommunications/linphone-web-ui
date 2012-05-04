@@ -546,9 +546,9 @@ body {
 
 		function callStateChanged(call, state, message) {
 			addLog('Call(' + state + '): ' + message);
-			if (state == LinphoneCallState.Connected) {
+			if (state == linphone.core.enums.callState.Connected) {
 
-			} else if (state == LinphoneCallState.IncomingReceived) {
+			} else if (state == linphone.core.enums.callState.IncomingReceived) {
 				create_call(call, '#Linphone-Call-IncomingReceived')
 			}
 
