@@ -10,6 +10,7 @@ var
   uiModules = [
     'linphone.ui',
     'linphone.ui.account',
+    'linphone.ui.call',
     'linphone.ui.codec',
     'linphone.ui.locale', 
     'linphone.ui.media',

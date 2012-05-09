@@ -123,49 +123,6 @@
 	font-weight: bold;
 }
 
-.linphone .window .composer {
-	width: 100%;
-	display: inline-block;
-}
-
-.linphone .window .composer input {
-	vertical-align: middle;
-	width: 170px;
-}
-
-.linphone .window .composer .dial-button {
-	display: inline-block;
-	vertical-align: middle;
-	background-image: url('images/ok.png');
-}
-
-.linphone .window > .content .tab .button {
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: 10px;
-	text-align: center;
-}
-
-.linphone .window > .content .tab .answer-button {
-	display: inline-block;
-	background-image: url('images/startcall-green.png');
-	background-size: 32px 32px;
-	width: 32px;
-	height: 32px;
-	margin-left: 10px;
-	margin-right: 10px;
-}
-
-.linphone .window > .content .tab .teminate-button {
-	display: inline-block;
-	background-image: url('images/stopcall-red.png');
-	background-size: 32px 32px;
-	width: 32px;
-	height: 32px;
-	margin-left: 10px;
-	margin-right: 10px;
-}
-
 /* 
  *
  * Tabs stuff

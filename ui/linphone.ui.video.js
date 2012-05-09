@@ -1,7 +1,6 @@
 /*globals getCore,getBase,localData,jQuery,linphone,consoleLog*/
 
 linphone.ui.video = {
-	call_number : 1,
 	video_number : 1,
 	video_data : [],
 	self_view : null,

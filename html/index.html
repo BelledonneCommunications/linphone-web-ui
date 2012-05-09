@@ -305,6 +305,7 @@ body {
 			if (typeof window['console'] !== 'undefined') {
 				console.log(a)
 			}
+			jQuery('#log').val(jQuery('#log').val() + a + '\n');
 		}
 
 		function core() {
@@ -377,10 +378,6 @@ body {
 			}
 		}
 
-		function addLog(message) {
-			jQuery('#log').val(jQuery('#log').val() + message + '\n');
-		}
-
 		// Init functions 
 		function init2() {
 			linphone.ui.locale.populate_locales_menu(jQuery('.linphone .window'))
@@ -444,7 +441,7 @@ body {
 					core.enableVideo(true)
 				}
 
-				addLog('Sip port: ' + core.sip_port)
+				consoleLog('Sip port: ' + core.sip_port)
 
 				jQuery('.linphone .window .load').hide()
 
@@ -454,82 +451,42 @@ body {
 		}
 
 		function globalStateChanged(state, message) {
-			addLog('State(' + state + '): ' + message)
+			consoleLog('State(' + state + '): ' + message)
 			jQuery('.linphone .window > .footer > .status').html(jQuery.i18n.get('globalstatetext.' + linphone.core.enums.getGlobalStateText(state)))
 		}
 
 		function callStateChanged(call, state, message) {
-			addLog('Call(' + state + '): ' + message);
+			consoleLog('Call(' + state + '): ' + message);
 			if (state == linphone.core.enums.callState.Connected) {
 
 			} else if (state == linphone.core.enums.callState.IncomingReceived) {
 				create_call(call, '#Linphone-Call-IncomingReceived')
 			}
 
-			var element = findCallTab(call);
+			var element = linphone.ui.call.findCallTab(call);
 			if (element) {
 				var content = jQuery('#Linphone-Call-' + linphone.core.enums.getCallStateText(state)).render(element.data('data'))
 				element.html(content)
 				jQuery.i18n.update(element, true)
 			} else {
-				addLog('Can\'t find call tab: ' + call);
+				consoleLog('Can\'t find call tab: ' + call);
 			}
 		}
 
 		function displayStatus(message) {
-			addLog('Status: ' + message);
+			consoleLog('Status: ' + message);
 		}
 
 		function displayMessage(message) {
-			addLog('Message: ' + message);
+			consoleLog('Message: ' + message);
 		}
 
 		function displayWarning(message) {
-			addLog('Warning: ' + message);
+			consoleLog('Warning: ' + message);
 		}
 
 		function displayUrl(message, url) {
-			addLog('Url: ' + message + ' - ' + url);
-		}
-
-		function findCallTab(obj) {
-			var ret = null
-			jQuery('#linphone .window > .content .tabs .tab').each(function(index) {
-				var element = jQuery(this)
-				if (element.data('data') && element.data('data') == obj) {
-					ret = element;
-				}
-			})
-			return ret;
-		}
-
-		function call_invite(dest) {
-			core().invite_async(dest, function() {
-				return function(plugin, obj) {
-					call_invite_callback(dest, obj)
-				}
-			}())
-		}
-
-		function create_call(obj, template) {
-			if (obj) {
-				var call_number = linphone.instance.call_number
-				consoleLog('Add tab call-' + call_number)
-				var div = jQuery('<div id="call-'+call_number+'" class="tab"></div>')
-				jQuery('#linphone .window > .content .tabs').append(div).tabs('add', '#call-' + call_number, 'Call ' + call_number);
-				jQuery('#linphone .window > .content .tabs').tabs('select', '#call-' + call_number)
-				var element = jQuery('#linphone .window > .content .tabs #call-' + call_number)
-				element.data('data', obj)
-
-				var content = jQuery(template).render(obj)
-				element.html(content)
-				jQuery.i18n.update(element, true)
-				linphone.instance.call_number++
-			}
-		}
-
-		function call_invite_callback(dest, obj) {
-			create_call(obj, '#Linphone-Call-OutgoingInit')
+			consoleLog('Url: ' + message + ' - ' + url);
 		}
 
 		jQuery.views.registerHelpers({
@@ -539,41 +496,6 @@ body {
 		});
 
 		jQuery(function() {
-
-			jQuery(document).on('click', '.linphone .window .dial-button', function(event) {
-				call_invite(jQuery(event.target).parent().find('.dest').val())
-			});
-
-			jQuery(document).on('click', '.linphone .window .answer-button', function(event) {
-				element = jQuery(event.target).parents('.tab')
-				if (element && element.data('data')) {
-					core().acceptCall(element.data('data'))
-				} else {
-					addLog('Can\'t find call: ' + element);
-				}
-			})
-
-			jQuery(document).on('click', '.linphone .window .teminate-button', function(event) {
-				element = jQuery(event.target).parents('.tab')
-				if (element && element.data('data')) {
-					core().terminateCall(element.data('data'))
-				} else {
-					addLog('Can\'t find call: ' + element);
-				}
-			})
-
-			jQuery(document).on('click', '.linphone .window .ui-tabs-close .ui-icon', function(event) {
-				var tab = jQuery(event.target).parents('li')
-				var tabId = tab.find('a').attr('href')
-				var element = jQuery('#linphone > .window > .content .tabs ' + tabId)
-				if (element && element.data('data')) {
-					core().terminateCall(element.data('data'))
-				} else {
-					addLog('Can\'t find call: ' + element);
-				}
-				jQuery('#linphone .window > .content .tabs ').tabs('remove', tab.prevAll('li').length)
-			})
-
 			init()
 			refresh()
 		})
