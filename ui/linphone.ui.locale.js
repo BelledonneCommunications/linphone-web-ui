@@ -7,7 +7,7 @@ linphone.ui.locale = {
 		menu.empty();
 		for (var index in linphone.ui.locales) {
 			var item = linphone.ui.locales[index];
-			var element = jQuery(jQuery('#Linphone-LocaleItem').render(item));
+			var element = jQuery(getBase(target).find('.templates .Linphone-LocaleItem').render(item));
 			element.find('a').data('data', item);
 			menu.append(element);
 		}

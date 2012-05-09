@@ -29,14 +29,14 @@ linphone.ui.call = {
 			var element = getBase(target).find('.window > .content .tabs #call-' + call_number);
 			element.data('data', obj);
 
-			var content = jQuery(template).render(obj);
+			var content = getBase(target).find(template).render(obj);
 			element.html(content);
 			jQuery.i18n.update(element, true);
 			linphone.ui.call.call_number++;
 		}
 	},
 	call_invite_callback : function(target, dest, obj) {
-		linphone.ui.call.create_call(target, obj, '#Linphone-Call-OutgoingInit');
+		linphone.ui.call.create_call(target, obj, '.templates .Linphone-Call-OutgoingInit');
 	}
 };
 

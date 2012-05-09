@@ -58,8 +58,7 @@ body {
 					<div class="text {translate: 'base.install.text'}"></div>
 					<div class="unavailable {translate: 'base.install.unavailable'}"></div>
 					<div class="buttons"></div>
-					<br />
-					<br />
+					<br /> <br />
 					<button type="button" onclick="refresh()" class="reload {translate: 'base.install.reload'}"></button>
 				</div>
 				<div class="load overall ui-corner-all">
@@ -223,7 +222,137 @@ body {
 					</div>
 				</div>
 			</div>
-			<div id="templates"></div>
+			<div class="templates">
+				<script class="Linphone-Call-Idle" type="text/x-jsrender">
+Idle <b>{{=getRemoteAddress()}}</b>
+</script>
+				<script class="Linphone-Call-IncomingReceived" type="text/x-jsrender">
+IncomingReceived <b>{{=getRemoteAddress()}}</b>
+<div class="button">
+	<div class="answer-button"></div>
+	<div class="teminate-button"></div>
+</div>
+</script>
+				<script class="Linphone-Call-OutgoingInit" type="text/x-jsrender">
+OutgoingInit <b>{{=getRemoteAddress()}}</b>
+<div class="button">
+	<div class="teminate-button"></div>
+</div>
+</script>
+				<script class="Linphone-Call-OutgoingProgress" type="text/x-jsrender">
+OutgoingProgress <b>{{=getRemoteAddress()}}</b>
+<div class="button">
+	<div class="teminate-button"></div>
+</div>
+</script>
+				<script class="Linphone-Call-OutgoingRinging" type="text/x-jsrender">
+OutgoingRinging <b>{{=getRemoteAddress()}}</b>
+<div class="button">
+	<div class="teminate-button"></div>
+</div>
+</script>
+				<script class="Linphone-Call-OutgoingEarlyMedia" type="text/x-jsrender">
+OutgoingEarlyMedia <b>{{=getRemoteAddress()}}</b>
+</script>
+				<script class="Linphone-Call-Connected" type="text/x-jsrender">
+Connected <b>{{=getRemoteAddress()}}</b>
+<div class="button">
+	<div class="teminate-button"></div>
+</div>
+</script>
+				<script class="Linphone-Call-StreamsRunning" type="text/x-jsrender">
+StreamsRunning <b>{{=getRemoteAddress()}}</b>
+<div class="button">
+	<div class="teminate-button"></div>
+</div>
+</script>
+				<script class="Linphone-Call-Pausing" type="text/x-jsrender">
+Pausing <b>{{=getRemoteAddress()}}</b>
+<div class="button">
+	<div class="teminate-button"></div>
+</div>
+</script>
+				<script class="Linphone-Call-Paused" type="text/x-jsrender">
+Paused <b>{{=getRemoteAddress()}}</b>
+<div class="button">
+	<div class="teminate-button"></div>
+</div>
+</script>
+				<script class="Linphone-Call-Resuming" type="text/x-jsrender">
+Resuming <b>{{=getRemoteAddress()}}</b>
+<div class="button">
+	<div class="teminate-button"></div>
+</div>
+</script>
+				<script class="Linphone-Call-Refered" type="text/x-jsrender">
+Refered <b>{{=getRemoteAddress()}}</b>
+</script>
+				<script class="Linphone-Call-Error" type="text/x-jsrender">
+Error <b>{{=getRemoteAddress()}}</b>
+</script>
+				<script class="Linphone-Call-End" type="text/x-jsrender">
+End <b>{{=getRemoteAddress()}}</b>
+</script>
+				<script class="Linphone-Call-PausedByRemote" type="text/x-jsrender">
+PausedByRemote <b>{{=getRemoteAddress()}}</b>
+</script>
+				<script class="Linphone-Call-UpdatedByRemote" type="text/x-jsrender">
+UpdatedByRemote <b>{{=getRemoteAddress()}}</b>
+</script>
+				<script class="Linphone-Call-IncomingEarlyMedia" type="text/x-jsrender">
+IncomingEarlyMedia <b>{{=getRemoteAddress()}}</b>
+</script>
+				<script class="Linphone-Call-Updated" type="text/x-jsrender">
+Updated <b>{{=getRemoteAddress()}}</b>
+</script>
+				<script class="Linphone-Call-Released" type="text/x-jsrender">
+Call end: <b>{{=getRemoteAddress()}}</b>
+</script>
+				<script class="Linphone-Video" type="text/x-jsrender">
+<div>
+	<object class="video" type="application/x-linphone-web-video">
+		<param name="onload" value="_videoLoad" />
+		<param name="magic" value="{{=magic}}" />
+	</object>
+</div>
+</script>
+				<script class="Linphone-Core" type="text/x-jsrender">
+<object class="core" type="application/x-linphone-web" width="0" height="0" codebase="{{=codebase}}"> 
+ 	<param name="onload" value="_coreLoad" /> 
+	<param name="magic" value="{{=magic}}" /> 
+ 	Linphone Core 
+</object>
+</script>
+				<script class="Linphone-LocaleItem" type="text/x-jsrender">
+<li>
+	<a class="ui-icon flag" style="background-image: url('{{=icon}}')">
+		{{=name}}
+	</a>
+</li>
+</script>
+				<script class="Linphone-CodecsList" type="text/x-jsrender">
+<tr>
+	<td class="name">{{=mimeType}}</td>
+	<td class="frequency">{{=clockRate}}</td>
+	<td class="bitrate">{{=normalBitrate}}</td>
+	<td class="actions">
+		{{#if enabled}}
+			<input class="enable" type="checkbox" checked="checked" />
+		{{else}}
+			<input class="enable" type="checkbox" />
+		{{/if}}
+	</td>
+	<td/>
+</tr>
+</script>
+				<script class="Linphone-AccountsList" type="text/x-jsrender">
+<tr>
+	<td class="name">{{=getIdentity()}}</td>
+	<td class="status">{{=$ctx.getLinphoneRegistrationStateText(getState())}}</td>
+	<td/>
+</tr>
+</script>
+			</div>
 		</div>
 		<div>
 			<textarea id="log" rows="10" cols="100"></textarea>
@@ -283,10 +412,6 @@ body {
 			_objectCodeBase = _objectFile + '#Version=' + _objectVersion.replace('.', ',')
 		else if (jQuery.client.os == 'Linux' && jQuery.client.browser == 'Firefox')
 			_objectCodeBase = _objectFile
-		var _coreTemplate = '<object id="core" class="core" type="application/x-linphone-web" width="0" height="0" codebase="'+_objectCodeBase+'"> \
-							 	<param name="onload" value="_coreLoad" /> \
-							 	Linphone Core \
-							 </object>'
 
 		function downloadPlugin(file) {
 			window.open(file, '_blank');
@@ -321,11 +446,12 @@ body {
 		function getBase(base) {
 			if (typeof base === 'undefined')
 				base = jQuery(this)
+
 			return base.parents('.linphone');
 		}
 
 		function _coreLoad(obj) {
-			coreLoad(obj)
+			coreLoad(linphone.ui.core_data[obj.magic], obj)
 		}
 
 		function _videoLoad(obj) {
@@ -378,20 +504,11 @@ body {
 			}
 		}
 
-		// Init functions 
-		function init2() {
+		function init() {
+			consoleLog('Init LinphoneJS')
+			loadLinphoneI18n()
 			linphone.ui.locale.populate_locales_menu(jQuery('.linphone .window'))
 			jQuery(".linphone .window .tools .locales-menu").menu();
-		}
-
-		function init() {
-			loadLinphoneI18n()
-			consoleLog('Init LinphoneJS')
-			try {
-				jQuery('#templates').load('templates.html', init2)
-			} catch (err) {
-				//Ignore console issue in internet explorer
-			}
 		}
 
 		function videoUnload(object) {
@@ -403,9 +520,9 @@ body {
 		function videoLoad(object) {
 		}
 
-		function coreLoad(core) {
+		function coreLoad(base, core) {
 			consoleLog('Load Core')
-			jQuery('.linphone .window .install').hide() // Force
+			base.find('.window .install').hide() // Force 
 
 			jQuery('#version_number').text(core.version)
 			addEvent(core, 'globalStateChanged', globalStateChanged)
@@ -420,15 +537,15 @@ body {
 			} else {
 				// Init volumes settings 
 				rec_level = (localData()['rec_level'] != null) ? localData()['rec_level'] : 100
-				jQuery('.linphone .window .tools .mic-slider').slider('value', rec_level)
+				base.find('.window .tools .mic-slider').slider('value', rec_level)
 				core.setRecLevel(rec_level)
 
 				play_level = (localData()['play_level'] != null) ? localData()['play_level'] : 100
-				jQuery('.linphone .window .tools .hp-slider').slider('value', play_level)
+				base.find('.window .tools .hp-slider').slider('value', play_level)
 				core.setPlayLevel(play_level)
 
 				ring_level = (localData()['ring_level'] != null) ? localData()['ring_level'] : 100
-				jQuery('.linphone .window .tools .bell-slider').slider('value', ring_level)
+				base.find('.window .tools .bell-slider').slider('value', ring_level)
 				core.setRingLevel(ring_level)
 
 				// Init video settings 
@@ -443,7 +560,7 @@ body {
 
 				consoleLog('Sip port: ' + core.sip_port)
 
-				jQuery('.linphone .window .load').hide()
+				base.find('.window .load').hide()
 
 				linphone.ui.video.updateSelfView(jQuery(core))
 				linphone.ui.video.updateVideoView(jQuery(core))
@@ -460,12 +577,12 @@ body {
 			if (state == linphone.core.enums.callState.Connected) {
 
 			} else if (state == linphone.core.enums.callState.IncomingReceived) {
-				create_call(call, '#Linphone-Call-IncomingReceived')
+				create_call(call, '.templates .Linphone-Call-IncomingReceived')
 			}
 
 			var element = linphone.ui.call.findCallTab(call);
 			if (element) {
-				var content = jQuery('#Linphone-Call-' + linphone.core.enums.getCallStateText(state)).render(element.data('data'))
+				var content = jQuery('.templates .Linphone-Call-' + linphone.core.enums.getCallStateText(state)).render(element.data('data'))
 				element.html(content)
 				jQuery.i18n.update(element, true)
 			} else {
@@ -500,11 +617,12 @@ body {
 			refresh()
 		})
 
-		function detect() {
+		function detect(base) {
+			var core = base.find('.core').get()[0];
 			consoleLog('Detect')
-			if (typeof core() !== 'undefined' && typeof core().valid !== 'undefined' && core().valid) {
-				jQuery('.linphone .window .install').hide()
-				jQuery('.linphone .window .load').show()
+			if (typeof core !== 'undefined' && typeof core.valid !== 'undefined' && core.valid) {
+				base.find('.window .install').hide()
+				base.find('.window .load').show()
 				return true
 			} else {
 				if (jQuery.client.os == "Linux" && jQuery.client.browser == "Firefox") {
@@ -519,12 +637,20 @@ body {
 
 		function refresh() {
 			consoleLog('Refresh')
-			jQuery('.linphone .window .error').hide()
-			jQuery('#core').remove()
+			var base = jQuery('.linphone');
+			base.find('.window .error').hide()
+			base.find('.core').remove()
 			navigator.plugins.refresh(false);
-			var core = jQuery(_coreTemplate)
-			core.appendTo(jQuery('.linphone'))
-			detect()
+			var coreTemplate = base.find('.templates .Linphone-Core').render({
+				magic : linphone.ui.core_number,
+				codebase : _objectCodeBase
+			});
+			var core = jQuery(coreTemplate);
+			linphone.ui.core_data[linphone.ui.core_number] = base;
+			linphone.ui.core_number = linphone.ui.core_number + 1;
+			core.appendTo(base)
+			
+			detect(base)
 		}
 
 		function error(msg) {

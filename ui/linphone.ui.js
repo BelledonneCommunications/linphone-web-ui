@@ -1,23 +1,25 @@
 /*globals linphone,getBase,jQuery */
-linphone.ui = {};
-
-linphone.ui.locales = [ {
-	name : 'English(US)',
-	locale : 'en_US',
-	icon : 'style/images/flags/us.png'
-}, {
-	name : 'Français',
-	locale : 'fr_FR',
-	icon : 'style/images/flags/fr.png'
-}, {
-	name : 'Deutsche',
-	locale : 'de_DE',
-	icon : 'style/images/flags/de.png'
-}, {
-	name : 'Italiano',
-	locale : 'it_IT',
-	icon : 'style/images/flags/it.png'
-} ];
+linphone.ui = {
+	core_number : 1,
+	core_data : [],
+	locales : [ {
+		name : 'English(US)',
+		locale : 'en_US',
+		icon : 'style/images/flags/us.png'
+	}, {
+		name : 'Français',
+		locale : 'fr_FR',
+		icon : 'style/images/flags/fr.png'
+	}, {
+		name : 'Deutsche',
+		locale : 'de_DE',
+		icon : 'style/images/flags/de.png'
+	}, {
+		name : 'Italiano',
+		locale : 'it_IT',
+		icon : 'style/images/flags/it.png'
+	} ]
+};
 
 // OnLoad
 jQuery(function() {
@@ -45,7 +47,6 @@ jQuery(function() {
 	// Apply JQuery UI button style
 	jQuery(".linphone .window button").button();
 
-	
 	// Disable selection on tools
 	jQuery('.linphone .window .tools').disableSelection();
 

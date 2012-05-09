@@ -59,7 +59,7 @@ linphone.ui.video = {
 		});
 		element.parent().appendTo(getBase(target));
 		element.dialog("open");
-		var template = jQuery(jQuery('#Linphone-Video').render({
+		var template = jQuery(getBase(target).find('.templates .Linphone-Video').render({
 			magic : linphone.ui.video.video_number
 		}));
 		var object = template.find('object');

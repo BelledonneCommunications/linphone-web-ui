@@ -21,7 +21,5 @@ jQuery('html').click(function(event) {
 		base.find('.window .tools .settings-menu').fadeToggle('fast');
 	} else if (target.parents(".linphone .window .tools .settings-icon").length === 0) {
 		jQuery('.linphone .window .tools .settings-menu').fadeOut('fast');
-	} else {
-		base.find('.window .tools .settings-menu').fadeIn('fast');
 	}
 });

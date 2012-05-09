@@ -8,7 +8,7 @@ linphone.ui.account = {
 		account_table.empty();
 		for ( var index in proxy_list) {
 			var item = proxy_list[index];
-			var element = jQuery(jQuery('#Linphone-AccountsList').render(item));
+			var element = jQuery(getBase(target).find('.templates .Linphone-AccountsList').render(item));
 			element.data('data', item);
 			account_table.append(element);
 		}
