@@ -1,5 +1,8 @@
 /*globals getCore,getBase,localData,jQuery,linphone*/
 
+linphone.ui.slider = {
+};
+
 // Transform hp/mic/bell div to slider
 jQuery(function() {
 	jQuery(".linphone .window .tools .hp-slider").slider({

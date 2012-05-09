@@ -1,0 +1,96 @@
+/* 
+ *
+ * Accounts options 
+ *
+ */
+.linphone .window .accounts-options .content {
+	position: relative;
+	padding: 5px;
+	height: 180px;
+	overflow-y: scroll;
+}
+
+.linphone .window .accounts-options .content table {
+	border-collapse: collapse;
+	table-layout: fixed;
+	height: auto;
+	max-height: 155px;
+}
+
+.linphone .window .accounts-options .content table td {
+	padding: 2px;
+}
+
+.linphone .window .accounts-options .content table th {
+	padding: 2px;
+}
+
+.linphone .window .accounts-options .content table tr {
+	line-height: 12px;
+	height: 12px;
+}
+
+.linphone .window .accounts-options .content .add {
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+}
+
+.linphone .window .accounts-options .content .name {
+	width: 120px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.linphone .window .accounts-options .content .status {
+	width: 35px;
+}
+
+/* 
+ *
+ * Account form 
+ *
+ */
+.linphone .window .account-form .content {
+	position: relative;
+	padding: 5px;
+	height: 180px;
+}
+
+.linphone .window .account-form .content .valid {
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+}
+
+.linphone .window .account-form .content .remove {
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+}
+
+.linphone .window .account-form .content label {
+	float: left;
+	line-height: 24px;
+	vertical-align: middle;
+}
+
+.linphone .window .account-form .content span {
+	display: block;
+	overflow: hidden;
+	padding: 0 4px 0 6px
+}
+
+.linphone .window .account-form .content input {
+	width: 100%;
+	height: 16px;
+	margin-top:4px;
+	margin-bottom:4px;
+}
+
+.linphone .window .account-form .content input[type="checkbox"] {
+	width: 16px;
+	height: 16px;
+	margin-top:4px;
+	margin-bottom:4px;
+}

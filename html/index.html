@@ -531,24 +531,6 @@ body {
 				}
 			}
 		}
-		
-		function refreshAccountList() {
-			table = jQuery('.linphone .window .accounts-options .content tbody')
-			data = core().getProxyConfigList()
-			table.empty()
-			for (a in data) {
-				var item = data[a]
-				var element = jQuery(jQuery('#Linphone-AccountsList').render(item))
-				element.data('data', item)
-				table.append(element)
-			}
-			
-			jQuery('.linphone .window .accounts-options .content tbody tr').hover(function() {
-				jQuery(this).addClass("ui-state-highlight");
-			}, function() {
-				jQuery(this).removeClass("ui-state-highlight");
-			})
-		}
 
 		function globalStateChanged(state, message) {
 			addLog('State(' + state + '): ' + message)
@@ -723,105 +705,6 @@ body {
 				jQuery('#linphone .window > .content .tabs ').tabs('remove', tab.prevAll('li').length)
 			})
 
-			jQuery(document).on('click', '.linphone .window .accounts-options .add', function(event) {
-				linphone.instance.current_proxy_config = null
-				jQuery('.linphone .window .account-form .content button.remove').hide()
-				jQuery('.linphone .window .account-form .content input.identity').val("sip:")
-				jQuery('.linphone .window .account-form .content input.proxy').val("sip:")
-				jQuery('.linphone .window .account-form .content input.route').val("")
-				jQuery('.linphone .window .account-form .content input.expires').val("3600")
-				jQuery('.linphone .window .account-form .content input.register').attr('checked', true);
-				jQuery('.linphone .window .account-form').fadeIn('fast');
-			})
-			
-			jQuery(document).on('click', '.linphone .window .accounts-options .content tbody tr', function(event) {
-				data = jQuery(this).data('data')
-				linphone.instance.current_proxy_config = data
-				jQuery('.linphone .window .account-form .content button.remove').show()
-				jQuery('.linphone .window .account-form .content input.identity').val(data.getIdentity())
-				jQuery('.linphone .window .account-form .content input.proxy').val(data.getServerAddr())
-				jQuery('.linphone .window .account-form .content input.route').val(data.getRoute())
-				jQuery('.linphone .window .account-form .content input.expires').val(data.getExpires())
-				jQuery('.linphone .window .account-form .content input.register').attr('checked', data.registerEnabled())
-				jQuery('.linphone .window .account-form').fadeIn('fast');
-			})
-			
-			jQuery(document).on('click', '.linphone .window .account-form .remove', function(event) {
-				consoleLog('Remove ProxyConfig')
-				var proxyConfig = linphone.instance.current_proxy_config
-				core().removeProxyConfig(proxyConfig)
-				
-				refreshAccountList()
-				jQuery('.linphone .window .account-form').fadeOut('fast');
-			})
-			
-			jQuery(document).on('click', '.linphone .window .account-form .valid', function(event) {
-					var errors = ""
-					var identity_regex = new RegExp('sip:.+@.+')
-					var identity = jQuery('.linphone .window .account-form .content input.identity').val()
-					var proxy_regex = new RegExp('sip:.+')
-					var proxy = jQuery('.linphone .window .account-form .content input.proxy').val()
-					var route_regex = new RegExp('.*')
-					var route = jQuery('.linphone .window .account-form .content input.route').val()
-					var expires_regex = new RegExp('\\d+')
-					var expires = jQuery('.linphone .window .account-form .content input.expires').val()
-					var register = jQuery('.linphone .window .account-form .content input.register').is(':checked')
-					
-					if(identity_regex.exec(identity) == null) {
-						errors += '<li class="{translate: \'form.account.errors.identity\'}"></li>'
-					}
-					if(proxy_regex.exec(proxy) == null) {
-						errors += '<li class="{translate: \'form.account.errors.proxy\'}"></li>'
-					}		
-					if(route_regex.exec(route) == null) {
-						errors += '<li class="{translate: \'form.account.errors.route\'}"></li>'
-					}
-					if(expires_regex.exec(expires) == null) {
-						errors += '<li class="{translate: \'form.account.errors.duration\'}"></li>'
-					}
-					if(errors.length > 0) {
-						errors = '<div>' + '<span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span><div class="{translate: \'form.account.errors.message\'}"></div><ul>' + errors + '</ul></div>'
-						var dialog = jQuery(errors)
-						jQuery.i18n.update(dialog, true)
-						dialog.dialog({
-							title: jQuery.i18n.get('form.account.errors.title'),
-							modal: false,
-							buttons: {
-								Ok: function() {
-									$( this ).dialog( "close" );
-								}
-							}
-						});
-						return;	
-					}
-					
-					var proxyConfig = null
-					if(linphone.instance.current_proxy_config == null) {
-						consoleLog('New ProxyConfig')
-						proxyConfig = core().newProxyConfig()
-					} else {
-						consoleLog('Use ProxyConfig')
-						proxyConfig = linphone.instance.current_proxy_config
-						linphone.instance.current_proxy_config.edit()
-					}
-					
-					// Set values 
-					proxyConfig.setIdentity(identity)
-					proxyConfig.setServerAddr(proxy)
-					proxyConfig.setRoute(route)
-					proxyConfig.setExpires(expires)
-					proxyConfig.enableRegister(register)
-					
-					if(linphone.instance.current_proxy_config == null) {
-						core().addProxyConfig(proxyConfig)
-					} else {
-						linphone.instance.current_proxy_config.done()
-					}
-					
-					refreshAccountList()
-					jQuery('.linphone .window .account-form').fadeOut('fast');
-			})
-		
 			jQuery( ".linphone .window button" ).button();
 			jQuery('.linphone .window .tools .settings-menu').menu()
 
@@ -924,15 +807,6 @@ body {
 					jQuery('.linphone .window .tools .settings-menu').fadeOut('fast');
 					jQuery.i18n.change(target.data('data').locale)
 					localData()['locale'] = target.data('data').locale
-				}
-
-				// Click on account item 
-				if (target.is('.linphone .window .tools .accounts > a')) {
-					jQuery('.linphone .window .tools .settings-menu').fadeOut('fast');
-					
-					refreshAccountList()
-					
-					jQuery('.linphone .window .accounts-options').fadeIn('fast');
 				}
 
 				// Click on media item 
