@@ -11,6 +11,7 @@ var
     'linphone.ui',
     'linphone.ui.account',
     'linphone.ui.codec',
+    'linphone.ui.locale', 
     'linphone.ui.slider',
     'linphone.ui.i18n'
   ],

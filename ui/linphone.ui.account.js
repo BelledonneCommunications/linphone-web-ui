@@ -26,6 +26,7 @@ linphone.ui.account = {
 jQuery('html').click(function(event) {
 	var target = jQuery(event.target);
 	var base = getBase(target);
+	
 	// Click on account item
 	if (target.is('.linphone .window .tools .accounts > a')) {
 		base.find('.window .tools .settings-menu').fadeOut('fast');

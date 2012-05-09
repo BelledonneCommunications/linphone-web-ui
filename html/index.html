@@ -386,7 +386,7 @@ body {
 
 		// Init functions 
 		function init2() {
-			populate_locales_menu()
+			linphone.ui.locale.populate_locales_menu(jQuery('.linphone .window'))
 			jQuery(".linphone .window .tools .locales-menu").menu();
 		}
 
@@ -612,18 +612,6 @@ body {
 		function call_invite_callback(dest, obj) {
 			create_call(obj, '#Linphone-Call-OutgoingInit')
 		}
-
-		function populate_locales_menu() {
-			// Locales
-			var menu = jQuery('.linphone .window .tools .locales-menu')
-			menu.empty()
-			for (a in linphone.ui.locales) {
-				var item = linphone.ui.locales[a]
-				var element = jQuery(jQuery('#Linphone-LocaleItem').render(item))
-				element.find('a').data('data', item)
-				menu.append(element)
-			}
-		}
 		
 		jQuery.views.registerHelpers({
 			getLinphoneRegistrationStateText: function(val) {
@@ -735,24 +723,6 @@ body {
 				else
 					jQuery('.linphone .window .tools .settings-menu').fadeIn('fast');
 
-				// Click on locale item 
-				if (target.is('.linphone .window .tools .locales > a')) {
-					// Update selected element 
-					jQuery('.linphone .window .tools .locales-menu .flag').each(function(index) {
-						var element = $(this)
-						if (element.data('data').locale == jQuery.i18n.locale) {
-							element.addClass('ui-state-selected')
-						} else {
-							element.removeClass('ui-state-selected')
-						}
-					})
-					jQuery('.linphone .window .tools .locales-menu').fadeToggle('fast');
-				} else if (target.parents(".linphone .window .tools .locales").length == 0)
-					jQuery('.linphone .window .tools .locales-menu').fadeOut('fast');
-				else {
-					jQuery('.linphone .window .tools .locales-menu').fadeIn('fast');
-				}
-
 				// Click on video item 
 				if (target.is('.linphone .window .tools .video > a')) {
 					if (localData()['enable_video'] == 1) {
@@ -799,14 +769,6 @@ body {
 					updateSelfView()
 					jQuery('.linphone .window .tools .video-menu').fadeOut('fast');
 					jQuery('.linphone .window .tools .settings-menu').fadeOut('fast');
-				}
-
-				// Click on a locale 
-				if (target.is('.linphone .window .tools .locales-menu a')) {
-					jQuery('.linphone .window .tools .locales-menu').fadeOut('fast');
-					jQuery('.linphone .window .tools .settings-menu').fadeOut('fast');
-					jQuery.i18n.change(target.data('data').locale)
-					localData()['locale'] = target.data('data').locale
 				}
 
 				// Click on media item 
