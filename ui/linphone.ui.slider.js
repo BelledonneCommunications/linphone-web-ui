@@ -1,4 +1,4 @@
-/*globals core,localData,jQuery*/
+/*globals getCore,getBase,localData,jQuery,linphone*/
 
 // Transform hp/mic/bell div to slider
 jQuery(function() {
@@ -8,7 +8,7 @@ jQuery(function() {
 			if (localData()) {
 				localData()['play_level'] = ui.value;
 			}
-			core().setPlayLevel(ui.value);
+			getCore(jQuery(event.target)).setPlayLevel(ui.value);
 		}
 	});
 	jQuery(".linphone .window .tools .mic-slider").slider({
@@ -17,7 +17,7 @@ jQuery(function() {
 			if (localData()) {
 				localData()['rec_level'] = ui.value;
 			}
-			core().setRecLevel(ui.value);
+			getCore(jQuery(event.target)).setRecLevel(ui.value);
 		}
 	});
 	jQuery(".linphone .window .tools .bell-slider").slider({
@@ -26,7 +26,7 @@ jQuery(function() {
 			if (localData()) {
 				localData()['ring_level'] = ui.value;
 			}
-			core().setRingLevel(ui.value);
+			getCore(jQuery(event.target)).setRingLevel(ui.value);
 		}
 	});
 });
@@ -36,20 +36,20 @@ jQuery('html').click(function(event) {
 	var target = jQuery(event.target);
 
 	if (!target.is('.linphone .window .tools .hp-icon')) {
-		jQuery('.linphone .window .tools .hp-slider').fadeOut('fast');
+		jQuery('.window .tools .hp-slider').fadeOut('fast');
 	} else {
-		jQuery('.linphone .window .tools .hp-slider').fadeToggle('fast');
+		getBase(target).find('.window .tools .hp-slider').fadeToggle('fast');
 	}
 	
 	if (!target.is('.linphone .window .tools .mic-icon')) {
-		jQuery('.linphone .window .tools .mic-slider').fadeOut('fast');
+		jQuery('.window .tools .mic-slider').fadeOut('fast');
 	} else {
-		jQuery('.linphone .window .tools .mic-slider').fadeToggle('fast');
+		getBase(target).find('.window .tools .mic-slider').fadeToggle('fast');
 	}
 	
 	if (!target.is('.linphone .window .tools .bell-icon')) {
-		jQuery('.linphone .window .tools .bell-slider').fadeOut('fast');
+		jQuery('.window .tools .bell-slider').fadeOut('fast');
 	} else {
-		jQuery('.linphone .window .tools .bell-slider').fadeToggle('fast');
+		getBase(target).find('.window .tools .bell-slider').fadeToggle('fast');
 	}
 });

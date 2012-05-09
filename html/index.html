@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-<title>Linphone-JS</title>
+<title>Linphone Web</title>
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -286,7 +286,7 @@ body {
 		   _objectCodeBase = _objectFile + '#Version=' + _objectVersion.replace('.', ',')
 		else if(jQuery.client.os == 'Linux' && jQuery.client.browser == 'Firefox')
 		   _objectCodeBase = _objectFile
-		var _coreTemplate = '<object id="core" type="application/x-linphone-web" width="0" height="0" codebase="'+_objectCodeBase+'"> \
+		var _coreTemplate = '<object id="core" class="core" type="application/x-linphone-web" width="0" height="0" codebase="'+_objectCodeBase+'"> \
 							 	<param name="onload" value="_coreLoad" /> \
 							 	Linphone Core \
 							 </object>'
@@ -309,13 +309,25 @@ body {
 				console.log(a)
 			}
 		}
-
+		
 		function core() {
 			return document.getElementById('core');
 		}
 
+		function getCore(base) {
+			var _base = getBase(base);
+			var _core = _base.find('> .core');
+			return _core.get()[0]
+		}
+		
+		function getBase(base) {
+			if(typeof base === 'undefined')
+				base = jQuery(this)
+			return base.parents('.linphone');
+		}
+
 		function _coreLoad(obj) {
-			coreLoad()
+			coreLoad(obj)
 		}
 
 		function _videoLoad(obj) {
@@ -431,45 +443,45 @@ body {
 			element.remove()
 		}
 
-		function coreLoad() {
+		function coreLoad(core) {
 			consoleLog('Load Core')
 			jQuery('.linphone .window .install').hide() // Force
 			
-			jQuery('#version_number').text(core().version)
-			addEvent(core(), 'globalStateChanged', globalStateChanged)
-			addEvent(core(), 'callStateChanged', callStateChanged)
-			addEvent(core(), 'displayStatus', displayStatus)
-			addEvent(core(), 'displayMessage', displayMessage)
-			addEvent(core(), 'displayWarning', displayWarning)
-			addEvent(core(), 'displayUrl', displayUrl)
-			var ret_value = core().init()
+			jQuery('#version_number').text(core.version)
+			addEvent(core, 'globalStateChanged', globalStateChanged)
+			addEvent(core, 'callStateChanged', callStateChanged)
+			addEvent(core, 'displayStatus', displayStatus)
+			addEvent(core, 'displayMessage', displayMessage)
+			addEvent(core, 'displayWarning', displayWarning)
+			addEvent(core, 'displayUrl', displayUrl)
+			var ret_value = core.init()
 			if (ret_value != 0) {
 				error(jQuery.i18n.get('errors.core.' + ret_value))
 			} else {
 				// Init volumes settings 
 				rec_level = (localData()['rec_level'] != null) ? localData()['rec_level'] : 100
 				jQuery('.linphone .window .tools .mic-slider').slider('value', rec_level)
-				core().setRecLevel(rec_level)
+				core.setRecLevel(rec_level)
 
 				play_level = (localData()['play_level'] != null) ? localData()['play_level'] : 100
 				jQuery('.linphone .window .tools .hp-slider').slider('value', play_level)
-				core().setPlayLevel(play_level)
+				core.setPlayLevel(play_level)
 
 				ring_level = (localData()['ring_level'] != null) ? localData()['ring_level'] : 100
 				jQuery('.linphone .window .tools .bell-slider').slider('value', ring_level)
-				core().setRingLevel(ring_level)
+				core.setRingLevel(ring_level)
 
 				// Init video settings 
 				if (localData()['enable_video'] == 1) {
-					core().enableVideo(true)
+					core.enableVideo(true)
 				} else if (localData()['enable_video'] == 0) {
-					core().enableVideo(false)
+					core.enableVideo(false)
 				} else {
 					localData()['enable_video'] = 1
-					core().enableVideo(true)
+					core.enableVideo(true)
 				}
 
-				addLog('Sip port: ' + core().sip_port)
+				addLog('Sip port: ' + core.sip_port)
 
 				jQuery('.linphone .window .load').hide()
 
@@ -829,21 +841,6 @@ body {
 				jQuery(this).removeClass("ui-state-hover");
 			})
 
-			var dnd = {}
-
-			function updateCodecsList(table) {
-				data = new Array()
-				table.find('tbody tr').each(function() {
-					data.push(jQuery(this).data('data'))
-				})
-				consoleLog(data)
-				if (table.is('.linphone .window .codecs-options .content .video')) {
-					core().setVideoCodecs(data)
-				} else if (table.is('.linphone .window .codecs-options .content .audio')) {
-					core().setAudioCodecs(data)
-				}
-			}
-
 			jQuery('html').click(function(event) {
 				var target = jQuery(event.target);
 				
@@ -938,69 +935,10 @@ body {
 					jQuery('.linphone .window .accounts-options').fadeIn('fast');
 				}
 
-				// Click on codecs item 
-				if (target.is('.linphone .window .tools .codecs > a')) {
-					jQuery('.linphone .window .tools .settings-menu').fadeOut('fast');
-					{
-						table = jQuery('.linphone .window .codecs-options .content .audio tbody')
-						data = core().getAudioCodecs()
-						table.empty()
-						for (a in data) {
-							var item = data[a]
-							var element = jQuery(jQuery('#Linphone-CodecsList').render(item))
-							element.data('data', item)
-							table.append(element)
-						}
-					}
-					{
-						table = jQuery('.linphone .window .codecs-options .content .video tbody')
-						data = core().getVideoCodecs()
-						table.empty()
-						for (a in data) {
-							var item = data[a]
-							var element = jQuery(jQuery('#Linphone-CodecsList').render(item))
-							element.data('data', item)
-							table.append(element)
-						}
-					}
-
-					jQuery(".linphone .window .codecs-options .content tbody tr").disableSelection()
-					jQuery(".linphone .window .codecs-options .content tbody tr").draggable({
-						containment : 'parent',
-						helper : function(event) {
-							original_tr = jQuery(event.target).parent()
-							original_table = original_tr.parents('table')
-							return original_tr.clone().css({
-								"height" : original_tr.outerHeight(),
-								"width" : original_tr.outerWidth(),
-								"position" : "absolute"
-							})
-						},
-						start : function(event, ui) {
-							dnd.tr = this;
-							dnd.helper = ui.helper;
-						}
-					});
-					jQuery(".linphone .window .codecs-options .content tbody tr").droppable({
-						drop : function(event, ui) {
-							jQuery(dnd.tr).detach().insertBefore(jQuery(this));
-							jQuery(dnd.helper).remove();
-							updateCodecsList(jQuery(this).parents('table'))
-						}
-					});
-					jQuery('.linphone .window .codecs-options').fadeIn('fast');
-				}
-
 				// Click on media item 
 				if (target.is('.linphone .window .tools .media > a')) {
 					jQuery('.linphone .window .tools .settings-menu').fadeOut('fast');
 					jQuery('.linphone .window .media-options').fadeIn('fast');
-				}
-
-				// Click on media item 
-				if (target.is('.linphone .window .codecs-options input')) {
-					data = target.parents('tr').data('data')
-					data.enabled = !data.enabled
 				}
 			});
 		
