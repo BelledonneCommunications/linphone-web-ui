@@ -1,4 +1,4 @@
-/*globals getCore,getBase,localData,jQuery,linphone*/
+/*globals jQuery,linphone*/
 
 linphone.ui.slider = {
 };
@@ -8,28 +8,28 @@ jQuery(function() {
 	jQuery(".linphone .window .tools .hp-slider").slider({
 		orientation : 'vertical',
 		change : function(event, ui) {
-			if (localData()) {
-				localData()['play_level'] = ui.value;
+			if (linphone.core.data()) {
+				linphone.core.data()['play_level'] = ui.value;
 			}
-			getCore(jQuery(event.target)).setPlayLevel(ui.value);
+			linphone.ui.getCore(jQuery(event.target)).setPlayLevel(ui.value);
 		}
 	});
 	jQuery(".linphone .window .tools .mic-slider").slider({
 		orientation : 'vertical',
 		change : function(event, ui) {
-			if (localData()) {
-				localData()['rec_level'] = ui.value;
+			if (linphone.core.data()) {
+				linphone.core.data()['rec_level'] = ui.value;
 			}
-			getCore(jQuery(event.target)).setRecLevel(ui.value);
+			linphone.ui.getCore(jQuery(event.target)).setRecLevel(ui.value);
 		}
 	});
 	jQuery(".linphone .window .tools .bell-slider").slider({
 		orientation : 'vertical',
 		change : function(event, ui) {
-			if (localData()) {
-				localData()['ring_level'] = ui.value;
+			if (linphone.core.data()) {
+				linphone.core.data()['ring_level'] = ui.value;
 			}
-			getCore(jQuery(event.target)).setRingLevel(ui.value);
+			linphone.ui.getCore(jQuery(event.target)).setRingLevel(ui.value);
 		}
 	});
 });
@@ -41,18 +41,18 @@ jQuery('html').click(function(event) {
 	if (!target.is('.linphone .window .tools .hp-icon')) {
 		jQuery('.linphone .window .tools .hp-slider').fadeOut('fast');
 	} else {
-		getBase(target).find('.window .tools .hp-slider').fadeToggle('fast');
+		linphone.ui.getBase(target).find('.window .tools .hp-slider').fadeToggle('fast');
 	}
 	
 	if (!target.is('.linphone .window .tools .mic-icon')) {
 		jQuery('.linphone .window .tools .mic-slider').fadeOut('fast');
 	} else {
-		getBase(target).find('.window .tools .mic-slider').fadeToggle('fast');
+		linphone.ui.getBase(target).find('.window .tools .mic-slider').fadeToggle('fast');
 	}
 	
 	if (!target.is('.linphone .window .tools .bell-icon')) {
 		jQuery('.linphone .window .tools .bell-slider').fadeOut('fast');
 	} else {
-		getBase(target).find('.window .tools .bell-slider').fadeToggle('fast');
+		linphone.ui.getBase(target).find('.window .tools .bell-slider').fadeToggle('fast');
 	}
 });

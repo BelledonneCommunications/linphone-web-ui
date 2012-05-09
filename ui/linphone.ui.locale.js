@@ -1,13 +1,13 @@
-/*globals getCore,getBase,localData,jQuery,linphone*/
+/*globals jQuery,linphone*/
 
 linphone.ui.locale = {
 	populate_locales_menu : function(target) {
 		// Locales
-		var menu = getBase(target).find('.window .tools .locales-menu');
+		var menu = linphone.ui.getBase(target).find('.window .tools .locales-menu');
 		menu.empty();
 		for (var index in linphone.ui.locales) {
 			var item = linphone.ui.locales[index];
-			var element = jQuery(getBase(target).find('.templates .Linphone-LocaleItem').render(item));
+			var element = jQuery(linphone.ui.getBase(target).find('.templates .Linphone-LocaleItem').render(item));
 			element.find('a').data('data', item);
 			menu.append(element);
 		}
@@ -17,7 +17,7 @@ linphone.ui.locale = {
 //
 jQuery('html').click(function(event) {
 	var target = jQuery(event.target);
-	var base = getBase(target);
+	var base = linphone.ui.getBase(target);
 	
 	// Click on locale item
 	if (target.is('.linphone .window .tools .locales > a')) {
@@ -42,6 +42,6 @@ jQuery('html').click(function(event) {
 		base.find('.window .tools .locales-menu').fadeOut('fast');
 		base.find('.window .tools .settings-menu').fadeOut('fast');
 		jQuery.i18n.change(target.data('data').locale);
-		localData()['locale'] = target.data('data').locale;
+		linphone.core.data()['locale'] = target.data('data').locale;
 	}
 });

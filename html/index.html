@@ -135,7 +135,7 @@ body {
 								<li><a class="{translate: 'options.codecs.video'}"></a></li>
 							</ul>
 							<div>
-								<table class="audio">
+								<table class="audio" title="Audio codecs">
 									<thead>
 										<tr>
 											<th class="name {translate: 'options.codecs.name'}"></th>
@@ -148,7 +148,7 @@ body {
 								</table>
 							</div>
 							<div>
-								<table class="video">
+								<table class="video" title="Video codecs">
 									<thead>
 										<tr>
 											<th class="name {translate: 'options.codecs.name'}"></th>
@@ -184,7 +184,7 @@ body {
 						</a>
 					</div>
 					<div class="content ui-corner-bottom">
-						<table class="accounts">
+						<table class="accounts" title="Account list">
 							<thead>
 								<tr>
 									<th class="name {translate: 'options.accounts.name'}"></th>
@@ -355,7 +355,6 @@ Call end: <b>{{=getRemoteAddress()}}</b>
 			</div>
 		</div>
 		<div>
-			<textarea id="log" rows="10" cols="100"></textarea>
 			<div class="ui-widget">
 				<div id="version" class="ui-state-highlight ui-corner-all">
 					Linphone version: <span id="version_number"></span>
@@ -371,8 +370,7 @@ Call end: <b>{{=getRemoteAddress()}}</b>
 
 		javascriptDetect()
 
-		// Utils 
-		var _objectFiles = {
+		linphone.config.files = {
 			'Windows' : {
 				'Explorer' : 'linphone-web.cab',
 				'DEFAULT' : 'linphone-web.msi'
@@ -382,73 +380,8 @@ Call end: <b>{{=getRemoteAddress()}}</b>
 				'DEFAULT' : 'linphone-web.tar.gz'
 			}
 		}
-		var _objectName = 'Linphone-Web'
-		var _objectVersion = '1.0.0.0'
-		var _objectFile = null
-		var _objectDetect = function() {
-			if (typeof _objectFiles[jQuery.client.os] !== 'undefined') {
-				if (typeof _objectFiles[jQuery.client.os][jQuery.client.browser] !== 'undefined') {
-					_objectFile = _objectFiles[jQuery.client.os][jQuery.client.browser]
-				} else {
-					_objectFile = _objectFiles[jQuery.client.os]['DEFAULT']
-				}
-			}
-			if (_objectFile !== null) {
-				var content = ''
-				content = '<button type="button" onclick="downloadPlugin(\'' + _objectFile
-						+ '\')" class="{translate: \'base.install.download\'}">Download !</button>'
-				jQuery('.linphone .window .install .buttons').html(content)
-				jQuery.i18n.update(jQuery('.linphone .window .install .button'), true)
-			} else {
-				jQuery('.linphone .window .install .text').hide()
-				jQuery('.linphone .window .install .refresh').hide()
-				jQuery('.linphone .window .install .unavailable').show()
-			}
-		}
-		_objectDetect()
-
-		var _objectCodeBase = ''
-		if (jQuery.client.os == 'Windows' && jQuery.client.browser == 'Explorer')
-			_objectCodeBase = _objectFile + '#Version=' + _objectVersion.replace('.', ',')
-		else if (jQuery.client.os == 'Linux' && jQuery.client.browser == 'Firefox')
-			_objectCodeBase = _objectFile
-
-		function downloadPlugin(file) {
-			window.open(file, '_blank');
-		}
-		//
-
-		var _localData = {}
-		function localData() {
-			if (typeof window['localStorage'] !== 'undefined')
-				return localStorage
-			else
-				return _localData
-		}
-
-		function consoleLog(a) {
-			if (typeof window['console'] !== 'undefined') {
-				console.log(a)
-			}
-			jQuery('#log').val(jQuery('#log').val() + a + '\n');
-		}
-
-		function core() {
-			return document.getElementById('core');
-		}
-
-		function getCore(base) {
-			var _base = getBase(base);
-			var _core = _base.find('> .core');
-			return _core.get()[0]
-		}
-
-		function getBase(base) {
-			if (typeof base === 'undefined')
-				base = jQuery(this)
-
-			return base.parents('.linphone');
-		}
+		linphone.config.name = 'Linphone-Web'
+		linphone.config.Version = '1.0.0.0'
 
 		function _coreLoad(obj) {
 			coreLoad(linphone.ui.core_data[obj.magic], obj)
@@ -477,14 +410,14 @@ Call end: <b>{{=getRemoteAddress()}}</b>
 			jQuery.i18n.data = linphone.ui.i18n
 			var locale = (navigator.language) ? navigator.language : navigator.userLanguage
 			locale = locale.replace('-', '_')
-			consoleLog('Browser language: ' + locale)
-			if (localData()['locale'] != null) {
-				jQuery.i18n.change(localData()['locale'])
+			linphone.core.log('Browser language: ' + locale)
+			if (linphone.core.data()['locale'] != null) {
+				jQuery.i18n.change(linphone.core.data()['locale'])
 			} else {
 				// Excat Match 
 				for (a in linphone.ui.locales) {
 					if (linphone.ui.locales[a].locale == locale) {
-						consoleLog('Change locale: ' + linphone.ui.locales[a].locale)
+						linphone.core.log('Change locale: ' + linphone.ui.locales[a].locale)
 						jQuery.i18n.change(linphone.ui.locales[a].locale)
 						return;
 					}
@@ -493,7 +426,7 @@ Call end: <b>{{=getRemoteAddress()}}</b>
 				// Start Match 
 				for (a in linphone.ui.locales) {
 					if (linphone.ui.locales[a].locale.search(locale) == 0) {
-						consoleLog('Change locale: ' + linphone.ui.locales[a].locale)
+						linphone.core.log('Change locale: ' + linphone.ui.locales[a].locale)
 						jQuery.i18n.change(linphone.ui.locales[a].locale)
 						return;
 					}
@@ -505,7 +438,7 @@ Call end: <b>{{=getRemoteAddress()}}</b>
 		}
 
 		function init() {
-			consoleLog('Init LinphoneJS')
+			linphone.core.log('Init LinphoneJS')
 			loadLinphoneI18n()
 			linphone.ui.locale.populate_locales_menu(jQuery('.linphone .window'))
 			jQuery(".linphone .window .tools .locales-menu").menu();
@@ -521,7 +454,7 @@ Call end: <b>{{=getRemoteAddress()}}</b>
 		}
 
 		function coreLoad(base, core) {
-			consoleLog('Load Core')
+			linphone.core.log('Load Core')
 			base.find('.window .install').hide() // Force 
 
 			jQuery('#version_number').text(core.version)
@@ -533,32 +466,32 @@ Call end: <b>{{=getRemoteAddress()}}</b>
 			addEvent(core, 'displayUrl', displayUrl)
 			var ret_value = core.init()
 			if (ret_value != 0) {
-				error(jQuery.i18n.get('errors.core.' + ret_value))
+				error(base, jQuery.i18n.get('errors.core.' + ret_value))
 			} else {
 				// Init volumes settings 
-				rec_level = (localData()['rec_level'] != null) ? localData()['rec_level'] : 100
+				rec_level = (linphone.core.data()['rec_level'] != null) ? linphone.core.data()['rec_level'] : 100
 				base.find('.window .tools .mic-slider').slider('value', rec_level)
 				core.setRecLevel(rec_level)
 
-				play_level = (localData()['play_level'] != null) ? localData()['play_level'] : 100
+				play_level = (linphone.core.data()['play_level'] != null) ? linphone.core.data()['play_level'] : 100
 				base.find('.window .tools .hp-slider').slider('value', play_level)
 				core.setPlayLevel(play_level)
 
-				ring_level = (localData()['ring_level'] != null) ? localData()['ring_level'] : 100
+				ring_level = (linphone.core.data()['ring_level'] != null) ? linphone.core.data()['ring_level'] : 100
 				base.find('.window .tools .bell-slider').slider('value', ring_level)
 				core.setRingLevel(ring_level)
 
 				// Init video settings 
-				if (localData()['enable_video'] == 1) {
+				if (linphone.core.data()['enable_video'] == 1) {
 					core.enableVideo(true)
-				} else if (localData()['enable_video'] == 0) {
+				} else if (linphone.core.data()['enable_video'] == 0) {
 					core.enableVideo(false)
 				} else {
-					localData()['enable_video'] = 1
+					linphone.core.data()['enable_video'] = 1
 					core.enableVideo(true)
 				}
 
-				consoleLog('Sip port: ' + core.sip_port)
+				linphone.core.log('Sip port: ' + core.sip_port)
 
 				base.find('.window .load').hide()
 
@@ -568,16 +501,16 @@ Call end: <b>{{=getRemoteAddress()}}</b>
 		}
 
 		function globalStateChanged(state, message) {
-			consoleLog('State(' + state + '): ' + message)
+			linphone.core.log('State(' + state + '): ' + message)
 			jQuery('.linphone .window > .footer > .status').html(jQuery.i18n.get('globalstatetext.' + linphone.core.enums.getGlobalStateText(state)))
 		}
 
 		function callStateChanged(call, state, message) {
-			consoleLog('Call(' + state + '): ' + message);
+			linphone.core.log('Call(' + state + '): ' + message);
 			if (state == linphone.core.enums.callState.Connected) {
 
 			} else if (state == linphone.core.enums.callState.IncomingReceived) {
-				create_call(call, '.templates .Linphone-Call-IncomingReceived')
+				linphone.ui.call.create_call(call, '.templates .Linphone-Call-IncomingReceived')
 			}
 
 			var element = linphone.ui.call.findCallTab(call);
@@ -586,24 +519,24 @@ Call end: <b>{{=getRemoteAddress()}}</b>
 				element.html(content)
 				jQuery.i18n.update(element, true)
 			} else {
-				consoleLog('Can\'t find call tab: ' + call);
+				linphone.core.log('Can\'t find call tab: ' + call);
 			}
 		}
 
 		function displayStatus(message) {
-			consoleLog('Status: ' + message);
+			linphone.core.log('Status: ' + message);
 		}
 
 		function displayMessage(message) {
-			consoleLog('Message: ' + message);
+			linphone.core.log('Message: ' + message);
 		}
 
 		function displayWarning(message) {
-			consoleLog('Warning: ' + message);
+			linphone.core.log('Warning: ' + message);
 		}
 
 		function displayUrl(message, url) {
-			consoleLog('Url: ' + message + ' - ' + url);
+			linphone.core.log('Url: ' + message + ' - ' + url);
 		}
 
 		jQuery.views.registerHelpers({
@@ -619,7 +552,7 @@ Call end: <b>{{=getRemoteAddress()}}</b>
 
 		function detect(base) {
 			var core = base.find('.core').get()[0];
-			consoleLog('Detect')
+			linphone.core.log('Detect')
 			if (typeof core !== 'undefined' && typeof core.valid !== 'undefined' && core.valid) {
 				base.find('.window .install').hide()
 				base.find('.window .load').show()
@@ -628,7 +561,7 @@ Call end: <b>{{=getRemoteAddress()}}</b>
 				if (jQuery.client.os == "Linux" && jQuery.client.browser == "Firefox") {
 					if (InstallTrigger.updateEnabled())
 						InstallTrigger.install({
-							"Linphone Web" : _objectCodeBase
+							"Linphone Web" : linphone.config.codebase
 						});
 				}
 			}
@@ -636,14 +569,14 @@ Call end: <b>{{=getRemoteAddress()}}</b>
 		}
 
 		function refresh() {
-			consoleLog('Refresh')
+			linphone.core.log('Refresh')
 			var base = jQuery('.linphone');
 			base.find('.window .error').hide()
 			base.find('.core').remove()
 			navigator.plugins.refresh(false);
 			var coreTemplate = base.find('.templates .Linphone-Core').render({
 				magic : linphone.ui.core_number,
-				codebase : _objectCodeBase
+				codebase : linphone.config.codebase
 			});
 			var core = jQuery(coreTemplate);
 			linphone.ui.core_data[linphone.ui.core_number] = base;
@@ -653,10 +586,10 @@ Call end: <b>{{=getRemoteAddress()}}</b>
 			detect(base)
 		}
 
-		function error(msg) {
-			jQuery('.linphone .window .load').hide()
-			jQuery('.linphone .window .error .text').html(msg)
-			jQuery('.linphone .window .error').show()
+		function error(base, msg) {
+			base.find('.window .load').hide()
+			base.find('.window .error .text').html(msg)
+			base.find('.window .error').show()
 		}
 	</script>
 </body>

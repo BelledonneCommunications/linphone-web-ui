@@ -1,4 +1,4 @@
-/*globals linphone,getBase,jQuery */
+/*globals linphone,jQuery */
 linphone.ui = {
 	core_number : 1,
 	core_data : [],
@@ -18,7 +18,20 @@ linphone.ui = {
 		name : 'Italiano',
 		locale : 'it_IT',
 		icon : 'style/images/flags/it.png'
-	} ]
+	} ],
+	downloadPlugin : function(file) {
+		window.open(file, '_blank');
+	},
+	getCore : function(base) {
+		base = linphone.ui.getBase(base);
+		return base.find('> .core').get()[0];
+	},
+	getBase : function(base) {
+		if (typeof base === 'undefined') {
+			base = jQuery(this);
+		}
+		return base.parents('.linphone');
+	}
 };
 
 // OnLoad
@@ -64,9 +77,40 @@ jQuery(function() {
 	});
 });
 
+// OnLoad
+jQuery(function() {
+	// Find the correct plugin file
+	if (typeof linphone.config.files[jQuery.client.os] !== 'undefined') {
+		if (typeof linphone.config.files[jQuery.client.os][jQuery.client.browser] !== 'undefined') {
+			linphone.config.file = linphone.config.files[jQuery.client.os][jQuery.client.browser];
+		} else {
+			linphone.config.file = linphone.config.files[jQuery.client.os]['DEFAULT'];
+		}
+	}
+
+	// Update
+	if (linphone.config.file !== null) {
+		var content = '';
+		content = '<button type="button" onclick="linphone.ui.downloadPlugin(\'' + linphone.config.file;
+		content += '\')" class="{translate: \'base.install.download\'}">Download !</button>';
+		jQuery('.linphone .window .install .buttons').html(content);
+		jQuery.i18n.update(jQuery('.linphone .window .install .button'), true);
+	} else {
+		jQuery('.linphone .window .install .text').hide();
+		jQuery('.linphone .window .install .refresh').hide();
+		jQuery('.linphone .window .install .unavailable').show();
+	}
+
+	if (jQuery.client.os === 'Windows' && jQuery.client.browser === 'Explorer') {
+		linphone.config.codebase = linphone.config.file + '#Version=' + linphone.config.version.replace('.', ',');
+	} else if (jQuery.client.os === 'Linux' && jQuery.client.browser === 'Firefox') {
+		linphone.config.codebase = linphone.config.file;
+	}
+});
+
 // Click
 jQuery('html').click(function(event) {
 	var target = jQuery(event.target);
-	var base = getBase(target);
+	var base = linphone.ui.getBase(target);
 
 });

@@ -1,4 +1,4 @@
-/*globals getCore,getBase,localData,jQuery,linphone*/
+/*globals jQuery,linphone*/
 
 linphone.ui.media = {
 
@@ -7,7 +7,7 @@ linphone.ui.media = {
 //Click
 jQuery('html').click(function(event) {
 	var target = jQuery(event.target);
-	var base = getBase(target);
+	var base = linphone.ui.getBase(target);
 	
 	// Click on media item 
 	if (target.is('.linphone .window .tools .media > a')) {

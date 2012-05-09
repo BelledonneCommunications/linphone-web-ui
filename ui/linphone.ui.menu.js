@@ -1,4 +1,4 @@
-/*globals getCore,getBase,localData,jQuery,linphone*/
+/*globals jQuery,linphone*/
 
 linphone.ui.menu = {
 
@@ -14,7 +14,7 @@ jQuery(function() {
 // Click
 jQuery('html').click(function(event) {
 	var target = jQuery(event.target);
-	var base = getBase(target);
+	var base = linphone.ui.getBase(target);
 
 	// Click on settings
 	if (target.is('.linphone .window .tools .settings-icon')) {

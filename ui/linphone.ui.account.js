@@ -1,20 +1,20 @@
-/*globals getCore,getBase,localData,jQuery,linphone*/
+/*globals jQuery,linphone*/
 
 linphone.ui.account = {
 	current_proxy_config : null,
 	updateAccountList : function(target) {
-		var account_table = getBase(target).find('.window .accounts-options .content tbody');
-		var proxy_list = getCore(target).getProxyConfigList();
+		var account_table = linphone.ui.getBase(target).find('.window .accounts-options .content tbody');
+		var proxy_list = linphone.ui.getCore(target).getProxyConfigList();
 		account_table.empty();
 		for ( var index in proxy_list) {
 			var item = proxy_list[index];
-			var element = jQuery(getBase(target).find('.templates .Linphone-AccountsList').render(item));
+			var element = jQuery(linphone.ui.getBase(target).find('.templates .Linphone-AccountsList').render(item));
 			element.data('data', item);
 			account_table.append(element);
 		}
 		
 		// Highlight cells under pointer 
-		getBase(target).find('.window .accounts-options .content tbody tr').hover(function() {
+		linphone.ui.getBase(target).find('.window .accounts-options .content tbody tr').hover(function() {
 			jQuery(this).addClass("ui-state-highlight");
 		}, function() {
 			jQuery(this).removeClass("ui-state-highlight");
@@ -25,7 +25,7 @@ linphone.ui.account = {
 //
 jQuery('html').click(function(event) {
 	var target = jQuery(event.target);
-	var base = getBase(target);
+	var base = linphone.ui.getBase(target);
 	
 	// Click on account item
 	if (target.is('.linphone .window .tools .accounts > a')) {
@@ -63,7 +63,7 @@ jQuery('html').click(function(event) {
 
 	// Remove proxy
 	if (target.is('.linphone .window .account-form .remove')) {
-		getCore(target).removeProxyConfig(linphone.ui.account.current_proxy_config);
+		linphone.ui.getCore(target).removeProxyConfig(linphone.ui.account.current_proxy_config);
 
 		linphone.ui.account.updateAccountList(target);
 		base.find('.window .account-form').fadeOut('fast');
@@ -113,7 +113,7 @@ jQuery('html').click(function(event) {
 		} else {
 			var proxyConfig = null;
 			if (linphone.ui.account.current_proxy_config == null) {
-				proxyConfig = getCore(target).newProxyConfig();
+				proxyConfig = linphone.ui.getCore(target).newProxyConfig();
 			} else {
 				proxyConfig = linphone.ui.account.current_proxy_config;
 				linphone.ui.account.current_proxy_config.edit();
@@ -127,7 +127,7 @@ jQuery('html').click(function(event) {
 			proxyConfig.enableRegister(register);
 
 			if (linphone.ui.account.current_proxy_config == null) {
-				getCore(target).addProxyConfig(proxyConfig);
+				linphone.ui.getCore(target).addProxyConfig(proxyConfig);
 			} else {
 				linphone.ui.account.current_proxy_config.done();
 			}
