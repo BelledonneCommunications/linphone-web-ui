@@ -2,6 +2,7 @@
 linphone.ui = {
 	core_number : 1,
 	core_data : [],
+	helpers : {},
 	locales : [ {
 		name : 'English(US)',
 		locale : 'en_US',
@@ -31,8 +32,110 @@ linphone.ui = {
 			base = jQuery(this);
 		}
 		return base.parents('.linphone');
+	},
+	_addEvent : null,
+	addEvent : function(obj, name, func) {
+		linphone.ui._addEvent(obj, name, func);
+	},
+	loadHandler : function(core) {
+		linphone.core.log('Load Core');
+		var base = linphone.ui.core_data[core.magic];
+
+		base.find('.window .install').hide(); // Force
+
+		jQuery('#version_number').text(core.version);
+		linphone.ui.addEvent(core, 'globalStateChanged', linphone.ui.globalStateChanged);
+		linphone.ui.addEvent(core, 'callStateChanged', linphone.ui.callStateChanged);
+		linphone.ui.addEvent(core, 'displayStatus', linphone.ui.displayStatus);
+		linphone.ui.addEvent(core, 'displayMessage', linphone.ui.displayMessage);
+		linphone.ui.addEvent(core, 'displayWarning', linphone.ui.displayWarning);
+		linphone.ui.addEvent(core, 'displayUrl', linphone.ui.displayUrl);
+		var ret_value = core.init();
+		if (ret_value !== 0) {
+			linphone.ui.error(base, jQuery.i18n.get('errors.core.' + ret_value));
+		} else {
+			// Init volumes settings
+			var rec_level = (linphone.core.data()['rec_level'] != null) ? linphone.core.data()['rec_level'] : 100;
+			base.find('.window .tools .mic-slider').slider('value', rec_level);
+			core.setRecLevel(rec_level);
+
+			var play_level = (linphone.core.data()['play_level'] != null) ? linphone.core.data()['play_level'] : 100;
+			base.find('.window .tools .hp-slider').slider('value', play_level);
+			core.setPlayLevel(play_level);
+
+			var ring_level = (linphone.core.data()['ring_level'] != null) ? linphone.core.data()['ring_level'] : 100;
+			base.find('.window .tools .bell-slider').slider('value', ring_level);
+			core.setRingLevel(ring_level);
+
+			// Init video settings
+			if (linphone.core.data()['enable_video'] === '1') {
+				core.enableVideo(true);
+			} else if (linphone.core.data()['enable_video'] === '0') {
+				core.enableVideo(false);
+			} else {
+				linphone.core.data()['enable_video'] = '1';
+				core.enableVideo(true);
+			}
+
+			linphone.core.log('Sip port: ' + core.sip_port);
+
+			base.find('.window .load').hide();
+
+			linphone.ui.video.updateSelfView(jQuery(core));
+			linphone.ui.video.updateVideoView(jQuery(core));
+		}
+	},
+	globalStateChanged : function(core, state, message) {
+		var base = linphone.ui.core_data[core.magic];
+		linphone.core.log('State(' + state + '): ' + message);
+		base.find('.window > .footer > .status').html(jQuery.i18n.get('globalstatetext.' + linphone.core.enums.getGlobalStateText(state)));
+	},
+
+	callStateChanged : function(core, call, state, message) {
+		linphone.core.log('Call(' + state + '): ' + message);
+		if (state === linphone.core.enums.callState.Connected) {
+
+		} else if (state === linphone.core.enums.callState.IncomingReceived) {
+			linphone.ui.call.create_call(call, '.templates .Linphone-Call-IncomingReceived');
+		}
+
+		var element = linphone.ui.call.findCallTab(call);
+		if (element) {
+			var content = jQuery('.templates .Linphone-Call-' + linphone.core.enums.getCallStateText(state)).render(element.data('data'));
+			element.html(content);
+			jQuery.i18n.update(element, true);
+		} else {
+			linphone.core.log('Can\'t find call tab: ' + call);
+		}
+	},
+	displayStatus : function(core, message) {
+		linphone.core.log('Status: ' + message);
+	},
+	displayMessage : function(core, message) {
+		linphone.core.log('Message: ' + message);
+	},
+	displayWarning : function(core, message) {
+		linphone.core.log('Warning: ' + message);
+	},
+	displayUrl : function(core, message, url) {
+		linphone.core.log('Url: ' + message + ' - ' + url);
+	},
+	error : function(core, base, msg) {
+		base.find('.window .load').hide();
+		base.find('.window .error .text').html(msg);
+		base.find('.window .error').show();
 	}
 };
+
+if (!jQuery.browser.msie) {
+	linphone.ui._addEvent = function(obj, name, func) {
+		obj.addEventListener(name, func, false);
+	};
+} else {
+	linphone.ui._addEvent = function(obj, name, func) {
+		obj.attachEvent("on" + name, func);
+	};
+}
 
 // OnLoad
 jQuery(function() {
@@ -94,7 +197,8 @@ jQuery(function() {
 		content = '<button type="button" onclick="linphone.ui.downloadPlugin(\'' + linphone.config.file;
 		content += '\')" class="{translate: \'base.install.download\'}">Download !</button>';
 		jQuery('.linphone .window .install .buttons').html(content);
-		jQuery.i18n.update(jQuery('.linphone .window .install .button'), true);
+		jQuery.i18n.update(jQuery('.linphone .window .install .buttons'), true);
+		jQuery('.linphone .window .install button').button();
 	} else {
 		jQuery('.linphone .window .install .text').hide();
 		jQuery('.linphone .window .install .refresh').hide();

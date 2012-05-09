@@ -348,7 +348,7 @@ Call end: <b>{{=getRemoteAddress()}}</b>
 				<script class="Linphone-AccountsList" type="text/x-jsrender">
 <tr>
 	<td class="name">{{=getIdentity()}}</td>
-	<td class="status">{{=$ctx.getLinphoneRegistrationStateText(getState())}}</td>
+	<td class="status">{{=$ctx.linphone_ui_helpers_getLinphoneRegistrationStateText(getState())}}</td>
 	<td/>
 </tr>
 </script>
@@ -383,29 +383,6 @@ Call end: <b>{{=getRemoteAddress()}}</b>
 		linphone.config.name = 'Linphone-Web'
 		linphone.config.Version = '1.0.0.0'
 
-		function _coreLoad(obj) {
-			coreLoad(linphone.ui.core_data[obj.magic], obj)
-		}
-
-		function _videoLoad(obj) {
-			linphone.ui.video.video_data[obj.magic](obj)
-		}
-
-		var _addEvent;
-		if (!jQuery.browser.msie) {
-			_addEvent = function(obj, name, func) {
-				obj.addEventListener(name, func, false);
-			}
-		} else {
-			_addEvent = function(obj, name, func) {
-				obj.attachEvent("on" + name, func);
-			}
-		}
-
-		function addEvent(obj, name, func) {
-			_addEvent(obj, name, func)
-		}
-
 		function loadLinphoneI18n() {
 			jQuery.i18n.data = linphone.ui.i18n
 			var locale = (navigator.language) ? navigator.language : navigator.userLanguage
@@ -437,6 +414,13 @@ Call end: <b>{{=getRemoteAddress()}}</b>
 			}
 		}
 
+		function _coreLoad(obj) {
+			linphone.ui.loadHandler(obj);
+		}
+		function _videoLoad(obj) {
+			linphone.ui.video.loadHandler(obj);
+		}
+		
 		function init() {
 			linphone.core.log('Init LinphoneJS')
 			loadLinphoneI18n()
@@ -444,103 +428,8 @@ Call end: <b>{{=getRemoteAddress()}}</b>
 			jQuery(".linphone .window .tools .locales-menu").menu();
 		}
 
-		function videoUnload(object) {
-		}
-
-		function videoError(object) {
-		}
-
-		function videoLoad(object) {
-		}
-
-		function coreLoad(base, core) {
-			linphone.core.log('Load Core')
-			base.find('.window .install').hide() // Force 
-
-			jQuery('#version_number').text(core.version)
-			addEvent(core, 'globalStateChanged', globalStateChanged)
-			addEvent(core, 'callStateChanged', callStateChanged)
-			addEvent(core, 'displayStatus', displayStatus)
-			addEvent(core, 'displayMessage', displayMessage)
-			addEvent(core, 'displayWarning', displayWarning)
-			addEvent(core, 'displayUrl', displayUrl)
-			var ret_value = core.init()
-			if (ret_value != 0) {
-				error(base, jQuery.i18n.get('errors.core.' + ret_value))
-			} else {
-				// Init volumes settings 
-				rec_level = (linphone.core.data()['rec_level'] != null) ? linphone.core.data()['rec_level'] : 100
-				base.find('.window .tools .mic-slider').slider('value', rec_level)
-				core.setRecLevel(rec_level)
-
-				play_level = (linphone.core.data()['play_level'] != null) ? linphone.core.data()['play_level'] : 100
-				base.find('.window .tools .hp-slider').slider('value', play_level)
-				core.setPlayLevel(play_level)
-
-				ring_level = (linphone.core.data()['ring_level'] != null) ? linphone.core.data()['ring_level'] : 100
-				base.find('.window .tools .bell-slider').slider('value', ring_level)
-				core.setRingLevel(ring_level)
-
-				// Init video settings 
-				if (linphone.core.data()['enable_video'] == 1) {
-					core.enableVideo(true)
-				} else if (linphone.core.data()['enable_video'] == 0) {
-					core.enableVideo(false)
-				} else {
-					linphone.core.data()['enable_video'] = 1
-					core.enableVideo(true)
-				}
-
-				linphone.core.log('Sip port: ' + core.sip_port)
-
-				base.find('.window .load').hide()
-
-				linphone.ui.video.updateSelfView(jQuery(core))
-				linphone.ui.video.updateVideoView(jQuery(core))
-			}
-		}
-
-		function globalStateChanged(state, message) {
-			linphone.core.log('State(' + state + '): ' + message)
-			jQuery('.linphone .window > .footer > .status').html(jQuery.i18n.get('globalstatetext.' + linphone.core.enums.getGlobalStateText(state)))
-		}
-
-		function callStateChanged(call, state, message) {
-			linphone.core.log('Call(' + state + '): ' + message);
-			if (state == linphone.core.enums.callState.Connected) {
-
-			} else if (state == linphone.core.enums.callState.IncomingReceived) {
-				linphone.ui.call.create_call(call, '.templates .Linphone-Call-IncomingReceived')
-			}
-
-			var element = linphone.ui.call.findCallTab(call);
-			if (element) {
-				var content = jQuery('.templates .Linphone-Call-' + linphone.core.enums.getCallStateText(state)).render(element.data('data'))
-				element.html(content)
-				jQuery.i18n.update(element, true)
-			} else {
-				linphone.core.log('Can\'t find call tab: ' + call);
-			}
-		}
-
-		function displayStatus(message) {
-			linphone.core.log('Status: ' + message);
-		}
-
-		function displayMessage(message) {
-			linphone.core.log('Message: ' + message);
-		}
-
-		function displayWarning(message) {
-			linphone.core.log('Warning: ' + message);
-		}
-
-		function displayUrl(message, url) {
-			linphone.core.log('Url: ' + message + ' - ' + url);
-		}
-
 		jQuery.views.registerHelpers({
-			getLinphoneRegistrationStateText : function(val) {
+			linphone_ui_helpers_getLinphoneRegistrationStateText : function(val) {
 				return linphone.core.enums.getRegistrationStateText(val);
 			}
 		});
@@ -584,12 +473,6 @@ Call end: <b>{{=getRemoteAddress()}}</b>
 			core.appendTo(base)
 			
 			detect(base)
-		}
-
-		function error(base, msg) {
-			base.find('.window .load').hide()
-			base.find('.window .error .text').html(msg)
-			base.find('.window .error').show()
 		}
 	</script>
 </body>

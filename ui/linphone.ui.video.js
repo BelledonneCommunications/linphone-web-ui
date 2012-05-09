@@ -75,6 +75,10 @@ linphone.ui.video = {
 		linphone.ui.video.video_data.splice(object.magic, 1);
 		element.dialog('destroy');
 		element.remove();
+	},
+	loadHandler : function(video) {
+		linphone.core.log('Load Video');
+		linphone.ui.video.video_data[video.magic](video);
 	}
 };
 
