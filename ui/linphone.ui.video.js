@@ -1,9 +1,14 @@
 /*globals getCore,getBase,localData,jQuery,linphone,consoleLog*/
 
 linphone.ui.video = {
+	call_number : 1,
+	video_number : 1,
+	video_data : [],
+	self_view : null,
+	video_view : null,
 	updateVideoView : function(target) {
 		if (localData()['enable_video'] === '1') {
-			linphone.instance.video_view = linphone.ui.video.createVideoView(target, 'video', function(object) {
+			linphone.ui.video.video_view = linphone.ui.video.createVideoView(target, 'video', function(object) {
 				consoleLog('Load VideoView ' + object.magic);
 				object.setBackgroundColor(0, 0, 0);
 				getCore(target).setNativeVideoWindowId(object.window);
@@ -13,17 +18,17 @@ linphone.ui.video = {
 				linphone.ui.video.updateSelfView(target);
 			});
 		} else {
-			if (linphone.instance.video_view !== null) {
+			if (linphone.ui.video.video_view !== null) {
 				getCore(target).enableVideo(false);
 				getCore(target).setNativeVideoWindowId(0);
-				linphone.ui.video.destroyVideoView(linphone.instance.video_view);
-				linphone.instance.video_view = null;
+				linphone.ui.video.destroyVideoView(linphone.ui.video.video_view);
+				linphone.ui.video.video_view = null;
 			}
 		}
 	},
 	updateSelfView : function(target) {
 		if (localData()['enable_video'] === '1' && localData()['enable_video_self'] === '1') {
-			linphone.instance.self_view = linphone.ui.video.createVideoView(target, 'locale', function(object) {
+			linphone.ui.video.self_view = linphone.ui.video.createVideoView(target, 'locale', function(object) {
 				consoleLog('Load VideoView ' + object.magic);
 				object.setBackgroundColor(0, 0, 0);
 				getCore(target).setNativePreviewWindowId(object.window);
@@ -33,15 +38,15 @@ linphone.ui.video = {
 				linphone.ui.video.updateSelfView();
 			});
 		} else {
-			if (linphone.self_view != null) {
+			if (linphone.ui.video.self_view != null) {
 				getCore(target).enableVideoPreview(false);
 				getCore(target).setNativePreviewWindowId(0);
-				linphone.ui.video.destroyVideoView(linphone.instance.self_view);
-				linphone.instance.self_view = null;
+				linphone.ui.video.destroyVideoView(linphone.ui.video.self_view);
+				linphone.ui.video.self_view = null;
 			}
 		}
 	},
-	createVideoView: function (target, title, onOpen, onClose) {
+	createVideoView : function(target, title, onOpen, onClose) {
 		var element = jQuery(document.createElement('div'));
 		element.attr('title', title);
 		element.addClass('video');
@@ -56,19 +61,19 @@ linphone.ui.video = {
 		element.parent().appendTo(getBase(target));
 		element.dialog("open");
 		var template = jQuery(jQuery('#Linphone-Video').render({
-			magic : linphone.instance.video_number
+			magic : linphone.ui.video.video_number
 		}));
 		var object = template.find('object');
-		consoleLog('Create VideoView ' + linphone.instance.video_number);
-		linphone.instance.video_data[linphone.instance.video_number] = onOpen;
-		linphone.instance.video_number = linphone.instance.video_number + 1;
+		consoleLog('Create VideoView ' + linphone.ui.video.video_number);
+		linphone.ui.video.video_data[linphone.ui.video.video_number] = onOpen;
+		linphone.ui.video.video_number = linphone.ui.video.video_number + 1;
 		element.append(template);
 		return element;
 	},
-	destroyVideoView: function (element) {
+	destroyVideoView : function(element) {
 		var object = element.find('object').get(0);
 		consoleLog('Destroy VideoView ' + object.magic);
-		linphone.instance.video_data.splice(object.magic, 1);
+		linphone.ui.video.video_data.splice(object.magic, 1);
 		element.dialog('destroy');
 		element.remove();
 	}

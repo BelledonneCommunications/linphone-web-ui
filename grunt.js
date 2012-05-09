@@ -12,6 +12,7 @@ var
     'linphone.ui.account',
     'linphone.ui.codec',
     'linphone.ui.locale', 
+    'linphone.ui.media',
     'linphone.ui.menu',
     'linphone.ui.slider',
     'linphone.ui.video',

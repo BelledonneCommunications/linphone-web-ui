@@ -3,7 +3,7 @@
  * Main
  *
  */
-#core {
+.linphone .core {
 	visibility: hidden;
 }
 

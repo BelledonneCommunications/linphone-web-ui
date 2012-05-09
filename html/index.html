@@ -328,7 +328,7 @@ body {
 		}
 
 		function _videoLoad(obj) {
-			linphone.instance.video_data[obj.magic](obj)
+			linphone.ui.video.video_data[obj.magic](obj)
 		}
 
 		var _addEvent;
@@ -540,35 +540,6 @@ body {
 
 		jQuery(function() {
 
-			jQuery.fn.disableSelection = function() {
-				return this.each(function() {
-					$(this).attr('unselectable', 'on').css({
-						'-moz-user-select' : 'none',
-						'-webkit-user-select' : 'none',
-						'user-select' : 'none',
-						'-ms-user-select' : 'none'
-					}).each(function() {
-						this.onselectstart = function() {
-							return false;
-						};
-					});
-				});
-			};
-
-			linphone.instance = {}
-			linphone.instance.call_number = 1
-			linphone.instance.video_number = 1
-			linphone.instance.video_data = new Array()
-			linphone.instance.self_view = null
-			linphone.instance.video_view = null
-			linphone.instance.current_proxy_config = null
-
-			// Tabs 
-			jQuery('.linphone .window > .content .tabs').tabs({
-				closable : true,
-				scrollable : true
-			})
-
 			jQuery(document).on('click', '.linphone .window .dial-button', function(event) {
 				call_invite(jQuery(event.target).parent().find('.dest').val())
 			});
@@ -602,32 +573,6 @@ body {
 				}
 				jQuery('#linphone .window > .content .tabs ').tabs('remove', tab.prevAll('li').length)
 			})
-
-			jQuery(".linphone .window button").button();
-
-			jQuery('.linphone .window .tools').disableSelection()
-
-			jQuery('.linphone .window .options .ui-dialog-titlebar').disableSelection()
-
-			jQuery('.linphone .window .options .ui-dialog-titlebar-close').click(function(event) {
-				jQuery(this).parents('.options').fadeOut('fast')
-			})
-
-			jQuery('.linphone .window .options .ui-dialog-titlebar-close').hover(function() {
-				jQuery(this).addClass("ui-state-hover");
-			}, function() {
-				jQuery(this).removeClass("ui-state-hover");
-			})
-
-			jQuery('html').click(function(event) {
-				var target = jQuery(event.target);
-
-				// Click on media item 
-				if (target.is('.linphone .window .tools .media > a')) {
-					jQuery('.linphone .window .tools .settings-menu').fadeOut('fast');
-					jQuery('.linphone .window .media-options').fadeIn('fast');
-				}
-			});
 
 			init()
 			refresh()
