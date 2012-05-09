@@ -39,19 +39,19 @@ jQuery('html').click(function(event) {
 	var target = jQuery(event.target);
 
 	if (!target.is('.linphone .window .tools .hp-icon')) {
-		jQuery('.window .tools .hp-slider').fadeOut('fast');
+		jQuery('.linphone .window .tools .hp-slider').fadeOut('fast');
 	} else {
 		getBase(target).find('.window .tools .hp-slider').fadeToggle('fast');
 	}
 	
 	if (!target.is('.linphone .window .tools .mic-icon')) {
-		jQuery('.window .tools .mic-slider').fadeOut('fast');
+		jQuery('.linphone .window .tools .mic-slider').fadeOut('fast');
 	} else {
 		getBase(target).find('.window .tools .mic-slider').fadeToggle('fast');
 	}
 	
 	if (!target.is('.linphone .window .tools .bell-icon')) {
-		jQuery('.window .tools .bell-slider').fadeOut('fast');
+		jQuery('.linphone .window .tools .bell-slider').fadeOut('fast');
 	} else {
 		getBase(target).find('.window .tools .bell-slider').fadeToggle('fast');
 	}

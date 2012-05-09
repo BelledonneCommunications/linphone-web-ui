@@ -58,16 +58,21 @@ body {
 					<div class="text {translate: 'base.install.text'}"></div>
 					<div class="unavailable {translate: 'base.install.unavailable'}"></div>
 					<div class="buttons"></div>
-					<br/><br/><button type="button" onclick="refresh()" class="reload {translate: 'base.install.reload'}"></button>
+					<br />
+					<br />
+					<button type="button" onclick="refresh()" class="reload {translate: 'base.install.reload'}"></button>
 				</div>
 				<div class="load overall ui-corner-all">
 					<img src="style/images/loading.gif" alt="..."
 						style="width: 50px; height: 50px; position: absolute; top: 50%; left: 50%; margin-left: -25px; margin-top: -25px;"></img>
 				</div>
 				<div class="javascript overall ui-corner-all">
-					<div class="text">Vous devez activer le Javascript pour utiliser le plugin<br/>You have to enable Javascript in order to use the plugin</div>
+					<div class="text">
+						Vous devez activer le Javascript pour utiliser le plugin<br />You have to enable Javascript in order to use the
+						plugin
+					</div>
 				</div>
-				
+
 				<div class="header ui-corner-top">
 					<div class="text">Linphone</div>
 				</div>
@@ -202,25 +207,16 @@ body {
 						</a>
 					</div>
 					<div class="content ui-corner-bottom">
-						<label class="{translate: 'form.account.identity'}"></label>
-						<span>
-							<input class="identity ui-widget-content ui-corner-all"></input>
-						</span>
-						<label class="{translate: 'form.account.proxy'}"></label>
-						<span>
-							<input class="proxy ui-widget-content ui-corner-all"></input>
-						</span>
-						<label class="{translate: 'form.account.route'}"></label>
-						<span>
-							<input class="route ui-widget-content ui-corner-all"></input>
-						</span>
-						<label class="{translate: 'form.account.expires'}"></label>
-						<span>
-							<input class="expires ui-widget-content ui-corner-all"></input>
-						</span>
-						<label class="{translate: 'form.account.register'}"></label>
-						<span>
-							<input type="checkbox" class="register ui-widget-content ui-corner-all"></input>
+						<label class="{translate: 'form.account.identity'}"></label> <span> <input
+							class="identity ui-widget-content ui-corner-all"></input>
+						</span> <label class="{translate: 'form.account.proxy'}"></label> <span> <input
+							class="proxy ui-widget-content ui-corner-all"></input>
+						</span> <label class="{translate: 'form.account.route'}"></label> <span> <input
+							class="route ui-widget-content ui-corner-all"></input>
+						</span> <label class="{translate: 'form.account.expires'}"></label> <span> <input
+							class="expires ui-widget-content ui-corner-all"></input>
+						</span> <label class="{translate: 'form.account.register'}"></label> <span> <input type="checkbox"
+							class="register ui-widget-content ui-corner-all"></input>
 						</span>
 						<button type="button" class="remove {translate: 'form.account.remove'}"></button>
 						<button type="button" class="valid {translate: 'form.account.valid'}"></button>
@@ -240,37 +236,38 @@ body {
 	</div>
 
 	<script type="text/javascript">
-		var javascriptDetect = function () {
+		var javascriptDetect = function() {
 			jQuery('.linphone .window .javascript').hide()
-		}		
-		
+		}
+
 		javascriptDetect()
-	
+
 		// Utils 
 		var _objectFiles = {
-			'Windows': {
-				'Explorer': 'linphone-web.cab',
-				'DEFAULT': 'linphone-web.msi'
+			'Windows' : {
+				'Explorer' : 'linphone-web.cab',
+				'DEFAULT' : 'linphone-web.msi'
 			},
-			'Linux': {
-				'Firefox': 'linphone-web.xpi',
-				'DEFAULT': 'linphone-web.tar.gz'
+			'Linux' : {
+				'Firefox' : 'linphone-web.xpi',
+				'DEFAULT' : 'linphone-web.tar.gz'
 			}
 		}
 		var _objectName = 'Linphone-Web'
 		var _objectVersion = '1.0.0.0'
 		var _objectFile = null
-		var _objectDetect = function (){
-			if(typeof _objectFiles[jQuery.client.os] !== 'undefined') {
-				if(typeof _objectFiles[jQuery.client.os][jQuery.client.browser] !== 'undefined') {
+		var _objectDetect = function() {
+			if (typeof _objectFiles[jQuery.client.os] !== 'undefined') {
+				if (typeof _objectFiles[jQuery.client.os][jQuery.client.browser] !== 'undefined') {
 					_objectFile = _objectFiles[jQuery.client.os][jQuery.client.browser]
 				} else {
 					_objectFile = _objectFiles[jQuery.client.os]['DEFAULT']
 				}
 			}
-			if(_objectFile !== null) {
+			if (_objectFile !== null) {
 				var content = ''
-				content = '<button type="button" onclick="downloadPlugin(\''+_objectFile+'\')" class="{translate: \'base.install.download\'}">Download !</button>'
+				content = '<button type="button" onclick="downloadPlugin(\'' + _objectFile
+						+ '\')" class="{translate: \'base.install.download\'}">Download !</button>'
 				jQuery('.linphone .window .install .buttons').html(content)
 				jQuery.i18n.update(jQuery('.linphone .window .install .button'), true)
 			} else {
@@ -280,22 +277,22 @@ body {
 			}
 		}
 		_objectDetect()
-		
+
 		var _objectCodeBase = ''
-		if(jQuery.client.os == 'Windows' && jQuery.client.browser == 'Explorer')
-		   _objectCodeBase = _objectFile + '#Version=' + _objectVersion.replace('.', ',')
-		else if(jQuery.client.os == 'Linux' && jQuery.client.browser == 'Firefox')
-		   _objectCodeBase = _objectFile
+		if (jQuery.client.os == 'Windows' && jQuery.client.browser == 'Explorer')
+			_objectCodeBase = _objectFile + '#Version=' + _objectVersion.replace('.', ',')
+		else if (jQuery.client.os == 'Linux' && jQuery.client.browser == 'Firefox')
+			_objectCodeBase = _objectFile
 		var _coreTemplate = '<object id="core" class="core" type="application/x-linphone-web" width="0" height="0" codebase="'+_objectCodeBase+'"> \
 							 	<param name="onload" value="_coreLoad" /> \
 							 	Linphone Core \
 							 </object>'
-			
+
 		function downloadPlugin(file) {
 			window.open(file, '_blank');
-		}		
+		}
 		//
-							 
+
 		var _localData = {}
 		function localData() {
 			if (typeof window['localStorage'] !== 'undefined')
@@ -309,7 +306,7 @@ body {
 				console.log(a)
 			}
 		}
-		
+
 		function core() {
 			return document.getElementById('core');
 		}
@@ -319,9 +316,9 @@ body {
 			var _core = _base.find('> .core');
 			return _core.get()[0]
 		}
-		
+
 		function getBase(base) {
-			if(typeof base === 'undefined')
+			if (typeof base === 'undefined')
 				base = jQuery(this)
 			return base.parents('.linphone');
 		}
@@ -393,10 +390,9 @@ body {
 		function init() {
 			loadLinphoneI18n()
 			consoleLog('Init LinphoneJS')
-			try
-			{
+			try {
 				jQuery('#templates').load('templates.html', init2)
-			}catch(err) {
+			} catch (err) {
 				//Ignore console issue in internet explorer
 			}
 		}
@@ -446,7 +442,7 @@ body {
 		function coreLoad(core) {
 			consoleLog('Load Core')
 			jQuery('.linphone .window .install').hide() // Force
-			
+
 			jQuery('#version_number').text(core.version)
 			addEvent(core, 'globalStateChanged', globalStateChanged)
 			addEvent(core, 'callStateChanged', callStateChanged)
@@ -534,8 +530,7 @@ body {
 
 		function globalStateChanged(state, message) {
 			addLog('State(' + state + '): ' + message)
-			jQuery('.linphone .window > .footer > .status').html(
-					jQuery.i18n.get('globalstatetext.' + linphone.core.enums.getGlobalStateText(state)))
+			jQuery('.linphone .window > .footer > .status').html(jQuery.i18n.get('globalstatetext.' + linphone.core.enums.getGlobalStateText(state)))
 		}
 
 		function callStateChanged(call, state, message) {
@@ -596,29 +591,28 @@ body {
 				var call_number = linphone.instance.call_number
 				consoleLog('Add tab call-' + call_number)
 				var div = jQuery('<div id="call-'+call_number+'" class="tab"></div>')
-				jQuery('#linphone .window > .content .tabs').append(div).tabs('add', '#call-' + call_number,
-						'Call ' + call_number);
+				jQuery('#linphone .window > .content .tabs').append(div).tabs('add', '#call-' + call_number, 'Call ' + call_number);
 				jQuery('#linphone .window > .content .tabs').tabs('select', '#call-' + call_number)
 				var element = jQuery('#linphone .window > .content .tabs #call-' + call_number)
 				element.data('data', obj)
-				
+
 				var content = jQuery(template).render(obj)
 				element.html(content)
 				jQuery.i18n.update(element, true)
 				linphone.instance.call_number++
 			}
 		}
-		
+
 		function call_invite_callback(dest, obj) {
 			create_call(obj, '#Linphone-Call-OutgoingInit')
 		}
-		
+
 		jQuery.views.registerHelpers({
-			getLinphoneRegistrationStateText: function(val) {
+			getLinphoneRegistrationStateText : function(val) {
 				return linphone.core.enums.getRegistrationStateText(val);
 			}
 		});
-		
+
 		jQuery(function() {
 
 			jQuery.fn.disableSelection = function() {
@@ -643,26 +637,17 @@ body {
 			linphone.instance.self_view = null
 			linphone.instance.video_view = null
 			linphone.instance.current_proxy_config = null
-			
+
 			// Tabs 
 			jQuery('.linphone .window > .content .tabs').tabs({
 				closable : true,
 				scrollable : true
 			})
 
-			jQuery(".linphone .window .codecs-options .content .tabs > ul li a").each(function(index) {
-				jQuery(this).attr("href", "#codecs" + index.toString());
-			});
-			jQuery(".linphone .window .codecs-options .content .tabs > div").each(function(index) {
-				jQuery(this).attr("id", "codecs" + index.toString());
-			})
-			// Tabs 
-			jQuery('.linphone .window .codecs-options .content .tabs').tabs({})
-
 			jQuery(document).on('click', '.linphone .window .dial-button', function(event) {
 				call_invite(jQuery(event.target).parent().find('.dest').val())
-			})
-			
+			});
+
 			jQuery(document).on('click', '.linphone .window .answer-button', function(event) {
 				element = jQuery(event.target).parents('.tab')
 				if (element && element.data('data')) {
@@ -693,10 +678,7 @@ body {
 				jQuery('#linphone .window > .content .tabs ').tabs('remove', tab.prevAll('li').length)
 			})
 
-			jQuery( ".linphone .window button" ).button();
-			jQuery('.linphone .window .tools .settings-menu').menu()
-
-			jQuery('.linphone .window .tools .video-menu').menu()
+			jQuery(".linphone .window button").button();
 
 			jQuery('.linphone .window .tools').disableSelection()
 
@@ -714,14 +696,6 @@ body {
 
 			jQuery('html').click(function(event) {
 				var target = jQuery(event.target);
-				
-				// Click on settings 
-				if (target.is('.linphone .window .tools .settings-icon'))
-					jQuery('.linphone .window .tools .settings-menu').fadeToggle('fast');
-				else if (target.parents(".linphone .window .tools .settings-icon").length == 0)
-					jQuery('.linphone .window .tools .settings-menu').fadeOut('fast');
-				else
-					jQuery('.linphone .window .tools .settings-menu').fadeIn('fast');
 
 				// Click on video item 
 				if (target.is('.linphone .window .tools .video > a')) {
@@ -777,7 +751,7 @@ body {
 					jQuery('.linphone .window .media-options').fadeIn('fast');
 				}
 			});
-		
+
 			init()
 			refresh()
 		})
@@ -789,9 +763,11 @@ body {
 				jQuery('.linphone .window .load').show()
 				return true
 			} else {
-				if(jQuery.client.os == "Linux" && jQuery.client.browser == "Firefox") {
+				if (jQuery.client.os == "Linux" && jQuery.client.browser == "Firefox") {
 					if (InstallTrigger.updateEnabled())
-  						InstallTrigger.install({"Linphone Web": _objectCodeBase});
+						InstallTrigger.install({
+							"Linphone Web" : _objectCodeBase
+						});
 				}
 			}
 			return false

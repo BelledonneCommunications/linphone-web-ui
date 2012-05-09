@@ -1,0 +1,89 @@
+/* 
+ *
+ * Menu stuff
+ *
+ */
+.linphone .window .tools .settings-icon {
+	display: inline-block;
+	background-image: url('images/settings.png');
+	margin-left: 1px;
+	margin-right: 1px;
+	position: relative;
+}
+
+.linphone .window .tools .settings-menu {
+	display: none;
+	bottom: 0px;
+	right: 0px;
+	position: absolute;
+	margin-bottom: 100%;
+}
+
+.linphone .window .tools .locales-menu {
+	display: none;
+	bottom: -4px;
+	right: 4px;
+	position: absolute;
+	margin-right: 100%;
+}
+
+.linphone .window .tools .video-menu {
+	display: none;
+	bottom: -4px;
+	right: 4px;
+	position: absolute;
+	margin-right: 100%;
+}
+
+.linphone .window .tools .settings-menu a {
+	width: 100%;
+	vertical-align: middle;
+	display: block;
+	width: auto;
+	white-space: nowrap;
+}
+
+.linphone .window .tools .ui-menu-item .ui-state-selected {
+	color: #1c94c4;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.linphone .window .tools ul {
+	padding: 4px;
+}
+
+.linphone .window .tools .ui-menu-item .ui-icon {
+	background-repeat: no-repeat;
+	background-position: 2px center;
+	padding-left: 22px;
+	padding-top: 2px;
+}
+
+.linphone .window .tools .settings-menu .accounts .ui-icon {
+	background-image: url('images/account.png');
+}
+
+.linphone .window .tools .settings-menu .locales {
+	position: relative;
+}
+
+.linphone .window .tools .settings-menu .locales .ui-icon {
+	background-image: url('images/language.png');
+}
+
+.linphone .window .tools .settings-menu .media .ui-icon {
+	background-image: url('images/media.png');
+}
+
+.linphone .window .tools .settings-menu .video {
+	position: relative;
+}
+
+.linphone .window .tools .settings-menu .video .ui-icon {
+	background-image: url('images/video.png');
+}
+
+.linphone .window .tools .settings-menu .codecs .ui-icon {
+	background-image: url('images/codecs.png');
+}

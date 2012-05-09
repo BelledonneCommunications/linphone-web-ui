@@ -6,7 +6,7 @@ linphone.ui.codec = {
 		var audio_table = getBase(target).find('.window .codecs-options .content .audio tbody');
 		var audio_codecs = getCore(target).getAudioCodecs();
 		audio_table.empty();
-		for (var audio_index in audio_codecs) {
+		for ( var audio_index in audio_codecs) {
 			var audio_item = audio_codecs[audio_index];
 			var audio_element = jQuery(jQuery('#Linphone-CodecsList').render(audio_item));
 			audio_element.data('data', audio_item);
@@ -16,14 +16,14 @@ linphone.ui.codec = {
 		var video_table = getBase(target).find('.window .codecs-options .content .video tbody');
 		var video_codecs = getCore(target).getVideoCodecs();
 		video_table.empty();
-		for (var video_index in video_codecs) {
+		for ( var video_index in video_codecs) {
 			var video_item = video_codecs[video_index];
 			var video_element = jQuery(jQuery('#Linphone-CodecsList').render(video_item));
 			video_element.data('data', video_item);
 			video_table.append(video_element);
 		}
 	},
-	submitCodecsList: function(table) {
+	submitCodecsList : function(table) {
 		var data = [];
 		table.find('tbody tr').each(function() {
 			data.push(jQuery(this).data('data'));
@@ -32,11 +32,24 @@ linphone.ui.codec = {
 			getCore(table).setVideoCodecs(data);
 		} else if (table.is('.linphone .window .codecs-options .content .audio')) {
 			getCore(table).setAudioCodecs(data);
-		}	
+		}
 	}
 };
 
-//
+// OnLoad
+jQuery(function() {
+	jQuery(".linphone .window .codecs-options .content .tabs > ul li a").each(function(index) {
+		jQuery(this).attr("href", "#codecs" + index.toString());
+	});
+	jQuery(".linphone .window .codecs-options .content .tabs > div").each(function(index) {
+		jQuery(this).attr("id", "codecs" + index.toString());
+	});
+
+	// Tabs
+	jQuery('.linphone .window .codecs-options .content .tabs').tabs({});
+});
+
+// Click
 jQuery('html').click(function(event) {
 	var target = jQuery(event.target);
 
@@ -45,7 +58,7 @@ jQuery('html').click(function(event) {
 		getBase(target).find('.window .tools .settings-menu').fadeOut('fast');
 
 		linphone.ui.codec.updateCodecsList(target);
-		
+
 		// DnD
 		getBase(target).find('.window .codecs-options .content tbody tr').disableSelection();
 		getBase(target).find('.window .codecs-options .content tbody tr').draggable({
