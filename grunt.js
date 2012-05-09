@@ -14,6 +14,7 @@ var
     'linphone.ui.locale', 
     'linphone.ui.menu',
     'linphone.ui.slider',
+    'linphone.ui.video',
     'linphone.ui.i18n'
   ],
 

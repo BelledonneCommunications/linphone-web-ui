@@ -406,39 +406,6 @@ body {
 		function videoLoad(object) {
 		}
 
-		function createVideoView(title, onOpen, onClose) {
-			var element = $(document.createElement('div'))
-			element.attr('title', title)
-			element.addClass('video')
-
-			element.dialog({
-				height : 240,
-				width : 320,
-				close : function() {
-					onClose(jQuery(this).find('object').get(0))
-				}
-			})
-			element.parent().appendTo(jQuery('.linphone'))
-			element.dialog("open")
-			var template = jQuery(jQuery('#Linphone-Video').render({
-				magic : linphone.instance.video_number
-			}))
-			var object = template.find('object')
-			consoleLog('Create VideoView ' + linphone.instance.video_number)
-			linphone.instance.video_data[linphone.instance.video_number] = onOpen
-			linphone.instance.video_number = linphone.instance.video_number + 1
-			element.append(template)
-			return element
-		}
-
-		function destroyVideoView(element) {
-			var object = element.find('object').get(0)
-			consoleLog('Destroy VideoView ' + object.magic)
-			linphone.instance.video_data.splice(object.magic, 1);
-			element.dialog('destroy')
-			element.remove()
-		}
-
 		function coreLoad(core) {
 			consoleLog('Load Core')
 			jQuery('.linphone .window .install').hide() // Force
@@ -481,50 +448,8 @@ body {
 
 				jQuery('.linphone .window .load').hide()
 
-				updateSelfView()
-				updateVideoView()
-			}
-		}
-
-		function updateVideoView() {
-			if (localData()['enable_video'] == 1) {
-				linphone.instance.video_view = createVideoView('video', function(object) {
-					consoleLog('Load VideoView ' + object.magic)
-					object.setBackgroundColor(0, 0, 0)
-					core().setNativeVideoWindowId(object.window)
-					core().enableVideo(true)
-				}, function(object) {
-					localData()['enable_video'] = 0
-					updateSelfView()
-				})
-			} else {
-				if (linphone.instance.video_view != null) {
-					core().enableVideo(false)
-					core().setNativeVideoWindowId(0)
-					destroyVideoView(linphone.instance.video_view)
-					linphone.instance.video_view = null
-				}
-			}
-		}
-
-		function updateSelfView() {
-			if (localData()['enable_video'] == 1 && localData()['enable_video_self'] == 1) {
-				linphone.instance.self_view = createVideoView('locale', function(object) {
-					consoleLog('Load VideoView ' + object.magic)
-					object.setBackgroundColor(0, 0, 0)
-					core().setNativePreviewWindowId(object.window)
-					core().enableVideoPreview(true)
-				}, function(object) {
-					localData()['enable_video_self'] = 0
-					updateSelfView()
-				})
-			} else {
-				if (linphone.self_view != null) {
-					core().enableVideoPreview(false)
-					core().setNativePreviewWindowId(0)
-					destroyVideoView(linphone.instance.self_view)
-					linphone.instance.self_view = null
-				}
+				linphone.ui.video.updateSelfView(jQuery(core))
+				linphone.ui.video.updateVideoView(jQuery(core))
 			}
 		}
 
@@ -696,54 +621,6 @@ body {
 
 			jQuery('html').click(function(event) {
 				var target = jQuery(event.target);
-
-				// Click on video item 
-				if (target.is('.linphone .window .tools .video > a')) {
-					if (localData()['enable_video'] == 1) {
-						jQuery('.linphone .window .tools .video-menu .enable a').addClass('ui-state-selected')
-						jQuery('.linphone .window .tools .video-menu .self a').removeClass('ui-state-disabled')
-					} else {
-						jQuery('.linphone .window .tools .video-menu .enable a').removeClass('ui-state-selected')
-						jQuery('.linphone .window .tools .video-menu .self a').addClass('ui-state-disabled')
-					}
-					if (localData()['enable_video_self'] == 1) {
-						jQuery('.linphone .window .tools .video-menu .self a').addClass('ui-state-selected')
-					} else {
-						jQuery('.linphone .window .tools .video-menu .self a').removeClass('ui-state-selected')
-					}
-					jQuery('.linphone .window .tools .video-menu').fadeToggle('fast');
-				} else if (target.parents(".linphone .window .tools .video").length == 0)
-					jQuery('.linphone .window .tools .video-menu').fadeOut('fast');
-				else {
-					jQuery('.linphone .window .tools .video-menu').fadeIn('fast');
-				}
-
-				// Click on enable video item 
-				if (target.is('.linphone .window .tools .video-menu .enable > a')) {
-					if (jQuery('.linphone .window .tools .video-menu .enable > a').hasClass('ui-state-selected')) {
-						localData()['enable_video'] = 0
-						core().enableVideo(false)
-					} else {
-						localData()['enable_video'] = 1
-						core().enableVideo(true)
-					}
-					updateVideoView()
-					updateSelfView()
-					jQuery('.linphone .window .tools .video-menu').fadeOut('fast');
-					jQuery('.linphone .window .tools .settings-menu').fadeOut('fast');
-				}
-
-				// Click on self view video item 
-				if (target.is('.linphone .window .tools .video-menu .self > a')) {
-					if (jQuery('.linphone .window .tools .video-menu .self > a').hasClass('ui-state-selected')) {
-						localData()['enable_video_self'] = 0
-					} else {
-						localData()['enable_video_self'] = 1
-					}
-					updateSelfView()
-					jQuery('.linphone .window .tools .video-menu').fadeOut('fast');
-					jQuery('.linphone .window .tools .settings-menu').fadeOut('fast');
-				}
 
 				// Click on media item 
 				if (target.is('.linphone .window .tools .media > a')) {
