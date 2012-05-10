@@ -14,29 +14,29 @@ linphone.ui.call = {
 	},
 	call_invite : function(base, dest) {
 		linphone.ui.getCore(base).invite_async(dest, (function() {
-			return function(plugin, obj) {
-				linphone.ui.call.call_invite_callback(base, dest, obj);
+			return function(plugin, call) {
+				linphone.ui.call.call_invite_callback(base, dest, call);
 			};
 		}()));
 	},
-	create_call : function(base, obj, template) {
-		if (obj) {
+	create_call_tab : function(base, call, template) {
+		if (call) {
 			var call_number = linphone.ui.call.call_number;
 			linphone.core.log('Add tab call-' + call_number);
 			var div = jQuery('<div id="call-' + call_number + '" class="tab"></div>');
 			base.find('.window > .content .tabs').append(div).tabs('add', '#call-' + call_number, 'Call ' + call_number);
 			base.find('.window > .content .tabs').tabs('select', '#call-' + call_number);
 			var element = base.find('.window > .content .tabs #call-' + call_number);
-			element.data('data', obj);
+			element.data('data', call);
 
-			var content = base.find(template).render(obj);
+			var content = base.find(template).render(call);
 			element.html(content);
 			jQuery.i18n.update(element, true);
 			linphone.ui.call.call_number++;
 		}
 	},
-	call_invite_callback : function(base, dest, obj) {
-		linphone.ui.call.create_call(base, obj, '.templates .Linphone-Call-OutgoingInit');
+	call_invite_callback : function(base, dest, call) {
+		linphone.ui.call.create_call_tab(base, call, '.templates .Linphone-Call-OutgoingInit');
 	}
 };
 
@@ -54,7 +54,7 @@ jQuery('html').click(function(event) {
 		if (element && element.data('data')) {
 			linphone.ui.getCore(target).acceptCall(element.data('data'));
 		} else {
-			linphone.core.log('Can\'t find call: ' + element);
+			linphone.core.log('Can\'t find call tab');
 		}
 	}
 
@@ -63,7 +63,7 @@ jQuery('html').click(function(event) {
 		if (element && element.data('data')) {
 			linphone.ui.getCore(target).terminateCall(element.data('data'));
 		} else {
-			linphone.core.log('Can\'t find call: ' + element);
+			linphone.core.log('Can\'t find call tab');
 		}
 	}
 
@@ -72,10 +72,11 @@ jQuery('html').click(function(event) {
 		var tabId = tab.find('a').attr('href');
 		element = base.find('.window > .content .tabs ' + tabId);
 		if (element && element.data('data')) {
-			linphone.ui.getCore(target).terminateCall(element.data('data'));
+			var call = element.data('data');
 			element.data('data', null);
+			linphone.ui.getCore(target).terminateCall(call);
 		} else {
-			linphone.core.log('Can\'t find call: ' + element);
+			linphone.core.log('Can\'t find call tab');
 		}
 		base.find('.window > .content .tabs ').tabs('remove', tab.prevAll('li').length);
 	}
