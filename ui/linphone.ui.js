@@ -27,11 +27,15 @@ linphone.ui = {
 		base = linphone.ui.getBase(base);
 		return base.find('> .core').get()[0];
 	},
-	getBase : function(base) {
-		if (typeof base === 'undefined') {
-			base = jQuery(this);
+	getBase : function(target) {
+		if (typeof target === 'undefined') {
+			target = jQuery(this);
 		}
-		return base.parents('.linphone');
+		if (target.is('.linphone')) {
+			return target;
+		} else {
+			return target.parents('.linphone');
+		}
 	},
 	_addEvent : null,
 	addEvent : function(obj, name, func) {
@@ -85,26 +89,29 @@ linphone.ui = {
 		}
 	},
 	globalStateChanged : function(core, state, message) {
-		var base = linphone.ui.core_data[core.magic];
 		linphone.core.log('State(' + state + '): ' + message);
+		var base = linphone.ui.core_data[core.magic];
+
 		base.find('.window > .footer > .status').html(jQuery.i18n.get('globalstatetext.' + linphone.core.enums.getGlobalStateText(state)));
 	},
 
 	callStateChanged : function(core, call, state, message) {
 		linphone.core.log('Call(' + state + '): ' + message);
+		var base = linphone.ui.core_data[core.magic];
+
 		if (state === linphone.core.enums.callState.Connected) {
 
 		} else if (state === linphone.core.enums.callState.IncomingReceived) {
-			linphone.ui.call.create_call(call, '.templates .Linphone-Call-IncomingReceived');
+			linphone.ui.call.create_call(base, call, '.templates .Linphone-Call-IncomingReceived');
 		}
 
-		var element = linphone.ui.call.findCallTab(call);
+		var element = linphone.ui.call.findCallTab(base, call);
 		if (element) {
 			var content = jQuery('.templates .Linphone-Call-' + linphone.core.enums.getCallStateText(state)).render(element.data('data'));
 			element.html(content);
 			jQuery.i18n.update(element, true);
 		} else {
-			linphone.core.log('Can\'t find call tab: ' + call);
+			linphone.core.log('Can\'t find call tab');
 		}
 	},
 	displayStatus : function(core, message) {
@@ -147,7 +154,8 @@ linphone.ui = {
 		var core = base.find('> .core').get()[0];
 		if (typeof core !== 'undefined') {
 			delete linphone.ui.core_data[core.magic];
-			base.get()[0].removeChild(core); // Use of dom: issue with jQuery and embedded object
+			base.get()[0].removeChild(core); // Use of dom: issue with jQuery
+												// and embedded object
 		}
 	},
 	load : function(base) {

@@ -190,7 +190,8 @@ body {
 						<div class="logo"></div><br/>
 						<div class="title">Linphone Web</div><br/>
 						<div class="version">Version: <span class="version_number"></span></div><br/>
-						<div class="copyright">Copyright Belledonne Communication 2012</div>
+						<div class="core_version">Core version: <span class="core_version_number"></span></div><br/>
+						<div class="copyright">Copyright Belledonne Communications 2012</div>
 					</div>
 				</div>
 
@@ -386,8 +387,8 @@ Call end: <b>{{=getRemoteAddress()}}</b>
 				'DEFAULT' : 'linphone-web.tar.gz'
 			}
 		}
-		linphone.config.name = 'Linphone-Web'
-		linphone.config.Version = '1.0.0.0'
+		linphone.config.name = 'Linphone Web'
+		linphone.config.version = '1.0.0.0'
 
 		function _coreLoad(obj) {
 			linphone.ui.loadHandler(obj);
