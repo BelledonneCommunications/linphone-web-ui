@@ -149,13 +149,8 @@ linphone.ui = {
 		var core = base.find('> .core').get()[0];
 		if (typeof core !== 'undefined') {
 			delete linphone.ui.core_data[core.magic];
-			base.find('> .core').remove();
+			base.get()[0].removeChild(core); // Use of dom: issue with jQuery and embedded object
 		}
-	},
-	reload : function(base) {
-		linphone.core.log('Reload');
-		linphone.ui.unload(base);
-		linphone.ui.load(base);
 	},
 	load : function(base) {
 		linphone.core.log('Load');

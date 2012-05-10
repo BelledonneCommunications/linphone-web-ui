@@ -63,9 +63,7 @@ jQuery('html').click(function(event) {
 		});
 		base.find('.window .tools .locales-menu').fadeToggle('fast');
 	} else if (target.parents(".linphone .window .tools .locales").length === 0) {
-		base.find('.window .tools .locales-menu').fadeOut('fast');
-	} else {
-		base.find('.window .tools .locales-menu').fadeIn('fast');
+		jQuery('.linphone .window .tools .locales-menu').fadeOut('fast');
 	}
 
 	// Click on one locale

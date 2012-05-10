@@ -48,7 +48,7 @@ body {
 
 <body>
 	<div>
-		<div class="linphone ui-widget" id="linphone">
+		<div class="linphone ui-widget">
 			<div class="window ui-corner-all">
 				<div class="error overall ui-corner-all">
 					<div class="text {translate: 'base.error.text'}"></div>
@@ -390,7 +390,10 @@ Call end: <b>{{=getRemoteAddress()}}</b>
 			linphone.ui.video.loadHandler(obj);
 		}
 		function _reload(event) {
-			linphone.ui.reload(linphone.ui.getBase(jQuery(event.target)));
+			var target = jQuery(event.target);
+			var base = linphone.ui.getBase(target);
+			linphone.ui.unload(jQuery('.linphone'));
+			linphone.ui.load(jQuery('.linphone'));
 		}
 		jQuery(function() {
 			linphone.ui.init();
