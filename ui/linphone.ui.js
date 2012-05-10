@@ -43,7 +43,6 @@ linphone.ui = {
 
 		base.find('.window .install').hide(); // Force
 
-		jQuery('#version_number').text(core.version);
 		linphone.ui.addEvent(core, 'globalStateChanged', linphone.ui.globalStateChanged);
 		linphone.ui.addEvent(core, 'callStateChanged', linphone.ui.callStateChanged);
 		linphone.ui.addEvent(core, 'displayStatus', linphone.ui.displayStatus);
@@ -130,7 +129,6 @@ linphone.ui = {
 		var core = base.find('.core').get()[0];
 		if (typeof core !== 'undefined' && typeof core.valid !== 'undefined' && core.valid) {
 			base.find('.window .install').hide();
-			base.find('.window .load').show();
 			return true;
 		} else {
 			if (jQuery.client.os === "Linux" && jQuery.client.browser === "Firefox") {
@@ -145,7 +143,7 @@ linphone.ui = {
 	},
 	unload : function(base) {
 		linphone.core.log('Unload');
-		base.find('.window .install').show();
+		base.find('.window .load').show();
 		var core = base.find('> .core').get()[0];
 		if (typeof core !== 'undefined') {
 			delete linphone.ui.core_data[core.magic];
@@ -154,6 +152,7 @@ linphone.ui = {
 	},
 	load : function(base) {
 		linphone.core.log('Load');
+		base.find('.window .install').show();
 		base.find('.window .error').hide();
 		navigator.plugins.refresh(false);
 		var coreTemplate = base.find('.templates .Linphone-Core').render({
@@ -171,7 +170,7 @@ linphone.ui = {
 		linphone.core.log('Init LinphoneJS');
 		var base = jQuery('.linphone');
 		linphone.ui.locale.load();
-		linphone.ui.locale.populate_locales_menu(base);
+		linphone.ui.menu.populateLocalesMenu(base);
 	}
 };
 

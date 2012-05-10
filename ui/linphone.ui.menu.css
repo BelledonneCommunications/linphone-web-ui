@@ -87,3 +87,7 @@
 .linphone .window .tools .settings-menu .codecs .ui-icon {
 	background-image: url('images/codecs.png');
 }
+
+.linphone .window .tools .settings-menu .about .ui-icon {
+	background-image: url('images/about.png');
+}

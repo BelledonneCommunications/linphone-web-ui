@@ -50,6 +50,10 @@ linphone.ui.i18n = {
 	},
 	menu : {
 		settings : {
+			about : {
+				en_US : 'About',
+				fr_FR : 'À Propos'
+			},
 			accounts : {
 				en_US : 'Accounts',
 				fr_FR : 'Comptes'
@@ -129,6 +133,10 @@ linphone.ui.i18n = {
 	},
 	options : {
 		accounts : {
+			title : {
+				en_US : 'Accounts',
+				fr_FR : 'Comptes'
+			},
 			add : {
 				en_US : 'Add',
 				fr_FR : 'Ajouter'
@@ -143,6 +151,10 @@ linphone.ui.i18n = {
 			}
 		},
 		codecs : {
+			title : {
+				en_US : 'Codecs',
+				fr_FR : 'Codecs'
+			},
 			audio : {
 				en_US : 'Audio',
 				fr_FR : 'Audio'
@@ -166,6 +178,18 @@ linphone.ui.i18n = {
 			actions : {
 				en_US : '',
 				fr_FR : ''
+			}
+		},
+		media : {
+			title : {
+				en_US : 'Media',
+				fr_FR : 'Média'
+			}
+		},
+		about : {
+			title : {
+				en_US : 'About',
+				fr_FR : 'À Propos'
 			}
 		}
 	}

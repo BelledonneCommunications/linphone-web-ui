@@ -9,6 +9,7 @@ var
   ],
   uiModules = [
     'linphone.ui',
+    'linphone.ui.about',
     'linphone.ui.account',
     'linphone.ui.call',
     'linphone.ui.codec',

@@ -1,18 +1,6 @@
 /*globals jQuery,linphone*/
 
 linphone.ui.locale = {
-	populate_locales_menu : function(base) {
-		// Locales
-		var menu = base.find('.window .tools .locales-menu');
-		menu.empty();
-		for (var index in linphone.ui.locales) {
-			var item = linphone.ui.locales[index];
-			var element = jQuery(base.find('.templates .Linphone-LocaleItem').render(item));
-			element.find('a').data('data', item);
-			menu.append(element);
-		}
-		menu.menu();
-	},
 	load : function() {
 		jQuery.i18n.data = linphone.ui.i18n;
 		var locale = (navigator.language) ? navigator.language : navigator.userLanguage;

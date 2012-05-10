@@ -39,6 +39,7 @@
 .linphone .window .install {
 	z-index: 9998;
 	text-align: center;
+	display: none;
 }
 
 .linphone .window .install .unavailable {
@@ -47,7 +48,6 @@
 
 .linphone .window .load {
 	z-index: 9997;
-	display: none;
 }
 
 .linphone .window .javascript {

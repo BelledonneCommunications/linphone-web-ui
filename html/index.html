@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-<link rel="icon" type="image/png" href="style/images/linphone.png" />
+<link rel="icon" type="image/png" href="style/images/icon.png" />
 
 <link type="text/css" href="style/ui-lightness/jquery-ui-1.8.17.custom.css" rel="stylesheet" />
 <link type="text/css" href="style/scrollabletab.css" rel="stylesheet" />
@@ -65,12 +65,14 @@ body {
 					<img src="style/images/loading.gif" alt="..."
 						style="width: 50px; height: 50px; position: absolute; top: 50%; left: 50%; margin-left: -25px; margin-top: -25px;"></img>
 				</div>
-				<div class="javascript overall ui-corner-all">
-					<div class="text">
-						Vous devez activer le Javascript pour utiliser le plugin<br />You have to enable Javascript in order to use the
-						plugin
+				<noscript>
+					<div class="javascript overall ui-corner-all">
+						<div class="text">
+							Vous devez activer le Javascript pour utiliser le plugin<br />You have to enable Javascript in order to use the
+							plugin
+						</div>
 					</div>
-				</div>
+				</noscript>
 
 				<div class="header ui-corner-top">
 					<div class="text">Linphone</div>
@@ -116,6 +118,7 @@ body {
 									<ul class="locales-menu">
 										<li></li>
 									</ul></li>
+								<li class="about"><a class="ui-icon {translate: 'menu.settings.about'}"></a></li>
 							</ul>
 						</div>
 					</div>
@@ -123,7 +126,7 @@ body {
 				<div class="codecs-options options ui-dialog ui-widget ui-widget-content ui-corner-all">
 					<div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"
 						style="-webkit-user-select: none;">
-						<span class="ui-dialog-title {translate: 'menu.settings.codecs'}" style="-webkit-user-select: none;"></span> <a
+						<span class="ui-dialog-title {translate: 'options.codecs.title'}" style="-webkit-user-select: none;"></span> <a
 							href="#" class="ui-dialog-titlebar-close ui-corner-all" style="-webkit-user-select: none;"> <span
 							class="ui-icon ui-icon-closethick" style="-webkit-user-select: none;">close</span>
 						</a>
@@ -167,12 +170,28 @@ body {
 				<div class="media-options options ui-dialog ui-widget ui-widget-content ui-corner-all">
 					<div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"
 						style="-webkit-user-select: none;">
-						<span class="ui-dialog-title {translate: 'menu.settings.media'}" style="-webkit-user-select: none;"></span> <a
+						<span class="ui-dialog-title {translate: 'options.media.title'}" style="-webkit-user-select: none;"></span> <a
 							href="#" class="ui-dialog-titlebar-close ui-corner-all" style="-webkit-user-select: none;"> <span
 							class="ui-icon ui-icon-closethick" style="-webkit-user-select: none;">close</span>
 						</a>
 					</div>
 					<div class="content ui-corner-bottom"></div>
+				</div>
+
+				<div class="about-options options ui-dialog ui-widget ui-widget-content ui-corner-all">
+					<div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"
+						style="-webkit-user-select: none;">
+						<span class="ui-dialog-title {translate: 'options.about.title'}" style="-webkit-user-select: none;"></span> <a
+							href="#" class="ui-dialog-titlebar-close ui-corner-all" style="-webkit-user-select: none;"> <span
+							class="ui-icon ui-icon-closethick" style="-webkit-user-select: none;">close</span>
+						</a>
+					</div>
+					<div class="content ui-corner-bottom">
+						<div class="logo"></div><br/>
+						<div class="title">Linphone Web</div><br/>
+						<div class="version">Version: <span class="version_number"></span></div><br/>
+						<div class="copyright">Copyright Belledonne Communication 2012</div>
+					</div>
 				</div>
 
 				<div class="accounts-options options ui-dialog ui-widget ui-widget-content ui-corner-all">
@@ -354,22 +373,9 @@ Call end: <b>{{=getRemoteAddress()}}</b>
 </script>
 			</div>
 		</div>
-		<div>
-			<div class="ui-widget">
-				<div id="version" class="ui-state-highlight ui-corner-all">
-					Linphone version: <span id="version_number"></span>
-				</div>
-			</div>
-		</div>
 	</div>
 
 	<script type="text/javascript">
-		var javascriptDetect = function() {
-			jQuery('.linphone .window .javascript').hide();
-		}
-
-		javascriptDetect()
-
 		linphone.config.files = {
 			'Windows' : {
 				'Explorer' : 'linphone-web.cab',
@@ -399,8 +405,6 @@ Call end: <b>{{=getRemoteAddress()}}</b>
 			linphone.ui.init();
 			linphone.ui.load(jQuery('.linphone'));
 		})
-
-		
 	</script>
 </body>
 </html>

@@ -64,7 +64,7 @@
 .linphone .window .codecs-options .content .ui-tabs-panel {
 	overflow-y: auto;
 	position: absolute;
-	max-height: 160px;
+	max-height: 158px;
 	left: 0px;
 	right: 0px;
 }
