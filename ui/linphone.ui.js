@@ -1,4 +1,4 @@
-/*globals linphone,jQuery */
+/*globals linphone,jQuery,InstallTrigger */
 linphone.ui = {
 	core_number : 1,
 	core_data : [],
@@ -120,10 +120,63 @@ linphone.ui = {
 	displayUrl : function(core, message, url) {
 		linphone.core.log('Url: ' + message + ' - ' + url);
 	},
-	error : function(core, base, msg) {
+	error : function(base, msg) {
 		base.find('.window .load').hide();
 		base.find('.window .error .text').html(msg);
 		base.find('.window .error').show();
+	},
+	detect : function(base) {
+		linphone.core.log('Detect');
+		var core = base.find('.core').get()[0];
+		if (typeof core !== 'undefined' && typeof core.valid !== 'undefined' && core.valid) {
+			base.find('.window .install').hide();
+			base.find('.window .load').show();
+			return true;
+		} else {
+			if (jQuery.client.os === "Linux" && jQuery.client.browser === "Firefox") {
+				if (InstallTrigger.updateEnabled()) {
+					InstallTrigger.install({
+						"Linphone Web" : linphone.config.codebase
+					});
+				}
+			}
+		}
+		return false;
+	},
+	unload : function(base) {
+		linphone.core.log('Unload');
+		base.find('.window .install').show();
+		var core = base.find('> .core').get()[0];
+		if (typeof core !== 'undefined') {
+			delete linphone.ui.core_data[core.magic];
+			base.find('> .core').remove();
+		}
+	},
+	reload : function(base) {
+		linphone.core.log('Reload');
+		linphone.ui.unload(base);
+		linphone.ui.load(base);
+	},
+	load : function(base) {
+		linphone.core.log('Load');
+		base.find('.window .error').hide();
+		navigator.plugins.refresh(false);
+		var coreTemplate = base.find('.templates .Linphone-Core').render({
+			magic : linphone.ui.core_number,
+			codebase : linphone.config.codebase
+		});
+		var core = jQuery(coreTemplate);
+		linphone.ui.core_data[linphone.ui.core_number] = base;
+		linphone.ui.core_number = linphone.ui.core_number + 1;
+		core.appendTo(base);
+
+		linphone.ui.detect(base);
+	},
+	init : function() {
+		linphone.core.log('Init LinphoneJS');
+		var base = jQuery('.linphone');
+		linphone.ui.locale.load();
+		linphone.ui.locale.populate_locales_menu(base);
 	}
 };
 
@@ -177,6 +230,13 @@ jQuery(function() {
 		jQuery(this).addClass("ui-state-hover");
 	}, function() {
 		jQuery(this).removeClass("ui-state-hover");
+	});
+
+	// Add template helper
+	jQuery.views.registerHelpers({
+		linphone_ui_helpers_getLinphoneRegistrationStateText : function(val) {
+			return linphone.core.enums.getRegistrationStateText(val);
+		}
 	});
 });
 

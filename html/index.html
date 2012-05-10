@@ -52,14 +52,14 @@ body {
 			<div class="window ui-corner-all">
 				<div class="error overall ui-corner-all">
 					<div class="text {translate: 'base.error.text'}"></div>
-					<button type="button" onclick="refresh()" class="reload {translate: 'base.error.reload'}"></button>
+					<button type="button" onclick="_reload(event)" class="reload {translate: 'base.error.reload'}"></button>
 				</div>
 				<div class="install overall ui-corner-all">
 					<div class="text {translate: 'base.install.text'}"></div>
 					<div class="unavailable {translate: 'base.install.unavailable'}"></div>
 					<div class="buttons"></div>
 					<br /> <br />
-					<button type="button" onclick="refresh()" class="reload {translate: 'base.install.reload'}"></button>
+					<button type="button" onclick="_reload(event)" class="reload {translate: 'base.install.reload'}"></button>
 				</div>
 				<div class="load overall ui-corner-all">
 					<img src="style/images/loading.gif" alt="..."
@@ -365,7 +365,7 @@ Call end: <b>{{=getRemoteAddress()}}</b>
 
 	<script type="text/javascript">
 		var javascriptDetect = function() {
-			jQuery('.linphone .window .javascript').hide()
+			jQuery('.linphone .window .javascript').hide();
 		}
 
 		javascriptDetect()
@@ -383,97 +383,21 @@ Call end: <b>{{=getRemoteAddress()}}</b>
 		linphone.config.name = 'Linphone-Web'
 		linphone.config.Version = '1.0.0.0'
 
-		function loadLinphoneI18n() {
-			jQuery.i18n.data = linphone.ui.i18n
-			var locale = (navigator.language) ? navigator.language : navigator.userLanguage
-			locale = locale.replace('-', '_')
-			linphone.core.log('Browser language: ' + locale)
-			if (linphone.core.data()['locale'] != null) {
-				jQuery.i18n.change(linphone.core.data()['locale'])
-			} else {
-				// Excat Match 
-				for (a in linphone.ui.locales) {
-					if (linphone.ui.locales[a].locale == locale) {
-						linphone.core.log('Change locale: ' + linphone.ui.locales[a].locale)
-						jQuery.i18n.change(linphone.ui.locales[a].locale)
-						return;
-					}
-				}
-
-				// Start Match 
-				for (a in linphone.ui.locales) {
-					if (linphone.ui.locales[a].locale.search(locale) == 0) {
-						linphone.core.log('Change locale: ' + linphone.ui.locales[a].locale)
-						jQuery.i18n.change(linphone.ui.locales[a].locale)
-						return;
-					}
-				}
-
-				// Take default (first) 
-				jQuery.i18n.change(linphone.ui.locales[0].locale)
-			}
-		}
-
 		function _coreLoad(obj) {
 			linphone.ui.loadHandler(obj);
 		}
 		function _videoLoad(obj) {
 			linphone.ui.video.loadHandler(obj);
 		}
-		
-		function init() {
-			linphone.core.log('Init LinphoneJS')
-			loadLinphoneI18n()
-			linphone.ui.locale.populate_locales_menu(jQuery('.linphone .window'))
-			jQuery(".linphone .window .tools .locales-menu").menu();
+		function _reload(event) {
+			linphone.ui.reload(linphone.ui.getBase(jQuery(event.target)));
 		}
-
-		jQuery.views.registerHelpers({
-			linphone_ui_helpers_getLinphoneRegistrationStateText : function(val) {
-				return linphone.core.enums.getRegistrationStateText(val);
-			}
-		});
-
 		jQuery(function() {
-			init()
-			refresh()
+			linphone.ui.init();
+			linphone.ui.load(jQuery('.linphone'));
 		})
 
-		function detect(base) {
-			var core = base.find('.core').get()[0];
-			linphone.core.log('Detect')
-			if (typeof core !== 'undefined' && typeof core.valid !== 'undefined' && core.valid) {
-				base.find('.window .install').hide()
-				base.find('.window .load').show()
-				return true
-			} else {
-				if (jQuery.client.os == "Linux" && jQuery.client.browser == "Firefox") {
-					if (InstallTrigger.updateEnabled())
-						InstallTrigger.install({
-							"Linphone Web" : linphone.config.codebase
-						});
-				}
-			}
-			return false
-		}
-
-		function refresh() {
-			linphone.core.log('Refresh')
-			var base = jQuery('.linphone');
-			base.find('.window .error').hide()
-			base.find('.core').remove()
-			navigator.plugins.refresh(false);
-			var coreTemplate = base.find('.templates .Linphone-Core').render({
-				magic : linphone.ui.core_number,
-				codebase : linphone.config.codebase
-			});
-			var core = jQuery(coreTemplate);
-			linphone.ui.core_data[linphone.ui.core_number] = base;
-			linphone.ui.core_number = linphone.ui.core_number + 1;
-			core.appendTo(base)
-			
-			detect(base)
-		}
+		
 	</script>
 </body>
 </html>

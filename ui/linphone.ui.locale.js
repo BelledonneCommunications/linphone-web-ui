@@ -1,15 +1,46 @@
 /*globals jQuery,linphone*/
 
 linphone.ui.locale = {
-	populate_locales_menu : function(target) {
+	populate_locales_menu : function(base) {
 		// Locales
-		var menu = linphone.ui.getBase(target).find('.window .tools .locales-menu');
+		var menu = base.find('.window .tools .locales-menu');
 		menu.empty();
 		for (var index in linphone.ui.locales) {
 			var item = linphone.ui.locales[index];
-			var element = jQuery(linphone.ui.getBase(target).find('.templates .Linphone-LocaleItem').render(item));
+			var element = jQuery(base.find('.templates .Linphone-LocaleItem').render(item));
 			element.find('a').data('data', item);
 			menu.append(element);
+		}
+		menu.menu();
+	},
+	load : function() {
+		jQuery.i18n.data = linphone.ui.i18n;
+		var locale = (navigator.language) ? navigator.language : navigator.userLanguage;
+		locale = locale.replace('-', '_');
+		linphone.core.log('Browser language: ' + locale);
+		if (linphone.core.data()['locale'] != null) {
+			jQuery.i18n.change(linphone.core.data()['locale']);
+		} else {
+			// Excat Match
+			for (var a in linphone.ui.locales) {
+				if (linphone.ui.locales[a].locale === locale) {
+					linphone.core.log('Change locale: ' + linphone.ui.locales[a].locale);
+					jQuery.i18n.change(linphone.ui.locales[a].locale);
+					return;
+				}
+			}
+
+			// Start Match
+			for (var b in linphone.ui.locales) {
+				if (linphone.ui.locales[b].locale.search(locale) === 0) {
+					linphone.core.log('Change locale: ' + linphone.ui.locales[b].locale);
+					jQuery.i18n.change(linphone.ui.locales[b].locale);
+					return;
+				}
+			}
+
+			// Take default (first)
+			jQuery.i18n.change(linphone.ui.locales[0].locale);
 		}
 	}
 };
