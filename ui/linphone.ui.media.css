@@ -1,0 +1,43 @@
+/* 
+ *
+ * Media options 
+ *
+ */
+.linphone .window .media-options .content {
+	position: relative;
+	padding: 5px;
+	height: 180px;
+}
+
+.linphone .window .media-options .content .label {
+	float: left;
+	line-height: 24px;
+	vertical-align: middle;
+}
+
+.linphone .window .media-options .content .fixedlabel {
+	float: left;
+	line-height: 30px;
+	text-align: right;
+	vertical-align: middle;
+	width: 80px;
+}
+
+.linphone .window .media-options .content .input {
+	display: block;
+	overflow: hidden;
+	padding: 0 4px 0 6px;
+	height: 40px;
+	font-size: 9px;
+}
+
+.linphone .window .media-options .content .input  .ui-selectmenu {
+	height: 30px;
+}
+
+.linphone .window .media-options .content select {
+	width: 100%;
+	height: 16px;
+	margin-top:4px;
+	margin-bottom:4px;
+}

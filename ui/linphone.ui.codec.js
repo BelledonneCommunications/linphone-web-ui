@@ -3,22 +3,24 @@
 linphone.ui.codec = {
 	dnd : {},
 	updateCodecsList : function(target) {
-		var audio_table = linphone.ui.getBase(target).find('.window .codecs-options .content .audio tbody');
-		var audio_codecs = linphone.ui.getCore(target).getAudioCodecs();
+		var base = linphone.ui.getBase(target);
+		var core = linphone.ui.getCore(target);
+		var audio_table = base.find('.window .codecs-options .content .audio tbody');
+		var audio_codecs = core.getAudioCodecs();
 		audio_table.empty();
-		for ( var audio_index in audio_codecs) {
+		for (var audio_index in audio_codecs) {
 			var audio_item = audio_codecs[audio_index];
-			var audio_element = jQuery(linphone.ui.getBase(target).find('.templates .Linphone-CodecsList').render(audio_item));
+			var audio_element = jQuery(base.find('.templates .Linphone-CodecsList').render(audio_item));
 			audio_element.data('data', audio_item);
 			audio_table.append(audio_element);
 		}
 
-		var video_table = linphone.ui.getBase(target).find('.window .codecs-options .content .video tbody');
-		var video_codecs = linphone.ui.getCore(target).getVideoCodecs();
+		var video_table = base.find('.window .codecs-options .content .video tbody');
+		var video_codecs = core.getVideoCodecs();
 		video_table.empty();
-		for ( var video_index in video_codecs) {
+		for (var video_index in video_codecs) {
 			var video_item = video_codecs[video_index];
-			var video_element = jQuery(linphone.ui.getBase(target).find('.templates .Linphone-CodecsList').render(video_item));
+			var video_element = jQuery(base.find('.templates .Linphone-CodecsList').render(video_item));
 			video_element.data('data', video_item);
 			video_table.append(video_element);
 		}

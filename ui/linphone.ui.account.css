@@ -32,8 +32,8 @@
 
 .linphone .window .accounts-options .content .add {
 	position: absolute;
-	bottom: 0px;
-	right: 0px;
+	bottom: 5px;
+	right: 5px;
 }
 
 .linphone .window .accounts-options .content .name {
@@ -54,28 +54,28 @@
 .linphone .window .account-form .content {
 	position: relative;
 	padding: 5px;
-	height: 180px;
+	height: 183px;
 }
 
 .linphone .window .account-form .content .valid {
 	position: absolute;
-	bottom: 0px;
-	right: 0px;
+	bottom: 5px;
+	right: 5px;
 }
 
 .linphone .window .account-form .content .remove {
 	position: absolute;
-	bottom: 0px;
-	left: 0px;
+	bottom: 5px;
+	left: 5px;
 }
 
-.linphone .window .account-form .content label {
+.linphone .window .account-form .content .label {
 	float: left;
 	line-height: 24px;
 	vertical-align: middle;
 }
 
-.linphone .window .account-form .content span {
+.linphone .window .account-form .content .input {
 	display: block;
 	overflow: hidden;
 	padding: 0 4px 0 6px

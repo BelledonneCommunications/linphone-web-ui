@@ -10,10 +10,12 @@
 
 <link type="text/css" href="style/ui-lightness/jquery-ui-1.8.17.custom.css" rel="stylesheet" />
 <link type="text/css" href="style/scrollabletab.css" rel="stylesheet" />
+<link type="text/css" href="style/jquery.ui.selectmenu.css" rel="stylesheet" />
 <link type="text/css" href="style/linphone-ui.css" rel="stylesheet" />
 
 <script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
 <script type="text/javascript" src="js/jquery-ui-1.8.17.custom.min.js"></script>
+<script type="text/javascript" src="js/jquery.ui.selectmenu.js"></script>
 <script type="text/javascript" src="js/jquery.scrollabletab.js"></script>
 <script type="text/javascript" src="js/jquery.metadata.js"></script>
 <script type="text/javascript" src="js/jquery.client.js"></script>
@@ -175,7 +177,24 @@ body {
 							class="ui-icon ui-icon-closethick" style="-webkit-user-select: none;">close</span>
 						</a>
 					</div>
-					<div class="content ui-corner-bottom"></div>
+					<div class="content ui-corner-bottom">
+						<div class="fixedlabel {translate: 'options.media.playback_device'}"></div>
+						<div class="input">
+							<select class="playback_device ui-widget-content ui-corner-all"></select>
+						</div>
+						<div class="fixedlabel {translate: 'options.media.ring_device'}"></div>
+						<div class="input">
+							<select class="ring_device ui-widget-content ui-corner-all"></select>
+						</div>
+						<div class="fixedlabel {translate: 'options.media.capture_device'}"></div>
+						<div class="input">
+							<select class="capture_device ui-widget-content ui-corner-all"></select>
+						</div>
+						<div class="fixedlabel {translate: 'options.media.video_device'}"></div>
+						<div class="input">
+							<select class="video_device ui-widget-content ui-corner-all"></select>
+						</div>
+					</div>
 				</div>
 
 				<div class="about-options options ui-dialog ui-widget ui-widget-content ui-corner-all">
@@ -187,10 +206,18 @@ body {
 						</a>
 					</div>
 					<div class="content ui-corner-bottom">
-						<div class="logo"></div><br/>
-						<div class="title">Linphone Web</div><br/>
-						<div class="version">Version: <span class="version_number"></span></div><br/>
-						<div class="core_version">Core version: <span class="core_version_number"></span></div><br/>
+						<div class="logo"></div>
+						<br />
+						<div class="title">Linphone Web</div>
+						<br />
+						<div class="version">
+							Version: <span class="version_number"></span>
+						</div>
+						<br />
+						<div class="core_version">
+							Core version: <span class="core_version_number"></span>
+						</div>
+						<br />
 						<div class="copyright">Copyright Belledonne Communications 2012</div>
 					</div>
 				</div>
@@ -226,17 +253,26 @@ body {
 						</a>
 					</div>
 					<div class="content ui-corner-bottom">
-						<label class="{translate: 'form.account.identity'}"></label> <span> <input
-							class="identity ui-widget-content ui-corner-all"></input>
-						</span> <label class="{translate: 'form.account.proxy'}"></label> <span> <input
-							class="proxy ui-widget-content ui-corner-all"></input>
-						</span> <label class="{translate: 'form.account.route'}"></label> <span> <input
-							class="route ui-widget-content ui-corner-all"></input>
-						</span> <label class="{translate: 'form.account.expires'}"></label> <span> <input
-							class="expires ui-widget-content ui-corner-all"></input>
-						</span> <label class="{translate: 'form.account.register'}"></label> <span> <input type="checkbox"
-							class="register ui-widget-content ui-corner-all"></input>
-						</span>
+						<div class="label {translate: 'form.account.identity'}"></div>
+						<div class="input">
+							<input class="identity ui-widget-content ui-corner-all"></input>
+						</div>
+						<div class="label {translate: 'form.account.proxy'}"></div>
+						<div class="input">
+							<input class="proxy ui-widget-content ui-corner-all"></input>
+						</div>
+						<div class="label {translate: 'form.account.route'}"></div>
+						<div class="input">
+							<input class="route ui-widget-content ui-corner-all"></input>
+						</div>
+						<div class="label {translate: 'form.account.expires'}"></div>
+						<div class="input">
+							<input class="expires ui-widget-content ui-corner-all"></input>
+						</div>
+						<div class="label {translate: 'form.account.register'}"></div>
+						<div class="input">
+							<input type="checkbox" class="register ui-widget-content ui-corner-all"></input>
+						</div>
 						<button type="button" class="remove {translate: 'form.account.remove'}"></button>
 						<button type="button" class="valid {translate: 'form.account.valid'}"></button>
 					</div>

@@ -184,6 +184,22 @@ linphone.ui.i18n = {
 			title : {
 				en_US : 'Media',
 				fr_FR : 'Média'
+			},
+			playback_device : {
+				en_US : 'Playback device',
+				fr_FR : 'Lecture'		
+			},
+			ring_device : {
+				en_US : 'Ring device',
+				fr_FR : 'Sonnerie'		
+			},
+			capture_device : {
+				en_US : 'Capture device',
+				fr_FR : 'Enregistrement'		
+			},
+			video_device : {
+				en_US : 'Video',
+				fr_FR : 'Vidéo'		
 			}
 		},
 		about : {
