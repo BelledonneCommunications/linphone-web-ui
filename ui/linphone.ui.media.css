@@ -3,6 +3,11 @@
  * Media options 
  *
  */
+ 
+.linphone .window .media-options .ui-dialog-titlebar .ui-dialog-icon {
+	background-image: url('images/media.png');
+}
+
 .linphone .window .media-options .content {
 	position: relative;
 	padding: 5px;

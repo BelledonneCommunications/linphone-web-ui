@@ -1,5 +1,18 @@
 /* 
  *
+ * Menu default behaviour 
+ *
+ */
+.linphone .ui-menu .ui-menu-item a {
+	cursor: pointer;
+}
+
+.linphone .ui-menu .ui-menu-item a:focus {
+	outline: 0px;
+}
+
+/* 
+ *
  * Menu stuff
  *
  */

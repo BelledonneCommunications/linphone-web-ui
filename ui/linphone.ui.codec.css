@@ -3,6 +3,10 @@
  * Codecs options 
  *
  */
+.linphone .window .codecs-options .ui-dialog-titlebar .ui-dialog-icon {
+	background-image: url('images/codecs.png');
+}
+
 .linphone .window .codecs-options .content {
 	overflow: inherit;
 	position: relative;

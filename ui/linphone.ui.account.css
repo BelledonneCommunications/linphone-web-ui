@@ -3,6 +3,10 @@
  * Accounts options 
  *
  */
+.linphone .window .accounts-options .ui-dialog-titlebar .ui-dialog-icon {
+	background-image: url('images/account.png');
+}
+
 .linphone .window .accounts-options .content {
 	position: relative;
 	padding: 5px;
@@ -51,6 +55,10 @@
  * Account form 
  *
  */
+.linphone .window .account-form .ui-dialog-titlebar .ui-dialog-icon {
+	background-image: url('images/account.png');
+}
+ 
 .linphone .window .account-form .content {
 	position: relative;
 	padding: 5px;

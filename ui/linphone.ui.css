@@ -109,7 +109,9 @@
 
 .linphone .window>.header {
 	border-bottom: 1px solid #6666DD;
-	background: url("ui-lightness/images/ui-bg_gloss-wave_35_f6a828_500x100.png") repeat-x scroll 50% 50% #F6A828;
+	background:
+		url("ui-lightness/images/ui-bg_gloss-wave_35_f6a828_500x100.png")
+		repeat-x scroll 50% 50% #F6A828;
 	height: 26px;
 	line-height: 30px;
 	width: 100%;
@@ -149,6 +151,11 @@
  * Options default behaviour 
  *
  */
+.linphone .window .options .ui-dialog-icon {
+	float: left;
+	margin-right: 5px;
+}
+
 .linphone .window .options {
 	top: 0px;
 	left: 0px;
@@ -184,17 +191,4 @@
 .linphone .window .options .ui-dialog-titlebar {
 	cursor: default;
 	height: 15px;
-}
-
-/* 
- *
- * Menu default behaviour 
- *
- */
-.linphone .ui-menu .ui-menu-item a {
-	cursor: pointer;
-}
-
-.linphone .ui-menu .ui-menu-item a:focus {
-	outline: 0px;
 }
