@@ -28,6 +28,8 @@ linphone.ui.media = {
 		base.find('.window .media-options .capture_device').empty();
 		base.find('.window .media-options .video_device').empty();
 
+		
+		// Sound
 		var sound_devices = core.getSoundDevices();
 		for ( var sound_index in sound_devices) {
 			var sound_device = sound_devices[sound_index];
@@ -41,29 +43,33 @@ linphone.ui.media = {
 			}
 		}
 
-		var ringer_device = core.getRingerDevice();
-		var playback_device = core.getPlaybackDevice();
-		var capture_device = core.getCaptureDevice();
-		var video_device = core.getVideoDevice();
+		var selected_ringer_device = core.getRingerDevice();
+		var selected_playback_device = core.getPlaybackDevice();
+		var selected_capture_device = core.getCaptureDevice();
 		
 		// Log
-		linphone.core.log('Ringer device: ' + ringer_device);
-		linphone.core.log('Playback device: ' + playback_device);
-		linphone.core.log('Capture device: ' + capture_device);
-		linphone.core.log('Video device: ' + video_device);
+		linphone.core.log('Ringer device: ' + selected_ringer_device);
+		linphone.core.log('Playback device: ' + selected_playback_device);
+		linphone.core.log('Capture device: ' + selected_capture_device);
 		
-		base.find('.window .media-options .ring_device').val(ringer_device);
-		base.find('.window .media-options .playback_device').val(playback_device);
-		base.find('.window .media-options .capture_device').val(capture_device);
+		base.find('.window .media-options .ring_device').val(selected_ringer_device);
+		base.find('.window .media-options .playback_device').val(selected_playback_device);
+		base.find('.window .media-options .capture_device').val(selected_capture_device);
 
+		// Video
 		var video_devices = linphone.ui.media.unique(core.getVideoDevices());
 		for ( var video_index in video_devices) {
 			var video_device = video_devices[video_index];
 			var video_option = '<option value="' + video_device + '">' + video_device + '</option>';
 			base.find('.window .media-options .video_device').append(video_option);
 		}
-
-		base.find('.window .media-options .video_device').val(video_device);
+		
+		var selected_video_device = core.getVideoDevice();
+		
+		// Log
+		linphone.core.log('Video device: ' + selected_video_device);
+		
+		base.find('.window .media-options .video_device').val(selected_video_device);
 		
 		// Apply JQuery UI select style
 		base.find('.window .media-options .ring_device').selectmenu();
@@ -72,6 +78,10 @@ linphone.ui.media = {
 		base.find('.window .media-options .video_device').selectmenu();
 		
 		// Event
+		base.find('.window .media-options .ring_device').unbind('change');
+		base.find('.window .media-options .playback_device').unbind('change');
+		base.find('.window .media-options .capture_device').unbind('change');
+		base.find('.window .media-options .video_device').unbind('change');
 		base.find('.window .media-options .ring_device').change(linphone.ui.media.changeEvent);
 		base.find('.window .media-options .playback_device').change(linphone.ui.media.changeEvent);
 		base.find('.window .media-options .capture_device').change(linphone.ui.media.changeEvent);
