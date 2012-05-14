@@ -35,8 +35,7 @@ var
 
   function stripBanner( files ) {
 	return files.map(function( file ) {
-		return file;
-		//return '<strip_all_banners:' + file + '>';
+		return '<strip_all_banners:' + file + '>';
 	});
   };
 
@@ -45,11 +44,11 @@ var
     pkg: '<json:package.json>',
     meta: {
       version: '0.1.0',
-      banner: '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - ' +
-        '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
-        '<%= pkg.homepage ? "* " + pkg.homepage + "\n" : "" %>' +
-        '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
-        ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */'
+      banner: '/*!\n' +
+	' * <%= pkg.title || pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("isoDate") %>\n' +
+        '<%= pkg.homepage ? " * " + pkg.homepage + "\n" : "" %>' +
+        ' * Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>; Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %>\n' +
+	' */'
     },
     lint: {
       core: coreJSFiles,
@@ -80,11 +79,11 @@ var
     },
     min: {
       coreJS: {
-        src: ['<config:concat.coreJS.dest>'],
+        src: ['<banner:meta.banner>', '<config:concat.coreJS.dest>'],
         dest: 'dist/js/linphone-core.min.js'
       },
       uiJS: {
-        src: ['<config:concat.uiJS.dest>'],
+        src: ['<banner:meta.banner>', '<config:concat.uiJS.dest>'],
         dest: 'dist/js/linphone-ui.min.js'
       }
    },
@@ -171,7 +170,11 @@ var
  
   // Dev mode
   grunt.registerTask('dev', 'compile server watch');
-  
+ 
+  grunt.registerHelper( "strip_all_banners", function( filepath ) {
+	return grunt.file.read( filepath ).replace( /^\s*\/\*[\s\S]*?\*\/\s*/g, "" );
+  });
+ 
   grunt.registerMultiTask('copy', 'Copy files to destination folder and replace @VERSION with pkg.version', function() {
 	function replaceVersion( source ) {
 		return source.replace( /@VERSION/g, grunt.config( "pkg.version" ) );

@@ -1,3 +1,21 @@
+<!-- 
+ Linphone Web - Web plugin of Linphone an audio/video SIP phone
+ Copyright (C) 2012  Yann Diorcet <yann.diorcet@linphone.org>
+
+ This program is free software; you can redistribute it and/or
+ modify it under the terms of the GNU General Public License
+ as published by the Free Software Foundation; either version 2
+ of the License, or (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
@@ -128,10 +146,10 @@ body {
 				<div class="codecs-options options ui-dialog ui-widget ui-widget-content ui-corner-all">
 					<div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"
 						style="-webkit-user-select: none;">
-						<span class="ui-dialog-icon ui-icon"></span>
-						<span class="ui-dialog-title {translate: 'options.codecs.title'}" style="-webkit-user-select: none;"></span> <a
-							href="#" class="ui-dialog-titlebar-close ui-corner-all" style="-webkit-user-select: none;"> <span
-							class="ui-icon ui-icon-closethick" style="-webkit-user-select: none;">close</span>
+						<span class="ui-dialog-icon ui-icon"></span> <span class="ui-dialog-title {translate: 'options.codecs.title'}"
+							style="-webkit-user-select: none;"></span> <a href="#" class="ui-dialog-titlebar-close ui-corner-all"
+							style="-webkit-user-select: none;"> <span class="ui-icon ui-icon-closethick"
+							style="-webkit-user-select: none;">close</span>
 						</a>
 					</div>
 					<div class="content ui-corner-bottom">
@@ -173,28 +191,36 @@ body {
 				<div class="media-options options ui-dialog ui-widget ui-widget-content ui-corner-all">
 					<div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"
 						style="-webkit-user-select: none;">
-						<span class="ui-dialog-icon ui-icon"></span>
-						<span class="ui-dialog-title {translate: 'options.media.title'}" style="-webkit-user-select: none;"></span> <a
-							href="#" class="ui-dialog-titlebar-close ui-corner-all" style="-webkit-user-select: none;"> <span
-							class="ui-icon ui-icon-closethick" style="-webkit-user-select: none;">close</span>
+						<span class="ui-dialog-icon ui-icon"></span> <span class="ui-dialog-title {translate: 'options.media.title'}"
+							style="-webkit-user-select: none;"></span> <a href="#" class="ui-dialog-titlebar-close ui-corner-all"
+							style="-webkit-user-select: none;"> <span class="ui-icon ui-icon-closethick"
+							style="-webkit-user-select: none;">close</span>
 						</a>
 					</div>
 					<div class="content ui-corner-bottom">
 						<div class="fixedlabel {translate: 'options.media.playback_device'}"></div>
 						<div class="input">
-							<select class="playback_device ui-widget-content ui-corner-all"></select>
+							<select class="playback_device ui-widget-content ui-corner-all" title="Playback device">
+								<option />
+							</select>
 						</div>
 						<div class="fixedlabel {translate: 'options.media.ring_device'}"></div>
 						<div class="input">
-							<select class="ring_device ui-widget-content ui-corner-all"></select>
+							<select class="ring_device ui-widget-content ui-corner-all" title="Playback device">
+								<option />
+							</select>
 						</div>
 						<div class="fixedlabel {translate: 'options.media.capture_device'}"></div>
 						<div class="input">
-							<select class="capture_device ui-widget-content ui-corner-all"></select>
+							<select class="capture_device ui-widget-content ui-corner-all" title="Capture device">
+								<option />
+							</select>
 						</div>
 						<div class="fixedlabel {translate: 'options.media.video_device'}"></div>
 						<div class="input">
-							<select class="video_device ui-widget-content ui-corner-all"></select>
+							<select class="video_device ui-widget-content ui-corner-all" title="Video device">
+								<option />
+							</select>
 						</div>
 					</div>
 				</div>
@@ -202,10 +228,10 @@ body {
 				<div class="about-options options ui-dialog ui-widget ui-widget-content ui-corner-all">
 					<div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"
 						style="-webkit-user-select: none;">
-						<span class="ui-dialog-icon ui-icon"></span>
-						<span class="ui-dialog-title {translate: 'options.about.title'}" style="-webkit-user-select: none;"></span> <a
-							href="#" class="ui-dialog-titlebar-close ui-corner-all" style="-webkit-user-select: none;"> <span
-							class="ui-icon ui-icon-closethick" style="-webkit-user-select: none;">close</span>
+						<span class="ui-dialog-icon ui-icon"></span> <span class="ui-dialog-title {translate: 'options.about.title'}"
+							style="-webkit-user-select: none;"></span> <a href="#" class="ui-dialog-titlebar-close ui-corner-all"
+							style="-webkit-user-select: none;"> <span class="ui-icon ui-icon-closethick"
+							style="-webkit-user-select: none;">close</span>
 						</a>
 					</div>
 					<div class="content ui-corner-bottom">
@@ -228,10 +254,10 @@ body {
 				<div class="accounts-options options ui-dialog ui-widget ui-widget-content ui-corner-all">
 					<div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"
 						style="-webkit-user-select: none;">
-						<span class="ui-dialog-icon ui-icon"></span>
-						<span class="ui-dialog-title {translate: 'menu.settings.accounts'}" style="-webkit-user-select: none;"></span> <a
-							href="#" class="ui-dialog-titlebar-close ui-corner-all" style="-webkit-user-select: none;"> <span
-							class="ui-icon ui-icon-closethick" style="-webkit-user-select: none;">close</span>
+						<span class="ui-dialog-icon ui-icon"></span> <span class="ui-dialog-title {translate: 'menu.settings.accounts'}"
+							style="-webkit-user-select: none;"></span> <a href="#" class="ui-dialog-titlebar-close ui-corner-all"
+							style="-webkit-user-select: none;"> <span class="ui-icon ui-icon-closethick"
+							style="-webkit-user-select: none;">close</span>
 						</a>
 					</div>
 					<div class="content ui-corner-bottom">
@@ -251,32 +277,32 @@ body {
 				<div class="account-form options ui-dialog ui-widget ui-widget-content ui-corner-all">
 					<div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"
 						style="-webkit-user-select: none;">
-						<span class="ui-dialog-icon ui-icon"></span>
-						<span class="ui-dialog-title {translate: 'form.account.title'}" style="-webkit-user-select: none;"></span> <a
-							href="#" class="ui-dialog-titlebar-close ui-corner-all" style="-webkit-user-select: none;"> <span
-							class="ui-icon ui-icon-closethick" style="-webkit-user-select: none;">close</span>
+						<span class="ui-dialog-icon ui-icon"></span> <span class="ui-dialog-title {translate: 'form.account.title'}"
+							style="-webkit-user-select: none;"></span> <a href="#" class="ui-dialog-titlebar-close ui-corner-all"
+							style="-webkit-user-select: none;"> <span class="ui-icon ui-icon-closethick"
+							style="-webkit-user-select: none;">close</span>
 						</a>
 					</div>
 					<div class="content ui-corner-bottom">
 						<div class="label {translate: 'form.account.identity'}"></div>
 						<div class="input">
-							<input class="identity ui-widget-content ui-corner-all"></input>
+							<input class="identity ui-widget-content ui-corner-all" title="identity"></input>
 						</div>
 						<div class="label {translate: 'form.account.proxy'}"></div>
 						<div class="input">
-							<input class="proxy ui-widget-content ui-corner-all"></input>
+							<input class="proxy ui-widget-content ui-corner-all" title="proxy"></input>
 						</div>
 						<div class="label {translate: 'form.account.route'}"></div>
 						<div class="input">
-							<input class="route ui-widget-content ui-corner-all"></input>
+							<input class="route ui-widget-content ui-corner-all" title="route"></input>
 						</div>
 						<div class="label {translate: 'form.account.expires'}"></div>
 						<div class="input">
-							<input class="expires ui-widget-content ui-corner-all"></input>
+							<input class="expires ui-widget-content ui-corner-all" title="expires"></input>
 						</div>
 						<div class="label {translate: 'form.account.register'}"></div>
 						<div class="input">
-							<input type="checkbox" class="register ui-widget-content ui-corner-all"></input>
+							<input type="checkbox" class="register ui-widget-content ui-corner-all" title="register"></input>
 						</div>
 						<button type="button" class="remove {translate: 'form.account.remove'}"></button>
 						<button type="button" class="valid {translate: 'form.account.valid'}"></button>

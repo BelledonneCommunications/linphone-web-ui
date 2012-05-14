@@ -1,3 +1,22 @@
+/*!
+ Linphone Web - Web plugin of Linphone an audio/video SIP phone
+ Copyright (C) 2012  Yann Diorcet <yann.diorcet@linphone.org>
+
+ This program is free software; you can redistribute it and/or
+ modify it under the terms of the GNU General Public License
+ as published by the Free Software Foundation; either version 2
+ of the License, or (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
+
 /*globals jQuery,linphone*/
 
 linphone.ui.codec = {
@@ -8,7 +27,7 @@ linphone.ui.codec = {
 		var audio_table = base.find('.window .codecs-options .content .audio tbody');
 		var audio_codecs = core.getAudioCodecs();
 		audio_table.empty();
-		for (var audio_index in audio_codecs) {
+		for ( var audio_index in audio_codecs) {
 			var audio_item = audio_codecs[audio_index];
 			var audio_element = jQuery(base.find('.templates .Linphone-CodecsList').render(audio_item));
 			audio_element.data('data', audio_item);
@@ -18,7 +37,7 @@ linphone.ui.codec = {
 		var video_table = base.find('.window .codecs-options .content .video tbody');
 		var video_codecs = core.getVideoCodecs();
 		video_table.empty();
-		for (var video_index in video_codecs) {
+		for ( var video_index in video_codecs) {
 			var video_item = video_codecs[video_index];
 			var video_element = jQuery(base.find('.templates .Linphone-CodecsList').render(video_item));
 			video_element.data('data', video_item);
