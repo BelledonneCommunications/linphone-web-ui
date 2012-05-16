@@ -122,7 +122,7 @@ linphone.ui = {
 		if (state === linphone.core.enums.callState.Connected) {
 
 		} else if (state === linphone.core.enums.callState.IncomingReceived) {
-			linphone.ui.call.create_call(base, call, '.templates .Linphone-Call-IncomingReceived');
+			linphone.ui.call.create_call_tab(base, call, '.templates .Linphone-Call-IncomingReceived');
 		}
 
 		var element = linphone.ui.call.findCallTab(base, call);
