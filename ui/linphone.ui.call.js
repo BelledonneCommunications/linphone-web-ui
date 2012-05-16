@@ -56,8 +56,30 @@ linphone.ui.call = {
 	},
 	call_invite_callback : function(base, dest, call) {
 		linphone.ui.call.create_call_tab(base, call, '.templates .Linphone-Call-OutgoingInit');
+	},
+	callStateChanged: function(event, call, state, message){
+		var base = jQuery(this);
+		if (state === linphone.core.enums.callState.Connected) {
+
+		} else if (state === linphone.core.enums.callState.IncomingReceived) {
+			linphone.ui.call.create_call_tab(base, call, '.templates .Linphone-Call-IncomingReceived');
+		}
+
+		var element = linphone.ui.call.findCallTab(base, call);
+		if (element) {
+			var content = base.find('.templates .Linphone-Call-' + linphone.core.enums.getCallStateText(state)).render(element.data('data'));
+			element.html(content);
+			jQuery.i18n.update(element, true);
+		} else {
+			linphone.core.log('Can\'t find call tab');
+		}
 	}
 };
+
+//OnLoad
+jQuery(function() {
+	jQuery(document).on('callStateChanged', '.linphone', linphone.ui.call.callStateChanged);  
+});
 
 // Click
 jQuery('html').click(function(event) {

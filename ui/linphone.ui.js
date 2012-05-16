@@ -69,6 +69,7 @@ linphone.ui = {
 
 		linphone.ui.addEvent(core, 'globalStateChanged', linphone.ui.globalStateChanged);
 		linphone.ui.addEvent(core, 'callStateChanged', linphone.ui.callStateChanged);
+		linphone.ui.addEvent(core, 'registrationStateChanged', linphone.ui.registrationStateChanged);
 		linphone.ui.addEvent(core, 'displayStatus', linphone.ui.displayStatus);
 		linphone.ui.addEvent(core, 'displayMessage', linphone.ui.displayMessage);
 		linphone.ui.addEvent(core, 'displayWarning', linphone.ui.displayWarning);
@@ -109,42 +110,40 @@ linphone.ui = {
 		}
 	},
 	globalStateChanged : function(core, state, message) {
-		linphone.core.log('State(' + state + '): ' + message);
+		linphone.core.log(core + '| State: ' + state + ', ' + message);
 		var base = linphone.ui.core_data[core.magic];
-
+		base.trigger('globalStateChanged', [state, message]);
 		base.find('.window > .footer > .status').html(jQuery.i18n.get('globalstatetext.' + linphone.core.enums.getGlobalStateText(state)));
 	},
-
-	callStateChanged : function(core, call, state, message) {
-		linphone.core.log('Call(' + state + '): ' + message);
+	registrationStateChanged : function(core, proxy, state, message) {
+		linphone.core.log(core + '| Proxy(' + proxy + '): ' + state + ', ' + message);
 		var base = linphone.ui.core_data[core.magic];
-
-		if (state === linphone.core.enums.callState.Connected) {
-
-		} else if (state === linphone.core.enums.callState.IncomingReceived) {
-			linphone.ui.call.create_call_tab(base, call, '.templates .Linphone-Call-IncomingReceived');
-		}
-
-		var element = linphone.ui.call.findCallTab(base, call);
-		if (element) {
-			var content = jQuery('.templates .Linphone-Call-' + linphone.core.enums.getCallStateText(state)).render(element.data('data'));
-			element.html(content);
-			jQuery.i18n.update(element, true);
-		} else {
-			linphone.core.log('Can\'t find call tab');
-		}
+		base.trigger('callStateChanged', [call, state, message]);
+	},
+	callStateChanged : function(core, call, state, message) {
+		linphone.core.log(core + '| Call(' + call + '): ' + state + ', ' + message);
+		var base = linphone.ui.core_data[core.magic];
+		base.trigger('callStateChanged', [call, state, message]);
 	},
 	displayStatus : function(core, message) {
-		linphone.core.log('Status: ' + message);
+		linphone.core.log(core + '| Status: ' + message);
+		var base = linphone.ui.core_data[core.magic];
+		base.trigger('displayStatus', [message]);
 	},
 	displayMessage : function(core, message) {
-		linphone.core.log('Message: ' + message);
+		linphone.core.log(core + '| Message: ' + message);
+		var base = linphone.ui.core_data[core.magic];
+		base.trigger('displayMessage', [message]);
 	},
 	displayWarning : function(core, message) {
-		linphone.core.log('Warning: ' + message);
+		linphone.core.log(core + '| Warning: ' + message);
+		var base = linphone.ui.core_data[core.magic];
+		base.trigger('displayWarning', [message]);
 	},
 	displayUrl : function(core, message, url) {
-		linphone.core.log('Url: ' + message + ' - ' + url);
+		linphone.core.log(core + '| Url: ' + message + ' - ' + url);
+		var base = linphone.ui.core_data[core.magic];
+		base.trigger('displayUrl', [message, url]);
 	},
 	error : function(base, msg) {
 		base.find('.window .load').hide();
