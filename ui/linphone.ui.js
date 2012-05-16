@@ -118,7 +118,7 @@ linphone.ui = {
 	registrationStateChanged : function(core, proxy, state, message) {
 		linphone.core.log(core + '| Proxy(' + proxy + '): ' + state + ', ' + message);
 		var base = linphone.ui.core_data[core.magic];
-		base.trigger('callStateChanged', [call, state, message]);
+		base.trigger('registrationStateChanged', [proxy, state, message]);
 	},
 	callStateChanged : function(core, call, state, message) {
 		linphone.core.log(core + '| Call(' + call + '): ' + state + ', ' + message);
