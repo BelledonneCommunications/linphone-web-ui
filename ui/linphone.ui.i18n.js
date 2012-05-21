@@ -105,7 +105,7 @@ linphone.ui.i18n = {
 			}
 		}
 	},
-	form : {
+	dialogs : {
 		account : {
 			title : {
 				en_US : 'Add a Account',
@@ -148,6 +148,12 @@ linphone.ui.i18n = {
 					en_US : 'The following error(s) occured: ',
 					fr_FR : 'Les erreurs suivantes sont survenues: '
 				}
+			}
+		},
+		auth : {
+			title : {
+				en_US : 'Authentication',
+				fr_FR : 'Authentification'
 			}
 		}
 	},

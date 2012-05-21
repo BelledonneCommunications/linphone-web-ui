@@ -211,3 +211,34 @@
 	cursor: default;
 	height: 15px;
 }
+
+/* 
+ *
+ * Dialogs default behaviour 
+ *
+ */
+.linphone .window .dialogs .ui-dialog-icon {
+	float: left;
+	margin-right: 5px;
+}
+
+.linphone .window .dialogs {
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	display: none;
+	position: absolute;
+	background: #FFFFFF;
+	padding: 0px;
+	margin: 0px;
+	border: 0px;
+	width: auto;
+	z-index: 200;
+}
+
+.linphone .window .dialogs .content {
+	height: 195px;
+	margin: 0px;
+	overflow: auto;
+}

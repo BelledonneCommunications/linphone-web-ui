@@ -70,6 +70,7 @@ linphone.ui = {
 		linphone.ui.addEvent(core, 'globalStateChanged', linphone.ui.globalStateChanged);
 		linphone.ui.addEvent(core, 'callStateChanged', linphone.ui.callStateChanged);
 		linphone.ui.addEvent(core, 'registrationStateChanged', linphone.ui.registrationStateChanged);
+		linphone.ui.addEvent(core, 'authInfoRequested', linphone.ui.authInfoRequested);
 		linphone.ui.addEvent(core, 'displayStatus', linphone.ui.displayStatus);
 		linphone.ui.addEvent(core, 'displayMessage', linphone.ui.displayMessage);
 		linphone.ui.addEvent(core, 'displayWarning', linphone.ui.displayWarning);
@@ -124,6 +125,11 @@ linphone.ui = {
 		linphone.core.log(core + '| (' + call + '): ' + state + ', ' + message);
 		var base = linphone.ui.core_data[core.magic];
 		base.trigger('callStateChanged', [call, state, message]);
+	},
+	authInfoRequested : function(core, realm, username) {
+		linphone.core.log(core + '| Auth: ' + realm + ', ' + username);
+		var base = linphone.ui.core_data[core.magic];
+		base.trigger('authInfoRequested', [realm, username]);
 	},
 	displayStatus : function(core, message) {
 		linphone.core.log(core + '| Status: ' + message);

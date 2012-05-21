@@ -39,7 +39,7 @@ linphone.ui.account = {
 			jQuery(this).removeClass("ui-state-highlight");
 		});
 	},
-	registrationStateChanged: function(event, proxy, state, message){
+	registrationStateChanged: function(event, proxy, state, message) {
 		var base = jQuery(this);
 		base.find('.window .accounts-options .content tbody tr').each(function (i, item) {
 			item = jQuery(item);
@@ -51,12 +51,17 @@ linphone.ui.account = {
 				item.remove();
 			}
 		});
+	},
+	authInfoRequested: function(event, realm, username) {
+		var base = jQuery(this);
+		base.find('.window .auth-form').show();
 	}
 };
 
 //OnLoad
 jQuery(function() {
 	jQuery(document).on('registrationStateChanged', '.linphone', linphone.ui.account.registrationStateChanged);  
+	jQuery(document).on('authInfoRequested', '.linphone', linphone.ui.account.authInfoRequested);  
 });
 
 // Click
@@ -121,24 +126,24 @@ jQuery('html').click(function(event) {
 		var register = base.find('.window .account-form .content input.register').is(':checked');
 
 		if (identity_regex.exec(identity) == null) {
-			errors += '<li class="{translate: \'form.account.errors.identity\'}"></li>';
+			errors += '<li class="{translate: \'dialogs.account.errors.identity\'}"></li>';
 		}
 		if (proxy_regex.exec(proxy) == null) {
-			errors += '<li class="{translate: \'form.account.errors.proxy\'}"></li>';
+			errors += '<li class="{translate: \'dialogs.account.errors.proxy\'}"></li>';
 		}
 		if (route_regex.exec(route) == null) {
-			errors += '<li class="{translate: \'form.account.errors.route\'}"></li>';
+			errors += '<li class="{translate: \'dialogs.account.errors.route\'}"></li>';
 		}
 		if (expires_regex.exec(expires) == null) {
-			errors += '<li class="{translate: \'form.account.errors.duration\'}"></li>';
+			errors += '<li class="{translate: \'dialogs.account.errors.duration\'}"></li>';
 		}
 		if (errors.length > 0) {
 			errors_text = '<div><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>';
-			errors_text += '<div class="{translate: \'form.account.errors.message\'}"></div><ul>' + errors + '</ul></div>';
+			errors_text += '<div class="{translate: \'dialogs.account.errors.message\'}"></div><ul>' + errors + '</ul></div>';
 			var dialog = jQuery(errors_text);
 			jQuery.i18n.update(dialog, true);
 			dialog.dialog({
-				title : jQuery.i18n.get('form.account.errors.title'),
+				title : jQuery.i18n.get('dialogs.account.errors.title'),
 				modal : false,
 				buttons : {
 					Ok : function() {

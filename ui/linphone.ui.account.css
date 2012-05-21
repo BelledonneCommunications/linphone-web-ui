@@ -121,3 +121,12 @@
 	margin-top: 4px;
 	margin-bottom: 4px;
 }
+
+/* 
+ *
+ * Auth form 
+ *
+ */
+.linphone .window .auth-form .ui-dialog-titlebar .ui-dialog-icon {
+	background-image: url('images/auth.png');
+}
