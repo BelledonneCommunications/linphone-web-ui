@@ -38,10 +38,28 @@ linphone.ui.account = {
 		}, function() {
 			jQuery(this).removeClass("ui-state-highlight");
 		});
+	},
+	registrationStateChanged: function(event, proxy, state, message){
+		var base = jQuery(this);
+		base.find('.window .accounts-options .content tbody tr').each(function (i, item) {
+			item = jQuery(item);
+			var data = item.data('data');
+			if(data === proxy) {
+				var element = jQuery(base.find('.templates .Linphone-AccountsList').render(proxy));
+				element.data('data', proxy);
+				item.after(element);
+				item.remove();
+			}
+		});
 	}
 };
 
-//
+//OnLoad
+jQuery(function() {
+	jQuery(document).on('registrationStateChanged', '.linphone', linphone.ui.account.registrationStateChanged);  
+});
+
+// Click
 jQuery('html').click(function(event) {
 	var target = jQuery(event.target);
 	var base = linphone.ui.getBase(target);

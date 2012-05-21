@@ -116,12 +116,12 @@ linphone.ui = {
 		base.find('.window > .footer > .status').html(jQuery.i18n.get('globalstatetext.' + linphone.core.enums.getGlobalStateText(state)));
 	},
 	registrationStateChanged : function(core, proxy, state, message) {
-		linphone.core.log(core + '| Proxy(' + proxy + '): ' + state + ', ' + message);
+		linphone.core.log(core + '| (' + proxy + '): ' + state + ', ' + message);
 		var base = linphone.ui.core_data[core.magic];
 		base.trigger('registrationStateChanged', [proxy, state, message]);
 	},
 	callStateChanged : function(core, call, state, message) {
-		linphone.core.log(core + '| Call(' + call + '): ' + state + ', ' + message);
+		linphone.core.log(core + '| (' + call + '): ' + state + ', ' + message);
 		var base = linphone.ui.core_data[core.magic];
 		base.trigger('callStateChanged', [call, state, message]);
 	},
