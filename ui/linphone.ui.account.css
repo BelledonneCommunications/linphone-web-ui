@@ -130,3 +130,45 @@
 .linphone .window .auth-form .ui-dialog-titlebar .ui-dialog-icon {
 	background-image: url('images/auth.png');
 }
+
+.linphone .window .auth-form .content {
+	position: relative;
+	padding: 5px;
+	height: 183px;
+}
+
+.linphone .window .auth-form .content .field {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.linphone .window .auth-form .content .label {
+	float: left;
+	line-height: 24px;
+	vertical-align: middle;
+}
+
+.linphone .window .auth-form .content .input {
+	display: block;
+	overflow: hidden;
+	padding: 0 4px 0 6px
+}
+
+.linphone .window .auth-form .content input {
+	width: 100%;
+	height: 16px;
+	margin-top: 4px;
+	margin-bottom: 4px;
+}
+
+.linphone .window .auth-form .content .valid {
+	position: absolute;
+	bottom: 5px;
+	right: 5px;
+}
+
+.linphone .window .auth-form .content .cancel {
+	position: absolute;
+	bottom: 5px;
+	left: 5px;
+}

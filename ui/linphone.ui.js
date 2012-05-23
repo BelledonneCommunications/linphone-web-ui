@@ -82,15 +82,15 @@ linphone.ui = {
 			// Init volumes settings
 			var rec_level = (linphone.core.data()['rec_level'] != null) ? linphone.core.data()['rec_level'] : 100;
 			base.find('.window .tools .mic-slider').slider('value', rec_level);
-			core.setRecLevel(rec_level);
+			core.recLevel = rec_level;
 
 			var play_level = (linphone.core.data()['play_level'] != null) ? linphone.core.data()['play_level'] : 100;
 			base.find('.window .tools .hp-slider').slider('value', play_level);
-			core.setPlayLevel(play_level);
+			core.playLevel = play_level;
 
 			var ring_level = (linphone.core.data()['ring_level'] != null) ? linphone.core.data()['ring_level'] : 100;
 			base.find('.window .tools .bell-slider').slider('value', ring_level);
-			core.setRingLevel(ring_level);
+			core.ringLevel = ring_level;
 
 			// Init video settings
 			if (linphone.core.data()['enable_video'] === '1') {

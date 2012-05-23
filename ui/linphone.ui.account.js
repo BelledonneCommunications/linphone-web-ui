@@ -110,6 +110,16 @@ jQuery('html').click(function(event) {
 		linphone.ui.account.updateAccountList(target);
 		base.find('.window .account-form').fadeOut('fast');
 	}
+	
+	// Cancel auth
+	if (target.is('.linphone .window .auth-form .cancel')) {
+		base.find('.window .auth-form').fadeOut('fast');
+	}
+	
+	// Valid auth
+	if (target.is('.linphone .window .auth-form .valid')) {
+		base.find('.window .auth-form').fadeOut('fast');
+	}
 
 	// Valid account check
 	if (target.is('.linphone .window .account-form .valid')) {

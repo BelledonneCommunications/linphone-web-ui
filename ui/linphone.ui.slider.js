@@ -30,7 +30,7 @@ jQuery(function() {
 			if (linphone.core.data()) {
 				linphone.core.data()['play_level'] = ui.value;
 			}
-			linphone.ui.getCore(jQuery(event.target)).setPlayLevel(ui.value);
+			linphone.ui.getCore(jQuery(event.target)).playLevel = ui.value;
 		}
 	});
 	jQuery(".linphone .window .tools .mic-slider").slider({
@@ -39,7 +39,7 @@ jQuery(function() {
 			if (linphone.core.data()) {
 				linphone.core.data()['rec_level'] = ui.value;
 			}
-			linphone.ui.getCore(jQuery(event.target)).setRecLevel(ui.value);
+			linphone.ui.getCore(jQuery(event.target)).recLevel = ui.value;
 		}
 	});
 	jQuery(".linphone .window .tools .bell-slider").slider({
@@ -48,7 +48,7 @@ jQuery(function() {
 			if (linphone.core.data()) {
 				linphone.core.data()['ring_level'] = ui.value;
 			}
-			linphone.ui.getCore(jQuery(event.target)).setRingLevel(ui.value);
+			linphone.ui.getCore(jQuery(event.target)).ringLevel = ui.value;
 		}
 	});
 });

@@ -154,6 +154,22 @@ linphone.ui.i18n = {
 			title : {
 				en_US : 'Authentication',
 				fr_FR : 'Authentification'
+			},
+			username : {
+				en_US : 'Username',
+				fr_FR : 'Utilisateur'
+			},
+			password : {
+				en_US : 'Password',
+				fr_FR : 'Mot de passe'
+			},
+			cancel : {
+				en_US : 'Cancel',
+				fr_FR : 'Annuler'
+			},
+			valid : {
+				en_US : 'Valid',
+				fr_FR : 'Valider'
 			}
 		}
 	},
