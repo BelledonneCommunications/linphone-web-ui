@@ -62,9 +62,9 @@ linphone.ui.media = {
 			}
 		}
 
-		var selected_ringer_device = core.getRingerDevice();
-		var selected_playback_device = core.getPlaybackDevice();
-		var selected_capture_device = core.getCaptureDevice();
+		var selected_ringer_device = core.ringerDevice;
+		var selected_playback_device = core.playbackDevice;
+		var selected_capture_device = core.captureDevice;
 		
 		// Log
 		linphone.core.log('Ringer device: ' + selected_ringer_device);
@@ -83,7 +83,7 @@ linphone.ui.media = {
 			base.find('.window .media-options .video_device').append(video_option);
 		}
 		
-		var selected_video_device = core.getVideoDevice();
+		var selected_video_device = core.videoDevice;
 		
 		// Log
 		linphone.core.log('Video device: ' + selected_video_device);
@@ -110,19 +110,19 @@ linphone.ui.media = {
 		var target = jQuery(event.target);
 		var core = linphone.ui.getCore(target);
 		if(target.is('.linphone .window .media-options .ring_device')) {
-			core.setRingerDevice(target.val());
+			core.ringerDevice = target.val();
 		}
 		
 		if(target.is('.linphone .window .media-options .playback_device')) {
-			core.setPlaybackDevice(target.val());
+			core.playbackDevice = target.val();
 		}
 		
 		if(target.is('.linphone .window .media-options .capture_device')) {
-			core.setCaptureDevice(target.val());
+			core.captureDevice = target.val();
 		}
 		
 		if(target.is('.linphone .window .media-options .video_device')) {
-			core.setVideoDevice(target.val());
+			core.videoDevice = target.val();
 		}
 	}
 };
