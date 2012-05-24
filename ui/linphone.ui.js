@@ -92,22 +92,12 @@ linphone.ui = {
 			base.find('.window .tools .bell-slider').slider('value', ring_level);
 			core.ringLevel = ring_level;
 
-			// Init video settings
-			if (linphone.core.data()['enable_video'] === '1') {
-				core.enableVideo(true);
-			} else if (linphone.core.data()['enable_video'] === '0') {
-				core.enableVideo(false);
-			} else {
-				linphone.core.data()['enable_video'] = '1';
-				core.enableVideo(true);
-			}
-
 			linphone.core.log('Sip port: ' + core.sip_port);
 
 			base.find('.window .load').hide();
 
-			linphone.ui.video.updateSelfView(jQuery(core));
-			linphone.ui.video.updateVideoView(jQuery(core));
+			linphone.ui.video.updateSelfView(base);
+			linphone.ui.video.updateVideoView(base);
 		}
 	},
 	globalStateChanged : function(core, state, message) {

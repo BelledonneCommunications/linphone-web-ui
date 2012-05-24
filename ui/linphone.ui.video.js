@@ -29,16 +29,16 @@ linphone.ui.video = {
 			linphone.ui.video.video_view = linphone.ui.video.createVideoView(target, 'video', function(object) {
 				linphone.core.log('Load VideoView ' + object.magic);
 				object.setBackgroundColor(0, 0, 0);
-				linphone.ui.getCore(target).setNativeVideoWindowId(object.window);
-				linphone.ui.getCore(target).enableVideo(true);
+				linphone.ui.getCore(target).nativeVideoWindowId = object.window;
+				linphone.ui.getCore(target).videoEnabled = true;
 			}, function(object) {
 				linphone.core.data()['enable_video'] = '0';
 				linphone.ui.video.updateSelfView(target);
 			});
 		} else {
 			if (linphone.ui.video.video_view !== null) {
-				linphone.ui.getCore(target).enableVideo(false);
-				linphone.ui.getCore(target).setNativeVideoWindowId(0);
+				linphone.ui.getCore(target).videoEnabled = false;
+				linphone.ui.getCore(target).nativeVideoWindowId = 0;
 				linphone.ui.video.destroyVideoView(linphone.ui.video.video_view);
 				linphone.ui.video.video_view = null;
 			}
@@ -49,16 +49,16 @@ linphone.ui.video = {
 			linphone.ui.video.self_view = linphone.ui.video.createVideoView(target, 'locale', function(object) {
 				linphone.core.log('Load VideoView ' + object.magic);
 				object.setBackgroundColor(0, 0, 0);
-				linphone.ui.getCore(target).setNativePreviewWindowId(object.window);
-				linphone.ui.getCore(target).enableVideoPreview(true);
+				linphone.ui.getCore(target).nativePreviewWindowId = object.window;
+				linphone.ui.getCore(target).videoPreviewEnabled = true;
 			}, function(object) {
 				linphone.core.data()['enable_video_self'] = '0';
 				linphone.ui.video.updateSelfView();
 			});
 		} else {
 			if (linphone.ui.video.self_view != null) {
-				linphone.ui.getCore(target).enableVideoPreview(false);
-				linphone.ui.getCore(target).setNativePreviewWindowId(0);
+				linphone.ui.getCore(target).videoPreviewEnabled = false;
+				linphone.ui.getCore(target).nativePreviewWindowId = 0;
 				linphone.ui.video.destroyVideoView(linphone.ui.video.self_view);
 				linphone.ui.video.self_view = null;
 			}
@@ -131,10 +131,8 @@ jQuery('html').click(function(event) {
 	if (target.is('.linphone .window .tools .video-menu .enable > a')) {
 		if (target.hasClass('ui-state-selected')) {
 			linphone.core.data()['enable_video'] = '0';
-			linphone.ui.getCore(target).enableVideo(false);
 		} else {
 			linphone.core.data()['enable_video'] = '1';
-			linphone.ui.getCore(target).enableVideo(true);
 		}
 		linphone.ui.video.updateVideoView(target);
 		linphone.ui.video.updateSelfView(target);
