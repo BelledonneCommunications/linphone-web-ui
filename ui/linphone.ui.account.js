@@ -55,6 +55,8 @@ linphone.ui.account = {
 	authInfoRequested: function(event, realm, username) {
 		var base = jQuery(this);
 		base.find('.window .auth-form').show();
+		base.find('.window .auth-form .content input.username').val(username);
+		base.find('.window .auth-form .content input.realm').val(realm);
 	}
 };
 
@@ -119,6 +121,11 @@ jQuery('html').click(function(event) {
 	// Valid auth
 	if (target.is('.linphone .window .auth-form .valid')) {
 		base.find('.window .auth-form').fadeOut('fast');
+		var username = base.find('.window .auth-form .content input.username').val();
+		var password = base.find('.window .auth-form .content input.password').val();
+		var realm = base.find('.window .auth-form .content input.realm').val();
+		var authinfo = linphone.ui.getCore(target).newAuthInfo(username, username, password, "", realm);
+		linphone.ui.getCore(target).addAuthInfo(authinfo);
 	}
 
 	// Valid account check

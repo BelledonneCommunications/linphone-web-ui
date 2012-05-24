@@ -142,6 +142,10 @@
 	margin-bottom: 10px;
 }
 
+.linphone .window .auth-form .content .hiddenfield {
+	display: none;
+}
+
 .linphone .window .auth-form .content .label {
 	float: left;
 	line-height: 24px;
