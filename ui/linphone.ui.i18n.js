@@ -250,5 +250,15 @@ linphone.ui.i18n = {
 				fr_FR : 'À Propos'
 			}
 		}
+	},
+	welcome : {
+		title : {
+			en_US : 'Welcome',
+			fr_FR : 'Bienvenue'
+		},
+		content : {
+			en_US : 'Welcome to Linphone Web',
+			fr_FR : 'Bienvenue dans Linphone Web'
+		}
 	}
 };
