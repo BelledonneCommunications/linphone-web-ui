@@ -55,10 +55,11 @@ linphone.ui.call = {
 		}
 	},
 	call_invite_callback : function(base, dest, call) {
-		if(call)
+		if(call) {
 			linphone.ui.call.create_call_tab(base, call, '.templates .Linphone-Call-OutgoingInit');
-		else
-			console.log("Null call");
+		} else {
+			linphone.core.log("Null call");
+		}
 	},
 	callStateChanged: function(event, call, state, message){
 		var base = jQuery(this);
