@@ -258,7 +258,7 @@ linphone.ui.i18n = {
 		},
 		content : {
 			en_US : 'Welcome to Linphone Web',
-			fr_FR : 'Bienvenue dans Linphone Web'
+			fr_FR : 'Bienvenue sur Linphone Web'
 		}
 	}
 };

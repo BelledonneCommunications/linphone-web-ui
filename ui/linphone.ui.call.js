@@ -73,12 +73,38 @@ linphone.ui.call = {
 		} else {
 			linphone.core.log('Can\'t find call tab');
 		}
+	},
+	getCurrentCall: function(base) {
+		var selected = base.find('.window > .content .tabs div.ui-tabs-panel:not(.ui-tabs-hide)');
+		return selected.data('data');
+	},
+	isInRunningCall: function(call) {
+		if(call) {
+			switch (call.getState()) {
+				case linphone.core.enums.callState.Idle:
+				case linphone.core.enums.callState.Error:
+				case linphone.core.enums.callState.End:
+				case linphone.core.enums.callState.Released:
+					return false;
+				default:
+					return true;
+			}
+		}
+		return false;
+	},
+	sendDTMF: function(base, call, dtmf) {
+		var core = linphone.ui.getCore(base);
+		linphone.core.log(core);
+		core.sendDtmf(dtmf);
 	}
 };
 
 //OnLoad
 jQuery(function() {
 	jQuery(document).on('callStateChanged', '.linphone', linphone.ui.call.callStateChanged);  
+	
+	// Disable selection on tools
+	jQuery('.linphone .window .content .pad').disableSelection();
 });
 
 // Click
@@ -86,10 +112,28 @@ jQuery('html').click(function(event) {
 	var target = jQuery(event.target);
 	var base = linphone.ui.getBase(target);
 	var element;
+	var call;
+	
 	if (target.is('.linphone .window .dial-button')) {
 		linphone.ui.call.call_invite(base, target.parent().find('.dest').val());
 	}
-
+	
+	if (target.is('.linphone .window .pad-button')) {
+		base.find('.window .content .pad').toggle();
+	}
+	
+	if (target.is('.linphone .window > .content .pad button')) {
+		var dtmf = target.text();
+		linphone.core.log("Dtmf: " + dtmf);
+		call = linphone.ui.call.getCurrentCall(base);
+		if(linphone.ui.call.isInRunningCall(call)) {
+			linphone.ui.call.sendDTMF(base, call, dtmf);
+		} else {
+			var composer = base.find('.window > .composer > .dest');
+			composer.val(composer.val() + dtmf);
+		}
+	}
+	
 	if (target.is('.linphone .window .answer-button')) {
 		element = target.parents('.tab');
 		if (element && element.data('data')) {
@@ -113,7 +157,7 @@ jQuery('html').click(function(event) {
 		var tabId = tab.find('a').attr('href');
 		element = base.find('.window > .content .tabs ' + tabId);
 		if (element && element.data('data')) {
-			var call = element.data('data');
+			call = element.data('data');
 			element.data('data', null);
 			linphone.ui.getCore(target).terminateCall(call);
 		} else {

@@ -64,3 +64,35 @@
 	margin-left: 10px;
 	margin-right: 10px;
 }
+
+.linphone .window>.content .pad {
+	display: none;
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	padding: 5px;
+	text-align: center;
+	/* Fallback for web browsers that doesn't support RGBa */
+	background: rgb(255, 255, 255);
+	/* RGBa with 0.6 opacity */
+	background: rgba(255, 255, 255, 0.6);
+	/* For IE 8*/
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99ffffff, endColorstr=#99ffffff)";
+
+}
+
+.linphone .window>.content .pad button{
+	width: 30px;
+	height: 30px;
+	margin: 2px;
+}
+
+.linphone .window .tools .pad-button {
+	display: inline-block;
+	background-image: url('images/pad.png');
+	margin-left: 1px;
+	margin-right: 5px;
+	position: relative;
+}
