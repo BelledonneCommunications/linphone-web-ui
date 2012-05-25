@@ -84,7 +84,7 @@
 }
 
 .linphone .window .ui-button-text-only .ui-button-text {
-	padding: initial;
+	padding: 0;
 }
 
 .linphone .window .tools .ui-icon {
@@ -181,7 +181,9 @@
 }
 
 .linphone .window .options .ui-dialog-title {
-	 margin: 0.05em 16px 0.1em 0;
+	margin: 1px 16px 1px 0;
+	height: 14px;
+	font-size: 14px;
 }
 
 .linphone .window .options {
@@ -233,7 +235,9 @@
 }
 
 .linphone .window .dialogs .ui-dialog-title {
-	 margin: 0 16px 0.1em 0;
+	margin: 1px 16px 1px 0;
+	height: 14px;
+	font-size: 14px;	
 }
 
 .linphone .window .dialogs {
@@ -245,7 +249,7 @@
 	position: absolute;
 	background: #FFFFFF;
 	padding: 0px;
-	margin: 0px;
+	hmargin: 0px;
 	border: 0px;
 	width: auto;
 	z-index: 200;
