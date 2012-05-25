@@ -180,6 +180,10 @@
 	margin-right: 5px;
 }
 
+.linphone .window .options .ui-dialog-title {
+	 margin: 0.05em 16px 0.1em 0;
+}
+
 .linphone .window .options {
 	top: 0px;
 	left: 0px;
@@ -214,7 +218,8 @@
 
 .linphone .window .options .ui-dialog-titlebar {
 	cursor: default;
-	height: 15px;
+	height: 16px;
+	padding: 4px 10px;
 }
 
 /* 
@@ -225,6 +230,10 @@
 .linphone .window .dialogs .ui-dialog-icon {
 	float: left;
 	margin-right: 5px;
+}
+
+.linphone .window .dialogs .ui-dialog-title {
+	 margin: 0 16px 0.1em 0;
 }
 
 .linphone .window .dialogs {
@@ -246,4 +255,10 @@
 	height: 195px;
 	margin: 0px;
 	overflow: auto;
+}
+
+.linphone .window .dialogs .ui-dialog-titlebar {
+	cursor: default;
+	height: 16px;
+	padding: 4px 10px;
 }

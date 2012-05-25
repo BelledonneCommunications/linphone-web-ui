@@ -236,7 +236,10 @@ jQuery(function() {
 	// Disable selection on tools
 	jQuery('.linphone .window .tools').disableSelection();
 
-	// Disable selection on dialog titlebar
+	// Disable selection on dialogs titlebar
+	jQuery('.linphone .window .dialogs .ui-dialog-titlebar').disableSelection();
+	
+	// Disable selection on options titlebar
 	jQuery('.linphone .window .options .ui-dialog-titlebar').disableSelection();
 
 	jQuery('.linphone .window .options .ui-dialog-titlebar-close').click(function(event) {

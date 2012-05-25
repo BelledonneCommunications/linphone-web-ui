@@ -25,11 +25,14 @@
 .linphone .window .composer {
 	width: 100%;
 	display: inline-block;
+	height: 22px;
 }
 
 .linphone .window .composer input {
 	vertical-align: middle;
 	width: 170px;
+	margin: 1px;
+	height: 16px;
 }
 
 .linphone .window .composer .dial-button {
@@ -38,14 +41,14 @@
 	background-image: url('images/ok.png');
 }
 
-.linphone .window > .content .tab .button {
+.linphone .window>.content .tab .button {
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 10px;
 	text-align: center;
 }
 
-.linphone .window > .content .tab .answer-button {
+.linphone .window>.content .tab .answer-button {
 	display: inline-block;
 	background-image: url('images/startcall-green.png');
 	background-size: 32px 32px;
@@ -55,7 +58,7 @@
 	margin-right: 10px;
 }
 
-.linphone .window > .content .tab .teminate-button {
+.linphone .window>.content .tab .teminate-button {
 	display: inline-block;
 	background-image: url('images/stopcall-red.png');
 	background-size: 32px 32px;
@@ -80,10 +83,9 @@
 	background: rgba(255, 255, 255, 0.6);
 	/* For IE 8*/
 	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99ffffff, endColorstr=#99ffffff)";
-
 }
 
-.linphone .window>.content .pad button{
+.linphone .window>.content .pad button {
 	width: 30px;
 	height: 30px;
 	margin: 2px;

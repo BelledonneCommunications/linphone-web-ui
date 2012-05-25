@@ -118,11 +118,11 @@ jQuery('html').click(function(event) {
 	var call;
 	
 	if (target.is('.linphone .window .dial-button')) {
-		linphone.ui.call.call_invite(base, target.parent().find('.dest').val());
+		linphone.ui.call.call_invite(base, target.parent().find('.destination').val());
 	}
 	
 	if (target.is('.linphone .window .pad-button')) {
-		base.find('.window .content .pad').toggle();
+		base.find('.window .content .pad').toggle('slide', {direction: 'down'});
 	}
 	
 	if (target.is('.linphone .window > .content .pad button') || target.parents('.linphone .window > .content .pad button') .length !== 0) {
