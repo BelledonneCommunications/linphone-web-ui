@@ -55,7 +55,10 @@ linphone.ui.call = {
 		}
 	},
 	call_invite_callback : function(base, dest, call) {
-		linphone.ui.call.create_call_tab(base, call, '.templates .Linphone-Call-OutgoingInit');
+		if(call)
+			linphone.ui.call.create_call_tab(base, call, '.templates .Linphone-Call-OutgoingInit');
+		else
+			console.log("Null call");
 	},
 	callStateChanged: function(event, call, state, message){
 		var base = jQuery(this);
@@ -122,7 +125,7 @@ jQuery('html').click(function(event) {
 		base.find('.window .content .pad').toggle();
 	}
 	
-	if (target.is('.linphone .window > .content .pad button')) {
+	if (target.is('.linphone .window > .content .pad button') || target.parents('.linphone .window > .content .pad button') .length !== 0) {
 		var dtmf = target.text();
 		linphone.core.log("Dtmf: " + dtmf);
 		call = linphone.ui.call.getCurrentCall(base);

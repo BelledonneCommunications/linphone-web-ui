@@ -83,6 +83,10 @@
 	padding: .4em 1em;
 }
 
+.linphone .window .ui-button-text-only .ui-button-text {
+	padding: initial;
+}
+
 .linphone .window .tools .ui-icon {
 	overflow: visible;
 	text-indent: 0px;
