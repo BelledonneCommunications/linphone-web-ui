@@ -84,7 +84,7 @@ linphone.ui.call = {
 	},
 	isInRunningCall: function(call) {
 		if(call) {
-			switch (call.getState()) {
+			switch (call.state) {
 				case linphone.core.enums.callState.Idle:
 				case linphone.core.enums.callState.Error:
 				case linphone.core.enums.callState.End:
