@@ -133,7 +133,7 @@ jQuery('html').click(function(event) {
 		if(linphone.ui.call.isInRunningCall(call)) {
 			linphone.ui.call.sendDTMF(base, call, dtmf);
 		} else {
-			var composer = base.find('.window > .composer > .dest');
+			var composer = base.find('.window > .composer > .destination');
 			composer.val(composer.val() + dtmf);
 		}
 	}
