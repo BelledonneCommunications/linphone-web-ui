@@ -38,6 +38,12 @@ linphone.ui.account = {
 		}, function() {
 			jQuery(this).removeClass("ui-state-highlight");
 		});
+		// Highlight cells under pointer 
+		linphone.ui.getBase(target).find('.window .accounts-options .content tbody tr td').hover(function() {
+			jQuery(this).parent().addClass("ui-state-highlight");
+		}, function() {
+			jQuery(this).parent().removeClass("ui-state-highlight");
+		});
 	},
 	registrationStateChanged: function(event, proxy, state, message) {
 		var base = jQuery(this);
