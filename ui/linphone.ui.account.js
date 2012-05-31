@@ -103,11 +103,11 @@ jQuery('html').click(function(event) {
 		var data = base.find('.window .accounts-options .content tbody tr').data('data');
 		linphone.ui.account.current_proxy_config = data;
 		base.find('.window .account-form .content button.remove').show();
-		base.find('.window .account-form .content input.identity').val(data.getIdentity());
-		base.find('.window .account-form .content input.proxy').val(data.getServerAddr());
-		base.find('.window .account-form .content input.route').val(data.getRoute());
-		base.find('.window .account-form .content input.expires').val(data.getExpires());
-		base.find('.window .account-form .content input.register').attr('checked', data.registerEnabled());
+		base.find('.window .account-form .content input.identity').val(data.identity);
+		base.find('.window .account-form .content input.proxy').val(data.serverAddr);
+		base.find('.window .account-form .content input.route').val(data.route);
+		base.find('.window .account-form .content input.expires').val(data.expires);
+		base.find('.window .account-form .content input.register').attr('checked', data.registerEnabled);
 		base.find('.window .account-form').fadeIn('fast');
 	}
 
@@ -185,11 +185,11 @@ jQuery('html').click(function(event) {
 			}
 
 			// Set values
-			proxyConfig.setIdentity(identity);
-			proxyConfig.setServerAddr(proxy);
-			proxyConfig.setRoute(route);
-			proxyConfig.setExpires(expires);
-			proxyConfig.enableRegister(register);
+			proxyConfig.identity = identity;
+			proxyConfig.serverAddr = proxy;
+			proxyConfig.route = route;
+			proxyConfig.expires = expires;
+			proxyConfig.registerEnabled = register;
 
 			if (linphone.ui.account.current_proxy_config == null) {
 				linphone.ui.getCore(target).addProxyConfig(proxyConfig);
