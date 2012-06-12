@@ -507,8 +507,8 @@ Call end: <b>{{=remoteAddressAsString}}</b>
 </script>
 				<script class="Linphone-AccountsList" type="text/x-jsrender">
 <tr>
-	<td class="name">{{=getIdentity()}}</td>
-	<td class="status">{{=$ctx.linphone_ui_helpers_getLinphoneRegistrationStateText(getState())}}</td>
+	<td class="name">{{=identity}}</td>
+	<td class="status">{{=$ctx.linphone_ui_helpers_getLinphoneRegistrationStateText(state)}}</td>
 	<td/>
 </tr>
 </script>

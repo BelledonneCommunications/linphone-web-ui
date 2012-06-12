@@ -60,6 +60,7 @@ linphone.ui.account = {
 	},
 	authInfoRequested: function(event, realm, username) {
 		var base = jQuery(this);
+		base.find('.window .auth-form').stop(true, true);
 		base.find('.window .auth-form').show();
 		base.find('.window .auth-form .content input.username').val(username);
 		base.find('.window .auth-form .content input.realm').val(realm);
