@@ -286,7 +286,7 @@ jQuery(function() {
 	}
 
 	if (jQuery.client.os === 'Windows' && jQuery.client.browser === 'Explorer') {
-		linphone.config.codebase = linphone.config.file + '#Version=' + linphone.config.version.replace('.', ',');
+		linphone.config.codebase = linphone.config.file.replace('.msi', '.cab') + '#Version=' + linphone.config.version.replace('.', ',');
 	} else if (jQuery.client.os === 'Linux' && jQuery.client.browser === 'Firefox') {
 		linphone.config.codebase = linphone.config.file;
 	}
