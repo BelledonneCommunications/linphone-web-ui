@@ -7,6 +7,7 @@
 				|| this.searchVersion(navigator.appVersion)
 				|| "an unknown version";
 			this.OS = this.searchString(this.dataOS) || "an unknown OS";
+			this.arch = this.searchArch();
 		},
 		searchString: function (data) {
 			for (var i=0;i<data.length;i++)	{
@@ -19,6 +20,14 @@
 				}
 				else if (dataProp)
 					return data[i].identity;
+			}
+		},
+		searchArch: function () {
+			var lcua = navigator.userAgent.toLowerCase();
+			if(lcua.indexOf("x86_64") != -1 || lcua.indexOf("amd64") != -1) {
+				return "x86_64";
+			} else {
+				return "i386";
 			}
 		},
 		searchVersion: function (dataString) {
@@ -118,6 +127,6 @@
 	
 	BrowserDetect.init();
 	
-	window.$.client = { os : BrowserDetect.OS, browser : BrowserDetect.browser };
+	window.$.client = { os : BrowserDetect.OS, arch: BrowserDetect.arch, browser : BrowserDetect.browser, version : BrowserDetect.version };
 	
 })();

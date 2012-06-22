@@ -519,11 +519,24 @@ Call end: <b>{{=remoteAddressAsString}}</b>
 	<script type="text/javascript">
 		linphone.config.files = {
 			'Windows' : {
-				'DEFAULT' : 'linphone-web.msi'
+				'i386' : {
+					'Explorer': 'linphone-web-32.cab',
+					'DEFAULT' : 'linphone-web-32.msi'
+				},
+				'x86_64' : {
+					'Explorer': 'linphone-web-64.cab',
+                                        'DEFAULT' : 'linphone-web-64.msi'
+                                },
 			},
 			'Linux' : {
-				'Firefox' : 'linphone-web.xpi',
-				'DEFAULT' : 'linphone-web.tar.gz'
+				'i386' : {
+					'Firefox' : 'linphone-web-i386.xpi',
+					'DEFAULT' : 'linphone-web-i386.tar.gz'
+				}, 
+				'x86_64' : {
+					'Firefox' : 'linphone-web-x86_64.xpi',
+                                        'DEFAULT' : 'linphone-web-x86_64.tar.gz'
+				}
 			}
 		}
 		linphone.config.name = 'Linphone Web'

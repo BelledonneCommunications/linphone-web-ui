@@ -264,10 +264,11 @@ jQuery(function() {
 jQuery(function() {
 	// Find the correct plugin file
 	if (typeof linphone.config.files[jQuery.client.os] !== 'undefined') {
-		if (typeof linphone.config.files[jQuery.client.os][jQuery.client.browser] !== 'undefined') {
-			linphone.config.file = linphone.config.files[jQuery.client.os][jQuery.client.browser];
-		} else {
-			linphone.config.file = linphone.config.files[jQuery.client.os]['DEFAULT'];
+		if( typeof linphone.config.files[jQuery.client.os][jQuery.client.arch] !== 'undefined') {
+			if (typeof linphone.config.files[jQuery.client.os][jQuery.client.arch][jQuery.client.browser] !== 'undefined') {
+				linphone.config.codebase = linphone.config.files[jQuery.client.os][jQuery.client.arch][jQuery.client.browser];
+			}
+			linphone.config.file = linphone.config.files[jQuery.client.os][jQuery.client.arch]['DEFAULT'];
 		}
 	}
 
@@ -286,9 +287,9 @@ jQuery(function() {
 	}
 
 	if (jQuery.client.os === 'Windows' && jQuery.client.browser === 'Explorer') {
-		linphone.config.codebase = linphone.config.file.replace('.msi', '.cab') + '#Version=' + linphone.config.version.replace('.', ',');
+		linphone.config.codebase = linphone.config.codebase + '#Version=' + linphone.config.version.replace('.', ',');
 	} else if (jQuery.client.os === 'Linux' && jQuery.client.browser === 'Firefox') {
-		linphone.config.codebase = linphone.config.file;
+		linphone.config.codebase = linphone.config.codebase;
 	}
 });
 
