@@ -40,9 +40,6 @@ linphone.ui = {
 		locale : 'it_IT',
 		icon : 'style/images/flags/it.png'
 	} ],
-	downloadPlugin : function(file) {
-		window.open(file, '_blank');
-	},
 	getCore : function(base) {
 		base = linphone.ui.getBase(base);
 		return base.find('> .core').get()[0];
@@ -156,7 +153,10 @@ linphone.ui = {
 			if (jQuery.client.browser === "Firefox") {
 				if (InstallTrigger.updateEnabled()) {
 					InstallTrigger.install({
-						"Linphone Web" : linphone.config.codebase
+						"Linphone-Web":{
+							URL: linphone.config.description.file,
+							IconURL: linphone.config.description.icon
+						}
 					});
 				}
 			}
@@ -266,30 +266,38 @@ jQuery(function() {
 	if (typeof linphone.config.files[jQuery.client.os] !== 'undefined') {
 		if( typeof linphone.config.files[jQuery.client.os][jQuery.client.arch] !== 'undefined') {
 			if (typeof linphone.config.files[jQuery.client.os][jQuery.client.arch][jQuery.client.browser] !== 'undefined') {
-				linphone.config.codebase = linphone.config.files[jQuery.client.os][jQuery.client.arch][jQuery.client.browser];
+				linphone.config.description = linphone.config.files[jQuery.client.os][jQuery.client.arch][jQuery.client.browser];
+			} else {
+				linphone.config.description = linphone.config.files[jQuery.client.os][jQuery.client.arch]['DEFAULT'];
 			}
-			linphone.config.file = linphone.config.files[jQuery.client.os][jQuery.client.arch]['DEFAULT'];
 		}
 	}
 
 	// Update
-	if (linphone.config.file !== null) {
-		var content = '';
-		content = '<button type="button" onclick="linphone.ui.downloadPlugin(\'' + linphone.config.file;
-		content += '\')" class="{translate: \'base.install.download\'}">Download !</button>';
-		jQuery('.linphone .window .install .buttons').html(content);
-		jQuery.i18n.update(jQuery('.linphone .window .install .buttons'), true);
-		jQuery('.linphone .window .install button').button();
+	if (linphone.config.description !== null) {
+		if (jQuery.client.os === 'Windows' && jQuery.client.browser === 'Explorer') {
+			jQuery('.linphone .window .install .text').addClass('{translate: \'base.install.text.auto\'}');
+			linphone.config.codebase = linphone.config.description + '#Version=' + linphone.config.version.replace('.', ',');
+		} else if (jQuery.client.browser === 'Firefox') {
+			jQuery('.linphone .window .install .text').addClass('{translate: \'base.install.text.auto\'}');
+			linphone.config.codebase = "";
+		} else {
+			jQuery('.linphone .window .install .text').addClass('{translate: \'base.install.text.download\'}');
+			
+			var content = '';
+			content = '<button type="button" onclick="window.open(\'' + linphone.config.description;
+			content += '\', \'_blank\')" class="{translate: \'base.install.download\'}">Download !</button>';
+			jQuery('.linphone .window .install .buttons').html(content);
+			jQuery.i18n.update(jQuery('.linphone .window .install .buttons'), true);
+			jQuery('.linphone .window .install button').button();
+
+			linphone.config.codebase = "";
+			//window.open(linphone.config.description, '_blank');
+		} 
 	} else {
 		jQuery('.linphone .window .install .text').hide();
 		jQuery('.linphone .window .install .refresh').hide();
 		jQuery('.linphone .window .install .unavailable').show();
-	}
-
-	if (jQuery.client.os === 'Windows' && jQuery.client.browser === 'Explorer') {
-		linphone.config.codebase = linphone.config.codebase + '#Version=' + linphone.config.version.replace('.', ',');
-	} else if (jQuery.client.os === 'Linux' && jQuery.client.browser === 'Firefox') {
-		linphone.config.codebase = linphone.config.codebase;
 	}
 });
 

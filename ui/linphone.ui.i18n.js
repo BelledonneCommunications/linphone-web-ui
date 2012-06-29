@@ -33,8 +33,14 @@ linphone.ui.i18n = {
 		},
 		install : {
 			text : {
-				en_US : 'The plugin is not installed. Please download it using the following button.',
-				fr_FR : 'Le plugin n\'est pas installé. Veuillez le télécharger en utilisant le bouton suivant.'
+				download : {
+					en_US : 'The plugin is not installed. Please download it using the following button.',
+					fr_FR : 'Le plugin n\'est pas installé. Veuillez le télécharger en utilisant le bouton suivant.'
+				},
+				auto : {
+					en_US : 'The plugin is not installed. Please accept the automatic install of the plugin',
+					fr_FR : 'Le plugin n\'est pas installé. Veuillez accepter l\'installation automatique du plugin'
+				}
 			},
 			unavailable : {
 				en_US : 'Your operating system or your browser is not supported.',

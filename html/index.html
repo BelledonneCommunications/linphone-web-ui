@@ -75,7 +75,7 @@ body {
 					<button type="button" onclick="_reload(event)" class="reload {translate: 'base.error.reload'}"></button>
 				</div>
 				<div class="install overall ui-corner-all">
-					<div class="text {translate: 'base.install.text'}"></div>
+					<div class="text"></div>
 					<div class="unavailable {translate: 'base.install.unavailable'}"></div>
 					<div class="buttons"></div>
 					<br /> <br />
@@ -520,22 +520,36 @@ Call end: <b>{{=remoteAddressAsString}}</b>
 		linphone.config.files = {
 			'Windows' : {
 				'i386' : {
-					'Explorer': 'linphone-web-32.cab',
-					'DEFAULT' : 'linphone-web-32.msi'
+					'Explorer': 'linphone-web-1.0.0.0-32.cab',
+					'Firefox' : {
+						file: 'linphone-web-1.0.0.0-win32-i386.xpi',
+						icon: 'style/images/linphone.png'
+					},
+					'DEFAULT' : 'linphone-web-1.0.0.0-32.msi'
 				},
 				'x86_64' : {
-					'Explorer': 'linphone-web-64.cab',
-                                        'DEFAULT' : 'linphone-web-64.msi'
-                                },
+					'Explorer': 'linphone-web-1.0.0.0-64.cab',
+					'Firefox' : {
+						file: 'linphone-web-1.0.0.0-win64.xpi',
+						icon: 'style/images/linphone.png'
+					},
+					'DEFAULT' : 'linphone-web-1.0.0.0-64.msi'
+				},
 			},
 			'Linux' : {
 				'i386' : {
-					'Firefox' : 'linphone-web-i386.xpi',
-					'DEFAULT' : 'linphone-web-i386.tar.gz'
+					'Firefox' : {
+						file: 'linphone-web-1.0.0.0-Linux-i386.xpi',
+						icon: 'style/images/linphone.png'
+					},
+					'DEFAULT' : 'linphone-web-1.0.0.0-Linux-i386.tar.gz'
 				}, 
 				'x86_64' : {
-					'Firefox' : 'linphone-web-x86_64.xpi',
-                                        'DEFAULT' : 'linphone-web-x86_64.tar.gz'
+					'Firefox' : {
+						file: 'linphone-web-1.0.0.0-Linux-x86_64.xpi',
+						icon: 'style/images/linphone.png'
+					},
+					'DEFAULT' : 'linphone-web-1.0.0.0-Linux-x86_64.tar.gz'
 				}
 			}
 		}
