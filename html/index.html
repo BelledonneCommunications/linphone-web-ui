@@ -520,7 +520,10 @@ Call end: <b>{{=remoteAddressAsString}}</b>
 		linphone.config.files = {
 			'Windows' : {
 				'i386' : {
-					'Explorer': 'linphone-web-1.0.0.0-32.cab',
+					'Explorer': {
+						file: 'linphone-web-1.0.0.0-32.cab',
+						version: '1,0,0,0'
+					},
 					'Firefox' : {
 						file: 'linphone-web-1.0.0.0-win32-i386.xpi',
 						icon: 'style/images/linphone.png'
@@ -528,7 +531,10 @@ Call end: <b>{{=remoteAddressAsString}}</b>
 					'DEFAULT' : 'linphone-web-1.0.0.0-32.msi'
 				},
 				'x86_64' : {
-					'Explorer': 'linphone-web-1.0.0.0-64.cab',
+					'Explorer': {
+						file: 'linphone-web-1.0.0.0-64.cab',
+						version: '1,0,0,0'
+					},
 					'Firefox' : {
 						file: 'linphone-web-1.0.0.0-win64.xpi',
 						icon: 'style/images/linphone.png'
