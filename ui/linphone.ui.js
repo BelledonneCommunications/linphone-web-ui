@@ -153,7 +153,7 @@ linphone.ui = {
 			base.find('.window .install').hide();
 			return true;
 		} else {
-			if (jQuery.client.os === "Linux" && jQuery.client.browser === "Firefox") {
+			if (jQuery.client.browser === "Firefox") {
 				if (InstallTrigger.updateEnabled()) {
 					InstallTrigger.install({
 						"Linphone Web" : linphone.config.codebase
