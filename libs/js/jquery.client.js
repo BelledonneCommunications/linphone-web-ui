@@ -27,7 +27,7 @@
 			if(lcua.indexOf("x86_64") != -1 || lcua.indexOf("amd64") != -1) {
 				return "x86_64";
 			} else {
-				return "i386";
+				return "x86";
 			}
 		},
 		searchVersion: function (dataString) {
