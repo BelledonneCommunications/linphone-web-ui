@@ -149,7 +149,7 @@ linphone.ui = {
 		if (typeof core !== 'undefined' && typeof core.valid !== 'undefined' && core.valid) {
 			base.find('.window .install').hide();
 			return true;
-		} else {
+		} else if(typeof linphone.config.description !== 'undefined'){
 			if (jQuery.client.browser === "Firefox") {
 				if (InstallTrigger.updateEnabled()) {
 					InstallTrigger.install({
