@@ -264,7 +264,7 @@ jQuery(function() {
 jQuery(function() {
 	// Find the correct plugin file
 	if (typeof linphone.config.files[jQuery.client.os] !== 'undefined') {
-		if( typeof linphone.config.files[jQuery.client.os][jQuery.client.arch] !== 'undefined') {
+		if(typeof linphone.config.files[jQuery.client.os][jQuery.client.arch] !== 'undefined') {
 			if (typeof linphone.config.files[jQuery.client.os][jQuery.client.arch][jQuery.client.browser] !== 'undefined') {
 				linphone.config.description = linphone.config.files[jQuery.client.os][jQuery.client.arch][jQuery.client.browser];
 				linphone.config.description_browser = jQuery.client.browser;
@@ -277,7 +277,7 @@ jQuery(function() {
 
 	// Update
 	linphone.config.codebase = "";
-	if (linphone.config.description !== null) {
+	if (typeof linphone.config.description !== 'undefined') {
 		if (linphone.config.description_browser === 'Explorer') {
 			jQuery('.linphone .window .install .text').addClass('{translate: \'base.install.text.auto\'}');
 			linphone.config.codebase = linphone.config.description.file + '#Version=' + linphone.config.description.version;
