@@ -59,10 +59,14 @@ linphone.ui = {
 		linphone.ui._addEvent(obj, name, func);
 	},
 	loadHandler : function(core) {
+		if(typeof core === 'undefined' || typeof core.valid === 'undefined') {
+			return;
+		}
+		
 		linphone.core.log('Load Core');
 		var base = linphone.ui.core_data[core.magic];
 
-		base.find('.window .install').hide(); // Force
+		base.find('.window .install').hide(); // Force hide
 
 		linphone.ui.addEvent(core, 'globalStateChanged', linphone.ui.globalStateChanged);
 		linphone.ui.addEvent(core, 'callStateChanged', linphone.ui.callStateChanged);
@@ -143,12 +147,45 @@ linphone.ui = {
 		base.find('.window .error .text').html(msg);
 		base.find('.window .error').show();
 	},
+	outdated : function(actual, plugin) {
+		var version1 = actual.split('.');
+		var version2 = plugin.split('.');
+		for(var i = 0; i < version1.length && i < version2.length; ++i) {
+			if(i >= version1.length) {
+				return false;
+			}
+			if(i >= version2.length) {
+				return true;
+			}
+			var number1 = parseInt(version1[i], 10);
+			var number2 = parseInt(version2[i], 10);
+			if(number2 < number1) {
+				return true;
+			} else if(number2 > number1) {
+				return false;
+			}
+		}
+		return false;
+	},
 	detect : function(base) {
 		linphone.core.log('Detect');
 		var core = base.find('.core').get()[0];
 		if (typeof core !== 'undefined' && typeof core.valid !== 'undefined' && core.valid) {
-			base.find('.window .install').hide();
-			return true;
+			if(!linphone.ui.outdated(linphone.config.version, core.pluginVersion)) {
+				base.find('.window .install').hide();
+				return true;
+			} else {
+				linphone.ui.unload(base);
+				if (linphone.config.description_browser === 'Explorer') {
+					jQuery('.linphone .window .install .text').html(jQuery.i18n.translate('base.install.text.outdated_auto'));
+				} else if (linphone.config.description_browser === 'Firefox') {
+					jQuery('.linphone .window .install .text').html(jQuery.i18n.translate('base.install.text.outdated_auto'));
+				} else if (linphone.config.description_browser === 'Chrome') {
+					jQuery('.linphone .window .install .text').html(jQuery.i18n.translate('base.install.text.outdated_auto'));
+				} else {
+					jQuery('.linphone .window .install .text').html(jQuery.i18n.translate('base.install.text.outdated_download'));
+				}
+			}
 		} else if(typeof linphone.config.description !== 'undefined'){
 			if (jQuery.client.browser === "Firefox") {
 				if (InstallTrigger.updateEnabled()) {
@@ -282,6 +319,8 @@ jQuery(function() {
 			jQuery('.linphone .window .install .text').addClass('{translate: \'base.install.text.auto\'}');
 			linphone.config.codebase = linphone.config.description.file + '#Version=' + linphone.config.description.version;
 		} else if (linphone.config.description_browser === 'Firefox') {
+			jQuery('.linphone .window .install .text').addClass('{translate: \'base.install.text.auto\'}');
+		} else if (linphone.config.description_browser === 'Chrome') {
 			jQuery('.linphone .window .install .text').addClass('{translate: \'base.install.text.auto\'}');
 		} else {
 			jQuery('.linphone .window .install .text').addClass('{translate: \'base.install.text.download\'}');

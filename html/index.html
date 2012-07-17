@@ -270,8 +270,8 @@ body {
 						<br />
 						<div class="title">Linphone Web</div>
 						<br />
-						<div class="version">
-							Version: <span class="version_number"></span>
+						<div class="plugin_version">
+							Plugin Version: <span class="plugin_version_number"></span>
 						</div>
 						<br />
 						<div class="core_version">
@@ -528,6 +528,9 @@ Call end: <b>{{=remoteAddressAsString}}</b>
 						file: 'linphone-web-1.0.0.0-win32.xpi',
 						icon: 'style/images/linphone.png'
 					},
+					'Chrome' : {
+						file: 'linphone-web-1.0.0.0-win32.crx'
+					},
 					'DEFAULT' : 'linphone-web-1.0.0.0-win32.msi'
 				},
 				'x86_64' : {
@@ -539,6 +542,9 @@ Call end: <b>{{=remoteAddressAsString}}</b>
 						file: 'linphone-web-1.0.0.0-win64.xpi',
 						icon: 'style/images/linphone.png'
 					},
+					'Chrome' : {
+						file: 'linphone-web-1.0.0.0-win64.crx'
+					},
 					'DEFAULT' : 'linphone-web-1.0.0.0-win64.msi'
 				},
 			},
@@ -548,6 +554,9 @@ Call end: <b>{{=remoteAddressAsString}}</b>
 						file: 'linphone-web-1.0.0.0-Linux-x86.xpi',
 						icon: 'style/images/linphone.png'
 					},
+					'Chrome' : {
+						file: 'linphone-web-1.0.0.0-Linux-x86.crx'
+					},
 					'DEFAULT' : 'linphone-web-1.0.0.0-Linux-x86.tar.gz'
 				}, 
 				'x86_64' : {
@@ -555,24 +564,33 @@ Call end: <b>{{=remoteAddressAsString}}</b>
 						file: 'linphone-web-1.0.0.0-Linux-x86_64.xpi',
 						icon: 'style/images/linphone.png'
 					},
+					'Chrome' : {
+						file: 'linphone-web-1.0.0.0-Linux-x86_64.crx'
+					},
 					'DEFAULT' : 'linphone-web-1.0.0.0-Linux-x86_64.tar.gz'
 				}
 			},
 			'Mac' : {
-                               'x86' : {
-                                        'Firefox' : {
-                                                file: 'linphone-web-1.0.0.0-Mac-x86.xpi',
-                                                icon: 'style/images/linphone.png'
-                                        },
-                                        'DEFAULT' : 'linphone-web-1.0.0.0-Mac-x86.tar.gz'
-                                }, 
-                                'x86_64' : {
-                                        'Firefox' : {
-                                                file: 'linphone-web-1.0.0.0-Mac-x86_64.xpi',
-                                                icon: 'style/images/linphone.png'
-                                        },
-                                        'DEFAULT' : 'linphone-web-1.0.0.0-Mac-x86_64.tar.gz'
-                                }
+				'x86' : {
+						'Firefox' : {
+							file: 'linphone-web-1.0.0.0-Mac-x86.xpi',
+							icon: 'style/images/linphone.png'
+						},
+						'Chrome' : {
+							file: 'linphone-web-1.0.0.0-Mac-x86_64.crx'
+						},
+						'DEFAULT' : 'linphone-web-1.0.0.0-Mac-x86.tar.gz'
+				}, 
+				'x86_64' : {
+					'Firefox' : {
+						file: 'linphone-web-1.0.0.0-Mac-x86_64.xpi',
+						icon: 'style/images/linphone.png'
+					},
+					'Chrome' : {
+						file: 'linphone-web-1.0.0.0-Mac-x86_64.crx'
+					},
+					'DEFAULT' : 'linphone-web-1.0.0.0-Mac-x86_64.tar.gz'
+				}
 			}
 		}
 		linphone.config.name = 'Linphone Web'

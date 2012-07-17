@@ -38,8 +38,16 @@ linphone.ui.i18n = {
 					fr_FR : 'Le plugin n\'est pas installé. Veuillez le télécharger en utilisant le bouton suivant.'
 				},
 				auto : {
-					en_US : 'The plugin is not installed. Please accept the automatic install of the plugin',
-					fr_FR : 'Le plugin n\'est pas installé. Veuillez accepter l\'installation automatique du plugin'
+					en_US : 'The plugin is not installed. Please accept the automatic install of the plugin.',
+					fr_FR : 'Le plugin n\'est pas installé. Veuillez accepter l\'installation automatique du plugin.'
+				},
+				outdated_download : {
+					en_US : 'The plugin is outdated.Please download it using the following button.',
+					fr_FR : 'Le plugin n\'est pas à jour. Veuillez accepter l\'installation automatique du plugin.'
+				},
+				outdated_auto : {
+					en_US : 'The plugin is outdated. Please accept the automatic install of the plugin.',
+					fr_FR : 'Le plugin n\'est pas à jour. Veuillez accepter l\'installation automatique du plugin.'
 				}
 			},
 			unavailable : {
