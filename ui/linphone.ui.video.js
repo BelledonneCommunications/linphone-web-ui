@@ -36,9 +36,9 @@ linphone.ui.video = {
 				linphone.ui.video.updateSelfView(target);
 			});
 		} else {
+			linphone.ui.getCore(target).videoEnabled = false;
+			linphone.ui.getCore(target).nativeVideoWindowId = 0;
 			if (linphone.ui.video.video_view !== null) {
-				linphone.ui.getCore(target).videoEnabled = false;
-				linphone.ui.getCore(target).nativeVideoWindowId = 0;
 				linphone.ui.video.destroyVideoView(linphone.ui.video.video_view);
 				linphone.ui.video.video_view = null;
 			}
@@ -56,9 +56,9 @@ linphone.ui.video = {
 				linphone.ui.video.updateSelfView();
 			});
 		} else {
+			linphone.ui.getCore(target).videoPreviewEnabled = false;
+			linphone.ui.getCore(target).nativePreviewWindowId = 0;
 			if (linphone.ui.video.self_view != null) {
-				linphone.ui.getCore(target).videoPreviewEnabled = false;
-				linphone.ui.getCore(target).nativePreviewWindowId = 0;
 				linphone.ui.video.destroyVideoView(linphone.ui.video.self_view);
 				linphone.ui.video.self_view = null;
 			}
