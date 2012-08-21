@@ -24,7 +24,7 @@
 		},
 		searchArch: function () {
 			var lcua = navigator.userAgent.toLowerCase();
-			if(lcua.indexOf("x86_64") != -1 || lcua.indexOf("amd64") != -1) {
+			if(lcua.indexOf("linux x86_64") != -1 || lcua.indexOf("win64") != -1) {
 				return "x86_64";
 			} else {
 				return "x86";
