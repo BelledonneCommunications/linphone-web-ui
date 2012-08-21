@@ -26,7 +26,7 @@ linphone.ui.video = {
 	video_view : null,
 	updateVideoView : function(target) {
 		if (linphone.core.data()['enable_video'] === '1') {
-			linphone.ui.video.video_view = linphone.ui.video.createVideoView(target, 'video', function(object) {
+			linphone.ui.video.video_view = linphone.ui.video.createVideoView(target, 'window.video.title', function(object) {
 				linphone.core.log('Load VideoView ' + object.magic);
 				object.setBackgroundColor(0, 0, 0);
 				linphone.ui.getCore(target).nativeVideoWindowId = object.window;
@@ -46,7 +46,7 @@ linphone.ui.video = {
 	},
 	updateSelfView : function(target) {
 		if (linphone.core.data()['enable_video'] === '1' && linphone.core.data()['enable_video_self'] === '1') {
-			linphone.ui.video.self_view = linphone.ui.video.createVideoView(target, 'locale', function(object) {
+			linphone.ui.video.self_view = linphone.ui.video.createVideoView(target, 'window.self.title', function(object) {
 				linphone.core.log('Load VideoView ' + object.magic);
 				object.setBackgroundColor(0, 0, 0);
 				linphone.ui.getCore(target).nativePreviewWindowId = object.window;
@@ -66,7 +66,8 @@ linphone.ui.video = {
 	},
 	createVideoView : function(target, title, onOpen, onClose) {
 		var element = jQuery(document.createElement('div'));
-		element.attr('title', title);
+		var translated_title = jQuery.i18n.get(title); 
+		element.attr('title', translated_title);
 		element.addClass('video');
 
 		element.dialog({

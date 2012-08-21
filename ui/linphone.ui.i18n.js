@@ -265,6 +265,20 @@ linphone.ui.i18n = {
 			}
 		}
 	},
+	window : {
+		self : {
+			title : {
+				en_US : 'Self view',
+				fr_FR : 'Vue de votre webcam'
+			}
+		},
+		video : {
+			title : {
+				en_US : 'Video view',
+				fr_FR : 'Vue video'
+			}
+		}
+	},
 	welcome : {
 		title : {
 			en_US : 'Welcome',
