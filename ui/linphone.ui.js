@@ -97,6 +97,7 @@ linphone.ui = {
 
 			base.find('.window .load').hide();
 
+			core.usePreviewWindow = true;
 			linphone.ui.video.updateSelfView(base);
 			linphone.ui.video.updateVideoView(base);
 		}
