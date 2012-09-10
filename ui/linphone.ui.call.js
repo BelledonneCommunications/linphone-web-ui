@@ -98,7 +98,6 @@ linphone.ui.call = {
 	},
 	sendDTMF: function(base, call, dtmf) {
 		var core = linphone.ui.getCore(base);
-		linphone.core.log(core);
 		core.sendDtmf(dtmf);
 	}
 };

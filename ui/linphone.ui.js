@@ -94,7 +94,6 @@ linphone.ui = {
 			core.ringLevel = ring_level;
 
 			linphone.core.log('Sip port: ' + core.sip_port);
-
 			base.find('.window .load').hide();
 
 			core.usePreviewWindow = true;
