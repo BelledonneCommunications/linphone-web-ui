@@ -605,8 +605,8 @@ Call end: <b>{{=remoteAddressAsString}}</b>
 		function _reload(event) {
 			var target = jQuery(event.target);
 			var base = linphone.ui.getBase(target);
-			linphone.ui.unload(jQuery('.linphone'));
-			linphone.ui.load(jQuery('.linphone'));
+			linphone.ui.unload(base);
+			linphone.ui.load(base);
 		}
 		jQuery(function() {
 			linphone.ui.init();

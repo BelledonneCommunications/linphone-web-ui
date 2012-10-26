@@ -17,7 +17,7 @@
  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-/*globals linphone,jQuery,InstallTrigger */
+/*globals linphone,jQuery,InstallTrigger,chrome */
 
 linphone.ui = {
 	core_number : 1,
@@ -196,6 +196,8 @@ linphone.ui = {
 						}
 					});
 				}
+			} else if (jQuery.client.browser === "Chrome") {
+				chrome.webstore.install(linphone.config.description.file, function(){linphone.ui.unload(base);linphone.ui.load(base);}, function(){});
 			}
 		}
 		return false;
