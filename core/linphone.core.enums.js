@@ -20,7 +20,35 @@
 /*globals linphone*/
 
 linphone.core.enums = {
-
+	reason : {
+		None : 0,
+		NoResponse : 1,
+		BadCredentials : 2,
+		Declined : 3,
+		NotFound : 4,
+		NotAnswered : 5,
+		Busy : 6
+	},
+	getReasonText : function(value) {
+		switch (value) {
+		case linphone.core.enums.reason.None:
+			return "None";
+		case linphone.core.enums.reason.NoResponse:
+			return "NoResponse";
+		case linphone.core.enums.reason.BadCredentials:
+			return "BadCredentials";
+		case linphone.core.enums.reason.Declined:
+			return "Declined";
+		case linphone.core.enums.reason.NotFound:
+			return "NotFound";
+		case linphone.core.enums.reason.NotAnswered:
+			return "NotAnswered";
+		case linphone.core.enums.reason.Busy:
+			return "Busy";
+		default:
+			return "?";
+		}
+	},
 	registrationState : {
 		None : 0,
 		Progress : 1,
