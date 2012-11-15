@@ -40,8 +40,8 @@ linphone.ui = {
 		locale : 'it_IT',
 		icon : 'style/images/flags/it.png'
 	} ],
-	getCore : function(base) {
-		base = linphone.ui.getBase(base);
+	getCore : function(target) {
+		var base = linphone.ui.getBase(target);
 		return base.find('> .core').get()[0];
 	},
 	getBase : function(target) {
@@ -295,6 +295,12 @@ jQuery(function() {
 	jQuery.views.registerHelpers({
 		linphone_ui_helpers_getLinphoneRegistrationStateText : function(val) {
 			return linphone.core.enums.getRegistrationStateText(val);
+		}
+	});
+	// Add template helper
+	jQuery.views.registerHelpers({
+		linphone_ui_helpers_payloadTypeEnabled : function(val) {
+			return this.core.payloadTypeEnabled(val);
 		}
 	});
 });

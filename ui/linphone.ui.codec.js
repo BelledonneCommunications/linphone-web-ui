@@ -29,7 +29,7 @@ linphone.ui.codec = {
 		audio_table.empty();
 		for ( var audio_index in audio_codecs) {
 			var audio_item = audio_codecs[audio_index];
-			var audio_element = jQuery(base.find('.templates .Linphone-CodecsList').render(audio_item));
+			var audio_element = jQuery(base.find('.templates .Linphone-CodecsList').render(audio_item, {core: core}));
 			audio_element.data('data', audio_item);
 			audio_table.append(audio_element);
 		}
@@ -39,7 +39,7 @@ linphone.ui.codec = {
 		video_table.empty();
 		for ( var video_index in video_codecs) {
 			var video_item = video_codecs[video_index];
-			var video_element = jQuery(base.find('.templates .Linphone-CodecsList').render(video_item));
+			var video_element = jQuery(base.find('.templates .Linphone-CodecsList').render(video_item, {core: core}));
 			video_element.data('data', video_item);
 			video_table.append(video_element);
 		}

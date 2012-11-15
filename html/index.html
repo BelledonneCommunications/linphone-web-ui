@@ -496,7 +496,7 @@ Call end: <b>{{=remoteAddressAsString}}</b>
 	<td class="frequency">{{=clockRate}}</td>
 	<td class="bitrate">{{=normalBitrate}}</td>
 	<td class="actions">
-		{{#if enabled}}
+		{{#if $ctx.linphone_ui_helpers_payloadTypeEnabled($data)}}
 			<input class="enable" type="checkbox" checked="checked" />
 		{{else}}
 			<input class="enable" type="checkbox" />
