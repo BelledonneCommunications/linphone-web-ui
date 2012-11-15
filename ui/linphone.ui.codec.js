@@ -110,7 +110,8 @@ jQuery('html').click(function(event) {
 
 	// Click on media item
 	if (target.is('.linphone .window .codecs-options input')) {
+		var core = linphone.ui.getCore(target);
 		var data = target.parents('tr').data('data');
-		data.enabled = !data.enabled;
+		core.enablePayloadType(data, !core.payloadTypeEnabled(data));
 	}
 });
