@@ -93,7 +93,7 @@ linphone.ui = {
 			base.find('.window .tools .bell-slider').slider('value', ring_level);
 			core.ringLevel = ring_level;
 
-			linphone.core.log('Sip port: ' + core.sip_port);
+			linphone.core.log('Sip port: ' + core.sipPort);
 			base.find('.window .load').hide();
 
 			core.usePreviewWindow = true;
