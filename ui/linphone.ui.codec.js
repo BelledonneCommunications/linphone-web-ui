@@ -25,7 +25,7 @@ linphone.ui.codec = {
 		var base = linphone.ui.getBase(target);
 		var core = linphone.ui.getCore(target);
 		var audio_table = base.find('.window .codecs-options .content .audio tbody');
-		var audio_codecs = core.getAudioCodecs();
+		var audio_codecs = core.audioCodecs;
 		audio_table.empty();
 		for ( var audio_index in audio_codecs) {
 			var audio_item = audio_codecs[audio_index];
@@ -35,7 +35,7 @@ linphone.ui.codec = {
 		}
 
 		var video_table = base.find('.window .codecs-options .content .video tbody');
-		var video_codecs = core.getVideoCodecs();
+		var video_codecs = core.videoCodecs;
 		video_table.empty();
 		for ( var video_index in video_codecs) {
 			var video_item = video_codecs[video_index];
@@ -50,9 +50,9 @@ linphone.ui.codec = {
 			data.push(jQuery(this).data('data'));
 		});
 		if (table.is('.linphone .window .codecs-options .content .video')) {
-			linphone.ui.getCore(table).setVideoCodecs(data);
+			linphone.ui.getCore(table).videoCodecs = data;
 		} else if (table.is('.linphone .window .codecs-options .content .audio')) {
-			linphone.ui.getCore(table).setAudioCodecs(data);
+			linphone.ui.getCore(table).audioCodecs = data;
 		}
 	}
 };
