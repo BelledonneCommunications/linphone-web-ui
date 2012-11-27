@@ -49,7 +49,7 @@ linphone.ui.media = {
 
 		
 		// Sound
-		var sound_devices = core.getSoundDevices();
+		var sound_devices = core.soundDevices;
 		for ( var sound_index in sound_devices) {
 			var sound_device = sound_devices[sound_index];
 			var sound_option = '<option value="' + sound_device + '">' + sound_device + '</option>';
@@ -76,7 +76,7 @@ linphone.ui.media = {
 		base.find('.window .media-options .capture_device').val(selected_capture_device);
 
 		// Video
-		var video_devices = linphone.ui.media.unique(core.getVideoDevices());
+		var video_devices = linphone.ui.media.unique(core.videoDevices);
 		for ( var video_index in video_devices) {
 			var video_device = video_devices[video_index];
 			var video_option = '<option value="' + video_device + '">' + video_device + '</option>';
