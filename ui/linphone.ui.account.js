@@ -23,7 +23,7 @@ linphone.ui.account = {
 	current_proxy_config : null,
 	updateAccountList : function(target) {
 		var account_table = linphone.ui.getBase(target).find('.window .accounts-options .content tbody');
-		var proxy_list = linphone.ui.getCore(target).getProxyConfigList();
+		var proxy_list = linphone.ui.getCore(target).proxyConfigList;
 		account_table.empty();
 		for ( var index in proxy_list) {
 			var item = proxy_list[index];
