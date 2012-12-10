@@ -20,8 +20,8 @@
 /*globals jQuery,linphone*/
 
 linphone.ui.call = {
-	call_number : 1,
-	findCallTab : function(base, obj) {
+	call_number: 1,
+	findCallTab: function(base, obj) {
 		var ret = null;
 		base.find('.window > .content .tabs .tab').each(function(index) {
 			var element = jQuery(this);
@@ -31,14 +31,14 @@ linphone.ui.call = {
 		});
 		return ret;
 	},
-	call_invite : function(base, dest) {
+	call_invite: function(base, dest) {
 		linphone.ui.getCore(base).invite_async(dest, (function() {
 			return function(plugin, call) {
 				linphone.ui.call.call_invite_callback(base, dest, call);
 			};
 		}()));
 	},
-	create_call_tab : function(base, call, template) {
+	create_call_tab: function(base, call, template) {
 		if (call) {
 			var call_number = linphone.ui.call.call_number;
 			linphone.core.log('Add tab call-' + call_number);
@@ -54,7 +54,7 @@ linphone.ui.call = {
 			linphone.ui.call.call_number++;
 		}
 	},
-	call_invite_callback : function(base, dest, call) {
+	call_invite_callback: function(base, dest, call) {
 		if(call) {
 			linphone.ui.call.create_call_tab(base, call, '.templates .Linphone-Call-OutgoingInit');
 		} else {
