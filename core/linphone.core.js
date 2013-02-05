@@ -31,10 +31,12 @@ linphone.core = {
 		}
 	},
 	data : function() {
-		if (typeof window['localStorage'] !== 'undefined') {
-			return localStorage;
-		} else {
-			return {};
+		try {
+			if (typeof window['localStorage'] !== 'undefined') {
+				return localStorage;
+			}
+		} catch(ex) {
 		}
+		return {};
 	}
 };

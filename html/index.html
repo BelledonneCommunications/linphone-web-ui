@@ -596,14 +596,8 @@ Call end: <b>{{=remoteAddressAsString}}</b>
 		linphone.config.name = 'Linphone Web'
 		linphone.config.version = '1.0.0.0'
 
-		function download_cb(core, downloaded, total, local, remote, error)
-		{
-			linphone.core.log("Ok");
-		}
-
 		function _coreLoad(obj) {
 			linphone.ui.loadHandler(obj);
-			obj.download("http://localhost:8000/ring.wav", download_cb);
 		}
 		function _videoLoad(obj) {
 			linphone.ui.video.loadHandler(obj);
