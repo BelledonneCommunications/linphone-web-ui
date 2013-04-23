@@ -27,7 +27,12 @@
     "grunt-contrib-jshint": "*",
     "grunt-contrib-copy": "*",
     "grunt-contrib-watch": "*",
-    "grunt-contrib-csslint": "*"
+    "grunt-contrib-nodeunit": "*",
+    "grunt-contrib-csslint": "*",
+    "grunt-express-server": "*",
+    "grunt-contrib-livereload": "*",
+    "express": "*",
+    "tiny-lr": "*"
   },
   "keywords": []
 }

@@ -55,6 +55,9 @@ module.exports = function(grunt) {
     qunit: {
       files: ['test/**/*.html']
     },
+    nodeunit: {
+      all: ['test/*.js']
+    },
     concat: {
       options: {
         stripBanners: true,
@@ -124,6 +127,10 @@ module.exports = function(grunt) {
       }
     },
     watch: {
+      server: {
+        files:  'server/**',
+        tasks:  [ 'express-server', 'livereload' ]
+      },
       coreJS: {
         files: coreJSFiles,
         tasks: 'concat:coreJS'
@@ -148,6 +155,9 @@ module.exports = function(grunt) {
           base: 'dist/'
         }
       }
+    },
+    server : {
+      script: 'server/server.js'
     },
     jshint: {
       options: {
@@ -176,13 +186,19 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks( "grunt-contrib-cssmin" );
   grunt.loadNpmTasks( "grunt-contrib-htmlmin" );
   grunt.loadNpmTasks( "grunt-contrib-copy" );
+  grunt.loadNpmTasks( "grunt-contrib-nodeunit" );
   grunt.loadNpmTasks( "grunt-contrib-watch" );
+  grunt.loadNpmTasks( "grunt-express-server" );
+  grunt.loadNpmTasks( "grunt-contrib-livereload");
+  grunt.loadNpmTasks( "tiny-lr" );
 
   // Default task.
   grunt.registerTask('compile', ['concat', 'uglify', 'cssmin', 'copy']);
  
   grunt.registerTask('default', ['concat', 'jshint', 'csslint', 'uglify', 'cssmin', 'copy']);
- 
+  
+  grunt.registerTask('express', ['compile', 'express-server', 'watch' ]);
+  
   // Dev mode
   grunt.registerTask('dev', ['compile', 'connect', 'watch']);
 };

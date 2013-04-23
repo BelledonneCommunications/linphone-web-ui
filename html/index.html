@@ -596,15 +596,18 @@ Call end: <b>{{=remoteAddressAsString}}</b>
 		linphone.config.name = 'Linphone Web'
 		linphone.config.version = '1.0.0.0'
 
-		function download_cb(value, error) {
+		function upload_cb(value, error) {
 			linphone.core.log("Value: " + value);
 			linphone.core.log("Error: " + error);
 		}
 
 		function _coreLoad(obj) {
 			linphone.ui.loadHandler(obj);
-			obj.getFileManager().exists("http://localhost:8888/ring.wav", download_cb);
-			
+			linphone.core.log("Copy");
+			ret = obj.getFileManager().copy("internal:///share/images/nowebcamCIF.jpg", "tmp:///upload", upload_cb);
+			linphone.core.log(ret);
+			ret.start();
+
 		}
 		function _videoLoad(obj) {
 			linphone.ui.video.loadHandler(obj);
