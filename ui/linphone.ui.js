@@ -1,4 +1,4 @@
-/*!
+/*
  Linphone Web - Web plugin of Linphone an audio/video SIP phone
  Copyright (C) 2012  Yann Diorcet <yann.diorcet@linphone.org>
 
@@ -81,15 +81,15 @@ linphone.ui = {
 			linphone.ui.error(base, jQuery.i18n.get('errors.core.' + ret_value));
 		} else {
 			// Init volumes settings
-			var rec_level = (linphone.core.data()['rec_level'] != null) ? linphone.core.data()['rec_level'] : 100;
+			var rec_level = (typeof linphone.core.data().rec_level !== "undefined") ? linphone.core.data().rec_level : 100;
 			base.find('.window .tools .mic-slider').slider('value', rec_level);
 			core.recLevel = rec_level;
 
-			var play_level = (linphone.core.data()['play_level'] != null) ? linphone.core.data()['play_level'] : 100;
+			var play_level = (typeof linphone.core.data().play_level !== "undefined") ? linphone.core.data().play_level : 100;
 			base.find('.window .tools .hp-slider').slider('value', play_level);
 			core.playLevel = play_level;
 
-			var ring_level = (linphone.core.data()['ring_level'] != null) ? linphone.core.data()['ring_level'] : 100;
+			var ring_level = (typeof linphone.core.data().ring_level !== "undefined") ? linphone.core.data().ring_level : 100;
 			base.find('.window .tools .bell-slider').slider('value', ring_level);
 			core.ringLevel = ring_level;
 
@@ -314,7 +314,7 @@ jQuery(function() {
 				linphone.config.description = linphone.config.files[jQuery.client.os][jQuery.client.arch][jQuery.client.browser];
 				linphone.config.description_browser = jQuery.client.browser;
 			} else {
-				linphone.config.description = linphone.config.files[jQuery.client.os][jQuery.client.arch]['DEFAULT'];
+				linphone.config.description = linphone.config.files[jQuery.client.os][jQuery.client.arch].DEFAULT;
 				linphone.config.description_browser = 'DEFAULT';
 			}
 		}

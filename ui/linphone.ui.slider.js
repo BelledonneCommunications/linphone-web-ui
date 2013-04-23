@@ -1,4 +1,4 @@
-/*!
+/*
  Linphone Web - Web plugin of Linphone an audio/video SIP phone
  Copyright (C) 2012  Yann Diorcet <yann.diorcet@linphone.org>
 
@@ -28,7 +28,7 @@ jQuery(function() {
 		orientation : 'vertical',
 		change : function(event, ui) {
 			if (linphone.core.data()) {
-				linphone.core.data()['play_level'] = ui.value;
+				linphone.core.data().play_level = ui.value;
 			}
 			linphone.ui.getCore(jQuery(event.target)).playLevel = ui.value;
 		}
@@ -37,7 +37,7 @@ jQuery(function() {
 		orientation : 'vertical',
 		change : function(event, ui) {
 			if (linphone.core.data()) {
-				linphone.core.data()['rec_level'] = ui.value;
+				linphone.core.data().rec_level = ui.value;
 			}
 			linphone.ui.getCore(jQuery(event.target)).recLevel = ui.value;
 		}
@@ -46,7 +46,7 @@ jQuery(function() {
 		orientation : 'vertical',
 		change : function(event, ui) {
 			if (linphone.core.data()) {
-				linphone.core.data()['ring_level'] = ui.value;
+				linphone.core.data().ring_level = ui.value;
 			}
 			linphone.ui.getCore(jQuery(event.target)).ringLevel = ui.value;
 		}

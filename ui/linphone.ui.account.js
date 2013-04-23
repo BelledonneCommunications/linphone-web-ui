@@ -1,4 +1,4 @@
-/*!
+/*
  Linphone Web - Web plugin of Linphone an audio/video SIP phone
  Copyright (C) 2012  Yann Diorcet <yann.diorcet@linphone.org>
 
@@ -149,16 +149,16 @@ jQuery('html').click(function(event) {
 		var expires = base.find('.window .account-form .content input.expires').val();
 		var register = base.find('.window .account-form .content input.register').is(':checked');
 
-		if (identity_regex.exec(identity) == null) {
+		if (identity_regex.exec(identity) !== null) {
 			errors += '<li class="{translate: \'dialogs.account.errors.identity\'}"></li>';
 		}
-		if (proxy_regex.exec(proxy) == null) {
+		if (proxy_regex.exec(proxy) !== null) {
 			errors += '<li class="{translate: \'dialogs.account.errors.proxy\'}"></li>';
 		}
-		if (route_regex.exec(route) == null) {
+		if (route_regex.exec(route) !== null) {
 			errors += '<li class="{translate: \'dialogs.account.errors.route\'}"></li>';
 		}
-		if (expires_regex.exec(expires) == null) {
+		if (expires_regex.exec(expires) !== null) {
 			errors += '<li class="{translate: \'dialogs.account.errors.duration\'}"></li>';
 		}
 		if (errors.length > 0) {
@@ -178,7 +178,7 @@ jQuery('html').click(function(event) {
 
 		} else {
 			var proxyConfig = null;
-			if (linphone.ui.account.current_proxy_config == null) {
+			if (linphone.ui.account.current_proxy_config === null) {
 				proxyConfig = linphone.ui.getCore(target).newProxyConfig();
 			} else {
 				proxyConfig = linphone.ui.account.current_proxy_config;
@@ -192,7 +192,7 @@ jQuery('html').click(function(event) {
 			proxyConfig.expires = expires;
 			proxyConfig.registerEnabled = register;
 
-			if (linphone.ui.account.current_proxy_config == null) {
+			if (linphone.ui.account.current_proxy_config === null) {
 				linphone.ui.getCore(target).addProxyConfig(proxyConfig);
 			} else {
 				linphone.ui.account.current_proxy_config.done();

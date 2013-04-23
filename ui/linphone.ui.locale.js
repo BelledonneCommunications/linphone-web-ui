@@ -1,4 +1,4 @@
-/*!
+/*
  Linphone Web - Web plugin of Linphone an audio/video SIP phone
  Copyright (C) 2012  Yann Diorcet <yann.diorcet@linphone.org>
 
@@ -25,8 +25,8 @@ linphone.ui.locale = {
 		var locale = (navigator.language) ? navigator.language : navigator.userLanguage;
 		locale = locale.replace('-', '_');
 		linphone.core.log('Browser language: ' + locale);
-		if (linphone.core.data()['locale'] != null) {
-			jQuery.i18n.change(linphone.core.data()['locale']);
+		if (typeof linphone.core.data().locale !== "undefined") {
+			jQuery.i18n.change(linphone.core.data().locale);
 		} else {
 			// Excat Match
 			for (var a in linphone.ui.locales) {
@@ -78,6 +78,6 @@ jQuery('html').click(function(event) {
 		base.find('.window .tools .locales-menu').fadeOut('fast');
 		base.find('.window .tools .settings-menu').fadeOut('fast');
 		jQuery.i18n.change(target.data('data').locale);
-		linphone.core.data()['locale'] = target.data('data').locale;
+		linphone.core.data().locale = target.data('data').locale;
 	}
 });

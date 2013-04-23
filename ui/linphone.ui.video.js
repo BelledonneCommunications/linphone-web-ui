@@ -1,4 +1,4 @@
-/*!
+/*
  Linphone Web - Web plugin of Linphone an audio/video SIP phone
  Copyright (C) 2012  Yann Diorcet <yann.diorcet@linphone.org>
 
@@ -25,14 +25,14 @@ linphone.ui.video = {
 	self_view : null,
 	video_view : null,
 	updateVideoView : function(target) {
-		if (linphone.core.data()['enable_video'] === '1') {
+		if (linphone.core.data().enable_video === '1') {
 			linphone.ui.video.video_view = linphone.ui.video.createVideoView(target, 'window.video.title', function(object) {
 				linphone.core.log('Load VideoView ' + object.magic);
 				object.setBackgroundColor(0, 0, 0);
 				linphone.ui.getCore(target).nativeVideoWindowId = object.window;
 				linphone.ui.getCore(target).videoEnabled = true;
 			}, function(object) {
-				linphone.core.data()['enable_video'] = '0';
+				linphone.core.data().enable_video = '0';
 				linphone.ui.video.updateSelfView(target);
 			});
 		} else {
@@ -45,20 +45,20 @@ linphone.ui.video = {
 		}
 	},
 	updateSelfView : function(target) {
-		if (linphone.core.data()['enable_video'] === '1' && linphone.core.data()['enable_video_self'] === '1') {
+		if (linphone.core.data().enable_video === '1' && linphone.core.data().enable_video_self === '1') {
 			linphone.ui.video.self_view = linphone.ui.video.createVideoView(target, 'window.self.title', function(object) {
 				linphone.core.log('Load VideoView ' + object.magic);
 				object.setBackgroundColor(0, 0, 0);
 				linphone.ui.getCore(target).nativePreviewWindowId = object.window;
 				linphone.ui.getCore(target).videoPreviewEnabled = true;
 			}, function(object) {
-				linphone.core.data()['enable_video_self'] = '0';
+				linphone.core.data().enable_video_self = '0';
 				linphone.ui.video.updateSelfView();
 			});
 		} else {
 			linphone.ui.getCore(target).videoPreviewEnabled = false;
 			linphone.ui.getCore(target).nativePreviewWindowId = 0;
-			if (linphone.ui.video.self_view != null) {
+			if (linphone.ui.video.self_view !== null) {
 				linphone.ui.video.destroyVideoView(linphone.ui.video.self_view);
 				linphone.ui.video.self_view = null;
 			}
@@ -109,14 +109,14 @@ jQuery('html').click(function(event) {
 
 	// Click on video item
 	if (target.is('.linphone .window .tools .video > a')) {
-		if (linphone.core.data()['enable_video'] === '1') {
+		if (linphone.core.data().enable_video === '1') {
 			base.find('.window .tools .video-menu .enable a').addClass('ui-state-selected');
 			base.find('.window .tools .video-menu .self a').removeClass('ui-state-disabled');
 		} else {
 			base.find('.window .tools .video-menu .enable a').removeClass('ui-state-selected');
 			base.find('.window .tools .video-menu .self a').addClass('ui-state-disabled');
 		}
-		if (linphone.core.data()['enable_video_self'] === '1') {
+		if (linphone.core.data().enable_video_self === '1') {
 			base.find('.window .tools .video-menu .self a').addClass('ui-state-selected');
 		} else {
 			base.find('.window .tools .video-menu .self a').removeClass('ui-state-selected');
@@ -131,9 +131,9 @@ jQuery('html').click(function(event) {
 	// Click on enable video item
 	if (target.is('.linphone .window .tools .video-menu .enable > a')) {
 		if (target.hasClass('ui-state-selected')) {
-			linphone.core.data()['enable_video'] = '0';
+			linphone.core.data().enable_video = '0';
 		} else {
-			linphone.core.data()['enable_video'] = '1';
+			linphone.core.data().enable_video = '1';
 		}
 		linphone.ui.video.updateVideoView(target);
 		linphone.ui.video.updateSelfView(target);
@@ -144,9 +144,9 @@ jQuery('html').click(function(event) {
 	// Click on self view video item
 	if (target.is('.linphone .window .tools .video-menu .self > a')) {
 		if (target.hasClass('ui-state-selected')) {
-			linphone.core.data()['enable_video_self'] = '0';
+			linphone.core.data().enable_video_self = '0';
 		} else {
-			linphone.core.data()['enable_video_self'] = '1';
+			linphone.core.data().enable_video_self = '1';
 		}
 		linphone.ui.video.updateSelfView(target);
 		base.find('.window .tools .video-menu').fadeOut('fast');

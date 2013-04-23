@@ -1,4 +1,4 @@
-/*!
+/*
  Linphone Web - Web plugin of Linphone an audio/video SIP phone
  Copyright (C) 2012  Yann Diorcet <yann.diorcet@linphone.org>
 
@@ -26,13 +26,13 @@ linphone.config = {
 };
 linphone.core = {
 	log : function(message) {
-		if (typeof window['console'] !== 'undefined') {
+		if (typeof window.console !== 'undefined') {
 			console.log(message);
 		}
 	},
 	data : function() {
 		try {
-			if (typeof window['localStorage'] !== 'undefined') {
+			if (typeof window.localStorage !== 'undefined') {
 				return localStorage;
 			}
 		} catch(ex) {

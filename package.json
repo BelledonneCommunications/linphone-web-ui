@@ -2,7 +2,7 @@
   "name": "linphone-web",
   "title": "Linphone Web",
   "description": "",
-  "version": "0.0.1e",
+  "version": "0.0.1f",
   "homepage": "",
   "author": {
     "name": "AUTHORS.txt"
@@ -17,11 +17,17 @@
       "url": "http://www.opensource.org/licenses/GPL-2.0"
     }
   ],
-  "dependencies": {},
-  "devDependencies": {
-    "grunt": "0.3.9",
-    "grunt-css": "0.1.1",
-    "grunt-html": "0.1.1"
+  "dependencies": {
+    "grunt": "*",
+    "grunt-contrib-cssmin": "*",
+    "grunt-contrib-htmlmin": "*",
+    "grunt-contrib-concat": "*",
+    "grunt-contrib-uglify": "*",
+    "grunt-contrib-connect": "*",
+    "grunt-contrib-jshint": "*",
+    "grunt-contrib-copy": "*",
+    "grunt-contrib-watch": "*",
+    "grunt-contrib-csslint": "*"
   },
   "keywords": []
 }
