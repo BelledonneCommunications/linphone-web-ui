@@ -17,6 +17,10 @@ module.exports = function(grunt) {
     'linphone.ui.video',
     'linphone.ui.i18n'
   ],
+  testModules = [
+    'linphone.tests',
+    'linphone.tests.files'
+  ]
 
   coreJSFiles = coreModules.map(function( module ) {
         return 'core/' + module + '.js';
@@ -24,6 +28,10 @@ module.exports = function(grunt) {
 
   uiJSFiles = uiModules.map(function( module ) {
 	return 'ui/' + module + '.js';
+  }),
+  
+  testsJSFiles = testModules.map(function( module ) {
+	return 'tests/' + module + '.js';
   }),
 
   uiCSSFiles = uiModules.map(function( module ) {
@@ -44,7 +52,8 @@ module.exports = function(grunt) {
     },
     jshint: {
       core: coreJSFiles,
-      ui: uiJSFiles
+      ui: uiJSFiles,
+      tests: testsJSFiles,
     },
     csslint: {
       files: [] + uiCSSFiles
@@ -54,9 +63,6 @@ module.exports = function(grunt) {
     },
     qunit: {
       files: ['test/**/*.html']
-    },
-    nodeunit: {
-      all: ['test/*.js']
     },
     concat: {
       options: {
@@ -70,6 +76,10 @@ module.exports = function(grunt) {
       uiJS: {
         dest: 'dist/js/linphone-ui.js',
         src: [uiJSFiles]
+      },
+      testsJS: {
+        dest: 'dist/js/linphone-tests.js',
+        src: [testsJSFiles]
       },
       uiCSS: {
         dest: 'dist/style/linphone-ui.css',
@@ -138,6 +148,10 @@ module.exports = function(grunt) {
       uiJS: {
         files: uiJSFiles,
         tasks: 'concat:uiJS'
+      },
+      testsJS: {
+        files: testsJSFiles,
+        tasks: 'concat:testsJS'
       },
       uiCSS: {
         files: uiCSSFiles,

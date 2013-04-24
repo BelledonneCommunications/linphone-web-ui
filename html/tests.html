@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<!-- saved from url=(0013)about:internet -->
+<!-- The above comment makes IE treat this as a web page -->
+<html>
+<head>
+    <title>Linphone Web - Test</title>
+    <script type="text/javascript" src="js/linphone-tests.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+	function _coreLoad(obj) {
+		console.log("Core loaded");
+		tests_run(obj);
+	}
+</script>
+<object class="core" type="application/x-linphone-web" width="0" height="0">
+        <param name="onload" value="_coreLoad" />
+        <param name="magic" value="666" />
+        Linphone Core
+</object>
+</body>
+</html>
