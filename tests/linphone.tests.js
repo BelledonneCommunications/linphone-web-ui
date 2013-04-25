@@ -34,7 +34,7 @@ function tests_log(context, msg) {
 	if(context.log != null) {
 		context.log(msg);
 	}
-	if(typeof console.log !== 'undefined') {
+	if(typeof window.console !== 'undefined') {
 		console.log(msg);
 	}
 }
