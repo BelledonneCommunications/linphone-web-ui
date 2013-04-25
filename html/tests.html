@@ -8,9 +8,21 @@
 </head>
 <body>
 <script type="text/javascript">
+	var core = null;
+	function mylog(message) {
+		elem = document.getElementById('logs');
+		elem.innerHTML = elem.innerHTML + message + "\n";		
+	}
+	
+	function start() {
+		elem = document.getElementById('logs');
+		elem.innerHTML = "";
+		tests_run(window.core, mylog);
+	}
+
 	function _coreLoad(obj) {
+		window.core = obj;
 		console.log("Core loaded");
-		tests_run(obj);
 	}
 </script>
 <object class="core" type="application/x-linphone-web" width="0" height="0">
@@ -18,5 +30,7 @@
         <param name="magic" value="666" />
         Linphone Core
 </object>
+<button onclick="start()">Run</button>
+<pre id="logs"></pre>
 </body>
 </html>

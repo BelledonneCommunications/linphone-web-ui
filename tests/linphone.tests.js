@@ -30,13 +30,18 @@ function tests_assert(context, value, description) {
 
 var tests = [];	
 
-function tests_log(msg) {
-	console.log(msg);
+function tests_log(context, msg) {
+	if(context.log != null) {
+		context.log(msg);
+	}
+	if(typeof console.log !== 'undefined') {
+		console.log(msg);
+	}
 }
 
 function tests_success(context) {
 	test = context.tests[context.current];
-	tests_log("Test " +  test.name + " (" + (context.current + 1 ) + "/" + context.tests.length + "): Success");
+	tests_log(context, "Test " +  test.name + " (" + (context.current + 1 ) + "/" + context.tests.length + "): Success");
 	context.current = context.current + 1;
 	setTimeout(function(){tests_run_next(context)}, 1);
 }
@@ -44,7 +49,7 @@ function tests_success(context) {
 function tests_error(context, msg) {
 	test = context.tests[context.current];
 	test.result = msg;
-	tests_log("Test " +  test.name + " (" + (context.current + 1 ) + "/" + context.tests.length + "): Failure->" + msg);
+	tests_log(context, "Test " +  test.name + " (" + (context.current + 1 ) + "/" + context.tests.length + "): Failure->" + msg);
 	context.current = context.current + 1;
 	setTimeout(function(){tests_run_next(context)}, 1);
 }
@@ -57,7 +62,9 @@ function tests_end(context) {
 			pass = pass + 1;
 		}
 	}
-	tests_log("Tests " + pass + "/" + context.tests.length + " passed");
+	tests_log(context, "------------------------------------------------------");
+	tests_log(context, "Tests " + pass + "/" + context.tests.length + " passed");
+	tests_log(context, "------------------------------------------------------");
 }	
 
 function tests_run_next(context) {
@@ -67,7 +74,7 @@ function tests_run_next(context) {
 	}
 	test = context.tests[context.current];
 	
-	tests_log("Test " + test.name + " (" + (context.current + 1 ) + "/" + context.tests.length + "): Run");
+	tests_log(context, "Test " + test.name + " (" + (context.current + 1 ) + "/" + context.tests.length + "): Run");
 	try {
 		test.fct(context);
 	} catch(err) {
@@ -91,10 +98,11 @@ function tests_serialize(serialized_tests, obj, prefix) {
 	}
 }
 
-function tests_run(core) {
+function tests_run(core, log) {
 	serialized_tests = [];
 	tests_serialize(serialized_tests, tests, "");		
 	var context = {
+		log: log,
 		core: core,
 		tests: serialized_tests,
 		current: 0
