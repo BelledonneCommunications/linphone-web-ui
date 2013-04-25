@@ -80,6 +80,12 @@ linphone.ui = {
 		if (ret_value !== 0) {
 			linphone.ui.error(base, jQuery.i18n.get('errors.core.' + ret_value));
 		} else {
+			// Init medias
+			core.staticPicture = "internal:///share/images/nowebcamCIF.jpg";
+			core.ring = "internal:///share/sounds/linphone/rings/oldphone.wav";
+			core.ringback = "internal:///share/sounds/linphone/ringback.wav";
+			core.playFile = "internal:///share/sounds/linphone/rings/toy-mono.wav";
+				
 			// Init volumes settings
 			var rec_level = (typeof linphone.core.data().rec_level !== "undefined") ? linphone.core.data().rec_level : 100;
 			base.find('.window .tools .mic-slider').slider('value', rec_level);
