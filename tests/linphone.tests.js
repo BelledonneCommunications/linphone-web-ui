@@ -28,7 +28,7 @@ function tests_assert(context, value, description) {
 	}
 }
 
-var tests = [];	
+var tests = new Array();	
 
 function tests_log(context, msg) {
 	if(context.log != null) {
