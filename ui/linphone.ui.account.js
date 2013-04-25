@@ -148,17 +148,17 @@ jQuery('html').click(function(event) {
 		var expires_regex = new RegExp('\\d+');
 		var expires = base.find('.window .account-form .content input.expires').val();
 		var register = base.find('.window .account-form .content input.register').is(':checked');
-
-		if (identity_regex.exec(identity) !== null) {
+		console.log(identity_regex.exec(identity));
+		if (identity_regex.exec(identity) === null) {
 			errors += '<li class="{translate: \'dialogs.account.errors.identity\'}"></li>';
 		}
-		if (proxy_regex.exec(proxy) !== null) {
+		if (proxy_regex.exec(proxy) === null) {
 			errors += '<li class="{translate: \'dialogs.account.errors.proxy\'}"></li>';
 		}
-		if (route_regex.exec(route) !== null) {
+		if (route_regex.exec(route) === null) {
 			errors += '<li class="{translate: \'dialogs.account.errors.route\'}"></li>';
 		}
-		if (expires_regex.exec(expires) !== null) {
+		if (expires_regex.exec(expires) === null) {
 			errors += '<li class="{translate: \'dialogs.account.errors.duration\'}"></li>';
 		}
 		if (errors.length > 0) {
