@@ -76,7 +76,7 @@ linphone.ui = {
 		linphone.ui.addEvent(core, 'displayMessage', linphone.ui.displayMessage);
 		linphone.ui.addEvent(core, 'displayWarning', linphone.ui.displayWarning);
 		linphone.ui.addEvent(core, 'displayUrl', linphone.ui.displayUrl);
-		var ret_value = core.init();
+		var ret_value = core.init("local:///.linphonerc");
 		if (ret_value !== 0) {
 			linphone.ui.error(base, jQuery.i18n.get('errors.core.' + ret_value));
 		} else {
