@@ -150,6 +150,7 @@ body {
 						<div class="ui-icon settings-icon">
 							<ul class="settings-menu">
 								<li class="accounts"><a class="ui-icon {translate: 'menu.settings.accounts'}"></a></li>
+								<li class="network"><a class="ui-icon {translate: 'menu.settings.network'}"></a></li>
 								<li class="media"><a class="ui-icon {translate: 'menu.settings.media'}"></a></li>
 								<li class="video"><a class="ui-icon {translate: 'menu.settings.video'}"></a>
 									<ul class="video-menu">
@@ -232,7 +233,7 @@ body {
 						<div class="field">
 							<div class="fixedlabel {translate: 'options.media.ring_device'}"></div>
 							<div class="input">
-								<select class="ring_device ui-widget-content ui-corner-all" title="Playback device">
+								<select class="ring_device ui-widget-content ui-corner-all" title="Ring device">
 									<option />
 								</select>
 							</div>
@@ -279,6 +280,33 @@ body {
 						</div>
 						<br />
 						<div class="copyright">Copyright Belledonne Communications 2012</div>
+					</div>
+				</div>
+				
+				<div class="network-options options ui-dialog ui-widget ui-widget-content ui-corner-all">
+					<div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"
+						style="-webkit-user-select: none;">
+						<span class="ui-dialog-icon ui-icon"></span> <span class="ui-dialog-title {translate: 'options.network.title'}"
+							style="-webkit-user-select: none;"></span> <a href="#" class="ui-dialog-titlebar-close ui-corner-all"
+							style="-webkit-user-select: none;"> <span class="ui-icon ui-icon-closethick"
+							style="-webkit-user-select: none;">close</span>
+						</a>
+					</div>
+					<div class="content ui-corner-bottom">
+						<div class="field">
+							<div class="label {translate: 'options.network.transport'}"></div>
+							<div class="input">
+								<select class="transports ui-widget-content ui-corner-all" title="transports">
+									<option />
+								</select>
+							</div>
+						</div>
+						<div class="field">
+							<div class="label {translate: 'options.network.port'}"></div>
+							<div class="input">
+								<input class="port ui-widget-content ui-corner-all" title="port"></input>
+							</div>
+						</div>
 					</div>
 				</div>
 

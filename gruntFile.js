@@ -13,6 +13,7 @@ module.exports = function(grunt) {
     'linphone.ui.locale', 
     'linphone.ui.media',
     'linphone.ui.menu',
+    'linphone.ui.network',
     'linphone.ui.slider',
     'linphone.ui.video',
     'linphone.ui.i18n'

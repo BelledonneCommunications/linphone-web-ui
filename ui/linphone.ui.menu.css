@@ -96,6 +96,10 @@
 	background-image: url('images/account.png');
 }
 
+.linphone .window .tools .settings-menu .network .ui-icon {
+	background-image: url('images/network.png');
+}
+
 .linphone .window .tools .settings-menu .locales {
 	position: relative;
 }

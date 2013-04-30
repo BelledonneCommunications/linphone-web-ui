@@ -76,10 +76,17 @@ linphone.ui = {
 		linphone.ui.addEvent(core, 'displayMessage', linphone.ui.displayMessage);
 		linphone.ui.addEvent(core, 'displayWarning', linphone.ui.displayWarning);
 		linphone.ui.addEvent(core, 'displayUrl', linphone.ui.displayUrl);
+		var init_count = (typeof linphone.core.data().init_count !== "undefined") ? linphone.core.data().init_count : 0;
 		var ret_value = core.init("local:///.linphonerc");
 		if (ret_value !== 0) {
 			linphone.ui.error(base, jQuery.i18n.get('errors.core.' + ret_value));
 		} else {
+			// Random port at first init
+			if(init_count == 0) {
+				core.sipPort = Math.floor((Math.random()*(65535 - 1024)) + 1024);
+			}
+			linphone.core.log('Sip port: ' + core.sipPort);
+			
 			// Init medias
 			core.staticPicture = "internal:///share/images/nowebcamCIF.jpg";
 			core.ring = "internal:///share/sounds/linphone/rings/oldphone.wav";
@@ -99,12 +106,12 @@ linphone.ui = {
 			base.find('.window .tools .bell-slider').slider('value', ring_level);
 			core.ringLevel = ring_level;
 
-			linphone.core.log('Sip port: ' + core.sipPort);
 			base.find('.window .load').hide();
 
 			core.usePreviewWindow = true;
 			linphone.ui.video.updateSelfView(base);
 			linphone.ui.video.updateVideoView(base);
+			linphone.core.data().init_count = init_count + 1;
 		}
 	},
 	globalStateChanged : function(core, state, message) {

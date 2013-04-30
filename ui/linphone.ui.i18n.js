@@ -116,6 +116,10 @@ linphone.ui.i18n = {
 					en_US : 'Self-view',
 					fr_FR : 'Se voir'
 				}
+			},
+			network : {
+				en_US : 'Network',
+				fr_FR : 'Réseau'
 			}
 		}
 	},
@@ -262,6 +266,20 @@ linphone.ui.i18n = {
 			title : {
 				en_US : 'About',
 				fr_FR : 'À Propos'
+			}
+		},
+		network : {
+			title : {
+				en_US : 'Network',
+				fr_FR : 'Réseau'
+			},
+			transport : {
+				en_US : 'Transport',
+				fr_FR : 'Transport'
+			},
+			port : {
+				en_US : 'Port',
+				fr_FR : 'Port'
 			}
 		}
 	},
