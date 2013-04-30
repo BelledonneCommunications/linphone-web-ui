@@ -24,6 +24,9 @@ linphone.ui.account = {
 	updateAccountList : function(target) {
 		var account_table = linphone.ui.getBase(target).find('.window .accounts-options .content tbody');
 		var proxy_list = linphone.ui.getCore(target).proxyConfigList;
+		if(account_table.length === 0) {
+			account_table = linphone.ui.getBase(target).find('.window .accounts-options .content').append('<tbody/>');
+		}
 		account_table.empty();
 		for ( var index in proxy_list) {
 			var item = proxy_list[index];
