@@ -29,9 +29,9 @@
     "grunt-contrib-watch": "*",
     "grunt-contrib-nodeunit": "*",
     "grunt-contrib-csslint": "*",
-    "grunt-express-server": "*",
     "grunt-contrib-livereload": "*",
-    "express": "*"
+    "express": "*",
+	"commander": "*"
   },
   "keywords": []
 }

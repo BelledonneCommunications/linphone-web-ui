@@ -1,20 +1,29 @@
 var express = require('express');
+var commander = require('commander');
 var https = require('https');
 var http = require('http');
 var fs = require('fs');
 var crypto = require('crypto');
 var app = express();
 
-app.set('port', process.env.PORT || 8888);
+commander
+  .version('0.0.1')
+  .option('-d, --debug', 'Debug mode')
+  .option('-p, --port <n>', 'HTTP port', parseInt)
+  .parse(process.argv);
+
+app.set('port', commander.port? commander.port: 8888);
+app.set('mode', commander.debug? 'debug': 'release');
 app.set('tmp', __dirname + '/tmp/');
 app.set('public', __dirname + '/../dist/')
 app.set('tmp', app.get('public') + '/tmp/');
+app.set('expires', (app.get('mode') === 'debug')? 0 : 60*60*24);
 
 
 app.configure(function(){
   app.use(express.compress());
   app.use(express.bodyParser());
-  app.use(express.static(app.get('public')));
+  app.use(express.static(app.get('public'), { maxAge: app.get('expires') }));
 });
 
 fs.mkdir(app.get('tmp'), 0777, function (err) {

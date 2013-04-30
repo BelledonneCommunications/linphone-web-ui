@@ -201,16 +201,8 @@ module.exports = function(grunt) {
 				tasks: ['concat:html', 'htmlmin:html']
 			},
 		},
-		connect: {
-			server: {
-				options: {
-					port: 8888,
-					base: 'dist/'
-				}
-			}
-		},
 		server : {
-			script: 'server/server.js'
+			script: ['server/server.js']
 		},
 		jshint: {
 			options: {
@@ -241,12 +233,58 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks( "grunt-contrib-copy" );
 	grunt.loadNpmTasks( "grunt-contrib-nodeunit" );
 	grunt.loadNpmTasks( "grunt-contrib-watch" );
-	grunt.loadNpmTasks( "grunt-express-server" );
 	grunt.loadNpmTasks( "grunt-contrib-livereload");
+	
+	// Express server
+	var server;
+	grunt.registerTask('express-server', 'Start an express web server', function() {
+		var done = this.async();
+		if (server) {
+			console.log("Killing existing Express server");
 
+			server.kill('SIGTERM');
+			server = null;
+		}
+
+		server = grunt.util.spawn({
+			cmd:      process.argv[0],
+			args:     grunt.config.get('server.script'),
+			fallback: function() {
+				// Prevent EADDRINUSE from breaking Grunt
+			}
+		}, function(err, result, code) {
+			// Nothing to do, but callback has to exist
+		});
+
+		server.stdout.on('data', function() {
+			if (done) {
+				done();
+			}
+
+			done = null;
+		});
+
+		server.stdout.pipe(process.stdout);
+		server.stderr.pipe(process.stdout);
+	});
+	
 	// Modes
-	grunt.registerTask('debug-mode', function () {grunt.config.set('mode', 'debug');});
-	grunt.registerTask('release-mode', function () {grunt.config.set('mode', 'release');});
+	grunt.registerTask('debug-mode', 
+		function () {
+			grunt.config.set('mode', 'debug'); 
+			
+			// Append debug mode
+			grunt.config.set('server.script', grunt.config.get('server.script').concat([ '-p', '8888', '-d']));
+		}
+	);
+	grunt.registerTask('release-mode', 
+		function () {
+			grunt.config.set('mode', 'release');
+			
+			// Append release mode
+			grunt.config.set('server.script', grunt.config.get('server.script').concat([ '-p', '8888']));
+		}
+	);
 	
 	// Compile task
 	grunt.registerTask('compile', ['concat', 'uglify', 'cssmin', 'htmlmin', 'copy']);
