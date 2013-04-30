@@ -31,8 +31,7 @@
     "grunt-contrib-csslint": "*",
     "grunt-express-server": "*",
     "grunt-contrib-livereload": "*",
-    "express": "*",
-    "tiny-lr": "*"
+    "express": "*"
   },
   "keywords": []
 }

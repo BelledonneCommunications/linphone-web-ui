@@ -23,14 +23,14 @@ function test_files_clean(context) {
 			function (done, error) {
 				if(done) {
 					core.getFileManager().remove(file, function (done, error) {
-					callback();
-					})	
+						callback();
+					});	
 				} else {
 					callback();
 				}
 			}
 		);
-	}
+	};
 	try_remove("tmp:///image1.jpg", function () {
 		try_remove("local:///image1.jpg", function () {
 			try_remove("local:///image2.jpg", function () {

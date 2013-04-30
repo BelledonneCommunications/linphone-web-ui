@@ -1,0 +1,59 @@
+	<script type="text/javascript">
+		(function(w, d, s) {
+			var scripts = [
+				{url: "js/jquery-1.7.1.min.js"},
+				{url: "js/jquery-ui-1.8.17.custom.min.js"},
+				{url: "js/jquery.ui.selectmenu.js"},
+				{url: "js/jquery.scrollabletab.js"},
+				{url: "js/jquery.metadata.js"},
+				{url: "js/jquery.client.js"},
+				{url: "js/jsrender.js"},
+				{url: "js/i18n.js"},
+				{url: "js/linphone-core.js"},
+				{url: "js/linphone-ui.js"},
+			]
+			function go(){
+				function getScript(url,success){
+					var script=document.createElement('script');
+					script.src=url;
+					script.type="text/javascript";
+					var head=document.getElementsByTagName('head')[0];
+					var done=false;
+					script.onload=script.onreadystatechange = function(){
+						if ( !done && (!this.readyState || this.readyState == 'loaded' || this.readyState == 'complete') ) {
+							done=true;
+							success();
+							script.onload = script.onreadystatechange = null;
+							head.removeChild(script);
+						}
+					};
+					head.appendChild(script);
+				}
+				function run(success) {
+					if(scripts.length > 0) {
+						var script = scripts[0];
+						scripts.shift();
+						getScript(script.url, 
+							function() {
+								run(success);
+							}
+						);
+					} else {
+						success();
+					}
+				}
+				run(function () {
+					jQuery(function() {
+						_init();
+					})
+				});
+			}
+			if (w.addEventListener) { 
+				w.addEventListener("load", go, false); 
+			} else if (w.attachEvent) { 
+				w.attachEvent("onload",go); 
+			}
+		}(window, document, 'script'));
+	</script>
+</body>
+</html>

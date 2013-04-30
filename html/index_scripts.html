@@ -1,0 +1,99 @@
+	<script type="text/javascript">
+		function _init() {
+			linphone.config.files = {
+				'Windows' : {
+					'x86' : {
+						'Explorer': {
+							file: 'linphone-web-0.0.1.0-Win32.cab',
+							version: '0,0,1,0'
+						},
+						'Firefox' : {
+							file: 'linphone-web-0.0.1.0-Win32.xpi',
+							icon: 'style/images/linphone.png'
+						},
+						'Chrome' : {
+							file: 'linphone-web-0.0.1.0-Win32.crx'
+						},
+						'DEFAULT' : 'linphone-web-0.0.1.0-Win32.msi'
+					},
+					'x86_64' : {
+						'Explorer': {
+							file: 'linphone-web-0.0.1.0-Win64.cab',
+							version: '0,0,1,0'
+						},
+						'Firefox' : {
+							file: 'linphone-web-0.0.1.0-Win64.xpi',
+							icon: 'style/images/linphone.png'
+						},
+						'Chrome' : {
+							file: 'linphone-web-0.0.1.0-Win64.crx'
+						},
+						'DEFAULT' : 'linphone-web-0.0.1.0-Win64.msi'
+					},
+				},
+				'Linux' : {
+					'x86' : {
+						'Firefox' : {
+							file: 'linphone-web-0.0.1.0-Linux-x86.xpi',
+							icon: 'style/images/linphone.png'
+						},
+						'Chrome' : {
+							file: 'linphone-web-0.0.1.0-Linux-x86.crx'
+						},
+						'DEFAULT' : 'linphone-web-0.0.1.0-Linux-x86.tar.gz'
+					}, 
+					'x86_64' : {
+						'Firefox' : {
+							file: 'linphone-web-0.0.1.0-Linux-x86_64.xpi',
+							icon: 'style/images/linphone.png'
+						},
+						'Chrome' : {
+							file: 'linphone-web-0.0.1.0-Linux-x86_64.crx'
+						},
+						'DEFAULT' : 'linphone-web-0.0.1.0-Linux-x86_64.tar.gz'
+					}
+				},
+				'Mac' : {
+					'x86' : {
+						'Firefox' : {
+							file: 'linphone-web-0.0.1.0-Mac-x86_64.xpi',
+							icon: 'style/images/linphone.png'
+						},
+						'Chrome' : {
+							file: 'linphone-web-0.0.1.0-Mac-x86.crx'
+						},
+						'DEFAULT' : 'linphone-web-0.0.1.0-Mac-x86_64.pkg'
+					}, 
+					'x86_64' : {
+						'Firefox' : {
+							file: 'linphone-web-0.0.1.0-Mac-x86_64.xpi',
+							icon: 'style/images/linphone.png'
+						},
+						'Chrome' : {
+							file: 'linphone-web-0.0.1.0-Mac-x86.crx'
+						},
+						'DEFAULT' : 'linphone-web-0.0.1.0-Mac-x86_64.pkg'
+					}
+				}
+			}
+			linphone.config.name = 'Linphone Web';
+			linphone.config.version = '0.0.1.0';
+			
+			linphone.ui.initPlugin();
+			linphone.ui.init();
+			linphone.ui.load(jQuery('.linphone'));
+		}
+
+		function _coreLoad(obj) {
+			linphone.ui.loadHandler(obj);
+		}
+		function _videoLoad(obj) {
+			linphone.ui.video.loadHandler(obj);
+		}
+		function _reload(event) {
+			var target = jQuery(event.target);
+			var base = linphone.ui.getBase(target);
+			linphone.ui.unload(base);
+			linphone.ui.load(base);
+		}
+	</script>

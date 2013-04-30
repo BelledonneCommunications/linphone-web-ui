@@ -12,6 +12,7 @@ app.set('tmp', app.get('public') + '/tmp/');
 
 
 app.configure(function(){
+  app.use(express.compress());
   app.use(express.bodyParser());
   app.use(express.static(app.get('public')));
 });

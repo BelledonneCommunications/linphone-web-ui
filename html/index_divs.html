@@ -1,0 +1,471 @@
+<div>
+	<div class="linphone ui-widget">
+		<div class="window ui-corner-all">
+			<div class="error overall ui-corner-all">
+				<div class="text {translate: 'base.error.text'}"></div>
+				<button type="button" onclick="_reload(event)" class="reload {translate: 'base.error.reload'}"></button>
+			</div>
+			<div class="install overall ui-corner-all">
+				<div class="text"></div>
+				<div class="unavailable {translate: 'base.install.unavailable'}"></div>
+				<div class="buttons"></div>
+				<br /> <br />
+				<button type="button" onclick="_reload(event)" class="reload {translate: 'base.install.reload'}"></button>
+			</div>
+			<div class="load overall ui-corner-all">
+				<img src="style/images/loading.gif" alt="..." width="50px" height="50px"
+					style="width: 50px; height: 50px; position: absolute; top: 50%; left: 50%; margin-left: -25px; margin-top: -25px;"></img>
+			</div>
+			<noscript>
+				<div class="javascript overall ui-corner-all">
+					<div class="text">
+						Vous devez activer le Javascript pour utiliser le plugin<br />You have to enable Javascript in order to use the
+						plugin
+					</div>
+				</div>
+			</noscript>
+			<div class="header ui-corner-top">
+				<div class="text">Linphone Web</div>
+			</div>
+			<div class="composer">
+				<input type="text" class="destination ui-widget-content ui-corner-all" title="destination" />
+				<div class="ui-icon dial-button"></div>
+			</div>
+			<div class="content">
+				<div class="tabs">
+					<ul>
+						<li><a href="#tabs-1" class="{translate: 'welcome.title'}"></a></li>
+					</ul>
+					<div id="tabs-1" class="tab {translate: 'welcome.content'}"></div>
+				</div>
+				<div class="pad">
+					<div class="line">
+						<button type="button">1</button>
+						<button type="button">2</button>
+						<button type="button">3</button>
+					</div>
+					<div class="line">
+						<button type="button">4</button>
+						<button type="button">5</button>
+						<button type="button">6</button>
+					</div>
+					<div class="line">
+						<button type="button">7</button>
+						<button type="button">8</button>
+						<button type="button">9</button>
+					</div>
+					<div class="line">
+						<button type="button">*</button>
+						<button type="button">0</button>
+						<button type="button">#</button>
+					</div>
+				</div>
+			</div>
+			<div class="footer ui-corner-bottom">
+				<div class="status"></div>
+				<div class="tools">
+					<div class="ui-icon pad-button"></div>
+					<div class="ui-icon bell-icon">
+						<div class="bell-slider"></div>
+					</div>
+					<div class="ui-icon mic-icon">
+						<div class="mic-slider"></div>
+					</div>
+					<div class="ui-icon hp-icon">
+						<div class="hp-slider"></div>
+					</div>
+					<div class="ui-icon settings-icon">
+						<ul class="settings-menu">
+							<li class="accounts"><a class="ui-icon {translate: 'menu.settings.accounts'}"></a></li>
+							<li class="network"><a class="ui-icon {translate: 'menu.settings.network'}"></a></li>
+							<li class="media"><a class="ui-icon {translate: 'menu.settings.media'}"></a></li>
+							<li class="video">
+								<a class="ui-icon {translate: 'menu.settings.video'}"></a>
+								<ul class="video-menu">
+									<li class="enable"><a class="{translate: 'menu.settings.video.enable'}"></a></li>
+									<li class="self"><a class="{translate: 'menu.settings.video.self'}"></a></li>
+								</ul>
+							</li>
+							<li class="codecs"><a class="ui-icon {translate: 'menu.settings.codecs'}"></a></li>
+							<li class="locales">
+								<a class="ui-icon {translate: 'menu.settings.locales'}"></a>
+								<ul class="locales-menu">
+									<li></li>
+								</ul>
+							</li>
+							<li class="about"><a class="ui-icon {translate: 'menu.settings.about'}"></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="codecs-options options ui-dialog ui-widget ui-widget-content ui-corner-all">
+				<div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"
+					style="-webkit-user-select: none;">
+					<span class="ui-dialog-icon ui-icon"></span> <span class="ui-dialog-title {translate: 'options.codecs.title'}"
+						style="-webkit-user-select: none;"></span> <a href="#" class="ui-dialog-titlebar-close ui-corner-all"
+						style="-webkit-user-select: none;"> <span class="ui-icon ui-icon-closethick"
+						style="-webkit-user-select: none;">close</span>
+					</a>
+				</div>
+				<div class="content ui-corner-bottom">
+					<div class="tabs">
+						<ul>
+							<li><a class="{translate: 'options.codecs.audio'}"></a></li>
+							<li><a class="{translate: 'options.codecs.video'}"></a></li>
+						</ul>
+						<div>
+							<table class="audio" title="Audio codecs">
+								<thead>
+									<tr>
+										<th class="name {translate: 'options.codecs.name'}"></th>
+										<th class="frequency {translate: 'options.codecs.frequency'}"></th>
+										<th class="bitrate {translate: 'options.codecs.bitrate'}"></th>
+										<th class="actions {translate: 'options.codecs.actions'}"></th>
+									</tr>
+								</thead>
+								<tbody />
+							</table>
+						</div>
+						<div>
+							<table class="video" title="Video codecs">
+								<thead>
+									<tr>
+										<th class="name {translate: 'options.codecs.name'}"></th>
+										<th class="frequency {translate: 'options.codecs.frequency'}"></th>
+										<th class="bitrate {translate: 'options.codecs.bitrate'}"></th>
+										<th class="actions {translate: 'options.codecs.actions'}"></th>
+									</tr>
+								</thead>
+								<tbody />
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="media-options options ui-dialog ui-widget ui-widget-content ui-corner-all">
+				<div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"
+					style="-webkit-user-select: none;">
+					<span class="ui-dialog-icon ui-icon"></span> <span class="ui-dialog-title {translate: 'options.media.title'}"
+						style="-webkit-user-select: none;"></span> <a href="#" class="ui-dialog-titlebar-close ui-corner-all"
+						style="-webkit-user-select: none;"> <span class="ui-icon ui-icon-closethick"
+						style="-webkit-user-select: none;">close</span>
+					</a>
+				</div>
+				<div class="content ui-corner-bottom">
+					<div class="field">
+						<div class="fixedlabel {translate: 'options.media.playback_device'}"></div>
+						<div class="input">
+							<select class="playback_device ui-widget-content ui-corner-all" title="Playback device">
+								<option />
+							</select>
+						</div>
+					</div>
+					<div class="field">
+						<div class="fixedlabel {translate: 'options.media.ring_device'}"></div>
+						<div class="input">
+							<select class="ring_device ui-widget-content ui-corner-all" title="Ring device">
+								<option />
+							</select>
+						</div>
+					</div>
+					<div class="field">
+						<div class="fixedlabel {translate: 'options.media.capture_device'}"></div>
+						<div class="input">
+							<select class="capture_device ui-widget-content ui-corner-all" title="Capture device">
+								<option />
+							</select>
+						</div>
+					</div>
+					<div class="field">
+						<div class="fixedlabel {translate: 'options.media.video_device'}"></div>
+						<div class="input">
+							<select class="video_device ui-widget-content ui-corner-all" title="Video device">
+								<option />
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="about-options options ui-dialog ui-widget ui-widget-content ui-corner-all">
+				<div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"
+					style="-webkit-user-select: none;">
+					<span class="ui-dialog-icon ui-icon"></span> <span class="ui-dialog-title {translate: 'options.about.title'}"
+						style="-webkit-user-select: none;"></span> <a href="#" class="ui-dialog-titlebar-close ui-corner-all"
+						style="-webkit-user-select: none;"> <span class="ui-icon ui-icon-closethick"
+						style="-webkit-user-select: none;">close</span>
+					</a>
+				</div>
+				<div class="content ui-corner-bottom">
+					<div class="logo"></div>
+					<br />
+					<div class="title">Linphone Web</div>
+					<br />
+					<div class="plugin_version">
+						Plugin Version: <span class="plugin_version_number"></span>
+					</div>
+					<br />
+					<div class="core_version">
+						Core version: <span class="core_version_number"></span>
+					</div>
+					<br />
+					<div class="copyright">Copyright Belledonne Communications 2012</div>
+				</div>
+			</div>
+			<div class="network-options options ui-dialog ui-widget ui-widget-content ui-corner-all">
+				<div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"
+					style="-webkit-user-select: none;">
+					<span class="ui-dialog-icon ui-icon"></span> <span class="ui-dialog-title {translate: 'options.network.title'}"
+						style="-webkit-user-select: none;"></span> <a href="#" class="ui-dialog-titlebar-close ui-corner-all"
+						style="-webkit-user-select: none;"> <span class="ui-icon ui-icon-closethick"
+						style="-webkit-user-select: none;">close</span>
+					</a>
+				</div>
+				<div class="content ui-corner-bottom">
+					<div class="field">
+						<div class="label {translate: 'options.network.transport'}"></div>
+						<div class="input">
+							<select class="transports ui-widget-content ui-corner-all" title="transports">
+								<option />
+							</select>
+						</div>
+					</div>
+					<div class="field">
+						<div class="label {translate: 'options.network.port'}"></div>
+						<div class="input">
+							<input class="port ui-widget-content ui-corner-all" title="port"></input>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="accounts-options options ui-dialog ui-widget ui-widget-content ui-corner-all">
+				<div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"
+					style="-webkit-user-select: none;">
+					<span class="ui-dialog-icon ui-icon"></span> <span class="ui-dialog-title {translate: 'menu.settings.accounts'}"
+						style="-webkit-user-select: none;"></span> <a href="#" class="ui-dialog-titlebar-close ui-corner-all"
+						style="-webkit-user-select: none;"> <span class="ui-icon ui-icon-closethick"
+						style="-webkit-user-select: none;">close</span>
+					</a>
+				</div>
+				<div class="content ui-corner-bottom">
+					<table class="accounts" title="Account list">
+						<thead>
+							<tr>
+								<th class="name {translate: 'options.accounts.name'}"></th>
+								<th class="status {translate: 'options.accounts.status'}"></th>
+							</tr>
+						</thead>
+						<tbody />
+					</table>
+					<button type="button" class="add {translate: 'options.accounts.add'}"></button>
+				</div>
+			</div>
+			<div class="account-form options ui-dialog ui-widget ui-widget-content ui-corner-all">
+				<div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"
+					style="-webkit-user-select: none;">
+					<span class="ui-dialog-icon ui-icon"></span> <span class="ui-dialog-title {translate: 'dialogs.account.title'}"
+						style="-webkit-user-select: none;"></span> <a href="#" class="ui-dialog-titlebar-close ui-corner-all"
+						style="-webkit-user-select: none;"> <span class="ui-icon ui-icon-closethick"
+						style="-webkit-user-select: none;">close</span>
+					</a>
+				</div>
+				<div class="content ui-corner-bottom">
+					<div class="field">
+						<div class="label {translate: 'dialogs.account.identity'}"></div>
+						<div class="input">
+							<input class="identity ui-widget-content ui-corner-all" title="identity"></input>
+						</div>
+					</div>
+					<div class="field">
+						<div class="label {translate: 'dialogs.account.proxy'}"></div>
+						<div class="input">
+							<input class="proxy ui-widget-content ui-corner-all" title="proxy"></input>
+						</div>
+					</div>
+					<div class="field">
+						<div class="label {translate: 'dialogs.account.route'}"></div>
+						<div class="input">
+							<input class="route ui-widget-content ui-corner-all" title="route"></input>
+						</div>
+					</div>
+					<div class="field">
+						<div class="label {translate: 'dialogs.account.expires'}"></div>
+						<div class="input">
+							<input class="expires ui-widget-content ui-corner-all" title="expires"></input>
+						</div>
+					</div>
+					<div class="field">
+						<div class="label {translate: 'dialogs.account.register'}"></div>
+						<div class="input">
+							<input type="checkbox" class="register ui-widget-content ui-corner-all" title="register"></input>
+						</div>
+					</div>
+					<button type="button" class="remove {translate: 'dialogs.account.remove'}"></button>
+					<button type="button" class="valid {translate: 'dialogs.account.valid'}"></button>
+				</div>
+			</div>
+			<div class="auth-form dialogs ui-dialog ui-widget ui-widget-content ui-corner-all">
+				<div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"
+					style="-webkit-user-select: none;">
+					<span class="ui-dialog-icon ui-icon"></span> <span class="ui-dialog-title {translate: 'dialogs.auth.title'}"
+						style="-webkit-user-select: none;"></span> <a href="#" class="ui-dialog-titlebar-close ui-corner-all"
+						style="-webkit-user-select: none;"> <span class="ui-icon ui-icon-closethick"
+						style="-webkit-user-select: none;">close</span>
+					</a>
+				</div>
+				<div class="content ui-corner-bottom">
+					<div class="field">
+						<div class="label {translate: 'dialogs.auth.username'}"></div>
+						<div class="input">
+							<input class="username ui-widget-content ui-corner-all" title="username"></input>
+						</div>
+					</div>
+					<div class="field">
+						<div class="label {translate: 'dialogs.auth.password'}"></div>
+						<div class="input">
+							<input class="password ui-widget-content ui-corner-all" title="password" type="password"></input>
+						</div>
+					</div>
+					<div class="hiddenfield">
+						<div class="label {translate: 'dialogs.auth.realm'}"></div>
+						<div class="input">
+							<input class="realm ui-widget-content ui-corner-all" title="realm"></input>
+						</div>
+					</div>
+					<button type="button" class="cancel {translate: 'dialogs.auth.cancel'}"></button>
+					<button type="button" class="valid {translate: 'dialogs.auth.valid'}"></button>
+				</div>
+			</div>
+		</div>
+		<div class="templates">
+			<script class="Linphone-Call-Idle" type="text/x-jsrender">
+				Idle <b>{{=remoteAddressAsString}}</b>
+			</script>
+			<script class="Linphone-Call-IncomingReceived" type="text/x-jsrender">
+				IncomingReceived <b>{{=remoteAddressAsString}}</b>
+				<div class="button">
+					<div class="answer-button"></div>
+					<div class="teminate-button"></div>
+				</div>
+			</script>
+			<script class="Linphone-Call-OutgoingInit" type="text/x-jsrender">
+				OutgoingInit <b>{{=remoteAddressAsString}}</b>
+				<div class="button">
+					<div class="teminate-button"></div>
+				</div>
+			</script>
+			<script class="Linphone-Call-OutgoingProgress" type="text/x-jsrender">
+				OutgoingProgress <b>{{=remoteAddressAsString}}</b>
+				<div class="button">
+					<div class="teminate-button"></div>
+				</div>
+			</script>
+			<script class="Linphone-Call-OutgoingRinging" type="text/x-jsrender">
+				OutgoingRinging <b>{{=remoteAddressAsString}}</b>
+				<div class="button">
+					<div class="teminate-button"></div>
+				</div>
+			</script>
+			<script class="Linphone-Call-OutgoingEarlyMedia" type="text/x-jsrender">
+				OutgoingEarlyMedia <b>{{=remoteAddressAsString}}</b>
+			</script>
+			<script class="Linphone-Call-Connected" type="text/x-jsrender">
+				Connected <b>{{=remoteAddressAsString}}</b>
+				<div class="button">
+					<div class="teminate-button"></div>
+				</div>
+			</script>
+			<script class="Linphone-Call-StreamsRunning" type="text/x-jsrender">
+				StreamsRunning <b>{{=remoteAddressAsString}}</b>
+				<div class="button">
+					<div class="teminate-button"></div>
+				</div>
+			</script>
+			<script class="Linphone-Call-Pausing" type="text/x-jsrender">
+				Pausing <b>{{=remoteAddressAsString}}</b>
+				<div class="button">
+					<div class="teminate-button"></div>
+				</div>
+			</script>
+			<script class="Linphone-Call-Paused" type="text/x-jsrender">
+				Paused <b>{{=remoteAddressAsString}}</b>
+				<div class="button">
+					<div class="teminate-button"></div>
+				</div>
+			</script>
+			<script class="Linphone-Call-Resuming" type="text/x-jsrender">
+				Resuming <b>{{=remoteAddressAsString}}</b>
+				<div class="button">
+					<div class="teminate-button"></div>
+				</div>
+			</script>
+			<script class="Linphone-Call-Refered" type="text/x-jsrender">
+				Refered <b>{{=remoteAddressAsString}}</b>
+			</script>
+			<script class="Linphone-Call-Error" type="text/x-jsrender">
+				Error <b>{{=remoteAddressAsString}}</b>
+			</script>
+			<script class="Linphone-Call-End" type="text/x-jsrender">
+				End <b>{{=remoteAddressAsString}}</b>
+			</script>
+			<script class="Linphone-Call-PausedByRemote" type="text/x-jsrender">
+				PausedByRemote <b>{{=remoteAddressAsString}}</b>
+			</script>
+			<script class="Linphone-Call-UpdatedByRemote" type="text/x-jsrender">
+				UpdatedByRemote <b>{{=remoteAddressAsString}}</b>
+			</script>
+			<script class="Linphone-Call-IncomingEarlyMedia" type="text/x-jsrender">
+				IncomingEarlyMedia <b>{{=remoteAddressAsString}}</b>
+			</script>
+			<script class="Linphone-Call-Updated" type="text/x-jsrender">
+				Updated <b>{{=remoteAddressAsString}}</b>
+			</script>
+			<script class="Linphone-Call-Released" type="text/x-jsrender">
+				Call end: <b>{{=remoteAddressAsString}}</b>
+			</script>
+			<script class="Linphone-Video" type="text/x-jsrender">
+				<div>
+					<object class="video" type="application/x-linphone-web-video">
+						<param name="onload" value="_videoLoad" />
+						<param name="magic" value="{{=magic}}" />
+					</object>
+				</div>
+			</script>
+			<script class="Linphone-Core" type="text/x-jsrender">
+				<object class="core" type="application/x-linphone-web" width="0" height="0" codebase="{{=codebase}}"> 
+				 	<param name="onload" value="_coreLoad" /> 
+					<param name="magic" value="{{=magic}}" /> 
+				 	Linphone Core 
+				</object>
+			</script>
+			<script class="Linphone-LocaleItem" type="text/x-jsrender">
+				<li>
+					<a class="ui-icon flag" style="background-image: url('{{=icon}}')">
+						{{=name}}
+					</a>
+				</li>
+			</script>
+			<script class="Linphone-CodecsList" type="text/x-jsrender">
+				<tr>
+					<td class="name">{{=mimeType}}</td>
+					<td class="frequency">{{=clockRate}}</td>
+					<td class="bitrate">{{=normalBitrate}}</td>
+					<td class="actions">
+						{{#if $ctx.linphone_ui_helpers_payloadTypeEnabled($data)}}
+							<input class="enable" type="checkbox" checked="checked" />
+						{{else}}
+							<input class="enable" type="checkbox" />
+						{{/if}}
+					</td>
+					<td/>
+				</tr>
+			</script>
+			<script class="Linphone-AccountsList" type="text/x-jsrender">
+				<tr>
+					<td class="name">{{=identity}}</td>
+					<td class="status">{{=$ctx.linphone_ui_helpers_getLinphoneRegistrationStateText(state)}}</td>
+					<td/>
+				</tr>
+			</script>
+		</div>
+	</div>
+</div>

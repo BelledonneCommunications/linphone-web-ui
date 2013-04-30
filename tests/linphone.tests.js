@@ -28,10 +28,10 @@ function tests_assert(context, value, description) {
 	}
 }
 
-var tests = new Array();	
+var tests = [];	
 
 function tests_log(context, msg) {
-	if(context.log != null) {
+	if(context.log !== null) {
 		context.log(msg);
 	}
 	if(typeof window.console !== 'undefined') {
@@ -43,7 +43,7 @@ function tests_success(context) {
 	test = context.tests[context.current];
 	tests_log(context, "Test " +  test.name + " (" + (context.current + 1 ) + "/" + context.tests.length + "): Success");
 	context.current = context.current + 1;
-	setTimeout(function(){tests_run_next(context)}, 1);
+	setTimeout(function(){tests_run_next(context);}, 1);
 }
 
 function tests_error(context, msg) {
@@ -51,7 +51,7 @@ function tests_error(context, msg) {
 	test.result = msg;
 	tests_log(context, "Test " +  test.name + " (" + (context.current + 1 ) + "/" + context.tests.length + "): Failure->" + msg);
 	context.current = context.current + 1;
-	setTimeout(function(){tests_run_next(context)}, 1);
+	setTimeout(function(){tests_run_next(context);}, 1);
 }
 
 function tests_end(context) {
@@ -69,7 +69,7 @@ function tests_end(context) {
 
 function tests_run_next(context) {
 	if(context.current >= context.tests.length) {
-		tests_end(context)
+		tests_end(context);
 		return;
 	}
 	test = context.tests[context.current];
@@ -106,6 +106,6 @@ function tests_run(core, log) {
 		core: core,
 		tests: serialized_tests,
 		current: 0
-	}
-	setTimeout(function(){tests_run_next(context)}, 1);
+	};
+	setTimeout(function(){tests_run_next(context);}, 1);
 }

@@ -45,13 +45,13 @@ linphone.ui.network = {
 		
 		// Update port and transport
 		var transports = core.sipTransports;
-		for (var protocol_index in linphone.ui.network.protocols) {
-			var protocol = linphone.ui.network.protocols[protocol_index];
-			var port = transports[protocol.property];
+		for (var protocol_index2 in linphone.ui.network.protocols) {
+			var protocol2 = linphone.ui.network.protocols[protocol_index2];
+			var port = transports[protocol2.property];
 			if(port > 0) {
 				// Log
-				linphone.core.log('Transport ' + protocol.name + " on "  + port);
-				base.find('.window .network-options .transports').val(protocol.property);
+				linphone.core.log('Transport ' + protocol2.name + " on "  + port);
+				base.find('.window .network-options .transports').val(protocol2.property);
 				base.find('.window .network-options .port').val(port);
 			}
 		}		
