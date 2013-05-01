@@ -83,7 +83,7 @@ jQuery('html').click(function(event) {
 	var target = jQuery(event.target);
 
 	// Click on codecs item
-	if (target.is('.linphone .window .tools .codecs > a')) {
+	if (target.isOrParent('.linphone .window .tools .codecs > a')) {
 		linphone.ui.getBase(target).find('.window .tools .settings-menu').fadeOut('fast');
 
 		linphone.ui.codec.updateCodecsList(target);

@@ -8,16 +8,16 @@ var app = express();
 
 commander
   .version('0.0.1')
-  .option('-d, --debug', 'Debug mode')
+  .option('-d, --debug', 'Debug env')
   .option('-p, --port <n>', 'HTTP port', parseInt)
   .parse(process.argv);
 
 app.set('port', commander.port? commander.port: 8888);
-app.set('mode', commander.debug? 'debug': 'release');
+app.set('env', commander.debug? 'debug': 'release');
 app.set('tmp', __dirname + '/tmp/');
 app.set('public', __dirname + '/../dist/')
 app.set('tmp', app.get('public') + '/tmp/');
-app.set('expires', (app.get('mode') === 'debug')? 0 : 60*60*24);
+app.set('expires', (app.get('env') === 'debug')? 0 : 60*60*24*14 * 1000);
 
 
 app.configure(function(){
@@ -55,6 +55,6 @@ app.post('/upload', function(req, res, next) {
 
 
 module.exports = app.listen(app.get('port'), function() {
-  console.log("Express server listening on port " + app.get('port'));
+  console.log('Express server listening on port ' + app.get('port') + ' env ' + app.get('env'));
 });
 

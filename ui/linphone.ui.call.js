@@ -125,7 +125,7 @@ jQuery('html').click(function(event) {
 		base.find('.window .content .pad').toggle('slide', {direction: 'down'});
 	}
 	
-	if (target.is('.linphone .window > .content .pad button') || target.parents('.linphone .window > .content .pad button') .length !== 0) {
+	if (target.isOrParent('.linphone .window > .content .pad button')) {
 		var dtmf = target.text();
 		linphone.core.log("Dtmf: " + dtmf);
 		call = linphone.ui.call.getCurrentCall(base);

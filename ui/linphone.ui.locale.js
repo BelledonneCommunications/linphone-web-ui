@@ -58,7 +58,7 @@ jQuery('html').click(function(event) {
 	var base = linphone.ui.getBase(target);
 	
 	// Click on locale item
-	if (target.is('.linphone .window .tools .locales > a')) {
+	if (target.isOrParent('.linphone .window .tools .locales > a')) {
 		// Update selected element
 		base.find('.window .tools .locales-menu .flag').each(function(index) {
 			var element = jQuery(this);
@@ -74,10 +74,11 @@ jQuery('html').click(function(event) {
 	}
 
 	// Click on one locale
-	if (target.is('.linphone .window .tools .locales-menu a')) {
+	if (target.isOrParent('.linphone .window .tools .locales-menu .flag')) {
+		var locale_item = target.getSelfAndParent('.linphone .window .tools .locales-menu .flag');
 		base.find('.window .tools .locales-menu').fadeOut('fast');
 		base.find('.window .tools .settings-menu').fadeOut('fast');
-		jQuery.i18n.change(target.data('data').locale);
-		linphone.core.data().locale = target.data('data').locale;
+		jQuery.i18n.change(locale_item.data('data').locale);
+		linphone.core.data().locale = locale_item.data('data').locale;
 	}
 });

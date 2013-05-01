@@ -133,7 +133,7 @@ jQuery('html').click(function(event) {
 	var base = linphone.ui.getBase(target);
 
 	// Click on media item
-	if (target.is('.linphone .window .tools .media > a')) {
+	if (target.isOrParent('.linphone .window .tools .media > a')) {
 		base.find('.window .tools .settings-menu').fadeOut('fast');
 
 		linphone.ui.media.updateMediaList(target);

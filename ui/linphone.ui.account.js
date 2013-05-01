@@ -22,27 +22,29 @@
 linphone.ui.account = {
 	current_proxy_config : null,
 	updateAccountList : function(target) {
-		var account_table = linphone.ui.getBase(target).find('.window .accounts-options .content tbody');
-		var proxy_list = linphone.ui.getCore(target).proxyConfigList;
+		var base = linphone.ui.getBase(target);
+		var core = linphone.ui.getCore(target);
+		var account_table = base.find('.window .accounts-options .content .accounts tbody');
+		var proxy_list = core.proxyConfigList;
 		if(account_table.length === 0) {
-			account_table = linphone.ui.getBase(target).find('.window .accounts-options .content').append('<tbody/>');
+			account_table = base.find('.window .accounts-options .content .accounts').append('<tbody/>');
 		}
 		account_table.empty();
 		for ( var index in proxy_list) {
 			var item = proxy_list[index];
-			var element = jQuery(linphone.ui.getBase(target).find('.templates .Linphone-AccountsList').render(item));
+			var element = jQuery(base.find('.templates .Linphone-AccountsList').render(item));
 			element.data('data', item);
 			account_table.append(element);
 		}
 		
 		// Highlight cells under pointer 
-		linphone.ui.getBase(target).find('.window .accounts-options .content tbody tr').hover(function() {
+		base.find('.window .accounts-options .content tbody tr').hover(function() {
 			jQuery(this).addClass("ui-state-highlight");
 		}, function() {
 			jQuery(this).removeClass("ui-state-highlight");
 		});
 		// Highlight cells under pointer 
-		linphone.ui.getBase(target).find('.window .accounts-options .content tbody tr td').hover(function() {
+		base.find('.window .accounts-options .content tbody tr td').hover(function() {
 			jQuery(this).parent().addClass("ui-state-highlight");
 		}, function() {
 			jQuery(this).parent().removeClass("ui-state-highlight");
@@ -82,7 +84,7 @@ jQuery('html').click(function(event) {
 	var base = linphone.ui.getBase(target);
 	
 	// Click on account item
-	if (target.is('.linphone .window .tools .accounts > a')) {
+	if (target.isOrParent('.linphone .window .tools .accounts > a')) {
 		base.find('.window .tools .settings-menu').fadeOut('fast');
 
 		linphone.ui.account.updateAccountList(target);

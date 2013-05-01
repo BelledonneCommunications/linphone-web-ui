@@ -76,24 +76,24 @@
 					</div>
 					<div class="ui-icon settings-icon">
 						<ul class="settings-menu">
-							<li class="accounts"><a class="ui-icon {translate: 'menu.settings.accounts'}"></a></li>
-							<li class="network"><a class="ui-icon {translate: 'menu.settings.network'}"></a></li>
-							<li class="media"><a class="ui-icon {translate: 'menu.settings.media'}"></a></li>
+							<li class="accounts"><a class="{translate: 'menu.settings.accounts'}"><span class="ui-icon" /></a></li>
+							<li class="network"><a class="{translate: 'menu.settings.network'}"><span class="ui-icon" /></a></li>
+							<li class="media"><a class="{translate: 'menu.settings.media'}"><span class="ui-icon" /></a></li>
 							<li class="video">
-								<a class="ui-icon {translate: 'menu.settings.video'}"></a>
+								<a class="{translate: 'menu.settings.video'}"><span class="ui-icon" /></a>
 								<ul class="video-menu">
 									<li class="enable"><a class="{translate: 'menu.settings.video.enable'}"></a></li>
 									<li class="self"><a class="{translate: 'menu.settings.video.self'}"></a></li>
 								</ul>
 							</li>
-							<li class="codecs"><a class="ui-icon {translate: 'menu.settings.codecs'}"></a></li>
+							<li class="codecs"><a class="{translate: 'menu.settings.codecs'}"><span class="ui-icon" /></a></li>
 							<li class="locales">
-								<a class="ui-icon {translate: 'menu.settings.locales'}"></a>
+								<a class="{translate: 'menu.settings.locales'}"><span class="ui-icon" /></a>
 								<ul class="locales-menu">
 									<li></li>
 								</ul>
 							</li>
-							<li class="about"><a class="ui-icon {translate: 'menu.settings.about'}"></a></li>
+							<li class="about"><a class="{translate: 'menu.settings.about'}"><span class="ui-icon" /></a></li>
 						</ul>
 					</div>
 				</div>
@@ -431,7 +431,8 @@
 			</script>
 			<script class="Linphone-LocaleItem" type="text/x-jsrender">
 				<li>
-					<a class="ui-icon flag" style="background-image: url('{{=icon}}')">
+					<a class="flag">
+						<span class="ui-icon {{=icon}}"/>
 						{{=name}}
 					</a>
 				</li>

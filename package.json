@@ -19,6 +19,7 @@
   ],
   "dependencies": {
     "grunt": "*",
+	"grunt-contrib-clean": "*",
     "grunt-contrib-cssmin": "*",
     "grunt-contrib-htmlmin": "*",
     "grunt-contrib-concat": "*",
@@ -30,6 +31,10 @@
     "grunt-contrib-nodeunit": "*",
     "grunt-contrib-csslint": "*",
     "grunt-contrib-livereload": "*",
+	"grunt-contrib-imagemin": "*",
+	"grunt-oversprite": "*",
+	"spritesmith": "0.3.5",
+	"grunt-preprocess": "*",
     "express": "*",
 	"commander": "*"
   },

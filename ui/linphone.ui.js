@@ -26,19 +26,19 @@ linphone.ui = {
 	locales : [ {
 		name : 'English(US)',
 		locale : 'en_US',
-		icon : 'style/images/flags/us.png'
+		icon : 'flag_us'
 	}, {
 		name : 'Français',
 		locale : 'fr_FR',
-		icon : 'style/images/flags/fr.png'
+		icon : 'flag_fr'
 	}, {
 		name : 'Deutsche',
 		locale : 'de_DE',
-		icon : 'style/images/flags/de.png'
+		icon : 'flag_de'
 	}, {
 		name : 'Italiano',
 		locale : 'it_IT',
-		icon : 'style/images/flags/it.png'
+		icon : 'flag_it'
 	} ],
 	getCore : function(target) {
 		var base = linphone.ui.getBase(target);
@@ -317,6 +317,18 @@ jQuery(function() {
 				};
 			});
 		});
+	};
+	jQuery.fn.isOrParent = function(selector) {
+		return this.is(selector) || this.parent(selector).length !== 0;
+	};
+	jQuery.fn.isOrParents = function(selector) {
+		return this.is(selector) || this.parents(selector).length !== 0;
+	};
+	jQuery.fn.getSelfAndParent = function(selector) {
+		return this.parent('*').andSelf().filter(selector);
+	};
+	jQuery.fn.getSelfAndParents = function(selector) {
+		return this.parents('*').andSelf().filter(selector);
 	};
 
 	// Tabs

@@ -23,10 +23,10 @@ module.exports = function(grunt) {
 		'linphone.tests.files'
 	],
 	htmlModules = [
-		'index_<%= mode %>_header',
+		'index_header',
 		'index_divs',
 		'index_scripts',
-		'index_<%= mode %>_footer'
+		'index_footer'
 	],
 	
 	coreJSFiles = coreModules.map(function( module ) {
@@ -48,14 +48,15 @@ module.exports = function(grunt) {
 	htmlFiles = htmlModules.map(function( module ) {
 		return 'html/' + module + '.html';
 	}),
-
+	
 	// Project configuration.
 	grunt.initConfig({
-		mode: 'debug',
+		env: 'debug',
+		tmp: 'dist/',
 		pkg: grunt.file.readJSON('package.json'),
 		theme: 'default',
 		meta: {
-			version: '0.1.0',
+			version: '<%= pkg.version %>',
 			banner: 
 				'/*\n' +
 				' * <%= pkg.title || pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("isoDate") %>\n' +
@@ -77,55 +78,63 @@ module.exports = function(grunt) {
 		qunit: {
 			files: ['test/**/*.html']
 		},
+		clean: {
+			dist: {
+				src: ['dist']
+			},
+			tmp: {
+				src: ['tmp']
+			}
+		},
 		concat: {
 			coreJS: {
 				options: {
 					stripBanners: true,
-					banner: "<%= meta.banner %>"
+					banner: '<%= meta.banner %>'
 				},
-				dest: 'dist/js/linphone-core.js',
+				dest: '<%= tmp %>/js/linphone-core-<%= pkg.version %>.js',
 				src: [coreJSFiles]
 			},
 			uiJS: {
 				options: {
 					stripBanners: true,
-					banner: "<%= meta.banner %>"
+					banner: '<%= meta.banner %>'
 				},
-				dest: 'dist/js/linphone-ui.js',
+				dest: '<%= tmp %>/js/linphone-ui-<%= pkg.version %>.js',
 				src: [uiJSFiles]
 			},
 			testsJS: {
 				options: {
 					stripBanners: true,
-					banner: "<%= meta.banner %>"
+					banner: '<%= meta.banner %>'
 				},
-				dest: 'dist/js/linphone-tests.js',
+				dest: '<%= tmp %>/js/linphone-tests-<%= pkg.version %>.js',
 				src: [testsJSFiles]
 			},
 			uiCSS: {
 				options: {
 					stripBanners: true,
-					banner: "<%= meta.banner %>"
+					banner: '<%= meta.banner %>'
 				},
-				dest: 'dist/style/linphone-ui.css',
+				dest: '<%= tmp %>/style/linphone-ui-<%= pkg.version %>.css',
 				src: [uiCSSFiles]
 			},
 			html: {
-				dest: 'dist/index-big.html',
+				dest: '<%= tmp %>/index-big.html',
 				src: [htmlFiles]
 			},
 		},
 		uglify: {
 			options: {
 				stripBanners: true,
-				banner: "<%= meta.banner %>"
+				banner: '<%= meta.banner %>'
 			},
 			coreJS: {
-				dest: 'dist/js/linphone-core.min.js',
+				dest: 'dist/js/linphone-core-<%= pkg.version %>.min.js',
 				src: ['<%= concat.coreJS.dest %>']
 			},
 			uiJS: {
-				dest: 'dist/js/linphone-ui.min.js',
+				dest: 'dist/js/linphone-ui-<%= pkg.version %>.min.js',
 				src: ['<%= concat.uiJS.dest %>']
 			}
 		},
@@ -136,27 +145,82 @@ module.exports = function(grunt) {
 			},
 			html: {
 				dest: 'dist/index.html',
-				src: ['<%= concat.html.dest %>']
+				src: ['<%= preprocess.html.dest %>']
+			}
+		},
+		preprocess: {
+			html: {
+				src : '<%= concat.html.dest %>',
+				dest: '<%= tmp %>/index-processed.html',
+				options: {
+					context: {
+						env: '<%= env %>',
+						version: '<%= pkg.version %>'
+					}
+				}
 			}
 		},
 		cssmin: {
 			options: {
 				stripBanners: true,
-				banner: "<%= meta.banner %>"
+				banner: '<%= meta.banner %>'
 			},
 			uiCSS: {
-				src: ['<%= concat.uiCSS.dest %>'],
-				dest: 'dist/style/linphone-ui.min.css'
+				src: ['<%= oversprite_mod.uiCSS.csslist.dest %>'],
+				dest: 'dist/style/linphone-ui-<%= pkg.version %>.min.css'
+			}
+		},
+		imagemin: {
+			options: {
+				optimizationLevel: '<%= (env=="debug")?0:7 %>'
+			},
+			theme: {
+				expand: true,
+				src: [
+					 '**'
+				],
+				cwd: 'dist/style/',
+				dest: 'dist/style/'
+			}
+		},
+		oversprite_mod: {
+			uiCSS: {
+				spritelist: {
+					src: ['themes/' + '<%= theme %>/' + 'images/**/*.png'],
+					dest: 'dist/style/images/sprite.png',
+					base: 'themes/' + '<%= theme %>/'
+				},
+				csslist: {
+					src: '<%= concat.uiCSS.dest %>',
+					dest: '<%= tmp %>/style/linphone-ui-<%= pkg.version %>.sprite.css',
+					base: 'dist/style/'
+				}
 			}
 		},
 		copy: {
 			theme: {
 				expand: true,
 				src: [
+					 '**/*.gif'
+				],
+				cwd: 'themes/' + '<%= theme %>/',
+				dest: 'dist/style/'
+			},
+			theme_flags: {
+				expand: true,
+				src: [
 					 '**'
 				],
-				cwd: 'themes/' + "<%= theme %>/",
-				dest: 'dist/style/'
+				cwd: 'themes/' + '<%= theme %>/images/flags',
+				dest: '<%= tmp %>/style/images/flags'
+			},
+			theme_png: {
+				expand: true,
+				src: [
+					 '**/*.png'
+				],
+				cwd: 'themes/' + '<%= theme %>/',
+				dest: '<%= tmp %>/style/'
 			},
 			lib: {
 				expand: true,
@@ -172,7 +236,7 @@ module.exports = function(grunt) {
 					'tests.html'
 				],
 				cwd: 'html/',
-				dest: 'dist/'
+				dest: '<%= tmp %>'
 			}
 		},
 		watch: {
@@ -198,7 +262,7 @@ module.exports = function(grunt) {
 			},
 			html: {
 				files: htmlFiles,
-				tasks: ['concat:html', 'htmlmin:html']
+				tasks: ['concat:html', 'preprocess:html', 'htmlmin:html']
 			},
 		},
 		server : {
@@ -223,24 +287,29 @@ module.exports = function(grunt) {
 	});
 
 	// Load NPM Tasks
-	grunt.loadNpmTasks( "grunt-contrib-jshint" );
-	grunt.loadNpmTasks( "grunt-contrib-uglify" );
-	grunt.loadNpmTasks( "grunt-contrib-concat" );
-	grunt.loadNpmTasks( "grunt-contrib-connect" );
-	grunt.loadNpmTasks( "grunt-contrib-csslint" );
-	grunt.loadNpmTasks( "grunt-contrib-cssmin" );
-	grunt.loadNpmTasks( "grunt-contrib-htmlmin" );
-	grunt.loadNpmTasks( "grunt-contrib-copy" );
-	grunt.loadNpmTasks( "grunt-contrib-nodeunit" );
-	grunt.loadNpmTasks( "grunt-contrib-watch" );
-	grunt.loadNpmTasks( "grunt-contrib-livereload");
+	grunt.loadNpmTasks( 'grunt-contrib-jshint' );
+	grunt.loadNpmTasks( 'grunt-contrib-uglify' );
+	grunt.loadNpmTasks( 'grunt-contrib-concat' );
+	grunt.loadNpmTasks( 'grunt-contrib-connect' );
+	grunt.loadNpmTasks( 'grunt-contrib-csslint' );
+	grunt.loadNpmTasks( 'grunt-contrib-cssmin' );
+	grunt.loadNpmTasks( 'grunt-contrib-htmlmin' );
+	grunt.loadNpmTasks( 'grunt-contrib-copy' );
+	grunt.loadNpmTasks( 'grunt-contrib-nodeunit' );
+	grunt.loadNpmTasks( 'grunt-contrib-watch' );
+	grunt.loadNpmTasks( 'grunt-contrib-livereload');
+	grunt.loadNpmTasks( 'grunt-contrib-clean' );
+	grunt.loadNpmTasks( 'grunt-contrib-imagemin' );
+	grunt.loadNpmTasks( 'grunt-preprocess' );
+	grunt.loadNpmTasks( 'grunt-oversprite' );
+	require( './grunt-oversprite-mod.js' ).call(grunt, grunt);
 	
 	// Express server
 	var server;
 	grunt.registerTask('express-server', 'Start an express web server', function() {
 		var done = this.async();
 		if (server) {
-			console.log("Killing existing Express server");
+			console.log('Killing existing Express server');
 
 			server.kill('SIGTERM');
 			server = null;
@@ -268,33 +337,36 @@ module.exports = function(grunt) {
 		server.stderr.pipe(process.stdout);
 	});
 	
-	// Modes
-	grunt.registerTask('debug-mode', 
+	// envs
+	grunt.registerTask('debug-env', 
 		function () {
-			grunt.config.set('mode', 'debug'); 
+			grunt.config.set('env', 'debug'); 
+			grunt.config.set('tmp', 'dist/');
 			
-			// Append debug mode
+			// Append debug env
 			grunt.config.set('server.script', grunt.config.get('server.script').concat([ '-p', '8888', '-d']));
 		}
 	);
-	grunt.registerTask('release-mode', 
+	grunt.registerTask('release-env', 
 		function () {
-			grunt.config.set('mode', 'release');
+			grunt.config.set('env', 'release');
+			grunt.config.set('tmp', 'tmp/');
+
 			
-			// Append release mode
+			// Append release env
 			grunt.config.set('server.script', grunt.config.get('server.script').concat([ '-p', '8888']));
 		}
 	);
 	
 	// Compile task
-	grunt.registerTask('compile', ['concat', 'uglify', 'cssmin', 'htmlmin', 'copy']);
+	grunt.registerTask('compile', ['clean', 'copy', 'concat', 'oversprite_mod', 'imagemin', 'preprocess', 'uglify', 'cssmin', 'htmlmin']);
  
 	// Default task
-	grunt.registerTask('default', ['release-mode', 'jshint', 'csslint', 'compile']);
+	grunt.registerTask('default', ['release-env', 'jshint', 'csslint', 'compile']);
 	
-	// Release mode
-	grunt.registerTask('release', ['release-mode', 'compile', 'express-server', 'watch' ]);
+	// Release env
+	grunt.registerTask('release', ['release-env', 'compile', 'express-server', 'watch' ]);
 	
-	// Dev mode
-	grunt.registerTask('develop', ['debug-mode', 'compile', 'express-server', 'watch']);
+	// Dev env
+	grunt.registerTask('develop', ['debug-env', 'compile', 'express-server', 'watch']);
 };

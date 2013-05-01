@@ -14,12 +14,14 @@ jQuery.i18n.update = function(element, recursive) {
 	}
 	element.filter(function () { return $(this).metadata().translate != null}).each(function() {
 		var element = $(this)
-		element.html(jQuery.i18n.translate(element.metadata().translate))
+		element.find('.i18n_translated').remove()
+		element.append(jQuery.i18n.translate(element.metadata().translate))
 	})
 	if(recursive) {
 		element.find('*').filter(function () { return $(this).metadata().translate != null}).each(function() {
 			var element = $(this)
-			element.html(jQuery.i18n.translate(element.metadata().translate))
+			element.find('.i18n_translated').remove()
+			element.append(jQuery.i18n.translate(element.metadata().translate))
 		})
 	}
 }
@@ -39,13 +41,11 @@ jQuery.i18n.translate = function(text) {
 	if (data != null) {
 		translated_text = data
 	}
-
-	translated_text = jQuery('<div/>').text(translated_text).html();
-
-	return translated_text
+	var ret = jQuery('<span class="i18n_translated"/>').text(translated_text)
+	return ret
 }
 
 jQuery.i18n.get = function(text) {
 	var translated_text = jQuery.i18n.translate(text)
-	return '<div class="{translate: \'' + text + '\'}">' + translated_text + '</div>'
+	return jQuery('<div class="{translate: \'' + text + '\'}" />').append(translated_text);
 }

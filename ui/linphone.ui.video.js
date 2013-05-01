@@ -66,7 +66,7 @@ linphone.ui.video = {
 	},
 	createVideoView : function(target, title, onOpen, onClose) {
 		var element = jQuery(document.createElement('div'));
-		var translated_title = jQuery.i18n.get(title); 
+		var translated_title = jQuery.i18n.get(title).text(); 
 		element.attr('title', translated_title);
 		element.addClass('video');
 
@@ -108,7 +108,7 @@ jQuery('html').click(function(event) {
 	var base = linphone.ui.getBase(target);
 
 	// Click on video item
-	if (target.is('.linphone .window .tools .video > a')) {
+	if (target.isOrParent('.linphone .window .tools .video > a')) {
 		if (linphone.core.data().enable_video === '1') {
 			base.find('.window .tools .video-menu .enable a').addClass('ui-state-selected');
 			base.find('.window .tools .video-menu .self a').removeClass('ui-state-disabled');
@@ -129,8 +129,9 @@ jQuery('html').click(function(event) {
 	}
 
 	// Click on enable video item
-	if (target.is('.linphone .window .tools .video-menu .enable > a')) {
-		if (target.hasClass('ui-state-selected')) {
+	var video_item = target.parents('.linphone .window .tools .video-menu .enable > a');
+	if (video_item.length !== 0) {
+		if (video_item.hasClass('ui-state-selected')) {
 			linphone.core.data().enable_video = '0';
 		} else {
 			linphone.core.data().enable_video = '1';
@@ -142,8 +143,9 @@ jQuery('html').click(function(event) {
 	}
 
 	// Click on self view video item
-	if (target.is('.linphone .window .tools .video-menu .self > a')) {
-		if (target.hasClass('ui-state-selected')) {
+	var self_item = target.parents('.linphone .window .tools .video-menu .self > a');
+	if (self_item.length !== 0) {
+		if (self_item.hasClass('ui-state-selected')) {
 			linphone.core.data().enable_video_self = '0';
 		} else {
 			linphone.core.data().enable_video_self = '1';

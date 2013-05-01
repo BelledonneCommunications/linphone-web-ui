@@ -17,3 +17,27 @@
  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+.linphone .window .tools .settings-menu  .locales .locales-menu {
+	background-position: 0px 0px;
+}
+
+.linphone .window .tools .settings-menu  .locales .locales-menu .ui-icon {
+	width: 16px;
+	height: 11px;
+}
+
+.linphone .window .tools .settings-menu  .locales .locales-menu  .flag_us {
+	background-image: url('images/flags/us.png');
+}
+
+.linphone .window .tools .settings-menu  .locales .locales-menu  .flag_fr {
+	background-image: url('images/flags/fr.png');
+}
+
+.linphone .window .tools .settings-menu  .locales .locales-menu  .flag_de {
+	background-image: url('images/flags/de.png');
+}
+
+.linphone .window .tools .settings-menu  .locales .locales-menu  .flag_it {
+	background-image: url('images/flags/it.png');
+}

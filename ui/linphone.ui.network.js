@@ -93,7 +93,7 @@ jQuery('html').click(function(event) {
 	var base = linphone.ui.getBase(target);
 	
 	// Click on account item
-	if (target.is('.linphone .window .tools .network > a')) {
+	if (target.isOrParent('.linphone .window .tools .network > a')) {
 		base.find('.window .tools .settings-menu').fadeOut('fast');
 
 		linphone.ui.network.update(target);

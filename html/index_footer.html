@@ -9,8 +9,14 @@
 				{url: "js/jquery.client.js"},
 				{url: "js/jsrender.js"},
 				{url: "js/i18n.js"},
-				{url: "js/linphone-core.min.js"},
-				{url: "js/linphone-ui.min.js"},
+				// <!-- @if env='release' -->
+				{url: "js/linphone-core-<!-- @echo version -->.min.js"},
+				{url: "js/linphone-ui-<!-- @echo version -->.min.js"}
+				// <!-- @endif -->
+				// <!-- @if env='debug' -->
+				{url: "js/linphone-core-<!-- @echo version -->.js"},
+				{url: "js/linphone-ui-<!-- @echo version -->.js"}
+				// <!-- @endif -->
 			]
 			function go(){
 				function getScript(url,success){

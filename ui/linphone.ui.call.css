@@ -51,9 +51,8 @@
 .linphone .window>.content .tab .answer-button {
 	display: inline-block;
 	background-image: url('images/startcall-green.png');
-	background-size: 32px 32px;
-	width: 32px;
-	height: 32px;
+	width: 30px;
+	height: 26px;
 	margin-left: 10px;
 	margin-right: 10px;
 }
@@ -61,9 +60,8 @@
 .linphone .window>.content .tab .teminate-button {
 	display: inline-block;
 	background-image: url('images/stopcall-red.png');
-	background-size: 32px 32px;
-	width: 32px;
-	height: 32px;
+	width: 30px;
+	height: 26px;
 	margin-left: 10px;
 	margin-right: 10px;
 }

@@ -30,7 +30,7 @@ jQuery('html').click(function(event) {
 	var core = linphone.ui.getCore(base);
 	
 	// Click on about item 
-	if (target.is('.linphone .window .tools .about > a')) {
+	if (target.isOrParent('.linphone .window .tools .about > a')) {
 		base.find('.window .tools .settings-menu').fadeOut('fast');
 		base.find('.window .about-options .title').text(linphone.config.name);
 		base.find('.window .about-options .core_version_number').text(core.version);
