@@ -24,7 +24,8 @@
 
 <link rel="icon" type="image/png" href="style/images/icon.png" />
 
-<link type="text/css" href="style/ui-lightness/jquery-ui-1.8.17.custom.min.css" rel="stylesheet" />
+<!-- @if env='release' --><link type="text/css" href="style/ui-lightness/jquery-ui-1.8.17.custom.min.css" rel="stylesheet" /><!-- @endif -->
+<!-- @if env='debug' --><link type="text/css" href="style/ui-lightness/jquery-ui-1.8.17.custom.css" rel="stylesheet" /><!-- @endif -->
 <link type="text/css" href="style/scrollabletab.css" rel="stylesheet" />
 <link type="text/css" href="style/jquery.ui.selectmenu.css" rel="stylesheet" />
 <!-- @if env='release' --><link type="text/css" href="style/linphone-ui-<!-- @echo version -->.min.css" rel="stylesheet" /><!-- @endif -->

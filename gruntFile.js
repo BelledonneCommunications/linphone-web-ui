@@ -84,6 +84,9 @@ module.exports = function(grunt) {
 			},
 			tmp: {
 				src: ['tmp']
+			},
+			release: {
+				src: ['dist/style/ui-lightness/jquery-ui-1.8.17.custom.css']
 			}
 		},
 		concat: {
@@ -166,8 +169,12 @@ module.exports = function(grunt) {
 				banner: '<%= meta.banner %>'
 			},
 			uiCSS: {
-				src: ['<%= oversprite_mod.uiCSS.csslist.dest %>'],
+				src: ['<%= oversprite.uiCSS.csslist.dest %>'],
 				dest: 'dist/style/linphone-ui-<%= pkg.version %>.min.css'
+			},
+			jQuery: {
+				src: 'dist/style/ui-lightness/jquery-ui-1.8.17.custom.css',
+				dest: 'dist/style/ui-lightness/jquery-ui-1.8.17.custom.min.css'
 			}
 		},
 		imagemin: {
@@ -183,9 +190,10 @@ module.exports = function(grunt) {
 				dest: 'dist/style/'
 			}
 		},
-		oversprite_mod: {
+		oversprite: {
 			uiCSS: {
 				spritelist: {
+					algorithm: 'binary-tree',
 					src: ['themes/' + '<%= theme %>/' + 'images/**/*.png'],
 					dest: 'dist/style/images/sprite.png',
 					base: 'themes/' + '<%= theme %>/'
@@ -283,6 +291,16 @@ module.exports = function(grunt) {
 				browser: true
 			},
 			globals: {}
+		},
+		compress: {
+			release: {
+				options: {
+					archive: '<%= pkg.name %>-<%= pkg.version %>.zip'
+				},
+				expand: true,
+				cwd: 'dist/',
+				src: ['**/*'],
+			}
 		}
 	});
 
@@ -302,7 +320,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks( 'grunt-contrib-imagemin' );
 	grunt.loadNpmTasks( 'grunt-preprocess' );
 	grunt.loadNpmTasks( 'grunt-oversprite' );
-	require( './grunt-oversprite-mod.js' ).call(grunt, grunt);
+	grunt.loadNpmTasks( 'grunt-contrib-compress' );
 	
 	// Express server
 	var server;
@@ -359,14 +377,17 @@ module.exports = function(grunt) {
 	);
 	
 	// Compile task
-	grunt.registerTask('compile', ['clean', 'copy', 'concat', 'oversprite_mod', 'imagemin', 'preprocess', 'uglify', 'cssmin', 'htmlmin']);
+	grunt.registerTask('compile', ['clean', 'copy', 'concat', 'oversprite', 'imagemin', 'preprocess', 'uglify', 'cssmin', 'htmlmin']);
  
 	// Default task
 	grunt.registerTask('default', ['release-env', 'jshint', 'csslint', 'compile']);
 	
 	// Release env
-	grunt.registerTask('release', ['release-env', 'compile', 'express-server', 'watch' ]);
+	grunt.registerTask('release', ['release-env', 'compile', 'clean:release', 'express-server', 'watch' ]);
 	
 	// Dev env
 	grunt.registerTask('develop', ['debug-env', 'compile', 'express-server', 'watch']);
+	
+	// Package 
+	grunt.registerTask('package', ['release-env', 'compile', 'clean:release', 'compress:release' ]);
 };

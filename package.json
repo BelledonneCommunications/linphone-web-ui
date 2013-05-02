@@ -28,7 +28,8 @@
 		"grunt-contrib-csslint": "*",
 		"grunt-contrib-livereload": "*",
 		"grunt-contrib-imagemin": "*",
-		"grunt-oversprite": "*",
+		"grunt-contrib-compress": "*",
+		"grunt-oversprite": "git://github.com/diorcety/grunt-oversprite.git",
 		"grunt-preprocess": "*",
 		"express": "*",
 		"commander": "*"
