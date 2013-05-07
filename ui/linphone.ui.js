@@ -20,10 +20,10 @@
 /*globals linphone,jQuery,InstallTrigger,chrome */
 
 linphone.ui = {
-	core_number : 1,
-	core_data : [],
-	helpers : {},
-	locales : [ {
+	core_number: 1,
+	core_data: [],
+	helpers: {},
+	locales: [ {
 		name : 'English(US)',
 		locale : 'en_US',
 		icon : 'flag_us'
@@ -40,11 +40,11 @@ linphone.ui = {
 		locale : 'it_IT',
 		icon : 'flag_it'
 	} ],
-	getCore : function(target) {
+	getCore: function(target) {
 		var base = linphone.ui.getBase(target);
 		return base.find('> .core').get()[0];
 	},
-	getBase : function(target) {
+	getBase: function(target) {
 		if (typeof target === 'undefined') {
 			target = jQuery(this);
 		}
@@ -54,18 +54,20 @@ linphone.ui = {
 			return target.parents('.linphone');
 		}
 	},
-	_addEvent : null,
-	addEvent : function(obj, name, func) {
+	_addEvent: null,
+	addEvent: function(obj, name, func) {
 		linphone.ui._addEvent(obj, name, func);
 	},
-	loadHandler : function(core) {
+	loadHandler: function(core) {
 		if(typeof core === 'undefined' || typeof core.valid === 'undefined') {
 			return;
 		}
 		
 		linphone.core.log('Load Core');
 		var base = linphone.ui.core_data[core.magic];
-
+		if(typeof base === 'undefined') {
+			return;
+		}
 		base.find('.window .install').hide(); // Force hide
 
 		linphone.ui.addEvent(core, 'globalStateChanged', linphone.ui.globalStateChanged);
@@ -114,53 +116,53 @@ linphone.ui = {
 			linphone.core.data().init_count = init_count + 1;
 		}
 	},
-	globalStateChanged : function(core, state, message) {
+	globalStateChanged: function(core, state, message) {
 		linphone.core.log(core + '| State: ' + state + ', ' + message);
 		var base = linphone.ui.core_data[core.magic];
 		base.trigger('globalStateChanged', [state, message]);
 		base.find('.window > .footer > .status').html(jQuery.i18n.get('globalstatetext.' + linphone.core.enums.getGlobalStateText(state)));
 	},
-	registrationStateChanged : function(core, proxy, state, message) {
+	registrationStateChanged: function(core, proxy, state, message) {
 		linphone.core.log(core + '| (' + proxy + '): ' + state + ', ' + message);
 		var base = linphone.ui.core_data[core.magic];
 		base.trigger('registrationStateChanged', [proxy, state, message]);
 	},
-	callStateChanged : function(core, call, state, message) {
+	callStateChanged: function(core, call, state, message) {
 		linphone.core.log(core + '| (' + call + '): ' + state + ', ' + message);
 		var base = linphone.ui.core_data[core.magic];
 		base.trigger('callStateChanged', [call, state, message]);
 	},
-	authInfoRequested : function(core, realm, username) {
+	authInfoRequested: function(core, realm, username) {
 		linphone.core.log(core + '| Auth: ' + realm + ', ' + username);
 		var base = linphone.ui.core_data[core.magic];
 		base.trigger('authInfoRequested', [realm, username]);
 	},
-	displayStatus : function(core, message) {
+	displayStatus: function(core, message) {
 		linphone.core.log(core + '| Status: ' + message);
 		var base = linphone.ui.core_data[core.magic];
 		base.trigger('displayStatus', [message]);
 	},
-	displayMessage : function(core, message) {
+	displayMessage: function(core, message) {
 		linphone.core.log(core + '| Message: ' + message);
 		var base = linphone.ui.core_data[core.magic];
 		base.trigger('displayMessage', [message]);
 	},
-	displayWarning : function(core, message) {
+	displayWarning: function(core, message) {
 		linphone.core.log(core + '| Warning: ' + message);
 		var base = linphone.ui.core_data[core.magic];
 		base.trigger('displayWarning', [message]);
 	},
-	displayUrl : function(core, message, url) {
+	displayUrl: function(core, message, url) {
 		linphone.core.log(core + '| Url: ' + message + ' - ' + url);
 		var base = linphone.ui.core_data[core.magic];
 		base.trigger('displayUrl', [message, url]);
 	},
-	error : function(base, msg) {
+	error: function(base, msg) {
 		base.find('.window .load').hide();
 		base.find('.window .error .text').html(msg);
 		base.find('.window .error').show();
 	},
-	outdated : function(actual, plugin) {
+	outdated: function(actual, plugin) {
 		var version1 = actual.split('.');
 		var version2 = plugin.split('.');
 		for(var i = 0; i < version1.length && i < version2.length; ++i) {
@@ -180,62 +182,82 @@ linphone.ui = {
 		}
 		return false;
 	},
-	detect : function(base) {
+	detect: function(base) {
 		linphone.core.log('Detection: ...');
 		var core = base.find('.core').get()[0];
+		var config = base.data('linphoneConfig');
 		if (typeof core !== 'undefined' && typeof core.valid !== 'undefined' && core.valid) {
-			if(!linphone.ui.outdated(linphone.config.version, core.pluginVersion)) {
+			if(!linphone.ui.outdated(config.version, core.pluginVersion)) {
 				linphone.core.log('Detection: Ok');
 				base.find('.window .install').hide();
 				return true;
 			} else {
 				linphone.core.log('Detection: Outdated');
 				linphone.ui.unload(base);
-				if (linphone.config.description_browser === 'Explorer') {
+				if (config.description_browser === 'Explorer') {
 					jQuery('.linphone .window .install .text').html(jQuery.i18n.translate('base.install.text.outdated_auto'));
-				} else if (linphone.config.description_browser === 'Firefox') {
+				} else if (config.description_browser === 'Firefox') {
 					jQuery('.linphone .window .install .text').html(jQuery.i18n.translate('base.install.text.outdated_auto'));
-				} else if (linphone.config.description_browser === 'Chrome') {
+				} else if (config.description_browser === 'Chrome') {
 					jQuery('.linphone .window .install .text').html(jQuery.i18n.translate('base.install.text.outdated_auto'));
 				} else {
 					jQuery('.linphone .window .install .text').html(jQuery.i18n.translate('base.install.text.outdated_download'));
 				}
+				if (config.description_browser === "Firefox") {
+					if (InstallTrigger.updateEnabled()) {
+						InstallTrigger.install({
+							"Linphone-Web": {
+								URL: config.description.file,
+								IconURL: config.description.icon
+							}
+						});
+					}
+				} else if (config.description_browser === "Chrome") {
+					chrome.webstore.install(config.description.file, function(){linphone.ui.unload(base);linphone.ui.load(base);}, function(){});
+				} else if (config.description_browser === 'Explorer') {
+					linphone.ui.init(base, true);
+					linphone.ui.load(base);
+				}
 			}
-		} else if(typeof linphone.config.description !== 'undefined'){
+		} else if(typeof config.description !== 'undefined'){
 			linphone.core.log('Detection: Not installed');
-			if (jQuery.client.browser === "Firefox") {
+			if (config.description_browser === "Firefox") {
 				if (InstallTrigger.updateEnabled()) {
 					InstallTrigger.install({
-						"Linphone-Web":{
-							URL: linphone.config.description.file,
-							IconURL: linphone.config.description.icon
+						"Linphone-Web": {
+							URL: config.description.file,
+							IconURL: config.description.icon
 						}
 					});
 				}
-			} else if (jQuery.client.browser === "Chrome") {
-				chrome.webstore.install(linphone.config.description.file, function(){linphone.ui.unload(base);linphone.ui.load(base);}, function(){});
+			} else if (config.description_browser === "Chrome") {
+				chrome.webstore.install(config.description.file, function(){linphone.ui.unload(base);linphone.ui.load(base);}, function(){});
 			}
 		}
 		return false;
 	},
-	unload : function(base) {
+	unload: function(base) {
 		linphone.core.log('Unload');
 		base.find('.window .load').show();
 		var core = base.find('> .core').get()[0];
 		if (typeof core !== 'undefined') {
 			delete linphone.ui.core_data[core.magic];
-			base.get()[0].removeChild(core); // Use of dom: issue with jQuery
-												// and embedded object
 		}
+
+		// jQuery and embeded objects are not friend: use DOM
+		base.find('>.core').each(function(core_index, core_element) {
+			base.get()[0].removeChild(core_element);
+		});
 	},
-	load : function(base) {
+	load: function(base) {
 		linphone.core.log('Loading ...');
 		base.find('.window .install').show();
 		base.find('.window .error').hide();
 		navigator.plugins.refresh(false);
+		var config = base.data('linphoneConfig');
 		var coreTemplate = base.find('.templates .Linphone-Core').render({
 			magic : linphone.ui.core_number,
-			codebase : linphone.config.codebase
+			codebase : config.codebase
 		});
 		var core = jQuery(coreTemplate);
 		linphone.ui.core_data[linphone.ui.core_number] = base;
@@ -244,49 +266,58 @@ linphone.ui = {
 
 		linphone.ui.detect(base);
 	},
-	initPlugin: function() {
+	configure: function(base, config) {
+		base.data('linphoneConfig', config);
+	},
+	init: function(base, versionForced) {
+		if(typeof versionForced === 'undefined') {
+			versionForced = false;
+		}
+
+		var config = base.data('linphoneConfig');
 		// Find the correct plugin file
-		if (typeof linphone.config.files[jQuery.client.os] !== 'undefined') {
-			if(typeof linphone.config.files[jQuery.client.os][jQuery.client.arch] !== 'undefined') {
-				if (typeof linphone.config.files[jQuery.client.os][jQuery.client.arch][jQuery.client.browser] !== 'undefined') {
-					linphone.config.description = linphone.config.files[jQuery.client.os][jQuery.client.arch][jQuery.client.browser];
-					linphone.config.description_browser = jQuery.client.browser;
+		if (typeof config.files[jQuery.client.os] !== 'undefined') {
+			if(typeof config.files[jQuery.client.os][jQuery.client.arch] !== 'undefined') {
+				if (typeof config.files[jQuery.client.os][jQuery.client.arch][jQuery.client.browser] !== 'undefined') {
+					config.description = config.files[jQuery.client.os][jQuery.client.arch][jQuery.client.browser];
+					config.description_browser = jQuery.client.browser;
 				} else {
-					linphone.config.description = linphone.config.files[jQuery.client.os][jQuery.client.arch].DEFAULT;
-					linphone.config.description_browser = 'DEFAULT';
+					config.description = config.files[jQuery.client.os][jQuery.client.arch].DEFAULT;
+					config.description_browser = 'DEFAULT';
 				}
 			}
 		}
 
 		// Update
-		linphone.config.codebase = "";
-		if (typeof linphone.config.description !== 'undefined') {
-			if (linphone.config.description_browser === 'Explorer') {
-				jQuery('.linphone .window .install .text').addClass('{translate: \'base.install.text.auto\'}');
-				linphone.config.codebase = linphone.config.description.file + '#Version=' + linphone.config.description.version;
-			} else if (linphone.config.description_browser === 'Firefox') {
-				jQuery('.linphone .window .install .text').addClass('{translate: \'base.install.text.auto\'}');
-			} else if (linphone.config.description_browser === 'Chrome') {
-				jQuery('.linphone .window .install .text').addClass('{translate: \'base.install.text.auto\'}');
+		config.codebase = "";
+		if (typeof config.description !== 'undefined') {
+			if (config.description_browser === 'Explorer') {
+				base.find('.window .install .text').addClass('{translate: \'base.install.text.auto\'}');
+				config.codebase = base.data('linphoneConfig').description.file;
+				if(versionForced) {
+					config.codebase += '#Version=' + base.data('linphoneConfig').description.version;
+				}
+			} else if (config.description_browser === 'Firefox') {
+				base.find('.window .install .text').addClass('{translate: \'base.install.text.auto\'}');
+			} else if (config.description_browser === 'Chrome') {
+				base.find('.window .install .text').addClass('{translate: \'base.install.text.auto\'}');
 			} else {
-				jQuery('.linphone .window .install .text').addClass('{translate: \'base.install.text.download\'}');
+				base.find('.window .install .text').addClass('{translate: \'base.install.text.download\'}');
 				
 				var content = '';
-				content = '<button type="button" onclick="window.open(\'' + linphone.config.description;
+				content = '<button type="button" onclick="window.open(\'' + config.description;
 				content += '\', \'_blank\')" class="{translate: \'base.install.download\'}">Download !</button>';
-				jQuery('.linphone .window .install .buttons').html(content);
-				jQuery.i18n.update(jQuery('.linphone .window .install .buttons'), true);
-				jQuery('.linphone .window .install button').button();
+				base.find('.window .install .buttons').html(content);
+				jQuery.i18n.update(base.find('.window .install .buttons'), true);
+				base.find('.window .install button').button();
 			} 
 		} else {
-			jQuery('.linphone .window .install .text').hide();
-			jQuery('.linphone .window .install .refresh').hide();
-			jQuery('.linphone .window .install .unavailable').show();
+			base.find('.window .install .text').hide();
+			base.find('.window .install .refresh').hide();
+			base.find('.window .install .unavailable').show();
 		}
-	},
-	init : function() {
-		linphone.core.log('Init LinphoneJS');
-		var base = jQuery('.linphone');
+		
+		linphone.core.log('Init Linphone Web');
 		linphone.ui.locale.load();
 		linphone.ui.menu.populateLocalesMenu(base);
 	}

@@ -28,6 +28,10 @@ module.exports = function(grunt) {
 		'index_scripts',
 		'index_footer'
 	],
+	testsFiles = [
+		'tests',
+		'update'
+	],
 	
 	coreJSFiles = coreModules.map(function( module ) {
 		return 'core/' + module + '.js';
@@ -47,6 +51,10 @@ module.exports = function(grunt) {
 	
 	htmlFiles = htmlModules.map(function( module ) {
 		return 'html/' + module + '.html';
+	}),
+	
+	testsHtmlFiles = testsFiles.map(function ( file ) {
+		return 'html/' + file + '.html';
 	}),
 	
 	// Project configuration.
@@ -86,7 +94,7 @@ module.exports = function(grunt) {
 				src: ['tmp']
 			},
 			release: {
-				src: ['dist/style/ui-lightness/jquery-ui-1.8.17.custom.css']
+				src: ['dist/style/ui-lightness/jquery-ui-1.8.17.custom.css', 'dist/downloads']
 			}
 		},
 		concat: {
@@ -222,6 +230,12 @@ module.exports = function(grunt) {
 				cwd: 'themes/' + '<%= theme %>/images/flags',
 				dest: '<%= tmp %>/style/images/flags'
 			},
+			tests: {
+				expand: true,
+				src: testsHtmlFiles, 
+				cwd: 'html/',
+				dest: '<%= tmp %>/'
+			},
 			theme_png: {
 				expand: true,
 				src: [
@@ -238,14 +252,14 @@ module.exports = function(grunt) {
 				cwd: 'libs/',
 				dest: 'dist/'
 			},
-		html: {
+			downloads: {
 				expand: true,
 				src: [
-					'tests.html'
+					 '**'
 				],
-				cwd: 'html/',
-				dest: '<%= tmp %>'
-			}
+				cwd: 'downloads/',
+				dest: 'dist/downloads/'
+			},
 		},
 		watch: {
 			server: {
@@ -272,6 +286,10 @@ module.exports = function(grunt) {
 				files: htmlFiles,
 				tasks: ['concat:html', 'preprocess:html', 'htmlmin:html']
 			},
+			tests: {
+				files: testsHtmlFiles,
+				tasks: ['copy:tests']
+			}
 		},
 		server : {
 			script: ['server/server.js']
@@ -389,5 +407,5 @@ module.exports = function(grunt) {
 	grunt.registerTask('develop', ['debug-env', 'compile', 'express-server', 'watch']);
 	
 	// Package 
-	grunt.registerTask('package', ['release-env', 'compile', 'clean:release', 'compress:release' ]);
+	grunt.registerTask('package', ['release-env', 'jshint', 'csslint', 'compile', 'clean:release', 'compress:release' ]);
 };

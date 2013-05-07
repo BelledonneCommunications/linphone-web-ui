@@ -1,0 +1,28 @@
+<html>
+<body>
+<button onclick="load();">Load</button>
+<button onclick="unload();">Unload</button>
+<div id="content"></div>
+<script>
+
+
+function load() {
+	var DivID = document.getElementById('content');
+	var myObject = document.createElement('object');
+	DivID.appendChild(myObject);
+	myObject.id = "core";
+	myObject.width = "200";
+	myObject.height = "100";
+	myObject.classid = "clsid:1563fddd-83a0-553a-854b-a6f75ed2d5f6"; 
+	alert(myObject.pluginVersion);
+}
+
+function unload() {
+	myObject = document.getElementById('core');
+	myObject.removeAttribute("id"); 
+	myObject.removeAttribute("classid");
+	myObject.parentNode.removeChild(myObject);
+}
+</script>
+</body>
+</html>

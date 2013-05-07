@@ -20,10 +20,6 @@
 /*globals console,localStorage */
 
 var linphone = {};
-linphone.config = {
-	file : null,
-	codebase : ''
-};
 linphone.core = {
 	log : function(message) {
 		if (typeof window.console !== 'undefined') {
