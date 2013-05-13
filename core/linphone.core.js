@@ -21,12 +21,32 @@
 
 var linphone = {};
 linphone.core = {
-	log : function(message) {
+	log: function(message) {
 		if (typeof window.console !== 'undefined') {
-			console.log(message);
+			window.console.log(message);
 		}
 	},
-	data : function() {
+	warn: function(message) {
+		if (typeof window.console !== 'undefined') {
+			window.console.warn(message);
+		}
+	},
+	error: function(message) {
+		if (typeof window.console !== 'undefined') {
+			window.console.error(message);
+		}
+	},
+	info: function(message) {
+		if (typeof window.console !== 'undefined') {
+			window.console.info(message);
+		}
+	},
+	debug: function(message) {
+		if (typeof window.console !== 'undefined') {
+			window.console.debug(message);
+		}
+	},
+	data: function() {
 		try {
 			if (typeof window.localStorage !== 'undefined') {
 				return localStorage;

@@ -58,7 +58,7 @@ linphone.ui.call = {
 		if(call) {
 			linphone.ui.call.create_call_tab(base, call, '.templates .Linphone-Call-OutgoingInit');
 		} else {
-			linphone.core.log("Null call");
+			linphone.core.warn("Null call");
 		}
 	},
 	callStateChanged: function(event, call, state, message){
@@ -75,7 +75,7 @@ linphone.ui.call = {
 			element.html(content);
 			jQuery.i18n.update(element, true);
 		} else {
-			linphone.core.log('Can\'t find call tab');
+			linphone.core.warn('Can\'t find call tab');
 		}
 	},
 	getCurrentCall: function(base) {
@@ -142,7 +142,7 @@ jQuery('html').click(function(event) {
 		if (element && element.data('data')) {
 			linphone.ui.getCore(target).acceptCall(element.data('data'));
 		} else {
-			linphone.core.log('Can\'t find call tab');
+			linphone.core.warn('Can\'t find call tab');
 		}
 	}
 
@@ -151,7 +151,7 @@ jQuery('html').click(function(event) {
 		if (element && element.data('data')) {
 			linphone.ui.getCore(target).terminateCall(element.data('data'));
 		} else {
-			linphone.core.log('Can\'t find call tab');
+			linphone.core.warn('Can\'t find call tab');
 		}
 	}
 
@@ -164,7 +164,7 @@ jQuery('html').click(function(event) {
 			element.data('data', null);
 			linphone.ui.getCore(target).terminateCall(call);
 		} else {
-			linphone.core.log('Can\'t find call tab');
+			linphone.core.warn('Can\'t find call tab');
 		}
 		base.find('.window > .content .tabs ').tabs('remove', tab.prevAll('li').length);
 	}

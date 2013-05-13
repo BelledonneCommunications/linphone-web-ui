@@ -58,6 +58,15 @@ linphone.ui = {
 	addEvent: function(obj, name, func) {
 		linphone.ui._addEvent(obj, name, func);
 	},
+	logHandler: function(level, message) {
+		if(level === "error" || level === "fatal") {
+			linphone.core.error(message);
+		} else if(level === "warning") {
+			linphone.core.warn(message);
+		} else {
+			linphone.core.log(message);
+		}
+	},
 	loadHandler: function(core) {
 		if(typeof core === 'undefined' || typeof core.valid === 'undefined') {
 			return;
@@ -69,6 +78,8 @@ linphone.ui = {
 			return;
 		}
 		base.find('.window .install').hide(); // Force hide
+
+		core.logHandler = linphone.ui.logHandler; 
 
 		linphone.ui.addEvent(core, 'globalStateChanged', linphone.ui.globalStateChanged);
 		linphone.ui.addEvent(core, 'callStateChanged', linphone.ui.callStateChanged);
