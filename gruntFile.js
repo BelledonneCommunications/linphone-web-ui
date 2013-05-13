@@ -232,8 +232,10 @@ module.exports = function(grunt) {
 			},
 			tests: {
 				expand: true,
-				src: testsHtmlFiles, 
-				cwd: 'html/',
+				src: testsFiles.map(function ( file ) {
+					return file + '.html';
+				}),
+				cwd: 'html/', 
 				dest: '<%= tmp %>/'
 			},
 			theme_png: {

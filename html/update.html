@@ -1,27 +1,23 @@
 <html>
 <body>
-<button onclick="load();">Load</button>
-<button onclick="unload();">Unload</button>
+<button id="bt1" onclick="load();">Load</button>
+<button id="bt2" onclick="unload();">Unload</button>
 <div id="content"></div>
-<script>
-
-
+<script id="script">
 function load() {
-	var DivID = document.getElementById('content');
-	var myObject = document.createElement('object');
-	DivID.appendChild(myObject);
+	DivID = document.getElementById('content');
+	myObject = document.createElement('object');
 	myObject.id = "core";
 	myObject.width = "200";
 	myObject.height = "100";
-	myObject.classid = "clsid:1563fddd-83a0-553a-854b-a6f75ed2d5f6"; 
+	myObject.type = "application/x-linphone-web"; 
+	DivID.appendChild(myObject);
 	alert(myObject.pluginVersion);
 }
 
 function unload() {
 	myObject = document.getElementById('core');
-	myObject.removeAttribute("id"); 
-	myObject.removeAttribute("classid");
-	myObject.parentNode.removeChild(myObject);
+	document.getElementById('content').removeChild(myObject);
 }
 </script>
 </body>

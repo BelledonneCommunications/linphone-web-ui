@@ -33,21 +33,25 @@ linphone.ui.i18n = {
 		},
 		install : {
 			text : {
-				download : {
+				download : { // No automatic plugin intallation
 					en_US : 'The plugin is not installed. Please download it using the following button.',
 					fr_FR : 'Le plugin n\'est pas installé. Veuillez le télécharger en utilisant le bouton suivant.'
 				},
-				auto : {
-					en_US : 'The plugin is not installed. Please accept the automatic install of the plugin.',
-					fr_FR : 'Le plugin n\'est pas installé. Veuillez accepter l\'installation automatique du plugin.'
+				auto : { // Automatic plugin installation
+					en_US : 'The plugin is not installed. Please wait and accept the automatic install of the plugin.',
+					fr_FR : 'Le plugin n\'est pas installé. Veuillez attendre et accepter l\'installation automatique du plugin.'
 				},
-				outdated_download : {
-					en_US : 'The plugin is outdated.Please download it using the following button.',
+				auto_or_update : { // With IE, we can not detect the current version without issue (javascript caching)
+					en_US : 'The plugin is not installed or updated. Please wait and accept the automatic install of the plugin.',
+					fr_FR : 'Le plugin n\'est pas installé ou pas à jour. Veuillez attendre et accepter l\'installation automatique du plugin.'
+				},
+				outdated_download : { // No automatic plugin update
+					en_US : 'The plugin is outdated. Please download it using the following button.',
 					fr_FR : 'Le plugin n\'est pas à jour. Veuillez accepter l\'installation automatique du plugin.'
 				},
-				outdated_auto : {
-					en_US : 'The plugin is outdated. Please accept the automatic install of the plugin.',
-					fr_FR : 'Le plugin n\'est pas à jour. Veuillez accepter l\'installation automatique du plugin.'
+				outdated_auto : { // Automatic plugin update
+					en_US : 'The plugin is outdated. Please wait and accept the automatic install of the plugin.',
+					fr_FR : 'Le plugin n\'est pas à jour. Veuillez attendre et accepter l\'installation automatique du plugin.'
 				}
 			},
 			unavailable : {

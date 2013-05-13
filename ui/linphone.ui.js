@@ -214,10 +214,10 @@ linphone.ui = {
 					}
 				} else if (config.description_browser === "Chrome") {
 					chrome.webstore.install(config.description.file, function(){linphone.ui.unload(base);linphone.ui.load(base);}, function(){});
-				} else if (config.description_browser === 'Explorer') {
+				} /*else if (config.description_browser === 'Explorer') {
 					linphone.ui.init(base, true);
 					linphone.ui.load(base);
-				}
+				}*/
 			}
 		} else if(typeof config.description !== 'undefined'){
 			linphone.core.log('Detection: Not installed');
@@ -271,7 +271,7 @@ linphone.ui = {
 	},
 	init: function(base, versionForced) {
 		if(typeof versionForced === 'undefined') {
-			versionForced = false;
+			versionForced = true;
 		}
 
 		var config = base.data('linphoneConfig');
@@ -292,7 +292,7 @@ linphone.ui = {
 		config.codebase = "";
 		if (typeof config.description !== 'undefined') {
 			if (config.description_browser === 'Explorer') {
-				base.find('.window .install .text').addClass('{translate: \'base.install.text.auto\'}');
+				base.find('.window .install .text').addClass('{translate: \'base.install.text.auto_or_update\'}');
 				config.codebase = base.data('linphoneConfig').description.file;
 				if(versionForced) {
 					config.codebase += '#Version=' + base.data('linphoneConfig').description.version;
