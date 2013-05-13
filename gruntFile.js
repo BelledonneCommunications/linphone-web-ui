@@ -119,7 +119,7 @@ module.exports = function(grunt) {
 					stripBanners: true,
 					banner: '<%= meta.banner %>'
 				},
-				dest: '<%= tmp %>/js/linphone-tests-<%= pkg.version %>.js',
+				dest: '<%= tmp %>/js/linphone-tests.js',
 				src: [testsJSFiles]
 			},
 			uiCSS: {

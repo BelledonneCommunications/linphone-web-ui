@@ -44,6 +44,16 @@ function test_files_clean(context) {
 	});
 }
 
+function test_invalid_url_core(context) {
+	core = context.core;
+	try {
+		core.ring = "internal://invalid.jpg";
+		tests_error(context, "Invalid file set in core");
+	} catch(err) {
+		tests_success(context);
+	}
+}
+
 function test_files_copy_internal_tmp(context) {
 	core = context.core;
 	ret = core.getFileManager().copy("internal:///share/images/nowebcamCIF.jpg", "tmp:///image1.jpg", 
@@ -354,6 +364,9 @@ function test_files_upload_invalid_url(context) {
 tests.push({
 	name: "Files",
 	tests: [{
+		name: "Test invalid url in core",
+		fct: test_invalid_url_core
+	}, {
 		name: "Copy a file from internal to tmp",
 		fct: test_files_copy_internal_tmp
 	}, {
