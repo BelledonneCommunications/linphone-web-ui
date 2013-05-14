@@ -100,12 +100,13 @@ linphone.ui = {
 			}
 			linphone.core.log('Sip port: ' + core.sipPort);
 			
-			// Init medias
+			// Init properties 
 			core.staticPicture = "internal:///share/images/nowebcamCIF.jpg";
 			core.ring = "internal:///share/sounds/linphone/rings/oldphone.wav";
 			core.ringback = "internal:///share/sounds/linphone/ringback.wav";
 			core.playFile = "internal:///share/sounds/linphone/rings/toy-mono.wav";
-				
+			core.rootCa = "internal:///share/linphone/rootca.pem";		
+
 			// Init volumes settings
 			var rec_level = (typeof linphone.core.data().rec_level !== "undefined") ? linphone.core.data().rec_level : 100;
 			base.find('.window .tools .mic-slider').slider('value', rec_level);

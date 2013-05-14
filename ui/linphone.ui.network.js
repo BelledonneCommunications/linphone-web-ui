@@ -23,7 +23,7 @@ linphone.ui.network = {
 	protocols : [
 		{name: "UDP", property: "udpPort"},
 		{name: "TCP", property: "tcpPort"},
-		{name: "DTLS", property: "dtlsPort"},
+		//{name: "DTLS", property: "dtlsPort"},
 		{name: "TLS", property: "tlsPort"}
 	],
 	update : function(target) {
