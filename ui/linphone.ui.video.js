@@ -25,19 +25,20 @@ linphone.ui.video = {
 	self_view : null,
 	video_view : null,
 	updateVideoView : function(target) {
+		var core = linphone.ui.getCore(target);
 		if (linphone.core.data().enable_video === '1') {
 			linphone.ui.video.video_view = linphone.ui.video.createVideoView(target, 'window.video.title', function(object) {
 				linphone.core.log('Load VideoView ' + object.magic);
 				object.setBackgroundColor(0, 0, 0);
-				linphone.ui.getCore(target).nativeVideoWindowId = object.window;
-				linphone.ui.getCore(target).videoEnabled = true;
+				core.nativeVideoWindowId = object.window;
+				core.videoEnabled = true;
 			}, function(object) {
 				linphone.core.data().enable_video = '0';
 				linphone.ui.video.updateSelfView(target);
 			});
 		} else {
-			linphone.ui.getCore(target).videoEnabled = false;
-			linphone.ui.getCore(target).nativeVideoWindowId = 0;
+			core.videoEnabled = false;
+			core.nativeVideoWindowId = 0;
 			if (linphone.ui.video.video_view !== null) {
 				linphone.ui.video.destroyVideoView(linphone.ui.video.video_view);
 				linphone.ui.video.video_view = null;
@@ -45,19 +46,24 @@ linphone.ui.video = {
 		}
 	},
 	updateSelfView : function(target) {
+		var core = linphone.ui.getCore(target);
 		if (linphone.core.data().enable_video === '1' && linphone.core.data().enable_video_self === '1') {
 			linphone.ui.video.self_view = linphone.ui.video.createVideoView(target, 'window.self.title', function(object) {
 				linphone.core.log('Load VideoView ' + object.magic);
 				object.setBackgroundColor(0, 0, 0);
-				linphone.ui.getCore(target).nativePreviewWindowId = object.window;
-				linphone.ui.getCore(target).videoPreviewEnabled = true;
+				core.nativePreviewWindowId = object.window;
+				core.videoPreviewEnabled = true;
+				core.selfViewEnabled = false;
+				core.usePreviewWindow = true;
 			}, function(object) {
 				linphone.core.data().enable_video_self = '0';
 				linphone.ui.video.updateSelfView();
 			});
 		} else {
-			linphone.ui.getCore(target).videoPreviewEnabled = false;
-			linphone.ui.getCore(target).nativePreviewWindowId = 0;
+			core.videoPreviewEnabled = false;
+			core.selfViewEnabled = false;
+			core.usePreviewWindow = false;
+			core.nativePreviewWindowId = 0;
 			if (linphone.ui.video.self_view !== null) {
 				linphone.ui.video.destroyVideoView(linphone.ui.video.self_view);
 				linphone.ui.video.self_view = null;
