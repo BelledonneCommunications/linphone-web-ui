@@ -22,7 +22,9 @@
 
 	function _coreLoad(obj) {
 		window.core = obj;
-		console.log("Core loaded");
+		if(typeof console !== "undefined") {
+			console.log("Core loaded");
+		}
 	}
 </script>
 <object class="core" type="application/x-linphone-web" width="0" height="0">
