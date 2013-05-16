@@ -1,6 +1,8 @@
 <html>
 <body>
 <button id="bt1" onclick="load();">Load</button>
+<button id="bt1" onclick="init();">Init</button>
+<button id="bt1" onclick="uninit();">Uinit</button>
 <button id="bt2" onclick="unload();">Unload</button>
 <div id="content"></div>
 <script id="script">
@@ -13,6 +15,16 @@ function load() {
 	myObject.type = "application/x-linphone-web"; 
 	DivID.appendChild(myObject);
 	alert(myObject.pluginVersion);
+}
+
+function init() {
+	myObject = document.getElementById('core');
+	myObject.init();
+}
+
+function uninit() {
+	myObject = document.getElementById('core');
+	myObject.uninit();
 }
 
 function unload() {
