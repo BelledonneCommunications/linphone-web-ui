@@ -20,14 +20,14 @@
 /*globals jQuery,linphone*/
 
 linphone.ui.video = {
-	video_number : 1,
-	video_data : [],
-	self_view : null,
-	video_view : null,
-	updateVideoView : function(target) {
+	video_number: 1,
+	video_data: [],
+	self_view: null,
+	video_view: null,
+	updateVideoView: function(target) {
 		var core = linphone.ui.getCore(target);
 		if (linphone.core.data().enable_video === '1') {
-			linphone.ui.video.video_view = linphone.ui.video.createVideoView(target, 'window.video.title', function(object) {
+			linphone.ui.video.video_view = linphone.ui.video.createVideoView(target, 'window.video', 'window.video.title', function(object) {
 				linphone.core.log('Load VideoView ' + object.magic);
 				object.setBackgroundColor(0, 0, 0);
 				core.nativeVideoWindowId = object.window;
@@ -45,10 +45,10 @@ linphone.ui.video = {
 			}
 		}
 	},
-	updateSelfView : function(target) {
+	updateSelfView: function(target) {
 		var core = linphone.ui.getCore(target);
 		if (linphone.core.data().enable_video === '1' && linphone.core.data().enable_video_self === '1') {
-			linphone.ui.video.self_view = linphone.ui.video.createVideoView(target, 'window.self.title', function(object) {
+			linphone.ui.video.self_view = linphone.ui.video.createVideoView(target, 'window.self', 'window.self.title', function(object) {
 				linphone.core.log('Load VideoView ' + object.magic);
 				object.setBackgroundColor(0, 0, 0);
 				core.nativePreviewWindowId = object.window;
@@ -70,21 +70,30 @@ linphone.ui.video = {
 			}
 		}
 	},
-	createVideoView : function(target, title, onOpen, onClose) {
+	createVideoView: function(target, id, title, onOpen, onClose) {
 		var element = jQuery(document.createElement('div'));
 		var translated_title = jQuery.i18n.get(title).text(); 
 		element.attr('title', translated_title);
 		element.addClass('video');
 
+		var position = 'center';
+		if(id === 'window.video') {
+			position = [300, 0];
+		}
+
+		if(id === 'window.self') {
+			position = [650, 0];
+		}
 		element.dialog({
-			height : 240,
-			width : 320,
-			close : function() {
+			height: 240,
+			width: 320,
+			position: position,
+			close: function() {
 				onClose(jQuery(this).find('object').get(0));
 			}
 		});
 		element.parent().appendTo(linphone.ui.getBase(target));
-		element.dialog("open");
+		element.dialog('open');
 		var template = jQuery(linphone.ui.getBase(target).find('.templates .Linphone-Video').render({
 			magic : linphone.ui.video.video_number
 		}));
@@ -95,14 +104,14 @@ linphone.ui.video = {
 		element.append(template);
 		return element;
 	},
-	destroyVideoView : function(element) {
+	destroyVideoView: function(element) {
 		var object = element.find('object').get(0);
 		linphone.core.log('Destroy VideoView ' + object.magic);
 		linphone.ui.video.video_data.splice(object.magic, 1);
 		element.dialog('destroy');
 		element.remove();
 	},
-	loadHandler : function(video) {
+	loadHandler: function(video) {
 		linphone.core.log('Load Video');
 		linphone.ui.video.video_data[video.magic](video);
 	}
