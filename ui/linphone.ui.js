@@ -125,6 +125,7 @@ linphone.ui = {
 			linphone.ui.video.updateSelfView(base);
 			linphone.ui.video.updateVideoView(base);
 			linphone.core.data().init_count = init_count + 1;
+			core.iterateEnabled = true;
 		}
 	},
 	globalStateChanged: function(core, state, message) {
