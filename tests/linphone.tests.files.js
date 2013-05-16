@@ -35,8 +35,10 @@ function test_files_clean(context) {
 		try_remove("local:///image1.jpg", function () {
 			try_remove("local:///image2.jpg", function () {
 				try_remove("tmp:///index.html", function () {
-					try_remove("tmp:///aa", function () {
-						tests_success(context);
+					try_remove("tmp:///eindex.html", function () {
+						try_remove("tmp:///aa", function () {
+							tests_success(context);
+						});
 					});
 				});
 			});
@@ -274,6 +276,19 @@ function test_files_remove_not_existing_tmp_file(context) {
 	);
 }
 
+function test_files_download_xss(context) {
+	core = context.core;
+	ret = core.getFileManager().copy("http://google.com/", "tmp:///eindex.html", 
+		function (done, error) {
+			tests_assert(context, done === false, "Security issue");
+			tests_success(context);
+		}
+	);
+	if(ret !== null) {
+		ret.start();
+	}
+}
+
 function test_files_download_existing_to_tmp_file(context) {
 	core = context.core;
 	var full = location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '');
@@ -432,6 +447,9 @@ tests.push({
 	}, {
 		name: "Download http to tmp file",
 		fct: test_files_download_existing_to_tmp_file
+	}, {
+		name: "Download xss",
+		fct: test_files_download_xss 
 	}, {
 		name: "Download not existing http to tmp file",
 		fct: test_files_download_not_existing_to_tmp_file
