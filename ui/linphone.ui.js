@@ -125,6 +125,18 @@ linphone.ui = {
 			linphone.ui.video.updateSelfView(base);
 			linphone.ui.video.updateVideoView(base);
 			linphone.core.data().init_count = init_count + 1;
+			
+			// Force network updates (hack)
+			var transports = core.sipTransports;
+			if(transports.tlsPort !== 0) {
+				transports.udpPort = transports.tlsPort;
+				transports.tlsPort = 0;
+				core.sipTransports = transports;
+				transports.tlsPort = transports.udpPort;
+				transports.udpPort = 0;
+				core.sipTransports = transports;
+			}
+
 			core.iterateEnabled = true;
 		}
 	},
