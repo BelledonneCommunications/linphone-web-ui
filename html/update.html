@@ -7,28 +7,27 @@
 <div id="content"></div>
 <script id="script">
 function load() {
-	DivID = document.getElementById('content');
-	myObject = document.createElement('object');
+	var DivID = document.getElementById('content');
+	var myObject = document.createElement('object');
 	myObject.id = "core";
 	myObject.width = "200";
 	myObject.height = "100";
-	myObject.type = "application/x-linphone-web"; 
 	DivID.appendChild(myObject);
-	alert(myObject.pluginVersion);
+	myObject.type = "application/x-linphone-web"; 
 }
 
 function init() {
-	myObject = document.getElementById('core');
+	var myObject = document.getElementById('core');
 	myObject.init();
 }
 
 function uninit() {
-	myObject = document.getElementById('core');
+	var myObject = document.getElementById('core');
 	myObject.uninit();
 }
 
 function unload() {
-	myObject = document.getElementById('core');
+	var myObject = document.getElementById('core');
 	document.getElementById('content').removeChild(myObject);
 }
 </script>
