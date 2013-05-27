@@ -40,10 +40,10 @@
  */
 .linphone .window .overall {
 	position: absolute;
-	top: 0px;
-	bottom: 0px;
-	left: 0px;
-	right: 0px;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
 	background-color: #FFFFFF;
 	z-index: 9000;
 	padding: 5px;
@@ -89,7 +89,7 @@
 
 .linphone .window .tools .ui-icon {
 	overflow: visible;
-	text-indent: 0px;
+	text-indent: 0;
 }
 
 /* 
@@ -100,7 +100,7 @@
 .linphone .window>.footer {
 	border-top: 1px solid #BBBBDD;
 	position: absolute;
-	bottom: 0px;
+	bottom: 0;
 	background-color: #DDDDFF;
 	height: 20px;
 	line-height: 20px;
@@ -119,8 +119,8 @@
 	margin-right: 5px;
 	display: inline-block;
 	position: absolute;
-	right: 0px;
-	top: 0px;
+	right: 0;
+	top: 0;
 }
 
 .linphone .window>.content {
@@ -154,12 +154,9 @@
  * Tabs stuff
  *
  */
-.linphone .window .tabs {
-	
-}
 
 .linphone .window .tabs a:focus {
-	outline: 0px;
+	outline: 0;
 }
 
 .linphone .window>.tabs .tab {
@@ -187,31 +184,31 @@
 }
 
 .linphone .window .options {
-	top: 0px;
-	left: 0px;
-	right: 0px;
-	bottom: 0px;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
 	display: none;
 	position: absolute;
 	background: #FFFFFF;
-	padding: 0px;
-	margin: 0px;
-	border: 0px;
+	padding: 0;
+	margin: 0;
+	border: 0;
 	width: auto;
 	z-index: 100;
 }
 
 .linphone .window .options .content {
 	height: 195px;
-	margin: 0px;
+	margin: 0;
 	overflow: auto;
 }
 
 .linphone .window .options .content table {
 	width: 100%;
 	height: 100%;
-	margin: 0px;
-	padding: 0px;
+	margin: 0;
+	padding: 0;
 }
 
 .linphone .window .options .content table th {
@@ -241,23 +238,22 @@
 }
 
 .linphone .window .dialogs {
-	top: 0px;
-	left: 0px;
-	right: 0px;
-	bottom: 0px;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
 	display: none;
 	position: absolute;
 	background: #FFFFFF;
-	padding: 0px;
-	hmargin: 0px;
-	border: 0px;
+	padding: 0;
+	border: 0;
 	width: auto;
 	z-index: 200;
 }
 
 .linphone .window .dialogs .content {
 	height: 195px;
-	margin: 0px;
+	margin: 0;
 	overflow: auto;
 }
 

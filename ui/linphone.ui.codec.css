@@ -49,14 +49,14 @@
 
 .linphone .window .codecs-options .content .tabs {
 	position: absolute;
-	top: 0px;
-	bottom: 0px;
-	right: 0px;
-	left: 0px;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
 }
 
 .linphone .window .codecs-options .content .tabs .ui-tabs-panel {
-	padding: 0px
+	padding: 0
 }
 
 .linphone .window .codecs-options .content table {
@@ -88,6 +88,6 @@
 	overflow-y: auto;
 	position: absolute;
 	max-height: 158px;
-	left: 0px;
-	right: 0px;
+	left: 0;
+	right: 0;
 }

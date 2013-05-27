@@ -32,29 +32,41 @@ module.exports = function(grunt) {
 		'tests',
 		'update'
 	],
-	
-	coreJSFiles = coreModules.map(function( module ) {
+
+	coreJSFiles = coreModules.map(function(module) {
 		return 'core/' + module + '.js';
+	}).filter(function(file) {
+		return grunt.file.exists(file)
 	}),
 
-	uiJSFiles = uiModules.map(function( module ) {
+	uiJSFiles = uiModules.map(function(module) {
 		return 'ui/' + module + '.js';
+	}).filter(function(file) {
+		return grunt.file.exists(file)
 	}),
 	
-	testsJSFiles = testModules.map(function( module ) {
+	testsJSFiles = testModules.map(function(module) {
 		return 'tests/' + module + '.js';
+	}).filter(function(file) {
+		return grunt.file.exists(file)
 	}),
 
-	uiCSSFiles = uiModules.map(function( module ) {
+	uiCSSFiles = uiModules.map(function(module) {
 		return 'ui/' + module + '.css';
+	}).filter(function(file) {
+		return grunt.file.exists(file)
 	}),
 	
-	htmlFiles = htmlModules.map(function( module ) {
+	htmlFiles = htmlModules.map(function(module) {
 		return 'html/' + module + '.html';
+	}).filter(function(file) {
+		return grunt.file.exists(file)
 	}),
 	
 	testsHtmlFiles = testsFiles.map(function ( file ) {
 		return 'html/' + file + '.html';
+	}).filter(function(file) {
+		return grunt.file.exists(file)
 	}),
 	
 	// Project configuration.
@@ -78,7 +90,13 @@ module.exports = function(grunt) {
 			tests: testsJSFiles,
 		},
 		csslint: {
-			files: [] + uiCSSFiles
+			options: {
+				'box-model': false,
+				'duplicate-background-images': false,
+				'important': false,
+				'outline-none': false
+			},
+			ui: uiCSSFiles
 		},
 		htmlint: {
 			files: ['test/**/*.html']

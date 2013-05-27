@@ -27,7 +27,7 @@
 }
 
 .linphone .ui-menu .ui-menu-item a:focus {
-	outline: 0px;
+	outline: 0;
 }
 
 /* 
@@ -45,8 +45,8 @@
 
 .linphone .window .tools .settings-menu {
 	display: none;
-	bottom: 0px;
-	right: 0px;
+	bottom: 0;
+	right: 0;
 	position: absolute;
 	margin-bottom: 100%;
 }
@@ -68,8 +68,6 @@
 }
 
 .linphone .window .tools .settings-menu a {
-	width: 100%;
-	vertical-align: middle;
 	display: block;
 	width: auto;
 	white-space: nowrap;
