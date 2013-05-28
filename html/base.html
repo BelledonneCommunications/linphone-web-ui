@@ -6,10 +6,9 @@
 <!--[if lt IE 9]>
 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
-<script src="js/jquery.js"></script>
-<script src="ui/base.js"></script>
-<link href="ui/reset.css" rel="stylesheet" type="text/css">
-<link href="ui/base.css" rel="stylesheet" type="text/css">
+<link type="text/css" href="style/reset.css" rel="stylesheet" />
+<!-- @if env='release' --><link type="text/css" href="style/linphone-ui-<!-- @echo version -->.min.css" rel="stylesheet" /><!-- @endif -->
+<!-- @if env='debug' --><link type="text/css" href="style/linphone-ui-<!-- @echo version -->.css" rel="stylesheet" /><!-- @endif -->
 </head>
 <body>
 <header>

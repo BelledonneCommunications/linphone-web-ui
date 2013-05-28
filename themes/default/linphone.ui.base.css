@@ -11,15 +11,15 @@ textes gris : #7a7a7a
 */
 @font-face {
     font-family: 'allerregular';
-    src: url('../font/aller_rg-webfont.eot');
-    src: url('../font/aller_rg-webfont.eot?#iefix') format('embedded-opentype'), url('../font/aller_rg-webfont.woff') format('woff'), url('../font/aller_rg-webfont.ttf') format('truetype'), url('../font/aller_rg-webfont.svg#allerregular') format('svg');
+    src: url('font/aller_rg-webfont.eot');
+    src: url('font/aller_rg-webfont.eot?#iefix') format('embedded-opentype'), url('font/aller_rg-webfont.woff') format('woff'), url('font/aller_rg-webfont.ttf') format('truetype'), url('font/aller_rg-webfont.svg#allerregular') format('svg');
     font-weight: normal;
     font-style: normal;
 }
 @font-face {
     font-family: 'allerregular';
-    src: url('../font/aller_std_bd-webfont.eot');
-    src: url('../font/aller_std_bd-webfont.eot?#iefix') format('embedded-opentype'), url('../font/aller_std_bd-webfont.woff') format('woff'), url('../font/aller_std_bd-webfont.ttf') format('truetype'), url('../font/aller_std_bd-webfont.svg#allerbold') format('svg');
+    src: url('font/aller_std_bd-webfont.eot');
+    src: url('font/aller_std_bd-webfont.eot?#iefix') format('embedded-opentype'), url('font/aller_std_bd-webfont.woff') format('woff'), url('font/aller_std_bd-webfont.ttf') format('truetype'), url('font/aller_std_bd-webfont.svg#allerbold') format('svg');
     font-weight: bold;
     font-style: normal;
 }
@@ -37,7 +37,8 @@ header {
     height: 70px;
 }
 header .logo {
-    background: url('../img/logo.png') no-repeat;
+    background-image: url('img/logo.png');
+    background-repeat: no-repeat;
     width: 230px;
     height: 70px;
     float: left;
@@ -66,14 +67,16 @@ header .profil .status {
     float: left;
 }
 header .profil .status .statusDisponible {
-    background: url('../img/online.png') no-repeat 0 0;
+    background-image: url('img/online.png');
+    background-repeat: no-repeat;
     width: 10px;
     height: 10px;
     float: left;
     margin-right: 10px;
 }
 header .profil .profilModify {
-    background: url('../img/open.png') no-repeat;
+    background-image: url('img/open.png');
+    background-repeat: no-repeat;
     width: 15px;
     height: 9px;
     float: right;
@@ -94,7 +97,9 @@ header .subnav li:before {
     content: '|';
     padding-right: 10px;
 }
-header .subnav li:first-child { padding-left: 0px }
+header .subnav li:first-child { 
+    padding-left: 0;
+}
 header .subnav li:first-child:before { content: '' }
 header .subnav li a {
     color: #616973;
@@ -129,7 +134,8 @@ header .lang li a:hover { color: #b3bfc5 }
     width:700px
 }
 .dialer .number {
-    background: url('../img/dialer.png') no-repeat top right;
+    background-image: url('img/dialer.png');
+    background-repeat: no-repeat;
     position: absolute;
     top: 1px;
     left: 377px;
@@ -173,13 +179,15 @@ aside {
     margin-left: 10px;
 }
 .button .pictoCall {
-    background: url('../img/call.png') no-repeat;
+    background-image: url('img/call.png');
+    background-repeat: no-repeat;
     width: 40px;
     height: 40px;
     float: left;
 }
 .button .pictoChat {
-    background: url('../img/chat.png') no-repeat;
+    background-image: url('img/chat.png');
+    background-repeat: no-repeat;
     width: 40px;
     height: 40px;
     float: left;
@@ -194,7 +202,8 @@ aside {
    text-transform: uppercase;
 }
 .ringtone .ringtonePicto {
-    background: url('../img/ringtone.png');
+    background-image: url('img/ringtone.png');
+    background-repeat: no-repeat;
     width: 8px;
     height: 13px;
     margin-right: 5px;
@@ -205,8 +214,7 @@ aside {
 .ringtone input {
     background: #ffffff;
     height: 40px;
-    color: #ffffff;
-    border: 0px;
+    border: 0;
     text-transform: uppercase;
     color: #8c949f;
     width: 50px;
@@ -227,7 +235,9 @@ aside nav li {
     position: relative;
 }
 aside nav li:first-child,
-aside nav li li { border-top: 0px }
+aside nav li li { 
+    border-top: 0; 
+}
 aside nav li a {
     color: #616973;
     text-decoration: none;
@@ -237,7 +247,7 @@ aside nav li a {
     border-left: 4px solid #23262a;
     font-weight: bold;
 }
-aside nav li span.menu {
+aside nav li .menu {
     color: #616973;
     text-decoration: none;
     text-transform: uppercase;
@@ -247,11 +257,12 @@ aside nav li span.menu {
 }
 aside nav li li a { padding: 5px 20px }
 aside nav li ul { margin-bottom: 10px }
-aside nav li span.numberMessage {
+aside nav li .numberMessage {
     padding: 0;
     display: inline-block;
     padding-left: 10px;
-    background: url('../img/numberMessage.png') no-repeat 7px 2px;
+    background-image: url('img/numberMessage.png');
+    background-repeat: no-repeat;
     line-height: 15pt;
     color: #23262b;
     font-size: 9pt;
@@ -259,7 +270,8 @@ aside nav li span.numberMessage {
     height: 16px;
 }
 aside nav li .closeContact {
-    background: url('../img/closeContact.png') no-repeat;
+    background-image: url('img/closeContact.png');
+    background-repeat: no-repeat;
     width: 15px;
     height: 9px;
     position: absolute;
@@ -274,7 +286,8 @@ aside nav li a.selected {
     background-color: #34393f;
 }
 aside nav li .play {
-    background-image: url('../img/play.png');
+    background-image: url('img/play.png');
+    background-repeat: no-repeat;
     width: 9px;
     height: 9px;
     float: left;
@@ -282,7 +295,8 @@ aside nav li .play {
     margin-top: 1px;
 }
 aside nav li .pause {
-    background-image: url('../img/pause.png');
+    background-image: url('img/pause.png');
+    background-repeat: no-repeat;
     width: 7px;
     height: 9px;
     float: left;
@@ -290,6 +304,12 @@ aside nav li .pause {
     margin-top: 1px;
 }
 aside nav li a:hover .play,
-aside nav li a.selected .play { background-image: url('../img/playHover.png') }
+aside nav li a.selected .play { 
+    background-image: url('img/playHover.png');
+    background-repeat: no-repeat;
+}
 aside nav li a:hover .pause,
-aside nav li a.selected .pause { background-image: g('../img/pauseHover.png') }
+aside nav li a.selected .pause {
+    background-image: url('img/pauseHover.png');
+    background-repeat: no-repeat;
+}

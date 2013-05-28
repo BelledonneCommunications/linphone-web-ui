@@ -1,0 +1,38 @@
+{
+	"name": "linphone-web2",
+	"title": "Linphone Web 2",
+	"description": "",
+	"version": "0.0.1",
+	"homepage": "",
+	"author": {
+		"name": "AUTHORS.txt"
+	},
+	"repository": {
+	},
+	"licenses": [{
+		"type": "GPL",
+		"url": "http://www.opensource.org/licenses/GPL-2.0"
+	}],
+	"dependencies": {
+		"grunt": "*",
+		"grunt-contrib-clean": "*",
+		"grunt-contrib-cssmin": "*",
+		"grunt-contrib-htmlmin": "*",
+		"grunt-contrib-concat": "*",
+		"grunt-contrib-uglify": "*",
+		"grunt-contrib-connect": "*",
+		"grunt-contrib-jshint": "*",
+		"grunt-contrib-copy": "*",
+		"grunt-contrib-watch": "*",
+		"grunt-contrib-nodeunit": "*",
+		"grunt-contrib-csslint": "*",
+		"grunt-contrib-livereload": "*",
+		"grunt-contrib-imagemin": "*",
+		"grunt-contrib-compress": "*",
+		"grunt-oversprite": "git://github.com/diorcety/grunt-oversprite.git",
+		"grunt-preprocess": "*",
+		"express": "*",
+		"commander": "*"
+	},
+	"keywords": []
+}
