@@ -6,8 +6,10 @@
 <!--[if lt IE 9]>
 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
-<link href="css/reset.css" rel="stylesheet" type="text/css">
-<link href="css/style.css" rel="stylesheet" type="text/css">
+<script src="js/jquery.js"></script>
+<script src="ui/base.js"></script>
+<link href="ui/reset.css" rel="stylesheet" type="text/css">
+<link href="ui/base.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <header>
@@ -31,11 +33,9 @@
 </nav>
 </div>
 </header>
-
 <div class="content">
 <div class="ringtone"><span class="ringtonePicto"></span>Silencieux<input type="button" value="on" class="on"  /><input type="button" value="off" class="selected" /></div>
-<div class="dialer"><input type="text" value="SIP or phone number"><div class="number"></div><input type="button" value="Appel" class="call" /><input type="button" value="Chat" class="chat" /></div>
-
+<div class="dialer"><input type="text" value="SIP or phone number"><div class="number"></div><div class="button"><div class="pictoCall"></div>Appel</div><div class="button"><div class="pictoChat"></div>Chat</div></div>
 <aside>
 	<nav>
 		<ul>
@@ -43,21 +43,20 @@
 			<li><a href="#">Historique</a></li>
 			<li><span class="menu">Appels</span>
 				<ul>
-					<li><a href="#"><span class="play"></span>Myrtille</a></li>
-					<li><a href="#"><span class="pause"></span>Apollin</a></li>
-					<li><a href="#" class="selected"><span class="pause"></span>César</a></li>
+					<li><a href="#"><span class="play"></span>Myrtille</a><span class="closeContact"></span></li>
+					<li><a href="#"><span class="pause"></span>Apollin</a><span class="closeContact"></span></li>
+					<li><a href="#" class="selected"><span class="pause"></span>César</a><span class="closeContact"></span></li>
 				</ul></li>
 			<li><span class="menu">Chats</span>
 				<ul>
-					<li><a href="#">Cunégonde</a></li>
-					<li><a href="#">Roger<span class="numberMessage">26</span></a></li>
+					<li><a href="#">Cunégonde</a><span class="closeContact"></span></li>
+					<li><a href="#">Roger<span class="numberMessage">26</span><span class="closeContact"></span></a></li>
 				</ul></li>
 		</ul>
 	</nav>
 </aside>
-
 <div class="wrapper">
-	<p></p>
+<p></p>
 </div>
 </div>
 
