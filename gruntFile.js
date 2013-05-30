@@ -5,10 +5,20 @@ module.exports = function(grunt) {
 		'linphone.core.enums'
 	],
 	uiModules = [
-		'linphone.ui.base'
+		'linphone.ui.base',
+		'linphone.ui.contacts',
+		'linphone.ui.history',
+		'linphone.ui.call',
+		'linphone.ui.incall',
+		'linphone.ui.outcall'		
 	],
 	htmlModules = [
 		'base',
+		'contacts',
+		'history',
+		'call',
+		'incall',
+		'outcall',
 		'index_footer'
 	],
 

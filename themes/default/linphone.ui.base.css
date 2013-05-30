@@ -51,6 +51,7 @@ header .profil {
     height: 40px;
     padding: 15px 15px 15px 17px;
     color: #b3bfc5;
+    position:relative
 }
 header .profil img {
     border: 2px solid #e4edf2;
@@ -66,7 +67,7 @@ header .profil .status {
     margin-top: 10px;
     float: left;
 }
-header .profil .status .statusDisponible {
+header .profil .status .statusOnline {
     background-image: url('img/online.png');
     background-repeat: no-repeat;
     width: 10px;
@@ -74,7 +75,8 @@ header .profil .status .statusDisponible {
     float: left;
     margin-right: 10px;
 }
-header .profil .profilModify {
+
+header .profil .profilOpen {
     background-image: url('img/open.png');
     background-repeat: no-repeat;
     width: 15px;
@@ -82,6 +84,52 @@ header .profil .profilModify {
     float: right;
     margin-top: 10px;
 }
+
+header .profil .profilOpen:hover {
+    background-image: url('img/close.png');
+    background-repeat: no-repeat;
+    width: 15px;
+    height: 9px;
+    cursor:pointer
+}
+
+header .profilModify{background:#23262a; position:absolute;top:70px;z-index:2; left:57px; width:185px; padding:13px 0; display:none}
+header .profilModify ul{margin-left:10px}
+header .profilModify li{margin-bottom:10px; color:#616973; text-transform:uppercase; font-size:9pt}
+header .profilModify li:hover{color:#fff; cursor:pointer}
+header .profilModify span{
+	background-repeat: no-repeat;
+    width: 10px;
+    height: 10px;
+    float: left;
+    margin-right: 10px;
+    margin-top:2px;
+}
+.statusOnline {
+    background-image: url('img/online.png');
+}
+.statusAway{
+    background-image: url('img/away.png');
+}
+.statusBusy{
+    background-image: url('img/busy.png');
+}
+header .profilModify .logout{
+	border-top:1px solid #2f3338; 
+	color:#616973;
+	text-transform:uppercase;
+	padding:13px 10px;
+	font-size:9pt
+}
+header .profilModify .logout:hover{color:#fff; cursor:pointer}
+header .profilModify .logout .pictoLogout{
+	background:url('img/logout.png') no-repeat;
+	width:10px;
+	height:11px;
+	margin-top:1px
+}
+
+
 header .subnav {
     padding-top: 37px;
     float: left;
@@ -142,6 +190,10 @@ header .lang li a:hover { color: #b3bfc5 }
     width: 33px;
     height: 37px;
 }
+
+.dialer table{position:absolute; top:40px; left:230px; background:rgba(35,38,42,0.8);border-collapse: separate; border-spacing:4px; display:none; z-index:2 }
+.dialer table td{background:#5d8398; color:#ffffff;text-align:center; width:55px; height:40px;vertical-align: middle; }
+
 aside {
     float: left;
     width: 230px;
@@ -151,6 +203,9 @@ aside {
 .wrapper {
     background: #fff;
     min-height: 550px;
+    width:710px;
+    float:left; 
+    position:relative
 }
 .dialer input {
     height: 36px;
@@ -161,75 +216,95 @@ aside {
     line-height: 36px;
     border: 1px solid #929fa5;
     background-color: #fff;
-    width: 390px;
+    width: 387px;
     padding-left: 20px;
     color: #929fa5;
     float: left;
 }
-.button {
+.action {
     color: #fff;
     height: 40px;
     background: #cf4c29;
-    width: 100px;
     outline: none;
     vertical-align: middle;
     text-transform: uppercase;
-    line-height: 36px;
+    line-height: 40px;
     float: left;
-    margin-left: 10px;
 }
-.button .pictoCall {
+.dialer .action{width:100px; padding:0}
+.action2{background:#5d8398; color:#fff; height:40px; outline:none; vertical-align:middle; text-transform:uppercase; line-height:40px; width:auto; float:left}
+.action2:hover{background:#8eaaba; cursor:pointer; color:#fff}
+.action:hover {
+    background-color: #d97459;
+    cursor: pointer;
+}
+
+.action .pictoCall {
     background-image: url('img/call.png');
     background-repeat: no-repeat;
     width: 40px;
     height: 40px;
     float: left;
 }
-.button .pictoChat {
+.action .pictoChat {
     background-image: url('img/chat.png');
     background-repeat: no-repeat;
     width: 40px;
     height: 40px;
     float: left;
 }
-.button:hover {
-    background-color: #d97459;
-    cursor: pointer;
-}
+
+
+.action2 .pictoModify {
+    background-image: url('img/modify.png');
+    background-repeat: no-repeat;
+    width: 40px;
+    height: 40px;
+    float: left;
+    }
+
 .ringtone {
    float: right;
    color: #5d8398;
    text-transform: uppercase;
 }
+.ringtone>div:first-child{float:left;margin-top: 15px;margin-right:10px}
 .ringtone .ringtonePicto {
     background-image: url('img/ringtone.png');
     background-repeat: no-repeat;
     width: 8px;
     height: 13px;
     margin-right: 5px;
-    margin-top: 12px;
+
     float: left;
 }
 
-.ringtone input {
-    background: #ffffff;
+.button, .buttonSelected {
+    background: #e4edf2;
     height: 40px;
     border: 0;
     text-transform: uppercase;
     color: #8c949f;
-    width: 50px;
     text-align: center;
+    float:left;
+    line-height:40px;
+    padding:0 15px
+    
 }
-.ringtone .on { margin-left: 15px }
-.ringtone input.selected {
+.ringtone .button{background:#fff; width:50px; padding:0}
+/*button .selected {
     background: #5d8398;
     color: #ffffff;
-}
-.ringtone input:hover {
+}*/
+.button:hover {
     background: #8eaaba;
     cursor: pointer;
     color: #ffffff;
 }
+
+.buttonSelected{background:#5d8398; color:#fff}
+
+
 aside nav li {
     border-top: 1px solid #434850;
     position: relative;
@@ -258,17 +333,18 @@ aside nav li .menu {
 aside nav li li a { padding: 5px 20px }
 aside nav li ul { margin-bottom: 10px }
 aside nav li .numberMessage {
-    padding: 0;
-    display: inline-block;
-    padding-left: 10px;
-    background-image: url('img/numberMessage.png');
-    background-repeat: no-repeat;
-    line-height: 15pt;
+    background: url('img/numberMessage.png') no-repeat;
     color: #23262b;
     font-size: 9pt;
-    width: 30px;
-    height: 16px;
+    width: 20px;
+    height: 14px;
+    position:absolute;
+    top:4px;
+    margin-left:10px;
+    padding-left:3px;
+    padding-top:1px
 }
+
 aside nav li .closeContact {
     background-image: url('img/closeContact.png');
     background-repeat: no-repeat;
@@ -276,9 +352,7 @@ aside nav li .closeContact {
     height: 9px;
     position: absolute;
     right: 0;
-    top: 6px;
-    display:none;
-}
+    top: 6px;}
 aside nav li a:hover,
 aside nav li a.selected {
     color: #ffffff;
@@ -313,3 +387,11 @@ aside nav li a.selected .pause {
     background-image: url('img/pauseHover.png');
     background-repeat: no-repeat;
 }
+
+
+.floatRight{float:right;}
+.padding{padding:10px}
+hr{clear:both; visibility:hidden}
+.paddingLeftRight{padding:0 10px}
+.marginLeft{margin-left:2px}
+.button + .button{border-left:1px solid #d0dce2}

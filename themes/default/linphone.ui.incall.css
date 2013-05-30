@@ -1,0 +1,31 @@
+#incall{background:rgba(35,38,42,0.8); width:155px; position:absolute; top:100px; left:200px; padding:10px; text-align:center; }
+#incall .title{color:#b3bfc5; text-transform:uppercase; font-size:9pt}
+#incall img{display:block; border:5px solid #e4edf2; margin:10px auto}
+#incall .contactName{color:#fff; font-size:11pt}
+
+
+#incall .contactActions{margin:20px 0 0 5px;}
+
+#incall .callOff{background:#9f1212; width:70px;height:40px;  float: left; margin-left:3px}
+#incall .callOff:hover{background:#c45a5a}
+
+#incall .pictoCallOff {
+    background-image: url('img/callOff.png');
+    background-repeat: no-repeat;
+    width: 40px;
+    height: 40px;
+    margin-left:15px;
+    display:block
+    }
+    
+#incall .call{background:#809f12; width:70px;height:40px;float: left;}
+#incall .call:hover{background:#a7ba65}
+#incall .pictoCall {
+    background-image: url('img/call.png');
+    background-repeat: no-repeat;
+    width: 40px;
+    height: 40px;
+    margin-left:15px;
+    display:block
+    }
+    

@@ -1,0 +1,7 @@
+#history{display:none}
+
+.contact .profil{float:left; width:300px}
+.contact .profil .number{margin-top:40px}
+.contact .historyInfos{float:left; width:240px; margin-left:20px; margin-top:50px}
+.contact .historyInfos span{display:inline}
+#history .action2 .pictoModify{margin-left:-15px}

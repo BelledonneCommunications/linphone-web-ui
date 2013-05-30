@@ -14,7 +14,18 @@
 <header>
 <div class="content">
 <div class="logo"></div>
-<div class="profil"><img src="tmp/profil.png" alt="" />Nom du compte<br /><p class="status"><span class="statusDisponible"></span>Disponible</p><div class="profilModify"></div></div>
+<div class="profil">
+	<img src="tmp/profil.png" alt="" />Nom du compte<br /><p class="status"><span class="statusOnline"></span>Disponible</p>
+	<div class="profilOpen"></div>
+	<div class="profilModify">
+		<ul>
+			<li><span class="statusOnline"></span>Disponible</li>
+			<li><span class="statusAway"></span>Absent</li>
+			<li><span class="statusBusy"></span>Occupé</li>
+		</ul>
+		<div class="logout"><span class="pictoLogout"></span>Déconnexion</div>
+	</div>
+</div>
 <nav class="subnav">
 	<ul>
 		<li><a href="">Paramètres</a></li>
@@ -27,37 +38,34 @@
 		<li><a href="" class="selected">FR</a></li>
 		<li><a href="">EN</a></li>
 		<li><a href="">IT</a></li>
-		<li><a href="">ES</a></li>
+		<li><a href="">DE</a></li>
 	</ul>
 </nav>
 </div>
 </header>
 <div class="content">
-<div class="ringtone"><span class="ringtonePicto"></span>Silencieux<input type="button" value="on" class="on"  /><input type="button" value="off" class="selected" /></div>
-<div class="dialer"><input type="text" value="SIP or phone number"><div class="number"></div><div class="button"><div class="pictoCall"></div>Appel</div><div class="button"><div class="pictoChat"></div>Chat</div></div>
+<div class="ringtone"><div><span class="ringtonePicto"></span>Silencieux</div><div class="buttonSelected">On</div><div class="button">Off</div></div>
+<div class="dialer"><input type="text" value="SIP or phone number"><div class="number"></div>
+<table><tr><td>1</td><td>2</td><td>3</td></tr><tr><td>4</td><td>5</td><td>6</td></tr><tr><td>7</td><td>8</td><td>9</td></tr><tr><td>*</td><td>0</td><td>#</td></tr></table>
+
+<div class="action marginLeft" id="call"><div class="pictoCall"></div>Appel</div><div class="action marginLeft"><div class="pictoChat"></div>Chat</div></div>
 <aside>
 	<nav>
 		<ul>
-			<li><a href="#">Contacts</a></li>
-			<li><a href="#">Historique</a></li>
+			<li><a href="#" id="contactWrapper">Contacts</a></li>
+			<li><a href="#" id="historyWrapper">Historique</a></li>
 			<li><span class="menu">Appels</span>
 				<ul>
-					<li><a href="#"><span class="play"></span>Myrtille</a><span class="closeContact"></span></li>
-					<li><a href="#"><span class="pause"></span>Apollin</a><span class="closeContact"></span></li>
-					<li><a href="#" class="selected"><span class="pause"></span>César</a><span class="closeContact"></span></li>
+					<li><a href="#"><span class="play"></span>Myrtille</a></li>
+					<li><a href="#"><span class="pause"></span>Apollin</a></li>
+					<li><a href="#"><span class="pause"></span>César</a></li>
 				</ul></li>
 			<li><span class="menu">Chats</span>
 				<ul>
-					<li><a href="#">Cunégonde</a><span class="closeContact"></span></li>
-					<li><a href="#">Roger<span class="numberMessage">26</span><span class="closeContact"></span></a></li>
+					<li><a href="#">Cunégonde</a></li>
+					<li><a href="#">Roger<span class="numberMessage">26</span></a></li>
 				</ul></li>
 		</ul>
 	</nav>
 </aside>
 <div class="wrapper">
-<p></p>
-</div>
-</div>
-
-</body>
-</html>
