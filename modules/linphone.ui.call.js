@@ -1,0 +1,1 @@
+// var content = base.find('.call .template .Idle').render({name: "Pierre"});

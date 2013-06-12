@@ -6,19 +6,35 @@ module.exports = function(grunt) {
 	],
 	uiModules = [
 		'linphone.ui.base',
+		'linphone.ui.plugin',
+		'linphone.ui.login',
 		'linphone.ui.contacts',
+		'linphone.ui.contact',
 		'linphone.ui.history',
 		'linphone.ui.call',
+		'linphone.ui.conference',
+		'linphone.ui.chat',
+		'linphone.ui.settings',
+		'linphone.ui.about',		
 		'linphone.ui.incall',
-		'linphone.ui.outcall'		
+		'linphone.ui.outcall',
+		'linphone.ui.error'
 	],
 	htmlModules = [
 		'base',
+		'plugin',
+		'login',
 		'contacts',
+		'contact',
 		'history',
 		'call',
+		'chat',
+		'conference',
+		'settings',
+		'about',
 		'incall',
 		'outcall',
+		'error',
 		'index_footer'
 	],
 

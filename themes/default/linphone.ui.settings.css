@@ -1,0 +1,5 @@
+.wrapper-settings .actions{padding:10px}
+.wrapper-settings .actions .title{font-size:15pt;float:left; margin-top:10px}
+.wrapper-settings form{padding:20px 10px 10px; border-top:1px solid #e4edf2; width:100%; margin-top:-10px}
+.wrapper-settings form label {width:200px; float:left; clear:left; line-height:20px; text-transform:uppercase; font-weight:bold}
+.wrapper-settings form select{border:1px solid #adbbc2; width:230px; margin-bottom:20px; float:left;padding:5px}

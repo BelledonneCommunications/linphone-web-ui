@@ -1,397 +1,169 @@
 /* 
-        Code couleurs 
-bkg foncé, textes : #23262a
-bkg bleu : #e4edf2
-bleu actif, textes : #5d8398
-texte sur bkg foncé : #616973
-texte actif sur bkg foncé : #b3bfc5
-orange : #cf4c29
-texte sur bleu actif : #6f8896
-textes gris : #7a7a7a 
+Code couleurs 
+bkg foncé, textes :#23262a
+bkg bleu :#e4edf2
+bleu actif, textes :#5d8398
+texte sur bkg foncé :#616973
+texte actif sur bkg foncé :#b3bfc5
+orange :#cf4c29
+texte sur bleu actif :#6f8896
+textes gris :#7a7a7a 
 */
-@font-face {
-    font-family: 'allerregular';
-    src: url('font/aller_rg-webfont.eot');
-    src: url('font/aller_rg-webfont.eot?#iefix') format('embedded-opentype'), url('font/aller_rg-webfont.woff') format('woff'), url('font/aller_rg-webfont.ttf') format('truetype'), url('font/aller_rg-webfont.svg#allerregular') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
-@font-face {
-    font-family: 'allerregular';
-    src: url('font/aller_std_bd-webfont.eot');
-    src: url('font/aller_std_bd-webfont.eot?#iefix') format('embedded-opentype'), url('font/aller_std_bd-webfont.woff') format('woff'), url('font/aller_std_bd-webfont.ttf') format('truetype'), url('font/aller_std_bd-webfont.svg#allerbold') format('svg');
-    font-weight: bold;
-    font-style: normal;
-}
-body {
-    font-family: 'allerregular',arial,verdana, sans-serif;
-    font-size: 10pt;
-    background: #e4edf2;
-}
-.content {
-    width: 940px;
-    margin: 0 auto;
-}
-header {
-    background: #23262a;
-    height: 70px;
-}
-header .logo {
-    background-image: url('img/logo.png');
-    background-repeat: no-repeat;
-    width: 230px;
-    height: 70px;
-    float: left;
-}
-header .profil {
-    float: left;
-    width: 210px;
-    border-left: 1px solid #434850;
-    border-right: 1px solid #434850;
-    height: 40px;
-    padding: 15px 15px 15px 17px;
-    color: #b3bfc5;
-    position:relative
-}
-header .profil img {
-    border: 2px solid #e4edf2;
-    float: left;
-    width: 36px;
-    height: 36px;
-    margin-right: 10px;
-}
-header .profil .status {
-    text-transform: uppercase;
-    font-size: 9pt;
-    color: #727c88;
-    margin-top: 10px;
-    float: left;
-}
-header .profil .status .statusOnline {
-    background-image: url('img/online.png');
-    background-repeat: no-repeat;
-    width: 10px;
-    height: 10px;
-    float: left;
-    margin-right: 10px;
-}
+@font-face{font-family:'allerregular'; src:url('font/aller_rg-webfont.eot'); src:url('font/aller_rg-webfont.eot?#iefix') format('embedded-opentype'), url('font/aller_rg-webfont.woff') format('woff'), url('font/aller_rg-webfont.ttf') format('truetype'), url('font/aller_rg-webfont.svg#allerregular') format('svg'); font-weight:normal; font-style:normal}
+@font-face{font-family:'allerregular'; src:url('font/aller_std_bd-webfont.eot'); src:url('font/aller_std_bd-webfont.eot?#iefix') format('embedded-opentype'), url('font/aller_std_bd-webfont.woff') format('woff'), url('font/aller_std_bd-webfont.ttf') format('truetype'), url('font/aller_std_bd-webfont.svg#allerbold') format('svg'); font-weight:bold; font-style:normal}
 
-header .profil .profilOpen {
-    background-image: url('img/open.png');
-    background-repeat: no-repeat;
-    width: 15px;
-    height: 9px;
-    float: right;
-    margin-top: 10px;
-}
+/*************/
+/* structure */
+/*************/
+body{font-family:'allerregular',arial,verdana, sans-serif; font-size:10pt; background:#e4edf2}
+.content{width:940px; margin:0 auto;position:relative }
+.main{display:none}
+header{background:#23262a; height:70px; }
+aside{float:left; width:230px; background:#23262a; height:550px} 
+.wrapper{background:#fff; min-height:550px; width:710px; float:left; position:relative; }
 
-header .profil .profilOpen:hover {
-    background-image: url('img/close.png');
-    background-repeat: no-repeat;
-    width: 15px;
-    height: 9px;
-    cursor:pointer
-}
+/*************/
+/* entete    */
+/*************/
+header .logo{background-image:url('img/logo.png'); background-repeat:no-repeat; width:230px; height:70px; float:left}
 
-header .profilModify{background:#23262a; position:absolute;top:70px;z-index:2; left:57px; width:185px; padding:13px 0; display:none}
+header .profil{float:left; width:210px; border-left:1px solid #434850; border-right:1px solid #434850; height:40px; padding:15px 15px 15px 17px; color:#b3bfc5; position:relative;}
+header .profil img{border:2px solid #e4edf2; float:left; width:36px; height:36px; margin-right:10px}
+header .profil .status{text-transform:uppercase; font-size:9pt; color:#727c88; margin-top:10px; float:left}
+header .profil .status .statusOnline{background-repeat:no-repeat; width:10px; height:10px; float:left; margin-right:10px}
+header .profil .profilOpen{background-image:url('img/statusOpen.png'); background-repeat:no-repeat; width:15px; height:9px; float:right; margin-top:10px}
+header .profil .profilOpen:hover{background-image:url('img/statusClose.png'); background-repeat:no-repeat; width:15px;height:9px; cursor:pointer}
+
+header .profilModify{background:#23262a; position:absolute; top:70px; z-index:2; left:57px; width:185px; padding:13px 0; display:none}
 header .profilModify ul{margin-left:10px}
-header .profilModify li{margin-bottom:10px; color:#616973; text-transform:uppercase; font-size:9pt}
+header .profilModify li{margin-bottom:10px; color:#616973; text-transform:uppercase; font-size:9pt; }
 header .profilModify li:hover{color:#fff; cursor:pointer}
-header .profilModify span{
-	background-repeat: no-repeat;
-    width: 10px;
-    height: 10px;
-    float: left;
-    margin-right: 10px;
-    margin-top:2px;
-}
-.statusOnline {
-    background-image: url('img/online.png');
-}
-.statusAway{
-    background-image: url('img/away.png');
-}
-.statusBusy{
-    background-image: url('img/busy.png');
-}
-header .profilModify .logout{
-	border-top:1px solid #2f3338; 
-	color:#616973;
-	text-transform:uppercase;
-	padding:13px 10px;
-	font-size:9pt
-}
+header .profilModify span{background-repeat:no-repeat; width:10px; height:10px; float:left; margin-right:10px; margin-top:2px}
+
+
+header .profilModify .logout{border-top:1px solid #2f3338;  color:#616973; text-transform:uppercase; padding:13px 10px; font-size:9pt}
 header .profilModify .logout:hover{color:#fff; cursor:pointer}
-header .profilModify .logout .pictoLogout{
-	background:url('img/logout.png') no-repeat;
-	width:10px;
-	height:11px;
-	margin-top:1px
-}
+header .profilModify .logout .pictoLogout{background:url('img/logout.png') no-repeat; width:10px; height:11px; margin-top:1px}
+
+header .subnav{position:absolute; left:474px; top:37px;}
+header .subnav li{display:inline; text-transform:uppercase; color:#616973; padding-left:10px; font-weight:bold}
+header .subnav li:hover{color:#b3bfc5; cursor:pointer}
+header .subnav li:before{content:'|'; padding-right:10px}
+header .subnav li:hover:before{color:#616973}
+header .subnav li:first-child{padding-left:0}
+header .subnav li:first-child:before{content:'' }
 
 
-header .subnav {
-    padding-top: 37px;
-    float: left;
-}
-header .subnav li {
-    display: inline;
-    text-transform: uppercase;
-    color: #616973;
-    padding-left: 10px;
-    font-weight: bold;
-}
-header .subnav li:before {
-    content: '|';
-    padding-right: 10px;
-}
-header .subnav li:first-child { 
-    padding-left: 0;
-}
-header .subnav li:first-child:before { content: '' }
-header .subnav li a {
-    color: #616973;
-    text-decoration: none;
-}
-header .subnav li a:hover { color: #b3bfc5 }
-header .lang {
-    float: right;
-    padding-top: 37px;
-}
-header .lang li {
-    display: inline;
-    padding-left: 3px;
-    color: #616973;
-    font-weight: bold;
-}
-header .lang li:before {
-    content: '|';
-    padding-right: 6px;
-}
-header .lang li:first-child:before { content: '' }
-header .lang li a {
-    color: #616973;
-    text-decoration: none;
-}
-header .lang li a.selected,
-header .lang li a:hover { color: #b3bfc5 }
-.dialer {
-    height: 60px;
-    margin-top: 20px;
-    position: relative;
-    width:700px
-}
-.dialer .number {
-    background-image: url('img/dialer.png');
-    background-repeat: no-repeat;
-    position: absolute;
-    top: 1px;
-    left: 377px;
-    width: 33px;
-    height: 37px;
-}
+header .lang{float:right; padding-top:37px}
+header .lang li{display:inline; padding-left:4px; color:#616973;font-weight:bold}
+header .lang li:before{content:'|'; padding-right:5px}
+header .lang li:first-child:before{ content:'' }
+header .lang li:hover{color:#b3bfc5; cursor:pointer}
+header .lang li:hover:before{color:#616973}
 
-.dialer table{position:absolute; top:40px; left:230px; background:rgba(35,38,42,0.8);border-collapse: separate; border-spacing:4px; display:none; z-index:2 }
-.dialer table td{background:#5d8398; color:#ffffff;text-align:center; width:55px; height:40px;vertical-align: middle; }
+.dialer{height:60px; margin-top:20px; position:relative; width:700px}
+.dialer .number{background-image:url('img/dialer.png'); background-repeat:no-repeat; position:absolute; top:1px; left:377px; width:33px; height:37px}
+.dialer table{position:absolute; top:40px; left:230px; background-color:rgb(35,35,42);background-color:rgba(35,38,42,0.8);border-collapse:separate; border-spacing:4px; display:none; z-index:2}
+.dialer table td{background:#5d8398; color:#ffffff;text-align:center; width:55px; height:40px;vertical-align:middle}
 
-aside {
-    float: left;
-    width: 230px;
-    background: #23262a;
-    min-height: 550px;
-}
-.wrapper {
-    background: #fff;
-    min-height: 550px;
-    width:710px;
-    float:left; 
-    position:relative
-}
-.dialer input {
-    height: 36px;
-    outline: none;
-    vertical-align: middle;
-    margin-right: 5px;
-    text-transform: uppercase;
-    line-height: 36px;
-    border: 1px solid #929fa5;
-    background-color: #fff;
-    width: 387px;
-    padding-left: 20px;
-    color: #929fa5;
-    float: left;
-}
-.action {
-    color: #fff;
-    height: 40px;
-    background: #cf4c29;
-    outline: none;
-    vertical-align: middle;
-    text-transform: uppercase;
-    line-height: 40px;
-    float: left;
-}
-.dialer .action{width:100px; padding:0}
-.action2{background:#5d8398; color:#fff; height:40px; outline:none; vertical-align:middle; text-transform:uppercase; line-height:40px; width:auto; float:left}
-.action2:hover{background:#8eaaba; cursor:pointer; color:#fff}
-.action:hover {
-    background-color: #d97459;
-    cursor: pointer;
-}
+.dialer input{height:36px; outline:none; vertical-align:middle; margin-right:5px; text-transform:uppercase; line-height:36px; border:1px solid #929fa5; background-color:#fff; width:387px; padding-left:20px; color:#929fa5; float:left}
+.ringtone{float:right;}
 
-.action .pictoCall {
-    background-image: url('img/call.png');
-    background-repeat: no-repeat;
-    width: 40px;
-    height: 40px;
-    float: left;
-}
-.action .pictoChat {
-    background-image: url('img/chat.png');
-    background-repeat: no-repeat;
-    width: 40px;
-    height: 40px;
-    float: left;
-}
-
-
-.action2 .pictoModify {
-    background-image: url('img/modify.png');
-    background-repeat: no-repeat;
-    width: 40px;
-    height: 40px;
-    float: left;
-    }
-
-.ringtone {
-   float: right;
-   color: #5d8398;
-   text-transform: uppercase;
-}
-.ringtone>div:first-child{float:left;margin-top: 15px;margin-right:10px}
-.ringtone .ringtonePicto {
-    background-image: url('img/ringtone.png');
-    background-repeat: no-repeat;
-    width: 8px;
-    height: 13px;
-    margin-right: 5px;
-
-    float: left;
-}
-
-.button, .buttonSelected {
-    background: #e4edf2;
-    height: 40px;
-    border: 0;
-    text-transform: uppercase;
-    color: #8c949f;
-    text-align: center;
-    float:left;
-    line-height:40px;
-    padding:0 15px
-    
-}
-.ringtone .button{background:#fff; width:50px; padding:0}
-/*button .selected {
-    background: #5d8398;
-    color: #ffffff;
-}*/
-.button:hover {
-    background: #8eaaba;
-    cursor: pointer;
-    color: #ffffff;
-}
-
-.buttonSelected{background:#5d8398; color:#fff}
-
-
-aside nav li {
-    border-top: 1px solid #434850;
-    position: relative;
-}
+/*************/
+/* menu      */
+/*************/
+aside .scroll-pane{width:230px; height:550px;}
+aside .scroll-content{width:220px} 
+aside .slider-wrap, aside .ui-slider-range{background-color:#23262a}
+aside nav li{border-top:1px solid #434850; position:relative}
 aside nav li:first-child,
-aside nav li li { 
-    border-top: 0; 
-}
-aside nav li a {
-    color: #616973;
-    text-decoration: none;
-    text-transform: uppercase;
-    padding: 20px;
-    display: block;
-    border-left: 4px solid #23262a;
-    font-weight: bold;
-}
-aside nav li .menu {
-    color: #616973;
-    text-decoration: none;
-    text-transform: uppercase;
-    padding: 24px;
-    display: block;
-    margin-bottom: -10px;
-}
-aside nav li li a { padding: 5px 20px }
-aside nav li ul { margin-bottom: 10px }
-aside nav li .numberMessage {
-    background: url('img/numberMessage.png') no-repeat;
-    color: #23262b;
-    font-size: 9pt;
-    width: 20px;
-    height: 14px;
-    position:absolute;
-    top:4px;
-    margin-left:10px;
-    padding-left:3px;
-    padding-top:1px
-}
+aside nav li li{border-top:0; }
+aside nav li a{color:#616973; text-decoration:none; text-transform:uppercase; padding:20px; display:block; border-left:4px solid #23262a; font-weight:bold}
+aside nav li .menu{color:#616973; text-decoration:none; text-transform:uppercase; padding:24px; display:block; margin-bottom:-10px}
+aside nav li li a{padding:5px 20px}
+aside nav li ul{margin-bottom:10px}
+aside nav li .numberMessage{background:url('img/numberMessage.png') no-repeat; color:#23262b; font-size:9pt; width:20px; height:14px; position:absolute; top:4px; margin-left:10px; padding-left:3px; padding-top:1px}
+aside nav li .closeContact{background-image:url('img/contactClose.png'); background-repeat:no-repeat; width:15px; height:9px; position:absolute; right:0; top:6px;}
+aside nav li a:hover{color:#ffffff; border-left:4px solid #cf4c29; background-color:#34393f; cursor:pointer} 
+aside nav li .play{background-image:url('img/play.png'); background-repeat:no-repeat; width:9px; height:9px; float:left; margin-right:7px; margin-top:1px}
+aside nav li .pause{background-image:url('img/pause.png'); background-repeat:no-repeat; width:7px; height:9px; float:left; margin-right:7px; margin-top:1px}
+aside nav li a:hover .play{background-image:url('img/playHover.png'); background-repeat:no-repeat}
+aside nav li a:hover .pause{background-image:url('img/pauseHover.png'); background-repeat:no-repeat}
 
-aside nav li .closeContact {
-    background-image: url('img/closeContact.png');
-    background-repeat: no-repeat;
-    width: 15px;
-    height: 9px;
-    position: absolute;
-    right: 0;
-    top: 6px;}
-aside nav li a:hover,
-aside nav li a.selected {
-    color: #ffffff;
-    border-left: 4px solid #cf4c29;
-    background-color: #34393f;
-}
-aside nav li .play {
-    background-image: url('img/play.png');
-    background-repeat: no-repeat;
-    width: 9px;
-    height: 9px;
-    float: left;
-    margin-right: 7px;
-    margin-top: 1px;
-}
-aside nav li .pause {
-    background-image: url('img/pause.png');
-    background-repeat: no-repeat;
-    width: 7px;
-    height: 9px;
-    float: left;
-    margin-right: 7px;
-    margin-top: 1px;
-}
-aside nav li a:hover .play,
-aside nav li a.selected .play { 
-    background-image: url('img/playHover.png');
-    background-repeat: no-repeat;
-}
-aside nav li a:hover .pause,
-aside nav li a.selected .pause {
-    background-image: url('img/pauseHover.png');
-    background-repeat: no-repeat;
-}
+/*************/
+/* wrapper */
+/*************/
+div[class^="wrapper-"]{display:none;}
+div[class^="popup-"]{display:none}
 
 
-.floatRight{float:right;}
-.padding{padding:10px}
+/*************/
+/* générique */
+/*************/
 hr{clear:both; visibility:hidden}
-.paddingLeftRight{padding:0 10px}
+
+.floatRight{float:right}
+.floatLeft{float:left}
+.padding{padding:10px}
+.paddingRight{padding-right:10px}
 .marginLeft{margin-left:2px}
-.button + .button{border-left:1px solid #d0dce2}
+.mediumMarginLeft{margin-left:10px}
+.bigMarginLeft{margin-left:15px}
+
+
+/*************/
+/* boutons   */
+/*************/
+
+.btn, .btnTxt{background:#cf4c29; margin-left:2px} /* fond orange picto */
+.btn:hover, .btnTxt:hover{background:#d97459; cursor:pointer}
+.btnAction, .btnTxtAction{background:#5d8398} /* fond bleu picto */
+.btnAction:hover, .btnTxtAction:hover{background:#8eaaba; cursor:pointer}
+.btnTxt, .btnTxtAction, .btnTxtPause{text-transform:uppercase; color:#fff; padding-right:15px; line-height:40px} /*fond  picto + txt */ 
+.btnSelect{background:#e4edf2; color:#8c949f; height:40px; line-height:40px; padding:0 15px; text-transform:uppercase}
+.btnSelect:hover{background:#5d8398; color:#fff; cursor:pointer}
+.ringtone .btnSelect{background:#fff}
+.btnSelect+.btnSelect{border-left:1px solid #d0dce2}
+.btnSelectDesc{color:#5d8398; height:40px; line-height:40px;text-transform:uppercase}
+.btnPause, .btnTxtPause{background:#23262a}
+.btnPause:hover, .btnTxtPause:hover{background:#616973; cursor:pointer}
+
+.btn, .btnTxt, .btnAction, .btnTxtAction, .btnSelect, .btnSelectDesc, .btnPause, .btnTxtPause, .btnTxt>div, .btnTxtAction>div, .btnSelectDesc>div , .btnTxtPause>div{float:left}
+div[class^="picto"]{height:40px; width:40px; background-repeat:no-repeat; float:left}
+.pictoAdd{background-image:url('img/add.png')}
+.pictoCall{background-image:url('img/call.png')}
+.pictoCallOff{background-image:url('img/callOff.png')}
+.pictoChat{background-image:url('img/chat.png')}
+.pictoClose{background-image:url('img/close.png')}
+.pictoConfAdd{background-image:url('img/confAdd.png')}
+.pictoContactAdd{background-image:url('img/contactAdd.png')}
+.pictoDelete{background-image:url('img/delete.png')}
+.pictoModify{background-image:url('img/modify.png')}
+.pictoPause{background-image:url('img/pauseBtn.png')}
+.pictoRefresh{background-image:url('img/refresh.png')}
+.pictoSave{background-image:url('img/check.png')}
+.pictoSend{background-image:url('img/send.png')}
+.pictoUpload{background-image:url('img/upload.png')}
+div.pictoVideo{background-image:url('img/video.png'); background-repeat:no-repeat; width:11px; height:6px; margin-top:17px; margin-right:5px}
+div.pictoMicro{background-image:url('img/speaker.png'); background-repeat:no-repeat; width:6px; height:9px; margin-top:16px; margin-right:5px}
+div.pictoRingtone{background-image:url('img/ringtone.png'); background-repeat:no-repeat; width:8px; height:11px;margin-top:15px; margin-right:5px; }
+
+
+/*************/
+/* status    */
+/*************/
+.statusOnline{background-image:url('img/statusOnline.png')}
+.statusAway{background-image:url('img/statusAway.png')}
+.statusBusy{background-image:url('img/statusBusy.png')}
+
+/*************/
+/* scrollbar */
+/*************/
+a:active, a:focus{outline:none}
+
+.scroll-pane {overflow: auto; position:relative;}
+.scroll-content {position:absolute;top:0;left:0;}
+.slider-wrap{position:absolute;right:0;top:0;background-color:#fff;width:8px;border-left:1px solid #d5dee3;}
+.slider-vertical{position:relative;height:100%}
+.ui-slider-handle{width:8px;height:10px;margin:0 auto;background-color:#5d8398;display:block;position:absolute}
+.ui-slider-range{position:absolute;width:100%;background-color:#fff}

@@ -1,0 +1,18 @@
+.wrapper-chat{position:relative;height:550px}
+.wrapper-chat .entryReceive,
+.wrapper-chat .entrySend {padding:10px 10px 10px 10px;  border-top:1px solid #e4edf2; clear:both}
+.wrapper-chat .entryReceive .contactImg,
+.wrapper-chat .entrySend .contactImg{border:5px solid #e4edf2;} 
+.wrapper-chat .entryReceive .contactImg{float:left; margin-right:10px}
+.wrapper-chat .entrySend .contactImg{float:right; margin-left:10px}
+.wrapper-chat .entryReceive .infos,
+.wrapper-chat .entrySend .infos{float:left; width:600px; margin-top:10px}
+.wrapper-chat .infos .contactName{color:#5d8398}
+.wrapper-chat .infos .date{color:#5d8398; float:right}
+.wrapper-chat .infos .message{font-size:11pt; line-height:14pt; margin-top:10px}
+.wrapper-chat .actions{position:absolute; bottom:10px; left:0; padding-left:10px}
+.wrapper-chat .messageToSend{border:1px solid #adbbc2; height:80px; margin-bottom:20px; padding-left:10px; margin-right:10px; font-size:11pt; line-height:14pt}
+.wrapper-chat .scroll-pane {width:710px; height:360px; border-bottom:1px solid #e4edf2;  }
+.wrapper-chat .scroll-content {width:700px; }
+.wrapper-chat .messageToSend .scroll-pane{width:670px; height:80px;}
+.wrapper-chat .messageToSend .scroll-content {width:650px; }
