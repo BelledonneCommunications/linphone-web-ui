@@ -49,6 +49,49 @@ linphone.core.enums = {
 			return "?";
 		}
 	},
+
+	firewallPolicy : {
+		NoFirewall : 0,
+		UseNatAddress : 1,
+		UseStun : 2,
+		UseIce : 3,
+		UseUpnp : 4
+	},
+	getFirewallPolicyText : function(value) {
+		switch (value) {
+		case linphone.core.enums.firewallPolicy.NoFirewall:
+			return "NoFirewall";
+		case linphone.core.enums.firewallPolicy.UseNatAddress:
+			return "UseNatAddress";
+		case linphone.core.enums.firewallPolicy.UseStun:
+			return "UseStun";
+		case linphone.core.enums.firewallPolicy.UseIce:
+			return "UseIce";
+		case linphone.core.enums.firewallPolicy.UseUpnp:
+			return "UseUpnp";
+		default:
+			return "?";
+		}
+	},
+
+	mediaEncryption : {
+		None : 0,
+		SRTP : 1,
+		ZRTP : 2
+	},
+	getMediaEncryption : function(value) {
+		switch (value) {
+		case linphone.core.enums.mediaEncryption.None:
+			return "None";
+		case linphone.core.enums.mediaEncryption.SRTP:
+			return "SRTP";
+		case linphone.core.enums.mediaEncryption.ZRTP:
+			return "ZRTP";
+		default:
+			return "?";
+		}
+	},
+
 	registrationState : {
 		None : 0,
 		Progress : 1,
