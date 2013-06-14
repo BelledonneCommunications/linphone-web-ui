@@ -1,4 +1,4 @@
-.popup-error {
+.popup .error {
 	background-color: rgb(35,38,42);
 	background-color: rgba(35,38,42,0.85);
 	width: 155px;
@@ -8,29 +8,29 @@
 	padding: 10px;
 	text-align: center;
 }
-.popup-error .popupTitle {
+.popup .error .popupTitle {
 	color: #b3bfc5;
 	text-transform: uppercase;
 	font-size: 9pt;
 }
-.popup-error .imgError {
+.popup .error .imgError {
 	background: url('img/error.png');
 	width: 40px;
 	height: 40px;
 	margin: 10px auto 15px;
 }
-.popup-error img {
+.popup .error img {
 	display: block;
 	border: 5px solid #e4edf2;
 	margin: 10px auto;
 }
-.popup-error p {
+.popup .error p {
 	color: #fff;
 	font-size: 12pt;
 	line-height: 14pt;
 	margin-bottom: 20px;
 }
-.popup-error .btnTxt {
+.popup .error .btnTxt {
 	float: inherit;
 	width: auto;
 }   

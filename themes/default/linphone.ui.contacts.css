@@ -1,30 +1,30 @@
-.wrapper-contacts .actions {
+.wrapper .contacts .actions {
 	padding: 10px 10px 1px;
 	border-bottom: 1px solid #e4edf2;
 }
-.wrapper-contacts .entry {
+.wrapper .contacts .entry {
 	clear: both;
 	border-bottom: 1px solid #e4edf2;
 	padding: 10px 10px 1px 10px;
 	position: relative;
 }
-.wrapper-contacts .entry .contactImg {
+.wrapper .contacts .entry .contactImg {
 	border: 5px solid #e4edf2;
 	float: left;
 	margin-right: 10px;
 }
-.wrapper-contacts .entry .contactName {
+.wrapper .contacts .entry .contactName {
 	display: inline-block;
 	margin-top: 7px;
 	line-height: 20px;
 	font-size: 11pt;
 }
-.wrapper-contacts .entry .contactStatus {
+.wrapper .contacts .entry .contactStatus {
 	color: #7a7a7a;
 	text-transform: uppercase;
 	font-size: 8pt;
 }
-.wrapper-contacts .entry .statusOnline, .wrapper-contacts .entry .statusBusy, .wrapper-contacts .entry .statusAway {
+.wrapper .contacts .entry .statusOnline, .wrapper .contacts .entry .statusBusy, .wrapper .contacts .entry .statusAway {
 	background-repeat: no-repeat;
 	width: 10px;
 	height: 10px;
@@ -32,21 +32,21 @@
 	margin-right: 5px;
 	margin-top: 2px;
 }
-.wrapper-contacts .entry .contactNumber {
+.wrapper .contacts .entry .contactNumber {
 	color: #5d8398;
 	display: inline-block;
 	margin-top: 20px;
 	line-height: 15px;
 }
-.wrapper-contacts .entry .entryActions {
+.wrapper .contacts .entry .entryActions {
 	position: absolute;
 	right: 10px;
 	bottom: 10px;
 }
-.wrapper-contacts .scroll-pane {
+.wrapper .contacts .scroll-pane {
 	width: 710px;
 	height: 490px;
 }
-.wrapper-contacts .scroll-content {
+.wrapper .contacts .scroll-content {
 	width: 700px;
 }

@@ -23,25 +23,11 @@ module.exports = function(grunt) {
 		'linphone.ui.outcall',
 		'linphone.ui.error'
 	],
-	htmlModules = [
-		'index_header',
-		'base',
-		'plugin',
-		'login',
-		'contacts',
-		'contact',
-		'history',
-		'call',
-		'chat',
-		'conference',
-		'settings',
-		'about',
-		'incall',
-		'outcall',
-		'error',
-		'index_footer'
+	htmlFiles = [
+		'index',
 	],
 
+	/* JS files */
 	coreJSFiles = coreModules.map(function(module) {
 		return 'modules/' + module + '.js';
 	}),
@@ -49,7 +35,9 @@ module.exports = function(grunt) {
 	uiJSFiles = uiModules.map(function(module) {
 		return 'modules/' + module + '.js';
 	}),
+	/* ********** */
 
+	/* Css files */
 	uiCSSFiles = uiModules.map(function(module) {
 		return 'modules/' + module + '.css';
 	}),
@@ -57,11 +45,18 @@ module.exports = function(grunt) {
 	uiCSSFiles = uiCSSFiles.concat(uiModules.map(function(module) {
 		return 'themes/<%= theme %>/' + module + '.css';
 	})),
+	/* ********** */
 	
-	htmlFiles = htmlModules.map(function(module) {
+	/* Html files */
+	htmlFiles = htmlFiles.map(function(module) {
 		return 'html/' + module + '.html';
 	}),
 	
+	htmlFiles = htmlFiles.concat(uiModules.map(function(module) {
+		return 'modules/' + module + '.html';
+	})),
+	/* ********** */
+
 	// Project configuration.
 	grunt.initConfig({
 		env: 'debug',
@@ -130,10 +125,6 @@ module.exports = function(grunt) {
 				dest: '<%= tmp %>/style/linphone-ui-<%= pkg.version %>.css',
 				src: [uiCSSFiles]
 			},
-			html: {
-				dest: '<%= tmp %>/index-big.html',
-				src: [htmlFiles]
-			},
 		},
 		uglify: {
 			options: {
@@ -161,9 +152,10 @@ module.exports = function(grunt) {
 		},
 		preprocess: {
 			html: {
-				src : '<%= concat.html.dest %>',
+				src : 'html/index.html',
 				dest: '<%= tmp %>/index-processed.html',
 				options: {
+					srcDir: 'modules/',
 					context: {
 						env: '<%= env %>',
 						version: '<%= pkg.version %>'
@@ -264,7 +256,7 @@ module.exports = function(grunt) {
 			},
 			html: {
 				files: htmlFiles,
-				tasks: ['concat:html', 'preprocess:html', 'htmlmin:html']
+				tasks: ['preprocess:html', 'htmlmin:html']
 			}
 		},
 		server : {
@@ -389,7 +381,7 @@ module.exports = function(grunt) {
 	);
 	
 	// Compile task
-	grunt.registerTask('compile', ['clean', 'copy', 'concat', 'oversprite', 'imagemin', 'preprocess', 'uglify', 'cssmin', 'htmlmin']);
+	grunt.registerTask('compile', ['clean', 'copy', 'preprocess', 'concat', 'oversprite', 'imagemin', 'uglify', 'cssmin', 'htmlmin']);
  
 	// Default task
 	grunt.registerTask('default', ['release-env', 'jshint', 'csslint', 'compile']);

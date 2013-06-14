@@ -66,10 +66,12 @@ aside {
 /*  wrapper  */
 /*************/
 
-div[class^="wrapper-"] {
+.wrapper > div {
 	display: none;
 }
-div[class^="popup-"] {
+
+
+.popup > div {
 	display: none;
 }
 

@@ -30,7 +30,7 @@
 		"grunt-contrib-imagemin": "*",
 		"grunt-contrib-compress": "*",
 		"grunt-oversprite": "git://github.com/diorcety/grunt-oversprite.git",
-		"grunt-preprocess": "*",
+		"grunt-preprocess": "git://github.com/diorcety/grunt-preprocess.git",
 		"express": "*",
 		"commander": "*"
 	},

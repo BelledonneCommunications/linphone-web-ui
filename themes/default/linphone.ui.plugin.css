@@ -1,21 +1,21 @@
-.wrapper-plugin {
+.wrapper .plugin {
 	text-align: center;
 }
-.wrapper-plugin .logo {
+.wrapper .plugin .logo {
 	background-image: url('img/logoPicto.png');
 	background-repeat: no-repeat;
 	width: 260px;
 	height: 100px;
 	margin: 30px auto;
 }
-.wrapper-plugin .title {
+.wrapper .plugin .title {
 	font-size: 18pt;
 	margin-bottom: 20px;
 }
-.wrapper-plugin .text {
+.wrapper .plugin .text {
 	width: 300px;
 	margin: 0 auto 20px;
 }
-.wrapper-plugin .action {
+.wrapper .plugin .action {
 	display: inline-block;
 }

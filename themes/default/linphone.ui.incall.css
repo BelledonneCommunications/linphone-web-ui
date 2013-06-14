@@ -1,4 +1,4 @@
-.popup-incall {
+.popup .incall {
 	background-color: rgb(35,38,42);
 	background-color: rgba(35,38,42,0.8);
 	width: 155px;
@@ -8,49 +8,49 @@
 	padding: 10px;
 	text-align: center;
 }
-.popup-incall .popupTitle {
+.popup .incall .popupTitle {
 	color: #b3bfc5;
 	text-transform: uppercase;
 	font-size: 9pt;
 }
-.popup-incall .contactImg {
+.popup .incall .contactImg {
 	display: block;
 	border: 5px solid #e4edf2;
 	margin: 10px auto;
 }
-.popup-incall .contactName {
+.popup .incall .contactName {
 	color: #fff;
 	font-size: 11pt;
 }
 
-.popup-incall .actions {
+.popup .incall .actions {
 	margin: 20px 0 0 5px;
 }
-.popup-incall .actions .callIn {
+.popup .incall .actions .callIn {
 	background: #809f12;
 	width: 70px;
 	height: 40px;
 	float: left;
 }
-.popup-incall .actions .callIn:hover {
+.popup .incall .actions .callIn:hover {
 	background: #a7ba65;
 	cursor: pointer;
 }
-.popup-incall .actions .callIn .pictoCall {
+.popup .incall .actions .callIn .pictoCall {
 	margin-left: 15px;
 }
 
-.popup-incall .actions .callOff {
+.popup .incall .actions .callOff {
 	background: #9f1212;
 	width: 70px;
 	height: 40px;
 	float: left;
 	margin-left: 3px;
 }
-.popup-incall .actions .callOff:hover {
+.popup .incall .actions .callOff:hover {
 	background: #c45a5a;
 	cursor: pointer;
 }
-.popup-incall .actions .callOff .pictoCallOff {
+.popup .incall .actions .callOff .pictoCallOff {
 	margin-left: 15px;
 }     
