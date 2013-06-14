@@ -1,11 +1,53 @@
-.wrapper-login{text-align:center;}
-.wrapper-login .logo{background-image:url('img/logoPicto.png'); background-repeat:no-repeat; width:260px; height:100px; margin:30px auto}
-.wrapper-login .title{font-size:18pt; margin-bottom:20px}
-.wrapper-login input[type="text"]{border:1px solid #adbbc2; width:400px; height:40px; margin-bottom:10px; padding:0 15px; color:#929fa5}
-.wrapper-login .choice{text-align:left; margin-bottom:10px}
-.wrapper-login .choice span{float:left; width:150px; text-transform:uppercase;color:#5d8398}
-.wrapper-login input[type="checkbox"]{border:1px solid #adbbc2}
-.wrapper-login label{color:#5d8398; margin-right:15px}
-.wrapper-login .btnTxt{width:415px; text-align:center; margin-bottom:30px}
-.wrapper-login .lien{color:#cf4c29; text-transform: uppercase; margin-bottom:10px}
-.wrapper-login .lien:hover{cursor:pointer; color:#d97459}
+.wrapper-login {
+	text-align: center;
+}
+.wrapper-login .logo {
+	background-image: url('img/logoPicto.png');
+	background-repeat: no-repeat;
+	width: 260px;
+	height: 100px;
+	margin: 30px auto;
+}
+.wrapper-login .title {
+	font-size: 18pt;
+	margin-bottom: 20px;
+}
+.wrapper-login input[type="text"] {
+	border: 1px solid #adbbc2;
+	width: 400px;
+	height: 40px;
+	margin-bottom: 10px;
+	padding: 0 15px;
+	color: #929fa5;
+}
+.wrapper-login .choice {
+	text-align: left;
+	margin-bottom: 10px;
+}
+.wrapper-login .choice span {
+	float: left;
+	width: 150px;
+	text-transform: uppercase;
+	color: #5d8398;
+}
+.wrapper-login input[type="checkbox"] {
+	border: 1px solid #adbbc2;
+}
+.wrapper-login label {
+	color: #5d8398;
+	margin-right: 15px;
+}
+.wrapper-login .btnTxt {
+	width: 415px;
+	text-align: center;
+	margin-bottom: 30px;
+}
+.wrapper-login .lien {
+	color: #cf4c29;
+	text-transform: uppercase;
+	margin-bottom: 10px;
+}
+.wrapper-login .lien:hover {
+	cursor: pointer;
+	color: #d97459;
+}

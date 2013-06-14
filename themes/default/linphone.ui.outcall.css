@@ -1,7 +1,37 @@
-.popup-outcall{background-color:rgb(35,38,42);background-color:rgba(35,38,42,0.8); width:155px; position:absolute; top:100px; left:200px; padding:10px; text-align:center;}
-.popup-outcall .popupTitle{color:#b3bfc5; text-transform:uppercase; font-size:9pt}
-.popup-outcall .contactImg{display:block; border:5px solid #e4edf2; margin:10px auto}
-.popup-outcall .contactName{color:#fff; font-size:11pt}
-.popup-outcall .actions .callOff{background:#9f1212; width:145px;height:40px; margin:20px auto 0}
-.popup-outcall .actions .callOff:hover{background:#c45a5a; cursor:pointer}
-.popup-outcall .actions .callOff .pictoCallOff{margin-left:50px;}  
+.popup-outcall {
+	background-color: rgb(35,38,42);
+	background-color: rgba(35,38,42,0.8);
+	width: 155px;
+	position: absolute;
+	top: 100px;
+	left: 200px;
+	padding: 10px;
+	text-align: center;
+}
+.popup-outcall .popupTitle {
+	color: #b3bfc5;
+	text-transform: uppercase;
+	font-size: 9pt;
+}
+.popup-outcall .contactImg {
+	display: block;
+	border: 5px solid #e4edf2;
+	margin: 10px auto;
+}
+.popup-outcall .contactName {
+	color: #fff;
+	font-size: 11pt;
+}
+.popup-outcall .actions .callOff {
+	background: #9f1212;
+	width: 145px;
+	height: 40px;
+	margin: 20px auto 0;
+}
+.popup-outcall .actions .callOff:hover {
+	background: #c45a5a;
+	cursor: pointer;
+}
+.popup-outcall .actions .callOff .pictoCallOff {
+	margin-left: 50px;
+}  

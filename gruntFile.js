@@ -6,6 +6,9 @@ module.exports = function(grunt) {
 	],
 	uiModules = [
 		'linphone.ui.base',
+		'linphone.ui.header',
+		'linphone.ui.menu',
+		'linphone.ui.dialer',
 		'linphone.ui.plugin',
 		'linphone.ui.login',
 		'linphone.ui.contacts',
@@ -21,6 +24,7 @@ module.exports = function(grunt) {
 		'linphone.ui.error'
 	],
 	htmlModules = [
+		'index_header',
 		'base',
 		'plugin',
 		'login',
@@ -294,6 +298,7 @@ module.exports = function(grunt) {
 		}
 	});
 
+	/* Filter non existing files */
 	function process_files(files) {
 		var ret = Array();
 		for(var i in files) {

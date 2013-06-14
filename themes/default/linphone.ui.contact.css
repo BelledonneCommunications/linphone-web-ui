@@ -1,7 +1,7 @@
 .wrapper-contact .actions{padding:10px 10px 1px 10px}
 .wrapper-contact .entry{clear:both; border-top:1px solid #e4edf2;padding:10px; position:relative}
 .wrapper-contact .entry form input{border:1px solid #adbbc2; width:230px; height:40px; margin-bottom:10px; padding:0 15px}
-.wrapper-contact .entry form input.defaut{color:#9ba6ac}
+.wrapper-contact .entry form .defaut{color:#9ba6ac}
 .wrapper-contact .entry form .contactImg{border:5px solid #e4edf2; float:left; margin-right:10px}
 .wrapper-contact .entry form .uploadPhoto{position:absolute; top:75px; left:75px; background-color:#5d8398; float:left}
 .wrapper-contact .entry form .addNumber input{float:left; margin-right:5px;}

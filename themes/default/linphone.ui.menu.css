@@ -1,0 +1,93 @@
+aside .scroll-pane {
+	width: 230px;
+	height: 550px;
+}
+aside .scroll-content {
+	width: 220px;
+}
+aside .slider-wrap, aside .ui-slider-range {
+	background-color: #23262a;
+}
+aside nav li {
+	border-top: 1px solid #434850;
+	position: relative;
+}
+aside nav li:first-child, aside nav li li {
+	border-top: 0;
+}
+aside nav li a {
+	color: #616973;
+	text-decoration: none;
+	text-transform: uppercase;
+	padding: 20px;
+	display: block;
+	border-left: 4px solid #23262a;
+	font-weight: bold;
+}
+aside nav li .menu {
+	color: #616973;
+	text-decoration: none;
+	text-transform: uppercase;
+	padding: 24px;
+	display: block;
+	margin-bottom: -10px;
+}
+aside nav li li a {
+	padding: 5px 20px;
+}
+aside nav li ul {
+	margin-bottom: 10px;
+}
+aside nav li .numberMessage {
+	background: url('img/numberMessage.png') no-repeat;
+	color: #23262b;
+	font-size: 9pt;
+	width: 20px;
+	height: 14px;
+	position: absolute;
+	top: 4px;
+	margin-left: 10px;
+	padding-left: 3px;
+	padding-top: 1px;
+}
+aside nav li .closeContact {
+	background-image: url('img/contactClose.png');
+	background-repeat: no-repeat;
+	width: 15px;
+	height: 9px;
+	position: absolute;
+	right: 0;
+	top: 6px;
+}
+aside nav li a:hover {
+	color: #ffffff;
+	border-left: 4px solid #cf4c29;
+	background-color: #34393f;
+	cursor: pointer;
+}
+aside nav li .play {
+	background-image: url('img/play.png');
+	background-repeat: no-repeat;
+	width: 9px;
+	height: 9px;
+	float: left;
+	margin-right: 7px;
+	margin-top: 1px;
+}
+aside nav li .pause {
+	background-image: url('img/pause.png');
+	background-repeat: no-repeat;
+	width: 7px;
+	height: 9px;
+	float: left;
+	margin-right: 7px;
+	margin-top: 1px;
+}
+aside nav li a:hover .play {
+	background-image: url('img/playHover.png');
+	background-repeat: no-repeat;
+}
+aside nav li a:hover .pause {
+	background-image: url('img/pauseHover.png');
+	background-repeat: no-repeat;
+}
