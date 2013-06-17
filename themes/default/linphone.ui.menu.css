@@ -1,21 +1,27 @@
-aside .scroll-pane {
+.linphoneweb > .content > .menu {
+	float: left;
+	width: 230px;
+	background: #23262a;
+	height: 550px;
+}
+.linphoneweb .menu .scroll-pane {
 	width: 230px;
 	height: 550px;
 }
-aside .scroll-content {
+.linphoneweb .menu .scroll-content {
 	width: 220px;
 }
-aside .slider-wrap, aside .ui-slider-range {
+.linphoneweb .menu .slider-wrap, .menu .ui-slider-range {
 	background-color: #23262a;
 }
-aside nav li {
+.linphoneweb .menu nav li {
 	border-top: 1px solid #434850;
 	position: relative;
 }
-aside nav li:first-child, aside nav li li {
+.linphoneweb .menu nav li:first-child, .menu nav li li {
 	border-top: 0;
 }
-aside nav li a {
+.linphoneweb .menu nav li a {
 	color: #616973;
 	text-decoration: none;
 	text-transform: uppercase;
@@ -24,7 +30,7 @@ aside nav li a {
 	border-left: 4px solid #23262a;
 	font-weight: bold;
 }
-aside nav li .menu {
+.linphoneweb .menu nav li .menu {
 	color: #616973;
 	text-decoration: none;
 	text-transform: uppercase;
@@ -32,13 +38,13 @@ aside nav li .menu {
 	display: block;
 	margin-bottom: -10px;
 }
-aside nav li li a {
+.linphoneweb .menu nav li li a {
 	padding: 5px 20px;
 }
-aside nav li ul {
+.linphoneweb .menu nav li ul {
 	margin-bottom: 10px;
 }
-aside nav li .numberMessage {
+.linphoneweb .menu nav li .numberMessage {
 	background: url('img/numberMessage.png') no-repeat;
 	color: #23262b;
 	font-size: 9pt;
@@ -50,7 +56,7 @@ aside nav li .numberMessage {
 	padding-left: 3px;
 	padding-top: 1px;
 }
-aside nav li .closeContact {
+.linphoneweb .menu nav li .closeContact {
 	background-image: url('img/contactClose.png');
 	background-repeat: no-repeat;
 	width: 15px;
@@ -59,13 +65,13 @@ aside nav li .closeContact {
 	right: 0;
 	top: 6px;
 }
-aside nav li a:hover {
+.linphoneweb .menu nav li a:hover {
 	color: #ffffff;
 	border-left: 4px solid #cf4c29;
 	background-color: #34393f;
 	cursor: pointer;
 }
-aside nav li .play {
+.linphoneweb .menu nav li .play {
 	background-image: url('img/play.png');
 	background-repeat: no-repeat;
 	width: 9px;
@@ -74,7 +80,7 @@ aside nav li .play {
 	margin-right: 7px;
 	margin-top: 1px;
 }
-aside nav li .pause {
+.linphoneweb .menu nav li .pause {
 	background-image: url('img/pause.png');
 	background-repeat: no-repeat;
 	width: 7px;
@@ -83,11 +89,11 @@ aside nav li .pause {
 	margin-right: 7px;
 	margin-top: 1px;
 }
-aside nav li a:hover .play {
+.linphoneweb .menu nav li a:hover .play {
 	background-image: url('img/playHover.png');
 	background-repeat: no-repeat;
 }
-aside nav li a:hover .pause {
+.linphoneweb .menu nav li a:hover .pause {
 	background-image: url('img/pauseHover.png');
 	background-repeat: no-repeat;
 }

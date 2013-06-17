@@ -1,3 +1,3 @@
-jQuery('.popup .outcall .callOff').click(function(){
-	jQuery('.popup .outcall').css('display','none');
+jQuery('.linphoneweb .popup .outcall .callOff').click(function(){
+	jQuery('.linphoneweb .popup .outcall').css('display','none');
 });

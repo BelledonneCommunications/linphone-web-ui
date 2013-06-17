@@ -1,32 +1,32 @@
-jQuery('aside nav li li').mouseover(function(){
+jQuery('.linphoneweb .menu nav li li').mouseover(function(){
 	jQuery(this).append('<span class="closeContact"></span>');
 });
 
-jQuery('aside nav li li').mouseleave(function(){
-	jQuery('.closeContact',this).remove();
+jQuery('.linphoneweb .menu nav li li').mouseleave(function(){
+	jQuery('.linphoneweb .closeContact',this).remove();
 });
 
-jQuery('aside .goHistory').click(function(){
-	jQuery('.wrapper .history').css('display','block');
-	jQuery('.scroll-pane').each(function(){
+jQuery('.linphoneweb .menu .goHistory').click(function(){
+	jQuery('.linphoneweb .view .history').css('display','block');
+	jQuery('.linphoneweb .scroll-pane').each(function(){
 		setSlider(jQuery(this));
 	});
 });
 
-jQuery('aside .goChat').click(function(){
-	jQuery('.wrapper .chat').css('display','block');
-	jQuery('.scroll-pane').each(function(){
+jQuery('.linphoneweb .menu .goChat').click(function(){
+	jQuery('.linphoneweb .view .chat').css('display','block');
+	jQuery('.linphoneweb .scroll-pane').each(function(){
 		setSlider(jQuery(this));
 	});
 });
 
-jQuery('aside nav li a').click(function(){
-	jQuery('.wrapper>div').css('display','none');
+jQuery('.linphoneweb .menu nav li a').click(function(){
+	jQuery('.linphoneweb .view>div').css('display','none');
 });
 
-jQuery('aside .goContacts').click(function(){
-	jQuery('.wrapper .contacts').css('display','block');
-	jQuery('.scroll-pane').each(function(){
+jQuery('.linphoneweb .menu .goContacts').click(function(){
+	jQuery('.linphoneweb .view .contacts').css('display','block');
+	jQuery('.linphoneweb .scroll-pane').each(function(){
 		setSlider(jQuery(this));
 	});
 });

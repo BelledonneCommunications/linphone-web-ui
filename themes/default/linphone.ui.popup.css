@@ -1,0 +1,18 @@
+/*************/
+/*  popup  */
+/*************/
+
+.linphoneweb .popup {
+	min-height: 550px;
+	width: 940px;
+	position: absolute;
+	display: none;
+	text-align:center;
+}
+
+.linphoneweb .popup > div {
+	display: none;
+	margin: auto;
+	text-align:left;
+	top: 100px;
+}

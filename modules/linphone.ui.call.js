@@ -1,4 +1,4 @@
-jQuery('.wrapper .call .goConference').click(function(){
-	jQuery('.wrapper .call').css('display','none');
-	jQuery('.wrapper .conference').css('display','block');
+jQuery('.linphoneweb .view .call .goConference').click(function(){
+	jQuery('.linphoneweb .view .call').css('display','none');
+	jQuery('.linphoneweb .view .conference').css('display','block');
 });

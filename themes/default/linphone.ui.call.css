@@ -1,18 +1,18 @@
-.wrapper .call {
+.linphoneweb .view .call {
 	margin: 10px;
 	position: relative;
 }
-.wrapper .call .profil {
+.linphoneweb .view .call .profil {
 	position: absolute;
 	bottom: 0;
 	right: 0
 }
-.wrapper .call .profil .profilActions {
+.linphoneweb .view .call .profil .profilActions {
 	position: absolute;
 	bottom: 107px;
 	right: 0
 }
-.wrapper .call .actions {
+.linphoneweb .view .call .actions {
 	margin-top: 8px;
 	text-transform: uppercase;
 	color: #5d8398;

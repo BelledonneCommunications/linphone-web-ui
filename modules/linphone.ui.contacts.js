@@ -1,4 +1,4 @@
-jQuery('.wrapper .contacts .goContact').click(function(){
-	jQuery('.wrapper .contacts').css('display','none'); 
-	jQuery('.wrapper .contact').css('display','block');
+jQuery('.linphoneweb .view .contacts .goContact').click(function(){
+	jQuery('.linphoneweb .view .contacts').css('display','none'); 
+	jQuery('.linphoneweb .view .contact').css('display','block');
 });

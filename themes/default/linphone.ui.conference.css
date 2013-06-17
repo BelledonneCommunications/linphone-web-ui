@@ -1,19 +1,19 @@
-.wrapper .conference {
+.linphoneweb .view .conference {
 	margin: 10px;
 	position: relative;
 	height: 530px;
 }
-.wrapper .conference .entry {
+.linphoneweb .view .conference .entry {
 	width: 220px;
 	background: #e4edf2;
 	float: left;
 	margin-right: 20px;
 	margin-bottom: 10px;
 }
-.wrapper .conference .entry .contactName {
+.linphoneweb .view .conference .entry .contactName {
 	margin-bottom: 5px;
 }
-.wrapper .conference .entry .statusOnline, .wrapper .conference .entry .statusBusy, .wrapper .conference .entry .statusAway {
+.linphoneweb .view .conference .entry .statusOnline, .linphoneweb .view .conference .entry .statusBusy, .linphoneweb .view .conference .entry .statusAway {
 	background-repeat: no-repeat;
 	width: 10px;
 	height: 10px;
@@ -21,17 +21,17 @@
 	margin-right: 5px;
 	margin-top: 2px;
 }
-.wrapper .conference .profil {
+.linphoneweb .view .conference .profil {
 	position: absolute;
 	bottom: 50px;
 	right: 0;
 }
-.wrapper .conference .profil .profilActions {
+.linphoneweb .view .conference .profil .profilActions {
 	position: absolute;
 	bottom: 107px;
 	right: 0;
 }
-.wrapper .conference .actions {
+.linphoneweb .view .conference .actions {
 	margin-top: 8px;
 	text-transform: uppercase;
 	color: #5d8398;
@@ -40,6 +40,6 @@
 	bottom: 2px;
 	width: 100%;
 }
-.wrapper .conference .actions .btnPause+ .btnAction {
+.linphoneweb .view .conference .actions .btnPause+ .btnAction {
 	margin-left: 2px;
 }

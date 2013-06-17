@@ -1,21 +1,21 @@
-.wrapper .plugin {
+.linphoneweb .view .plugin {
 	text-align: center;
 }
-.wrapper .plugin .logo {
+.linphoneweb .view .plugin .logo {
 	background-image: url('img/logoPicto.png');
 	background-repeat: no-repeat;
 	width: 260px;
 	height: 100px;
 	margin: 30px auto;
 }
-.wrapper .plugin .title {
+.linphoneweb .view .plugin .title {
 	font-size: 18pt;
 	margin-bottom: 20px;
 }
-.wrapper .plugin .text {
+.linphoneweb .view .plugin .text {
 	width: 300px;
 	margin: 0 auto 20px;
 }
-.wrapper .plugin .action {
+.linphoneweb .view .plugin .action {
 	display: inline-block;
 }

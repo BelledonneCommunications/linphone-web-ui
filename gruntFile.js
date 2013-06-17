@@ -18,7 +18,8 @@ module.exports = function(grunt) {
 		'linphone.ui.conference',
 		'linphone.ui.chat',
 		'linphone.ui.settings',
-		'linphone.ui.about',		
+		'linphone.ui.about',
+		'linphone.ui.popup',
 		'linphone.ui.incall',
 		'linphone.ui.outcall',
 		'linphone.ui.error'

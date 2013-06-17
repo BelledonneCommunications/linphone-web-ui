@@ -1,10 +1,10 @@
-.dialer {
+.linphoneweb .dialer {
 	height: 60px;
 	margin-top: 20px;
 	position: relative;
 	width: 700px;
 }
-.dialer .number {
+.linphoneweb .dialer .number {
 	background-image: url('img/dialer.png');
 	background-repeat: no-repeat;
 	position: absolute;
@@ -13,7 +13,7 @@
 	width: 33px;
 	height: 37px;
 }
-.dialer table {
+.linphoneweb .dialer table {
 	position: absolute;
 	top: 40px;
 	left: 230px;
@@ -24,7 +24,7 @@
 	display: none;
 	z-index: 2;
 }
-.dialer table td {
+.linphoneweb .dialer table td {
 	background: #5d8398;
 	color: #ffffff;
 	text-align: center;
@@ -33,7 +33,7 @@
 	vertical-align: middle;
 }
 
-.dialer input {
+.linphoneweb .dialer input {
 	height: 36px;
 	outline: none;
 	vertical-align: middle;

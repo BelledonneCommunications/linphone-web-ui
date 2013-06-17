@@ -1,14 +1,14 @@
-.wrapper .about .actions {
+.linphoneweb .view .about .actions {
 	padding: 10px 10px 1px 10px;
 	float: right;
 }
-.wrapper .about .entry {
+.linphoneweb .view .about .entry {
 	clear: both;
 	border-top: 1px solid #e4edf2;
 	padding: 10px;
 	text-align: center;
 }
-.wrapper .about .entry .logoBig {
+.linphoneweb .view .about .entry .logoBig {
 	background: url('img/logoBig.png');
 	width: 401px;
 	height: 67px;
