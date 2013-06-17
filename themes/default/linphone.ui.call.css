@@ -1,20 +1,44 @@
-.linphoneweb .view .call {
+.linphoneweb > .content .view > .call {
 	margin: 10px;
-	position: relative;
+	width: 690px;
+	height: 530px;
 }
-.linphoneweb .view .call .profil {
+
+.linphoneweb > .content .view > .call .video {
+	position: absolute;
+	bottom: 48px;
+	top: 0;
+	width: 100%;
+}
+
+.linphoneweb > .content .view > .call .video .profile {
 	position: absolute;
 	bottom: 0;
 	right: 0
 }
-.linphoneweb .view .call .profil .profilActions {
+.linphoneweb > .content .view > .call .video .profile .profileActions {
 	position: absolute;
-	bottom: 107px;
-	right: 0
+	top: 0;
+	right: 0;
 }
-.linphoneweb .view .call .actions {
-	margin-top: 8px;
+.linphoneweb > .content .view > .call .actions {
 	text-transform: uppercase;
 	color: #5d8398;
-	line-height: 40px
+	line-height: 40px;
+	position: absolute;
+	bottom: 0;
+	display:inline-block;
+	width: 100%;
+}
+
+.linphoneweb > .content .view > .call .actions .pause {
+	margin-left: 15px;
+}
+
+.linphoneweb > .content .view > .call .actions .conference {
+	margin-left: 15px;
+}
+
+.linphoneweb > .content .view > .call .actions div {
+	display:inline-block;
 }

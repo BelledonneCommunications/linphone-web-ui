@@ -1,8 +1,5 @@
 .linphoneweb .dialer {
-	height: 60px;
-	margin-top: 20px;
 	position: relative;
-	width: 700px;
 }
 .linphoneweb .dialer .number {
 	background-image: url('img/dialer.png');
@@ -31,6 +28,10 @@
 	width: 55px;
 	height: 40px;
 	vertical-align: middle;
+}
+
+.linphoneweb .dialer .buttonTxt {
+	height: 40px;
 }
 
 .linphoneweb .dialer input {

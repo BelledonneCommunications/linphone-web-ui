@@ -4,7 +4,7 @@
 	width: 160px;
 	position: absolute;
 	left: 50%; 
-	margin-left: -130px;
+	margin-left: -80px;
 	top: 100px;
 	padding: 10px;
 	text-align: center;
@@ -31,7 +31,7 @@
 	line-height: 14pt;
 	margin-bottom: 20px;
 }
-.linphoneweb .popup .error .btnTxt {
+.linphoneweb .popup .error .buttonTxt {
 	float: inherit;
 	width: auto;
 }   

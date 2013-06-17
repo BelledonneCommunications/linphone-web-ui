@@ -1,0 +1,14 @@
+.linphoneweb .view {
+	background: #fff;
+	min-width: 710px;
+	min-height: 550px;
+	display: inline-block;
+	vertical-align: top;
+}
+
+.linphoneweb .view > div {
+	width: 710px;
+	height: 550px;
+	display: none;
+	position: relative;
+}

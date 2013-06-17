@@ -1,27 +1,28 @@
-.linphoneweb > .content > .menu {
-	float: left;
+.linphoneweb .content > .middle > .menu {
 	width: 230px;
 	background: #23262a;
 	height: 550px;
+	display: inline-block;
+	text-align: left;
 }
-.linphoneweb .menu .scroll-pane {
+.linphoneweb .content .menu .scroll-pane {
 	width: 230px;
 	height: 550px;
 }
-.linphoneweb .menu .scroll-content {
+.linphoneweb .content .menu .scroll-content {
 	width: 220px;
 }
-.linphoneweb .menu .slider-wrap, .menu .ui-slider-range {
+.linphoneweb .content .menu .slider-wrap, .menu .ui-slider-range {
 	background-color: #23262a;
 }
-.linphoneweb .menu nav li {
+.linphoneweb .content .menu nav li {
 	border-top: 1px solid #434850;
 	position: relative;
 }
-.linphoneweb .menu nav li:first-child, .menu nav li li {
+.linphoneweb .content .menu nav li:first-child, .linphoneweb .content .menu nav li li {
 	border-top: 0;
 }
-.linphoneweb .menu nav li a {
+.linphoneweb .content .menu nav li a {
 	color: #616973;
 	text-decoration: none;
 	text-transform: uppercase;
@@ -30,7 +31,7 @@
 	border-left: 4px solid #23262a;
 	font-weight: bold;
 }
-.linphoneweb .menu nav li .menu {
+.linphoneweb .content .menu nav li .menu {
 	color: #616973;
 	text-decoration: none;
 	text-transform: uppercase;
@@ -38,13 +39,13 @@
 	display: block;
 	margin-bottom: -10px;
 }
-.linphoneweb .menu nav li li a {
+.linphoneweb .content .menu nav li li a {
 	padding: 5px 20px;
 }
-.linphoneweb .menu nav li ul {
+.linphoneweb .content .menu nav li ul {
 	margin-bottom: 10px;
 }
-.linphoneweb .menu nav li .numberMessage {
+.linphoneweb .content .menu nav li .numberMessage {
 	background: url('img/numberMessage.png') no-repeat;
 	color: #23262b;
 	font-size: 9pt;
@@ -56,7 +57,7 @@
 	padding-left: 3px;
 	padding-top: 1px;
 }
-.linphoneweb .menu nav li .closeContact {
+.linphoneweb .content .menu nav li .closeContact {
 	background-image: url('img/contactClose.png');
 	background-repeat: no-repeat;
 	width: 15px;
@@ -65,13 +66,13 @@
 	right: 0;
 	top: 6px;
 }
-.linphoneweb .menu nav li a:hover {
+.linphoneweb .content .menu nav li a:hover {
 	color: #ffffff;
 	border-left: 4px solid #cf4c29;
 	background-color: #34393f;
 	cursor: pointer;
 }
-.linphoneweb .menu nav li .play {
+.linphoneweb .content .menu nav li .play {
 	background-image: url('img/play.png');
 	background-repeat: no-repeat;
 	width: 9px;
@@ -80,7 +81,7 @@
 	margin-right: 7px;
 	margin-top: 1px;
 }
-.linphoneweb .menu nav li .pause {
+.linphoneweb .content .menu nav li .pause {
 	background-image: url('img/pause.png');
 	background-repeat: no-repeat;
 	width: 7px;
@@ -89,11 +90,11 @@
 	margin-right: 7px;
 	margin-top: 1px;
 }
-.linphoneweb .menu nav li a:hover .play {
+.linphoneweb .content .menu nav li a:hover .play {
 	background-image: url('img/playHover.png');
 	background-repeat: no-repeat;
 }
-.linphoneweb .menu nav li a:hover .pause {
+.linphoneweb .content .menu nav li a:hover .pause {
 	background-image: url('img/pauseHover.png');
 	background-repeat: no-repeat;
 }

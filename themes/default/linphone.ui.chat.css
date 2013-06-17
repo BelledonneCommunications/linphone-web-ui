@@ -1,47 +1,47 @@
-.linphoneweb .view .chat {
+.linphoneweb > .content .view > .chat {
 	position: relative;
 	height: 550px
 }
-.linphoneweb .view .chat .entryReceive, .linphoneweb .view .chat .entrySend {
+.linphoneweb > .content .view > .chat .entryReceive, .linphoneweb > .content .view > .chat .entrySend {
 	padding: 10px 10px 10px 10px;
 	border-top: 1px solid #e4edf2;
 	clear: both
 }
-.linphoneweb .view .chat .entryReceive .contactImg, .linphoneweb .view .chat .entrySend .contactImg {
+.linphoneweb > .content .view > .chat .entryReceive .contactImg, .linphoneweb > .content .view > .chat .entrySend .contactImg {
 	border: 5px solid #e4edf2;
 }
-.linphoneweb .view .chat .entryReceive .contactImg {
+.linphoneweb > .content .view > .chat .entryReceive .contactImg {
 	float: left;
 	margin-right: 10px
 }
-.linphoneweb .view .chat .entrySend .contactImg {
+.linphoneweb > .content .view > .chat .entrySend .contactImg {
 	float: right;
 	margin-left: 10px
 }
-.linphoneweb .view .chat .entryReceive .infos, .view .chat .entrySend .infos {
+.linphoneweb > .content .view > .chat .entryReceive .infos, .linphoneweb > .content .view > .chat .entrySend .infos {
 	float: left;
 	width: 600px;
 	margin-top: 10px
 }
-.linphoneweb .view .chat .infos .contactName {
+.linphoneweb > .content .view > .chat .infos .contactName {
 	color: #5d8398;
 }
-.linphoneweb .view .chat .infos .date {
+.linphoneweb > .content .view > .chat .infos .date {
 	color: #5d8398;
 	float: right;
 }
-.linphoneweb .view .chat .infos .message {
+.linphoneweb > .content .view > .chat .infos .message {
 	font-size: 11pt;
 	line-height: 14pt;
 	margin-top: 10px;
 }
-.linphoneweb .view .chat .actions {
+.linphoneweb > .content .view > .chat .actions {
 	position: absolute;
 	bottom: 10px;
 	left: 0;
 	padding-left: 10px;
 }
-.linphoneweb .view .chat .messageToSend {
+.linphoneweb > .content .view > .chat .messageToSend {
 	border: 1px solid #adbbc2;
 	height: 80px;
 	margin-bottom: 20px;
@@ -50,18 +50,18 @@
 	font-size: 11pt;
 	line-height: 14pt;
 }
-.linphoneweb .view .chat .scroll-pane {
+.linphoneweb > .content .view > .chat .scroll-pane {
 	width: 710px;
 	height: 360px;
 	border-bottom: 1px solid #e4edf2;
 }
-.linphoneweb .view .chat .scroll-content {
+.linphoneweb > .content .view > .chat .scroll-content {
 	width: 700px;
 }
-.linphoneweb .view .chat .messageToSend .scroll-pane {
+.linphoneweb > .content .view > .chat .messageToSend .scroll-pane {
 	width: 670px;
 	height: 80px;
 }
-.linphoneweb .view .chat .messageToSend .scroll-content {
+.linphoneweb > .content .view > .chat .messageToSend .scroll-content {
 	width: 650px;
 }

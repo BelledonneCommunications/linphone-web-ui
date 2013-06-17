@@ -32,42 +32,41 @@
 
 .linphoneweb {
 	font-family: 'allerregular', arial, verdana, sans-serif;
-	font-size: 10pt;
-	background: #e4edf2;
-	overflow: hidden;
-	height: 100%;
+	font-size: 13pt; font-size: 1.3rem;
+	background-color: #e4edf2;
+	min-height: 100%;
 }
-.linphoneweb .content {
+
+/*************/
+/* Main arch */
+/*************/
+
+.linphoneweb > .content {
 	width: 940px;
 	margin: 0 auto;
 	position: relative;
 }
-.linphoneweb .main {
-	display: none;
+
+.linphoneweb > .content .middle {
+	text-align: center;
+	font-size: .1em; letter-spacing: -2px;
 }
 
-.linphoneweb .ringtone {
-	float: right;
+.linphoneweb .content .middle .view, .linphoneweb .content .middle .menu {
+	font-size: 13pt; font-size: 1.3rem; letter-spacing: normal;
+	text-align: left;
 }
 
-
-/*************/
-/*  view  */
-/*************/
-
-.linphoneweb .view {
-	background: #fff;
-	min-height: 550px;
-	width: 710px;
-	float: left;
-}
-
-.linphoneweb .view > div {
-	display: none;
+.linphoneweb .content .loading {
+	position: absolute;
+	width: 100%;
+	top: 0;
+	bottom: 0;
+	background-color: #e4edf2;
 }
 
 /*************/
-/* générique */
+/*  Generic  */
 /*************/
 
 .linphoneweb hr {
@@ -102,149 +101,179 @@
 /* boutons   */
 /*************/
 
-.linphoneweb .btn, .linphoneweb .btnTxt {
+.linphoneweb .button {
 	background: #cf4c29;
 	margin-left: 2px;
-}/* fond orange picto */
-.linphoneweb .btn:hover, .linphoneweb .btnTxt:hover {
+	text-transform: uppercase;
+	color: #fff;
+	line-height: 40px;
+}/* fond orange image */
+.linphoneweb .button .text {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+.linphoneweb .button .image + .text {
+	margin-left: 0;
+}
+
+.linphoneweb .button:hover  {
 	background: #d97459;
 	cursor: pointer;
 }
-.linphoneweb .btnAction, .linphoneweb .btnTxtAction {
+
+.linphoneweb .buttonAction {
 	background: #5d8398;
-}/* fond bleu picto */
-.linphoneweb .btnAction:hover, .linphoneweb .btnTxtAction:hover {
+}
+.linphoneweb .buttonAction:hover {
 	background: #8eaaba;
 	cursor: pointer;
 }
-.linphoneweb .btnTxt, .linphoneweb .btnTxtAction, .linphoneweb .btnTxtPause {
-	text-transform: uppercase;
-	color: #fff;
-	padding-right: 15px;
-	line-height: 40px;
-}/*fond  picto + txt */
-.linphoneweb .btnSelect {
+
+.linphoneweb .buttonSelect {
 	background: #e4edf2;
 	color: #8c949f;
 	height: 40px;
 	line-height: 40px;
-	padding: 0 15px;
+	padding: 0 5px;
 	text-transform: uppercase;
 }
-.linphoneweb .btnSelect:hover {
+.linphoneweb .buttonSelect:hover {
 	background: #5d8398;
 	color: #fff;
 	cursor: pointer;
 }
-.linphoneweb .ringtone .btnSelect {
-	background: #fff;
-}
-.linphoneweb .btnSelect+ .btnSelect {
+.linphoneweb .buttonSelect+ .buttonSelect {
 	border-left: 1px solid #d0dce2;
 }
-.linphoneweb .btnSelectDesc {
+
+.linphoneweb .buttonSelectDescription {
 	color: #5d8398;
 	height: 40px;
 	line-height: 40px;
 	text-transform: uppercase;
+	margin-right: 5px;
+	margin-left: 10px;
 }
-.linphoneweb .btnPause, .linphoneweb .btnTxtPause {
+
+.linphoneweb .buttonPause {
 	background: #23262a;
 }
-.linphoneweb .btnPause:hover, .linphoneweb .btnTxtPause:hover {
+.linphoneweb .buttonPause:hover {
 	background: #616973;
 	cursor: pointer;
 }
 
-.linphoneweb .btn, .linphoneweb .btnTxt, .linphoneweb .btnAction, .linphoneweb .btnTxtAction, .linphoneweb .btnSelect, .linphoneweb .btnSelectDesc, .linphoneweb .btnPause, .linphoneweb .btnTxtPause, .linphoneweb .btnTxt > div, .linphoneweb .btnTxtAction > div, .linphoneweb .btnSelectDesc > div, .linphoneweb .btnTxtPause > div {
-	float: left;
+/* Force button to show on one line */
+.linphoneweb .button div {
+	display: inline-block;
 }
 
-.linphoneweb .picto {
+.linphoneweb .button {
+	display: inline-block;
+}
+
+.linphoneweb .button-group .button {
+	margin-right: -0.3em;
+	margin-left: 0;
+}
+
+.linphoneweb .button-group .button:last-child {
+	margin-right: 0;
+}
+
+.linphoneweb .button-group {
+	display: inline-block;
+	margin-left: 2px;
+}
+
+/* 
+ * 
+ * Images
+ *
+ */
+
+.linphoneweb .image {
 	height: 40px;
 	width: 40px;
 	background-repeat: no-repeat;
 	float: left;
 }
-.linphoneweb .pictoAdd {
+.linphoneweb .imageAdd {
 	background-image: url('img/add.png');
 }
-.linphoneweb .pictoCall {
+.linphoneweb .imageCall {
 	background-image: url('img/call.png');
 }
-.linphoneweb .pictoCallOff {
+.linphoneweb .imageCallOff {
 	background-image: url('img/callOff.png');
 }
-.linphoneweb .pictoChat {
+.linphoneweb .imageChat {
 	background-image: url('img/chat.png');
 }
-.linphoneweb .pictoClose {
+.linphoneweb .imageClose {
 	background-image: url('img/close.png');
 }
-.linphoneweb .pictoConfAdd {
+.linphoneweb .imageConfAdd {
 	background-image: url('img/confAdd.png');
 }
-.linphoneweb .pictoContactAdd {
+.linphoneweb .imageContactAdd {
 	background-image: url('img/contactAdd.png');
 }
-.linphoneweb .pictoDelete {
+.linphoneweb .imageDelete {
 	background-image: url('img/delete.png');
 }
-.linphoneweb .pictoModify {
+.linphoneweb .imageModify {
 	background-image: url('img/modify.png');
 }
-.linphoneweb .pictoPause {
-	background-image: url('img/pauseBtn.png');
+.linphoneweb .imagePause {
+	background-image: url('img/pausebutton.png');
 }
-.linphoneweb .pictoRefresh {
+.linphoneweb .imageRefresh {
 	background-image: url('img/refresh.png');
 }
-.linphoneweb .pictoSave {
+.linphoneweb .imageSave {
 	background-image: url('img/check.png');
 }
-.linphoneweb .pictoSend {
+.linphoneweb .imageSend {
 	background-image: url('img/send.png');
 }
-.linphoneweb .pictoUpload {
+.linphoneweb .imageUpload {
 	background-image: url('img/upload.png');
 }
-.linphoneweb .pictoVideo {
+.linphoneweb .imageVideo {
 	background-image: url('img/video.png');
+	/* TODO MOVE */
 	background-repeat: no-repeat;
 	width: 11px;
 	height: 6px;
 	margin-top: 17px;
 	margin-right: 5px;
 }
-.linphoneweb .pictoMicro {
+.linphoneweb .imageMicro {
 	background-image: url('img/speaker.png');
+	/* TODO MOVE */
 	background-repeat: no-repeat;
 	width: 6px;
 	height: 9px;
 	margin-top: 16px;
 	margin-right: 5px;
 }
-.linphoneweb .pictoRingtone {
+.linphoneweb .imageRingtone {
 	background-image: url('img/ringtone.png');
+	/* TODO MOVE */
 	background-repeat: no-repeat;
 	width: 8px;
 	height: 11px;
 	margin-top: 15px;
 	margin-right: 5px;
 }
-
-
-/*************/
-/* status    */
-/*************/
-
-.linphoneweb .statusOnline {
+.linphoneweb .imageStatusOnline {
 	background-image: url('img/statusOnline.png');
 }
-.linphoneweb .statusAway {
+.linphoneweb .imageStatusAway {
 	background-image: url('img/statusAway.png');
 }
-.linphoneweb .statusBusy {
+.linphoneweb .imageStatusBusy {
 	background-image: url('img/statusBusy.png');
 }
 
@@ -290,4 +319,20 @@
 	position: absolute;
 	width: 100%;
 	background-color: #fff;
+}
+
+/* 
+ *
+ * Overall divs
+ *
+ */
+.linphoneweb .overall {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: #FFFFFF;
+	z-index: 9000;
+	padding: 5px;
 }

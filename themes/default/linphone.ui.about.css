@@ -1,14 +1,17 @@
-.linphoneweb .view .about .actions {
+.linphoneweb > .content .view > .about {
+	width: 940px; /* All width */
+}
+.linphoneweb > .content .view > .about .actions {
 	padding: 10px 10px 1px 10px;
 	float: right;
 }
-.linphoneweb .view .about .entry {
+.linphoneweb > .content .view > .about .entry {
 	clear: both;
 	border-top: 1px solid #e4edf2;
 	padding: 10px;
 	text-align: center;
 }
-.linphoneweb .view .about .entry .logoBig {
+.linphoneweb > .content .view > .about .entry .logoBig {
 	background: url('img/logoBig.png');
 	width: 401px;
 	height: 67px;

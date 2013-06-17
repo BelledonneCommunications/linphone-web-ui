@@ -1,4 +1,7 @@
-jQuery('.linphoneweb .view .call .goConference').click(function(){
-	jQuery('.linphoneweb .view .call').css('display','none');
-	jQuery('.linphoneweb .view .conference').css('display','block');
+linphone.ui.call = {
+}
+
+jQuery('.linphoneweb > .content .view .call .actions .conference').click(function(){
+	jQuery('.linphoneweb > .content .view > .call').hide();
+	jQuery('.linphoneweb > .content .view > .conference').show();
 });

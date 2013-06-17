@@ -1,30 +1,31 @@
-.linphoneweb .view .contacts .actions {
+.linphoneweb > .content .view > .contacts .actions {
 	padding: 10px 10px 1px;
 	border-bottom: 1px solid #e4edf2;
+	height: 50px;
 }
-.linphoneweb .view .contacts .entry {
+.linphoneweb > .content .view > .contacts .entry {
 	clear: both;
 	border-bottom: 1px solid #e4edf2;
 	padding: 10px 10px 1px 10px;
 	position: relative;
 }
-.linphoneweb .view .contacts .entry .contactImg {
+.linphoneweb > .content .view > .contacts .entry .contactImg {
 	border: 5px solid #e4edf2;
 	float: left;
 	margin-right: 10px;
 }
-.linphoneweb .view .contacts .entry .contactName {
+.linphoneweb > .content .view > .contacts .entry .contactName {
 	display: inline-block;
 	margin-top: 7px;
 	line-height: 20px;
 	font-size: 11pt;
 }
-.linphoneweb .view .contacts .entry .contactStatus {
+.linphoneweb > .content .view > .contacts .entry .contactStatus {
 	color: #7a7a7a;
 	text-transform: uppercase;
 	font-size: 8pt;
 }
-.linphoneweb .view .contacts .entry .statusOnline, .linphoneweb .view .contacts .entry .statusBusy, .linphoneweb .view .contacts .entry .statusAway {
+.linphoneweb > .content .view > .contacts .entry .imageStatusOnline, .linphoneweb > .content .view > .contacts .entry .imageStatusBusy, .linphoneweb > .content .view > .contacts .entry .imageStatusAway {
 	background-repeat: no-repeat;
 	width: 10px;
 	height: 10px;
@@ -32,21 +33,21 @@
 	margin-right: 5px;
 	margin-top: 2px;
 }
-.linphoneweb .view .contacts .entry .contactNumber {
+.linphoneweb > .content .view > .contacts .entry .contactNumber {
 	color: #5d8398;
 	display: inline-block;
 	margin-top: 20px;
 	line-height: 15px;
 }
-.linphoneweb .view .contacts .entry .entryActions {
+.linphoneweb > .content .view > .contacts .entry .entryActions {
 	position: absolute;
 	right: 10px;
 	bottom: 10px;
 }
-.linphoneweb .view .contacts .scroll-pane {
+.linphoneweb > .content .view > .contacts .scroll-pane {
 	width: 710px;
-	height: 490px;
+	height: 488px; /* 550 - 55(height) - 10(padding top) - 1(padding bot) - 1(border bot) */
 }
-.linphoneweb .view .contacts .scroll-content {
+.linphoneweb > .content .view > .contacts .scroll-content {
 	width: 700px;
 }

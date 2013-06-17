@@ -4,7 +4,7 @@
 	width: 160px;
 	position: absolute;
 	left: 50%; 
-	margin-left: -130px;
+	margin-left: -80px;
 	top: 100px;
 	padding: 10px;
 	text-align: center;
@@ -33,6 +33,6 @@
 	background: #c45a5a;
 	cursor: pointer;
 }
-.linphoneweb .popup .outcall .actions .callOff .pictoCallOff {
+.linphoneweb .popup .outcall .actions .callOff .imageCallOff {
 	margin-left: 50px;
 }  

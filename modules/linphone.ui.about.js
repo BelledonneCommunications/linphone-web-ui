@@ -1,0 +1,2 @@
+linphone.ui.about = {
+}

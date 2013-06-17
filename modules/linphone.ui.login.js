@@ -1,15 +1,20 @@
-jQuery('.linphoneweb .view .login .goAccountOther').click(function(){
-	jQuery('.linphoneweb .view .login .accountLinphone').css('display','none');
-	jQuery('.linphoneweb .view .login .accountOther').css('display','block');	
+linphone.ui.login = {
+}
+
+jQuery('.linphoneweb > .content .view .login .goAccountOther').click(function(){
+	jQuery('.linphoneweb > .content .view .login .accountLinphone').hide();
+	jQuery('.linphoneweb > .content .view .login .accountOther').show();	
 });
 
-jQuery('.linphoneweb .view .login .login').click(function(event){
+jQuery('.linphoneweb > .content .view .login .login').click(function(event){
 	var target = jQuery(event.target);
 	var base = linphone.ui.getBase(target);
-	jQuery('.linphoneweb .view .login').css('display','none');
-	jQuery('.linphoneweb .profil,.ringtone,.dialer,.menu').css('display','block');
-	jQuery('.linphoneweb .view').css({'width':'710px','margin':'0','background':'#fff'});
-	jQuery('.linphoneweb .popup .incall').css('display','block');
-	jQuery('.linphoneweb .popup .error').css('display','block');
+	jQuery('.linphoneweb > .header .profile').show();
+	jQuery('.linphoneweb > .header .settings').removeClass('disabled');
+	jQuery('.linphoneweb > .content .view .login').hide();
+	jQuery('.linphoneweb > .content .mainbar').show();
+	jQuery('.linphoneweb > .content .menu').show();
+	jQuery('.linphoneweb > .content .popup .incall').show();
+	jQuery('.linphoneweb > .content .popup .error').show();
 	linphone.ui.popup.showError(base);
 });

@@ -1,0 +1,17 @@
+.linphoneweb .content .mainbar {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	display: none;
+}
+
+.linphoneweb .content .mainbar .ringtone .buttonSelect {
+	background: #fff;
+}
+
+.linphoneweb .content .mainbar div {
+	display: inline-block;	
+}
+
+.linphoneweb .content .mainbar .ringtone {
+	float: right;
+}

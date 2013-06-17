@@ -1,39 +1,22 @@
 <div class="linphoneweb">
 	<!-- @include linphone.ui.header.html -->
 	<div class="content">
-		<div class="ringtone">
-			<div class="btnSelectDesc"><div class="picto pictoRingtone"></div><div>Silencieux</div></div>
-			<div class="btnSelect bigMarginLeft">On</div>
-			<div class="btnSelect">Off</div>
+		<!-- @include linphone.ui.mainbar.html -->
+		<div class="middle">
+			<!-- @include linphone.ui.menu.html -->
+			<!-- @include linphone.ui.view.html -->
 		</div>
-	
-		<div class="dialer">
-			<input type="text" value="SIP or phone number">
-			<div class="number"></div>
-			<table>
-				<tr><td>1</td><td>2</td><td>3</td></tr>
-				<tr><td>4</td><td>5</td><td>6</td></tr>
-				<tr><td>7</td><td>8</td><td>9</td></tr>
-				<tr><td>*</td><td>0</td><td>#</td></tr>
-			</table>
-	
-		
-			<div class="btnTxt goOutcall"><div class="picto pictoCall"></div><div>Appel</div></div>
-			<div class="btnTxt goChat"><div class="picto pictoChat"></div><div>Chat</div></div>
-		</div>
-		<!-- @include linphone.ui.menu.html -->
-		<div class="view">
-			<!-- @include linphone.ui.plugin.html -->
-			<!-- @include linphone.ui.login.html -->
-			<!-- @include linphone.ui.contacts.html -->
-			<!-- @include linphone.ui.contact.html -->
-			<!-- @include linphone.ui.history.html -->
-			<!-- @include linphone.ui.call.html -->
-			<!-- @include linphone.ui.conference.html -->
-			<!-- @include linphone.ui.chat.html -->
-			<!-- @include linphone.ui.settings.html -->
-			<!-- @include linphone.ui.about.html -->
+		<div class="loading">
+			
 		</div>
 		<!-- @include linphone.ui.popup.html -->
 	</div>
+	<noscript>
+		<div class="javascript overall">
+			<div class="text">
+				<!-- TODO Design !-->
+				Vous devez activer le Javascript pour utiliser le plugin<br />You have to enable Javascript in order to use the plugin
+			</div>
+		</div>
+	</noscript>
 </div>

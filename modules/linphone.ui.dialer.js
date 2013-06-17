@@ -1,11 +1,14 @@
-jQuery('.linphoneweb .dialer .goOutcall').click(function(){
-	jQuery('.linphoneweb .popup .outcall').css('display','block');
+linphone.ui.dialer = {
+}
+
+jQuery('.linphoneweb > .content .dialer .goOutcall').click(function(){
+	jQuery('.linphoneweb > .content .popup .outcall').show();
 });
 
-jQuery('.linphoneweb .dialer .number').mouseover(function(){
-		jQuery('.linphoneweb .dialer table').css('display','block');
+jQuery('.linphoneweb > .content .dialer .number').mouseover(function(){
+		jQuery('.linphoneweb > .content .dialer table').show();
 });
 
-jQuery('.linphoneweb .dialer .number').mouseleave(function(){
-	jQuery('.linphoneweb .dialer table').css('display','none');
+jQuery('.linphoneweb > .content .dialer .number').mouseleave(function(){
+	jQuery('.linphoneweb > .content .dialer table').hide();
 });

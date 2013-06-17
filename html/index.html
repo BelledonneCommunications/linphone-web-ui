@@ -16,6 +16,7 @@
 		<style type="text/css">
 			body, html {
 				height: 100%;
+				font-size: 62.5%;
 			}
 		</style>
 	</head>
@@ -71,9 +72,9 @@
 						}
 					}
 					run(function () {
-						jQuery(function() {
-							//_init();
-						})
+						jQuery('.linphoneweb').each(function (index) {
+							linphone.ui.init(jQuery(this));
+						});
 					});
 				}
 				if (w.addEventListener) { 

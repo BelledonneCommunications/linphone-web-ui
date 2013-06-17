@@ -8,6 +8,8 @@ module.exports = function(grunt) {
 		'linphone.ui.base',
 		'linphone.ui.header',
 		'linphone.ui.menu',
+		'linphone.ui.mainbar',
+		'linphone.ui.view',
 		'linphone.ui.dialer',
 		'linphone.ui.plugin',
 		'linphone.ui.login',

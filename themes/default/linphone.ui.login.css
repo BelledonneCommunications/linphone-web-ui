@@ -1,18 +1,25 @@
-.linphoneweb .view .login {
+.linphoneweb > .content .view > .login {
 	text-align: center;
 }
-.linphoneweb .view .login .logo {
-	background-image: url('img/logoPicto.png');
+
+.linphoneweb .view > .login {
+	background-color: rgb(228, 237, 242);
+	overflow: auto;
+	min-height: 550px;
+}
+
+.linphoneweb > .content .view > .login .logo {
+	background-image: url('img/logoIcon.png');
 	background-repeat: no-repeat;
 	width: 260px;
 	height: 100px;
 	margin: 30px auto;
 }
-.linphoneweb .view .login .title {
+.linphoneweb > .content .view > .login .title {
 	font-size: 18pt;
 	margin-bottom: 20px;
 }
-.linphoneweb .view .login input[type="text"] {
+.linphoneweb > .content .view > .login input[type="text"] {
 	border: 1px solid #adbbc2;
 	width: 400px;
 	height: 40px;
@@ -20,34 +27,37 @@
 	padding: 0 15px;
 	color: #929fa5;
 }
-.linphoneweb .view .login .choice {
+.linphoneweb > .content .view > .login .choice {
 	text-align: left;
 	margin-bottom: 10px;
 }
-.linphoneweb .view .login .choice span {
+.linphoneweb > .content .view > .login .choice span {
 	float: left;
 	width: 150px;
 	text-transform: uppercase;
 	color: #5d8398;
 }
-.linphoneweb .view .login input[type="checkbox"] {
+.linphoneweb > .content .view > .login input[type="checkbox"] {
 	border: 1px solid #adbbc2;
 }
-.linphoneweb .view .login label {
+.linphoneweb > .content .view > .login label {
 	color: #5d8398;
 	margin-right: 15px;
 }
-.linphoneweb .view .login .btnTxt {
-	width: 415px;
+.linphoneweb > .content .view > .login .button {
+	width: 430px;
 	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
 	margin-bottom: 30px;
 }
-.linphoneweb .view .login .lien {
+.linphoneweb > .content .view > .login .lien {
 	color: #cf4c29;
 	text-transform: uppercase;
 	margin-bottom: 10px;
+	clear: both;
 }
-.linphoneweb .view .login .lien:hover {
+.linphoneweb > .content .view > .login .lien:hover {
 	cursor: pointer;
 	color: #d97459;
 }

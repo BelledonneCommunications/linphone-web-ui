@@ -1,21 +1,22 @@
 .linphoneweb .view .plugin {
 	text-align: center;
+	background-color: rgb(228, 237, 242);
+	overflow: auto;
+	min-height: 550px;
 }
-.linphoneweb .view .plugin .logo {
-	background-image: url('img/logoPicto.png');
+
+.linphoneweb .view .plugin > .logo {
+	background-image: url('img/logoIcon.png');
 	background-repeat: no-repeat;
 	width: 260px;
 	height: 100px;
 	margin: 30px auto;
 }
-.linphoneweb .view .plugin .title {
+.linphoneweb .view .plugin > .title {
 	font-size: 18pt;
 	margin-bottom: 20px;
 }
-.linphoneweb .view .plugin .text {
+.linphoneweb .view .plugin > .text {
 	width: 300px;
 	margin: 0 auto 20px;
-}
-.linphoneweb .view .plugin .action {
-	display: inline-block;
 }
