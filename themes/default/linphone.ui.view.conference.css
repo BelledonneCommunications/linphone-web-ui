@@ -51,6 +51,6 @@
 	display:inline-block;
 }
 
-.linphoneweb > .content .view > .conference .actions .buttonPause+ .buttonAction {
-	margin-left: 2px;
+.linphoneweb > .content .view > .conference .actions .pause {
+	margin-left: 15px;
 }

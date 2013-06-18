@@ -60,11 +60,11 @@
 .linphoneweb .content .menu nav li .closeContact {
 	background-image: url('img/contactClose.png');
 	background-repeat: no-repeat;
-	width: 15px;
-	height: 9px;
+	width: 8px;
+	height: 8px;
 	position: absolute;
-	right: 0;
-	top: 6px;
+	right: 6px;
+	top: 8px;
 }
 .linphoneweb .content .menu nav li a:hover {
 	color: #ffffff;

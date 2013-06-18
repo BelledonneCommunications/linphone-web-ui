@@ -12,7 +12,7 @@
 	text-align: center;
 }
 .linphoneweb > .content .view > .about .entry .logoBig {
-	background: url('img/logoBig.png');
+	background-image: url('img/logoBig.png');
 	width: 401px;
 	height: 67px;
 	margin: 30px auto;
