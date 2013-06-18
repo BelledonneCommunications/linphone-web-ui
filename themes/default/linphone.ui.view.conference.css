@@ -37,6 +37,12 @@
 	top: 0;
 	right: 0;
 }
+
+.linphoneweb > .content .view > .conference .video .profile .profileActions .button-group {
+	margin-right: 0;
+}
+
+
 .linphoneweb > .content .view > .conference .actions {
 	text-transform: uppercase;
 	color: #5d8398;
@@ -53,4 +59,9 @@
 
 .linphoneweb > .content .view > .conference .actions .pause {
 	margin-left: 15px;
+}
+
+.linphoneweb > .content .view > .conference .actions .conference {
+	margin-left: 15px;
+	margin-right: 0;
 }

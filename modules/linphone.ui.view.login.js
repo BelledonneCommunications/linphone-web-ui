@@ -14,7 +14,7 @@ jQuery('.linphoneweb > .content .view .login .login').click(function(event){
 	jQuery('.linphoneweb > .content .view .login').hide();
 	jQuery('.linphoneweb > .content .mainbar').show();
 	jQuery('.linphoneweb > .content .menu').show();
-	jQuery('.linphoneweb > .content .popup .incall').show();
-	jQuery('.linphoneweb > .content .popup .error').show();
+	jQuery('.linphoneweb > .content .popup > .incall').show();
+	jQuery('.linphoneweb > .content .popup > .error').show();
 	linphone.ui.popup.showError(base);
 });

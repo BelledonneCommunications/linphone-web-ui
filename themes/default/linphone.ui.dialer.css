@@ -10,7 +10,7 @@
 	width: 33px;
 	height: 37px;
 }
-.linphoneweb .dialer table {
+.linphoneweb .dialer .pinpad {
 	position: absolute;
 	top: 40px;
 	left: 230px;
@@ -21,7 +21,7 @@
 	display: none;
 	z-index: 2;
 }
-.linphoneweb .dialer table td {
+.linphoneweb .dialer .pinpad td {
 	background: #5d8398;
 	color: #ffffff;
 	text-align: center;
@@ -30,7 +30,7 @@
 	vertical-align: middle;
 }
 
-.linphoneweb .dialer .buttonTxt {
+.linphoneweb .dialer .button {
 	height: 40px;
 }
 

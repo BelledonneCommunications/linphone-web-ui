@@ -103,14 +103,15 @@
 
 .linphoneweb .button {
 	background: #cf4c29;
-	margin-left: 2px;
+	margin-left: 1px;
+	margin-right: 1px;
 	text-transform: uppercase;
 	color: #fff;
 	line-height: 40px;
 }/* fond orange image */
 .linphoneweb .button .text {
-	margin-left: 10px;
-	margin-right: 10px;
+	margin-left: 15px;
+	margin-right: 15px;
 }
 .linphoneweb .button .image + .text {
 	margin-left: 0;
@@ -136,6 +137,10 @@
 	line-height: 40px;
 	padding: 0 5px;
 	text-transform: uppercase;
+}
+.linphoneweb .buttonSelect .text {
+	margin-left: 10px;
+	margin-right: 10px;
 }
 .linphoneweb .buttonSelect:hover {
 	background: #5d8398;
@@ -173,17 +178,14 @@
 }
 
 .linphoneweb .button-group .button {
-	margin-right: -0.3em;
 	margin-left: 0;
-}
-
-.linphoneweb .button-group .button:last-child {
 	margin-right: 0;
 }
 
 .linphoneweb .button-group {
 	display: inline-block;
 	margin-left: 2px;
+	margin-right: 2px;
 }
 
 /* 
