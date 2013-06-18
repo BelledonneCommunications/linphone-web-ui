@@ -1,3 +1,5 @@
+/*globals jQuery,linphone*/
+
 linphone.ui.view.contacts = {
 	init: function(base) {
 		linphone.ui.view.contacts.uiInit(base);

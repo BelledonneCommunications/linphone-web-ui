@@ -1,3 +1,5 @@
+/*globals jQuery,linphone,setSlider*/
+
 linphone.ui.menu = {
 	init: function(base) {
 		linphone.ui.menu.uiInit(base);

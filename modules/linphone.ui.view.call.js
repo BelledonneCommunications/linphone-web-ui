@@ -1,3 +1,5 @@
+/*globals jQuery,linphone*/
+
 linphone.ui.view.call = {
 	init: function(base) {
 		linphone.ui.view.call.uiInit(base);

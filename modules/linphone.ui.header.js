@@ -1,3 +1,5 @@
+/*globals jQuery,linphone*/
+
 linphone.ui.header = {
 	init: function(base) {
 		linphone.ui.header.uiInit(base);
@@ -15,7 +17,9 @@ linphone.ui.header = {
 		});
 		
 		base.find('> .header .navigation .settings').click(function(event){
-			if($(this).hasClass('disabled')) return;
+			if(jQuery(this).hasClass('disabled')) {
+				return;
+			}
 			base.find('> .content .view > div').hide();
 			base.find('> .content .menu').hide();
 			base.find('> .content .view .settings').show();

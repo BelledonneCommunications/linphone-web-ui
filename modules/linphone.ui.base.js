@@ -1,3 +1,5 @@
+/*globals jQuery,linphone,setSlider */
+
 linphone.ui = {
 	getCore: function(target) {
 		var base = linphone.ui.getBase(target);

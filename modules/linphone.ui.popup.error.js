@@ -1,3 +1,5 @@
+/*globals jQuery,linphone*/
+
 linphone.ui.popup.error = {
 	init: function(base) {
 		linphone.ui.popup.error.uiInit(base);

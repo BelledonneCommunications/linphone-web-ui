@@ -1,3 +1,5 @@
+/*globals jQuery,linphone*/
+
 linphone.ui.popup.incall = {
 	init: function(base) {
 		linphone.ui.popup.incall.uiInit(base);

@@ -1,3 +1,5 @@
+/*globals jQuery,linphone*/
+
 linphone.ui.dialer = {
 	init: function(base) {
 		linphone.ui.dialer.uiInit(base);
