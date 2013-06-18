@@ -85,9 +85,22 @@ module.exports = function(grunt) {
 				' */\n\n'
 		},
 		jshint: {
+			options: {
+				curly: true,
+				eqeqeq: true,
+				immed: true,
+				latedef: true,
+				newcap: true,
+				noarg: true,
+				sub: true,
+				undef: true,
+				boss: true,
+				eqnull: true,
+				browser: true,
+				globals: {}
+			},
 			core: coreJSFiles,
-			ui: uiJSFiles,
-			tests: testsJSFiles,
+			ui: uiJSFiles
 		},
 		csslint: {
 			options: {
@@ -313,22 +326,6 @@ module.exports = function(grunt) {
 		},
 		server : {
 			script: ['server/server.js']
-		},
-		jshint: {
-			options: {
-				curly: true,
-				eqeqeq: true,
-				immed: true,
-				latedef: true,
-				newcap: true,
-				noarg: true,
-				sub: true,
-				undef: true,
-				boss: true,
-				eqnull: true,
-				browser: true
-			},
-			globals: {}
 		},
 		compress: {
 			release: {

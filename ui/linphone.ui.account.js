@@ -153,7 +153,6 @@ jQuery('html').click(function(event) {
 		var expires_regex = new RegExp('\\d+');
 		var expires = base.find('.window .account-form .content input.expires').val();
 		var register = base.find('.window .account-form .content input.register').is(':checked');
-		console.log(identity_regex.exec(identity));
 		if (identity_regex.exec(identity) === null) {
 			errors += '<li class="{translate: \'dialogs.account.errors.identity\'}"></li>';
 		}
