@@ -1,7 +1,11 @@
-linphone.ui.contacts = {
+linphone.ui.view.contacts = {
+	init: function(base) {
+		linphone.ui.view.contacts.uiInit(base);
+	},
+	uiInit: function(base) {
+		base.find('> .content .view .contacts .goContact').click(function(){
+			base.find('> .content .view .contacts').hide(); 
+			base.find('> .content .view .contact').show();
+		});
+	}
 };
-
-jQuery('.linphoneweb > .content .view .contacts .goContact').click(function(){
-	jQuery('.linphoneweb > .content .view .contacts').hide(); 
-	jQuery('.linphoneweb > .content .view .contact').show();
-});

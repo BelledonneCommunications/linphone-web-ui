@@ -1,35 +1,39 @@
 linphone.ui.menu = {
+	init: function(base) {
+		linphone.ui.menu.uiInit(base);
+	},
+	uiInit: function(base) {
+		base.find('> .content .menu nav li li').mouseover(function(){
+			jQuery(this).append('<span class="closeContact"></span>');
+		});
+		
+		base.find('> .content .menu nav li li').mouseleave(function(){
+			jQuery(this).find('.closeContact').remove();
+		});
+		
+		base.find('> .content .menu .goHistory').click(function(){
+			base.find('> .content .view .history').show();
+			base.find('.scroll-pane').each(function(){
+				setSlider(jQuery(this));
+			});
+		});
+		
+		base.find('> .content .menu .goChat').click(function(){
+			base.find('> .content .view .chat').show();
+			base.find('.scroll-pane').each(function(){
+				setSlider(jQuery(this));
+			});
+		});
+		
+		base.find('> .content .menu nav li a').click(function(){
+			base.find('> .content .view > div').hide();
+		});
+		
+		base.find('> .content .menu .goContacts').click(function(){
+			base.find('> .content .view .contacts').show();
+			base.find('.scroll-pane').each(function(){
+				setSlider(jQuery(this));
+			});
+		});
+	}
 };
-
-jQuery('.linphoneweb > .content .menu nav li li').mouseover(function(){
-	jQuery(this).append('<span class="closeContact"></span>');
-});
-
-jQuery('.linphoneweb > .content .menu nav li li').mouseleave(function(){
-	jQuery(this).find('.closeContact').remove();
-});
-
-jQuery('.linphoneweb > .content .menu .goHistory').click(function(){
-	jQuery('.linphoneweb > .content .view .history').show();
-	jQuery('.linphoneweb .scroll-pane').each(function(){
-		setSlider(jQuery(this));
-	});
-});
-
-jQuery('.linphoneweb > .content .menu .goChat').click(function(){
-	jQuery('.linphoneweb > .content .view .chat').show();
-	jQuery('.linphoneweb .scroll-pane').each(function(){
-		setSlider(jQuery(this));
-	});
-});
-
-jQuery('.linphoneweb > .content .menu nav li a').click(function(){
-	jQuery('.linphoneweb > .content .view > div').hide();
-});
-
-jQuery('.linphoneweb > .content .menu .goContacts').click(function(){
-	jQuery('.linphoneweb > .content .view .contacts').show();
-	jQuery('.linphoneweb .scroll-pane').each(function(){
-		setSlider(jQuery(this));
-	});
-});

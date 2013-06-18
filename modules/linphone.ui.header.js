@@ -1,35 +1,38 @@
 linphone.ui.header = {
+	init: function(base) {
+		linphone.ui.header.uiInit(base);
+	},
+	uiInit: function(base) {
+		base.find('> .header .profile, > .content .mainbar, > .content .menu').hide();
+		
+		base.find('> .header .profile .profileOpen').mouseover(function(event){
+			base.find('> .header .profile').css('background','#2f3338');
+			base.find('> .header .profileModify').show();
+			base.find('> .header .profileModify').mouseleave(function(){
+				jQuery(this).hide();
+				base.find('> .header .profile').css('background','#23262a'); 
+			});	
+		});
+		
+		base.find('> .header .navigation .settings').click(function(event){
+			if($(this).hasClass('disabled')) return;
+			base.find('> .content .view > div').hide();
+			base.find('> .content .menu').hide();
+			base.find('> .content .view .settings').show();
+			base.find('> .content .view .settings .button').click(function(){
+				base.find('> .content .view .settings').hide();
+				base.find('> .content .menu').show();
+			});
+		});
+		
+		base.find('> .header .navigation .about').click(function(event){
+			base.find('> .content .view > div').hide();
+			base.find('> .content .menu').hide();
+			base.find('> .content .view .about').show();
+			base.find('> .content .view .about .button').click(function(){
+				base.find('> .content .view .about').hide();
+				base.find('> .content .menu').show();
+			});
+		});
+	}
 };
-
-jQuery('.linphoneweb > .header .profile, .linphoneweb > .content .mainbar, .linphoneweb > .content .menu').hide();
-
-jQuery('.linphoneweb > .header .profile .profileOpen').mouseover(function(event){
-	jQuery('.linphoneweb > .header .profile').css('background','#2f3338');
-	jQuery('.linphoneweb > .header .profileModify').show();
-	jQuery('.linphoneweb > .header .profileModify').mouseleave(function(){
-		jQuery(this).hide();
-		jQuery('.linphoneweb > .header .profile').css('background','#23262a'); 
-	});	
-});
-
-jQuery('.linphoneweb > .header .navigation .settings').click(function(event){
-	if($(this).hasClass('disabled')) return;
-	jQuery('.linphoneweb > .content .view > div').hide();
-	jQuery('.linphoneweb > .content .menu').hide();
-	jQuery('.linphoneweb > .content .view .settings').show();
-	jQuery('.linphoneweb > .content .view .settings .button').click(function(){
-		jQuery('.linphoneweb > .content .view .settings').hide();
-		jQuery('.linphoneweb > .content .menu').show();
-	});
-});
-
-jQuery('.linphoneweb > .header .navigation .about').click(function(event){
-	jQuery('.linphoneweb > .content .view > div').hide();
-	jQuery('.linphoneweb > .content .menu').hide();
-	jQuery('.linphoneweb > .content .view .about').show();
-	jQuery('.linphoneweb > .content .view .about .button').click(function(){
-		jQuery('.linphoneweb > .content .view .about').hide();
-		jQuery('.linphoneweb > .content .menu').show();
-	});
-});
-

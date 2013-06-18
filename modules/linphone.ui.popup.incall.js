@@ -1,10 +1,14 @@
-linphone.ui.incall = {
+linphone.ui.popup.incall = {
+	init: function(base) {
+		linphone.ui.popup.incall.uiInit(base);
+	},
+	uiInit: function(base) {
+		base.find('> .content .popup > .incall .callIn').click(function(event){
+			var target = jQuery(event.target);
+			var base = linphone.ui.getBase(target);
+			base.find('> .content .popup > .incall').hide();
+			base.find('> .content .view > .call').show();
+			linphone.ui.popup.updatePopups(base);
+		});
+	}
 };
-
-jQuery('.linphoneweb > .content .popup > .incall .callIn').click(function(event){
-	var target = jQuery(event.target);
-	var base = linphone.ui.getBase(target);
-	jQuery('.linphoneweb > .content .popup > .incall').hide();
-	jQuery('.linphoneweb > .content .view > .call').show();
-	linphone.ui.popup.updatePopups(base);
-});

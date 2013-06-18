@@ -1,2 +1,7 @@
-linphone.ui.settings = {
+linphone.ui.view.settings = {
+	init: function(base) {
+		linphone.ui.view.settings.uiInit(base);
+	},
+	uiInit: function(base) {
+	}
 };

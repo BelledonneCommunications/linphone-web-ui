@@ -73,7 +73,7 @@
 					}
 					run(function () {
 						jQuery('.linphoneweb').each(function (index) {
-							linphone.ui.init(jQuery(this));
+							linphone.ui.init(linphone.ui.getBase(jQuery(this)));
 						});
 					});
 				}

@@ -1,6 +1,10 @@
-linphone.ui.outcall = {
+linphone.ui.popup.outcall = {
+	init: function(base) {
+		linphone.ui.popup.outcall.uiInit(base);
+	},
+	uiInit: function(base) {
+		base.find('> .content .popup > .outcall .callOff').click(function(){
+			base.find('> .content .popup > .outcall').hide();
+		});
+	}
 };
-
-jQuery('.linphoneweb > .content .popup > .outcall .callOff').click(function(){
-	jQuery('.linphoneweb > .content .popup > .outcall').hide();
-});

@@ -13,12 +13,20 @@ linphone.ui = {
 			return target.parents('.linphoneweb');
 		}
 	},
-	init: function(target) {
-		var base = linphone.ui.getBase(target);
-		base.find('.content .loading').hide();
+	init: function(base) {
+		linphone.ui.uiInit(base);
+		linphone.ui.header.init(base);
+		linphone.ui.menu.init(base);
+		linphone.ui.mainbar.init(base);
+		linphone.ui.dialer.init(base);
+		linphone.ui.view.init(base);
+		linphone.ui.popup.init(base);
+	},
+	uiInit: function(base) {
+		base.find('.scroll-pane').each(function(){
+			setSlider(jQuery(this));
+		});
+		base.find('> .content .loading').hide();
 	}
 };
 
-jQuery('.linphoneweb .scroll-pane').each(function(){
-	setSlider(jQuery(this));
-});

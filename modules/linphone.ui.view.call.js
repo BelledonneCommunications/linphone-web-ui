@@ -1,7 +1,11 @@
-linphone.ui.call = {
+linphone.ui.view.call = {
+	init: function(base) {
+		linphone.ui.view.call.uiInit(base);
+	},
+	uiInit: function(base) {
+		base.find('> .content .view .call .actions .conference').click(function(){
+			base.find('> .content .view > .call').hide();
+			base.find('> .content .view > .conference').show();
+		});
+	}
 };
-
-jQuery('.linphoneweb > .content .view .call .actions .conference').click(function(){
-	jQuery('.linphoneweb > .content .view > .call').hide();
-	jQuery('.linphoneweb > .content .view > .conference').show();
-});
