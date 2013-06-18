@@ -1,5 +1,5 @@
 linphone.ui.contacts = {
-}
+};
 
 jQuery('.linphoneweb > .content .view .contacts .goContact').click(function(){
 	jQuery('.linphoneweb > .content .view .contacts').hide(); 

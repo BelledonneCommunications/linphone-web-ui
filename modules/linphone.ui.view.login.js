@@ -1,5 +1,5 @@
 linphone.ui.login = {
-}
+};
 
 jQuery('.linphoneweb > .content .view .login .goAccountOther').click(function(){
 	jQuery('.linphoneweb > .content .view .login .accountLinphone').hide();

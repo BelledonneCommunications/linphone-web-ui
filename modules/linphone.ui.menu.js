@@ -1,5 +1,5 @@
 linphone.ui.menu = {
-}
+};
 
 jQuery('.linphoneweb > .content .menu nav li li').mouseover(function(){
 	jQuery(this).append('<span class="closeContact"></span>');

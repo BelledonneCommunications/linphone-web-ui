@@ -1,2 +1,2 @@
 linphone.ui.conference = {
-}
+};

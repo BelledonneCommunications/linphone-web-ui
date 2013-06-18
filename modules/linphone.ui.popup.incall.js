@@ -1,5 +1,5 @@
 linphone.ui.incall = {
-}
+};
 
 jQuery('.linphoneweb > .content .popup .incall .callIn').click(function(event){
 	var target = jQuery(event.target);

@@ -1,5 +1,5 @@
 linphone.ui.header = {
-}
+};
 
 jQuery('.linphoneweb > .header .profile, .linphoneweb > .content .mainbar, .linphoneweb > .content .menu').hide();
 

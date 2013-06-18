@@ -1,5 +1,5 @@
 linphone.ui.error = {
-}
+};
 
 jQuery('.linphoneweb > .content .popup .error .button').click(function(event){
 	var target = jQuery(event.target);

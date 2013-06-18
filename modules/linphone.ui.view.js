@@ -1,5 +1,5 @@
 linphone.ui.view = {
-}
+};
 
 jQuery('.linphoneweb > .content .view .plugin').show();
 

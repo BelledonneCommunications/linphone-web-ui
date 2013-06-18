@@ -1,5 +1,5 @@
 linphone.ui.dialer = {
-}
+};
 
 jQuery('.linphoneweb > .content .dialer .goOutcall').click(function(){
 	jQuery('.linphoneweb > .content .popup .outcall').show();
