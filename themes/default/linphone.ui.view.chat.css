@@ -9,10 +9,12 @@
 }
 .linphoneweb > .content .view > .chat .entryReceive .contactImg, .linphoneweb > .content .view > .chat .entrySend .contactImg {
 	border: 5px solid #e4edf2;
+	width: 50px;
+	height: 50px;
 }
 .linphoneweb > .content .view > .chat .entryReceive .contactImg {
 	float: left;
-	margin-right: 10px
+	margin-right: 10px;
 }
 .linphoneweb > .content .view > .chat .entrySend .contactImg {
 	float: right;

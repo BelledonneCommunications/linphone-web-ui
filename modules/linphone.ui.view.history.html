@@ -1,4 +1,27 @@
 <div class="history">
+	<script id="linphone.ui.view.history.list.entry" type="text/x-handlebars-template">
+		<div class="entry">
+			<div class="profile">
+				<img src="{{img}}" alt="" class="contactImg">
+				<span class="contactName">{{name}}</span><br>
+				<span class="imageStatusOnline"></span>
+				<span class="contactStatus">{{status}}</span><br>
+				<span class="contactNumber">{{nulber}}</span>
+			</div>
+			<div class="historyInfos">
+				<span>Date :</span> <span class="historyDate">{{date}}</span><br>
+				<span>Durée :</span> <span class="historyTime">{{duration}}</span><br>
+				<span>Type :</span> <span class="historyType">{{type}}</span>
+			</div>
+	
+			<div class="entryActions">
+				<div class="button"><div class="image imageCall"></div></div><!--
+				Avoid issue with inline block in dev mode
+		 	 --><div class="button"><div class="image imageChat"></div></div>
+				</div>
+			<hr>
+		</div>
+	</script>
 	<div class="actions">
 		<div class="button-group">
 			<div class="button buttonSelect"><div class="text">Tous</div></div><!--
@@ -12,144 +35,6 @@
 		<div class="floatRight"><div class="button buttonAction"><div class="image imageModify"></div><div class="text">Modifier l'historique</div></div></div>
 		<hr>
 	</div>
-	<div class="scroll-pane">
-	<!-- a recopier -->
-		<div class="entry">
-			<div class="profile">
-				<img src="tmp/marcel.jpg" alt="" class="contactImg">
-				<span class="contactName">Marcel</span><br>
-				<span class="imageStatusOnline"></span>
-				<span class="contactStatus">Disponible</span><br>
-				<span class="contactNumber">+336096894321</span>
-			</div>
-			<div class="historyInfos">
-				<span>Date :</span> <span class="historyDate">6 mai 2014 16h56</span><br>
-				<span>Durée :</span> <span class="historyTime">00:20</span><br>
-				<span>Type :</span> <span class="historyType">appel sortant</span>
-			</div>
-	
-			<div class="entryActions">
-				<div class="button"><div class="image imageCall"></div></div><!--
-				Avoid issue with inline block in dev mode
-		 	 --><div class="button"><div class="image imageChat"></div></div>
-				</div>
-			<hr>
-		</div>
-	<!-- fin -->
-	<!-- a recopier -->
-		<div class="entry">
-			<div class="profile">
-				<img src="tmp/marcel.jpg" alt="" class="contactImg">
-				<span class="contactName">Marcel</span><br>
-				<span class="imageStatusOnline"></span>
-				<span class="contactStatus">Disponible</span><br>
-				<span class="contactNumber">+336096894321</span>
-			</div>
-			<div class="historyInfos">
-				<span>Date :</span> <span class="historyDate">6 mai 2014 16h56</span><br>
-				<span>Durée :</span> <span class="historyTime">00:20</span><br>
-				<span>Type :</span> <span class="historyType">appel sortant</span>
-			</div>
-	
-			<div class="entryActions">
-				<div class="button"><div class="image imageCall"></div></div><!--
-				Avoid issue with inline block in dev mode
-		 	 --><div class="button"><div class="image imageChat"></div></div>
-				</div>
-			<hr>
-		</div>
-	<!-- fin -->
-	<!-- a recopier -->
-		<div class="entry">
-			<div class="profile">
-				<img src="tmp/marcel.jpg" alt="" class="contactImg">
-				<span class="contactName">Marcel</span><br>
-				<span class="imageStatusOnline"></span>
-				<span class="contactStatus">Disponible</span><br>
-				<span class="contactNumber">+336096894321</span>
-			</div>
-			<div class="historyInfos">
-				<span>Date :</span> <span class="historyDate">6 mai 2014 16h56</span><br>
-				<span>Durée :</span> <span class="historyTime">00:20</span><br>
-				<span>Type :</span> <span class="historyType">appel sortant</span>
-			</div>
-	
-			<div class="entryActions">
-				<div class="button"><div class="image imageCall"></div></div><!--
-				Avoid issue with inline block in dev mode
-		 	 --><div class="button"><div class="image imageChat"></div></div>
-				</div>
-			<hr>
-		</div>
-	<!-- fin -->
-	<!-- a recopier -->
-		<div class="entry">
-			<div class="profile">
-				<img src="tmp/marcel.jpg" alt="" class="contactImg">
-				<span class="contactName">Marcel</span><br>
-				<span class="imageStatusOnline"></span>
-				<span class="contactStatus">Disponible</span><br>
-				<span class="contactNumber">+336096894321</span>
-			</div>
-			<div class="historyInfos">
-				<span>Date :</span> <span class="historyDate">6 mai 2014 16h56</span><br>
-				<span>Durée :</span> <span class="historyTime">00:20</span><br>
-				<span>Type :</span> <span class="historyType">appel sortant</span>
-			</div>
-	
-			<div class="entryActions">
-				<div class="button"><div class="image imageCall"></div></div><!--
-				Avoid issue with inline block in dev mode
-		 	 --><div class="button"><div class="image imageChat"></div></div>
-				</div>
-			<hr>
-		</div>
-	<!-- fin -->
-	<!-- a recopier -->
-		<div class="entry">
-			<div class="profile">
-				<img src="tmp/marcel.jpg" alt="" class="contactImg">
-				<span class="contactName">Marcel</span><br>
-				<span class="imageStatusOnline"></span>
-				<span class="contactStatus">Disponible</span><br>
-				<span class="contactNumber">+336096894321</span>
-			</div>
-			<div class="historyInfos">
-				<span>Date :</span> <span class="historyDate">6 mai 2014 16h56</span><br>
-				<span>Durée :</span> <span class="historyTime">00:20</span><br>
-				<span>Type :</span> <span class="historyType">appel sortant</span>
-			</div>
-	
-			<div class="entryActions">
-				<div class="button"><div class="image imageCall"></div></div><!--
-				Avoid issue with inline block in dev mode
-		 	 --><div class="button"><div class="image imageChat"></div></div>
-				</div>
-			<hr>
-		</div>
-	<!-- fin -->
-	<!-- a recopier -->
-		<div class="entry">
-			<div class="profile">
-				<img src="tmp/marcel.jpg" alt="" class="contactImg">
-				<span class="contactName">Marcel</span><br>
-				<span class="imageStatusOnline"></span>
-				<span class="contactStatus">Disponible</span><br>
-				<span class="contactNumber">+336096894321</span>
-			</div>
-			<div class="historyInfos">
-				<span>Date :</span> <span class="historyDate">6 mai 2014 16h56</span><br>
-				<span>Durée :</span> <span class="historyTime">00:20</span><br>
-				<span>Type :</span> <span class="historyType">appel sortant</span>
-			</div>
-	
-			<div class="entryActions">
-				<div class="button"><div class="image imageCall"></div></div><!--
-				Avoid issue with inline block in dev mode
-		 	 --><div class="button"><div class="image imageChat"></div></div>
-				</div>
-			<hr>
-		</div>
-	<!-- fin -->
+	<div class="list scroll-pane">
 	</div>
 </div>

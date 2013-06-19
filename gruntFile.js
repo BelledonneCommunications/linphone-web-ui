@@ -433,6 +433,12 @@ module.exports = function(grunt) {
 	);
 	grunt.registerTask('extract-handlebars', 
 		function() {
+			var existingHBS = grunt.file.expand(grunt.template.process('<%= tmp %>/*.hbs'));
+			for(var i = 0; i < existingHBS.length; ++i) {
+				var hbs = existingHBS[i];
+				grunt.log.writeln("Remove " + hbs);
+				fs.unlinkSync(hbs);
+			}
 			htmlFiles.forEach(function(f) {
 				var html = fs.readFileSync(f, 'utf8');
 				var $ = cheerio.load(html);

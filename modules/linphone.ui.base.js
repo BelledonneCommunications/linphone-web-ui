@@ -19,6 +19,8 @@ linphone.ui = {
 	template: function(name, context) {
 		if(linphone.ui.debug) {
 			name = '#linphone.ui.' + name;
+			linphone.core.log("Template: " + name);
+			name = name.replace(/\./g, '\\.');
 			var source = jQuery(name).html();
 			var template = Handlebars.compile(source);
 			return template(context);
