@@ -5,7 +5,7 @@ linphone.ui.header = {
 		linphone.ui.header.uiInit(base);
 	},
 	uiInit: function(base) {
-		base.find('> .header .profile, > .content .mainbar, > .content .menu').hide();
+		base.find('> .header .navigation').show();
 		
 		base.find('> .header .profile .profileOpen').mouseover(function(event){
 			base.find('> .header .profile').addClass('highlight');
@@ -38,5 +38,16 @@ linphone.ui.header = {
 				base.find('> .content .menu').show();
 			});
 		});
+		
+		/* Samples */
+		var list = base.find('> .header .language .list');
+		for(var i = 0; i < linphone.ui.locales.length; ++i) {
+			var locale = linphone.ui.locales[i];
+			console.log(jQuery.i18n.locale + "===" + locale.locale + " " + (locale.locale === jQuery.i18n.locale));
+			list.append(linphone.ui.template('header.language.list.entry', {
+				lang: locale.name,
+				cls: (locale.locale === jQuery.i18n.locale) ? 'selected': ''
+			}));
+		}
 	}
 };

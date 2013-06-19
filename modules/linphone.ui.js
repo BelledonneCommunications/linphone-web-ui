@@ -2,6 +2,19 @@
 
 linphone.ui = {
 	debug: false,
+	locales: [ {
+		name : 'US',
+		locale : 'en_US'
+	}, {
+		name : 'FR',
+		locale : 'fr_FR'
+	}, {
+		name : 'DE',
+		locale : 'de_DE'
+	}, {
+		name : 'IT',
+		locale : 'it_IT'
+	} ],
 	getCore: function(target) {
 		var base = linphone.ui.getBase(target);
 		return base.find('> .core').get()[0];
@@ -33,6 +46,7 @@ linphone.ui = {
 	},
 	init: function(base) {
 		linphone.ui.uiInit(base);
+		linphone.ui.locale.init(base);
 		linphone.ui.header.init(base);
 		linphone.ui.menu.init(base);
 		linphone.ui.mainbar.init(base);

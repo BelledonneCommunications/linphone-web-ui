@@ -119,6 +119,7 @@
 	position: absolute;
 	left: 474px;
 	top: 37px;
+	display: none;
 }
 .linphoneweb .header .navigation li {
 	display: inline;
@@ -165,9 +166,13 @@
 	color: #616973;
 	font-weight: bold;
 }
+.linphoneweb .header .language .selected {
+	color: #b3bfc5;
+}
 .linphoneweb .header .language li:before {
 	content: '|';
 	padding-right: 5px;
+	color: #616973;
 }
 .linphoneweb .header .language li:first-child:before {
 	content: '';

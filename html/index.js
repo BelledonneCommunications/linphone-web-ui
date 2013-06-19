@@ -1,6 +1,11 @@
 (function(w, d, s) {
-				var scripts = [
-					{url: "js/jquery.js"},
+	var scripts = [
+		{url: "js/jquery.js"},
+		{url: "js/jquery.client.js"},
+		
+		{url: "js/jquery.metadata.js"},
+		{url: "js/i18n.js"},
+		
 		{url: "js/jquery-ui.js"},
 		{url: "js/jquery.mousewheel.js"},
 		{url: "js/vertical.slider.js"},

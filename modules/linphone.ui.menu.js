@@ -5,6 +5,8 @@ linphone.ui.menu = {
 		linphone.ui.menu.uiInit(base);
 	},
 	uiInit: function(base) {
+		base.find('> .content .menu').hide();
+		
 		base.find('> .content .menu nav li li').mouseover(function(){
 			jQuery(this).append('<span class="closeContact"></span>');
 		});

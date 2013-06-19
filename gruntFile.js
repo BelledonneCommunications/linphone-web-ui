@@ -8,7 +8,9 @@ module.exports = function(grunt) {
 		'linphone.core.enums'
 	],
 	uiModules = [
-		'linphone.ui.base',
+		'linphone.ui',
+		'linphone.ui.i18n',
+		'linphone.ui.locale',
 		'linphone.ui.header',
 		'linphone.ui.menu',
 		'linphone.ui.mainbar',
