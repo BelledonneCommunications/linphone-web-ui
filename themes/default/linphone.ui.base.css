@@ -49,11 +49,9 @@
 
 .linphoneweb > .content .middle {
 	text-align: center;
-	font-size: .1em; letter-spacing: -2px;
 }
 
 .linphoneweb .content .middle .view, .linphoneweb .content .middle .menu {
-	font-size: 13pt; font-size: 1.3rem; letter-spacing: normal;
 	text-align: left;
 }
 

@@ -28,6 +28,11 @@
 	position: relative;
 	display: none;
 }
+
+.linphoneweb .header .highlight {
+	background-color: #2f3338;
+}
+
 .linphoneweb .header .profile img {
 	border: 2px solid #e4edf2;
 	float: left;

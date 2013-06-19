@@ -8,12 +8,12 @@ linphone.ui.header = {
 		base.find('> .header .profile, > .content .mainbar, > .content .menu').hide();
 		
 		base.find('> .header .profile .profileOpen').mouseover(function(event){
-			base.find('> .header .profile').css('background','#2f3338');
+			base.find('> .header .profile').addClass('highlight');
 			base.find('> .header .profileModify').show();
-			base.find('> .header .profileModify').mouseleave(function(){
-				jQuery(this).hide();
-				base.find('> .header .profile').css('background','#23262a'); 
-			});	
+			base.find('> .header .profile').mouseleave(function(){
+				base.find('> .header .profileModify').hide();
+				base.find('> .header .profile').removeClass('highlight'); 
+			});
 		});
 		
 		base.find('> .header .navigation .settings').click(function(event){

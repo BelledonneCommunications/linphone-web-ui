@@ -10,7 +10,6 @@ linphone.ui.popup = {
 		}
 	},
 	showError: function(base) {
-		
 		linphone.ui.popup.updatePopups(base);
 	},
 	init: function(base) {

@@ -7,10 +7,12 @@
 			<div class="floatRight"><span class="imageStatusOnline"></span></div>
 			<div class="contactName">George</div>
 				<div class="entryActions">
-				<div class="button buttonPause"><div class="image imagePause"></div></div>
-				<div class="button buttonAction marginLeft"><div class="image imageClose"></div></div>
-				<div class="floatRight"><img src="tmp/signal2.png" alt="" /></div>
-			</div>
+					<div class="button buttonPause"><div class="image imagePause"></div></div><!--
+					Avoid issue with inline block in dev mode
+				 --><div class="button buttonAction "><div class="image imageClose"></div></div><!--
+					Avoid issue with inline block in dev mode
+				 --><div class="floatRight"><img src="tmp/signal2.png" alt="" /></div>
+				</div>
 			</div>
 			<hr />
 		</div>
@@ -19,25 +21,34 @@
 			<img src="tmp/profile-big.jpg" class="profileImg">
 			<div class="profileActions">
 				<div class="button-group">
-					<div class="button buttonSelect"><div class="text">ON</div></div>
-					<div class="button buttonSelect"><div class="text">OFF</div></div>
+					<div class="button buttonSelect"><div class="text">ON</div></div><!--
+					Avoid issue with inline block in dev mode
+				 --><div class="button buttonSelect"><div class="text">OFF</div></div>
 				</div>
 			</div>
 		</div>
 	</div>
 	<div class="actions">
-			<img src="tmp/signal.png" alt="" class="floatLeft" />
-			<div class="button pause buttonPause"><div class="image imagePause"></div><div class="text">Pause</div></div>
-			<div class="buttonSelectDescription"><div class="image imageVideo"></div><div class="text">Vidéo</div></div>
-			<div class="button-group">
-				<div class="button buttonSelect"><div class="text">ON</div></div>
-				<div class="button buttonSelect"><div class="text">OFF</div></div>
-			</div>
-			<div class="buttonSelectDescription"><div class="image imageMicro"></div><div class="text">Micro</div></div>
-			<div class="button-group">
-				<div class="button buttonSelect"><div class="text">ON</div></div>
-				<div class="button buttonSelect"><div class="text">OFF</div></div>
-			</div>
-			<div class="floatRight"><div class="button conference"><div class="image imageConfAdd"></div><div class="text">Conference</div></div></div>
-		</div>		
+		<img src="tmp/signal.png" alt="" class="floatLeft" /><!--
+		Avoid issue with inline block in dev mode
+	 --><div class="button pause buttonPause"><div class="image imagePause"></div><div class="text">Pause</div></div><!--
+		Avoid issue with inline block in dev mode
+	 --><div class="buttonSelectDescription"><div class="image imageVideo"></div><div class="text">Vidéo</div></div><!--
+		Avoid issue with inline block in dev mode
+	 --><div class="button-group">
+			<div class="button buttonSelect"><div class="text">ON</div></div><!--
+			Avoid issue with inline block in dev mode
+		 --><div class="button buttonSelect"><div class="text">OFF</div></div>
+		</div><!--
+		Avoid issue with inline block in dev mode
+	 --><div class="buttonSelectDescription"><div class="image imageMicro"></div><div class="text">Micro</div></div><!--
+		Avoid issue with inline block in dev mode
+	 --><div class="button-group">
+			<div class="button buttonSelect"><div class="text">ON</div></div><!--
+			Avoid issue with inline block in dev mode
+		 --><div class="button buttonSelect"><div class="text">OFF</div></div>
+		</div><!--
+		Avoid issue with inline block in dev mode
+	 --><div class="floatRight"><div class="button conference"><div class="image imageConfAdd"></div><div class="text">Conference</div></div></div>
+	</div>		
 </div>
