@@ -1,6 +1,7 @@
-/*globals jQuery,linphone,setSlider */
+/*globals jQuery,linphone,Handlebars,setSlider */
 
 linphone.ui = {
+	debug: false,
 	getCore: function(target) {
 		var base = linphone.ui.getBase(target);
 		return base.find('> .core').get()[0];
@@ -15,6 +16,19 @@ linphone.ui = {
 			return target.parents('.linphoneweb');
 		}
 	},
+	template: function(name, context) {
+		if(linphone.ui.debug) {
+			name = '#linphone.ui.' + name;
+			var source = jQuery(name).html();
+			var template = Handlebars.compile(source);
+			return template(context);
+		} else {
+			return linphone.ui.templates[name](context);
+		}
+	},
+	slider: function(element) {
+		setSlider(element);
+	},
 	init: function(base) {
 		linphone.ui.uiInit(base);
 		linphone.ui.header.init(base);
@@ -26,7 +40,7 @@ linphone.ui = {
 	},
 	uiInit: function(base) {
 		base.find('.scroll-pane').each(function(){
-			setSlider(jQuery(this));
+			linphone.ui.slider(jQuery(this));
 		});
 		base.find('> .content .loading').hide();
 	}

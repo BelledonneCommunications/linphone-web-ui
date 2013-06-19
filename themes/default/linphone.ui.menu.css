@@ -46,7 +46,8 @@
 	margin-bottom: 10px;
 }
 .linphoneweb .content .menu nav li .numberMessage {
-	background: url('img/numberMessage.png') no-repeat;
+	background-image: url('img/numberMessage.png');
+	background-repeat: no-repeat;
 	color: #23262b;
 	font-size: 9pt;
 	width: 20px;

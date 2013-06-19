@@ -1,4 +1,4 @@
-/*globals jQuery,linphone,setSlider*/
+/*globals jQuery,linphone*/
 
 linphone.ui.menu = {
 	init: function(base) {
@@ -16,14 +16,14 @@ linphone.ui.menu = {
 		base.find('> .content .menu .goHistory').click(function(){
 			base.find('> .content .view .history').show();
 			base.find('.scroll-pane').each(function(){
-				setSlider(jQuery(this));
+				linphone.ui.slider(jQuery(this));
 			});
 		});
 		
 		base.find('> .content .menu .goChat').click(function(){
 			base.find('> .content .view .chat').show();
 			base.find('.scroll-pane').each(function(){
-				setSlider(jQuery(this));
+				linphone.ui.slider(jQuery(this));
 			});
 		});
 		
@@ -34,7 +34,7 @@ linphone.ui.menu = {
 		base.find('> .content .menu .goContacts').click(function(){
 			base.find('> .content .view .contacts').show();
 			base.find('.scroll-pane').each(function(){
-				setSlider(jQuery(this));
+				linphone.ui.slider(jQuery(this));
 			});
 		});
 	}

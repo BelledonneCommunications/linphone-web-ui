@@ -1,4 +1,7 @@
 /*global module:false*/
+var cheerio = require('cheerio');
+var fs = require('fs');
+var path = require('path');
 module.exports = function(grunt) {
 	coreModules = [
 		'linphone.core',
@@ -39,8 +42,8 @@ module.exports = function(grunt) {
 		return 'modules/' + module + '.js';
 	}),
 	/* ********** */
-
-	/* Css files */
+	
+	/* CSS files */
 	uiCSSFiles = uiModules.map(function(module) {
 		return 'modules/' + module + '.css';
 	}),
@@ -50,7 +53,7 @@ module.exports = function(grunt) {
 	})),
 	/* ********** */
 	
-	/* Html files */
+	/* HTML files */
 	htmlFiles = htmlFiles.map(function(module) {
 		return 'html/' + module + '.html';
 	}),
@@ -75,6 +78,8 @@ module.exports = function(grunt) {
 				' * Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>; Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %>\n' +
 				' */\n\n'
 		},
+
+		// Validation Part
 		jshint: {
 			options: {
 				curly: true,
@@ -100,12 +105,10 @@ module.exports = function(grunt) {
 			},
 			ui: uiCSSFiles
 		},
-		htmlint: {
-			files: ['test/**/*.html']
+		validation: {
+			html: '<%= tmp %>/index-processed.html' 
 		},
-		qunit: {
-			files: ['test/**/*.html']
-		},
+
 		clean: {
 			dist: {
 				src: ['dist']
@@ -114,7 +117,7 @@ module.exports = function(grunt) {
 				src: ['tmp']
 			},
 			release: {
-				src: ['dist/style/ui-lightness/jquery-ui-1.8.17.custom.css', 'dist/downloads']
+				src: ['dist/style/ui-lightness/jquery-ui-1.8.17.custom.css', 'dist/downloads', 'dist/js/handlebars.js']
 			}
 		},
 		concat: {
@@ -133,6 +136,22 @@ module.exports = function(grunt) {
 				},
 				dest: '<%= tmp %>/js/linphone-ui-<%= pkg.version %>.js',
 				src: [uiJSFiles]
+			},
+			uiTmplJS: {
+				options: {
+					stripBanners: true,
+					banner: '<%= meta.banner %>'
+				},
+				dest: '<%= tmp %>/js/linphone-ui-tmpl-<%= pkg.version %>.js',
+				src: ['<%= handlebars.uiTmplJS.dest %>']
+			},
+			allJS: {
+				options: {
+					stripBanners: true,
+					banner: '<%= meta.banner %>'
+				},
+				dest: '<%= tmp %>/js/linphone-<%= pkg.version %>.js',
+				src: [coreJSFiles, uiJSFiles, '<%= handlebars.uiTmplJS.dest %>']
 			},
 			uiCSS: {
 				options: {
@@ -155,6 +174,14 @@ module.exports = function(grunt) {
 			uiJS: {
 				dest: 'dist/js/linphone-ui-<%= pkg.version %>.min.js',
 				src: ['<%= concat.uiJS.dest %>']
+			},
+			allJS: {
+				dest: 'dist/js/linphone-<%= pkg.version %>.min.js',
+				src: ['<%= concat.allJS.dest %>']
+			},
+			uiTmplJS: {
+				dest: 'dist/js/linphone-ui-tmpl-<%= pkg.version %>.min.js',
+				src: ['<%= concat.uiTmplJS.dest %>']
 			}
 		},
 		htmlmin: {
@@ -167,12 +194,24 @@ module.exports = function(grunt) {
 				src: ['<%= preprocess.html.dest %>']
 			}
 		},
+		handlebars: {
+			options: {
+				namespace: 'linphone.ui.templates',
+				processName: function(filename) {
+					var prefix = path.normalize(grunt.template.process('<%= tmp %>/linphone.ui.'));
+					return filename.replace(prefix, '').replace('.hbs','');
+				}
+			},
+			uiTmplJS: {
+				dest: '<%= tmp %>/js/linphone-ui-tmpl.js',
+				src: ['<%= tmp %>/*.hbs']
+			}
+		},
 		preprocess: {
 			html: {
 				src : 'html/index.html',
 				dest: '<%= tmp %>/index-processed.html',
 				options: {
-					srcDir: 'modules/',
 					context: {
 						env: '<%= env %>',
 						version: '<%= pkg.version %>'
@@ -223,8 +262,10 @@ module.exports = function(grunt) {
 				expand: true,
 				src: [
 					'**/*',
+					'!*.png',
 					'!**/*.png',
-					'!*.css'
+					'!*.css',
+					'!**/*.css'
 				],
 				cwd: 'themes/' + '<%= theme %>/',
 				dest: 'dist/style/'
@@ -257,7 +298,11 @@ module.exports = function(grunt) {
 		watch: {
 			server: {
 				files:  'server/**',
-				tasks:  [ 'express-server', 'livereload' ]
+				tasks:  ['express-server', 'livereload']
+			},
+			allJS: {
+				files: ['<%= concat.coreJS.dest %>', '<%= concat.uiJS.dest %>', '<%= concat.uiTmplJS.dest %>'],
+				tasks: ['concat:allJS', 'uglify:allJS']
 			},
 			coreJS: {
 				files: coreJSFiles,
@@ -267,13 +312,17 @@ module.exports = function(grunt) {
 				files: uiJSFiles,
 				tasks: ['concat:uiJS', 'uglify:uiJS']
 			},
+			uiTmplJS: {
+				files: '<%= handlebars.uiTmplJS.dest %>',
+				tasks: ['concat:uiTmplJS', 'uglify:uiTmplJS']
+			},
 			uiCSS: {
 				files: uiCSSFiles,
 				tasks: ['concat:uiCSS', 'cssmin:uiCSS']
 			},
 			html: {
 				files: htmlFiles,
-				tasks: ['preprocess:html', 'htmlmin:html']
+				tasks: ['preprocess:html', 'htmlmin:html', 'extract-handlebars', 'handlebars']
 			}
 		},
 		server : {
@@ -323,9 +372,11 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks( 'grunt-contrib-livereload');
 	grunt.loadNpmTasks( 'grunt-contrib-clean' );
 	grunt.loadNpmTasks( 'grunt-contrib-imagemin' );
+	grunt.loadNpmTasks( 'grunt-contrib-compress' );
+	grunt.loadNpmTasks( 'grunt-contrib-handlebars' );
 	grunt.loadNpmTasks( 'grunt-preprocess' );
 	grunt.loadNpmTasks( 'grunt-oversprite' );
-	grunt.loadNpmTasks( 'grunt-contrib-compress' );
+	grunt.loadNpmTasks( 'grunt-html-validation' );
 	
 	// Express server
 	var server;
@@ -380,12 +431,31 @@ module.exports = function(grunt) {
 			grunt.config.set('server.script', grunt.config.get('server.script').concat([ '-p', '8888']));
 		}
 	);
+	grunt.registerTask('extract-handlebars', 
+		function() {
+			htmlFiles.forEach(function(f) {
+				var html = fs.readFileSync(f, 'utf8');
+				var $ = cheerio.load(html);
+				var elements = $("script[type='text/x-handlebars-template']");
+				elements.each(
+					function(index, element) {
+						var that = $(element);
+						var name = that.attr('id');	
+						var content = that.text();
+						var filename = path.normalize(grunt.template.process('<%= tmp %>/' + name + '.hbs'));
+						grunt.log.writeln(name  + " ->  " + filename);
+						fs.writeFileSync(filename, content, 'utf8');
+					}
+				);
+			});
+		}
+	);
 	
 	// Compile task
-	grunt.registerTask('compile', ['clean', 'copy', 'preprocess', 'concat', 'oversprite', 'imagemin', 'uglify', 'cssmin', 'htmlmin']);
+	grunt.registerTask('compile', ['clean', 'copy', 'extract-handlebars', 'handlebars', 'preprocess', 'concat', 'oversprite', 'imagemin', 'uglify', 'cssmin', 'htmlmin']);
  
 	// Default task
-	grunt.registerTask('default', ['release-env', 'jshint', 'csslint', 'compile']);
+	grunt.registerTask('default', ['release-env', 'jshint', 'csslint', 'compile', 'clean:release', 'validation']);
 	
 	// Release env
 	grunt.registerTask('release', ['release-env', 'compile', 'clean:release', 'express-server', 'watch' ]);
