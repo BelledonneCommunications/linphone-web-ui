@@ -10,31 +10,30 @@
 		{url: "js/jquery.mousewheel.js"},
 		{url: "js/vertical.slider.js"},
 		
-		// <!-- @if env='release' -->
+		/* @if env='release' */
 		{url: "js/jquery.watermark.min.js"},
-		// <!-- @endif -->
-		// <!-- @if env='debug' -->
+		/* @endif */
+		/* @if env='debug' */
 		{url: "js/jquery.watermark.js"},
-		// <!-- @endif -->
+		/* @endif */
 		
-		// <!-- @if env='release' -->
+		/* @if env='release' */
 		{url: "js/handlebars.runtime.js"},
-		// <!-- @endif -->
-		// <!-- @if env='debug' -->
+		/* @endif */
+		/* @if env='debug' */
 		{url: "js/handlebars.js"},
-		// <!-- @endif -->
+		/* @endif */
 		
-		// <!-- @if env='debug' -->
-		{url: "js/linphone-core-<!-- @echo version -->.min.js"},
-		{url: "js/linphone-ui-<!-- @echo version -->.min.js"},
-		{url: "js/linphone-ui-tmpl-<!-- @echo version -->.min.js"},
-		// <!-- @endif -->
-		// <!-- @if env='debug' -->
-		{url: "js/handlebars.js"},
-		{url: "js/linphone-core-<!-- @echo version -->.js"},
-		{url: "js/linphone-ui-<!-- @echo version -->.js"},
-		{url: "js/linphone-ui-tmpl-<!-- @echo version -->.js"},
-		// <!-- @endif -->
+		/* @if env='release' */
+		{url: "js/linphone-core-/* @echo version */.min.js"},
+		{url: "js/linphone-ui-/* @echo version */.min.js"},
+		{url: "js/linphone-ui-tmpl-/* @echo version */.min.js"},
+		/* @endif */
+		/* @if env='debug' */
+		{url: "js/linphone-core-/* @echo version */.js"},
+		{url: "js/linphone-ui-/* @echo version */.js"},
+		{url: "js/linphone-ui-tmpl-/* @echo version */.js"},
+		/* @endif */
 	];
 	function go(){
 		function getScript(url,success){
@@ -68,12 +67,12 @@
 		}
 		run(function () {
 			jQuery('.linphoneweb').each(function (index) {
-				// <!-- @if env='release' -->
+				/* @if env='release' */
 				linphone.ui.debug = false;
-				// <!-- @endif -->
-				// <!-- @if env='debug' -->
+				/* @endif */
+				/* @if env='debug' */
 				linphone.ui.debug = true;
-				// <!-- @endif -->
+				/* @endif */
 				linphone.ui.init(linphone.ui.getBase(jQuery(this)));
 			});
 		});

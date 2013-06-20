@@ -21,14 +21,16 @@
 			<ul>
 				<li class="settings disabled" data-i18n="header.navigation.settings"></li><!--
 				Avoid issue with inline block in dev mode
-		 	 --><li class="help" data-i18n="header.navigation.help"></li><!--
+		 		--><li class="help" data-i18n="header.navigation.help"></li><!--
 				Avoid issue with inline block in dev mode
-		 	 --><li class="about" data-i18n="header.navigation.about"></li>
+		 		--><li class="about" data-i18n="header.navigation.about"></li>
 			</ul>
 		</nav>
+		<!-- @if env='debug' -->
 		<script id="linphone.ui.header.language.list.entry" type="text/x-handlebars-template">
 				<li class="{{cls}}">{{lang}}</li>
 		</script>
+		<!-- @endif -->
 		<nav class="language">
 			<ul class="list">
 			</ul>

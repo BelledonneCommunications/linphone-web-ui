@@ -32,7 +32,9 @@ module.exports = function(grunt) {
 		'linphone.ui.popup.error'
 	],
 	htmlFiles = [
-		'index',
+		'index.html',
+		'index.js',
+		'index.css'
 	],
 
 	/* JS files */
@@ -56,8 +58,8 @@ module.exports = function(grunt) {
 	/* ********** */
 	
 	/* HTML files */
-	htmlFiles = htmlFiles.map(function(module) {
-		return 'html/' + module + '.html';
+	htmlFiles = htmlFiles.map(function(file) {
+		return 'html/' + file;
 	}),
 	
 	htmlFiles = htmlFiles.concat(uiModules.map(function(module) {
@@ -189,6 +191,13 @@ module.exports = function(grunt) {
 			uiTmplJS: {
 				dest: 'dist/js/linphone-ui-tmpl-<%= pkg.version %>.min.js',
 				src: ['<%= concat.uiTmplJS.dest %>']
+			},
+			indexJS: {
+				dest: 'tmp/index.js',
+				src: 'tmp/index-processed.js',
+				options: {
+					banner:''
+				}
 			}
 		},
 		htmlmin: {
@@ -215,15 +224,23 @@ module.exports = function(grunt) {
 			}
 		},
 		preprocess: {
-			html: {
-				src : 'html/index.html',
-				dest: '<%= tmp %>/index-processed.html',
-				options: {
-					context: {
-						env: '<%= env %>',
-						version: '<%= pkg.version %>'
-					}
+			options: {
+				context: {
+					env: '<%= env %>',
+					version: '<%= pkg.version %>'
 				}
+			},
+			html: {
+				src : 'tmp/index.html',
+				dest: '<%= tmp %>/index-processed.html'
+			},
+			indexJS: {
+				src : 'html/index.js',
+				dest: 'tmp/index-processed.js'
+			},
+			indexCSS: {
+				src : 'html/index.css',
+				dest: 'tmp/index-processed.css'
 			}
 		},
 		cssmin: {
@@ -234,6 +251,13 @@ module.exports = function(grunt) {
 			uiCSS: {
 				src: ['<%= oversprite.uiCSS.csslist.dest %>'],
 				dest: 'dist/style/linphone-ui-<%= pkg.version %>.min.css'
+			},
+			indexCSS: {
+				dest: 'tmp/index.css',
+				src: 'tmp/index-processed.css',
+				options: {
+					banner:''
+				}
 			}
 		},
 		imagemin: {
@@ -293,6 +317,22 @@ module.exports = function(grunt) {
 				cwd: 'libs/',
 				dest: 'dist/'
 			},
+			html: {
+				expand: true,
+				src: [
+					 '**'
+				],
+				cwd: 'html/',
+				dest: 'tmp/'
+			},
+			indexJS: {
+				src: 'tmp/index-processed.js',
+				dest: 'tmp/index.js'
+			},
+			indexCSS: {
+				src: 'tmp/index-processed.css',
+				dest: 'tmp/index.css'
+			},
 			downloads: {
 				expand: true,
 				src: [
@@ -327,9 +367,13 @@ module.exports = function(grunt) {
 				files: uiCSSFiles,
 				tasks: ['concat:uiCSS', 'cssmin:uiCSS']
 			},
+			htmlFinal: {
+				files: ['<%= preprocess.html.dest %>'],
+				tasks: ['htmlmin']
+			},
 			html: {
 				files: htmlFiles,
-				tasks: ['preprocess:html', 'htmlmin:html', 'extract-handlebars', 'handlebars']
+				tasks: ['pre-preprocess', 'preprocess:html', 'htmlmin:html', 'extract-handlebars', 'handlebars']
 			}
 		},
 		server : {
@@ -464,9 +508,22 @@ module.exports = function(grunt) {
 			});
 		}
 	);
+	grunt.registerTask('pre-preprocess', 
+		function() {
+			grunt.task.run('preprocess:indexJS');
+			grunt.task.run('preprocess:indexCSS');
+			if(grunt.config.get('env') === 'release') {
+				grunt.task.run('uglify:indexJS');
+				grunt.task.run('cssmin:indexCSS');
+			} else {
+				grunt.task.run('copy:indexJS');
+				grunt.task.run('copy:indexCSS');
+			}
+		}
+	);
 	
 	// Compile task
-	grunt.registerTask('compile', ['clean', 'copy', 'extract-handlebars', 'handlebars', 'preprocess', 'concat', 'oversprite', 'imagemin', 'uglify', 'cssmin', 'htmlmin']);
+	grunt.registerTask('compile', ['clean', 'copy', 'extract-handlebars', 'handlebars', 'pre-preprocess', 'preprocess', 'concat', 'oversprite', 'imagemin', 'uglify', 'cssmin', 'htmlmin']);
  
 	// Default task
 	grunt.registerTask('default', ['release-env', 'jshint', 'csslint', 'compile', 'clean:release', 'validation']);
