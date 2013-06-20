@@ -17,7 +17,7 @@ linphone.ui.view.login = {
 			base.find('> .header .settings').removeClass('disabled');
 			base.find('> .content .view > .login').hide();
 			base.find('> .content .mainbar').show();
-			base.find('> .content .menu').show();
+			linphone.ui.menu.show(base);
 			base.find('> .content .popup > .incall').show();
 			base.find('> .content .popup > .error').show();
 			linphone.ui.popup.showError(base);

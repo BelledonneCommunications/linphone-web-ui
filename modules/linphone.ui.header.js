@@ -21,21 +21,21 @@ linphone.ui.header = {
 				return;
 			}
 			base.find('> .content .view > div').hide();
-			base.find('> .content .menu').hide();
+			linphone.ui.menu.hide(base);
 			base.find('> .content .view > .settings').show();
 			base.find('> .content .view > .settings .button').click(function(){
 				base.find('> .content .view > .settings').hide();
-				base.find('> .content .menu').show();
+				linphone.ui.menu.hide(base);
 			});
 		});
 		
 		base.find('> .header .navigation .about').click(function(event){
 			base.find('> .content .view > div').hide();
-			base.find('> .content .menu').hide();
+			linphone.ui.menu.hide(base);
 			base.find('> .content .view > .about').show();
 			base.find('> .content .view > .about .button').click(function(){
 				base.find('> .content .view > .about').hide();
-				base.find('> .content .menu').show();
+				linphone.ui.menu.show(base);
 			});
 		});
 		

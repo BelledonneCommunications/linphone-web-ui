@@ -5,7 +5,7 @@ linphone.ui.menu = {
 		linphone.ui.menu.uiInit(base);
 	},
 	uiInit: function(base) {
-		base.find('> .content .menu').hide();
+		linphone.ui.menu.hide(base);
 		
 		base.find('> .content .menu nav li li').mouseover(function(){
 			jQuery(this).append('<span class="closeContact"></span>');
@@ -42,5 +42,14 @@ linphone.ui.menu = {
 	},
 	translate: function(base) {
 		
+	},
+	show: function(base) {
+		base.find('> .content .menu').show();
+		base.find('> .content .menu .scroll-pane').each(function(){
+			linphone.ui.slider(jQuery(this));
+		});
+	},
+	hide: function(base) {
+		base.find('> .content .menu').hide();
 	}
 };

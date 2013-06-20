@@ -130,43 +130,27 @@ module.exports = function(grunt) {
 			}
 		},
 		concat: {
+			options: {
+				stripBanners: true,
+				banner: '<%= meta.banner %>'
+			},
 			coreJS: {
-				options: {
-					stripBanners: true,
-					banner: '<%= meta.banner %>'
-				},
 				dest: '<%= tmp %>/js/linphone-core-<%= pkg.version %>.js',
 				src: [coreJSFiles]
 			},
 			uiJS: {
-				options: {
-					stripBanners: true,
-					banner: '<%= meta.banner %>'
-				},
 				dest: '<%= tmp %>/js/linphone-ui-<%= pkg.version %>.js',
 				src: [uiJSFiles]
 			},
 			uiTmplJS: {
-				options: {
-					stripBanners: true,
-					banner: '<%= meta.banner %>'
-				},
 				dest: '<%= tmp %>/js/linphone-ui-tmpl-<%= pkg.version %>.js',
 				src: ['<%= handlebars.uiTmplJS.dest %>']
 			},
 			allJS: {
-				options: {
-					stripBanners: true,
-					banner: '<%= meta.banner %>'
-				},
 				dest: '<%= tmp %>/js/linphone-<%= pkg.version %>.js',
 				src: [coreJSFiles, uiJSFiles, '<%= handlebars.uiTmplJS.dest %>']
 			},
 			uiCSS: {
-				options: {
-					stripBanners: true,
-					banner: '<%= meta.banner %>'
-				},
 				dest: '<%= tmp %>/style/linphone-ui-<%= pkg.version %>.css',
 				src: [uiCSSFiles]
 			},
