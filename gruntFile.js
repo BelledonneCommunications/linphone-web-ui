@@ -119,7 +119,12 @@ module.exports = function(grunt) {
 				src: ['tmp']
 			},
 			release: {
-				src: ['dist/style/ui-lightness/jquery-ui-1.8.17.custom.css', 'dist/downloads', 'dist/js/handlebars.js']
+				src: [
+					'dist/style/ui-lightness/jquery-ui-1.8.17.custom.css', 
+					'dist/downloads', 
+					'dist/js/handlebars.js', 
+					'dist/js/jquery.watermark.js'
+				]
 			}
 		},
 		concat: {
@@ -450,6 +455,7 @@ module.exports = function(grunt) {
 						var that = $(element);
 						var name = that.attr('id');	
 						var content = that.text();
+						//content = content.replace(/\s+/g, ''); // Strip
 						var filename = path.normalize(grunt.template.process('<%= tmp %>/' + name + '.hbs'));
 						grunt.log.writeln(name  + " ->  " + filename);
 						fs.writeFileSync(filename, content, 'utf8');

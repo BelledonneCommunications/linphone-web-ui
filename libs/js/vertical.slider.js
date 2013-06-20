@@ -14,6 +14,7 @@ function setSlider($scrollpane){
 	if ($scrollpane.find('.scroll-content').length==0) $scrollpane.children().wrapAll('<\div class="scroll-content"> /');
 	
 	//compare the height of the scroll content to the scroll pane to see if we need a scrollbar
+	//console.log($scrollpane.find('.scroll-content').height() + " " + $scrollpane.height());
 	var difference = $scrollpane.find('.scroll-content').height()-$scrollpane.height();//eg it's 200px longer 
 	$scrollpane.data('difference',difference); 
 	

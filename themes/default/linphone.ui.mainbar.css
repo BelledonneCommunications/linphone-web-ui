@@ -1,17 +1,30 @@
-.linphoneweb .content .mainbar {
+.linphoneweb > .content .mainbar {
 	margin-top: 20px;
 	margin-bottom: 20px;
 	display: none;
+	height: 40px;
 }
 
-.linphoneweb .content .mainbar .ringtone .buttonSelect {
+.linphoneweb > .content .mainbar .ringtone .buttonSelect {
 	background: #fff;
 }
 
-.linphoneweb .content .mainbar div {
+.linphoneweb > .content .mainbar div {
 	display: inline-block;	
 }
 
-.linphoneweb .content .mainbar .ringtone {
-	float: right;
+.linphoneweb > .content .mainbar .dialer {
+	width: 700px;
+	vertical-align: top;
+}
+
+.linphoneweb > .content .mainbar .ringtone {
+	width: 240px;
+	overflow: hidden;
+	text-align: right;
+	vertical-align: top;
+}
+
+.linphoneweb > .content .mainbar .ringtone .button-group {
+	margin-right: 0;
 }

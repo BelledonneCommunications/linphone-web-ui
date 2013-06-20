@@ -44,5 +44,8 @@ linphone.ui.view.history = {
 			duration: "0:01",
 			type:"Sortant"
 		}));
+	},
+	translate: function(base) {
+		
 	}
 };

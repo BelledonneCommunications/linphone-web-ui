@@ -6,8 +6,8 @@ linphone.ui.view.contacts = {
 	},
 	uiInit: function(base) {
 		base.find('> .content .view > .contacts .goContact').click(function(){
-			base.find('> .content .view .contacts').hide(); 
-			base.find('> .content .view .contact').show();
+			base.find('> .content .view > .contacts').hide(); 
+			base.find('> .content .view > .contact').show();
 		});
 		
 		/* Samples */
@@ -36,5 +36,8 @@ linphone.ui.view.contacts = {
 			number: '+336096894321',
 			name: "Test4"
 		}));
+	},
+	translate: function(base) {
+		
 	}
 };

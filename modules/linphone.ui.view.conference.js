@@ -5,5 +5,8 @@ linphone.ui.view.conference = {
 		linphone.ui.view.conference.uiInit(base);
 	},
 	uiInit: function(base) {
+	},
+	translate: function(base) {
+		
 	}
 };

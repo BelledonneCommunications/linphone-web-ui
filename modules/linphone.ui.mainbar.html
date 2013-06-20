@@ -1,25 +1,12 @@
 <div class="mainbar">
-	<div class="dialer">
-		<input type="text" value="SIP or phone number">
-		<div class="number"></div>
-		<table class="pinpad">
-			<tr><td>1</td><td>2</td><td>3</td></tr>
-			<tr><td>4</td><td>5</td><td>6</td></tr>
-			<tr><td>7</td><td>8</td><td>9</td></tr>
-			<tr><td>*</td><td>0</td><td>#</td></tr>
-		</table>
-	
-		<div class="button invite"><div class="image imageCall"></div><div class="text">Appel</div></div><!--
-		Avoid issue with inline block in dev mode
-	 --><div class="button chat"><div class="image imageChat"></div><div class="text">Chat</div></div>
-	</div>
+	<!-- @include linphone.ui.dialer.html -->
 	<div class="ringtone">
-		<div class="buttonSelectDescription"><div class="image imageRingtone"></div><div class="text">Silencieux</div></div><!--
+		<div class="buttonSelectDescription"><div class="image imageRingtone"></div><div class="text" data-i18n="content.mainbar.ringtone"></div></div><!--
 		Avoid issue with inline block in dev mode
 	 --><div class="button-group">
-			<div class="button buttonSelect"><div class="text">On</div></div><!--
+			<div class="button buttonSelect"><div class="text" data-i18n="global.on"></div></div><!--
 			Avoid issue with inline block in dev mode
-		 --><div class="button buttonSelect"><div class="text">Off</div></div>
+		 --><div class="button buttonSelect"><div class="text" data-i18n="global.off"></div></div>
 		</div>
 	</div>
 </div>

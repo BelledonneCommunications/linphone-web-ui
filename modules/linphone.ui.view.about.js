@@ -5,5 +5,8 @@ linphone.ui.view.about = {
 		linphone.ui.view.about.uiInit(base);
 	},
 	uiInit: function(base) {
+	},
+	translate: function(base) {
+		
 	}
 };

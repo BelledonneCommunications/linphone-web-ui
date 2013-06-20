@@ -32,5 +32,8 @@ linphone.ui.view.chat = {
 			message: 'dd',
 			name: "Test4"
 		}));
+	},
+	translate: function(base) {
+		
 	}
 };

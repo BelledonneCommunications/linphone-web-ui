@@ -11,5 +11,8 @@ linphone.ui.popup.error = {
 			base.find('> .content .popup > .error').hide();
 			linphone.ui.popup.updatePopups(base);
 		});
+	},
+	translate: function(base) {
+		
 	}
 };

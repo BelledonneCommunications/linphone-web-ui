@@ -19,5 +19,10 @@ linphone.ui.popup = {
 		linphone.ui.popup.error.init(base);
 	},
 	uiInit: function(base) {
+	},
+	translate: function(base) {
+		linphone.ui.popup.incall.translate(base);
+		linphone.ui.popup.outcall.translate(base);
+		linphone.ui.popup.error.translate(base);
 	}
 };

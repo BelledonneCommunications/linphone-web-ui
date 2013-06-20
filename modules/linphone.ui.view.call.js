@@ -9,5 +9,8 @@ linphone.ui.view.call = {
 			base.find('> .content .view > .call').hide();
 			base.find('> .content .view > .conference').show();
 		});
+	},
+	translate: function(base) {
+		
 	}
 };

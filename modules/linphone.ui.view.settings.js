@@ -5,5 +5,8 @@ linphone.ui.view.settings = {
 		linphone.ui.view.settings.uiInit(base);
 	},
 	uiInit: function(base) {
+	},
+	translate: function(base) {
+		
 	}
 };

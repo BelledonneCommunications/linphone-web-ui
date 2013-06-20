@@ -11,7 +11,20 @@
 		{url: "js/vertical.slider.js"},
 		
 		// <!-- @if env='release' -->
+		{url: "js/jquery.watermark.min.js"},
+		// <!-- @endif -->
+		// <!-- @if env='debug' -->
+		{url: "js/jquery.watermark.js"},
+		// <!-- @endif -->
+		
+		// <!-- @if env='release' -->
 		{url: "js/handlebars.runtime.js"},
+		// <!-- @endif -->
+		// <!-- @if env='debug' -->
+		{url: "js/handlebars.js"},
+		// <!-- @endif -->
+		
+		// <!-- @if env='debug' -->
 		{url: "js/linphone-core-<!-- @echo version -->.min.js"},
 		{url: "js/linphone-ui-<!-- @echo version -->.min.js"},
 		{url: "js/linphone-ui-tmpl-<!-- @echo version -->.min.js"},

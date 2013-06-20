@@ -5,5 +5,7 @@ linphone.ui.mainbar = {
 		linphone.ui.mainbar.uiInit(base);
 	},
 	uiInit: function(base) {
+	},
+	translate: function(base) {
 	}
 };

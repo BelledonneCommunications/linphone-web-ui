@@ -12,5 +12,8 @@ linphone.ui.popup.incall = {
 			base.find('> .content .view > .call').show();
 			linphone.ui.popup.updatePopups(base);
 		});
+	},
+	translate: function(base) {
+		
 	}
 };

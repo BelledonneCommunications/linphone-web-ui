@@ -5,5 +5,8 @@ linphone.ui.view.contact = {
 		linphone.ui.view.contact.uiInit(base);
 	},
 	uiInit: function(base) {
+	},
+	translate: function(base) {
+		
 	}
 };

@@ -5,19 +5,16 @@ linphone.ui.dialer = {
 		linphone.ui.dialer.uiInit(base);
 	},
 	uiInit: function(base) {
-		base.find('> .content .dialer .invite').click(function(){
-			var target = jQuery(event.target);
-			var base = linphone.ui.getBase(target);
-			base.find('> .content .popup > .outcall').hide();
+		base.find('> .content .dialer .call').click(function(){
+			base.find('> .content .popup > .outcall').show();
 			linphone.ui.popup.updatePopups(base);
 		});
 		
-		base.find('> .content .dialer .number').mouseover(function(){
-			base.find('> .content .dialer table').show();
+		base.find('> .content .dialer .number').click(function(){
+			base.find('> .content .dialer .pinpad').toggle();
 		});
-		
-		base.find('> .content .dialer .number').mouseleave(function(){
-			base.find('> .content .dialer table').hide();
-		});
+	},
+	translate: function(base) {
+		base.find('> .content .dialer .address').watermark(jQuery.i18n.translate('content.dialer.address'));
 	}
 };

@@ -5,25 +5,25 @@
 		<div class="profile">
 			<img src="tmp/profile.png" alt="">
 			<span>Nom du compte</span><br>
-			<p class="status"><span class="image imageStatusOnline"></span><span>Disponible</span></p>
+			<p class="status"><span class="image imageStatusOnline"></span><span data-i18n="global.status.online"></span></p>
 			<div class="profileOpen"></div>
 			<div class="profileModify">
 				<ul>
-					<li><span class="image imageStatusOnline"></span>Disponible</li>
-					<li><span class="image imageStatusAway"></span>Absent</li>
-					<li><span class="image imageStatusBusy"></span>Occupé</li>
+					<li><span class="image imageStatusOnline"></span><span data-i18n="global.status.online"></span></li>
+					<li><span class="image imageStatusAway"></span><span data-i18n="global.status.busy"></span></li>
+					<li><span class="image imageStatusBusy"></span><span data-i18n="global.status.away"></span></li>
 				</ul>
-			<div class="logout"><span class="image imageLogout"></span>Déconnexion</div>
+			<div class="logout"><span class="image imageLogout"></span><span data-i18n="header.profile.disconnect"></span></div>
 			</div>
 		</div>
 
 		<nav class="navigation">
 			<ul>
-				<li class="settings disabled">Paramètres</li><!--
+				<li class="settings disabled" data-i18n="header.navigation.settings"></li><!--
 				Avoid issue with inline block in dev mode
-		 	 --><li class="help">Aide</li><!--
+		 	 --><li class="help" data-i18n="header.navigation.help"></li><!--
 				Avoid issue with inline block in dev mode
-		 	 --><li class="about">À propos</li>
+		 	 --><li class="about" data-i18n="header.navigation.about"></li>
 			</ul>
 		</nav>
 		<script id="linphone.ui.header.language.list.entry" type="text/x-handlebars-template">
