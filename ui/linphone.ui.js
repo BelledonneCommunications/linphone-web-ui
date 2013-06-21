@@ -78,8 +78,13 @@ linphone.ui = {
 			return;
 		}
 		base.find('.window .install').hide(); // Force hide
-
-		core.logHandler = linphone.ui.logHandler; 
+	
+		// Enable debug only if lpdebug is set to true	
+		if(jQuery.getUrlVar('lpdebug') === '1' ||
+			jQuery.getUrlVar('lpdebug') === 'true' ||
+			jQuery.getUrlVar('lpdebug') === 'yes') {
+			core.logHandler = linphone.ui.logHandler;
+		}
 
 		linphone.ui.addEvent(core, 'globalStateChanged', linphone.ui.globalStateChanged);
 		linphone.ui.addEvent(core, 'callStateChanged', linphone.ui.callStateChanged);
@@ -359,6 +364,21 @@ if (!jQuery.browser.msie) {
 
 // OnLoad
 jQuery(function() {
+	jQuery.extend({
+		getUrlVars: function(){
+			var vars = [], hash;
+			var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+			for(var i = 0; i < hashes.length; i++) {
+				hash = hashes[i].split('=');
+				vars.push(hash[0]);
+				vars[hash[0]] = hash[1];
+			}
+			return vars;
+		},
+		getUrlVar: function(name){
+			return jQuery.getUrlVars()[name];
+		}
+	});
 	jQuery.fn.disableSelection = function() {
 		return this.each(function() {
 			jQuery(this).attr('unselectable', 'on').css({
