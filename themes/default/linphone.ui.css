@@ -329,10 +329,10 @@
 .linphoneweb .overall {
 	position: absolute;
 	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	background-color: #FFFFFF;
+	min-height: 490px;
+	width: 890px;
+	background-color: #e4edf2;
 	z-index: 9000;
-	padding: 5px;
+	padding: 30px;
+	text-align: center;
 }
