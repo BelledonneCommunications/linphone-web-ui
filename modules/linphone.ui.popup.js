@@ -9,7 +9,12 @@ linphone.ui.popup = {
 			popup.hide();
 		}
 	},
-	showError: function(base) {
+	show: function(base, view) {
+		base.find('> .content .popup > ' + view).show();
+		linphone.ui.popup.updatePopups(base);
+	},
+	hide: function(base, view) {
+		base.find('> .content .popup > ' + view).hide();
 		linphone.ui.popup.updatePopups(base);
 	},
 	init: function(base) {

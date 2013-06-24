@@ -9,7 +9,7 @@
 	padding: 10px;
 	text-align: center;
 }
-.linphoneweb .popup .error .popupTitle {
+.linphoneweb .popup .error .title {
 	color: #b3bfc5;
 	text-transform: uppercase;
 	font-size: 9pt;
@@ -25,7 +25,7 @@
 	border: 5px solid #e4edf2;
 	margin: 10px auto;
 }
-.linphoneweb .popup .error p {
+.linphoneweb .popup .error .message {
 	color: #fff;
 	font-size: 12pt;
 	line-height: 14pt;

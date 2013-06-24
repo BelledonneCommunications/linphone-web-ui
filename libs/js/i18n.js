@@ -56,5 +56,9 @@ jQuery.i18n.translate = function(text) {
 
 jQuery.i18n.get = function(text) {
 	var translated_text = jQuery.i18n.element(text);
-	return jQuery('<div data-'+jQuery.i18n.translate_key+'= "' + text + '" />').append(translated_text);
+	return jQuery(jQuery.i18n.skeleton(text)).append(translated_text);
+};
+
+jQuery.i18n.skeleton = function(text) {
+	return '<div data-'+jQuery.i18n.translate_key+'="' + text + '"></div>';
 };

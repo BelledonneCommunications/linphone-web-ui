@@ -12,25 +12,25 @@ linphone.ui.view.contacts = {
 		
 		/* Samples */
 		var list = base.find('> .content .view > .contacts .list');
-		list.append(linphone.ui.template('view.contacts.list.entry', {
+		list.append(linphone.ui.template(base, 'view.contacts.list.entry', {
 			img: 'tmp/marcel.jpg',
 			status: 'Disponible',
 			number: '+336096894321',
 			name: "Test"
 		}));
-		list.append(linphone.ui.template('view.contacts.list.entry', {
+		list.append(linphone.ui.template(base, 'view.contacts.list.entry', {
 			img: 'tmp/marcel.jpg',
 			status: 'Disponible',
 			number: '+336096894321',
 			name: "Test2"
 		}));
-		list.append(linphone.ui.template('view.contacts.list.entry', {
+		list.append(linphone.ui.template(base, 'view.contacts.list.entry', {
 			img: 'tmp/marcel.jpg',
 			status: 'Disponible',
 			number: '+336096894321',
 			name: "Test3"
 		}));
-		list.append(linphone.ui.template('view.contacts.list.entry', {
+		list.append(linphone.ui.template(base, 'view.contacts.list.entry', {
 			img: 'tmp/marcel.jpg',
 			status: 'Disponible',
 			number: '+336096894321',

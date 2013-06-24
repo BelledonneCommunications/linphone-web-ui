@@ -5,9 +5,8 @@ linphone.ui.popup.outcall = {
 		linphone.ui.popup.outcall.uiInit(base);
 	},
 	uiInit: function(base) {
-		base.find('> .content .popup > .outcall .callOff').click(function(){
-			base.find('> .content .popup > .outcall').hide();
-			linphone.ui.popup.updatePopups(base);
+		base.find('> .content .popup > .outcall .callOff').click(function() {
+			linphone.ui.popup.hide(base, '.outcall');
 		});
 	},
 	translate: function(base) {

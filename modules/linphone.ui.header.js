@@ -54,9 +54,10 @@ linphone.ui.header = {
 	reloadLanguageList: function(base) {
 		var list = base.find('> .header .language .list');
 		list.empty();
-		for(var i = 0; i < linphone.ui.locales.length; ++i) {
-			var locale = linphone.ui.locales[i];
-			var element = jQuery(linphone.ui.template('header.language.list.entry', {
+		var locales = linphone.ui.configuration(base);
+		for(var i = 0; i < locales.length; ++i) {
+			var locale = locales[i];
+			var element = jQuery(linphone.ui.template(base, 'header.language.list.entry', {
 				lang: locale.name,
 				cls: (locale.locale === jQuery.i18n.locale) ? 'selected': ''
 			}));

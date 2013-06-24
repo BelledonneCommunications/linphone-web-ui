@@ -1,20 +1,6 @@
 /*globals jQuery,linphone,Handlebars,setSlider */
 
 linphone.ui = {
-	debug: false,
-	locales: [ {
-		name : 'US',
-		locale : 'en_US'
-	}, {
-		name : 'FR',
-		locale : 'fr_FR'
-	}, {
-		name : 'DE',
-		locale : 'de_DE'
-	}, {
-		name : 'IT',
-		locale : 'it_IT'
-	} ],
 	data: function() {
 		try {
 			if (typeof window.localStorage !== 'undefined') {
@@ -38,21 +24,51 @@ linphone.ui = {
 			return target.parents('.linphoneweb');
 		}
 	},
-	template: function(name, context) {
-		if(linphone.ui.debug) {
+
+	/* Configuration Part */ 
+	configuration: function(base) {
+		return base.data('linphoneConfig');
+	},
+	configure: function(base, config) {
+		base.data('linphoneConfig', config);
+	},
+	
+	/* UI Part */
+	template: function(base, name, context) {
+		var elem;
+		if(linphone.ui.configuration(base).debug) {
 			name = '#linphone.ui.' + name;
 			name = name.replace(/\./g, '\\.');
 			var source = jQuery(name).html();
 			var template = Handlebars.compile(source);
-			return template(context);
+			elem = template(context);
 		} else {
-			return linphone.ui.templates[name](context);
+			elem = linphone.ui.templates[name](context);
 		}
+		elem = jQuery(elem);
+		jQuery.i18n.update(elem, true);
+		return elem;
 	},
 	slider: function(element) {
 		setSlider(element);
 	},
 	init: function(base) {
+		jQuery.extend({
+			getUrlVars: function(){
+				var vars = [], hash;
+				var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+				for(var i = 0; i < hashes.length; i++) {
+					hash = hashes[i].split('=');
+					vars.push(hash[0]);
+					vars[hash[0]] = hash[1];
+				}
+				return vars;
+			},
+			getUrlVar: function(name){
+				return jQuery.getUrlVars()[name];
+			}
+		});
+		
 		jQuery.fn.visible = function() {
 			return this.css('visibility', 'visible');
 		};
@@ -72,21 +88,21 @@ linphone.ui = {
 			return this.parents('*').andSelf().filter(selector);
 		};
 		
-		linphone.ui.uiInit(base);
-		linphone.ui.locale.init(base);
-		linphone.ui.header.init(base);
-		linphone.ui.menu.init(base);
-		linphone.ui.mainbar.init(base);
-		linphone.ui.dialer.init(base);
-		linphone.ui.view.init(base);
-		linphone.ui.popup.init(base);
-		
-		// Update locale
-		linphone.ui.locale.update(base);
-		base.find('.scroll-pane').each(function(){
-			linphone.ui.slider(jQuery(this));
+		linphone.ui.exceptionHandler(base, function() {
+			linphone.ui.uiInit(base);
+			linphone.ui.core.init(base);
+			linphone.ui.video.init(base);
+			linphone.ui.locale.init(base);
+			linphone.ui.header.init(base);
+			linphone.ui.menu.init(base);
+			linphone.ui.mainbar.init(base);
+			linphone.ui.dialer.init(base);
+			linphone.ui.view.init(base);
+			linphone.ui.popup.init(base);
+			
+			// Update locale
+			linphone.ui.locale.update(base);
 		});
-		base.find('> .content .loading').hide();
 	},
 	uiInit: function(base) {
 	},
@@ -98,6 +114,15 @@ linphone.ui = {
 		linphone.ui.dialer.translate(base);
 		linphone.ui.view.translate(base);
 		linphone.ui.popup.translate(base);
+	},
+	exceptionHandler: function (base, fct) {
+		try {
+			fct();
+		} catch (error) {
+			linphone.ui.error(base, 'errors.exception.unhandled');
+		}
+	},
+	error: function (base, error_id, error) {
+		linphone.ui.popup.error.show(base, error_id, error);
 	}
 };
-

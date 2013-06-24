@@ -1,6 +1,24 @@
 /*globals linphone*/
 
 linphone.ui.i18n = {
+	errors : {
+		core : {
+			1 : {
+				en_US : 'Invalid version of Linphone',
+				fr_FR : 'Version invalide de Linphone'
+			},
+			2 : {
+				en_US : 'Another instance of Linphone Web is started. Close it',
+				fr_FR : 'Une autre instance de de Linphone Web est démarré. Veuillez fermer celle-ci.'
+			}
+		},
+		exception: {
+			unhandled: {
+				en_US : 'Unhandle error',
+				fr_FR : 'Erreur inattendue'
+			}
+		}
+	},
 	global: {
 		save: {
 			en_US : 'Save',

@@ -1,6 +1,8 @@
-<div class="error">
-	<span class="popupTitle" data-i18n="content.popup.error.title"></span>
-	<div class="imgError"></div>
-	<p>Nullam quis nunc massa, et bibendum lorem. Curabitur vulputate molestie hendrerit. </p>	
-	<div class="button"><div class="text" data-i18n="global.ok"></div></div>
-</div>
+<script id="linphone.ui.view.popup.error" type="text/x-handlebars-template">
+	<div class="error">
+		<span class="title" data-i18n="content.popup.error.title"></span>
+		<div class="imgError"></div>
+		<div class="message">{{{content}}}</div>
+		<div class="button"><div class="text" data-i18n="global.ok"></div></div>
+	</div>
+</script>

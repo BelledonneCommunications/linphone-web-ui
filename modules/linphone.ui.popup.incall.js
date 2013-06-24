@@ -8,9 +8,8 @@ linphone.ui.popup.incall = {
 		base.find('> .content .popup > .incall .callIn').click(function(event){
 			var target = jQuery(event.target);
 			var base = linphone.ui.getBase(target);
-			base.find('> .content .popup > .incall').hide();
 			base.find('> .content .view > .call').show();
-			linphone.ui.popup.updatePopups(base);
+			linphone.ui.popup.hide(base, '.incall');
 		});
 	},
 	translate: function(base) {

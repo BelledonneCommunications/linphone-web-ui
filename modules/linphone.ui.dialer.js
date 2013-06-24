@@ -6,8 +6,7 @@ linphone.ui.dialer = {
 	},
 	uiInit: function(base) {
 		base.find('> .content .dialer .call').click(function(){
-			base.find('> .content .popup > .outcall').show();
-			linphone.ui.popup.updatePopups(base);
+			linphone.ui.popup.show(base, '> .content .popup > .outcall');
 		});
 		
 		base.find('> .content .dialer .number').click(function(){

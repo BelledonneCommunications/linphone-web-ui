@@ -9,6 +9,8 @@ module.exports = function(grunt) {
 	],
 	uiModules = [
 		'linphone.ui',
+		'linphone.ui.core',
+		'linphone.ui.video',
 		'linphone.ui.i18n',
 		'linphone.ui.locale',
 		'linphone.ui.header',

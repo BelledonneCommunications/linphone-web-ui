@@ -18,9 +18,8 @@ linphone.ui.view.login = {
 			base.find('> .content .view > .login').hide();
 			base.find('> .content .mainbar').show();
 			linphone.ui.menu.show(base);
-			base.find('> .content .popup > .incall').show();
-			base.find('> .content .popup > .error').show();
-			linphone.ui.popup.showError(base);
+			linphone.ui.popup.show(base, '.incall');
+			linphone.ui.popup.error.show(base, null, 'ullam quis nunc massa, et bibendum lorem. Curabitur vulputate molestie hendrerit.');
 		});
 	},
 	translate: function(base) {

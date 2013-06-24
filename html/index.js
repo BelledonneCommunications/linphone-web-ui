@@ -1,3 +1,117 @@
+var plop = {
+	plop: function(object) {
+		console.log("PLOP");
+	}
+}
+function truc() {
+	console.log("TRUC");
+}
+function __linphone_init(base) {
+	var config = {
+		files: {
+			'Windows' : {
+				'x86' : {
+					'Explorer': {
+						file: 'downloads/linphone-web-0.0.1.3-Win32.cab',
+						version: '0,0,1,3'
+					},
+					'Firefox' : {
+						file: 'downloads/linphone-web-0.0.1.3-Win32.xpi',
+						icon: 'style/images/linphone.png'
+					},
+					'Chrome' : {
+						file: 'downloads/linphone-web-0.0.1.3-Win32.crx'
+					},
+					'DEFAULT' : 'downloads/linphone-web-0.0.1.3-Win32.msi'
+				},
+				'x86_64' : {
+					'Explorer': {
+						file: 'downloads/linphone-web-0.0.1.3-Win32.cab',
+						version: '0,0,1,3'
+					},
+					'Firefox' : {
+						file: 'downloads/linphone-web-0.0.1.3-Win32.xpi',
+						icon: 'style/images/linphone.png'
+					},
+					'Chrome' : {
+						file: 'downloads/linphone-web-0.0.1.3-Win32.crx'
+					},
+					'DEFAULT' : 'downloads/linphone-web-0.0.1.3-Win32.msi'
+				},
+			},
+			'Linux' : {
+				'x86' : {
+					'Firefox' : {
+						file: 'downloads/linphone-web-0.0.1.3-Linux-x86.xpi',
+						icon: 'style/images/linphone.png'
+					},
+					'Chrome' : {
+						file: 'downloads/linphone-web-0.0.1.3-Linux-x86.crx'
+					},
+					'DEFAULT' : 'downloads/linphone-web-0.0.1.3-Linux-x86.tar.gz'
+				}, 
+				'x86_64' : {
+					'Firefox' : {
+						file: 'downloads/linphone-web-0.0.1.3-Linux-x86_64.xpi',
+						icon: 'style/images/linphone.png'
+					},
+					'Chrome' : {
+						file: 'downloads/linphone-web-0.0.1.3-Linux-x86_64.crx'
+					},
+					'DEFAULT' : 'downloads/linphone-web-0.0.1.3-Linux-x86_64.tar.gz'
+				}
+			},
+			'Mac' : {
+				'x86' : {
+					'Firefox' : {
+						file: 'downloads/linphone-web-0.0.1.3-Mac-x86.xpi',
+						icon: 'style/images/linphone.png'
+					},
+					'Chrome' : {
+						file: 'downloads/linphone-web-0.0.1.3-Mac-x86.crx'
+					},
+					'DEFAULT' : 'downloads/linphone-web-0.0.1.3-Mac-x86.pkg'
+				}, 
+				'x86_64' : {
+					'Firefox' : {
+						file: 'downloads/linphone-web-0.0.1.3-Mac-x86_64.xpi',
+						icon: 'style/images/linphone.png'
+					},
+					'Chrome' : {
+						file: 'downloads/linphone-web-0.0.1.3-Mac-x86.crx'
+					},
+					'DEFAULT' : 'downloads/linphone-web-0.0.1.3-Mac-x86_64.pkg'
+				}
+			}
+		},
+		name: 'Linphone Web',
+		version: '0.0.1.3',
+		locales: [ {
+			name : 'US',
+			locale : 'en_US'
+		}, {
+			name : 'FR',
+			locale : 'fr_FR'
+		}, {
+			name : 'DE',
+			locale : 'de_DE'
+		}, {
+			name : 'IT',
+			locale : 'it_IT'
+		} ],
+	}
+	
+	/* @if env='release' */
+	config.debug = false;
+	/* @endif */
+	/* @if env='debug' */
+	config.debug = true;
+	/* @endif */
+	linphone.ui.configure(base, config);
+	linphone.ui.init(base);
+	linphone.ui.core.load(base);
+}
+
 (function(w, d, s) {
 	var scripts = [
 		{url: "js/jquery.js"},
@@ -67,13 +181,8 @@
 		}
 		run(function () {
 			jQuery('.linphoneweb').each(function (index) {
-				/* @if env='release' */
-				linphone.ui.debug = false;
-				/* @endif */
-				/* @if env='debug' */
-				linphone.ui.debug = true;
-				/* @endif */
-				linphone.ui.init(linphone.ui.getBase(jQuery(this)));
+				var base = linphone.ui.getBase(jQuery(this));
+				__linphone_init(base);
 			});
 		});
 	}

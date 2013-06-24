@@ -8,7 +8,7 @@ linphone.ui.view.history = {
 		
 		/* Samples */
 		var list = base.find('> .content .view > .history .list');
-		list.append(linphone.ui.template('view.history.list.entry', {
+		list.append(linphone.ui.template(base, 'view.history.list.entry', {
 			img: 'tmp/marcel.jpg',
 			status: 'Disponible',
 			number: '+336096894321',
@@ -17,7 +17,7 @@ linphone.ui.view.history = {
 			duration: "10:01",
 			type:"Sortant"
 		}));
-		list.append(linphone.ui.template('view.history.list.entry', {
+		list.append(linphone.ui.template(base, 'view.history.list.entry', {
 			img: 'tmp/marcel.jpg',
 			status: 'Disponible',
 			number: '+336096894321',
@@ -26,7 +26,7 @@ linphone.ui.view.history = {
 			duration: "0:01",
 			type:"Entrant"
 		}));
-		list.append(linphone.ui.template('view.history.list.entry', {
+		list.append(linphone.ui.template(base, 'view.history.list.entry', {
 			img: 'tmp/marcel.jpg',
 			status: 'Disponible',
 			number: '+336096894321',
@@ -35,7 +35,7 @@ linphone.ui.view.history = {
 			duration: "0:01",
 			type:"Sortant"
 		}));
-		list.append(linphone.ui.template('view.history.list.entry', {
+		list.append(linphone.ui.template(base, 'view.history.list.entry', {
 			img: 'tmp/marcel.jpg',
 			status: 'Disponible',
 			number: '+336096894321',

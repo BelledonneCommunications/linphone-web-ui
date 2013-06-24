@@ -2,6 +2,7 @@
 
 linphone.ui.locale = {
 	currentLocale: function(base) {
+		var locales = linphone.ui.configuration(base);
 		var locale = (navigator.language) ? navigator.language : navigator.userLanguage;
 		locale = locale.replace('-', '_');
 		linphone.core.log('Browser language: ' + locale);
@@ -9,23 +10,23 @@ linphone.ui.locale = {
 			return linphone.ui.data(base);
 		} else {
 			// Excat Match
-			for (var a in linphone.ui.locales) {
-				if (linphone.ui.locales[a].locale === locale) {
-					linphone.core.log('Exact locale: ' + linphone.ui.locales[a].locale);
-					return linphone.ui.locales[a];
+			for (var a in locales) {
+				if (locales[a].locale === locale) {
+					linphone.core.log('Exact locale: ' + locales[a].locale);
+					return locales[a];
 				}
 			}
 
 			// Start Match
-			for (var b in linphone.ui.locales) {
-				if (linphone.ui.locales[b].locale.search(locale) === 0) {
-					linphone.core.log('Approx locale: ' + linphone.ui.locales[b].locale);
-					return linphone.ui.locales[b];
+			for (var b in locales) {
+				if (locales[b].locale.search(locale) === 0) {
+					linphone.core.log('Approx locale: ' + locales[b].locale);
+					return locales[b];
 				}
 			}
 
 			// Take default (first)
-			return linphone.ui.locales[0];
+			return locales[0];
 		}
 	},
 	update: function(base) {
