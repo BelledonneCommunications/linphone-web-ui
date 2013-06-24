@@ -75,8 +75,8 @@ linphone.ui.i18n = {
 				fr_FR : 'Version invalide de Linphone'
 			},
 			2 : {
-				en_US : 'Another instance of Linphone JS is started. Close it',
-				fr_FR : 'Une autre instance de de Linphone JS est démarré. Veuillez fermer celle-ci.'
+				en_US : 'Another instance of Linphone Web is started. Close it',
+				fr_FR : 'Une autre instance de de Linphone Web est démarré. Veuillez fermer celle-ci.'
 			}
 		}
 	},
