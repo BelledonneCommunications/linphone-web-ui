@@ -10,27 +10,31 @@ linphone.ui.popup.error = {
 		
 	},
 	show: function(base, error_id, error) {
+		// Create error message
 		var content;
 		if(typeof error_id === 'undefined' || error_id === null) {
 			content = jQuery("<div />").text(error).html();
 		} else {
 			content = jQuery.i18n.skeleton(error_id);
 		}
+		
+		// Generate error popup
 		var list = base.find('> .content .popup');
-		var error = linphone.ui.template(base, 'view.popup.error', {
+		var errorPopup = linphone.ui.template(base, 'view.popup.error', {
 			content: content
 		});
-		error.show();
-		error.find('.button').click(function(event){
+		errorPopup.find('.button').click(function(event) {
 			var target = jQuery(event.target);
 			var base = linphone.ui.getBase(target);
 			
 			// Close itself
-			var e = target.getSelfAndParents('.popup > .error');
-			e.hide();
+			target.getSelfAndParents('.popup > .error').hide();
 			linphone.ui.popup.updatePopups(base);
 		});
-		list.append(error);
+		
+		// Append to DOM
+		list.append(errorPopup);
+		errorPopup.show();
 		linphone.ui.popup.updatePopups(base);
 	}
 };
