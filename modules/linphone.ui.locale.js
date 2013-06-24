@@ -2,7 +2,7 @@
 
 linphone.ui.locale = {
 	currentLocale: function(base) {
-		var locales = linphone.ui.configuration(base);
+		var locales = linphone.ui.configuration(base).locales;
 		var locale = (navigator.language) ? navigator.language : navigator.userLanguage;
 		locale = locale.replace('-', '_');
 		linphone.core.log('Browser language: ' + locale);
