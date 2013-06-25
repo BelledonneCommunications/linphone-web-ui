@@ -107,7 +107,7 @@ linphone.ui.media = {
 		base.find('.window .media-options .video_device').change(linphone.ui.media.changeEvent);
 	},
 	changeEvent: function(event) {
-		var target = jQuery(event.target);
+		var target = jQuery(event.target ? event.target : event.srcElement);
 		var core = linphone.ui.getCore(target);
 		if(target.is('.linphone .window .media-options .ring_device')) {
 			core.ringerDevice = target.val();
@@ -129,7 +129,7 @@ linphone.ui.media = {
 
 // Click
 jQuery('html').click(function(event) {
-	var target = jQuery(event.target);
+	var target = jQuery(event.target ? event.target : event.srcElement);
 	var base = linphone.ui.getBase(target);
 
 	// Click on media item

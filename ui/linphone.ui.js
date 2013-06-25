@@ -42,7 +42,14 @@ linphone.ui = {
 	} ],
 	getCore: function(target) {
 		var base = linphone.ui.getBase(target);
-		return base.find('> .core').get()[0];
+		var nodes = base.get(0).childNodes;
+		for(i=0; i<nodes.length; ++i) {
+			var obj = jQuery(nodes[i]);
+			if(obj.hasClass('core')) {
+				return obj;
+			}
+		}
+		return null;
 	},
 	getBase: function(target) {
 		if (typeof target === 'undefined') {
@@ -213,7 +220,7 @@ linphone.ui = {
 	},
 	detect: function(base) {
 		linphone.core.log('Detection: ...');
-		var core = base.find('.core').get()[0];
+		var core = base.find('.core').get(0);
 		var config = base.data('linphoneConfig');
 		if (typeof core !== 'undefined' && typeof core.valid !== 'undefined' && core.valid) {
 			if(!linphone.ui.outdated(config.version, core.pluginVersion)) {
@@ -268,15 +275,20 @@ linphone.ui = {
 	unload: function(base) {
 		linphone.core.log('Unload');
 		base.find('.window .load').show();
-		var core = base.find('> .core').get()[0];
+		var core = base.find('> .core').get(0);
 		if (typeof core !== 'undefined') {
 			delete linphone.ui.core_data[core.magic];
 		}
 
 		// jQuery and embeded objects are not friend: use DOM
-		base.find('>.core').each(function(core_index, core_element) {
-			base.get()[0].removeChild(core_element);
-		});
+		var nodes = base.get(0).childNodes;
+		for(i=0; i<nodes.length; ++i) {
+			var node = nodes[i];
+			var obj = jQuery(node);
+			if(obj.hasClass('core')) {
+				node.parentNode.removeChild(node);
+			}
+		}
 	},
 	load: function(base) {
 		linphone.core.log('Loading ...');
@@ -450,6 +462,6 @@ jQuery(function() {
 
 // Click
 jQuery('html').click(function(event) {
-	var target = jQuery(event.target);
+	var target = jQuery(event.target ? event.target : event.srcElement);
 	var base = linphone.ui.getBase(target);
 });

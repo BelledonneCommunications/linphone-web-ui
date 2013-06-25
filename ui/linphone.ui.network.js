@@ -82,14 +82,14 @@ linphone.ui.network = {
 		core.sipTransports = transports;
 	},
 	changeEvent: function(event) {
-		var target = jQuery(event.target);
+		var target = jQuery(event.target ? event.target : event.srcElement);
 		var core = linphone.ui.getCore(target);
 	}
 };
 
 // Click
 jQuery('html').click(function(event) {
-	var target = jQuery(event.target);
+	var target = jQuery(event.target ? event.target : event.srcElement);
 	var base = linphone.ui.getBase(target);
 	
 	// Click on account item

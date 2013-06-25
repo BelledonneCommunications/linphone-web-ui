@@ -30,7 +30,18 @@
 <link type="text/css" href="style/jquery.ui.selectmenu.css" rel="stylesheet" />
 <!-- @if env='release' --><link type="text/css" href="style/linphone-ui-<!-- @echo version -->.min.css" rel="stylesheet" /><!-- @endif -->
 <!-- @if env='debug' --><link type="text/css" href="style/linphone-ui-<!-- @echo version -->.css" rel="stylesheet" /><!-- @endif -->
-
+<!-- @if env='debug' -->
+<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.8.17.custom.min.js"></script>
+<script type="text/javascript" src="js/jquery.ui.selectmenu.js"></script>
+<script type="text/javascript" src="js/jquery.scrollabletab.js"></script>
+<script type="text/javascript" src="js/jquery.metadata.js"></script>
+<script type="text/javascript" src="js/jquery.client.js"></script>
+<script type="text/javascript" src="js/jsrender.js"></script>
+<script type="text/javascript" src="js/i18n.js"></script>
+<script type="text/javascript" src="js/linphone-core-<!-- @echo version -->.js"></script>
+<script type="text/javascript" src="js/linphone-ui-<!-- @echo version -->.js"></script>
+<!-- @endif -->
 <style type="text/css">
 body {
 	font: 62.5% "Trebuchet MS", sans-serif;

@@ -25,7 +25,7 @@ linphone.ui.about = {
 
 //Click
 jQuery('html').click(function(event) {
-	var target = jQuery(event.target);
+	var target = jQuery(event.target ? event.target : event.srcElement);
 	var base = linphone.ui.getBase(target);
 	var core = linphone.ui.getCore(base);
 	var config = base.data('linphoneConfig');

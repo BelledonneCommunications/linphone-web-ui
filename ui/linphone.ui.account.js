@@ -80,7 +80,7 @@ jQuery(function() {
 
 // Click
 jQuery('html').click(function(event) {
-	var target = jQuery(event.target);
+	var target = jQuery(event.target ? event.target : event.srcElement);
 	var base = linphone.ui.getBase(target);
 	
 	// Click on account item

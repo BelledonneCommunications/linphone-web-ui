@@ -80,7 +80,7 @@ jQuery(function() {
 
 // Click
 jQuery('html').click(function(event) {
-	var target = jQuery(event.target);
+	var target = jQuery(event.target ? event.target : event.srcElement);
 
 	// Click on codecs item
 	if (target.isOrParent('.linphone .window .tools .codecs > a')) {
@@ -93,7 +93,7 @@ jQuery('html').click(function(event) {
 		linphone.ui.getBase(target).find('.window .codecs-options .content tbody tr').draggable({
 			containment : 'parent',
 			helper : function(event) {
-				var original_tr = jQuery(event.target).parent();
+				var original_tr = target.parent();
 				var original_table = original_tr.parents('table');
 				return original_tr.clone().css({
 					'height' : original_tr.outerHeight(),

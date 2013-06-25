@@ -27,35 +27,41 @@ jQuery(function() {
 	jQuery(".linphone .window .tools .hp-slider").slider({
 		orientation : 'vertical',
 		change : function(event, ui) {
+			var target = jQuery(event.target ? event.target : event.srcElement);
+			var base = linphone.ui.getBase(target);
 			if (linphone.core.data()) {
 				linphone.core.data().play_level = ui.value;
 			}
-			linphone.ui.getCore(jQuery(event.target)).playLevel = ui.value;
+			linphone.ui.getCore(base).playLevel = ui.value;
 		}
 	});
 	jQuery(".linphone .window .tools .mic-slider").slider({
 		orientation : 'vertical',
 		change : function(event, ui) {
+			var target = jQuery(event.target ? event.target : event.srcElement);
+			var base = linphone.ui.getBase(target);
 			if (linphone.core.data()) {
 				linphone.core.data().rec_level = ui.value;
 			}
-			linphone.ui.getCore(jQuery(event.target)).recLevel = ui.value;
+			linphone.ui.getCore(base).recLevel = ui.value;
 		}
 	});
 	jQuery(".linphone .window .tools .bell-slider").slider({
 		orientation : 'vertical',
 		change : function(event, ui) {
+			var target = jQuery(event.target ? event.target : event.srcElement);
+			var base = linphone.ui.getBase(target);
 			if (linphone.core.data()) {
 				linphone.core.data().ring_level = ui.value;
 			}
-			linphone.ui.getCore(jQuery(event.target)).ringLevel = ui.value;
+			linphone.ui.getCore(base).ringLevel = ui.value;
 		}
 	});
 });
 
 // Show/Hide slider
 jQuery('html').click(function(event) {
-	var target = jQuery(event.target);
+	var target = jQuery(event.target ? event.target : event.srcElement);
 
 	if (!target.is('.linphone .window .tools .hp-icon')) {
 		jQuery('.linphone .window .tools .hp-slider').fadeOut('fast');
