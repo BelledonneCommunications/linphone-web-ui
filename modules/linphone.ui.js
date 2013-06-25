@@ -12,10 +12,13 @@ linphone.ui = {
 	},
 	getCore: function(target) {
 		var base = linphone.ui.getBase(target);
-		for(i=0; i<nodes.length; ++i) {
+		var nodes = base.get(0).childNodes;
+		
+		// jQuery and embeded objects are not friend: use DOM
+		for(var i = 0; i < nodes.length; ++i) {
 			var obj = jQuery(nodes[i]);
 			if(obj.hasClass('core')) {
-				return obj;
+				return nodes[i];
 			}
 		}
 		throw "Can't find Core";
