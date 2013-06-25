@@ -5,10 +5,10 @@ linphone.ui.view.contacts = {
 		linphone.ui.view.contacts.uiInit(base);
 	},
 	uiInit: function(base) {
-		base.find('> .content .view > .contacts .goContact').click(function(){
+		base.find('> .content .view > .contacts .goContact').click(linphone.ui.exceptionHandler(base, function(){
 			base.find('> .content .view > .contacts').hide(); 
 			base.find('> .content .view > .contact').show();
-		});
+		}));
 		
 		/* Samples */
 		var list = base.find('> .content .view > .contacts .list');

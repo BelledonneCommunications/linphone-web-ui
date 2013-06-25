@@ -12,7 +12,13 @@ linphone.ui = {
 	},
 	getCore: function(target) {
 		var base = linphone.ui.getBase(target);
-		return base.find('> .core').get()[0];
+		for(i=0; i<nodes.length; ++i) {
+			var obj = jQuery(nodes[i]);
+			if(obj.hasClass('core')) {
+				return obj;
+			}
+		}
+		throw "Can't find Core";
 	},
 	getBase: function(target) {
 		if (typeof target === 'undefined') {
@@ -102,7 +108,7 @@ linphone.ui = {
 			
 			// Update locale
 			linphone.ui.locale.update(base);
-		});
+		})();
 	},
 	uiInit: function(base) {
 	},
@@ -116,11 +122,13 @@ linphone.ui = {
 		linphone.ui.popup.translate(base);
 	},
 	exceptionHandler: function (base, fct) {
-		try {
-			fct();
-		} catch (error) {
-			linphone.ui.error(base, 'errors.exception.unhandled');
-		}
+		return function(args) {
+			try {
+				fct.apply(this, arguments);
+			} catch (error) {
+				linphone.ui.error(base, 'errors.exception.unhandled');
+			}
+		};
 	},
 	error: function (base, error_id, error) {
 		linphone.ui.popup.error.show(base, error_id, error);

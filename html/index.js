@@ -1,11 +1,3 @@
-var plop = {
-	plop: function(object) {
-		console.log("PLOP");
-	}
-}
-function truc() {
-	console.log("TRUC");
-}
 function __linphone_init(base) {
 	var config = {
 		files: {
@@ -37,7 +29,7 @@ function __linphone_init(base) {
 						file: 'downloads/linphone-web-0.0.1.3-Win32.crx'
 					},
 					'DEFAULT' : 'downloads/linphone-web-0.0.1.3-Win32.msi'
-				},
+				}
 			},
 			'Linux' : {
 				'x86' : {
@@ -112,6 +104,7 @@ function __linphone_init(base) {
 	linphone.ui.core.load(base);
 }
 
+/* @if env='release' */
 (function(w, d, s) {
 	var scripts = [
 		{url: "js/jquery.js"},
@@ -124,30 +117,13 @@ function __linphone_init(base) {
 		{url: "js/jquery.mousewheel.js"},
 		{url: "js/vertical.slider.js"},
 		
-		/* @if env='release' */
 		{url: "js/jquery.watermark.min.js"},
-		/* @endif */
-		/* @if env='debug' */
-		{url: "js/jquery.watermark.js"},
-		/* @endif */
 		
-		/* @if env='release' */
 		{url: "js/handlebars.runtime.js"},
-		/* @endif */
-		/* @if env='debug' */
-		{url: "js/handlebars.js"},
-		/* @endif */
 		
-		/* @if env='release' */
 		{url: "js/linphone-core-/* @echo version */.min.js"},
 		{url: "js/linphone-ui-/* @echo version */.min.js"},
 		{url: "js/linphone-ui-tmpl-/* @echo version */.min.js"},
-		/* @endif */
-		/* @if env='debug' */
-		{url: "js/linphone-core-/* @echo version */.js"},
-		{url: "js/linphone-ui-/* @echo version */.js"},
-		{url: "js/linphone-ui-tmpl-/* @echo version */.js"},
-		/* @endif */
 	];
 	function go(){
 		function getScript(url,success){
@@ -192,3 +168,10 @@ function __linphone_init(base) {
 		w.attachEvent("onload",go); 
 	}
 }(window, document, 'script'));
+/* @endif */
+/* @if env='debug' */
+jQuery('.linphoneweb').each(function (index) {
+	var base = linphone.ui.getBase(jQuery(this));
+	__linphone_init(base);
+});
+/* @endif */

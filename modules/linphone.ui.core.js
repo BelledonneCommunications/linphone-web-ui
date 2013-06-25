@@ -58,21 +58,21 @@ linphone.ui.core = {
 		var base = linphone.ui.core.instances[core.magic];
 		linphone.ui.exceptionHandler(base, function() {
 			base.trigger('globalStateChanged', [state, message]);
-		});
+		})();
 	},
 	_registrationStateChanged: function(core, proxy, state, message) {
 		linphone.core.log(core + '| (' + proxy + '): ' + state + ', ' + message);
 		var base = linphone.ui.core.instances[core.magic];
 		linphone.ui.exceptionHandler(base, function() {
 			base.trigger('registrationStateChanged', [proxy, state, message]);
-		});
+		})();
 	},
 	_callStateChanged: function(core, call, state, message) {
 		linphone.core.log(core + '| (' + call + '): ' + state + ', ' + message);
 		var base = linphone.ui.core.instances[core.magic];
 		linphone.ui.exceptionHandler(base, function() {
 			base.trigger('callStateChanged', [call, state, message]);
-		});
+		})();
 	},
 	_authInfoRequested: function(core, realm, username) {
 		linphone.core.log(core + '| Auth: ' + realm + ', ' + username);
@@ -80,7 +80,7 @@ linphone.ui.core = {
 		linphone.ui.exceptionHandler(base, function() {
 
 			base.trigger('authInfoRequested', [realm, username]);
-		});
+		})();
 	},
 	_displayStatus: function(core, message) {
 		linphone.core.log(core + '| Status: ' + message);
@@ -88,28 +88,28 @@ linphone.ui.core = {
 		linphone.ui.exceptionHandler(base, function() {
 
 			base.trigger('displayStatus', [message]);
-		});
+		})();
 	},
 	_displayMessage: function(core, message) {
 		linphone.core.log(core + '| Message: ' + message);
 		var base = linphone.ui.core.instances[core.magic];
 		linphone.ui.exceptionHandler(base, function() {
 			base.trigger('displayMessage', [message]);
-		});
+		})();
 	},
 	_displayWarning: function(core, message) {
 		linphone.core.log(core + '| Warning: ' + message);
 		var base = linphone.ui.core.instances[core.magic];
 		linphone.ui.exceptionHandler(base, function() {
 			base.trigger('displayWarning', [message]);
-		});
+		})();
 	},
 	_displayUrl: function(core, message, url) {
 		linphone.core.log(core + '| Url: ' + message + ' - ' + url);
 		var base = linphone.ui.core.instances[core.magic];
 		linphone.ui.exceptionHandler(base, function() {
 			base.trigger('displayUrl', [message, url]);
-		});
+		})(base);
 	},
 	
 	/* Helpers */
@@ -217,9 +217,14 @@ linphone.ui.core = {
 			}
 	
 			// jQuery and embeded objects are not friend: use DOM
-			base.find('>.core').each(function(core_index, core_element) {
-				base.get()[0].removeChild(core_element);
-			});
+			var nodes = base.get(0).childNodes;
+			for(i=0; i<nodes.length; ++i) {
+				var node = nodes[i];
+				var obj = jQuery(node);
+				if(obj.hasClass('core')) {
+					node.parentNode.removeChild(node);
+				}
+			}
 		});
 	},
 	load: function(base) {
@@ -248,7 +253,7 @@ linphone.ui.core = {
 			core.appendTo(base);
 	
 			linphone.ui.core.detect(base);
-		});
+		})();
 	},
 	
 	/* */
@@ -328,6 +333,6 @@ linphone.ui.core = {
 				core.iterateEnabled = true;
 				linphone.core.log('Core loaded');
 			}
-		});
+		})();
 	}
 };

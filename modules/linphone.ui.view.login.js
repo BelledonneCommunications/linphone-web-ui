@@ -5,13 +5,13 @@ linphone.ui.view.login = {
 		linphone.ui.view.login.uiInit(base);
 	},
 	uiInit: function(base) {
-		base.find('> .content .view > .login .goAccountOther').click(function(){
+		base.find('> .content .view > .login .goAccountOther').click(linphone.ui.exceptionHandler(base, function(){
 			base.find('> .content .view > .login .accountSimple').hide();
 			base.find('> .content .view > .login .accountAdvanced').show();	
-		});
+		}));
 		
-		base.find('> .content .view > .login .login').click(function(event){
-			var target = jQuery(event.target);
+		base.find('> .content .view > .login .login').click(linphone.ui.exceptionHandler(base, function(event){
+			var target = jQuery(event.target ? event.target : event.srcElement);
 			var base = linphone.ui.getBase(target);
 			base.find('> .header .profile').visible();
 			base.find('> .header .settings').removeClass('disabled');
@@ -20,7 +20,7 @@ linphone.ui.view.login = {
 			linphone.ui.menu.show(base);
 			linphone.ui.popup.show(base, '.incall');
 			linphone.ui.popup.error.show(base, null, 'ullam quis nunc massa, et bibendum lorem. Curabitur vulputate molestie hendrerit.');
-		});
+		}));
 	},
 	translate: function(base) {
 		base.find('> .content .view > .login .accountSimple .account').watermark(jQuery.i18n.translate('content.view.login.accountSimple.account'));

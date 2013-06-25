@@ -23,14 +23,14 @@ linphone.ui.popup.error = {
 		var errorPopup = linphone.ui.template(base, 'view.popup.error', {
 			content: content
 		});
-		errorPopup.find('.button').click(function(event) {
-			var target = jQuery(event.target);
+		errorPopup.find('.button').click(linphone.ui.exceptionHandler(base, function(event) {
+			var target = jQuery(event.target ? event.target : event.srcElement);
 			var base = linphone.ui.getBase(target);
 			
 			// Close itself
 			target.getSelfAndParents('.popup > .error').hide();
 			linphone.ui.popup.updatePopups(base);
-		});
+		}));
 		
 		// Append to DOM
 		list.append(errorPopup);

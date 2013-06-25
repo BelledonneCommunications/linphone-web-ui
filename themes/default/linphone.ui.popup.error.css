@@ -15,7 +15,7 @@
 	font-size: 9pt;
 }
 .linphoneweb .popup .error .imgError {
-	background: url('img/error.png');
+	background-image: url('img/error.png');
 	width: 40px;
 	height: 40px;
 	margin: 10px auto 15px;
