@@ -210,19 +210,15 @@ linphone.ui.core = {
 			linphone.core.log('Unload Core');
 
 			base.find('> .content .loading').show();
-					
-			var core = base.find('> .core').get()[0];
-			if (typeof core !== 'undefined') {
-				delete linphone.ui.core.instances[core.magic];
-			}
 	
-			// jQuery and embeded objects are not friend: use DOM
+			// jQuery and embedded objects are not friends: use DOM
 			var nodes = base.get(0).childNodes;
-			for(i=0; i<nodes.length; ++i) {
+			for(var i = 0; i < nodes.length; ++i) {
 				var node = nodes[i];
 				var obj = jQuery(node);
 				if(obj.hasClass('core')) {
 					node.parentNode.removeChild(node);
+					delete linphone.ui.core.instances[node.magic];
 				}
 			}
 		});
