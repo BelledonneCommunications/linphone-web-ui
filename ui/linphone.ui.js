@@ -44,11 +44,12 @@ linphone.ui = {
 		var base = linphone.ui.getBase(target);
 		var nodes = base.get(0).childNodes;
 		
-		// jQuery and embeded objects are not friend: use DOM
+		// jQuery and embedded objects are not friends: use DOM
 		for(var i = 0; i < nodes.length; ++i) {
-			var obj = jQuery(nodes[i]);
+			var node = nodes[i];
+			var obj = jQuery(node);
 			if(obj.hasClass('core')) {
-				return nodes[i];
+				return node;
 			}
 		}
 		return null;
@@ -277,18 +278,15 @@ linphone.ui = {
 	unload: function(base) {
 		linphone.core.log('Unload');
 		base.find('.window .load').show();
-		var core = base.find('> .core').get(0);
-		if (typeof core !== 'undefined') {
-			delete linphone.ui.core_data[core.magic];
-		}
-
-		// jQuery and embeded objects are not friend: use DOM
+		
+		// jQuery and embedded objects are not friends: use DOM
 		var nodes = base.get(0).childNodes;
-		for(i=0; i<nodes.length; ++i) {
+		for(var i = 0; i < nodes.length; ++i) {
 			var node = nodes[i];
 			var obj = jQuery(node);
 			if(obj.hasClass('core')) {
 				node.parentNode.removeChild(node);
+				delete linphone.ui.core_data[node.magic];
 			}
 		}
 	},
