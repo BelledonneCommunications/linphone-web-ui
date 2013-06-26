@@ -217,7 +217,7 @@ linphone.ui.core = {
 				var node = nodes[i];
 				var obj = jQuery(node);
 				if(obj.hasClass('core')) {
-					node.parentNode.removeChild(node);
+					base.get(0).removeChild(node);
 					delete linphone.ui.core.instances[node.magic];
 				}
 			}
