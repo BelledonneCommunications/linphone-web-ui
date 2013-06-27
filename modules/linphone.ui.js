@@ -44,7 +44,8 @@ linphone.ui = {
 	},
 	
 	/* UI Part */
-	template: function(base, name, context) {
+	template: function(base, name, context, jquery) {
+		if(typeof jquery === 'undefined') jquery = true;
 		var elem;
 		if(linphone.ui.configuration(base).debug) {
 			name = '#linphone.ui.' + name;
@@ -55,8 +56,11 @@ linphone.ui = {
 		} else {
 			elem = linphone.ui.templates[name](context);
 		}
-		elem = jQuery(elem);
-		jQuery.i18n.update(elem, true);
+		
+		if(jquery) {
+			elem = jQuery(elem);
+			jQuery.i18n.update(elem, true);
+		}
 		return elem;
 	},
 	slider: function(element) {
@@ -127,10 +131,14 @@ linphone.ui = {
 	},
 	exceptionHandler: function (base, fct) {
 		return function(args) {
-			try {
+			if(linphone.ui.configuration(base).debug) {
 				fct.apply(this, arguments);
-			} catch (error) {
-				linphone.ui.error(base, 'errors.exception.unhandled');
+			} else {
+				try {
+					fct.apply(this, arguments);
+				} catch (error) {
+					linphone.ui.error(base, 'errors.exception.unhandled');
+				}
 			}
 		};
 	},

@@ -170,8 +170,22 @@ function __linphone_init(base) {
 }(window, document, 'script'));
 /* @endif */
 /* @if env='debug' */
-jQuery('.linphoneweb').each(function (index) {
-	var base = linphone.ui.getBase(jQuery(this));
-	__linphone_init(base);
-});
+(function(w, d, s) {
+	function go() {
+		var timeout; 
+		function run(){
+			window.clearTimeout(timeout);
+			jQuery('.linphoneweb').each(function (index) {
+				var base = linphone.ui.getBase(jQuery(this));
+				__linphone_init(base);
+			});
+		}
+		timeout = window.setTimeout(run, 1000);
+	}
+	if (w.addEventListener) { 
+		w.addEventListener("load", go, false); 
+	} else if (w.attachEvent) { 
+		w.attachEvent("onload",go); 
+	}
+}(window, document, 'script'));
 /* @endif */

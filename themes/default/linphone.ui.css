@@ -60,6 +60,14 @@
 }
 
 /*************/
+/*  Objects  */
+/*************/
+
+.linphoneweb > .core {
+	visibility: hidden;
+}
+
+/*************/
 /*  Generic  */
 /*************/
 

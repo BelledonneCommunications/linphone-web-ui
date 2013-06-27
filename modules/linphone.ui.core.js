@@ -1,7 +1,7 @@
 /*globals jQuery,linphone,InstallTrigger,chrome*/
 
 linphone.ui.core = {
-	instanceCount: 0,
+	instanceCount: 1,
 	instances: [],
 	init: function(base) {
 
@@ -141,7 +141,7 @@ linphone.ui.core = {
 	},
 	detect: function(base) {
 		linphone.core.log('Core detection ...');
-		var core = base.find('.core').get()[0];
+		var core = linphone.ui.getCore(base);
 		var config = linphone.ui.configuration(base);
 		if (typeof core !== 'undefined' && typeof core.valid !== 'undefined' && core.valid) {
 			if(!linphone.ui.core.outdated(config.version, core.pluginVersion)) {
@@ -238,12 +238,11 @@ linphone.ui.core = {
 				linphone.ui.core._loadHandler(core);
 				delete window[functionName];
 			};
-			var coreTemplate = linphone.ui.template(base, 'object.core', {
+			var core = linphone.ui.template(base, 'object.core', {
 				fct: functionName,
 				magic : linphone.ui.core.instanceCount,
 				codebase : config.codebase
 			});
-			var core = jQuery(coreTemplate);
 			linphone.ui.core.instances[linphone.ui.core.instanceCount] = base;
 			linphone.ui.core.instanceCount = linphone.ui.core.instanceCount + 1;
 			core.appendTo(base);
