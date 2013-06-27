@@ -52,6 +52,9 @@ linphone.ui.view.history = {
 	
 	show: function(base) {
 		linphone.ui.menu.show(base);
+		base.find('> .content .view > .history .scroll-pane').each(function(){
+			linphone.ui.slider(jQuery(this));
+		});
 	},
 	hide: function(base) {
 	}

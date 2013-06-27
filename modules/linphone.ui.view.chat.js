@@ -33,6 +33,12 @@ linphone.ui.view.chat = {
 			message: 'dd',
 			name: "Test4"
 		}));
+		list.append(linphone.ui.template(base, 'view.chat.list.entry.sent', {
+			img: 'tmp/marcel-medium.jpg',
+			date: "Jeudi 21 Septembre 2012 à 23h39m22s",
+			message: 'dd',
+			name: "Test5"
+		}));
 	},
 	translate: function(base) {
 		
@@ -40,6 +46,9 @@ linphone.ui.view.chat = {
 	
 	show: function(base) {
 		linphone.ui.menu.show(base);
+		base.find('> .content .view > .chat .scroll-pane').each(function(){
+			linphone.ui.slider(jQuery(this));
+		});
 	},
 	hide: function(base) {
 	}

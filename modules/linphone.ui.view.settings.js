@@ -7,9 +7,6 @@ linphone.ui.view.settings = {
 	},
 	uiInit: function(base) {
 		base.find('> .content .view > .settings').data('linphoneweb-view', linphone.ui.view.settings);
-		base.find('> .content .view > .settings .button').click(linphone.ui.exceptionHandler(base, function() {
-			linphone.ui.view.hide(base, 'settings');		
-		}));
 	},
 	translate: function(base) {
 		

@@ -2,9 +2,16 @@
 
 linphone.ui.view.settings.media = {
 	init: function(base) {
-		linphone.ui.view.settings.uiInit(base);
+		linphone.ui.view.settings.media.uiInit(base);
 	},
 	uiInit: function(base) {
+		base.find('> .content .view > .settings > .media .actions .save').click(linphone.ui.exceptionHandler(base, function() {
+			linphone.ui.view.settings.media.save(base);
+			linphone.ui.view.hide(base, 'settings');
+		}));
+		base.find('> .content .view > .settings > .media .actions .cancel').click(linphone.ui.exceptionHandler(base, function() {
+			linphone.ui.view.hide(base, 'settings');	
+		}));
 	},
 	translate: function(base) {
 		
@@ -75,6 +82,7 @@ linphone.ui.view.settings.media = {
 		media.find('.devices .video select').val(selected_video_device);
 		
 
+		/*
 		// Event handling
 		media.find('.devices .ring select').unbind('change');
 		media.find('.devices .play select').unbind('change');
@@ -84,7 +92,9 @@ linphone.ui.view.settings.media = {
 		media.find('.devices .play select').change(linphone.ui.view.settings.media.changeEvent);
 		media.find('.devices .record select').change(linphone.ui.view.settings.media.changeEvent);
 		media.find('.devices .video select').change(linphone.ui.view.settings.media.changeEvent);
+		*/
 	},
+	/*
 	changeEvent: function(event) {
 		var target = jQuery(event.target ? event.target : event.srcElement);
 		var core = linphone.ui.getCore(target);
@@ -103,6 +113,14 @@ linphone.ui.view.settings.media = {
 		if(target.is('.linphoneweb > .content .view > .settings > .media .devices .video select')) {
 			core.videoDevice = target.val();
 		}
+	},*/
+	save: function(base) {
+		var core = linphone.ui.getCore(base);
+		var media = base.find('> .content .view > .settings > .media');
+		core.ringerDevice = media.find('.devices .ring select').val();
+		core.playbackDevice = media.find('.devices .play select').val();
+		core.captureDevice = media.find('.devices .record select').val();
+		core.videoDevice = media.find('.devices .video select').val();
 	},
 	show: function(base) {
 		linphone.ui.view.settings.media.updateList(base);

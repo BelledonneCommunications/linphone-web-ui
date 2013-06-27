@@ -44,6 +44,9 @@ linphone.ui.view.contacts = {
 	
 	show: function(base) {
 		linphone.ui.menu.show(base);
+		base.find('> .content .view > .contacts .scroll-pane').each(function(){
+			linphone.ui.slider(jQuery(this));
+		});
 	},
 	hide: function(base) {
 	}

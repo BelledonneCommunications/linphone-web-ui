@@ -19,7 +19,7 @@
 	border-collapse: separate;
 	border-spacing: 4px;
 	display: none;
-	z-index: 2;
+	z-index: 200;
 }
 .linphoneweb .dialer .pinpad td {
 	background: #5d8398;

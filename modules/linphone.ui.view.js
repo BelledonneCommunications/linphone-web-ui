@@ -51,20 +51,20 @@ linphone.ui.view = {
 			var jobject = jQuery(object);
 			if(index == divs.length - 1) {
 				if(!jobject.is(':visible')) {
+					jobject.show();
 					cls = jobject.data('linphoneweb-view');
 					if(cls && cls.show) {
 						cls.show(base);
 					}
 				}
-				jobject.show();
 			} else {
 				if(jobject.is(':visible')) {
 					cls = jobject.data('linphoneweb-view');
 					if(cls && cls.hide) {
 						cls.hide(base);
 					}
+					jobject.hide();
 				}
-				jobject.hide();
 			}
 		});
 	},
