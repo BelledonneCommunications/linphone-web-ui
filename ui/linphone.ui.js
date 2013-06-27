@@ -223,7 +223,7 @@ linphone.ui = {
 	},
 	detect: function(base) {
 		linphone.core.log('Detection: ...');
-		var core = base.find('.core').get(0);
+		var core = linphone.ui.getCore(base);
 		var config = base.data('linphoneConfig');
 		if (typeof core !== 'undefined' && typeof core.valid !== 'undefined' && core.valid) {
 			if(!linphone.ui.outdated(config.version, core.pluginVersion)) {
