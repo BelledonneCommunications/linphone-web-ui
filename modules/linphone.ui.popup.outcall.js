@@ -6,7 +6,7 @@ linphone.ui.popup.outcall = {
 	},
 	uiInit: function(base) {
 		base.find('> .content .popup > .outcall .callOff').click(linphone.ui.exceptionHandler(base, function() {
-			linphone.ui.popup.hide(base, '.outcall');
+			linphone.ui.popup.hide(base, 'outcall');
 		}));
 	},
 	translate: function(base) {

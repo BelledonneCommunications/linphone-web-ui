@@ -16,14 +16,14 @@ linphone.ui.menu = {
 		}));
 		
 		base.find('> .content .menu .goHistory').click(linphone.ui.exceptionHandler(base, function() {
-			base.find('> .content .view > .history').show();
+			linphone.ui.view.show(base, 'history');
 			base.find('.scroll-pane').each(function(){
 				linphone.ui.slider(jQuery(this));
 			});
 		}));
 		
 		base.find('> .content .menu .goChat').click(linphone.ui.exceptionHandler(base, function() {
-			base.find('> .content .view > .chat').show();
+			linphone.ui.view.show(base, 'chat');
 			base.find('.scroll-pane').each(function(){
 				linphone.ui.slider(jQuery(this));
 			});
@@ -34,7 +34,7 @@ linphone.ui.menu = {
 		}));
 		
 		base.find('> .content .menu .goContacts').click(linphone.ui.exceptionHandler(base, function() {
-			base.find('> .content .view > .contacts').show();
+			linphone.ui.view.show(base, 'contacts');
 			base.find('.scroll-pane').each(function(){
 				linphone.ui.slider(jQuery(this));
 			});

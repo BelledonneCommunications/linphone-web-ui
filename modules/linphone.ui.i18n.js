@@ -52,7 +52,7 @@ linphone.ui.i18n = {
 			tls: {
 				en_US : 'TLS',
 				fr_FR : 'TLS'
-			},
+			}
 		},
 		status: {
 			online: {
@@ -239,6 +239,12 @@ linphone.ui.i18n = {
 					fr_FR : 'Ajouter un contact'
 				}
 			},
+			contact: {
+				remove: {
+					en_US : 'Remove contact',
+					fr_FR : 'Supprimer le contact'
+				}
+			},
 			chat: {
 				send: {
 					en_US : 'Send',
@@ -250,28 +256,30 @@ linphone.ui.i18n = {
 				}
 			},
 			settings: {
-				title: {
-					en_US : 'Settings',
-					fr_FR : 'Options'
-				},
-				devices: {
-					play: {
-						en_US : 'Play',
-						fr_FR : 'Lecture'
+				media: {
+					title: {
+						en_US : 'Settings',
+						fr_FR : 'Options'
 					},
-					ring: {
-						en_US : 'Ring',
-						fr_FR : 'Sonnerie'
-					},
-					record: {
-						en_US : 'Record',
-						fr_FR : 'Enregistrement'
-					},
-					video: {
-						en_US : 'Video',
-						fr_FR : 'Vidéo'
-					},
-				},
+					devices: {
+						play: {
+							en_US : 'Play',
+							fr_FR : 'Lecture'
+						},
+						ring: {
+							en_US : 'Ring',
+							fr_FR : 'Sonnerie'
+						},
+						record: {
+							en_US : 'Record',
+							fr_FR : 'Enregistrement'
+						},
+						video: {
+							en_US : 'Video',
+							fr_FR : 'Vidéo'
+						}
+					}
+				}
 			},
 			call: {
 				pause: {

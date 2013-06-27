@@ -20,28 +20,15 @@ linphone.ui.header = {
 			if(jQuery(this).hasClass('disabled')) {
 				return;
 			}
-			base.find('> .content .view > div').hide();
-			linphone.ui.menu.hide(base);
-			base.find('> .content .view > .settings').show();
-			base.find('> .content .view > .settings .button').click(linphone.ui.exceptionHandler(base, function(){
-				base.find('> .content .view > .settings').hide();
-				linphone.ui.menu.hide(base);
-			}));
+			linphone.ui.view.show(base, 'settings');
 		}));
 		
 		base.find('> .header .navigation .about').click(linphone.ui.exceptionHandler(base, function(event){
-			base.find('> .content .view > div').hide();
-			linphone.ui.menu.hide(base);
-			base.find('> .content .view > .about').show();
-			base.find('> .content .view > .about .button').click(linphone.ui.exceptionHandler(base, function(){
-				base.find('> .content .view > .about').hide();
-				linphone.ui.menu.show(base);
-			}));
+			linphone.ui.view.show(base, 'about');
 		}));
 		
-		base.click(linphone.ui.exceptionHandler(base, function(event) {
+		base.find('> .header .language .list').click(linphone.ui.exceptionHandler(base, function(event) {
 			var target = jQuery(event.target ? event.target : event.srcElement);
-			var base = linphone.ui.getBase(target);
 			if (target.isOrParent('.linphoneweb > .header .language .list > li')) {
 				var locale = target.data('data');
 				linphone.ui.locale.change(base, locale);

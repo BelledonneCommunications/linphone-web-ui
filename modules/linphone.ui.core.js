@@ -236,7 +236,11 @@ linphone.ui.core = {
 			var functionName = '__linphone_ui_core_loadHandler' + linphone.ui.core.instanceCount;
 			window[functionName] = function (core) {
 				linphone.ui.core._loadHandler(core);
-				delete window[functionName];
+				window[functionName] = undefined;
+			    try{
+					delete window[functionName];
+			    } catch(e) {
+			    }
 			};
 			var core = linphone.ui.template(base, 'object.core', {
 				fct: functionName,

@@ -5,6 +5,7 @@ linphone.ui.view.history = {
 		linphone.ui.view.history.uiInit(base);
 	},
 	uiInit: function(base) {
+		base.find('> .content .view > .history').data('linphoneweb-view', linphone.ui.view.history);
 		
 		/* Samples */
 		var list = base.find('> .content .view > .history .list');
@@ -47,5 +48,11 @@ linphone.ui.view.history = {
 	},
 	translate: function(base) {
 		
+	},
+	
+	show: function(base) {
+		linphone.ui.menu.show(base);
+	},
+	hide: function(base) {
 	}
 };

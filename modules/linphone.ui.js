@@ -45,7 +45,9 @@ linphone.ui = {
 	
 	/* UI Part */
 	template: function(base, name, context, jquery) {
-		if(typeof jquery === 'undefined') jquery = true;
+		if(typeof jquery === 'undefined') {
+			jquery = true;
+		}
 		var elem;
 		if(linphone.ui.configuration(base).debug) {
 			name = '#linphone.ui.' + name;

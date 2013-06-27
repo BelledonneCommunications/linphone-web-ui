@@ -6,7 +6,7 @@ linphone.ui.dialer = {
 	},
 	uiInit: function(base) {
 		base.find('> .content .dialer .call').click(linphone.ui.exceptionHandler(base, function() {
-			linphone.ui.popup.show(base, '> .content .popup > .outcall');
+			linphone.ui.popup.show(base, 'outcall');
 		}));
 		
 		base.find('> .content .dialer .number').click(linphone.ui.exceptionHandler(base, function(){

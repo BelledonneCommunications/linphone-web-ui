@@ -5,10 +5,7 @@ linphone.ui.view.contacts = {
 		linphone.ui.view.contacts.uiInit(base);
 	},
 	uiInit: function(base) {
-		base.find('> .content .view > .contacts .goContact').click(linphone.ui.exceptionHandler(base, function(){
-			base.find('> .content .view > .contacts').hide(); 
-			base.find('> .content .view > .contact').show();
-		}));
+		base.find('> .content .view > .contacts').data('linphoneweb-view', linphone.ui.view.contacts);
 		
 		/* Samples */
 		var list = base.find('> .content .view > .contacts .list');
@@ -36,8 +33,18 @@ linphone.ui.view.contacts = {
 			number: '+336096894321',
 			name: "Test4"
 		}));
+		
+		base.find('> .content .view > .contacts .goContact').click(linphone.ui.exceptionHandler(base, function(){
+			linphone.ui.view.show(base, 'contact');
+		}));
 	},
 	translate: function(base) {
 		
+	},
+	
+	show: function(base) {
+		linphone.ui.menu.show(base);
+	},
+	hide: function(base) {
 	}
 };

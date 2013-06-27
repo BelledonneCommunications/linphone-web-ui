@@ -1,7 +1,7 @@
 /*globals jQuery,linphone*/
 
 linphone.ui.popup = {
-	updatePopups: function(base) {
+	update: function(base) {
 		var popup = base.find('.content .popup');
 		if(popup.children().filter(function() { return jQuery(this).css("display") !== "none"; }).length > 0) {
 			popup.show();
@@ -10,12 +10,12 @@ linphone.ui.popup = {
 		}
 	},
 	show: function(base, view) {
-		base.find('> .content .popup > ' + view).show();
-		linphone.ui.popup.updatePopups(base);
+		base.find('> .content .popup > .' + view).show();
+		linphone.ui.popup.update(base);
 	},
 	hide: function(base, view) {
-		base.find('> .content .popup > ' + view).hide();
-		linphone.ui.popup.updatePopups(base);
+		base.find('> .content .popup > .' + view).hide();
+		linphone.ui.popup.update(base);
 	},
 	init: function(base) {
 		linphone.ui.popup.uiInit(base);

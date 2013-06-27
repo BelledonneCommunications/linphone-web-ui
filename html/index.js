@@ -90,7 +90,7 @@ function __linphone_init(base) {
 		}, {
 			name : 'IT',
 			locale : 'it_IT'
-		} ],
+		} ]
 	}
 	
 	/* @if env='release' */

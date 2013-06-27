@@ -6,10 +6,9 @@ linphone.ui.popup.incall = {
 	},
 	uiInit: function(base) {
 		base.find('> .content .popup > .incall .callIn').click(linphone.ui.exceptionHandler(base, function(event){
-			var target = jQuery(event.target ? event.target : event.srcElement);
-			var base = linphone.ui.getBase(target);
-			base.find('> .content .view > .call').show();
-			linphone.ui.popup.hide(base, '.incall');
+			linphone.ui.view.show(base, 'call');
+			
+			linphone.ui.popup.hide(base, 'incall');
 		}));
 	},
 	translate: function(base) {

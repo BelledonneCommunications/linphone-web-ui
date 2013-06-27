@@ -5,6 +5,7 @@ linphone.ui.view.chat = {
 		linphone.ui.view.chat.uiInit(base);
 	},
 	uiInit: function(base) {
+		base.find('> .content .view > .chat').data('linphoneweb-view', linphone.ui.view.chat);
 		
 		/* Samples */
 		var list = base.find('> .content .view > .chat .list');
@@ -35,5 +36,11 @@ linphone.ui.view.chat = {
 	},
 	translate: function(base) {
 		
+	},
+	
+	show: function(base) {
+		linphone.ui.menu.show(base);
+	},
+	hide: function(base) {
 	}
 };

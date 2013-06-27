@@ -1,0 +1,27 @@
+.linphoneweb > .content .view > .settings > .media .actions {
+	padding: 10px;
+}
+.linphoneweb > .content .view > .settings > .media .actions .title {
+	font-size: 15pt;
+	float: left;
+	margin-top: 10px;
+}
+.linphoneweb > .content .view > .settings > .media form {
+	padding: 20px 10px 10px;
+	border-top: 1px solid #e4edf2;
+	margin-top: -10px;
+}
+.linphoneweb > .content .view > .settings > .media form label {
+	display:inline-block;
+	width: 200px;
+	line-height: 20px;
+	text-transform: uppercase;
+	font-weight: bold;
+}
+.linphoneweb > .content .view > .settings > .media form select {
+	display:inline-block;
+	border: 1px solid #adbbc2;
+	width: 230px;
+	margin-bottom: 20px;
+	padding: 5px;
+}
