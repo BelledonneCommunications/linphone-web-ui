@@ -18,6 +18,7 @@ linphone.ui.view.login = {
 			
 			linphone.ui.view.show(base, 'empty');
 			linphone.ui.menu.show(base);
+			linphone.ui.mainbar.show(base);
 			linphone.ui.popup.show(base, 'incall');
 			linphone.ui.popup.error.show(base, null, 'ullam quis nunc massa, et bibendum lorem. Curabitur vulputate molestie hendrerit.');
 		}));
@@ -30,13 +31,13 @@ linphone.ui.view.login = {
 		base.find('> .content .view > .login .accountAdvanced .proxy').watermark(jQuery.i18n.translate('content.view.login.accountAdvanced.proxy'));
 	},
 	
+	/**/
 	show: function(base) {
 		linphone.ui.mainbar.hide(base);
 		base.find('> .content .view > .login .accountSimple').show();	
 		base.find('> .content .view > .login .accountAdvanced').hide();
 	},
 	hide: function(base) {
-		linphone.ui.mainbar.show(base);
 	}
 };
 

@@ -17,19 +17,23 @@ linphone.ui.view.plugin = {
 		
 	},
 	
+	/* */
 	show: function(base) {
 		linphone.ui.mainbar.hide(base);
 		linphone.ui.menu.hide(base);
 	},
 	hide: function(base) {
-		linphone.ui.mainbar.show(base);
 	},
 	
+	/**/
 	download: function(base) {
 		var config = linphone.ui.configuration(base);
 		window.open(config.file.description);
 	},
-	error: function(base, ret) {
+	show: function(base, ret) {
+		if(typeof ret === 'undefined' || ret === null) {
+			return;
+		}
 		var config = linphone.ui.configuration(base);
 		var plugin = base.find('> .content .view > .plugin');
 		plugin.find('.action .download').hide();

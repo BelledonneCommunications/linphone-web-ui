@@ -17,3 +17,8 @@
 	height: 67px;
 	margin: 30px auto;
 }
+
+.linphoneweb > .content .view > .about .entry .version {
+	font-weight: bolder;
+	margin-left: 10px;
+}

@@ -7,6 +7,8 @@ linphone.ui.view.history = {
 	uiInit: function(base) {
 		base.find('> .content .view > .history').data('linphoneweb-view', linphone.ui.view.history);
 		
+		base.find('> .content .view > .history .actions .all').addClass('selected');
+		
 		/* Samples */
 		var list = base.find('> .content .view > .history .list');
 		list.append(linphone.ui.template(base, 'view.history.list.entry', {
@@ -50,6 +52,7 @@ linphone.ui.view.history = {
 		
 	},
 	
+	/**/
 	show: function(base) {
 		linphone.ui.menu.show(base);
 		base.find('> .content .view > .history .scroll-pane').each(function(){

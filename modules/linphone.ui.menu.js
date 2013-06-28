@@ -7,6 +7,9 @@ linphone.ui.menu = {
 	uiInit: function(base) {
 		linphone.ui.menu.hide(base);
 		
+		// Disable menu element selection
+		base.find('> .content .menu ul li').disableSelection();
+		
 		base.find('> .content .menu .history').click(linphone.ui.exceptionHandler(base, function() {
 			linphone.ui.view.show(base, 'history');
 		}));
@@ -105,6 +108,8 @@ linphone.ui.menu = {
 	translate: function(base) {
 		
 	},
+	
+	/**/
 	show: function(base) {
 		base.find('> .content .menu').show();
 		base.find('> .content .menu .scroll-pane').each(function(){

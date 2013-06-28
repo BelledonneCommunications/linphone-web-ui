@@ -12,6 +12,7 @@ linphone.ui.view.contact = {
 		
 	},
 	
+	/**/
 	show: function(base) {
 		linphone.ui.menu.show(base);
 	},

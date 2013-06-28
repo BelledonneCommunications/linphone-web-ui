@@ -44,6 +44,7 @@ linphone.ui.view.chat = {
 		
 	},
 	
+	/**/
 	show: function(base) {
 		linphone.ui.menu.show(base);
 		base.find('> .content .view > .chat .scroll-pane').each(function(){

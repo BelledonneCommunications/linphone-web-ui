@@ -9,6 +9,8 @@ linphone.ui.popup.error = {
 	translate: function(base) {
 		
 	},
+	
+	/**/
 	show: function(base, error_id, error) {
 		// Create error message
 		var content;

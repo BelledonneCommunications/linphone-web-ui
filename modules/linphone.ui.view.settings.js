@@ -11,6 +11,8 @@ linphone.ui.view.settings = {
 	translate: function(base) {
 		
 	},
+	
+	/**/
 	show: function(base) {
 		linphone.ui.menu.hide(base);
 		linphone.ui.view.settings.media.show(base);

@@ -12,6 +12,7 @@ linphone.ui.view.conference = {
 		
 	},
 	
+	/**/
 	show: function(base) {
 		linphone.ui.menu.show(base);
 	},

@@ -42,6 +42,8 @@ linphone.ui.header = {
 	translate: function(base) {
 		linphone.ui.header.reloadLanguageList(base);
 	},
+	
+	/**/
 	reloadLanguageList: function(base) {
 		var list = base.find('> .header .language .list');
 		list.empty();

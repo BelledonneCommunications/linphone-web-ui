@@ -15,6 +15,7 @@ linphone.ui.view.call = {
 		
 	},
 	
+	/**/
 	show: function(base) {
 		linphone.ui.menu.show(base);
 	},

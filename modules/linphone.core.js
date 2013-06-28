@@ -54,5 +54,8 @@ linphone.core = {
 		} catch(ex) {
 		}
 		return {};
+	},
+	isValid: function(core) {
+		return core !== 'undefined' && typeof core.valid !== 'undefined' && core.valid;
 	}
 };

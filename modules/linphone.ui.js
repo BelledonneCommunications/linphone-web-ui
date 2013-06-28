@@ -85,6 +85,20 @@ linphone.ui = {
 			}
 		});
 		
+		jQuery.fn.disableSelection = function() {
+			return this.each(function() {
+				jQuery(this).attr('unselectable', 'on').css({
+					'-moz-user-select' : 'none',
+					'-webkit-user-select' : 'none',
+					'user-select' : 'none',
+					'-ms-user-select' : 'none'
+				}).each(function() {
+					this.onselectstart = function() {
+						return false;
+					};
+				});
+			});
+		};
 		jQuery.fn.visible = function() {
 			return this.css('visibility', 'visible');
 		};
@@ -121,6 +135,8 @@ linphone.ui = {
 		})();
 	},
 	uiInit: function(base) {
+		// Disable selection on buttons
+		base.find('.button').disableSelection();
 	},
 	translate: function(base) {
 		linphone.ui.locale.translate(base);
@@ -147,7 +163,7 @@ linphone.ui = {
 	},
 	error: function (base, error_id, error) {
 		base.find('> .content .loading').hide();
-		linphone.ui.view.error.show(base, error_id, error);
+		linphone.ui.view.show(base, 'error', error_id, error);
 	},
 	
 	reset: function (base) {

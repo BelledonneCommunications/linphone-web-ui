@@ -8,6 +8,8 @@ linphone.ui.core = {
 		NotInstalled: 1,
 		Outdated: 2
 	},
+	
+	/* Init */
 	init: function(base) {
 
 		/* addEvent following Browser */
@@ -148,7 +150,7 @@ linphone.ui.core = {
 		linphone.core.log('Core detection ...');
 		var core = linphone.ui.getCore(base);
 		var config = linphone.ui.configuration(base);
-		if (typeof core !== 'undefined' && typeof core.valid !== 'undefined' && core.valid) {
+		if (linphone.core.isValid(core)) {
 			if(!linphone.ui.core.outdated(config.version, core.pluginVersion)) {
 				linphone.core.log('Core detection: Ok');
 				return linphone.ui.core.detectionStatus.Installed;
@@ -246,9 +248,7 @@ linphone.ui.core = {
 	
 			var ret = linphone.ui.core.detect(base);
 			if(ret !== linphone.ui.core.detectionStatus.Installed) {
-				linphone.ui.view.show(base, 'plugin');
-				base.find('> .content .loading').hide();
-				linphone.ui.view.plugin.error(base, ret);
+				linphone.ui.core.error(base, ret);
 			}
 		})();
 	},
@@ -256,6 +256,16 @@ linphone.ui.core = {
 		linphone.ui.reset(base);
 		linphone.ui.core.unload(base);
 		linphone.ui.core.load(base);
+	},
+	
+	/* */
+	error: function(base, ret) {
+		base.find('> .content .loading').hide();
+		linphone.ui.view.show(base, 'plugin', ret);
+	},
+	done: function(base) {
+		base.find('> .content .loading').hide();
+		linphone.ui.view.show(base, 'login');
 	},
 	
 	/* */
@@ -333,8 +343,7 @@ linphone.ui.core = {
 				core.iterateEnabled = true;
 				linphone.core.log('Core loaded');
 				
-				base.find('> .content .loading').hide();
-				linphone.ui.view.show(base, 'login');
+				linphone.ui.core.done(base);
 			}
 		})();
 	}

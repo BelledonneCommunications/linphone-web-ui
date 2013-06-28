@@ -228,16 +228,16 @@ linphone.ui.i18n = {
 						fr_FR : 'Tous'
 					},
 					incoming: {
-						en_US : 'Incoming',
-						fr_FR : 'Entrant'
+						en_US : 'Incomings',
+						fr_FR : 'Entrants'
 					},
 					outgoing: {
-						en_US : 'Outgoing',
-						fr_FR : 'Sortant'
+						en_US : 'Outgoings',
+						fr_FR : 'Sortants'
 					},
 					miss: {
-						en_US : 'All',
-						fr_FR : 'Tous'
+						en_US : 'Miss',
+						fr_FR : 'Manqués'
 					}
 				},
 				modify: {

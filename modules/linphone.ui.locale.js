@@ -1,6 +1,19 @@
 /*globals jQuery,linphone*/
 
 linphone.ui.locale = {
+	init: function(base) {
+		linphone.ui.locale.uiInit(base);
+	},
+	uiInit: function(base) {
+		var locale = linphone.ui.locale.currentLocale(base, false);
+		jQuery.i18n.data = linphone.ui.i18n;
+		jQuery.i18n.locale = locale;
+	},
+	translate: function(base) {
+	
+	},
+	
+	/**/
 	currentLocale: function(base, log) {
 		var locale;
 		var locales = linphone.ui.configuration(base).locales;
@@ -54,16 +67,5 @@ linphone.ui.locale = {
 		linphone.ui.data(base).locale = locale.locale;
 		jQuery.i18n.change(locale.locale, base);
 		linphone.ui.translate(base);
-	},
-	init: function(base) {
-		linphone.ui.locale.uiInit(base);
-	},
-	uiInit: function(base) {
-		var locale = linphone.ui.locale.currentLocale(base, false);
-		jQuery.i18n.data = linphone.ui.i18n;
-		jQuery.i18n.locale = locale;
-	},
-	translate: function(base) {
-	
 	}
 };

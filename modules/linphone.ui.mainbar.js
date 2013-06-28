@@ -15,7 +15,7 @@ linphone.ui.mainbar = {
 	translate: function(base) {
 	},
 	
-	
+	/**/
 	show: function(base) {
 		linphone.ui.mainbar.update(base);
 		base.find('> .content .mainbar').show();
@@ -24,6 +24,7 @@ linphone.ui.mainbar = {
 		base.find('> .content .mainbar').hide();
 	},
 	
+	/**/
 	update: function(base, level) {
 		var core = linphone.ui.getCore(base);
 		var old_level = core.ringLevel;

@@ -181,7 +181,7 @@ function __linphone_init(base) {
 				__linphone_init(base);
 			});
 		}
-		timeout = window.setTimeout(run, 1);
+		timeout = window.setTimeout(run, 1000);
 	}
 	if (w.addEventListener) { 
 		w.addEventListener("load", go, false); 

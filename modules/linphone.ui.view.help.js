@@ -12,5 +12,12 @@ linphone.ui.view.help = {
 		}));
 	},
 	translate: function(base) {
+	},
+	
+	/**/
+	show: function(base) {
+		linphone.ui.menu.hide(base);
+	},
+	hide: function(base) {
 	}
 };

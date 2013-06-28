@@ -14,8 +14,9 @@ linphone.ui.view.error = {
 	translate: function(base) {
 	},
 	
+	/**/
 	show: function(base, error_id, error) {
-		if(typeof error_id === 'undefined' || error_id === null && typeof error === 'undefined' || error === null) {
+		if((typeof error_id === 'undefined' || error_id === null) && (typeof error === 'undefined' || error === null)) {
 			return;
 		}
 		

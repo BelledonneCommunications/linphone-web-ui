@@ -17,6 +17,12 @@ linphone.ui.view.settings.media = {
 		
 	},
 	
+	/* UI Events */
+	show: function(base) {
+		linphone.ui.view.settings.media.updateList(base);
+		base.find('> .content .view > .settings > .media').show();
+	},
+	
 	// Original function by Alien51
 	unique : function(arrVal) {
 		var uniqueArr = [];
@@ -121,9 +127,5 @@ linphone.ui.view.settings.media = {
 		core.playbackDevice = media.find('.devices .play select').val();
 		core.captureDevice = media.find('.devices .record select').val();
 		core.videoDevice = media.find('.devices .video select').val();
-	},
-	show: function(base) {
-		linphone.ui.view.settings.media.updateList(base);
-		base.find('> .content .view > .settings > .media').show();
 	}
 };
