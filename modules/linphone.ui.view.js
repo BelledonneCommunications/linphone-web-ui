@@ -13,12 +13,13 @@ linphone.ui.view = {
 		linphone.ui.view.chat.init(base);
 		linphone.ui.view.settings.init(base);
 		linphone.ui.view.about.init(base);
+		linphone.ui.view.help.init(base);
+		linphone.ui.view.error.init(base);
 		
 		/* Update */
 		linphone.ui.view.updateIndex(base);
 	},
 	uiInit: function(base) {
-		linphone.ui.view.show(base, 'plugin');
 	},
 	translate: function(base) {
 		linphone.ui.view.plugin.translate(base);
@@ -31,6 +32,8 @@ linphone.ui.view = {
 		linphone.ui.view.chat.translate(base);
 		linphone.ui.view.settings.translate(base);
 		linphone.ui.view.about.translate(base);
+		linphone.ui.view.help.translate(base);
+		linphone.ui.view.error.translate(base);
 	},
 	
 	updateIndex: function(base) {
@@ -49,7 +52,7 @@ linphone.ui.view = {
 		var divs = linphone.ui.view.updateIndex(base);
 		divs.each(function (index, object) {
 			var jobject = jQuery(object);
-			if(index == divs.length - 1) {
+			if(index ===  (divs.length - 1)) {
 				if(!jobject.is(':visible')) {
 					jobject.show();
 					cls = jobject.data('linphoneweb-view');
@@ -72,11 +75,13 @@ linphone.ui.view = {
 		return base.find('> .content .view > div:visible');
 	},
 	show: function(base, viewName) {
+		linphone.core.log('Show view: ' + viewName);
 		var div = base.find('> .content .view > .' + viewName);
 		div.zIndex(100);
 		linphone.ui.view.update(base);
 	},
 	hide: function(base, viewName) {
+		linphone.core.log('Hide view: ' + viewName);
 		var div;
 		if(typeof viewName !== 'undefined') {
 			div = base.find('> .content .view > .' + viewName);

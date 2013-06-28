@@ -2,7 +2,7 @@
 	text-align: center;
 }
 
-.linphoneweb .view > .login {
+.linphoneweb > .content .view > .login {
 	background-color: rgb(228, 237, 242);
 	overflow: auto;
 	min-height: 550px;

@@ -29,6 +29,8 @@ module.exports = function(grunt) {
 		'linphone.ui.view.settings',
 		'linphone.ui.view.settings.media',
 		'linphone.ui.view.about',
+		'linphone.ui.view.help',
+		'linphone.ui.view.error',
 		'linphone.ui.popup',
 		'linphone.ui.popup.incall',
 		'linphone.ui.popup.outcall',
@@ -100,6 +102,7 @@ module.exports = function(grunt) {
 				boss: true,
 				eqnull: true,
 				browser: true,
+				es3: true,
 				globals: {}
 			},
 			core: coreJSFiles,
@@ -108,7 +111,8 @@ module.exports = function(grunt) {
 		csslint: {
 			options: {
 				'box-model': false,
-				'outline-none': false
+				'outline-none': false,
+				'adjoining-classes': false
 			},
 			ui: uiCSSFiles
 		},

@@ -62,3 +62,13 @@ jQuery.i18n.get = function(text) {
 jQuery.i18n.skeleton = function(text) {
 	return '<div data-'+jQuery.i18n.translate_key+'="' + text + '"></div>';
 };
+
+jQuery.i18n.set = function(element, text, translate) {
+	if(typeof translate === 'undefined') {
+		translate = true;
+	}
+	element.data(jQuery.i18n.translate_key, text);
+	if(translate) {
+		jQuery.i18n.update(element);
+	}
+}

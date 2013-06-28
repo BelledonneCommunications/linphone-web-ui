@@ -23,6 +23,10 @@ linphone.ui.header = {
 			linphone.ui.view.show(base, 'settings');
 		}));
 		
+		base.find('> .header .navigation .help').click(linphone.ui.exceptionHandler(base, function(event){
+			linphone.ui.view.show(base, 'help');
+		}));
+
 		base.find('> .header .navigation .about').click(linphone.ui.exceptionHandler(base, function(event){
 			linphone.ui.view.show(base, 'about');
 		}));

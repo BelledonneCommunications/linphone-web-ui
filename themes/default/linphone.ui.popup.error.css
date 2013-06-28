@@ -1,4 +1,4 @@
-.linphoneweb .popup .error {
+.linphoneweb > .content .popup > .error {
 	background-color: rgb(35,38,42);
 	background-color: rgba(35,38,42,0.85);
 	width: 160px;
@@ -9,29 +9,29 @@
 	padding: 10px;
 	text-align: center;
 }
-.linphoneweb .popup .error .title {
+.linphoneweb > .content .popup > .error .title {
 	color: #b3bfc5;
 	text-transform: uppercase;
 	font-size: 9pt;
 }
-.linphoneweb .popup .error .imgError {
+.linphoneweb > .content .popup > .error .imgError {
 	background-image: url('img/error.png');
 	width: 40px;
 	height: 40px;
 	margin: 10px auto 15px;
 }
-.linphoneweb .popup .error img {
+.linphoneweb > .content .popup > .error img {
 	display: block;
 	border: 5px solid #e4edf2;
 	margin: 10px auto;
 }
-.linphoneweb .popup .error .message {
+.linphoneweb > .content .popup > .error .message {
 	color: #fff;
 	font-size: 12pt;
 	line-height: 14pt;
 	margin-bottom: 20px;
 }
-.linphoneweb .popup .error .button {
+.linphoneweb > .content .popup > .error .button {
 	float: inherit;
 	width: auto;
 }   

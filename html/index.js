@@ -90,7 +90,8 @@ function __linphone_init(base) {
 		}, {
 			name : 'IT',
 			locale : 'it_IT'
-		} ]
+		} ],
+		disableChat: true
 	}
 	
 	/* @if env='release' */
@@ -180,7 +181,7 @@ function __linphone_init(base) {
 				__linphone_init(base);
 			});
 		}
-		timeout = window.setTimeout(run, 1000);
+		timeout = window.setTimeout(run, 1);
 	}
 	if (w.addEventListener) { 
 		w.addEventListener("load", go, false); 

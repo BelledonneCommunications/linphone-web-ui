@@ -55,10 +55,6 @@
 	text-align: left;
 }
 
-.linphoneweb .content .loading {
-	z-index: 0;
-}
-
 /*************/
 /*  Objects  */
 /*************/
@@ -148,6 +144,10 @@
 	background: #5d8398;
 	color: #fff;
 	cursor: pointer;
+}
+.linphoneweb .buttonSelect.selected {
+	background: #5d8398;
+	color: #fff;
 }
 .linphoneweb .buttonSelect+ .buttonSelect {
 	border-left: 1px solid #d0dce2;

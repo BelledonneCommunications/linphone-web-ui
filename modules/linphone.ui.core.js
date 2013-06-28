@@ -3,6 +3,11 @@
 linphone.ui.core = {
 	instanceCount: 1,
 	instances: [],
+	detectionStatus: {
+		Installed: 0,
+		NotInstalled: 1,
+		Outdated: 2
+	},
 	init: function(base) {
 
 		/* addEvent following Browser */
@@ -146,23 +151,12 @@ linphone.ui.core = {
 		if (typeof core !== 'undefined' && typeof core.valid !== 'undefined' && core.valid) {
 			if(!linphone.ui.core.outdated(config.version, core.pluginVersion)) {
 				linphone.core.log('Core detection: Ok');
-				// UI TODO
-				base.find('.window .install').hide();
-				return true;
+				return linphone.ui.core.detectionStatus.Installed;
 			} else {
 				linphone.core.log('Core detection: Outdated');
 				linphone.ui.core.unload(base);
 				
-				// UI TODO
-				if (config.file.browser === 'Explorer') {
-					jQuery('.linphone .window .install .text').html(jQuery.i18n.translate('base.install.text.outdated_auto'));
-				} else if (config.file.browser === 'Firefox') {
-					jQuery('.linphone .window .install .text').html(jQuery.i18n.translate('base.install.text.outdated_auto'));
-				} else if (config.file.browser === 'Chrome') {
-					jQuery('.linphone .window .install .text').html(jQuery.i18n.translate('base.install.text.outdated_auto'));
-				} else {
-					jQuery('.linphone .window .install .text').html(jQuery.i18n.translate('base.install.text.outdated_download'));
-				}
+				// Browser update
 				if (config.file.browser === "Firefox") {
 					if (InstallTrigger.updateEnabled()) {
 						InstallTrigger.install({
@@ -183,9 +177,12 @@ linphone.ui.core = {
 					linphone.ui.core.init(base);
 					linphone.ui.core.load(base);
 				}*/
+				return linphone.ui.core.detectionStatus.Outdated;
 			}
 		} else if(typeof config.file.description !== 'undefined'){
 			linphone.core.log('Core detection: Not installed');
+			
+			// Browser installation
 			if (config.file.browser === "Firefox") {
 				if (InstallTrigger.updateEnabled()) {
 					InstallTrigger.install({
@@ -202,8 +199,8 @@ linphone.ui.core = {
 						linphone.ui.core.load(base);
 					}, function(){});
 			}
+			return linphone.ui.core.detectionStatus.NotInstalled;
 		}
-		return false;
 	},
 	unload: function(base) {
 		linphone.ui.exceptionHandler(base, function() {
@@ -221,15 +218,11 @@ linphone.ui.core = {
 					delete linphone.ui.core.instances[node.magic];
 				}
 			}
-		});
+		})();
 	},
 	load: function(base) {
 		linphone.ui.exceptionHandler(base, function() {
 			linphone.core.log('Loading Core...');
-
-			// UI TODO
-			base.find('.window .install').show();
-			base.find('.window .error').hide();
 			
 			navigator.plugins.refresh(false);
 			var config = linphone.ui.configuration(base);
@@ -237,10 +230,10 @@ linphone.ui.core = {
 			window[functionName] = function (core) {
 				linphone.ui.core._loadHandler(core);
 				window[functionName] = undefined;
-			    try{
+				try{
 					delete window[functionName];
-			    } catch(e) {
-			    }
+				} catch(e) {
+				}
 			};
 			var core = linphone.ui.template(base, 'object.core', {
 				fct: functionName,
@@ -251,8 +244,18 @@ linphone.ui.core = {
 			linphone.ui.core.instanceCount = linphone.ui.core.instanceCount + 1;
 			core.appendTo(base);
 	
-			linphone.ui.core.detect(base);
+			var ret = linphone.ui.core.detect(base);
+			if(ret !== linphone.ui.core.detectionStatus.Installed) {
+				linphone.ui.view.show(base, 'plugin');
+				base.find('> .content .loading').hide();
+				linphone.ui.view.plugin.error(base, ret);
+			}
 		})();
+	},
+	reload: function(base) {
+		linphone.ui.reset(base);
+		linphone.ui.core.unload(base);
+		linphone.ui.core.load(base);
 	},
 	
 	/* */
@@ -314,8 +317,6 @@ linphone.ui.core = {
 				var ring_level = (typeof linphone.core.data().ring_level !== "undefined") ? linphone.core.data().ring_level : 100;
 				core.ringLevel = ring_level;
 	
-				base.find('> .content .loading').hide();
-	
 				linphone.core.data().init_count = init_count + 1;
 				
 				// Force network updates (hack)
@@ -331,6 +332,9 @@ linphone.ui.core = {
 	
 				core.iterateEnabled = true;
 				linphone.core.log('Core loaded');
+				
+				base.find('> .content .loading').hide();
+				linphone.ui.view.show(base, 'login');
 			}
 		})();
 	}

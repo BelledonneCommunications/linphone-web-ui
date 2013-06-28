@@ -12,6 +12,10 @@ linphone.ui.dialer = {
 		base.find('> .content .dialer .number').click(linphone.ui.exceptionHandler(base, function(){
 			base.find('> .content .dialer .pinpad').toggle();
 		}));
+		
+		if(linphone.ui.configuration(base).disableChat) {
+			base.find('> .content .dialer .actions .chat').hide();
+		}
 	},
 	translate: function(base) {
 		base.find('> .content .dialer .address').watermark(jQuery.i18n.translate('content.dialer.address'));

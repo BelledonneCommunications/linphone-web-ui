@@ -1,4 +1,4 @@
-.linphoneweb .popup .incall {
+.linphoneweb > .content .popup > .incall {
 	background-color: rgb(35,38,42);
 	background-color: rgba(35,38,42,0.8);
 	width: 160px;
@@ -9,48 +9,48 @@
 	padding: 10px;
 	text-align: center;
 }
-.linphoneweb .popup .incall .title {
+.linphoneweb > .content .popup > .incall .title {
 	color: #b3bfc5;
 	text-transform: uppercase;
 	font-size: 9pt;
 }
-.linphoneweb .popup .incall .contactImg {
+.linphoneweb > .content .popup > .incall .contactImg {
 	display: block;
 	border: 5px solid #e4edf2;
 	margin: 10px auto;
 }
-.linphoneweb .popup .incall .contactName {
+.linphoneweb > .content .popup > .incall .contactName {
 	color: #fff;
 	font-size: 11pt;
 }
 
-.linphoneweb .popup .incall .actions {
+.linphoneweb > .content .popup > .incall .actions {
 	margin: 20px 5px 0 5px;
 }
-.linphoneweb .popup .incall .actions .callIn {
+.linphoneweb > .content .popup > .incall .actions .callIn {
 	background: #809f12;
 	width: 70px;
 	height: 40px;
 	float: left;
 }
-.linphoneweb .popup .incall .actions .callIn:hover {
+.linphoneweb > .content .popup > .incall .actions .callIn:hover {
 	background: #a7ba65;
 	cursor: pointer;
 }
-.linphoneweb .popup .incall .actions .callIn .imageCall {
+.linphoneweb > .content .popup > .incall .actions .callIn .imageCall {
 	margin-left: 15px;
 }
 
-.linphoneweb .popup .incall .actions .callOff {
+.linphoneweb > .content .popup > .incall .actions .callOff {
 	background: #9f1212;
 	width: 70px;
 	height: 40px;
 	float: right;
 }
-.linphoneweb .popup .incall .actions .callOff:hover {
+.linphoneweb > .content .popup > .incall .actions .callOff:hover {
 	background: #c45a5a;
 	cursor: pointer;
 }
-.linphoneweb .popup .incall .actions .callOff .imageCallOff {
+.linphoneweb > .content .popup > .incall .actions .callOff .imageCallOff {
 	margin-left: 15px;
 }     

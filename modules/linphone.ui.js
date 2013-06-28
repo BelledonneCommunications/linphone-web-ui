@@ -131,6 +131,7 @@ linphone.ui = {
 		linphone.ui.view.translate(base);
 		linphone.ui.popup.translate(base);
 	},
+	
 	exceptionHandler: function (base, fct) {
 		return function(args) {
 			if(linphone.ui.configuration(base).debug) {
@@ -145,6 +146,15 @@ linphone.ui = {
 		};
 	},
 	error: function (base, error_id, error) {
-		linphone.ui.popup.error.show(base, error_id, error);
+		base.find('> .content .loading').hide();
+		linphone.ui.view.error.show(base, error_id, error);
+	},
+	
+	reset: function (base) {
+		base.find('> .content .loading').show();
+		base.find('> .header .settings').addClass('disabled');
+		linphone.ui.view.show(base, 'empty');
+		linphone.ui.mainbar.hide(base);
+		linphone.ui.menu.hide(base);
 	}
 };

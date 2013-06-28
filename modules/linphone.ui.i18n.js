@@ -141,12 +141,34 @@ linphone.ui.i18n = {
 					fr_FR : 'Bienvenue'
 				},
 				text: {
-					en_US : 'The plugin is not installed. Please wait and accept the automatic installation of plugin.',
-					fr_FR : 'Le plugin n\'est pas installé. Veuillez attendre et accepter l\'installation automatique du plugin.'
+					download : { // No automatic plugin intallation
+						en_US : 'The plugin is not installed. Please download it using the following button.',
+						fr_FR : 'Le plugin n\'est pas installé. Veuillez le télécharger en utilisant le bouton suivant.'
+					},
+					auto : { // Automatic plugin installation
+						en_US : 'The plugin is not installed. Please wait and accept the automatic install of the plugin.',
+						fr_FR : 'Le plugin n\'est pas installé. Veuillez attendre et accepter l\'installation automatique du plugin.'
+					},
+					auto_or_update : { // With IE, we can not detect the current version without issue (javascript caching)
+						en_US : 'The plugin is not installed or updated. Please wait and accept the automatic install of the plugin.',
+						fr_FR : 'Le plugin n\'est pas installé ou pas à jour. Veuillez attendre et accepter l\'installation automatique du plugin.'
+					},
+					outdated_download : { // No automatic plugin update
+						en_US : 'The plugin is outdated. Please download it using the following button.',
+						fr_FR : 'Le plugin n\'est pas à jour. Veuillez accepter l\'installation automatique du plugin.'
+					},
+					outdated_auto : { // Automatic plugin update
+						en_US : 'The plugin is outdated. Please wait and accept the automatic install of the plugin.',
+						fr_FR : 'Le plugin n\'est pas à jour. Veuillez attendre et accepter l\'installation automatique du plugin.'
+					}
 				},
 				reload: {
 					en_US : 'Reload',
 					fr_FR : 'Recharger'
+				},
+				download: {
+					en_US : 'Download',
+					fr_FR : 'Télécharger'
 				}
 			},
 			login: {
@@ -315,6 +337,16 @@ linphone.ui.i18n = {
 				micro: {
 					en_US : 'Micro',
 					fr_FR : 'Micro'
+				}
+			},
+			error: {
+				title: {
+					en_US : 'Error',
+					fr_FR : 'Erreur'
+				},
+				reload: {
+					en_US : 'Reload',
+					fr_FR : 'Recharger'
 				}
 			}
 		},

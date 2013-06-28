@@ -6,7 +6,11 @@
 }
 
 .linphoneweb > .content .mainbar .ringtone .buttonSelect {
-	background: #fff;
+	background-color: #fff;
+}
+.linphoneweb > .content .mainbar .ringtone .buttonSelect.selected {
+	background-color: #5d8398;
+	color: #fff;
 }
 
 .linphoneweb > .content .mainbar div {

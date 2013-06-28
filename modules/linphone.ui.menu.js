@@ -11,13 +11,6 @@ linphone.ui.menu = {
 			linphone.ui.view.show(base, 'history');
 		}));
 		
-		base.find('> .content .menu .chat .entry').click(linphone.ui.exceptionHandler(base, function() {
-			linphone.ui.view.show(base, 'chat');
-		}));
-		
-		base.find('> .content .menu nav li a').click(linphone.ui.exceptionHandler(base, function() {
-		}));
-		
 		base.find('> .content .menu .contacts').click(linphone.ui.exceptionHandler(base, function() {
 			linphone.ui.view.show(base, 'contacts');
 		}));
@@ -100,6 +93,14 @@ linphone.ui.menu = {
 		base.find('> .content .menu .list .entry').mouseleave(linphone.ui.exceptionHandler(base, function() {
 			jQuery(this).find('.closeContact').remove();
 		}));
+		
+		base.find('> .content .menu .chat .entry').click(linphone.ui.exceptionHandler(base, function() {
+			linphone.ui.view.show(base, 'chat');
+		}));
+		
+		if(linphone.ui.configuration(base).disableChat) {
+			base.find('> .content .menu .chat').hide();
+		}
 	},
 	translate: function(base) {
 		
