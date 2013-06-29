@@ -205,6 +205,7 @@ module.exports = function(grunt) {
 			options: {
 				namespace: 'linphone.ui.templates',
 				processName: function(filename) {
+					filename = path.normalize(filename);
 					var prefix = path.normalize(grunt.template.process('<%= tmp %>/linphone.ui.'));
 					return filename.replace(prefix, '').replace('.hbs','');
 				}

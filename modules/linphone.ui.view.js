@@ -38,13 +38,13 @@ linphone.ui.view = {
 	
 	/**/
 	show: function(base, viewName) {
-		linphone.core.log('Show view: ' + viewName);
+		linphone.ui.logger.log(base, 'Show view: ' + viewName);
 		var div = base.find('> .content .view > .' + viewName);
 		div.zIndex(100);
 		linphone.ui.view.update.apply(this, [base].concat(Array.prototype.slice.call(arguments, 2)));
 	},
 	hide: function(base, viewName) {
-		linphone.core.log('Hide view: ' + viewName);
+		linphone.ui.logger.log(base, 'Hide view: ' + viewName);
 		var div;
 		if(typeof viewName !== 'undefined') {
 			div = base.find('> .content .view > .' + viewName);

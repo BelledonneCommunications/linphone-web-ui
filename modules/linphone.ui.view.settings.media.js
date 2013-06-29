@@ -64,9 +64,9 @@ linphone.ui.view.settings.media = {
 		var selected_capture_device = core.captureDevice;
 		
 		// Log
-		linphone.core.log('Ringer device: ' + selected_ringer_device);
-		linphone.core.log('Playback device: ' + selected_playback_device);
-		linphone.core.log('Capture device: ' + selected_capture_device);
+		linphone.ui.logger.log(base, 'Ringer device: ' + selected_ringer_device);
+		linphone.ui.logger.log(base, 'Playback device: ' + selected_playback_device);
+		linphone.ui.logger.log(base, 'Capture device: ' + selected_capture_device);
 		
 		media.find('.devices .ring select').val(selected_ringer_device);
 		media.find('.devices .play select').val(selected_playback_device);
@@ -83,7 +83,7 @@ linphone.ui.view.settings.media = {
 		var selected_video_device = core.videoDevice;
 		
 		// Log
-		linphone.core.log('Video device: ' + selected_video_device);
+		linphone.ui.logger.log(base, 'Video device: ' + selected_video_device);
 		
 		media.find('.devices .video select').val(selected_video_device);
 		

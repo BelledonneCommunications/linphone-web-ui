@@ -24,14 +24,14 @@ linphone.ui.locale = {
 		// Get saved locale or browser one
 		if (typeof linphone.ui.data(base).locale !== "undefined") {
 			if(log) {
-				linphone.core.log('Saved locale: ' + linphone.ui.data(base).locale);
+				linphone.ui.logger.log(base, 'Saved locale: ' + linphone.ui.data(base).locale);
 			}
 			locale = linphone.ui.data(base).locale;
 		} else {
 			locale = (navigator.language) ? navigator.language : navigator.userLanguage;
 			locale = locale.replace('-', '_');
 			if(log) {
-				linphone.core.log('Browser language: ' + locale);
+				linphone.ui.logger.log(base, 'Browser language: ' + locale);
 			}
 		}
 		
@@ -39,7 +39,7 @@ linphone.ui.locale = {
 		for (var a in locales) {
 			if (locales[a].locale === locale) {
 				if(log) {
-					linphone.core.log('Exact locale: ' + locales[a].locale);
+					linphone.ui.logger.log(base, 'Exact locale: ' + locales[a].locale);
 				}
 				return locales[a];
 			}
@@ -49,7 +49,7 @@ linphone.ui.locale = {
 		for (var b in locales) {
 			if (locales[b].locale.search(locale) === 0) {
 				if(log) {
-					linphone.core.log('Approx locale: ' + locales[b].locale);
+					linphone.ui.logger.log(base, 'Approx locale: ' + locales[b].locale);
 				}
 				return locales[b];
 			}

@@ -93,13 +93,20 @@ function __linphone_init(base) {
 		} ],
 		disableChat: true
 	}
-	
+
 	/* @if env='release' */
 	config.debug = false;
 	/* @endif */
 	/* @if env='debug' */
 	config.debug = true;
 	/* @endif */
+	
+	// Enable debug only if lpdebug is set to true	
+	if(jQuery.getUrlVar('lpdebug') === '1' ||
+		jQuery.getUrlVar('lpdebug') === 'true' ||
+		jQuery.getUrlVar('lpdebug') === 'yes') {
+		config.debug = true;
+	}
 	linphone.ui.configure(base, config);
 	linphone.ui.init(base);
 	linphone.ui.core.load(base);
@@ -117,6 +124,8 @@ function __linphone_init(base) {
 		{url: "js/jquery-ui.js"},
 		{url: "js/jquery.mousewheel.js"},
 		{url: "js/vertical.slider.js"},
+		
+		{url: "js/jquery.urlvars.js"},
 		
 		{url: "js/jquery.watermark.min.js"},
 		

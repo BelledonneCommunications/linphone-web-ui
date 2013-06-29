@@ -69,22 +69,6 @@ linphone.ui = {
 		setSlider(element);
 	},
 	init: function(base) {
-		jQuery.extend({
-			getUrlVars: function(){
-				var vars = [], hash;
-				var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-				for(var i = 0; i < hashes.length; i++) {
-					hash = hashes[i].split('=');
-					vars.push(hash[0]);
-					vars[hash[0]] = hash[1];
-				}
-				return vars;
-			},
-			getUrlVar: function(name){
-				return jQuery.getUrlVars()[name];
-			}
-		});
-		
 		jQuery.fn.disableSelection = function() {
 			return this.each(function() {
 				jQuery(this).attr('unselectable', 'on').css({
@@ -172,5 +156,56 @@ linphone.ui = {
 		linphone.ui.view.show(base, 'empty');
 		linphone.ui.mainbar.hide(base);
 		linphone.ui.menu.hide(base);
+	},
+	
+	isValid: function(base) {
+		return typeof base !== 'undefined' && base !== null;
+	},
+	logger: {
+		log: function(base, message) {
+			var config = {debug: true};
+			if(base) {
+				config = linphone.ui.configuration(base);
+			}
+			if (config.debug && typeof window.console !== 'undefined') {
+				window.console.log(message);
+			}
+		},
+		warn: function(base, message) {
+			var config = {debug: true};
+			if(base) {
+				config = linphone.ui.configuration(base);
+			}
+			if (config.debug && typeof window.console !== 'undefined') {
+				window.console.warn(message);
+			}
+		},
+		error: function(base, message) {
+			var config = {debug: true};
+			if(base) {
+				config = linphone.ui.configuration(base);
+			}
+			if (config.debug && typeof window.console !== 'undefined') {
+				window.console.error(message);
+			}
+		},
+		info: function(base, message) {
+			var config = {debug: true};
+			if(base) {
+				config = linphone.ui.configuration(base);
+			}
+			if (config.debug && typeof window.console !== 'undefined') {
+				window.console.info(message);
+			}
+		},
+		debug: function(base, message) {
+			var config = {debug: true};
+			if(base) {
+				config = linphone.ui.configuration(base);
+			}
+			if (config.debug && typeof window.console !== 'undefined') {
+				window.console.debug(message);
+			}
+		}
 	}
 };

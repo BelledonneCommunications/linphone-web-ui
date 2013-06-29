@@ -18,19 +18,9 @@ linphone.ui.view.plugin = {
 	},
 	
 	/* */
-	show: function(base) {
+	show: function(base, ret) {
 		linphone.ui.mainbar.hide(base);
 		linphone.ui.menu.hide(base);
-	},
-	hide: function(base) {
-	},
-	
-	/**/
-	download: function(base) {
-		var config = linphone.ui.configuration(base);
-		window.open(config.file.description);
-	},
-	show: function(base, ret) {
 		if(typeof ret === 'undefined' || ret === null) {
 			return;
 		}
@@ -65,5 +55,13 @@ linphone.ui.view.plugin = {
 			default:
 				linphone.ui.error(base, 'errors.exception.unhandled');
 		}
+	},
+	hide: function(base) {
+	},
+	
+	/**/
+	download: function(base) {
+		var config = linphone.ui.configuration(base);
+		window.open(config.file.description);
 	}
 };

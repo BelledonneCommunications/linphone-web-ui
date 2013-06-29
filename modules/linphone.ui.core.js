@@ -61,59 +61,123 @@ linphone.ui.core = {
 	
 	/* Callbacks */
 	_globalStateChanged: function(core, state, message) {
-		linphone.core.log(core + '| State: ' + state + ', ' + message);
+		if(!linphone.core.isValid(core)) {
+			linphone.ui.logger.error(null, '_globalStateChanged fail: \'core\' object is invalid');
+			return;
+		}
 		var base = linphone.ui.core.instances[core.magic];
+		if(!linphone.ui.isValid(base)) {
+			linphone.ui.logger.error(null, '_globalStateChanged fail: can\'t retrieve data associated to the \'core\' object');
+			return;
+		}
+		linphone.ui.logger.log(base, core + '| State: ' + state + ', ' + message);
 		linphone.ui.exceptionHandler(base, function() {
 			base.trigger('globalStateChanged', [state, message]);
 		})();
 	},
 	_registrationStateChanged: function(core, proxy, state, message) {
-		linphone.core.log(core + '| (' + proxy + '): ' + state + ', ' + message);
+		if(!linphone.core.isValid(core)) {
+			linphone.ui.logger.error(null, '_registrationStateChanged fail: \'core\' object is invalid');
+			return;
+		}
 		var base = linphone.ui.core.instances[core.magic];
+		if(!linphone.ui.isValid(base)) {
+			linphone.ui.logger.error(null, '_registrationStateChanged fail: can\'t retrieve data associated to the \'core\' object');
+			return;
+		}
+		linphone.ui.logger.log(base, core + '| (' + proxy + '): ' + state + ', ' + message);
 		linphone.ui.exceptionHandler(base, function() {
 			base.trigger('registrationStateChanged', [proxy, state, message]);
 		})();
 	},
 	_callStateChanged: function(core, call, state, message) {
-		linphone.core.log(core + '| (' + call + '): ' + state + ', ' + message);
+		if(!linphone.core.isValid(core)) {
+			linphone.ui.logger.error(null, '_callStateChanged fail: \'core\' object is invalid');
+			return;
+		}
 		var base = linphone.ui.core.instances[core.magic];
+		if(!linphone.ui.isValid(base)) {
+			linphone.ui.logger.error(null, '_callStateChanged fail: can\'t retrieve data associated to the \'core\' object');
+			return;
+		}
+		linphone.ui.logger.log(base, core + '| (' + call + '): ' + state + ', ' + message);
 		linphone.ui.exceptionHandler(base, function() {
 			base.trigger('callStateChanged', [call, state, message]);
 		})();
 	},
 	_authInfoRequested: function(core, realm, username) {
-		linphone.core.log(core + '| Auth: ' + realm + ', ' + username);
+		if(!linphone.core.isValid(core)) {
+			linphone.ui.logger.error(null, '_displayStatus fail: \'core\' object is invalid');
+			return;
+		}
 		var base = linphone.ui.core.instances[core.magic];
+		if(!linphone.ui.isValid(base)) {
+			linphone.ui.logger.error(null, '_authInfoRequested fail: can\'t retrieve data associated to the \'core\' object');
+			return;
+		}
+		linphone.ui.logger.log(base, core + '| Auth: ' + realm + ', ' + username);
 		linphone.ui.exceptionHandler(base, function() {
 
 			base.trigger('authInfoRequested', [realm, username]);
 		})();
 	},
 	_displayStatus: function(core, message) {
-		linphone.core.log(core + '| Status: ' + message);
+		if(!linphone.core.isValid(core)) {
+			linphone.ui.logger.error(null, '_displayStatus fail: \'core\' object is invalid');
+			return;
+		}
 		var base = linphone.ui.core.instances[core.magic];
+		if(!linphone.ui.isValid(base)) {
+			linphone.ui.logger.error(null, '_displayStatus fail: can\'t retrieve data associated to the \'core\' object');
+			return;
+		}
+		linphone.ui.logger.log(base, core + '| Status: ' + message);
 		linphone.ui.exceptionHandler(base, function() {
 
 			base.trigger('displayStatus', [message]);
 		})();
 	},
 	_displayMessage: function(core, message) {
-		linphone.core.log(core + '| Message: ' + message);
+		if(!linphone.core.isValid(core)) {
+			linphone.ui.logger.error(null, '_displayMessage fail: \'core\' object is invalid');
+			return;
+		}
 		var base = linphone.ui.core.instances[core.magic];
+		if(!linphone.ui.isValid(base)) {
+			linphone.ui.logger.error(null, '_displayMessage fail: can\'t retrieve data associated to the \'core\' objecta');
+			return;
+		}
+		linphone.ui.logger.log(base, core + '| Message: ' + message);
 		linphone.ui.exceptionHandler(base, function() {
 			base.trigger('displayMessage', [message]);
 		})();
 	},
 	_displayWarning: function(core, message) {
-		linphone.core.log(core + '| Warning: ' + message);
+		if(!linphone.core.isValid(core)) {
+			linphone.ui.logger.error(null, '_displayWarning fail: \'core\' object is invalid');
+			return;
+		}
 		var base = linphone.ui.core.instances[core.magic];
+		if(!linphone.ui.isValid(base)) {
+			linphone.ui.logger.error(null, '_displayWarning fail: can\'t retrieve data associated to the \'core\' object');
+			return;
+		}
+		linphone.ui.logger.log(base, core + '| Warning: ' + message);
 		linphone.ui.exceptionHandler(base, function() {
 			base.trigger('displayWarning', [message]);
 		})();
 	},
 	_displayUrl: function(core, message, url) {
-		linphone.core.log(core + '| Url: ' + message + ' - ' + url);
+		if(!linphone.core.isValid(core)) {
+			linphone.ui.logger.error(null, '_displayUrl fail: \'core\' object is invalid');
+			return;
+		}
 		var base = linphone.ui.core.instances[core.magic];
+		if(!linphone.ui.isValid(base)) {
+			linphone.ui.logger.error(null, '_displayUrl fail: can\'t retrieve data associated to the \'core\' object');
+			return;
+		}
+		linphone.ui.logger.log(base, core + '| Url: ' + message + ' - ' + url);
 		linphone.ui.exceptionHandler(base, function() {
 			base.trigger('displayUrl', [message, url]);
 		})(base);
@@ -147,15 +211,15 @@ linphone.ui.core = {
 		return false;
 	},
 	detect: function(base) {
-		linphone.core.log('Core detection ...');
+		linphone.ui.logger.log(base, 'Core detection ...');
 		var core = linphone.ui.getCore(base);
 		var config = linphone.ui.configuration(base);
 		if (linphone.core.isValid(core)) {
 			if(!linphone.ui.core.outdated(config.version, core.pluginVersion)) {
-				linphone.core.log('Core detection: Ok');
+				linphone.ui.logger.log(base, 'Core detection: Ok');
 				return linphone.ui.core.detectionStatus.Installed;
 			} else {
-				linphone.core.log('Core detection: Outdated');
+				linphone.ui.logger.log(base, 'Core detection: Outdated');
 				linphone.ui.core.unload(base);
 				
 				// Browser update
@@ -182,7 +246,7 @@ linphone.ui.core = {
 				return linphone.ui.core.detectionStatus.Outdated;
 			}
 		} else if(typeof config.file.description !== 'undefined'){
-			linphone.core.log('Core detection: Not installed');
+			linphone.ui.logger.log(base, 'Core detection: Not installed');
 			
 			// Browser installation
 			if (config.file.browser === "Firefox") {
@@ -206,7 +270,7 @@ linphone.ui.core = {
 	},
 	unload: function(base) {
 		linphone.ui.exceptionHandler(base, function() {
-			linphone.core.log('Unload Core');
+			linphone.ui.logger.log(base, 'Unload Core');
 
 			base.find('> .content .loading').show();
 	
@@ -224,7 +288,7 @@ linphone.ui.core = {
 	},
 	load: function(base) {
 		linphone.ui.exceptionHandler(base, function() {
-			linphone.core.log('Loading Core...');
+			linphone.ui.logger.log(base, 'Loading Core...');
 			
 			navigator.plugins.refresh(false);
 			var config = linphone.ui.configuration(base);
@@ -270,23 +334,21 @@ linphone.ui.core = {
 	
 	/* */
 	_loadHandler: function(core) {
-		linphone.core.log('Core handler');
-		if(typeof core === 'undefined' || typeof core.valid === 'undefined') {
-			linphone.core.error('_loadHandler fail: \'core\' object is invalid');
+		if(!linphone.core.isValid(core)) {
+			linphone.ui.logger.error(null, '_loadHandler fail: \'core\' object is invalid');
 			return;
 		}
 		var base = linphone.ui.core.instances[core.magic];
-		if(typeof base === 'undefined') {
-			linphone.core.error('_loadHandler fail: can\'t retrieve \'core\' data');
+		if(!linphone.ui.isValid(base)) {
+			linphone.ui.logger.error(null, '_loadHandler fail: can\'t retrieve data associated to the \'core\' object');
 			return;
 		}
+		linphone.ui.logger.log(base, 'Core handler');
+		
 		linphone.ui.exceptionHandler(base, function() {
 			base.find('.window .install').hide(); // Force hide
-		
-			// Enable debug only if lpdebug is set to true	
-			if(jQuery.getUrlVar('lpdebug') === '1' ||
-				jQuery.getUrlVar('lpdebug') === 'true' ||
-				jQuery.getUrlVar('lpdebug') === 'yes') {
+			var config = linphone.ui.configuration(base);
+			if(config.debug) {
 				core.logHandler = linphone.ui.logHandler;
 			}
 	
@@ -301,14 +363,14 @@ linphone.ui.core = {
 			var init_count = (typeof linphone.core.data().init_count !== "undefined") ? linphone.core.data().init_count : 0;
 			var ret_value = core.init("local:///.linphonerc");
 			if (ret_value !== 0) {
-				linphone.core.log('Core init error: ' + ret_value);
+				linphone.ui.logger.log(base, 'Core init error: ' + ret_value);
 				linphone.ui.error(base, 'errors.core.' + ret_value);
 			} else {
 				// Random port at first init
 				if(init_count === 0) {
 					core.sipPort = Math.floor((Math.random()*(65535 - 1024)) + 1024);
 				}
-				linphone.core.log('Sip port: ' + core.sipPort);
+				linphone.ui.logger.log(base, 'Sip port: ' + core.sipPort);
 				
 				// Init properties 
 				core.staticPicture = "internal:///share/images/nowebcamCIF.jpg";
@@ -341,7 +403,7 @@ linphone.ui.core = {
 				}
 	
 				core.iterateEnabled = true;
-				linphone.core.log('Core loaded');
+				linphone.ui.logger.log(base, 'Core loaded');
 				
 				linphone.ui.core.done(base);
 			}
