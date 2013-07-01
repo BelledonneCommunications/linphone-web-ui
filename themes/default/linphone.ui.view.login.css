@@ -27,6 +27,14 @@
 	padding: 0 15px;
 	color: #929fa5;
 }
+.linphoneweb > .content .view > .login input[type="password"] {
+	border: 1px solid #adbbc2;
+	width: 400px;
+	height: 40px;
+	margin-bottom: 10px;
+	padding: 0 15px;
+	color: #929fa5;
+}
 .linphoneweb > .content .view > .login .choice {
 	text-align: left;
 	margin: 0 auto 10px auto;
@@ -52,13 +60,13 @@
 	margin-right: auto;
 	margin-bottom: 30px;
 }
-.linphoneweb > .content .view > .login .lien {
+.linphoneweb > .content .view > .login .link {
 	color: #cf4c29;
 	text-transform: uppercase;
 	margin-bottom: 10px;
 	clear: both;
 }
-.linphoneweb > .content .view > .login .lien:hover {
+.linphoneweb > .content .view > .login .link:hover {
 	cursor: pointer;
 	color: #d97459;
 }

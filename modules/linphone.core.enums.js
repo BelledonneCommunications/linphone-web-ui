@@ -50,6 +50,48 @@ linphone.core.enums = {
 		}
 	},
 
+	status : {
+          Offline : 0,
+          Online : 1,
+          Busy : 2,
+          BeRightBack : 3,
+          Away : 4,
+          OnThePhone : 5,
+          OutToLunch : 6,
+          DoNotDisturb : 7,
+          Moved : 8,
+          AltService : 9,
+          Pending : 10
+	},
+	getStatusText : function(value) {
+		switch (value) {
+		case linphone.core.enums.status.Offline:
+			return "Offline";
+		case linphone.core.enums.status.Online:
+			return "Online";
+		case linphone.core.enums.status.Busy:
+			return "Busy";
+		case linphone.core.enums.status.BeRightBack:
+			return "BeRightBack";
+		case linphone.core.enums.status.Away:
+			return "Away";
+		case linphone.core.enums.status.OnThePhone:
+			return "OnThePhone";
+		case linphone.core.enums.status.OutToLunch:
+			return "OutToLunch";
+		case linphone.core.enums.status.DoNotDisturb:
+			return "DoNotDisturb";
+		case linphone.core.enums.status.Moved:
+			return "Moved";
+		case linphone.core.enums.status.AltService:
+			return "AltService";
+		case linphone.core.enums.status.Pending:
+			return "Pending";
+		default:
+			return "?";
+		}
+	},
+
 	firewallPolicy : {
 		NoFirewall : 0,
 		UseNatAddress : 1,

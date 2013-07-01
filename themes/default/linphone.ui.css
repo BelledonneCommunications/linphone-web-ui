@@ -280,6 +280,9 @@
 .linphoneweb .imageStatusBusy {
 	background-image: url('img/statusBusy.png');
 }
+.linphoneweb .imageStatusOffline {
+	background-image: url('img/statusOffline.png');
+}
 
 
 /*************/

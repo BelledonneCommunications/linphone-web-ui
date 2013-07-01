@@ -3,11 +3,11 @@
 	<div class="title" data-i18n="content.view.login.title"></div>
 	<form class="accountSimple">
 		<input class="account" type="text" value="">
-		<input class="password" type="text" value="">
+		<input class="password" type="password" value="">
 	</form>
 	<form class="accountAdvanced">
 		<input class="account" type="text" value="">
-		<input class="password" type="text" value="">
+		<input class="password" type="password" value="">
 		<input class="proxy" type="text" value="">
 		<div class="choice">
 			<span data-i18n="content.view.login.accountAdvanced.outband_proxy"></span>
@@ -21,7 +21,10 @@
 			<input type="checkbox"><label data-i18n="global.transports.tls"></label>
 		</div>
 	</form>
-	<div class="button login" data-i18n="content.view.login.login"></div>
-	<div class="lien" data-i18n="content.view.login.create"></div>
-	<div class="lien goAccountOther" data-i18n="content.view.login.advanced"></div>
+	<div class="actions">
+		<div class="button login"><div class="text" data-i18n="content.view.login.login"></div></div>
+		<div class="link" data-i18n="content.view.login.create"></div>
+		<div class="link advanced" data-i18n="content.view.login.advanced"></div>
+		<div class="link simple" data-i18n="content.view.login.simple"></div>
+	</div>
 </div>

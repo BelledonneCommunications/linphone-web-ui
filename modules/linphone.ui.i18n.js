@@ -67,6 +67,22 @@ linphone.ui.i18n = {
 				en_US : 'Away',
 				fr_FR : 'Absent'
 			},
+			onThePhone: {
+				en_US : 'On the phone',
+				fr_FR : 'Au téléphone'
+			},
+			doNotDisturb: {
+				en_US : 'Do not disturb',
+				fr_FR : 'Ne pas déranger'
+			},
+			beRightBack: {
+				en_US : 'Be right back',
+				fr_FR : 'Reviens tout de suite'
+			},
+			outToLunch: {
+				en_US : 'Out to lunch',
+				fr_FR : 'En train de manger'
+			},
 			offline: {
 				en_US : 'Offline',
 				fr_FR : 'Déconnecté'
@@ -196,14 +212,32 @@ linphone.ui.i18n = {
 					en_US : 'Advanced settings',
 					fr_FR : 'Options avancées'
 				},
+				simple: {
+					en_US : 'Use a Linphone account',
+					fr_FR : 'Utiliser un compte Linphone'
+				},
 				accountSimple: {
 					account: {
-						en_US : 'Linphone Account',
+						en_US : 'Linphone account',
 						fr_FR : 'Compte Linphone'
 					},
 					password: {
 						en_US : 'Password',
 						fr_FR : 'Mot de passe'
+					},
+					errors: {
+						account: {
+							en_US : 'The \'Linphone account\' field is incorrect',
+							fr_FR : 'L\'entrée \'Compte linphone\' est invalide'
+						},
+						password: {
+							en_US : 'The \'password\' field is incorrect',
+							fr_FR : 'L\'entrée \'Mot de passe\' est invalide'
+						},
+						registrationFailed: {
+							en_US : 'Authentification failure',
+							fr_FR : 'Echec d\'authentification'
+						}
 					}
 				},
 				accountAdvanced: {
@@ -226,6 +260,20 @@ linphone.ui.i18n = {
 					transport: {
 						en_US : 'Transport',
 						fr_FR : 'Transport'
+					},
+					errors: {
+						account: {
+							en_US : 'The \'Linphone account\' field is incorrect',
+							fr_FR : 'L\'entrée \'Compte linphone\' est invalide'
+						},
+						password: {
+							en_US : 'The \'password\' field is incorrect',
+							fr_FR : 'L\'entrée \'Mot de passe\' est invalide'
+						},
+						registrationFailed: {
+							en_US : 'Authentification failure',
+							fr_FR : 'Echec d\'authentification'
+						}
 					}
 				}
 			},

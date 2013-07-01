@@ -210,23 +210,38 @@ linphone.ui = {
 	},
 	login: function(base) {
 		linphone.ui.popup.clear(base);
-		base.find('> .header .profile').visible();
-		base.find('> .header .settings').removeClass('disabled');
 		linphone.ui.view.show(base, 'empty');
 		linphone.ui.menu.show(base);
 		linphone.ui.mainbar.show(base);
 	},
 	logout: function(base) {
 		linphone.ui.popup.clear(base);
-		base.find('> .header .profile').invisible();
-		base.find('> .header .settings').addClass('disabled');
 		linphone.ui.menu.hide(base);
 		linphone.ui.mainbar.hide(base);
 		linphone.ui.view.show(base, 'login');
 	},
 	utils: {
+		regex: {
+			sip: {
+				username: "([0-9a-zA-Z-_.!~*'()&=+$,;?/]+)",
+				domain: "([0-9a-zA-Z.-]+)",
+				complete: "([0-9a-zA-Z-_.!~*'()&=+$,;?/]+)@([0-9a-zA-Z.-]+)"
+			}
+		},
 		formatAddress: function(base, address) {
 			return address;
+		},
+		getUsername: function(base, uri) {
+			var core = linphone.ui.getCore(base);
+			var address = core.newAddress(uri);
+			if(!address) {
+				return uri;
+			}
+			var displayName = address.displayName;
+			if(displayName) {
+				return displayName;
+			}
+			return address.username;
 		}
 	}
 };

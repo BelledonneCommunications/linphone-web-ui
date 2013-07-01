@@ -3,20 +3,50 @@
 linphone.ui.header = {
 	status: {
 		online: {
+			value: linphone.core.enums.status.Online,
 			cls: 'imageStatusOnline',
 			i18n: 'online'
 		},
 		busy: {
+			value: linphone.core.enums.status.Busy,
 			cls: 'imageStatusBusy',
 			i18n: 'busy'
 		},
+		onThePhone: {
+			value: linphone.core.enums.status.OnThePhone,
+			cls: 'imageStatusBusy',
+			i18n: 'onThePhone'
+		},
+		doNotDisturb: {
+			value: linphone.core.enums.status.DoNotDisturb,
+			cls: 'imageStatusBusy',
+			i18n: 'doNotDisturb'
+		},
+		beRightBack: {
+			value: linphone.core.enums.status.BeRightBack,
+			cls: 'imageStatusAway',
+			i18n: 'beRightBack'
+		},
 		away: {
+			value: linphone.core.enums.status.Away,
 			cls: 'imageStatusAway',
 			i18n: 'away'
+		},
+		outToLunch: {
+			value: linphone.core.enums.status.OutToLunch,
+			cls: 'imageStatusAway',
+			i18n: 'outToLunch'
+		},
+		offline: {
+			value: linphone.core.enums.status.Offline,
+			cls: 'imageStatusOffline',
+			i18n: 'offline'
 		}
+
 	},
 	/* */
 	init: function(base) {
+		base.on('registrationStateChanged', linphone.ui.header.onRegistrationStateChanged);
 		linphone.ui.header.uiInit(base);
 	},
 	uiInit: function(base) {
@@ -30,25 +60,33 @@ linphone.ui.header = {
 			});
 		});
 		
-		/* Sample */
-		linphone.ui.header.profile.update(base, linphone.ui.header.status.online);
-		
+		// Populate status list
 		header.find('.profile .menu .list').empty();
+		// Wrap the function in orther function in order to detach status from the status variable
+		var _updateStatus = function(status) {
+				return function(event) {
+					var core = linphone.ui.getCore(base);
+					core.presenceInfo = status.value;
+					linphone.ui.header.profile.update(base, status);
+					linphone.ui.header.menu.close(base);
+				};
+		};
 		for(var i in linphone.ui.header.status) {
 			var status = linphone.ui.header.status[i];
 			var elem = jQuery('<li/>').html(linphone.ui.template(base, 'header.profile.status', status));
-			// Wrap the function in orther function in order to detach status from the status variable
-			elem.click(linphone.ui.exceptionHandler(base, function(status) {
-				return function(event) {
-					linphone.ui.header.profile.update(base, status);
-					linphone.ui.header.menu.close(base);
-				}
-			}(status)));
+			elem.click(linphone.ui.exceptionHandler(base, _updateStatus(status)));
 			header.find('.profile .menu .list').append(elem);
 		}
-		/* End Sample */
 		
 		header.find('.profile .menu .logout').click(linphone.ui.exceptionHandler(base, function(event){
+			// Unregister from SIP server
+			var core = linphone.ui.getCore(base);
+			core.clearProxyConfig();
+			core.clearAllAuthInfo();
+			
+			// Normally do by callback (but not done)
+			linphone.ui.header.update(base, null);
+			
 			linphone.ui.header.menu.close(base);
 			linphone.ui.logout(base);
 		}));
@@ -109,10 +147,41 @@ linphone.ui.header = {
 		}
 	},
 	
+	onRegistrationStateChanged: function(event, proxy, state, message) {
+		var base = jQuery(this);
+		linphone.ui.header.update(base, proxy);
+	},
+	
+	update: function(base, proxy) {
+		var core = linphone.ui.getCore(base);
+		if(proxy && proxy.state === linphone.core.enums.registrationState.Ok) {
+			linphone.ui.header.profile.update(base);
+			base.find('> .header .profile').visible();
+			base.find('> .header .settings').removeClass('disabled');
+			base.find('> .header .profile .identity').text(linphone.ui.utils.getUsername(base, proxy.identity));
+		} else {
+			base.find('> .header .profile').invisible();
+			base.find('> .header .settings').addClass('disabled');
+		}
+	},
+	
 	/* */
 	profile: {
-		update: function(base, status) {
-			base.find('> .header .profile .status').html(linphone.ui.template(base, 'header.profile.status', status));
+		update: function(base) {
+			var core = linphone.ui.getCore(base);
+			
+			/* Find eq item to presence info */
+			var value = core.presenceInfo;
+			var item = linphone.ui.header.status.online;
+			for(var i in linphone.ui.header.status) {
+				var a = linphone.ui.header.status[i];
+				if(a.value === value) {
+					item = a;
+					break;
+				}
+			}
+			
+			base.find('> .header .profile .status').html(linphone.ui.template(base, 'header.profile.status', item));
 		}
 	}
 };
