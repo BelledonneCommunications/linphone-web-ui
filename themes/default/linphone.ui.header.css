@@ -57,7 +57,7 @@
 }
 
 /* */
-.linphoneweb .header .profile .profileOpen {
+.linphoneweb .header .profile .open {
 	background-image: url('img/statusOpen.png');
 	background-repeat: no-repeat;
 	width: 15px;
@@ -65,50 +65,56 @@
 	float: right;
 	margin-top: 10px;
 }
-.linphoneweb .header .profile .profileOpen:hover {
+.linphoneweb .header .profile .open:hover {
 	background-image: url('img/statusClose.png');
 	background-repeat: no-repeat;
 	width: 15px;
 	height: 9px;
 	cursor: pointer;
 }
+.linphoneweb .header .profile.highlight .open {
+	background-image: url('img/statusClose.png');
+	background-repeat: no-repeat;
+	width: 15px;
+	height: 9px;
+}
 
-.linphoneweb .header .profileModify {
+.linphoneweb .header .profile .menu {
 	background: #23262a;
 	position: absolute;
 	top: 70px;
-	z-index: 300;
+	z-index: 400;
 	right: 0;
 	width: 185px;
 	padding: 13px 0 0 0;
 	display: none;
 }
-.linphoneweb .header .profileModify ul {
+.linphoneweb .header .profile .menu ul {
 	margin-left: 10px;
 }
-.linphoneweb .header .profileModify li {
+.linphoneweb .header .profile .menu li {
 	margin-bottom: 10px;
 	color: #616973;
 	text-transform: uppercase;
 	font-size: 9pt;
 }
-.linphoneweb .header .profileModify li:hover {
+.linphoneweb .header .profile .menu li:hover {
 	color: #fff;
 	cursor: pointer;
 }
 
-.linphoneweb .header .profileModify .logout {
+.linphoneweb .header .profile .menu .logout {
 	border-top: 1px solid #2f3338;
 	color: #616973;
 	text-transform: uppercase;
 	padding: 13px 10px;
 	font-size: 9pt;
 }
-.linphoneweb .header .profileModify .logout:hover {
+.linphoneweb .header .profile .menu .logout:hover {
 	color: #fff;
 	cursor: pointer;
 }
-.linphoneweb .header .profileModify .logout .imageLogout {
+.linphoneweb .header .profile .menu .logout .imageLogout {
 	background: url('img/logout.png') no-repeat;
 	width: 10px;
 	height: 11px;

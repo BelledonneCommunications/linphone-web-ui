@@ -1,37 +1,74 @@
 /*globals jQuery,linphone*/
 
 linphone.ui.header = {
+	status: {
+		online: {
+			cls: 'imageStatusOnline',
+			i18n: 'online'
+		},
+		busy: {
+			cls: 'imageStatusBusy',
+			i18n: 'busy'
+		},
+		away: {
+			cls: 'imageStatusAway',
+			i18n: 'away'
+		}
+	},
+	/* */
 	init: function(base) {
 		linphone.ui.header.uiInit(base);
 	},
 	uiInit: function(base) {
-		base.find('> .header .navigation').visible();
+		var header = base.find('> .header');
+		header.find('.navigation').visible();
 		
-		base.find('> .header .profile .profileOpen').mouseover(function(event){
-			base.find('> .header .profile').addClass('highlight');
-			base.find('> .header .profileModify').show();
-			base.find('> .header .profile').mouseleave(function(){
-				base.find('> .header .profileModify').hide();
-				base.find('> .header .profile').removeClass('highlight'); 
+		header.find('.profile .open').mouseover(function(event){
+			linphone.ui.header.menu.open(base);
+			header.find('.profile').mouseleave(function(){
+				linphone.ui.header.menu.close(base);
 			});
 		});
 		
-		base.find('> .header .navigation .settings').click(linphone.ui.exceptionHandler(base, function(event){
+		/* Sample */
+		linphone.ui.header.profile.update(base, linphone.ui.header.status.online);
+		
+		header.find('.profile .menu .list').empty();
+		for(var i in linphone.ui.header.status) {
+			var status = linphone.ui.header.status[i];
+			var elem = jQuery('<li/>').html(linphone.ui.template(base, 'header.profile.status', status));
+			// Wrap the function in orther function in order to detach status from the status variable
+			elem.click(linphone.ui.exceptionHandler(base, function(status) {
+				return function(event) {
+					linphone.ui.header.profile.update(base, status);
+					linphone.ui.header.menu.close(base);
+				}
+			}(status)));
+			header.find('.profile .menu .list').append(elem);
+		}
+		/* End Sample */
+		
+		header.find('.profile .menu .logout').click(linphone.ui.exceptionHandler(base, function(event){
+			linphone.ui.header.menu.close(base);
+			linphone.ui.logout(base);
+		}));
+		
+		header.find('.navigation .settings').click(linphone.ui.exceptionHandler(base, function(event){
 			if(jQuery(this).hasClass('disabled')) {
 				return;
 			}
 			linphone.ui.view.show(base, 'settings');
 		}));
 		
-		base.find('> .header .navigation .help').click(linphone.ui.exceptionHandler(base, function(event){
+		header.find('.navigation .help').click(linphone.ui.exceptionHandler(base, function(event){
 			linphone.ui.view.show(base, 'help');
 		}));
 
-		base.find('> .header .navigation .about').click(linphone.ui.exceptionHandler(base, function(event){
+		header.find('.navigation .about').click(linphone.ui.exceptionHandler(base, function(event){
 			linphone.ui.view.show(base, 'about');
 		}));
 		
-		base.find('> .header .language .list').click(linphone.ui.exceptionHandler(base, function(event) {
+		header.find('.language .list').click(linphone.ui.exceptionHandler(base, function(event) {
 			var target = jQuery(event.target ? event.target : event.srcElement);
 			if (target.isOrParent('.linphoneweb > .header .language .list > li')) {
 				var locale = target.data('data');
@@ -43,7 +80,7 @@ linphone.ui.header = {
 		linphone.ui.header.reloadLanguageList(base);
 	},
 	
-	/**/
+	/* */
 	reloadLanguageList: function(base) {
 		var list = base.find('> .header .language .list');
 		list.empty();
@@ -56,6 +93,26 @@ linphone.ui.header = {
 			}));
 			element.data('data', locale);
 			list.append(element);
+		}
+	},
+	
+	/* */
+	menu: {
+		open: function(base) {
+			base.find('> .header .profile').addClass('highlight');
+			base.find('> .header .profile').addClass('highlight');
+			base.find('> .header .menu').show();
+		},
+		close: function(base) {
+			base.find('> .header .menu').hide();
+			base.find('> .header .profile').removeClass('highlight'); 
+		}
+	},
+	
+	/* */
+	profile: {
+		update: function(base, status) {
+			base.find('> .header .profile .status').html(linphone.ui.template(base, 'header.profile.status', status));
 		}
 	}
 };

@@ -5,12 +5,29 @@ linphone.ui.view.history = {
 		linphone.ui.view.history.uiInit(base);
 	},
 	uiInit: function(base) {
-		base.find('> .content .view > .history').data('linphoneweb-view', linphone.ui.view.history);
+		var history = base.find('> .content .view > .history');
+		history.data('linphoneweb-view', linphone.ui.view.history);
 		
-		base.find('> .content .view > .history .actions .all').addClass('selected');
+		history.find('.actions .all').click(linphone.ui.exceptionHandler(base, function() {
+			linphone.ui.view.history.filter.update(base, linphone.ui.view.history.filter.all);
+		}));
+		
+		history.find('.actions .incoming').click(linphone.ui.exceptionHandler(base, function() {
+			linphone.ui.view.history.filter.update(base, linphone.ui.view.history.filter.incoming);
+		}));
+		
+		history.find('.actions .outgoing').click(linphone.ui.exceptionHandler(base, function() {
+			linphone.ui.view.history.filter.update(base, linphone.ui.view.history.filter.outgoing);
+		}));
+		
+		history.find('.actions .miss').click(linphone.ui.exceptionHandler(base, function() {
+			linphone.ui.view.history.filter.update(base, linphone.ui.view.history.filter.miss);
+		}));
+		
+		linphone.ui.view.history.filter.update(base, linphone.ui.view.history.filter.all);
 		
 		/* Samples */
-		var list = base.find('> .content .view > .history .list');
+		var list = history.find('.list');
 		list.append(linphone.ui.template(base, 'view.history.list.entry', {
 			img: 'tmp/marcel.jpg',
 			status: 'Disponible',
@@ -50,6 +67,37 @@ linphone.ui.view.history = {
 	},
 	translate: function(base) {
 		
+	},
+	
+	/* */
+	filter : {
+		all: 0,
+		incoming: 1,
+		outgoing: 2,
+		miss: 3,
+		update: function(base, state) {
+			var history = base.find('> .content .view > .history');
+			history.find('.actions .all').removeClass('selected');
+			history.find('.actions .incoming').removeClass('selected');
+			history.find('.actions .outgoing').removeClass('selected');
+			history.find('.actions .miss').removeClass('selected');
+			switch(state) {
+				case linphone.ui.view.history.filter.all:
+					history.find('.actions .all').addClass('selected');
+				break;
+				case linphone.ui.view.history.filter.incoming:
+					history.find('.actions .incoming').addClass('selected');
+				break;
+				case linphone.ui.view.history.filter.outgoing:
+					history.find('.actions .outgoing').addClass('selected');
+				break;
+				case linphone.ui.view.history.filter.miss:
+					history.find('.actions .miss').addClass('selected');
+				break;
+				default:
+				linphone.ui.logger.error(base, 'Invalid linphone.ui.view.history.filter state');
+			}
+		}
 	},
 	
 	/**/

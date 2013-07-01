@@ -71,6 +71,14 @@ linphone.ui.i18n = {
 				en_US : 'Offline',
 				fr_FR : 'Déconnecté'
 			}
+		},
+		errors: {
+			uri: {
+				misformatted: {
+					en_US : 'The provided address is not a valid SIP URI',
+					fr_FR : 'L\'adresse fournie n\'est pas une URI SIP'
+				}
+			}
 		}
 	},
 	header: {

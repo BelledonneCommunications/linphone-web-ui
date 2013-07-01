@@ -6,7 +6,17 @@ linphone.ui.dialer = {
 	},
 	uiInit: function(base) {
 		base.find('> .content .dialer .call').click(linphone.ui.exceptionHandler(base, function() {
-			linphone.ui.popup.show(base, 'outcall');
+			var address = base.find('> .content .dialer .address').val();
+			var url = linphone.ui.utils.formatAddress(base, address);
+			if(url) {
+				linphone.ui.logger.log(base, url);
+				linphone.ui.popup.show(base, 'outcall');
+				
+				// Reset input
+				base.find('> .content .dialer .address').val('');
+			} else {
+				linphone.ui.popup.error.show(base, 'global.errors.uri.misformatted');
+			}
 		}));
 		
 		base.find('> .content .dialer .number').click(linphone.ui.exceptionHandler(base, function(){

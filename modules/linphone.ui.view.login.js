@@ -13,12 +13,7 @@ linphone.ui.view.login = {
 		}));
 		
 		base.find('> .content .view > .login .login').click(linphone.ui.exceptionHandler(base, function(event){
-			base.find('> .header .profile').visible();
-			base.find('> .header .settings').removeClass('disabled');
-			
-			linphone.ui.view.show(base, 'empty');
-			linphone.ui.menu.show(base);
-			linphone.ui.mainbar.show(base);
+			linphone.ui.login(base);
 			linphone.ui.popup.show(base, 'incall');
 			linphone.ui.popup.error.show(base, null, 'ullam quis nunc massa, et bibendum lorem. Curabitur vulputate molestie hendrerit.');
 		}));
@@ -33,7 +28,6 @@ linphone.ui.view.login = {
 	
 	/**/
 	show: function(base) {
-		linphone.ui.mainbar.hide(base);
 		base.find('> .content .view > .login .accountSimple').show();	
 		base.find('> .content .view > .login .accountAdvanced').hide();
 	},

@@ -207,5 +207,26 @@ linphone.ui = {
 				window.console.debug(message);
 			}
 		}
+	},
+	login: function(base) {
+		linphone.ui.popup.clear(base);
+		base.find('> .header .profile').visible();
+		base.find('> .header .settings').removeClass('disabled');
+		linphone.ui.view.show(base, 'empty');
+		linphone.ui.menu.show(base);
+		linphone.ui.mainbar.show(base);
+	},
+	logout: function(base) {
+		linphone.ui.popup.clear(base);
+		base.find('> .header .profile').invisible();
+		base.find('> .header .settings').addClass('disabled');
+		linphone.ui.menu.hide(base);
+		linphone.ui.mainbar.hide(base);
+		linphone.ui.view.show(base, 'login');
+	},
+	utils: {
+		formatAddress: function(base, address) {
+			return address;
+		}
 	}
 };
