@@ -63,6 +63,10 @@
 	visibility: hidden;
 }
 
+.linphoneweb .content .loading {
+	z-index: 0; 
+}
+
 /*************/
 /*  Generic  */
 /*************/
@@ -333,13 +337,35 @@
  * Overall divs
  *
  */
+
 .linphoneweb .overall {
 	position: absolute;
 	top: 0;
-	min-height: 490px;
+	min-height: 520px;
 	width: 890px;
 	background-color: #e4edf2;
 	z-index: 9000;
-	padding: 30px;
+	padding: 0 30px 30px 30px;
 	text-align: center;
+}
+
+ .linphoneweb .overall .logo {
+	background-image: url('img/logoIcon.png');
+	background-repeat: no-repeat;
+	width: 260px;
+	height: 100px;
+	margin: 30px auto;
+}
+
+.linphoneweb .content .overall .title {
+	font-size: 18pt;
+	margin-bottom: 20px;
+}
+
+.loading-bar{
+	background-image:url('img/loader.gif');
+	background-repeat:no-repeat;
+	width:128px;
+	height:15px;
+	margin:0 auto
 }
