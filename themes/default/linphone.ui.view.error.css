@@ -2,13 +2,13 @@
 	text-align: center;
 	background-color: rgb(228, 237, 242);
 	overflow: auto;
-	padding: 30px;
+	padding: 0px 30px 30px;
 	width: 890px;
 }
 .linphoneweb > .content .view > .error .title {
-	color: #b3bfc5;
-	text-transform: uppercase;
-	font-size: 9pt;
+	font-size:18pt;
+	margin-bottom:20px;
+	display:block;
 }
 .linphoneweb > .content .view > .error .imgError {
 	background-image: url('img/error.png');
@@ -23,11 +23,17 @@
 }
 .linphoneweb > .content .view > .error .message {
 	color: #000;
-	font-size: 12pt;
-	line-height: 14pt;
 	margin-bottom: 20px;
 }
 .linphoneweb > .content .view > .error .button {
 	float: inherit;
 	width: auto;
 }   
+
+.linphoneweb > .content .view > .error .logo {
+	background-image: url('img/logoIcon.png');
+	background-repeat: no-repeat;
+	width: 260px;
+	height: 100px;
+	margin: 30px auto;
+}
