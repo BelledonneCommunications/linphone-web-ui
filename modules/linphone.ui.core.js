@@ -9,6 +9,12 @@ linphone.ui.core = {
 		Outdated: 2
 	},
 	
+	/* Helpers */
+	_addEvent: null,
+	addEvent: function(obj, name, func) {
+		linphone.ui.core._addEvent(obj, name, func);
+	},
+	
 	/* Init */
 	init: function(base) {
 
@@ -55,6 +61,8 @@ linphone.ui.core = {
 				}
 			}
 		}
+		
+		base.on('networkStateChanged', linphone.ui.core.onNetworkStateChanged); 
 	},
 	translate: function(base) {
 	},
@@ -183,13 +191,7 @@ linphone.ui.core = {
 		})(base);
 	},
 	
-	/* Helpers */
-	_addEvent: null,
-	addEvent: function(obj, name, func) {
-		linphone.ui.core._addEvent(obj, name, func);
-	},
-	
-	/* */
+	/* Core management */
 	outdated: function(actual, plugin) {
 		var version1 = actual.split('.');
 		var version2 = plugin.split('.');
@@ -284,6 +286,9 @@ linphone.ui.core = {
 					delete linphone.ui.core.instances[node.magic];
 				}
 			}
+			
+			var configuration = linphone.ui.configuration(base);
+			configuration.core.running = false;
 		})();
 	},
 	load: function(base) {
@@ -322,14 +327,30 @@ linphone.ui.core = {
 		linphone.ui.core.load(base);
 	},
 	
-	/* */
+	/* Call after detection */
 	error: function(base, ret) {
 		base.find('> .content .loading').hide();
 		linphone.ui.view.show(base, 'plugin', ret);
 	},
-	done: function(base) {
+	done: function(base, core) {
 		base.find('> .content .loading').hide();
-		linphone.ui.view.show(base, 'login');
+		
+		var configuration = linphone.ui.configuration(base);
+		configuration.core.running = true;
+		
+		// Get first proxy
+		var proxy;
+		var list = core.proxyConfigList;
+		if(list.length > 0) {
+			proxy = list[0];
+		}
+		
+		// Test if already registered
+		if(proxy && proxy.state === linphone.core.enums.registrationState.Ok) {
+			linphone.ui.login(base);
+		} else {
+			linphone.ui.view.show(base, 'login');
+		}
 	},
 	
 	/* */
@@ -391,6 +412,11 @@ linphone.ui.core = {
 	
 				linphone.core.data().init_count = init_count + 1;
 				
+				// Set network state
+				if(linphone.ui.isHeartBeatRunning(base)) {
+					core.networkReachable = (linphone.ui.getHeartBeatStatus(base) === linphone.ui.heartBeatStatus.Online);
+				}
+			
 				// Force network updates (hack)
 				var transports = core.sipTransports;
 				if(transports.tlsPort !== 0) {
@@ -405,8 +431,23 @@ linphone.ui.core = {
 				core.iterateEnabled = true;
 				linphone.ui.logger.log(base, 'Core loaded');
 				
-				linphone.ui.core.done(base);
+				linphone.ui.core.done(base, core);
 			}
 		})();
+	},
+	
+	/* Network events */
+	onNetworkStateChanged: function(event, status) {
+		var base = jQuery(this);
+		var core = linphone.ui.getCoreNull(base);
+		var configuration = linphone.ui.configuration(base);
+		
+		if(linphone.core.isValid(core) && configuration.core.running) {
+			if(status === linphone.ui.heartBeatStatus.Online) {
+				core.networkReachable = true;
+			} else {
+				core.networkReachable = false;
+			}
+		}
 	}
 };

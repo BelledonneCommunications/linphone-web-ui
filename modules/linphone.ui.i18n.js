@@ -404,6 +404,28 @@ linphone.ui.i18n = {
 					en_US : 'Reload',
 					fr_FR : 'Recharger'
 				}
+			},
+			about: {
+				versions: {
+					plugin : {
+						en_US : 'Plugin version',
+						fr_FR : 'Version du plugin'
+					},
+					core : {
+						en_US : 'Core verison',
+						fr_FR : 'Version du cœur'
+					}
+				},
+				links: {
+					support : {
+						en_US : 'Support service',
+						fr_FR : 'Service support'
+					},
+					sales : {
+						en_US : 'Sales service',
+						fr_FR : 'Service commercial'
+					}
+				}
 			}
 		},
 		popup: {

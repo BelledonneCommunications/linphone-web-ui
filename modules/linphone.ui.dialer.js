@@ -23,6 +23,8 @@ linphone.ui.dialer = {
 			base.find('> .content .dialer .pinpad').toggle();
 		}));
 		
+		base.find('> .content .dialer .pinpad').disableSelection();
+		
 		if(linphone.ui.configuration(base).disableChat) {
 			base.find('> .content .dialer .actions .chat').hide();
 		}

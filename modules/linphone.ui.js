@@ -1,6 +1,24 @@
 /*globals jQuery,linphone,Handlebars,setSlider */
 
 linphone.ui = {
+	defaultConfiguration: {
+		debug: false,
+		heartbeat: {
+			enabled: true,
+			url: 'hb',
+			timeout: 5000
+		},
+		core: {
+			running: false
+		}
+	},
+	heartBeatStatus: {
+		Undefined: -1,
+		Online: 0,
+		Offline: 1
+	},
+	
+	/* */
 	data: function() {
 		try {
 			if (typeof window.localStorage !== 'undefined') {
@@ -11,6 +29,13 @@ linphone.ui = {
 		return {};
 	},
 	getCore: function(target) {
+		var ret = linphone.ui.getCoreNull(target);
+		if(ret === null) {
+			throw "Can't find Core";
+		}
+		return ret;
+	},
+	getCoreNull: function(target) {
 		var base = linphone.ui.getBase(target);
 		var nodes = base.get(0).childNodes;
 		
@@ -22,7 +47,7 @@ linphone.ui = {
 				return node;
 			}
 		}
-		throw "Can't find Core";
+		return null;
 	},
 	getBase: function(target) {
 		if (typeof target === 'undefined') {
@@ -37,10 +62,12 @@ linphone.ui = {
 
 	/* Configuration Part */ 
 	configuration: function(base) {
-		return base.data('linphoneConfig');
+		return base.data('LinphoneWebConfig');
 	},
 	configure: function(base, config) {
-		base.data('linphoneConfig', config);
+		var fconfig = jQuery.extend(true, {}, linphone.ui.defaultConfiguration);
+		jQuery.extend(fconfig, config);
+		base.data('LinphoneWebConfig', fconfig);
 	},
 	
 	/* UI Part */
@@ -116,6 +143,11 @@ linphone.ui = {
 			
 			// Update locale
 			linphone.ui.locale.update(base);
+			
+			// Run heartbeat
+			if(linphone.ui.configuration(base).heartbeat.enabled) {
+				linphone.ui.startHeartBeat(base);
+			}
 		})();
 	},
 	uiInit: function(base) {
@@ -130,6 +162,85 @@ linphone.ui = {
 		linphone.ui.dialer.translate(base);
 		linphone.ui.view.translate(base);
 		linphone.ui.popup.translate(base);
+	},
+	
+	/* */
+	login: function(base) {
+		linphone.ui.popup.clear(base);
+		linphone.ui.view.show(base, 'empty');
+		linphone.ui.menu.show(base);
+		linphone.ui.mainbar.show(base);
+	},
+	logout: function(base) {
+		linphone.ui.popup.clear(base);
+		linphone.ui.menu.hide(base);
+		linphone.ui.mainbar.hide(base);
+		linphone.ui.view.show(base, 'login');
+	},
+	
+	/* Heartbeat functions */
+	startHeartBeat: function(base) {
+		var heartbeat = linphone.ui.configuration(base).heartbeat;
+		if(!heartbeat.running) {
+			heartbeat.status = linphone.ui.heartBeatStatus.Undefined;
+			heartbeat.running = true;
+			linphone.ui.heartBeat(base, heartbeat);
+		}
+	},
+	stopHeartBeat: function(base) {
+		var heartbeat = linphone.ui.configuration(base).heartbeat;
+		if(heartbeat.running) {
+			heartbeat.running = false;
+			if(heartbeat.__timeout) {
+				// Reset timer
+				var timeout = heartbeat.__timeout;
+				heartbeat.__timeout = null;
+				window.clearInterval(timeout);
+			}
+		}
+	},
+	getHeartBeatStatus: function(base) {
+		var heartbeat = linphone.ui.configuration(base).heartbeat;
+		return heartbeat.status;
+	},
+	isHeartBeatRunning: function(base) {
+		var heartbeat = linphone.ui.configuration(base).heartbeat;
+		return heartbeat.running;
+	},
+	heartBeat: function(base, heartbeat) {
+		linphone.ui.logger.debug(base, "Hearbeat");
+		jQuery.ajax(heartbeat.url, {
+			cache: false
+		}).done(function(data){
+			if(heartbeat.status !== linphone.ui.heartBeatStatus.Online) {
+				heartbeat.status = linphone.ui.heartBeatStatus.Online;
+				linphone.ui.logger.debug(base, "Network status changed: Online");
+				linphone.ui.exceptionHandler(base, function() {
+					base.trigger('networkStateChanged', [linphone.ui.heartBeatStatus.Online]);
+				})();
+			}
+			linphone.ui._heartBeat(base);
+		}).error(function(jqXHR, textStatus, errorThrown) {
+			if(heartbeat.status !== linphone.ui.heartBeatStatus.Offline) {
+				heartbeat.status = linphone.ui.heartBeatStatus.Offline;
+				linphone.ui.logger.debug(base, "Network status changed: Offline");
+				linphone.ui.exceptionHandler(base, function() {
+					base.trigger('networkStateChanged', [linphone.ui.heartBeatStatus.Offline]);
+				})();
+			}
+			linphone.ui._heartBeat(base);
+		});
+	},
+	_heartBeat: function(base) {
+		var heartbeat = linphone.ui.configuration(base).heartbeat;
+		heartbeat.__timeout = window.setTimeout(function() {
+			// Reset timer
+			var timeout = heartbeat.__timeout;
+			heartbeat.__timeout = null;
+			window.clearInterval(timeout);
+			
+			linphone.ui.heartBeat(base, heartbeat);
+		}, heartbeat.timeout);
 	},
 	
 	exceptionHandler: function (base, fct) {
@@ -207,18 +318,6 @@ linphone.ui = {
 				window.console.debug(message);
 			}
 		}
-	},
-	login: function(base) {
-		linphone.ui.popup.clear(base);
-		linphone.ui.view.show(base, 'empty');
-		linphone.ui.menu.show(base);
-		linphone.ui.mainbar.show(base);
-	},
-	logout: function(base) {
-		linphone.ui.popup.clear(base);
-		linphone.ui.menu.hide(base);
-		linphone.ui.mainbar.hide(base);
-		linphone.ui.view.show(base, 'login');
 	},
 	utils: {
 		regex: {

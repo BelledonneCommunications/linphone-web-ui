@@ -46,7 +46,7 @@
 	text-overflow: ellipsis;
 	display: inline-block;
 	width: 160px;
-	line-height: 1.5em;
+	white-space: nowrap;
 }
 
 .linphoneweb .header .profile .status {
@@ -54,7 +54,16 @@
 	font-size: 9pt;
 	color: #727c88;
 	margin-top: 10px;
-	float: left;
+	display: inline-block;
+	width: 140px;
+}
+
+.linphoneweb .header .profile .status .text {
+	display: block;
+	width: 120px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .linphoneweb .header .profile .image {

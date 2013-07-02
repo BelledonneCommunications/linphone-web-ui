@@ -56,6 +56,6 @@ linphone.core = {
 		return {};
 	},
 	isValid: function(core) {
-		return core !== 'undefined' && typeof core.valid !== 'undefined' && core.valid;
+		return typeof core !== 'undefined' && typeof core.valid !== 'undefined' && core.valid;
 	}
 };

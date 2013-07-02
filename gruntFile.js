@@ -112,7 +112,8 @@ module.exports = function(grunt) {
 			options: {
 				'box-model': false,
 				'outline-none': false,
-				'adjoining-classes': false
+				'adjoining-classes': false,
+				'duplicate-background-images': false
 			},
 			ui: uiCSSFiles
 		},
@@ -306,7 +307,7 @@ module.exports = function(grunt) {
 				src: [
 					 '**'
 				],
-				cwd: 'libs/',
+				cwd: 'statics/',
 				dest: 'dist/'
 			},
 			html: {

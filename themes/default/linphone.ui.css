@@ -297,6 +297,15 @@
 	outline: none;
 }
 
+.linphoneweb a {
+	color: #cf4c29;
+}
+
+.linphoneweb a:hover {
+	cursor: pointer;
+	color: #d97459;
+}
+
 .linphoneweb .scroll-pane {
 	overflow: auto;
 	position: relative;

@@ -42,8 +42,8 @@ linphone.ui.header = {
 			cls: 'imageStatusOffline',
 			i18n: 'offline'
 		}
-
 	},
+	
 	/* */
 	init: function(base) {
 		base.on('registrationStateChanged', linphone.ui.header.onRegistrationStateChanged);
@@ -65,6 +65,7 @@ linphone.ui.header = {
 		// Wrap the function in orther function in order to detach status from the status variable
 		var _updateStatus = function(status) {
 				return function(event) {
+					linphone.ui.logger.log(base, 'Change status to ' + linphone.core.enums.getStatusText(status.value));
 					var core = linphone.ui.getCore(base);
 					core.presenceInfo = status.value;
 					linphone.ui.header.profile.update(base, status);
@@ -118,26 +119,25 @@ linphone.ui.header = {
 		linphone.ui.header.reloadLanguageList(base);
 	},
 	
-	/* */
+	/* Languages */
 	reloadLanguageList: function(base) {
 		var list = base.find('> .header .language .list');
 		list.empty();
 		var locales = linphone.ui.configuration(base).locales;
 		for(var i = 0; i < locales.length; ++i) {
 			var locale = locales[i];
-			var element = jQuery(linphone.ui.template(base, 'header.language.list.entry', {
+			var element = linphone.ui.template(base, 'header.language.list.entry', {
 				lang: locale.name,
 				cls: (locale.locale === jQuery.i18n.locale) ? 'selected': ''
-			}));
+			});
 			element.data('data', locale);
 			list.append(element);
 		}
 	},
 	
-	/* */
+	/* Menu */
 	menu: {
 		open: function(base) {
-			base.find('> .header .profile').addClass('highlight');
 			base.find('> .header .profile').addClass('highlight');
 			base.find('> .header .menu').show();
 		},
@@ -147,13 +147,22 @@ linphone.ui.header = {
 		}
 	},
 	
+	/* Proxy config updating */
 	onRegistrationStateChanged: function(event, proxy, state, message) {
 		var base = jQuery(this);
 		linphone.ui.header.update(base, proxy);
 	},
-	
 	update: function(base, proxy) {
 		var core = linphone.ui.getCore(base);
+		
+		// If not provided try to use first proxy config
+		if(typeof proxy === 'undefined') {
+			var list = core.proxyConfigList;
+			if(list.length > 0) {
+				proxy = list[0];
+			}
+		}
+		
 		if(proxy && proxy.state === linphone.core.enums.registrationState.Ok) {
 			linphone.ui.header.profile.update(base);
 			base.find('> .header .profile').visible();
@@ -165,13 +174,10 @@ linphone.ui.header = {
 		}
 	},
 	
-	/* */
+	/* Profile */
 	profile: {
-		update: function(base) {
-			var core = linphone.ui.getCore(base);
-			
-			/* Find eq item to presence info */
-			var value = core.presenceInfo;
+		/* Find eq item to presence info */
+		findStatus: function(value) {
 			var item = linphone.ui.header.status.online;
 			for(var i in linphone.ui.header.status) {
 				var a = linphone.ui.header.status[i];
@@ -180,7 +186,13 @@ linphone.ui.header = {
 					break;
 				}
 			}
+			return item;
+		},
+		update: function(base) {
+			linphone.ui.logger.log(base, 'Update profile');
+			var core = linphone.ui.getCore(base);
 			
+			var item = linphone.ui.header.profile.findStatus(core.presenceInfo);
 			base.find('> .header .profile .status').html(linphone.ui.template(base, 'header.profile.status', item));
 		}
 	}

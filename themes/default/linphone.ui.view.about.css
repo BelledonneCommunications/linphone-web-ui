@@ -22,3 +22,8 @@
 	font-weight: bolder;
 	margin-left: 10px;
 }
+
+.linphoneweb > .content .view > .about .links a {
+	margin: 4pt;
+	display: block;
+}

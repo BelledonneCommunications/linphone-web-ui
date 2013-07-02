@@ -78,6 +78,16 @@ function __linphone_init(base) {
 		},
 		name: 'Linphone Web',
 		version: '0.0.1.3',
+		copyright: 'Copyright© Belledonne Communications 2013',
+		links: [{
+			cls: 'support',
+			text: 'support',
+			link: 'mailto:linphone-web@belledonne-communications.com',
+		},{
+			cls: 'sales',
+			text: 'sales',
+			link: 'mailto:sales@belledonne-communications.com',
+		}],
 		locales: [ {
 			name : 'US',
 			locale : 'en_US'
