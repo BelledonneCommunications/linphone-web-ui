@@ -18,66 +18,6 @@ linphone.ui.menu = {
 			linphone.ui.view.show(base, 'contacts');
 		}));
 		
-		/* Samples */
-		var list = base.find('> .content .menu .calls .list');
-		list.append(linphone.ui.template(base, 'menu.calls.list.entry', {
-			cls: 'play',
-			name: "Myrtille"
-		}));
-		list.append(linphone.ui.template(base, 'menu.calls.list.entry', {
-			cls: 'play',
-			name: "Apollin"
-		}));
-		list.append(linphone.ui.template(base, 'menu.calls.list.entry', {
-			cls: 'play',
-			name: "César"
-		}));
-		list.append(linphone.ui.template(base, 'menu.calls.list.entry', {
-			cls: 'pause',
-			name: "Bénédicte"
-		}));
-		list.append(linphone.ui.template(base, 'menu.calls.list.entry', {
-			cls: 'play',
-			name: "Violaine"
-		}));
-		list.append(linphone.ui.template(base, 'menu.calls.list.entry', {
-			cls: 'play',
-			name: "Simon"
-		}));
-		list.append(linphone.ui.template(base, 'menu.calls.list.entry', {
-			cls: 'play',
-			name: "Jehann"
-		}));
-		list.append(linphone.ui.template(base, 'menu.calls.list.entry', {
-			cls: 'play',
-			name: "Yann"
-		}));
-		list.append(linphone.ui.template(base, 'menu.calls.list.entry', {
-			cls: 'play',
-			name: "Véronique"
-		}));
-		list.append(linphone.ui.template(base, 'menu.calls.list.entry', {
-			cls: 'pause',
-			name: "Violaine"
-		}));
-		list.append(linphone.ui.template(base, 'menu.calls.list.entry', {
-			cls: 'play',
-			name: "Simon"
-		}));
-		list.append(linphone.ui.template(base, 'menu.calls.list.entry', {
-			cls: 'play',
-			name: "Jehann"
-		}));
-		list.append(linphone.ui.template(base, 'menu.calls.list.entry', {
-			cls: 'pause',
-			name: "Yann"
-		}));
-		list.append(linphone.ui.template(base, 'menu.calls.list.entry', {
-			cls: 'play',
-			name: "Véronique"
-		}));
-		
-		
 		list = base.find('> .content .menu .chat .list');
 		list.append(linphone.ui.template(base, 'menu.chat.list.entry', {
 			name: 'Cunégonde',
@@ -111,12 +51,34 @@ linphone.ui.menu = {
 	
 	/**/
 	show: function(base) {
+		base.on('callStateChanged', linphone.ui.menu.onCallStateChanged);
+		linphone.ui.menu.update(base);
 		base.find('> .content .menu').show();
 		base.find('> .content .menu .scroll-pane').each(function(){
 			linphone.ui.slider(jQuery(this));
 		});
 	},
 	hide: function(base) {
+		base.off('callStateChanged', linphone.ui.menu.onCallStateChanged);
 		base.find('> .content .menu').hide();
+	},
+	update: function(base) {
+		var list = base.find('> .content .menu .calls .list');
+		var core = linphone.ui.getCore(base);
+		list.empty();
+		var calls = core.calls;
+		for(var i = 0; i < calls.length; ++i) {
+			var call = calls[i];
+			list.append(linphone.ui.template(base, 'menu.calls.list.entry', {
+				base: base,
+				call: call
+			}));
+		}
+	},
+	
+	/* Events */
+	onCallStateChanged: function(event, call, state, message) {
+		var base = jQuery(this);
+		linphone.ui.menu.update(base);
 	}
 };

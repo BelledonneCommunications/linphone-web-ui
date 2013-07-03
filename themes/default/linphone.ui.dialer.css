@@ -39,12 +39,17 @@
 	outline: none;
 	vertical-align: middle;
 	margin-right: 5px;
-	text-transform: uppercase;
+	text-transform: none;
 	line-height: 36px;
 	border: 1px solid #929fa5;
 	background-color: #fff;
 	width: 387px;
 	padding-left: 20px;
-	color: #929fa5;
+	color: #222222;
 	float: left;
+}
+
+.linphoneweb .dialer input.watermark {
+	color: #929fa5;
+	text-transform: uppercase;
 }

@@ -9,8 +9,9 @@ linphone.ui.dialer = {
 			var address = base.find('> .content .dialer .address').val();
 			var url = linphone.ui.utils.formatAddress(base, address);
 			if(url) {
-				linphone.ui.logger.log(base, url);
-				linphone.ui.popup.show(base, 'outcall');
+				var core = linphone.ui.getCore(base);
+				core.invite_async(url);
+				linphone.ui.logger.log(base, "Call: " + url);
 				
 				// Reset input
 				base.find('> .content .dialer .address').val('');
@@ -30,6 +31,6 @@ linphone.ui.dialer = {
 		}
 	},
 	translate: function(base) {
-		base.find('> .content .dialer .address').watermark(jQuery.i18n.translate('content.dialer.address'));
+		base.find('> .content .dialer .address').watermark(jQuery.i18n.translate('content.dialer.address'), {className: 'watermark', useNative: false});
 	}
 };

@@ -31,6 +31,30 @@
 	border-left: 4px solid #23262a;
 	font-weight: bold;
 }
+.linphoneweb .content .menu nav li a:hover {
+	color: #ffffff;
+	border-left: 4px solid #cf4c29;
+	background-color: #34393f;
+	cursor: pointer;
+}
+
+.linphoneweb .content .menu nav .entry {
+	color: #616973;
+	text-decoration: none;
+	text-transform: uppercase;
+	padding: 5px 20px;
+	display: block;
+	border-left: 4px solid #23262a;
+	font-weight: bold;
+}
+
+.linphoneweb .content .menu nav .entry:hover {
+	color: #ffffff;
+	border-left: 4px solid #cf4c29;
+	background-color: #34393f;
+	cursor: pointer;
+}
+
 .linphoneweb .content .menu nav li .menu {
 	color: #616973;
 	text-decoration: none;
@@ -39,7 +63,7 @@
 	display: block;
 	margin-bottom: -10px;
 }
-.linphoneweb .content .menu nav li li a {
+.linphoneweb .content .menu nav li li .entry {
 	padding: 5px 20px;
 }
 .linphoneweb .content .menu nav li ul {
@@ -67,13 +91,9 @@
 	right: 6px;
 	top: 8px;
 }
-.linphoneweb .content .menu nav li a:hover {
-	color: #ffffff;
-	border-left: 4px solid #cf4c29;
-	background-color: #34393f;
-	cursor: pointer;
-}
-.linphoneweb .content .menu nav li .play {
+
+/* Calls */
+.linphoneweb .content .menu nav .calls .list .play {
 	background-image: url('img/play.png');
 	background-repeat: no-repeat;
 	width: 9px;
@@ -82,7 +102,7 @@
 	margin-right: 7px;
 	margin-top: 1px;
 }
-.linphoneweb .content .menu nav li .pause {
+.linphoneweb .content .menu nav .calls .list .pause {
 	background-image: url('img/pause.png');
 	background-repeat: no-repeat;
 	width: 7px;
@@ -91,11 +111,16 @@
 	margin-right: 7px;
 	margin-top: 1px;
 }
-.linphoneweb .content .menu nav li a:hover .play {
+.linphoneweb .content .menu nav .calls .list .entry:hover .play {
 	background-image: url('img/playHover.png');
 	background-repeat: no-repeat;
 }
-.linphoneweb .content .menu nav li a:hover .pause {
+.linphoneweb .content .menu nav .calls .list .entry:hover .pause {
 	background-image: url('img/pauseHover.png');
 	background-repeat: no-repeat;
+}
+
+.linphoneweb .content .menu nav .calls .list .entry {
+	overflow: hidden;
+	text-overflow: ellipsis;
 }

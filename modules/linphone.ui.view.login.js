@@ -44,11 +44,11 @@ linphone.ui.view.login = {
 	},
 	translate: function(base) {
 		var login = base.find('> .content .view > .login');
-		login.find('.accountSimple .account').watermark(jQuery.i18n.translate('content.view.login.accountSimple.account'));
-		login.find('.accountSimple .password').watermark(jQuery.i18n.translate('content.view.login.accountSimple.password'));
-		login.find('.accountAdvanced .account').watermark(jQuery.i18n.translate('content.view.login.accountAdvanced.account'));
-		login.find('.accountAdvanced .password').watermark(jQuery.i18n.translate('content.view.login.accountAdvanced.password'));
-		login.find('.accountAdvanced .proxy').watermark(jQuery.i18n.translate('content.view.login.accountAdvanced.proxy'));
+		login.find('.accountSimple .account').watermark(jQuery.i18n.translate('content.view.login.accountSimple.account'), {className: 'watermark', useNative: false});
+		login.find('.accountSimple .password').watermark(jQuery.i18n.translate('content.view.login.accountSimple.password'), {className: 'watermark', useNative: false});
+		login.find('.accountAdvanced .account').watermark(jQuery.i18n.translate('content.view.login.accountAdvanced.account'), {className: 'watermark', useNative: false});
+		login.find('.accountAdvanced .password').watermark(jQuery.i18n.translate('content.view.login.accountAdvanced.password'), {className: 'watermark', useNative: false});
+		login.find('.accountAdvanced .proxy').watermark(jQuery.i18n.translate('content.view.login.accountAdvanced.proxy'), {className: 'watermark', useNative: false});
 	},
 	
 	/* */
@@ -164,8 +164,6 @@ linphone.ui.view.login = {
 			linphone.ui.view.login.reset(base);
 			
 			linphone.ui.login(base);
-			linphone.ui.popup.show(base, 'incall');
-			linphone.ui.popup.error.show(base, null, 'ullam quis nunc massa, et bibendum lorem. Curabitur vulputate molestie hendrerit.');
 		} else if(state === linphone.core.enums.registrationState.Failed) {
 			// Reset challenge
 			login.data('password', null);

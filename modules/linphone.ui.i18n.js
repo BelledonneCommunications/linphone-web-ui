@@ -120,6 +120,12 @@ linphone.ui.i18n = {
 		}
 	},
 	content: {
+		offline: {
+			title: {
+				en_US : 'You are not connected to Internet.',
+				fr_FR : 'Vous n\'êtes pas connecté à Internet.'	
+			},
+		},
 		dialer: {
 			address: {
 				en_US : 'SIP address or phone number',

@@ -150,6 +150,13 @@ linphone.ui = {
 				linphone.ui.startHeartBeat(base);
 			}
 		})();
+		
+		base.on('networkStateChanged', linphone.ui.onNetworkStateChanged);
+		
+		// Helpers
+		Handlebars.registerHelper('username', function(object) {
+			return linphone.ui.utils.getUsername(this.base, object);
+		});
 	},
 	uiInit: function(base) {
 		// Disable selection on buttons
@@ -171,7 +178,10 @@ linphone.ui = {
 		var configuration = linphone.ui.configuration(base);
 		if(!configuration.login) {
 			configuration.login = true;
-			linphone.ui.update(base, configuration);
+			linphone.ui.popup.clear(base);
+			linphone.ui.view.show(base, 'empty');
+			linphone.ui.menu.show(base);
+			linphone.ui.mainbar.show(base);
 		}
 	},
 	logout: function(base) {
@@ -179,16 +189,6 @@ linphone.ui = {
 		var configuration = linphone.ui.configuration(base);
 		if(configuration.login) {
 			configuration.login = false;
-			linphone.ui.update(base, configuration);
-		}
-	},
-	update: function(base, configuration) {
-		if(configuration.login) {
-			linphone.ui.popup.clear(base);
-			linphone.ui.view.show(base, 'empty');
-			linphone.ui.menu.show(base);
-			linphone.ui.mainbar.show(base);
-		} else {
 			linphone.ui.popup.clear(base);
 			linphone.ui.view.show(base, 'login');
 		}
@@ -233,7 +233,8 @@ linphone.ui = {
 	heartBeat: function(base, heartbeat) {
 		linphone.ui.logger.debug(base, "Hearbeat");
 		jQuery.ajax(heartbeat.url, {
-			cache: false
+			cache: false,
+			timeout: heartbeat.timeout
 		}).done(function(data){
 			if(heartbeat.status !== linphone.ui.heartBeatStatus.Online) {
 				heartbeat.status = linphone.ui.heartBeatStatus.Online;
@@ -264,6 +265,14 @@ linphone.ui = {
 			
 			linphone.ui.heartBeat(base, heartbeat);
 		}, heartbeat.timeout);
+	},
+	onNetworkStateChanged: function(event, status) {
+		var base = jQuery(this);
+		if(status === linphone.ui.heartBeatStatus.Online) {
+			base.find('> .content .offline').hide();
+		} else {
+			base.find('> .content .offline').show();
+		}
 	},
 	
 	/* Error handling */
@@ -350,17 +359,26 @@ linphone.ui = {
 		formatAddress: function(base, address) {
 			return address;
 		},
-		getUsername: function(base, uri) {
-			var core = linphone.ui.getCore(base);
-			var address = core.newAddress(uri);
+		getUsername: function(base, object) {
+			var address;
+			if (typeof object === 'string') {
+				var core = linphone.ui.getCore(base);
+				address = core.newAddress(object);
+			} else {
+				address = object;
+			}
 			if(!address) {
-				return uri;
+				return String(object);
 			}
 			var displayName = address.displayName;
 			if(displayName) {
 				return displayName;
 			}
-			return address.username;
+			var username = address.username;
+			if(username) {
+				return username
+			}
+			return String(object);
 		}
 	}
 };
