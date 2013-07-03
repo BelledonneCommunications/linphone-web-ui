@@ -125,7 +125,7 @@ function __linphone_init(base) {
 /* @if env='release' */
 (function(w, d, s) {
 	var scripts = [
-		{url: "js/jquery.js"},
+		{url: "js/jquery.min.js"},
 		{url: "js/jquery.client.js"},
 		
 		{url: "js/jquery.metadata.js"},

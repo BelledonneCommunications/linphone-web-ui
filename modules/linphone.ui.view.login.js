@@ -33,10 +33,12 @@ linphone.ui.view.login = {
 		}));
 		
 		login.find('.actions .login').click(linphone.ui.exceptionHandler(base, function(event) {
-			if(login.find('.accountSimple').is(':visible')) {
-				linphone.ui.view.login.loginSimple(base);
-			} else {
-				linphone.ui.view.login.loginAdvanced(base);
+			linphone.ui.view.login.login(base);
+		}));
+		
+		login.find('.password').keyup(linphone.ui.exceptionHandler(base, function(event) {
+			if(event.which == 13){
+				linphone.ui.view.login.login(base);
 			}
 		}));
 	},
@@ -92,6 +94,14 @@ linphone.ui.view.login = {
 		}
 	},
 	
+	login: function(base){
+		var login = base.find('> .content .view > .login');
+		if(login.find('.accountSimple').is(':visible')) {
+			linphone.ui.view.login.loginSimple(base);
+		} else {
+			linphone.ui.view.login.loginAdvanced(base);
+		}
+	},
 	loginSimple: function(base) {
 		var login = base.find('> .content .view > .login');
 		var core = linphone.ui.getCore(base);

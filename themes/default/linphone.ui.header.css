@@ -47,6 +47,7 @@
 	display: inline-block;
 	width: 160px;
 	white-space: nowrap;
+	height: 16px;
 }
 
 .linphoneweb .header .profile .status {
