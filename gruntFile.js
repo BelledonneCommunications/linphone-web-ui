@@ -132,8 +132,7 @@ module.exports = function(grunt) {
 				src: [
 					'dist/style/ui-lightness/jquery-ui-1.8.17.custom.css', 
 					'dist/downloads', 
-					'dist/js/handlebars.js', 
-					'dist/js/jquery.watermark.js'
+					'dist/js/handlebars.min.js'
 				]
 			}
 		},
@@ -165,30 +164,41 @@ module.exports = function(grunt) {
 		},
 		uglify: {
 			options: {
-				stripBanners: true,
 				banner: '<%= meta.banner %>'
 			},
 			coreJS: {
-				dest: 'dist/js/linphone-core-<%= pkg.version %>.min.js',
+				dest: '<%= tmp %>/js/linphone-core-<%= pkg.version %>.min.js',
 				src: ['<%= concat.coreJS.dest %>']
 			},
 			uiJS: {
-				dest: 'dist/js/linphone-ui-<%= pkg.version %>.min.js',
+				dest: '<%= tmp %>/js/linphone-ui-<%= pkg.version %>.min.js',
 				src: ['<%= concat.uiJS.dest %>']
+			},
+			uiTmplJS: {
+				dest: '<%= tmp %>/js/linphone-ui-tmpl-<%= pkg.version %>.min.js',
+				src: ['<%= concat.uiTmplJS.dest %>']
 			},
 			allJS: {
 				dest: 'dist/js/linphone-<%= pkg.version %>.min.js',
 				src: ['<%= concat.allJS.dest %>']
-			},
-			uiTmplJS: {
-				dest: 'dist/js/linphone-ui-tmpl-<%= pkg.version %>.min.js',
-				src: ['<%= concat.uiTmplJS.dest %>']
 			},
 			indexJS: {
 				dest: 'tmp/index.js',
 				src: 'tmp/index-processed.js',
 				options: {
 					banner:''
+				}
+			},
+			statics: {
+				files: grunt.file.expandMapping(['*.js', '**/*.js'], 'dist/', {
+					cwd: 'statics',
+					rename: function(dest, matchedSrcPath, options) {
+						return path.join(dest, matchedSrcPath).replace('.js', '.min.js');
+					}
+				}),
+				options: {
+					banner:'',
+					preserveComments: 'some'
 				}
 			}
 		},
@@ -238,7 +248,6 @@ module.exports = function(grunt) {
 		},
 		cssmin: {
 			options: {
-				stripBanners: true,
 				banner: '<%= meta.banner %>'
 			},
 			uiCSS: {
@@ -250,6 +259,18 @@ module.exports = function(grunt) {
 				src: 'tmp/index-processed.css',
 				options: {
 					banner:''
+				}
+			},
+			statics: {
+				files: grunt.file.expandMapping(['*.css', '**/*.css'], 'dist/', {
+					cwd: 'statics',
+					rename: function(dest, matchedSrcPath, options) {
+						return path.join(dest, matchedSrcPath).replace('.css', '.min.css');
+					}
+				}),
+				options: {
+					banner:'',
+					preserveComments: 'some'
 				}
 			}
 		},
@@ -302,13 +323,35 @@ module.exports = function(grunt) {
 				cwd: 'themes/' + '<%= theme %>/',
 				dest: '<%= tmp %>/style/'
 			},
-			lib: {
+			statics: {
 				expand: true,
 				src: [
-					 '**'
+					 '**',
+					'!*.js',
+					'!**/*.js',
+					'!*.css',
+					'!**/*.css'
 				],
 				cwd: 'statics/',
 				dest: 'dist/'
+			},
+			statics_js: {
+				expand: true,
+				src: [
+					'*.js',
+					'**/*.js'
+				],
+				cwd: 'statics/',
+				dest: '<%= tmp %>/'
+			},
+			statics_css: {
+				expand: true,
+				src: [
+					'*.css',
+					'**/*.css'
+				],
+				cwd: 'statics/',
+				dest: '<%= tmp %>/'
 			},
 			html: {
 				expand: true,

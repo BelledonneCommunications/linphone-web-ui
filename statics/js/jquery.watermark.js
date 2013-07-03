@@ -1,4 +1,4 @@
-/*	
+/*!	
 	Watermark plugin for jQuery
 	Version: 3.1.4
 	http://jquery-watermark.googlecode.com/

@@ -37,7 +37,7 @@ linphone.ui.view.login = {
 		}));
 		
 		login.find('.password').keyup(linphone.ui.exceptionHandler(base, function(event) {
-			if(event.which == 13){
+			if(event.which === 13){
 				linphone.ui.view.login.login(base);
 			}
 		}));

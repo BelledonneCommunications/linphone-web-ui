@@ -125,25 +125,23 @@ function __linphone_init(base) {
 /* @if env='release' */
 (function(w, d, s) {
 	var scripts = [
-		{url: "js/jquery.min.js"},
-		{url: "js/jquery.client.js"},
+		{url: "js/jquery-1.10.1.min.js"},
+		{url: "js/jquery.client.min.js"},
 		
-		{url: "js/jquery.metadata.js"},
-		{url: "js/i18n.js"},
+		{url: "js/jquery.metadata.min.js"},
+		{url: "js/i18n.min.js"},
 		
-		{url: "js/jquery-ui.js"},
-		{url: "js/jquery.mousewheel.js"},
-		{url: "js/vertical.slider.js"},
+		{url: "js/jquery-ui.min.js"},
+		{url: "js/jquery.mousewheel.min.js"},
+		{url: "js/vertical.slider.min.js"},
 		
-		{url: "js/jquery.urlvars.js"},
+		{url: "js/jquery.urlvars.min.js"},
 		
 		{url: "js/jquery.watermark.min.js"},
 		
-		{url: "js/handlebars.runtime.js"},
+		{url: "js/handlebars.runtime.min.js"},
 		
-		{url: "js/linphone-core-/* @echo version */.min.js"},
-		{url: "js/linphone-ui-/* @echo version */.min.js"},
-		{url: "js/linphone-ui-tmpl-/* @echo version */.min.js"},
+		{url: "js/linphone-/* @echo version */.min.js"}
 	];
 	function go(){
 		function getScript(url,success){

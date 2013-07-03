@@ -6,16 +6,17 @@
 		<!--[if lt IE 9]>
 		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
-		<link type="text/css" href="style/reset.css" rel="stylesheet">
 		<!-- @if env='release' -->
+		<link type="text/css" href="style/reset.min.css" rel="stylesheet">
 		<link type="text/css" href="style/linphone-ui-<!-- @echo version -->.min.css" rel="stylesheet">
 		<!-- @endif -->
 		<!-- @if env='debug' -->
+		<link type="text/css" href="style/reset.css" rel="stylesheet">
 		<link type="text/css" href="style/linphone-ui-<!-- @echo version -->.css" rel="stylesheet">
 		<!-- @endif -->
 		
 		<!-- @if env='debug' -->
-		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/jquery-1.10.1.js"></script>
 		<script type="text/javascript" src="js/jquery.client.js"></script>
 		<script type="text/javascript" src="js/jquery.metadata.js"></script>
 		<script type="text/javascript" src="js/i18n.js"></script>
