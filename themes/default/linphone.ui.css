@@ -350,7 +350,7 @@
 .linphoneweb .overall {
 	position: absolute;
 	top: 0;
-	min-height: 520px;
+	min-height: 580px;
 	width: 890px;
 	background-color: #e4edf2;
 	z-index: 9000;
@@ -358,7 +358,11 @@
 	text-align: center;
 }
 
- .linphoneweb .overall .logo {
+.linphoneweb .offline {
+	display: none;
+}
+
+.linphoneweb .overall .logo {
 	background-image: url('img/logoIcon.png');
 	background-repeat: no-repeat;
 	width: 260px;

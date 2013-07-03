@@ -1,5 +1,6 @@
 .linphoneweb > .content .view > .settings > .media .actions {
 	padding: 10px;
+	height: 42px;
 }
 .linphoneweb > .content .view > .settings > .media .actions .title {
 	font-size: 15pt;
@@ -9,7 +10,6 @@
 .linphoneweb > .content .view > .settings > .media form {
 	padding: 20px 10px 10px;
 	border-top: 1px solid #e4edf2;
-	margin-top: -10px;
 }
 .linphoneweb > .content .view > .settings > .media form label {
 	display:inline-block;

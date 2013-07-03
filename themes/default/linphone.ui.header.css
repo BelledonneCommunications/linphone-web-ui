@@ -59,7 +59,6 @@
 }
 
 .linphoneweb .header .profile .status .text {
-	display: block;
 	width: 120px;
 	white-space: nowrap;
 	overflow: hidden;

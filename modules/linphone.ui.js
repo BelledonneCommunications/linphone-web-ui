@@ -28,6 +28,7 @@ linphone.ui = {
 		}
 		return {};
 	},
+	
 	getCore: function(target) {
 		var ret = linphone.ui.getCoreNull(target);
 		if(ret === null) {
@@ -166,16 +167,38 @@ linphone.ui = {
 	
 	/* */
 	login: function(base) {
-		linphone.ui.popup.clear(base);
-		linphone.ui.view.show(base, 'empty');
-		linphone.ui.menu.show(base);
-		linphone.ui.mainbar.show(base);
+		// Update configuration
+		var configuration = linphone.ui.configuration(base);
+		if(!configuration.login) {
+			configuration.login = true;
+			linphone.ui.update(base, configuration);
+		}
 	},
 	logout: function(base) {
-		linphone.ui.popup.clear(base);
-		linphone.ui.menu.hide(base);
+		// Update configuration
+		var configuration = linphone.ui.configuration(base);
+		if(configuration.login) {
+			configuration.login = false;
+			linphone.ui.update(base, configuration);
+		}
+	},
+	update: function(base, configuration) {
+		if(configuration.login) {
+			linphone.ui.popup.clear(base);
+			linphone.ui.view.show(base, 'empty');
+			linphone.ui.menu.show(base);
+			linphone.ui.mainbar.show(base);
+		} else {
+			linphone.ui.popup.clear(base);
+			linphone.ui.view.show(base, 'login');
+		}
+	},
+	reset: function (base) {
+		base.find('> .content .loading').show();
+		base.find('> .header .settings').addClass('disabled');
+		linphone.ui.view.show(base, 'empty');
 		linphone.ui.mainbar.hide(base);
-		linphone.ui.view.show(base, 'login');
+		linphone.ui.menu.hide(base);
 	},
 	
 	/* Heartbeat functions */
@@ -243,6 +266,7 @@ linphone.ui = {
 		}, heartbeat.timeout);
 	},
 	
+	/* Error handling */
 	exceptionHandler: function (base, fct) {
 		return function(args) {
 			if(linphone.ui.configuration(base).debug) {
@@ -261,17 +285,11 @@ linphone.ui = {
 		linphone.ui.view.show(base, 'error', error_id, error);
 	},
 	
-	reset: function (base) {
-		base.find('> .content .loading').show();
-		base.find('> .header .settings').addClass('disabled');
-		linphone.ui.view.show(base, 'empty');
-		linphone.ui.mainbar.hide(base);
-		linphone.ui.menu.hide(base);
-	},
-	
 	isValid: function(base) {
 		return typeof base !== 'undefined' && base !== null;
 	},
+	
+	/* Logging functions */
 	logger: {
 		log: function(base, message) {
 			var config = {debug: true};
@@ -319,6 +337,8 @@ linphone.ui = {
 			}
 		}
 	},
+	
+	/* Utils */
 	utils: {
 		regex: {
 			sip: {

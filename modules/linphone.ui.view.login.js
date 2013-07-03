@@ -51,6 +51,8 @@ linphone.ui.view.login = {
 	
 	/* */
 	show: function(base) {
+		linphone.ui.menu.hide(base);
+		linphone.ui.mainbar.hide(base);
 		linphone.ui.view.login.reset(base);
 		linphone.ui.view.login.update(base, linphone.ui.view.login.state.simple);
 		base.on('authInfoRequested', linphone.ui.view.login.onAuthInfoRequested); 

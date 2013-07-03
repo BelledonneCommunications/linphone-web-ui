@@ -2,8 +2,9 @@
 	width: 940px; /* All width */
 }
 .linphoneweb > .content .view > .about .actions {
-	padding: 10px 10px 1px 10px;
+	padding: 10px;
 	float: right;
+	height: 42px;
 }
 .linphoneweb > .content .view > .about .entry {
 	clear: both;
@@ -23,7 +24,6 @@
 	margin-left: 10px;
 }
 
-.linphoneweb > .content .view > .about .links a {
+.linphoneweb > .content .view > .about .links .link {
 	margin: 4pt;
-	display: block;
 }
