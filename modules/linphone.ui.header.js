@@ -60,6 +60,12 @@ linphone.ui.header = {
 			});
 		});
 		
+		header.find('.logo').click(linphone.ui.exceptionHandler(base, function(event){
+			if(linphone.ui.isLogged(base)) {
+				linphone.ui.view.show(base, 'main');
+			}
+		}));
+		
 		// Populate status list
 		header.find('.profile .menu .list').empty();
 		// Wrap the function in orther function in order to detach status from the status variable

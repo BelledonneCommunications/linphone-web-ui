@@ -179,9 +179,7 @@ linphone.ui = {
 		if(!configuration.login) {
 			configuration.login = true;
 			linphone.ui.popup.clear(base);
-			linphone.ui.view.show(base, 'empty');
-			linphone.ui.menu.show(base);
-			linphone.ui.mainbar.show(base);
+			linphone.ui.view.show(base, 'main');
 		}
 	},
 	logout: function(base) {
@@ -192,6 +190,10 @@ linphone.ui = {
 			linphone.ui.popup.clear(base);
 			linphone.ui.view.show(base, 'login');
 		}
+	},
+	isLogged: function(base) {
+		var configuration = linphone.ui.configuration(base);
+		return configuration.login;
 	},
 	reset: function (base) {
 		base.find('> .content .loading').show();

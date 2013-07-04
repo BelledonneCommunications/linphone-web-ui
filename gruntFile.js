@@ -18,6 +18,7 @@ module.exports = function(grunt) {
 		'linphone.ui.mainbar',
 		'linphone.ui.dialer',
 		'linphone.ui.view',
+		'linphone.ui.view.main',
 		'linphone.ui.view.plugin',
 		'linphone.ui.view.login',
 		'linphone.ui.view.contacts',

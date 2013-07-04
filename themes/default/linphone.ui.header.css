@@ -15,6 +15,7 @@
 	width: 230px;
 	height: 70px;
 	float: left;
+	cursor: pointer;
 }
 
 .linphoneweb .header .profile {
