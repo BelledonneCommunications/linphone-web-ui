@@ -178,11 +178,14 @@ linphone.ui = {
 	},
 	
 	/* */
-	login: function(base) {
+	login: function(base, force) {
 		// Update configuration
 		var configuration = linphone.ui.configuration(base);
-		if(!configuration.login) {
-			configuration.login = true;
+		
+		configuration.login = true;
+		
+		linphone.ui.mainbar.show(base);
+		if((!configuration.login && typeof force === 'undefined') || force) {
 			linphone.ui.popup.clear(base);
 			linphone.ui.view.show(base, 'main');
 		}
@@ -190,11 +193,14 @@ linphone.ui = {
 	logout: function(base) {
 		// Update configuration
 		var configuration = linphone.ui.configuration(base);
+		
+		linphone.ui.mainbar.hide(base);
 		if(configuration.login) {
-			configuration.login = false;
 			linphone.ui.popup.clear(base);
 			linphone.ui.view.show(base, 'login');
 		}
+		
+		configuration.login = false;
 	},
 	isLogged: function(base) {
 		var configuration = linphone.ui.configuration(base);

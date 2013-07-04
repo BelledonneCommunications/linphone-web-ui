@@ -28,7 +28,11 @@
 	color: #222222;
 }
 
-.linphoneweb > .content .view > .login .watermark[type="text"] {
+.linphoneweb > .content .view > .login.disabled form input[type="text"], .linphoneweb > .content .view > .login.disabled form input[type="password"] {
+	background:#ebf2f5;
+}
+
+.linphoneweb > .content .view > .login input.watermark[type="text"] {
 	color: #929fa5;
 	text-transform: uppercase;
 }
@@ -44,8 +48,11 @@
 	text-transform: uppercase;
 	color: #5d8398;
 }
-.linphoneweb > .content .view > .login input[type="checkbox"] {
+.linphoneweb > .content .view > .login form input[type="checkbox"] {
 	border: 1px solid #adbbc2;
+}
+.linphoneweb > .content .view > .login.disabled form input[type="checkbox"] {
+	background:#ebf2f5;
 }
 .linphoneweb > .content .view > .login label {
 	color: #5d8398;
@@ -58,18 +65,34 @@
 	margin-right: auto;
 	margin-bottom: 30px;
 }
+.linphoneweb > .content .view > .login.disabled .button {
+	background: #d97459;
+	cursor: default;
+}
 .linphoneweb > .content .view > .login .link {
 	color: #cf4c29;
 	text-transform: uppercase;
 	margin-bottom: 10px;
 	clear: both;
-}
-.linphoneweb > .content .view > .login .link:hover {
 	cursor: pointer;
+}
+.linphoneweb > .content .view > .login.disabled .link {
+	cursor: default;
+	
+}
+.linphoneweb > .content .view > .login.disabled .link:hover {
+	color: #cf4c29;
+}
+
+.linphoneweb > .content .view > .login .link:hover {
 	color: #d97459;
 }
 
-.linphoneweb > .content .view > .login input.disabled {background:#ebf2f5}
-.linphoneweb > .content .view > .login .buttonDisabled{background:#d97459}
-.linphoneweb > .content .view > .login .loginLoading{margin-bottom:10px}
-.imageLoaderCircle{background-image:url('img/loaderCircle.gif'); background-repeat:no-repeat; width:16px; height:16px; margin-right:10px; display:inline-table}
+.linphoneweb > .content .view > .login .wait > div, .linphoneweb > .content .view > .login .wait > span {
+	vertical-align: middle;
+}
+.linphoneweb > .content .view > .login .wait {
+	margin-bottom:20px;
+	height: 20px;
+	display: none;
+}

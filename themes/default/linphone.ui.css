@@ -275,6 +275,16 @@
 	margin-top: 15px;
 	margin-right: 5px;
 }
+
+.linphoneweb .imageLoaderCircle{
+	background-image:url('img/loaderCircle.gif');
+	background-repeat:no-repeat;
+	width:16px;
+	height:16px;
+	margin-right:10px;
+	display:inline-block;
+}
+
 .linphoneweb .imageStatusOnline {
 	background-image: url('img/statusOnline.png');
 }

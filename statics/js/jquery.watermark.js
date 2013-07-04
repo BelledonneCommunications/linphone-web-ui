@@ -144,6 +144,7 @@ $.watermark = $.watermark || {
 		}
 		
 		className && $input.removeClass( className );
+		return $input;
 	},
 	
 	// Display one or more watermarks by specifying any selector type
@@ -311,15 +312,18 @@ $.fn.watermark = $.fn.watermark || function ( text, options ) {
 			
 				// If re-defining text or class, first remove existing watermark, then make changes
 				if ( hasText || hasClass ) {
-					$.watermark._hide( $input );
+					var $ainput = $.watermark._hide( $input );
 			
 					if ( hasText ) {
 						$input.data( dataText, text );
+						$ainput.data( dataText, text );
 					}
 					
 					if ( hasClass ) {
 						$input.data( dataClass, options.className );
+						$ainput.data( dataClass, options.className );
 					}
+					$input = $ainput;
 				}
 			}
 			else {

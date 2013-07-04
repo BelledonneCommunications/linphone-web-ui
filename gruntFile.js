@@ -114,7 +114,8 @@ module.exports = function(grunt) {
 				'box-model': false,
 				'outline-none': false,
 				'adjoining-classes': false,
-				'duplicate-background-images': false
+				'duplicate-background-images': false,
+				'overqualified-elements': false
 			},
 			ui: uiCSSFiles
 		},

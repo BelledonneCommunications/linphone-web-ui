@@ -338,19 +338,7 @@ linphone.ui.core = {
 		var configuration = linphone.ui.configuration(base);
 		configuration.core.running = true;
 		
-		// Get first proxy
-		var proxy;
-		var list = core.proxyConfigList;
-		if(list.length > 0) {
-			proxy = list[0];
-		}
-		
-		// Test if already registered
-		if(proxy && proxy.state === linphone.core.enums.registrationState.Ok) {
-			linphone.ui.login(base);
-		} else {
-			linphone.ui.view.show(base, 'login');
-		}
+		linphone.ui.view.show(base, 'login');
 	},
 	
 	/* */

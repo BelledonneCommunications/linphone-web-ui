@@ -206,6 +206,10 @@ linphone.ui.i18n = {
 					en_US : 'Welcome',
 					fr_FR : 'Bienvenue'
 				},
+				wait: {
+					en_US : 'Login in progress, please wait...',
+					fr_FR : 'Enregistrement en cours, veuillez patienter...'
+				},
 				login: {
 					en_US : 'Login',
 					fr_FR : 'S\'enregister'

@@ -19,6 +19,8 @@ linphone.ui.view.login = {
 	/* */
 	init: function(base) {
 		linphone.ui.view.login.uiInit(base);
+		base.on('authInfoRequested', linphone.ui.view.login.onAuthInfoRequested); 
+		base.on('registrationStateChanged', linphone.ui.view.login.onRegistrationStateChanged);
 	},
 	uiInit: function(base) {
 		var login = base.find('> .content .view > .login');
@@ -37,7 +39,7 @@ linphone.ui.view.login = {
 		}));
 		
 		login.find('.password').keyup(linphone.ui.exceptionHandler(base, function(event) {
-			if(event.which === 13){
+			if(event.which === jQuery.ui.keyCode.ENTER){
 				linphone.ui.view.login.login(base);
 			}
 		}));
@@ -53,16 +55,26 @@ linphone.ui.view.login = {
 	
 	/* */
 	show: function(base) {
+		var core = linphone.ui.getCore(base);
+		
+		// Get first proxy
+		var proxy;
+		var list = core.proxyConfigList;
+		if(list.length > 0) {
+			proxy = list[0];
+		}
+		
+		// Test if already registered
+		if(proxy && proxy.state === linphone.core.enums.registrationState.Ok) {
+			linphone.ui.login(base, true);
+			return;
+		}
+		
 		linphone.ui.menu.hide(base);
-		linphone.ui.mainbar.hide(base);
 		linphone.ui.view.login.reset(base);
 		linphone.ui.view.login.update(base, linphone.ui.view.login.state.simple);
-		base.on('authInfoRequested', linphone.ui.view.login.onAuthInfoRequested); 
-		base.on('registrationStateChanged', linphone.ui.view.login.onRegistrationStateChanged);
 	},
 	hide: function(base) {
-		base.off('authInfoRequested', linphone.ui.view.login.onAuthInfoRequested); 
-		base.off('registrationStateChanged', linphone.ui.view.login.onRegistrationStateChanged);
 	},
 	
 	/* */
@@ -75,6 +87,9 @@ linphone.ui.view.login = {
 		login.find('.accountAdvanced .proxy').val('');
 	},
 	update: function(base, state) {
+		if(linphone.ui.view.login.isLocked(base)) {
+			return;
+		}
 		var login = base.find('> .content .view > .login');
 		switch(state) {
 			case linphone.ui.view.login.state.simple:
@@ -93,13 +108,36 @@ linphone.ui.view.login = {
 			break;
 		}
 	},
+	lock: function(base) {
+		var login = base.find('> .content .view > .login');
+		login.find('.wait').show();
+		login.addClass('disabled');
+		login.find('form input').prop('disabled', true);
+	},
+	unlock: function(base) {
+		var login = base.find('> .content .view > .login');
+		login.find('.wait').hide();
+		login.removeClass('disabled');
+		login.find('form input').prop('disabled', false);
+	},
+	isLocked: function(base) {
+		var login = base.find('> .content .view > .login');
+		return login.hasClass('disabled');
+	},
 	
 	login: function(base){
+		if(linphone.ui.view.login.isLocked(base)) {
+			return;
+		}
 		var login = base.find('> .content .view > .login');
+		var ret;
 		if(login.find('.accountSimple').is(':visible')) {
-			linphone.ui.view.login.loginSimple(base);
+			ret = linphone.ui.view.login.loginSimple(base);
 		} else {
-			linphone.ui.view.login.loginAdvanced(base);
+			ret = linphone.ui.view.login.loginAdvanced(base);
+		}
+		if(ret) {
+			linphone.ui.view.login.lock(base);
 		}
 	},
 	loginSimple: function(base) {
@@ -115,11 +153,11 @@ linphone.ui.view.login = {
 		// Check values
 		if (linphone.ui.view.login.state.simple.regex.account.exec(account) === null) {
 			linphone.ui.popup.error.show(base, 'content.view.login.accountSimple.errors.account');
-			return;
+			return false;
 		}
 		if (linphone.ui.view.login.state.simple.regex.password.exec(password) === null) {
 			linphone.ui.popup.error.show(base, 'content.view.login.accountSimple.errors.password');
-			return;
+			return false;
 		}
 		
 		// Create proxy config
@@ -133,8 +171,10 @@ linphone.ui.view.login = {
 		login.data('password', password);
 		login.data('username', account);
 		core.addProxyConfig(proxyConfig);
+		return true;
 	},
 	loginAdvanced: function(base) {
+		return false;
 	},
 	
 	/* */
@@ -158,12 +198,18 @@ linphone.ui.view.login = {
 		var login = base.find('> .content .view > .login');
 		var core = linphone.ui.getCore(base);
 		if(state === linphone.core.enums.registrationState.Ok) {
+			linphone.ui.view.login.unlock(base);
+			
 			// Reset challenge
 			login.data('password', null);
 			login.data('username', null);
 			linphone.ui.view.login.reset(base);
-			linphone.ui.login(base);
+
+			// Force if we are still on this view
+			linphone.ui.login(base, linphone.ui.view.top(base).is(login));
 		} else if(state === linphone.core.enums.registrationState.Failed) {
+			linphone.ui.view.login.unlock(base);
+			
 			// Reset challenge
 			login.data('password', null);
 			login.data('username', null);

@@ -14,7 +14,6 @@ linphone.ui.view.main = {
 	/* */
 	show: function(base) {
 		linphone.ui.menu.show(base);
-		linphone.ui.mainbar.show(base);
 	},
 	hide: function(base) {
 	}

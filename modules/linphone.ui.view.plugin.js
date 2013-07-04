@@ -19,7 +19,6 @@ linphone.ui.view.plugin = {
 	
 	/* */
 	show: function(base, ret) {
-		linphone.ui.mainbar.hide(base);
 		linphone.ui.menu.hide(base);
 		if(typeof ret === 'undefined' || ret === null) {
 			return;
