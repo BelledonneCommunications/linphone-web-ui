@@ -5,7 +5,7 @@
 .linphoneweb > .content .view > .login {
 	background-color: rgb(228, 237, 242);
 	overflow: auto;
-	min-height: 550px;
+	min-height: 600px;
 }
 
 .linphoneweb > .content .view > .login .logo {
@@ -68,3 +68,8 @@
 	cursor: pointer;
 	color: #d97459;
 }
+
+.linphoneweb > .content .view > .login input.disabled {background:#ebf2f5}
+.linphoneweb > .content .view > .login .buttonDisabled{background:#d97459}
+.linphoneweb > .content .view > .login .loginLoading{margin-bottom:10px}
+.imageLoaderCircle{background-image:url('img/loaderCircle.gif'); background-repeat:no-repeat; width:16px; height:16px; margin-right:10px; display:inline-table}
