@@ -144,7 +144,6 @@ $.watermark = $.watermark || {
 		}
 		
 		className && $input.removeClass( className );
-		return $input;
 	},
 	
 	// Display one or more watermarks by specifying any selector type
@@ -180,7 +179,11 @@ $.watermark = $.watermark || {
 						$wrap[ 0 ].removeChild( $input[ 0 ] ); // Can't use jQuery methods, because they destroy data
 						$wrap[ 0 ].appendChild( $pwd[ 0 ] );
 						$input = $pwd;
-						$input.attr( "maxLength", text.length );
+						
+						// Update variables
+						text = $input.data( dataText ) || "";
+						type = $input.attr( "type" ) || "";
+						className = $input.data( dataClass );
 						elem = $input[ 0 ];
 					}
 				}
@@ -312,18 +315,31 @@ $.fn.watermark = $.fn.watermark || function ( text, options ) {
 			
 				// If re-defining text or class, first remove existing watermark, then make changes
 				if ( hasText || hasClass ) {
-					var $ainput = $.watermark._hide( $input );
-			
+					$.watermark._hide( $input );
 					if ( hasText ) {
 						$input.data( dataText, text );
-						$ainput.data( dataText, text );
 					}
 					
 					if ( hasClass ) {
 						$input.data( dataClass, options.className );
-						$ainput.data( dataClass, options.className );
 					}
-					$input = $ainput;
+					
+					// Update alertnative input (password or text)
+					var $ainput = $input.data( dataPassword );
+					if($ainput) {
+						if ( hasText ) {
+							$ainput.data( dataText, text );
+						}
+						
+						if ( hasClass ) {
+							$ainput.data( dataClass, options.className );
+						}
+						
+						// Get the password input
+						if($input.attr( "type" ) !== "password") {
+							$input = $ainput;
+						}
+					}
 				}
 			}
 			else {
