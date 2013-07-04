@@ -158,6 +158,9 @@ linphone.ui = {
 		Handlebars.registerHelper('avatar', function(object) {
 			return linphone.ui.utils.getAvatar(this.base, object);
 		});
+		Handlebars.registerHelper('menuCallStateClass', function(object) {
+			return linphone.ui.menu.getCallStateClass(this.base, object);
+		});
 
 		// Call callback
 		base.on('callStateChanged', linphone.ui.onCallStateChanged); 

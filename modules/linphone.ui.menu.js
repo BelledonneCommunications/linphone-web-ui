@@ -28,6 +28,19 @@ linphone.ui.menu = {
 			unreadMessage: 21
 		}));
 		
+		// Must refresh mouse events
+		base.find('> .content .menu .list .entry').mouseover(linphone.ui.exceptionHandler(base, function() {
+			jQuery(this).append('<span class="closeContact"></span>');
+		}));
+		
+		base.find('> .content .menu .list .entry').mouseleave(linphone.ui.exceptionHandler(base, function() {
+			jQuery(this).find('.closeContact').remove();
+		}));
+		
+		base.find('> .content .menu .chat .entry').click(linphone.ui.exceptionHandler(base, function() {
+			linphone.ui.view.show(base, 'chat');
+		}));
+		
 		if(linphone.ui.configuration(base).disableChat) {
 			base.find('> .content .menu .chat').hide();
 		}
@@ -61,24 +74,25 @@ linphone.ui.menu = {
 				call: call
 			}));
 		}
-		
-		// Must refresh mouse events
-		base.find('> .content .menu .list .entry').mouseover(linphone.ui.exceptionHandler(base, function() {
-			jQuery(this).append('<span class="closeContact"></span>');
-		}));
-		
-		base.find('> .content .menu .list .entry').mouseleave(linphone.ui.exceptionHandler(base, function() {
-			jQuery(this).find('.closeContact').remove();
-		}));
-		
-		base.find('> .content .menu .chat .entry').click(linphone.ui.exceptionHandler(base, function() {
-			linphone.ui.view.show(base, 'chat');
-		}));
 	},
 	
 	/* Events */
 	onCallStateChanged: function(event, call, state, message) {
 		var base = jQuery(this);
 		linphone.ui.menu.update(base);
+		
+		//if(state === linphone.core.enums.callState.Paused){
+		//	linphone.ui.popup.incall.show(base,call);
+		//}
+	},
+	
+	getCallStateClass: function(base, object) {
+		if(object === linphone.core.enums.callState.PausedByRemote || object === linphone.core.enums.callState.Paused){
+			return "pause";
+		} 
+		if(object === linphone.core.enums.callState.IncomingReceived || object === linphone.core.enums.callState.OutgoingRinging){
+			return "ringing";
+		}
+		return "play";
 	}
 };

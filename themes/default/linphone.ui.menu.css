@@ -111,12 +111,25 @@
 	margin-right: 7px;
 	margin-top: 1px;
 }
+.linphoneweb .content .menu nav .calls .list .ringing {
+	background-color: #0000FF;
+	background-repeat: no-repeat;
+	width: 7px;
+	height: 9px;
+	float: left;
+	margin-right: 7px;
+	margin-top: 1px;
+}
 .linphoneweb .content .menu nav .calls .list .entry:hover .play {
 	background-image: url('img/playHover.png');
 	background-repeat: no-repeat;
 }
 .linphoneweb .content .menu nav .calls .list .entry:hover .pause {
 	background-image: url('img/pauseHover.png');
+	background-repeat: no-repeat;
+}
+.linphoneweb .content .menu nav .calls .list .entry:hover .ringing {
+	background-image: url('img/call.png');
 	background-repeat: no-repeat;
 }
 
