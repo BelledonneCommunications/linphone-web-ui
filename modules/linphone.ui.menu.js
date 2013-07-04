@@ -18,7 +18,7 @@ linphone.ui.menu = {
 			linphone.ui.view.show(base, 'contacts');
 		}));
 		
-		list = base.find('> .content .menu .chat .list');
+		var list = base.find('> .content .menu .chat .list');
 		list.append(linphone.ui.template(base, 'menu.chat.list.entry', {
 			name: 'Cunégonde',
 			unreadMessage: 0
@@ -26,19 +26,6 @@ linphone.ui.menu = {
 		list.append(linphone.ui.template(base, 'menu.chat.list.entry', {
 			name: 'Roger',
 			unreadMessage: 21
-		}));
-		
-		// Must refresh mouse events
-		base.find('> .content .menu .list .entry').mouseover(linphone.ui.exceptionHandler(base, function() {
-			jQuery(this).append('<span class="closeContact"></span>');
-		}));
-		
-		base.find('> .content .menu .list .entry').mouseleave(linphone.ui.exceptionHandler(base, function() {
-			jQuery(this).find('.closeContact').remove();
-		}));
-		
-		base.find('> .content .menu .chat .entry').click(linphone.ui.exceptionHandler(base, function() {
-			linphone.ui.view.show(base, 'chat');
 		}));
 		
 		if(linphone.ui.configuration(base).disableChat) {
@@ -74,6 +61,19 @@ linphone.ui.menu = {
 				call: call
 			}));
 		}
+		
+		// Must refresh mouse events
+		base.find('> .content .menu .list .entry').mouseover(linphone.ui.exceptionHandler(base, function() {
+			jQuery(this).append('<span class="closeContact"></span>');
+		}));
+		
+		base.find('> .content .menu .list .entry').mouseleave(linphone.ui.exceptionHandler(base, function() {
+			jQuery(this).find('.closeContact').remove();
+		}));
+		
+		base.find('> .content .menu .chat .entry').click(linphone.ui.exceptionHandler(base, function() {
+			linphone.ui.view.show(base, 'chat');
+		}));
 	},
 	
 	/* Events */

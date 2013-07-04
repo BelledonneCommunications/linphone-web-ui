@@ -49,7 +49,7 @@
 	float: left;
 }
 
-.linphoneweb .dialer input.watermark {
+.linphoneweb .dialer .watermark {
 	color: #929fa5;
 	text-transform: uppercase;
 }

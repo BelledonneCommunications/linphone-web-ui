@@ -376,7 +376,7 @@ linphone.ui = {
 			}
 			var username = address.username;
 			if(username) {
-				return username
+				return username;
 			}
 			return String(object);
 		}

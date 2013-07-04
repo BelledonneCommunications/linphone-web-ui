@@ -36,7 +36,7 @@
 	color: #222222;
 }
 
-.linphoneweb > .content .view > .login input.watermark {
+.linphoneweb > .content .view > .login .watermark {
 	color: #929fa5;
 	text-transform: uppercase;
 }

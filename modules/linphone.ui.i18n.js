@@ -124,7 +124,7 @@ linphone.ui.i18n = {
 			title: {
 				en_US : 'You are not connected to Internet.',
 				fr_FR : 'Vous n\'êtes pas connecté à Internet.'	
-			},
+			}
 		},
 		dialer: {
 			address: {
