@@ -162,7 +162,6 @@ linphone.ui.view.login = {
 			login.data('password', null);
 			login.data('username', null);
 			linphone.ui.view.login.reset(base);
-			
 			linphone.ui.login(base);
 		} else if(state === linphone.core.enums.registrationState.Failed) {
 			// Reset challenge

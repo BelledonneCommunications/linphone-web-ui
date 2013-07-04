@@ -144,19 +144,24 @@ linphone.ui = {
 			
 			// Update locale
 			linphone.ui.locale.update(base);
-			
-			// Run heartbeat
-			if(linphone.ui.configuration(base).heartbeat.enabled) {
-				linphone.ui.startHeartBeat(base);
-			}
 		})();
-		
-		base.on('networkStateChanged', linphone.ui.onNetworkStateChanged);
+
+		// Run heartbeat
+		if(linphone.ui.configuration(base).heartbeat.enabled) {
+			linphone.ui.startHeartBeat(base);
+		}
 		
 		// Helpers
 		Handlebars.registerHelper('username', function(object) {
 			return linphone.ui.utils.getUsername(this.base, object);
 		});
+		Handlebars.registerHelper('avatar', function(object) {
+			return linphone.ui.utils.getAvatar(this.base, object);
+		});
+
+		// Call callback
+		base.on('callStateChanged', linphone.ui.onCallStateChanged); 
+		base.on('networkStateChanged', linphone.ui.onNetworkStateChanged);
 	},
 	uiInit: function(base) {
 		// Disable selection on buttons
@@ -277,6 +282,22 @@ linphone.ui = {
 		}
 	},
 	
+	/* Call state */
+	onCallStateChanged: function(event, call, state, message) {
+		var base = jQuery(this);
+		var core = linphone.ui.getCore(base);
+		if(state === linphone.core.enums.callState.IncomingReceived){
+			linphone.ui.popup.incall.show(base,call);
+		}
+		if(state === linphone.core.enums.callState.Connected){
+			linphone.ui.popup.incall.hide(base,call);
+		}
+		if(state === linphone.core.enums.callState.End){
+			linphone.ui.popup.incall.hide(base,call);
+			linphone.ui.view.hide(base,'call');
+		}
+	},
+	
 	/* Error handling */
 	exceptionHandler: function (base, fct) {
 		return function(args) {
@@ -381,6 +402,9 @@ linphone.ui = {
 				return username;
 			}
 			return String(object);
+		},
+		getAvatar: function(base, object) {
+			return 'tmp/marcel.jpg';
 		}
 	}
 };

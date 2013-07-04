@@ -25,11 +25,12 @@ linphone.ui.popup.error = {
 		var errorPopup = linphone.ui.template(base, 'view.popup.error', {
 			content: content
 		});
+		errorPopup.data('errorPopup',content);
 		errorPopup.find('.button').click(linphone.ui.exceptionHandler(base, function(event) {
 			var target = jQuery(event.target ? event.target : event.srcElement);
 			
 			// Close itself
-			target.getSelfAndParents('.popup > .error').hide();
+			linphone.ui.popup.error.hide(base,content);
 			linphone.ui.popup.update(base);
 		}));
 		
@@ -37,5 +38,15 @@ linphone.ui.popup.error = {
 		list.append(errorPopup);
 		errorPopup.show();
 		linphone.ui.popup.update(base);
+	},
+	hide: function(base,content){
+		var errorPopup = base.find('> .content .popup > .error').each(function (index, object) {
+			var jobject = jQuery(object);
+			var data=jobject.data('errorPopup');
+			if(errorPopup === data){
+				return jobject;
+			}
+		});
+		errorPopup.remove();
 	}
 };
