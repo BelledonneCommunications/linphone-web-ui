@@ -12,10 +12,7 @@ linphone.ui.popup.incall = {
 	/* */
 	show: function(base, call){
 		var list = base.find('> .content .popup');
-		var element=linphone.ui.template(base, 'popup.incall', {	
-				base: base,
-				call: call
-		});
+		var element=linphone.ui.template(base, 'popup.incall', call);
 
 		element.data('incallPopup',call);
 		element.find('.actions .callIn').click(linphone.ui.exceptionHandler(base, function(event){

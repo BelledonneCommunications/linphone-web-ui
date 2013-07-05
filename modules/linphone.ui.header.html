@@ -1,7 +1,7 @@
 <header class="header">
 	<!-- @if env='debug' -->
 	<script id="linphone.ui.header.profile.status" type="text/x-handlebars-template">
-		<div class="image {{cls}}"></div><div class="text" data-i18n="global.status.{{i18n}}"></div>
+		<div class="image {{context.cls}}"></div><div class="text" data-i18n="global.status.{{context.i18n}}"></div>
 	</script>
 	<!-- @endif -->
 	
@@ -44,7 +44,7 @@
 		</nav>
 		<!-- @if env='debug' -->
 		<script id="linphone.ui.header.language.list.entry" type="text/x-handlebars-template">
-			<li class="{{cls}}">{{lang}}</li>
+			<li class="{{context.cls}}">{{context.lang}}</li>
 		</script>
 		<!-- @endif -->
 		<nav class="language">

@@ -2,11 +2,11 @@
 	<!-- @if env='debug' -->
 	<script id="linphone.ui.view.chat.list.entry.received" type="text/x-handlebars-template">
 		<div class="entryReceive">
-			<img src="{{img}}" alt="" class="contactImg">
+			<img src="{{context.img}}" alt="" class="contactImg">
 			<div class="infos">
-				<div class="date">{{date}}</div>
-				<div class="contactName">{{name}}</div>
-				<div class="message">{{message}}</div>
+				<div class="date">{{context.date}}</div>
+				<div class="contactName">{{context.name}}</div>
+				<div class="message">{{context.message}}</div>
 			</div>
 			<hr>
 		</div>
@@ -15,11 +15,11 @@
 	<!-- @if env='debug' -->
 	<script id="linphone.ui.view.chat.list.entry.sent" type="text/x-handlebars-template">
 		<div class="entrySend">
-			<img src="{{img}}" alt="" class="contactImg">
+			<img src="{{context.img}}" alt="" class="contactImg">
 			<div class="infos">
-				<div class="date">{{date}}</div>
-				<div class="contactName">{{name}}</div>
-				<div class="message">{{message}}</div>
+				<div class="date">{{context.date}}</div>
+				<div class="contactName">{{context.name}}</div>
+				<div class="message">{{context.message}}</div>
 			</div>
 			<hr>
 		</div>

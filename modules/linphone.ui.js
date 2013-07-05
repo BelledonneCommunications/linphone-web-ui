@@ -77,14 +77,19 @@ linphone.ui = {
 			jquery = true;
 		}
 		var elem;
+		var proxy = {
+			base: base,
+			helpers: linphone.ui.helpers,
+			context: context
+		};
 		if(linphone.ui.configuration(base).debug) {
 			name = '#linphone.ui.' + name;
 			name = name.replace(/\./g, '\\.');
 			var source = jQuery(name).html();
 			var template = Handlebars.compile(source);
-			elem = template(context);
+			elem = template(proxy);
 		} else {
-			elem = linphone.ui.templates[name](context);
+			elem = linphone.ui.templates[name](proxy);
 		}
 		
 		if(jquery) {
@@ -130,6 +135,14 @@ linphone.ui = {
 			return this.parents('*').andSelf().filter(selector);
 		};
 		
+		// Use linphone.ui as linphone.ui.helpers
+		linphone.ui.helpers = linphone.ui;
+		
+		// Helpers		
+		Handlebars.registerHelper('LinphoneWeb-Call', function(fct) {
+			return fct.apply(this, [this.base].concat(Array.prototype.slice.call(arguments, 1)));
+		});
+		
 		linphone.ui.exceptionHandler(base, function() {
 			linphone.ui.uiInit(base);
 			linphone.ui.core.init(base);
@@ -150,17 +163,6 @@ linphone.ui = {
 		if(linphone.ui.configuration(base).heartbeat.enabled) {
 			linphone.ui.startHeartBeat(base);
 		}
-		
-		// Helpers
-		Handlebars.registerHelper('username', function(object) {
-			return linphone.ui.utils.getUsername(this.base, object);
-		});
-		Handlebars.registerHelper('avatar', function(object) {
-			return linphone.ui.utils.getAvatar(this.base, object);
-		});
-		Handlebars.registerHelper('menuCallStateClass', function(object) {
-			return linphone.ui.menu.getCallStateClass(this.base, object);
-		});
 
 		// Call callback
 		base.on('callStateChanged', linphone.ui.onCallStateChanged); 
@@ -379,6 +381,11 @@ linphone.ui = {
 				window.console.debug(message);
 			}
 		}
+	},
+	
+	/* Template helpers */
+	helpers: {
+		/* Replaced in init */
 	},
 	
 	/* Utils */

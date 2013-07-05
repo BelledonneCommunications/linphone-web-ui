@@ -2,8 +2,8 @@
 <script id="linphone.ui.popup.incall" type="text/x-handlebars-template">
 	<div class="incall">
  		<span class="title" data-i18n="content.popup.incall.title"></span>
-		<img src="{{avatar call.remoteAddress}}" alt="" class="contactImg">
-		<span class="contactName">{{username call.remoteAddress}}</span>
+		<img src="{{LinphoneWeb-Call helpers.utils.getAvatar context.remoteAddress}}" alt="" class="contactImg">
+		<span class="contactName">{{LinphoneWeb-Call helpers.utils.getUsername context.remoteAddress}}</span>
  		<div class="actions">
  			<div class="callIn"><div class="image imageCall"></div></div>
  			<div class="callOff"><div class="image imageCallOff"></div></div>

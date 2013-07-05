@@ -2,11 +2,11 @@
 	<!-- @if env='debug' -->
 	<script id="linphone.ui.view.contacts.list.entry" type="text/x-handlebars-template">
 		<div class="entry">
-			<img src="{{img}}" alt="" class="contactImg" />
-			<span class="contactName">{{name}}</span><br>
+			<img src="{{context.img}}" alt="" class="contactImg" />
+			<span class="contactName">{{context.name}}</span><br>
 			<span class="imageStatusOnline"></span>
-			<span class="contactStatus">{{status}}</span><br />
-			<span class="contactNumber">{{number}}<br />Sip number</span>
+			<span class="contactStatus">{{context.status}}</span><br />
+			<span class="contactNumber">{{context.number}}<br />Sip number</span>
 		
 			<div class="entryActions">
 				<div class="button buttonAction goContact"><div class="image imageModify"></div></div><!--

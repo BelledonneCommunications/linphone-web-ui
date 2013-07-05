@@ -248,6 +248,9 @@
 .linphoneweb .imageUpload {
 	background-image: url('img/upload.png');
 }
+.linphoneweb .imageOffline {
+	background-image: url('img/offline.png');
+}
 .linphoneweb .imageVideo {
 	background-image: url('img/video.png');
 	/* TODO MOVE */

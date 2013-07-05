@@ -32,7 +32,6 @@ linphone.ui.dialer = {
 	/* */
 	call: function(base) {
 		var addressStr = base.find('> .content .dialer .address').val();
-		console.log(linphone.ui.getCore(base).defaultProxy);
 		var address = linphone.ui.utils.getAddress(base, addressStr);
 		if(address) {
 			var core = linphone.ui.getCore(base);

@@ -49,7 +49,7 @@ linphone.ui.menu = {
 		
 	},
 	
-	/**/
+	/* */
 	show: function(base) {
 		base.on('callStateChanged', linphone.ui.menu.onCallStateChanged);
 		linphone.ui.menu.update(base);
@@ -69,10 +69,7 @@ linphone.ui.menu = {
 		var calls = core.calls;
 		for(var i = 0; i < calls.length; ++i) {
 			var call = calls[i];
-			list.append(linphone.ui.template(base, 'menu.calls.list.entry', {
-				base: base,
-				call: call
-			}));
+			list.append(linphone.ui.template(base, 'menu.calls.list.entry', call));
 		}
 	},
 	

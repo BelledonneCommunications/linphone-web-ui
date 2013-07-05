@@ -3,16 +3,16 @@
 	<script id="linphone.ui.view.history.list.entry" type="text/x-handlebars-template">
 		<div class="entry">
 			<div class="profile">
-				<img src="{{img}}" alt="" class="contactImg">
-				<span class="contactName">{{name}}</span><br>
+				<img src="{{context.img}}" alt="" class="contactImg">
+				<span class="contactName">{{context.name}}</span><br>
 				<span class="imageStatusOnline"></span>
-				<span class="contactStatus">{{status}}</span><br>
-				<span class="contactNumber">{{nulber}}</span>
+				<span class="contactStatus">{{context.status}}</span><br>
+				<span class="contactNumber">{{context.number}}</span>
 			</div>
 			<div class="historyInfos">
-				<span>Date :</span> <span class="historyDate">{{date}}</span><br>
-				<span>Durée :</span> <span class="historyTime">{{duration}}</span><br>
-				<span>Type :</span> <span class="historyType">{{type}}</span>
+				<span>Date :</span> <span class="historyDate">{{context.date}}</span><br>
+				<span>Durée :</span> <span class="historyTime">{{context.duration}}</span><br>
+				<span>Type :</span> <span class="historyType">{{context.type}}</span>
 			</div>
 	
 			<div class="entryActions">
