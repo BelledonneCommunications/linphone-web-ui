@@ -4,9 +4,13 @@
 		<div class="image {{cls}}"></div><div class="text" data-i18n="global.status.{{i18n}}"></div>
 	</script>
 	<!-- @endif -->
+	
 	<div class="content">
 		<div class="logo"></div>
 	
+		<div class="empty">
+		</div>
+		
 		<div class="profile">
 			<img src="tmp/profile.png" alt="">
 			<span class="identity"></span><br>
@@ -16,6 +20,18 @@
 				<ul class="list">
 				</ul>
 				<div class="logout"><span class="image imageLogout"></span><span data-i18n="header.profile.disconnect"></span></div>
+			</div>
+		</div>
+		
+		<div class="offline">
+			<!-- @if env='debug' -->
+			<!-- Force load on debug -->
+			<img src="style/img/offline.png" alt="" style="display: none;">
+			<!-- @endif -->
+			<div class="center">
+				<div class="image imageOffline"></div><!--
+				Avoid issue with inline block in dev mode
+		 		--><div class="title" data-i18n="header.offline.title"></div>
 			</div>
 		</div>
 

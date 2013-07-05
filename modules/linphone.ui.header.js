@@ -46,8 +46,9 @@ linphone.ui.header = {
 	
 	/* */
 	init: function(base) {
-		base.on('registrationStateChanged', linphone.ui.header.onRegistrationStateChanged);
 		linphone.ui.header.uiInit(base);
+		base.on('registrationStateChanged', linphone.ui.header.onRegistrationStateChanged);
+		base.on('networkStateChanged', linphone.ui.header.onNetworkStateChanged);
 	},
 	uiInit: function(base) {
 		var header = base.find('> .header');
@@ -98,6 +99,7 @@ linphone.ui.header = {
 			linphone.ui.logout(base);
 		}));
 		
+		/* Navigation */
 		header.find('.navigation .settings').click(linphone.ui.exceptionHandler(base, function(event){
 			if(jQuery(this).hasClass('disabled')) {
 				return;
@@ -113,6 +115,7 @@ linphone.ui.header = {
 			linphone.ui.view.show(base, 'about');
 		}));
 		
+		/* Language */
 		header.find('.language .list').click(linphone.ui.exceptionHandler(base, function(event) {
 			var target = jQuery(event.target ? event.target : event.srcElement);
 			if (target.isOrParent('.linphoneweb > .header .language .list > li')) {
@@ -156,27 +159,42 @@ linphone.ui.header = {
 	/* Proxy config updating */
 	onRegistrationStateChanged: function(event, proxy, state, message) {
 		var base = jQuery(this);
-		linphone.ui.header.update(base, proxy);
+		linphone.ui.header.update(base, proxy, null);
 	},
-	update: function(base, proxy) {
-		var core = linphone.ui.getCore(base);
+	onNetworkStateChanged: function(event, status) {
+		var base = jQuery(this);
+		linphone.ui.header.update(base, null, status);
+	},
+	update: function(base, proxy, network) {
+		linphone.ui.logger.log(base, 'Header: update');
+		var header = base.find('> .header');
 		
 		// If not provided try to use first proxy config
-		if(typeof proxy === 'undefined') {
-			var list = core.proxyConfigList;
-			if(list.length > 0) {
-				proxy = list[0];
-			}
+		if(typeof proxy === 'undefined' || !proxy) {
+			proxy = linphone.ui.utils.getMainProxyConfig(base);
+		}
+		// If not provided try to use getHeartBeatStatus
+		if(typeof network === 'undefined' || !network) {
+			network = linphone.ui.getHeartBeatStatus(base);
 		}
 		
-		if(proxy && proxy.state === linphone.core.enums.registrationState.Ok) {
-			linphone.ui.header.profile.update(base);
-			base.find('> .header .profile').visible();
-			base.find('> .header .settings').removeClass('disabled');
-			base.find('> .header .profile .identity').text(linphone.ui.utils.getUsername(base, proxy.identity));
+		if(network === linphone.ui.heartBeatStatus.Online) {
+			header.find('.offline').hide();
+			if(proxy && proxy.state === linphone.core.enums.registrationState.Ok) {
+				linphone.ui.header.profile.update(base);
+				header.find('.empty').hide();
+				header.find('.profile').show();
+				header.find('.settings').removeClass('disabled');
+				header.find('.profile .identity').text(linphone.ui.utils.getUsername(base, proxy.identity));
+			} else {
+				header.find('.empty').show();
+				header.find('.profile').hide();
+				header.find('.settings').addClass('disabled');
+			}
 		} else {
-			base.find('> .header .profile').invisible();
-			base.find('> .header .settings').addClass('disabled');
+			header.find('.offline').show();
+			header.find('.empty').hide();
+			header.find('.profile').hide();
 		}
 	},
 	
@@ -195,7 +213,7 @@ linphone.ui.header = {
 			return item;
 		},
 		update: function(base) {
-			linphone.ui.logger.log(base, 'Update profile');
+			linphone.ui.logger.log(base, 'Header: update profile');
 			var core = linphone.ui.getCore(base);
 			
 			var item = linphone.ui.header.profile.findStatus(core.presenceInfo);

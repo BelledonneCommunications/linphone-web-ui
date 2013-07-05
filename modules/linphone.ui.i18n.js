@@ -117,6 +117,12 @@ linphone.ui.i18n = {
 				en_US : 'Disconnect',
 				fr_FR : 'Déconnexion'
 			}
+		},
+		offline: {
+			title: {
+				en_US : 'You are not connected to Internet.',
+				fr_FR : 'Vous n\'êtes pas connecté à Internet.'	
+			}
 		}
 	},
 	content: {

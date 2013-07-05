@@ -27,7 +27,47 @@
 	padding: 15px 15px 15px 17px;
 	color: #b3bfc5;
 	position: relative;
-	visibility: hidden;
+	display: none;
+}
+
+.linphoneweb .header .empty {
+	float: left;
+	width: 210px;
+	border-left: 1px solid #434850;
+	border-right: 1px solid #434850;
+	height: 40px;
+	padding: 15px 15px 15px 17px;
+	position: relative;
+	color: #b3bfc5;
+}
+
+.linphoneweb .header .offline {
+	float: left;
+	width: 210px;
+	border-left: 1px solid #434850;
+	border-right: 1px solid #434850;
+	height: 40px;
+	padding: 15px 15px 15px 17px;
+	color: #b3bfc5;
+	position: relative;
+	display: none;
+}
+
+.linphoneweb .header .offline .center {
+	height: 40px;
+}
+
+.linphoneweb .header .offline .center .image {
+	float: none;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.linphoneweb .header .offline .center .title {
+	width: 160px;
+	margin-left: 10px;
+	vertical-align: middle;
+	display: inline-block;
 }
 
 .linphoneweb .header .highlight {

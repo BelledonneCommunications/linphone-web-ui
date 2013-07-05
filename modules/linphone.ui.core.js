@@ -340,6 +340,10 @@ linphone.ui.core = {
 		
 		linphone.ui.view.show(base, 'login');
 	},
+	isRunning: function(base) {
+		var configuration = linphone.ui.configuration(base);
+		return configuration.core.running;
+	},
 	
 	/* */
 	_loadHandler: function(core) {

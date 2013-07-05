@@ -280,12 +280,14 @@ linphone.ui = {
 		}, heartbeat.timeout);
 	},
 	onNetworkStateChanged: function(event, status) {
+		/*
 		var base = jQuery(this);
 		if(status === linphone.ui.heartBeatStatus.Online) {
 			base.find('> .content .offline').hide();
 		} else {
 			base.find('> .content .offline').show();
 		}
+		*/
 	},
 	
 	/* Call state */
@@ -411,6 +413,17 @@ linphone.ui = {
 		},
 		getAvatar: function(base, object) {
 			return 'tmp/marcel.jpg';
+		},
+		getMainProxyConfig: function(base) {
+			var proxy = null;
+			if(linphone.ui.core.isRunning(base)) {
+				var core = linphone.ui.getCore(base);
+				var list = core.proxyConfigList;
+				if(list.length > 0) {
+					proxy = list[0];
+				}
+			}
+			return proxy;
 		}
 	}
 };

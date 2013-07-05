@@ -58,11 +58,7 @@ linphone.ui.view.login = {
 		var core = linphone.ui.getCore(base);
 		
 		// Get first proxy
-		var proxy;
-		var list = core.proxyConfigList;
-		if(list.length > 0) {
-			proxy = list[0];
-		}
+		var proxy = linphone.ui.utils.getMainProxyConfig(base);
 		
 		// Test if already registered
 		if(proxy && proxy.state === linphone.core.enums.registrationState.Ok) {
