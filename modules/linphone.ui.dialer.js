@@ -31,12 +31,13 @@ linphone.ui.dialer = {
 	
 	/* */
 	call: function(base) {
-		var address = base.find('> .content .dialer .address').val();
-		var url = linphone.ui.utils.formatAddress(base, address);
-		if(url) {
+		var addressStr = base.find('> .content .dialer .address').val();
+		console.log(linphone.ui.getCore(base).defaultProxy);
+		var address = linphone.ui.utils.getAddress(base, addressStr);
+		if(address) {
 			var core = linphone.ui.getCore(base);
-			core.invite_async(url);
-			linphone.ui.logger.log(base, "Call: " + url);
+			core.inviteAddress_async(address);
+			linphone.ui.logger.log(base, "Call: " + address.asString());
 			
 			// Reset input
 			base.find('> .content .dialer .address').val('');

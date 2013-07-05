@@ -53,17 +53,13 @@
 	display: none;
 }
 
-.linphoneweb .header .offline .center {
-	height: 40px;
-}
-
-.linphoneweb .header .offline .center .image {
+.linphoneweb .header .offline .image {
 	float: none;
 	display: inline-block;
 	vertical-align: middle;
 }
 
-.linphoneweb .header .offline .center .title {
+.linphoneweb .header .offline .title {
 	width: 160px;
 	margin-left: 10px;
 	vertical-align: middle;

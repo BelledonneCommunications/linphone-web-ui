@@ -167,6 +167,7 @@ linphone.ui.view.login = {
 		login.data('password', password);
 		login.data('username', account);
 		core.addProxyConfig(proxyConfig);
+		core.defaultProxy = proxyConfig;
 		return true;
 	},
 	loginAdvanced: function(base) {

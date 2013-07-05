@@ -387,8 +387,9 @@ linphone.ui = {
 				complete: "([0-9a-zA-Z-_.!~*'()&=+$,;?/]+)@([0-9a-zA-Z.-]+)"
 			}
 		},
-		formatAddress: function(base, address) {
-			return address;
+		getAddress: function(base, uri) {
+			var core = linphone.ui.getCore(base);
+			return core.interpretUrl(uri);
 		},
 		getUsername: function(base, object) {
 			var address;
@@ -418,10 +419,7 @@ linphone.ui = {
 			var proxy = null;
 			if(linphone.ui.core.isRunning(base)) {
 				var core = linphone.ui.getCore(base);
-				var list = core.proxyConfigList;
-				if(list.length > 0) {
-					proxy = list[0];
-				}
+				proxy = core.defaultProxy;
 			}
 			return proxy;
 		}

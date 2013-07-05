@@ -25,14 +25,12 @@
 		
 		<div class="offline">
 			<!-- @if env='debug' -->
-			<!-- Force load on debug -->
+			<!-- Force load on debug. On release there is no issue (sprite) -->
 			<img src="style/img/offline.png" alt="" style="display: none;">
 			<!-- @endif -->
-			<div class="center">
-				<div class="image imageOffline"></div><!--
-				Avoid issue with inline block in dev mode
-		 		--><div class="title" data-i18n="header.offline.title"></div>
-			</div>
+			<div class="image imageOffline"></div><!--
+			Avoid issue with inline block in dev mode
+	 		--><div class="title" data-i18n="header.offline.title"></div>
 		</div>
 
 		<nav class="navigation">
