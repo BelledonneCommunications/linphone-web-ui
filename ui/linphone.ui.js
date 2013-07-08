@@ -104,7 +104,7 @@ linphone.ui = {
 		linphone.ui.addEvent(core, 'displayMessage', linphone.ui.displayMessage);
 		linphone.ui.addEvent(core, 'displayWarning', linphone.ui.displayWarning);
 		linphone.ui.addEvent(core, 'displayUrl', linphone.ui.displayUrl);
-		var init_count = (typeof linphone.core.data().init_count !== "undefined") ? linphone.core.data().init_count : 0;
+		var init_count = (typeof linphone.core.data().init_count !== "undefined") ? parseInt(linphone.core.data().init_count) : 0;
 		var ret_value = core.init("local:///.linphonerc");
 		if (ret_value !== 0) {
 			linphone.ui.error(base, jQuery.i18n.get('errors.core.' + ret_value));
@@ -113,6 +113,7 @@ linphone.ui = {
 			if(init_count === 0) {
 				core.sipPort = Math.floor((Math.random()*(65535 - 1024)) + 1024);
 			}
+			init_count++;
 			linphone.core.log('Sip port: ' + core.sipPort);
 			
 			// Init properties 
@@ -139,7 +140,7 @@ linphone.ui = {
 
 			linphone.ui.video.updateSelfView(base);
 			linphone.ui.video.updateVideoView(base);
-			linphone.core.data().init_count = init_count + 1;
+			linphone.core.data().init_count = init_count;
 			
 			// Force network updates (hack)
 			var transports = core.sipTransports;
