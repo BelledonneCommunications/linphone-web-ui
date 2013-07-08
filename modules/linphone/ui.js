@@ -18,17 +18,7 @@ linphone.ui = {
 		Offline: 1
 	},
 	
-	/* */
-	data: function() {
-		try {
-			if (typeof window.localStorage !== 'undefined') {
-				return localStorage;
-			}
-		} catch(ex) {
-		}
-		return {};
-	},
-	
+	/* Main JS helpers */
 	getCore: function(target) {
 		var ret = linphone.ui.getCoreNull(target);
 		if(ret === null) {
@@ -61,14 +51,14 @@ linphone.ui = {
 		}
 	},
 
+	/* Persistant Part */
+	persistent: function(base) {
+		return base.data('LinphoneWebPersistent').config;
+	},
+
 	/* Configuration Part */ 
 	configuration: function(base) {
 		return base.data('LinphoneWebConfig');
-	},
-	configure: function(base, config) {
-		var fconfig = jQuery.extend(true, {}, linphone.ui.defaultConfiguration);
-		jQuery.extend(fconfig, config);
-		base.data('LinphoneWebConfig', fconfig);
 	},
 	
 	/* UI Part */
@@ -101,7 +91,15 @@ linphone.ui = {
 	slider: function(element) {
 		setSlider(element);
 	},
-	init: function(base) {
+	init: function(base, config) {
+		/* Merge config with default configuration */
+		var fconfig = jQuery.extend(true, {}, linphone.ui.defaultConfiguration);
+		jQuery.extend(fconfig, config);
+		base.data('LinphoneWebConfig', fconfig);
+		
+		/* Get persistent storage */
+		base.data('LinphoneWebPersistent', new PersistentStorage(fconfig.name, {}, 10000, fconfig.debug));
+		
 		jQuery.fn.disableSelection = function() {
 			return this.each(function() {
 				jQuery(this).attr('unselectable', 'on').css({
@@ -420,7 +418,7 @@ linphone.ui = {
 			if(username) {
 				return username;
 			}
-			return String(object);
+			return 'Unknown';
 		},
 		getAvatar: function(base, object) {
 			return 'tmp/marcel.jpg';

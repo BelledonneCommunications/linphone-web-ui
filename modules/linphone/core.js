@@ -46,19 +46,6 @@ linphone.core = {
 			window.console.debug(message);
 		}
 	},
-	data: function() {
-		try {
-			if (typeof window.localStorage !== 'undefined') {
-				// Init LocalStorage
-				if (typeof window.localStorage['LinphoneWeb'] === 'undefined') {
-					window.localStorage['LinphoneWeb'] = {};
-				}
-				return window.localStorage['LinphoneWeb'];
-			}
-		} catch(ex) {
-		}
-		return {};
-	},
 	isValid: function(core) {
 		return typeof core !== 'undefined' && typeof core.valid !== 'undefined' && core.valid;
 	}

@@ -7,6 +7,13 @@ module.exports = function(grunt) {
 		'linphone.core',
 		'linphone.core.enums'
 	],
+	modelsModules = [
+		'linphone.models',
+		'linphone.models.contacts',
+		'linphone.models.history',
+		'linphone.models.contacts.localStorage',
+		'linphone.models.history.localStorage'
+	],
 	uiModules = [
 		'linphone.ui',
 		'linphone.ui.core',
@@ -45,6 +52,10 @@ module.exports = function(grunt) {
 
 	/* JS files */
 	coreJSFiles = coreModules.map(function(module) {
+		return 'modules/' + module.replace(/\./g, '/') + '.js';
+	}),
+
+	modelsJSFiles = modelsModules.map(function(module) {
 		return 'modules/' + module.replace(/\./g, '/') + '.js';
 	}),
 
@@ -107,6 +118,7 @@ module.exports = function(grunt) {
 				globals: {}
 			},
 			core: coreJSFiles,
+			models: modelsJSFiles,
 			ui: uiJSFiles,
 		},
 		csslint: {
@@ -147,6 +159,10 @@ module.exports = function(grunt) {
 				dest: '<%= tmp %>/js/linphone-core-<%= pkg.version %>.js',
 				src: [coreJSFiles]
 			},
+			modelsJS: {
+				dest: '<%= tmp %>/js/linphone-models-<%= pkg.version %>.js',
+				src: [modelsJSFiles]
+			},
 			uiJS: {
 				dest: '<%= tmp %>/js/linphone-ui-<%= pkg.version %>.js',
 				src: [uiJSFiles]
@@ -157,7 +173,7 @@ module.exports = function(grunt) {
 			},
 			allJS: {
 				dest: '<%= tmp %>/js/linphone-<%= pkg.version %>.js',
-				src: [coreJSFiles, uiJSFiles, '<%= handlebars.uiTmplJS.dest %>']
+				src: [coreJSFiles, modelsJSFiles, uiJSFiles, '<%= handlebars.uiTmplJS.dest %>']
 			},
 			uiCSS: {
 				dest: '<%= tmp %>/style/linphone-ui-<%= pkg.version %>.css',
@@ -171,6 +187,10 @@ module.exports = function(grunt) {
 			coreJS: {
 				dest: '<%= tmp %>/js/linphone-core-<%= pkg.version %>.min.js',
 				src: ['<%= concat.coreJS.dest %>']
+			},
+			modelsJS: {
+				dest: '<%= tmp %>/js/linphone-models-<%= pkg.version %>.min.js',
+				src: ['<%= concat.modelsJS.dest %>']
 			},
 			uiJS: {
 				dest: '<%= tmp %>/js/linphone-ui-<%= pkg.version %>.min.js',
@@ -393,6 +413,10 @@ module.exports = function(grunt) {
 				files: coreJSFiles,
 				tasks: ['concat:coreJS', 'uglify:coreJS']
 			},
+			modelsJS: {
+				files: modelsJSFiles,
+				tasks: ['concat:modelsJS', 'uglify:modelsJS']
+			},
 			uiJS: {
 				files: uiJSFiles,
 				tasks: ['concat:uiJS', 'uglify:uiJS']
@@ -443,6 +467,7 @@ module.exports = function(grunt) {
 	}
 	
 	coreJSFiles = process_files(coreJSFiles)	
+	modelsJSFiles = process_files(modelsJSFiles)	
 	uiJSFiles = process_files(uiJSFiles) 
 	uiCSSFiles = process_files(uiCSSFiles) 
 	htmlFiles = process_files(htmlFiles) 

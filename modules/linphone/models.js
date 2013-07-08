@@ -1,0 +1,4 @@
+/*globals linphone */
+
+linphone.models = {
+};

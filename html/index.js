@@ -1,4 +1,11 @@
 function __linphone_init(base) {
+	/* @if env='release' */
+	var debug = false;
+	/* @endif */
+	/* @if env='debug' */
+	var debug = true;
+	/* @endif */
+	
 	var config = {
 		files: {
 			'Windows' : {
@@ -101,15 +108,14 @@ function __linphone_init(base) {
 			name : 'IT',
 			locale : 'it_IT'
 		} ],
+		models: {
+			contacts: new linphone.models.contacts.localStorage.engine('Linphone Web', debug),
+			history: new linphone.models.history.localStorage.engine('Linphone Web', debug),
+		},
 		disableChat: true
 	}
 
-	/* @if env='release' */
-	config.debug = false;
-	/* @endif */
-	/* @if env='debug' */
-	config.debug = true;
-	/* @endif */
+	config.debug = debug;
 	
 	// Enable debug only if lpdebug is set to true	
 	if(jQuery.getUrlVar('lpdebug') === '1' ||
@@ -117,8 +123,7 @@ function __linphone_init(base) {
 		jQuery.getUrlVar('lpdebug') === 'yes') {
 		config.debug = true;
 	}
-	linphone.ui.configure(base, config);
-	linphone.ui.init(base);
+	linphone.ui.init(base, config);
 	linphone.ui.core.load(base);
 }
 
@@ -129,6 +134,7 @@ function __linphone_init(base) {
 		{url: "js/jquery.client.min.js"},
 		
 		{url: "js/i18n.min.js"},
+		{url: "js/persistent.min.js"},
 		
 		{url: "js/jquery-ui-1.10.3.min.js"},
 		{url: "js/jquery.mousewheel.min.js"},

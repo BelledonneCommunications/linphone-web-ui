@@ -18,32 +18,13 @@ linphone.ui.view.contacts = {
 		
 		linphone.ui.view.contacts.filter.update(base, linphone.ui.view.contacts.filter.all);
 		
-		/* Samples */
+		var configuration = linphone.ui.configuration(base);
+		var data = configuration.models.contacts.list();
 		var list = contacts.find('.list');
-		list.append(linphone.ui.template(base, 'view.contacts.list.entry', {
-			img: 'tmp/marcel.jpg',
-			status: 'Disponible',
-			number: '+336096894321',
-			name: "Test"
-		}));
-		list.append(linphone.ui.template(base, 'view.contacts.list.entry', {
-			img: 'tmp/marcel.jpg',
-			status: 'Disponible',
-			number: '+336096894321',
-			name: "Test2"
-		}));
-		list.append(linphone.ui.template(base, 'view.contacts.list.entry', {
-			img: 'tmp/marcel.jpg',
-			status: 'Disponible',
-			number: '+336096894321',
-			name: "Test3"
-		}));
-		list.append(linphone.ui.template(base, 'view.contacts.list.entry', {
-			img: 'tmp/marcel.jpg',
-			status: 'Disponible',
-			number: '+336096894321',
-			name: "Test4"
-		}));
+		
+		for(var item in data) {
+			list.append(data[item]);
+		}
 		
 		contacts.find('.goContact').click(linphone.ui.exceptionHandler(base, function(){
 			linphone.ui.view.show(base, 'contact');

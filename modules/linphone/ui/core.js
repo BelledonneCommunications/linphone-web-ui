@@ -25,7 +25,7 @@ linphone.ui.core = {
 			};
 		} else {
 			linphone.ui.core._addEvent = function(obj, name, func) {
-				obj.attachEvent("on" + name, func);
+				obj.attachEvent('on' + name, func);
 			};
 		}
 		
@@ -52,7 +52,7 @@ linphone.ui.core = {
 		}
 
 		// Specific updates
-		config.file.codebase = "";
+		config.file.codebase = '';
 		if (typeof config.file.description !== 'undefined') {
 			if (config.file.browser === 'Explorer') {
 				config.file.codebase = config.file.description.file;
@@ -225,16 +225,16 @@ linphone.ui.core = {
 				linphone.ui.core.unload(base);
 				
 				// Browser update
-				if (config.file.browser === "Firefox") {
+				if (config.file.browser === 'Firefox') {
 					if (InstallTrigger.updateEnabled()) {
 						InstallTrigger.install({
-							"Linphone-Web": {
+							'Linphone-Web': {
 								URL: config.file.description.file,
 								IconURL: config.file.description.icon
 							}
 						});
 					}
-				} else if (config.file.browser === "Chrome") {
+				} else if (config.file.browser === 'Chrome') {
 					chrome.webstore.install(config.file.description.file, 
 						function() {
 							linphone.ui.core.unload(base);
@@ -251,16 +251,16 @@ linphone.ui.core = {
 			linphone.ui.logger.log(base, 'Core detection: Not installed');
 			
 			// Browser installation
-			if (config.file.browser === "Firefox") {
+			if (config.file.browser === 'Firefox') {
 				if (InstallTrigger.updateEnabled()) {
 					InstallTrigger.install({
-						"Linphone-Web": {
+						'Linphone-Web': {
 							URL: config.file.description.file,
 							IconURL: config.file.description.icon
 						}
 					});
 				}
-			} else if (config.file.browser === "Chrome") {
+			} else if (config.file.browser === 'Chrome') {
 				chrome.webstore.install(config.file.description.file, 
 					function(){
 						linphone.ui.core.unload(base);
@@ -373,8 +373,8 @@ linphone.ui.core = {
 			linphone.ui.core.addEvent(core, 'displayMessage', linphone.ui.core._displayMessage);
 			linphone.ui.core.addEvent(core, 'displayWarning', linphone.ui.core._displayWarning);
 			linphone.ui.core.addEvent(core, 'displayUrl', linphone.ui.core._displayUrl);
-			var init_count = (typeof linphone.core.data().init_count !== "undefined") ? linphone.core.data().init_count : 0;
-			var ret_value = core.init("local:///.linphonerc");
+			var init_count = (typeof linphone.ui.persistent(base).init_count !== 'undefined') ? linphone.ui.persistent(base).init_count : 0;
+			var ret_value = core.init('local:///.linphonerc');
 			if (ret_value !== 0) {
 				linphone.ui.logger.log(base, 'Core init error: ' + ret_value);
 				linphone.ui.error(base, 'errors.core.' + ret_value);
@@ -383,26 +383,28 @@ linphone.ui.core = {
 				if(init_count === 0) {
 					core.sipPort = Math.floor((Math.random()*(65535 - 1024)) + 1024);
 				}
+				init_count++;
+				
 				linphone.ui.logger.log(base, 'Sip port: ' + core.sipPort);
 				
 				// Init properties 
-				core.staticPicture = "internal:///share/images/nowebcamCIF.jpg";
-				core.ring = "internal:///share/sounds/linphone/rings/oldphone.wav";
-				core.ringback = "internal:///share/sounds/linphone/ringback.wav";
-				core.playFile = "internal:///share/sounds/linphone/rings/toy-mono.wav";
-				core.rootCa = "internal:///share/linphone/rootca.pem";		
+				core.staticPicture = 'internal:///share/images/nowebcamCIF.jpg';
+				core.ring = 'internal:///share/sounds/linphone/rings/oldphone.wav';
+				core.ringback = 'internal:///share/sounds/linphone/ringback.wav';
+				core.playFile = 'internal:///share/sounds/linphone/rings/toy-mono.wav';
+				core.rootCa = 'internal:///share/linphone/rootca.pem';		
 	
 				// Init volumes settings
-				var rec_level = (typeof linphone.core.data().rec_level !== "undefined") ? linphone.core.data().rec_level : 100;
+				var rec_level = (typeof linphone.ui.persistent(base).rec_level !== 'undefined') ? linphone.ui.persistent(base).rec_level : 100;
 				core.recLevel = rec_level;
 	
-				var play_level = (typeof linphone.core.data().play_level !== "undefined") ? linphone.core.data().play_level : 100;
+				var play_level = (typeof linphone.ui.persistent(base).play_level !== 'undefined') ? linphone.ui.persistent(base).play_level : 100;
 				core.playLevel = play_level;
 	
-				var ring_level = (typeof linphone.core.data().ring_level !== "undefined") ? linphone.core.data().ring_level : 100;
+				var ring_level = (typeof linphone.ui.persistent(base).ring_level !== 'undefined') ? linphone.ui.persistent(base).ring_level : 100;
 				core.ringLevel = ring_level;
 	
-				linphone.core.data().init_count = init_count + 1;
+				linphone.ui.persistent(base).init_count = init_count;
 				
 				// Set network state
 				if(linphone.ui.isHeartBeatRunning(base)) {

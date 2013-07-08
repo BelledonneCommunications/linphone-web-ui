@@ -22,11 +22,11 @@ linphone.ui.locale = {
 		}
 		
 		// Get saved locale or browser one
-		if (typeof linphone.ui.data(base).locale !== "undefined") {
+		if (typeof linphone.ui.persistent(base).locale !== 'undefined') {
 			if(log) {
-				linphone.ui.logger.log(base, 'Saved locale: ' + linphone.ui.data(base).locale);
+				linphone.ui.logger.log(base, 'Saved locale: ' + linphone.ui.persistent(base).locale);
 			}
-			locale = linphone.ui.data(base).locale;
+			locale = linphone.ui.persistent(base).locale;
 		} else {
 			locale = (navigator.language) ? navigator.language : navigator.userLanguage;
 			locale = locale.replace('-', '_');
@@ -64,7 +64,7 @@ linphone.ui.locale = {
 		linphone.ui.translate(base);
 	},
 	change: function (base, locale) {
-		linphone.ui.data(base).locale = locale.locale;
+		linphone.ui.persistent(base).locale = locale.locale;
 		jQuery.i18n.change(locale.locale, base);
 		linphone.ui.translate(base);
 	}
