@@ -77,10 +77,6 @@ linphone.ui.menu = {
 	onCallStateChanged: function(event, call, state, message) {
 		var base = jQuery(this);
 		linphone.ui.menu.update(base);
-		
-		//if(state === linphone.core.enums.callState.Paused){
-		//	linphone.ui.popup.incall.show(base,call);
-		//}
 	},
 	
 	getCallStateClass: function(base, object) {

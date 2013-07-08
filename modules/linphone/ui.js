@@ -1,4 +1,4 @@
-/*globals jQuery,linphone,Handlebars,setSlider */
+/*globals jQuery,linphone,Handlebars,setSlider,PersistentStorage */
 
 linphone.ui = {
 	defaultConfiguration: {
@@ -296,6 +296,7 @@ linphone.ui = {
 	/* Call state */
 	onCallStateChanged: function(event, call, state, message) {
 		var base = jQuery(this);
+		window.console.log(state);
 		var core = linphone.ui.getCore(base);
 		if(state === linphone.core.enums.callState.IncomingReceived){
 			linphone.ui.popup.incall.show(base,call);
@@ -305,6 +306,7 @@ linphone.ui = {
 		}
 		if(state === linphone.core.enums.callState.End){
 			linphone.ui.popup.incall.hide(base,call);
+			linphone.ui.view.call.terminateCall(base,call);
 			linphone.ui.view.hide(base,'call');
 		}
 	},

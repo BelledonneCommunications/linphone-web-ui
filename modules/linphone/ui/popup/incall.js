@@ -37,15 +37,17 @@ linphone.ui.popup.incall = {
 	/* */
 	decline: function(base, call){
 		var core = linphone.ui.getCore(base);
+		
 		core.terminateCall(call);
 		linphone.ui.popup.incall.hide(base,call);
 	},
 	accept: function(base, call){
 		var core = linphone.ui.getCore(base);
 		var callParams = core.createDefaultCallParameters();
+		
 		core.acceptCallWithParams(call,callParams);
 		linphone.ui.popup.incall.hide(base,call);
-		linphone.ui.view.show(base, 'call');
+		linphone.ui.view.show(base,'call',call);
 	},
 	
 	/* */
