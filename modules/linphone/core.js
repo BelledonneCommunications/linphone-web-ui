@@ -49,7 +49,11 @@ linphone.core = {
 	data: function() {
 		try {
 			if (typeof window.localStorage !== 'undefined') {
-				return localStorage;
+				// Init LocalStorage
+				if (typeof window.localStorage['LinphoneWeb'] === 'undefined') {
+					window.localStorage['LinphoneWeb'] = {};
+				}
+				return window.localStorage['LinphoneWeb'];
 			}
 		} catch(ex) {
 		}

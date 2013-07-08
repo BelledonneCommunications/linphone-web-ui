@@ -45,17 +45,17 @@ module.exports = function(grunt) {
 
 	/* JS files */
 	coreJSFiles = coreModules.map(function(module) {
-		return 'modules/' + module + '.js';
+		return 'modules/' + module.replace(/\./g, '/') + '.js';
 	}),
 
 	uiJSFiles = uiModules.map(function(module) {
-		return 'modules/' + module + '.js';
+		return 'modules/' + module.replace(/\./g, '/') + '.js';
 	}),
 	/* ********** */
 	
 	/* CSS files */
 	uiCSSFiles = uiModules.map(function(module) {
-		return 'modules/' + module + '.css';
+		return 'modules/' + module.replace(/\./g, '/') + '.css';
 	}),
 	
 	uiCSSFiles = uiCSSFiles.concat(uiModules.map(function(module) {
@@ -69,7 +69,7 @@ module.exports = function(grunt) {
 	}),
 	
 	htmlFiles = htmlFiles.concat(uiModules.map(function(module) {
-		return 'modules/' + module + '.html';
+		return 'modules/' + module.replace(/\./g, '/') + '.html';
 	})),
 	/* ********** */
 
@@ -434,9 +434,9 @@ module.exports = function(grunt) {
 		var ret = Array();
 		for(var i in files) {
 			var file = files[i];
-			file = grunt.config.process(file);
-			if(grunt.file.exists(file)) {
-				ret.push(file);
+			var file1 = grunt.config.process(file);
+			if(grunt.file.exists(file1)) {
+				ret.push(file1);
 			}
 		}
 		return ret;
