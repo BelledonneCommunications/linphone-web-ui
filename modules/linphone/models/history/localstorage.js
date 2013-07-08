@@ -1,7 +1,7 @@
 /**
  * History engine using localstorage
  */
-/*globals linphone */
+/*globals linphone,PersistentStorage */
 
 linphone.models.history.localStorage = {
 	/*
@@ -17,11 +17,13 @@ linphone.models.history.localStorage = {
 		var dbname = name + ' History';
 		
 		// Get data from local storage or init
-		this.data = new PersistentStorage(dbname, {
+		this.ps = new PersistentStorage(dbname, {
 			list: []
 		}, 10000, debug);
+		this.data = this.ps.config;
 	}
 };
+
 
 //
 // List

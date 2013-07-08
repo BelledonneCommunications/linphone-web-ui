@@ -5,13 +5,30 @@ linphone.ui.view.call = {
 		linphone.ui.view.call.uiInit(base);
 	},
 	uiInit: function(base) {
-		base.find('> .content .view > .call').data('linphoneweb-view', linphone.ui.view.call);	
+		var call = base.find('> .content .view > .call');
+		call.data('linphoneweb-view', linphone.ui.view.call);
+		
+		/* Resizable */
+		call.find('.video .profile').mouseenternear(linphone.ui.exceptionHandler(base, function (event) {
+			call.find('.video .profile .resize').show();
+		}), 40);
+		call.find('.video .profile').mouseleavenear(linphone.ui.exceptionHandler(base, function (event) {
+			call.find('.video .profile .resize').hide();
+		}), 40);
+		call.find('.video .profile .resize .collapse').click(linphone.ui.exceptionHandler(base, function(event) {
+			linphone.ui.view.call.updateVideoProfile(base, false);
+		}));
+		call.find('.video .profile .resize .expand').click(linphone.ui.exceptionHandler(base, function(event) {
+			linphone.ui.view.call.updateVideoProfile(base, true);
+		}));
+		
+		linphone.ui.view.call.updateVideoProfile(base, true);
 	},
 	translate: function(base) {
 	},
 	
 	/* */
-	show: function(base,call) {
+	show: function(base, call) {
 		var core = linphone.ui.getCore(base);
 		var callView = base.find('> .content .view > .call');
 		var list = callView.find(' .actions');
@@ -39,7 +56,7 @@ linphone.ui.view.call = {
 			linphone.ui.view.show(base, 'conference');
 		}));
 		base.find('> .content .view > .call .actions .pause').click(linphone.ui.exceptionHandler(base, function(){
-			linphone.ui.view.call.onPauseButton(base,call);
+			linphone.ui.view.call.onPauseButton(base, call);
 		}));
 	},
 	update: function(base) {
@@ -49,6 +66,18 @@ linphone.ui.view.call = {
 	},
 	
 	/* */
+	updateVideoProfile: function(base, expanded) {
+		var call = base.find('> .content .view > .call');
+		if(expanded) {
+			call.find('.video .profile .resize .collapse').show();
+			call.find('.video .profile .resize .expand').hide();
+			call.find('.video .profile').removeClass('collapsed');
+		} else {
+			call.find('.video .profile .resize .expand').show();
+			call.find('.video .profile .resize .collapse').hide();
+			call.find('.video .profile').addClass('collapsed');
+		}
+	},
 	updateMuteButton: function(base, isMicMuted) {
 		if(isMicMuted === true){
 			base.find('> .content .view > .call .actions .muteEnabled .off').addClass('selected');

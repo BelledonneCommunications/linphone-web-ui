@@ -47,7 +47,6 @@ linphone.ui.popup.incall = {
 		
 		core.acceptCallWithParams(call,callParams);
 		linphone.ui.popup.incall.hide(base,call);
-		linphone.ui.view.show(base,'call',call);
 	},
 	
 	/* */

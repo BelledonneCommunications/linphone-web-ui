@@ -279,13 +279,27 @@
 	margin-right: 5px;
 }
 
-.linphoneweb .imageLoaderCircle{
+.linphoneweb .imageLoaderCircle {
 	background-image:url('img/loaderCircle.gif');
 	background-repeat:no-repeat;
 	width:16px;
 	height:16px;
 	margin-right:10px;
 	display:inline-block;
+}
+
+.linphoneweb .imageExpand {
+	background-image:url('img/expand.png');
+	background-repeat:no-repeat;
+	width:16px;
+	height:16px;
+}
+
+.linphoneweb .imageCollapse {
+	background-image:url('img/collapse.png');
+	background-repeat:no-repeat;
+	width:16px;
+	height:16px;
 }
 
 .linphoneweb .imageStatusOnline {

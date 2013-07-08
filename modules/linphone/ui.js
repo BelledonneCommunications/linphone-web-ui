@@ -88,9 +88,11 @@ linphone.ui = {
 		}
 		return elem;
 	},
+	
 	slider: function(element) {
 		setSlider(element);
 	},
+	
 	init: function(base, config) {
 		/* Merge config with default configuration */
 		var fconfig = jQuery.extend(true, {}, linphone.ui.defaultConfiguration);
@@ -114,6 +116,63 @@ linphone.ui = {
 				});
 			});
 		};
+		
+		jQuery.fn.mouseenternear = function(fct, distance) {
+			if(typeof distance === 'undefined') {
+				distance = 0;
+			}
+			var that = this;
+			function isNear( element, distance, event ) {
+				var left = element.offset().left - distance,
+				top = element.offset().top - distance,
+				right = left + element.width() + 2*distance,
+				bottom = top + element.height() + 2*distance,
+				x = event.pageX,
+				y = event.pageY;
+
+				return ( x > left && x < right && y > top && y < bottom );
+			}
+			function wrapper() {
+				var old_in = false;
+				jQuery('body').mousemove(function(event) {
+					var new_in = isNear(that, distance, event);
+					if(!old_in && new_in) {
+						fct(event);
+					}
+					old_in = new_in;
+				});
+			}
+			return wrapper();
+		};
+		
+		jQuery.fn.mouseleavenear = function(fct, distance) {
+			if(typeof distance === 'undefined') {
+				distance = 0;
+			}
+			var that = this;
+			function isNear(element, distance, event) {
+				var left = element.offset().left - distance,
+				top = element.offset().top - distance,
+				right = left + element.width() + 2*distance,
+				bottom = top + element.height() + 2*distance,
+				x = event.pageX,
+				y = event.pageY;
+		
+				return ( x > left && x < right && y > top && y < bottom );
+			}
+			function wrapper () {
+				var old_in = false;
+				jQuery('body').mousemove(function(event) {
+					var new_in = isNear(that, distance, event);
+					if(old_in && !new_in) {
+						fct(event);
+					}
+					old_in = new_in;
+				});
+			}
+			return wrapper();
+		};
+		
 		jQuery.fn.visible = function() {
 			return this.css('visibility', 'visible');
 		};
@@ -299,15 +358,16 @@ linphone.ui = {
 		window.console.log(state);
 		var core = linphone.ui.getCore(base);
 		if(state === linphone.core.enums.callState.IncomingReceived){
-			linphone.ui.popup.incall.show(base,call);
+			linphone.ui.popup.incall.show(base, call);
 		}
 		if(state === linphone.core.enums.callState.Connected){
-			linphone.ui.popup.incall.hide(base,call);
+			linphone.ui.popup.incall.hide(base, call);
+			linphone.ui.view.show(base, 'call', call);
 		}
 		if(state === linphone.core.enums.callState.End){
-			linphone.ui.popup.incall.hide(base,call);
-			linphone.ui.view.call.terminateCall(base,call);
-			linphone.ui.view.hide(base,'call');
+			linphone.ui.popup.incall.hide(base, call);
+			linphone.ui.view.call.terminateCall(base, call);
+			linphone.ui.view.hide(base, 'call');
 		}
 	},
 	
