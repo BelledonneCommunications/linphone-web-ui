@@ -38,7 +38,7 @@ linphone.ui.video = {
 			});
 		} else {
 			core.videoEnabled = false;
-			core.nativeVideoWindowId = 0;
+			core.nativeVideoWindowId = null;
 			if (linphone.ui.video.video_view !== null) {
 				linphone.ui.video.destroyVideoView(linphone.ui.video.video_view);
 				linphone.ui.video.video_view = null;
@@ -63,7 +63,7 @@ linphone.ui.video = {
 			core.videoPreviewEnabled = false;
 			core.selfViewEnabled = false;
 			core.usePreviewWindow = false;
-			core.nativePreviewWindowId = 0;
+			core.nativePreviewWindowId = null;
 			if (linphone.ui.video.self_view !== null) {
 				linphone.ui.video.destroyVideoView(linphone.ui.video.self_view);
 				linphone.ui.video.self_view = null;
