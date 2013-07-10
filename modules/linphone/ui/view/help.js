@@ -19,5 +19,6 @@ linphone.ui.view.help = {
 		linphone.ui.menu.hide(base);
 	},
 	hide: function(base) {
+		linphone.ui.view.hide(base, 'help'); // Do not stack
 	}
 };

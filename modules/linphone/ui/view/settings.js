@@ -18,5 +18,6 @@ linphone.ui.view.settings = {
 		linphone.ui.view.settings.media.show(base);
 	},
 	hide: function(base) {
+		linphone.ui.view.hide(base, 'settings'); // Do not stack
 	}
 };

@@ -168,10 +168,62 @@ linphone.ui.view.login = {
 		login.data('username', account);
 		core.addProxyConfig(proxyConfig);
 		core.defaultProxy = proxyConfig;
+		linphone.ui.view.login.setTimeout(base);
 		return true;
 	},
 	loginAdvanced: function(base) {
 		return false;
+	},
+	
+	/* Results */
+	error: function(base, error) {
+		var login = base.find('> .content .view > .login');
+		var core = linphone.ui.getCore(base);
+		
+		linphone.ui.view.login.unlock(base);
+		
+		// Reset challenge
+		login.data('password', null);
+		login.data('username', null);
+	
+		core.clearProxyConfig();
+		core.clearAllAuthInfo();
+		linphone.ui.view.login.resetTimeout(base);
+		
+		linphone.ui.popup.error.show(base, error);
+	},
+	done: function(base) {
+		var login = base.find('> .content .view > .login');
+		var core = linphone.ui.getCore(base);
+		
+		linphone.ui.view.login.unlock(base);
+		
+		// Reset challenge
+		login.data('password', null);
+		login.data('username', null);
+		linphone.ui.view.login.reset(base);
+		linphone.ui.view.login.resetTimeout(base);
+
+		// Force if we are still on this view
+		linphone.ui.login(base, linphone.ui.view.top(base).is(login));
+	},
+	
+	/* Timeout of registration */
+	setTimeout: function(base) {
+		var login = base.find('> .content .view > .login');
+		linphone.ui.view.login.resetTimeout(base);
+		var timeout = window.setTimeout(function () {
+			linphone.ui.view.login.error(base, 'content.view.login.errors.registrationTimeout');
+		}, 10000);
+		login.data('timeout', timeout);
+	},
+	resetTimeout: function(base) {
+		var login = base.find('> .content .view > .login');
+		var timeout = login.data('timeout');
+		if(timeout) {
+			login.data('timeout', null);
+			window.clearTimeout(timeout);
+		}
 	},
 	
 	/* */
@@ -195,26 +247,9 @@ linphone.ui.view.login = {
 		var login = base.find('> .content .view > .login');
 		var core = linphone.ui.getCore(base);
 		if(state === linphone.core.enums.registrationState.Ok) {
-			linphone.ui.view.login.unlock(base);
-			
-			// Reset challenge
-			login.data('password', null);
-			login.data('username', null);
-			linphone.ui.view.login.reset(base);
-
-			// Force if we are still on this view
-			linphone.ui.login(base, linphone.ui.view.top(base).is(login));
+			linphone.ui.view.login.done(base);
 		} else if(state === linphone.core.enums.registrationState.Failed) {
-			linphone.ui.view.login.unlock(base);
-			
-			// Reset challenge
-			login.data('password', null);
-			login.data('username', null);
-		
-			core.clearProxyConfig();
-			core.clearAllAuthInfo();
-			
-			linphone.ui.popup.error.show(base, 'content.view.login.accountSimple.errors.registrationFailed');
+			linphone.ui.view.login.error(base, 'content.view.login.errors.registrationFailed');
 		}
 	}
 };

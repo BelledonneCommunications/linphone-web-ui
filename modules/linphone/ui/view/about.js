@@ -15,12 +15,13 @@ linphone.ui.view.about = {
 		
 	},
 	
-	/**/
+	/* */
 	show: function(base) {
 		linphone.ui.view.about.update(base);
 		linphone.ui.menu.hide(base);
 	},
 	hide: function(base) {
+		linphone.ui.view.hide(base, 'about'); // Do not stack
 	},
 	
 	update: function(base) {

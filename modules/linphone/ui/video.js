@@ -15,9 +15,7 @@ linphone.ui.video = {
 			linphone.ui.video.createView(base, element, function(base, video) {
 				var core = linphone.ui.getCore(base);
 				video.setBackgroundColor(0, 0, 0);
-				console.log(video.window);
 				core.nativeVideoWindowId = video.window;
-				console.log(core.nativeVideoWindowId);
 			}, function(base, video) {
 				var core = linphone.ui.getCore(base);
 				core.nativeVideoWindowId = null;
@@ -31,9 +29,7 @@ linphone.ui.video = {
 			linphone.ui.video.createView(base, element, function(base, video) {
 				var core = linphone.ui.getCore(base);
 				video.setBackgroundColor(0, 0, 0);
-				console.log(video.window);
 				core.nativePreviewWindowId = video.window;
-				console.log(core.nativeVideoWindowId);
 			}, function(base, video) {
 				var core = linphone.ui.getCore(base);
 				core.nativePreviewWindowId = null;

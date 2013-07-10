@@ -23,6 +23,10 @@ linphone.ui.view.call = {
 		}));
 		
 		linphone.ui.view.call.updateVideoProfile(base, true);
+		
+		// Set video/self view
+		linphone.ui.video.addVideoView(base, base.find('> .content .view > .call .video > .content'));
+		linphone.ui.video.addSelfView(base, base.find('> .content .view > .call .video .profile > .content'));
 	},
 	translate: function(base) {
 	},
@@ -64,20 +68,13 @@ linphone.ui.view.call = {
 		base.find('> .content .view > .call .actions .pause').click(linphone.ui.exceptionHandler(base, function(){
 			linphone.ui.view.call.onPauseButton(base, call);
 		}));
-		
-		if(!linphone.ui.video.addVideoView(base, base.find('> .content .view > .call .video > .content'))) {
-			
-		}
-		if(!linphone.ui.video.addSelfView(base, base.find('> .content .view > .call .video .profile > .content'))) {
-			
-		}
 	},
 	update: function(base) {
 		
 	},
 	hide: function(base) {
 		var data = base.find('> .content .view > .call ').data('qualityTimer');
-		window.clearInterval(data);
+		window.clearTimeout(data);
 	},
 	
 	/* */

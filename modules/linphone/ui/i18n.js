@@ -249,10 +249,6 @@ linphone.ui.i18n = {
 						password: {
 							en_US : 'The \'password\' field is incorrect',
 							fr_FR : 'L\'entrée \'Mot de passe\' est invalide'
-						},
-						registrationFailed: {
-							en_US : 'Authentification failure',
-							fr_FR : 'Echec d\'authentification'
 						}
 					}
 				},
@@ -290,6 +286,16 @@ linphone.ui.i18n = {
 							en_US : 'Authentification failure',
 							fr_FR : 'Echec d\'authentification'
 						}
+					}
+				},
+				errors: {
+					registrationFailed: {
+						en_US : 'Authentification failure',
+						fr_FR : 'Echec d\'authentification'
+					},
+					registrationTimeout: {
+						en_US : 'Authentification timeout',
+						fr_FR : 'Expiration de l\'authentification'
 					}
 				}
 			},

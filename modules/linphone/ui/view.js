@@ -76,7 +76,7 @@ linphone.ui.view = {
 			var jobject = jQuery(object);
 			if(index ===  (divs.length - 1)) {
 				if(!jobject.is(':visible')) {
-					jobject.show();
+					jobject.show(); // Do before calling class function in order to avoid loop
 					cls = jobject.data('linphoneweb-view');
 					if(cls && cls.show) {
 						cls.show.apply(this, [base].concat(Array.prototype.slice.call(baseArguments, 1)));
@@ -84,11 +84,11 @@ linphone.ui.view = {
 				}
 			} else {
 				if(jobject.is(':visible')) {
+					jobject.hide(); // Do before calling class function in order to avoid loop
 					cls = jobject.data('linphoneweb-view');
 					if(cls && cls.hide) {
 						cls.hide.apply(this, [base].concat(Array.prototype.slice.call(baseArguments, 1)));
 					}
-					jobject.hide();
 				}
 			}
 		});
