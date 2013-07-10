@@ -101,12 +101,6 @@ function __linphone_init(base) {
 		}, {
 			name : 'FR',
 			locale : 'fr_FR'
-		}, {
-			name : 'DE',
-			locale : 'de_DE'
-		}, {
-			name : 'IT',
-			locale : 'it_IT'
 		} ],
 		models: {
 			contacts: new linphone.models.contacts.localStorage.engine('Linphone Web', debug),

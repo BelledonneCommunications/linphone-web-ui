@@ -64,6 +64,13 @@ linphone.ui.view.call = {
 		base.find('> .content .view > .call .actions .pause').click(linphone.ui.exceptionHandler(base, function(){
 			linphone.ui.view.call.onPauseButton(base, call);
 		}));
+		
+		if(!linphone.ui.video.addVideoView(base, base.find('> .content .view > .call .video > .content'))) {
+			
+		}
+		if(!linphone.ui.video.addSelfView(base, base.find('> .content .view > .call .video .profile > .content'))) {
+			
+		}
 	},
 	update: function(base) {
 		
@@ -152,6 +159,5 @@ linphone.ui.view.call = {
 		if(quality >= 4 && quality < 5){
 			signal.attr('src','tmp/signal4b.png');
 		}
-		console.log(quality);
 	}
 };

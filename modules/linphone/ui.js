@@ -355,7 +355,6 @@ linphone.ui = {
 	/* Call state */
 	onCallStateChanged: function(event, call, state, message) {
 		var base = jQuery(this);
-		window.console.log(state);
 		var core = linphone.ui.getCore(base);
 		if(state === linphone.core.enums.callState.IncomingReceived){
 			linphone.ui.popup.incall.show(base, call);

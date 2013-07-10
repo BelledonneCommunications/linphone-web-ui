@@ -348,12 +348,12 @@ linphone.ui.core = {
 	/* */
 	_loadHandler: function(core) {
 		if(!linphone.core.isValid(core)) {
-			linphone.ui.logger.error(null, '_loadHandler fail: \'core\' object is invalid');
+			linphone.ui.logger.error(null, 'Core _loadHandler fail: \'core\' object is invalid');
 			return;
 		}
 		var base = linphone.ui.core.instances[core.magic];
 		if(!linphone.ui.isValid(base)) {
-			linphone.ui.logger.error(null, '_loadHandler fail: can\'t retrieve data associated to the \'core\' object');
+			linphone.ui.logger.error(null, 'Core _loadHandler fail: can\'t retrieve data associated to the \'core\' object');
 			return;
 		}
 		linphone.ui.logger.log(base, 'Core handler');
@@ -393,6 +393,12 @@ linphone.ui.core = {
 				core.ringback = 'internal:///share/sounds/linphone/ringback.wav';
 				core.playFile = 'internal:///share/sounds/linphone/rings/toy-mono.wav';
 				core.rootCa = 'internal:///share/linphone/rootca.pem';		
+	
+				// Set video modes
+				core.videoEnabled = true;
+				core.videoPreviewEnabled = true;
+				core.selfViewEnabled = false;
+				core.usePreviewWindow = true;
 	
 				// Init volumes settings
 				var rec_level = (typeof linphone.ui.persistent(base).rec_level !== 'undefined') ? linphone.ui.persistent(base).rec_level : 100;

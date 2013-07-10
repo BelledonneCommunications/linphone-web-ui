@@ -224,6 +224,7 @@
 	height: 33px;
 	width: 116px;
 	float: left;
+	text-align: right;
 }
 .linphoneweb .header .language li {
 	display: inline;

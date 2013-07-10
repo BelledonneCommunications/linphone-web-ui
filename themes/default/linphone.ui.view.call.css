@@ -17,15 +17,34 @@
 	height: 100%;
 	display: none;
 }
-.linphoneweb > .content .view > .call .video .profile .resize .expand, .linphoneweb > .content .view > .call .video .profile .resize .collapse {
+.linphoneweb > .content .view > .call .video .profile .resize .expand {
 	position: absolute;
 	left: -16px;
 	top: -16px;
 	cursor: pointer;
 }
+.linphoneweb > .content .view > .call .video .profile .resize .collapse {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	cursor: pointer;
+}
 
 .linphoneweb > .content .view > .call .video .content {
 	overflow: hidden;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+.linphoneweb > .content .view > .call .video .content object {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
 }
 
 .linphoneweb > .content .view > .call .video .profile {
