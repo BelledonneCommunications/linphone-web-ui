@@ -68,17 +68,17 @@ linphone.ui.menu = {
 		var core = linphone.ui.getCore(base);
 		list.empty();
 		var calls = core.calls;
+		var f = function(base, call){
+			return function() {
+				if(linphone.ui.view.show(base,'call',call) === false){
+					linphone.ui.view.call.update(base,call);
+				}
+			};
+		};
 		for(var i = 0; i < calls.length; ++i) {
 			var call = calls[i];
 			var element = linphone.ui.template(base, 'menu.calls.list.entry', call);
-			var f = function(base, call){
-				return function(){
-					if(linphone.ui.view.show(base,'call',call) === false){
-						linphone.ui.view.call.update(base,call);
-					}
-				};
-			}(base, call);
-			element.click(linphone.ui.exceptionHandler(base, f));
+			element.click(linphone.ui.exceptionHandler(base, f(base, call)));
 			list.append(element);
 		}
 	},
@@ -90,12 +90,15 @@ linphone.ui.menu = {
 	},
 	
 	getCallStateClass: function(base, object) {
+		if(object === linphone.core.enums.callState.Idle || object === linphone.core.enums.callState.OutgoingInit || object === linphone.core.enums.callState.OutgoingProgress) {
+			return 'idle';
+		}
 		if(object === linphone.core.enums.callState.PausedByRemote || object === linphone.core.enums.callState.Paused){
-			return "pause";
+			return 'pause';
 		} 
 		if(object === linphone.core.enums.callState.IncomingReceived || object === linphone.core.enums.callState.OutgoingRinging){
-			return "ringing";
+			return 'ringing';
 		}
-		return "play";
+		return 'play';
 	}
 };

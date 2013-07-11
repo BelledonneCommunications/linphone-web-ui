@@ -1,7 +1,7 @@
 <aside class="menu">
 	<!-- @if env='debug' -->
 	<script id="linphone.ui.menu.calls.list.entry" type="text/x-handlebars-template">
-		<li class="entry"><span class="{{LinphoneWeb-Call helpers.menu.getCallStateClass context.state}}"></span>{{LinphoneWeb-Call helpers.utils.getUsername context.remoteAddress}}</li>
+		<li class="entry"><span class="state {{LinphoneWeb-Call helpers.menu.getCallStateClass context.state}}"></span>{{LinphoneWeb-Call helpers.utils.getUsername context.remoteAddress}}</li>
 	</script>
 	<script id="linphone.ui.menu.chat.list.entry" type="text/x-handlebars-template">
 		<li class="entry">

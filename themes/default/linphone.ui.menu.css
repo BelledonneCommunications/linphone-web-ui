@@ -1,28 +1,28 @@
-.linphoneweb .content > .middle > .menu {
+.linphoneweb > .content  .middle > .menu {
 	width: 230px;
 	background: #23262a;
 	height: 550px;
 	display: inline-block;
 	text-align: left;
 }
-.linphoneweb .content .menu .scroll-pane {
+.linphoneweb > .content .menu .scroll-pane {
 	width: 230px;
 	height: 550px;
 }
-.linphoneweb .content .menu nav {
+.linphoneweb > .content .menu nav {
 	width: 220px;
 }
-.linphoneweb .content .menu .slider-wrap, .menu .ui-slider-range {
+.linphoneweb > .content .menu .slider-wrap, .menu .ui-slider-range {
 	background-color: #23262a;
 }
-.linphoneweb .content .menu nav li {
+.linphoneweb > .content .menu nav li {
 	border-top: 1px solid #434850;
 	position: relative;
 }
-.linphoneweb .content .menu nav li:first-child, .linphoneweb .content .menu nav li li {
+.linphoneweb > .content .menu nav li:first-child, .linphoneweb > .content .menu nav li li {
 	border-top: 0;
 }
-.linphoneweb .content .menu nav li a {
+.linphoneweb > .content .menu nav li a {
 	color: #616973;
 	text-decoration: none;
 	text-transform: uppercase;
@@ -31,14 +31,14 @@
 	border-left: 4px solid #23262a;
 	font-weight: bold;
 }
-.linphoneweb .content .menu nav li a:hover {
+.linphoneweb > .content .menu nav li a:hover {
 	color: #ffffff;
 	border-left: 4px solid #cf4c29;
 	background-color: #34393f;
 	cursor: pointer;
 }
 
-.linphoneweb .content .menu nav .entry {
+.linphoneweb > .content .menu nav .entry {
 	color: #616973;
 	text-decoration: none;
 	text-transform: uppercase;
@@ -48,14 +48,14 @@
 	font-weight: bold;
 }
 
-.linphoneweb .content .menu nav .entry:hover {
+.linphoneweb > .content .menu nav .entry:hover {
 	color: #ffffff;
 	border-left: 4px solid #cf4c29;
 	background-color: #34393f;
 	cursor: pointer;
 }
 
-.linphoneweb .content .menu nav li .menu {
+.linphoneweb > .content .menu nav li .menu {
 	color: #616973;
 	text-decoration: none;
 	text-transform: uppercase;
@@ -63,13 +63,13 @@
 	display: block;
 	margin-bottom: -10px;
 }
-.linphoneweb .content .menu nav li li .entry {
+.linphoneweb > .content .menu nav li li .entry {
 	padding: 5px 20px;
 }
-.linphoneweb .content .menu nav li ul {
+.linphoneweb > .content .menu nav li ul {
 	margin-bottom: 10px;
 }
-.linphoneweb .content .menu nav li .numberMessage {
+.linphoneweb > .content .menu nav li .numberMessage {
 	background-image: url('img/numberMessage.png');
 	background-repeat: no-repeat;
 	color: #23262b;
@@ -82,7 +82,7 @@
 	padding-left: 3px;
 	padding-top: 1px;
 }
-.linphoneweb .content .menu nav li .closeContact {
+.linphoneweb > .content .menu nav li .closeContact {
 	background-image: url('img/contactClose.png');
 	background-repeat: no-repeat;
 	width: 8px;
@@ -93,17 +93,7 @@
 }
 
 /* Calls */
-.linphoneweb .content .menu nav .calls .list .play {
-	background-image: url('img/play.png');
-	background-repeat: no-repeat;
-	width: 9px;
-	height: 9px;
-	float: left;
-	margin-right: 7px;
-	margin-top: 1px;
-}
-.linphoneweb .content .menu nav .calls .list .pause {
-	background-image: url('img/pause.png');
+.linphoneweb > .content .menu nav .calls .list .state {
 	background-repeat: no-repeat;
 	width: 7px;
 	height: 9px;
@@ -111,29 +101,36 @@
 	margin-right: 7px;
 	margin-top: 1px;
 }
-.linphoneweb .content .menu nav .calls .list .ringing {
+.linphoneweb > .content .menu nav .calls .list .entry .state.idle {
 	background-color: #0000FF;
-	background-repeat: no-repeat;
-	width: 7px;
-	height: 9px;
-	float: left;
-	margin-right: 7px;
-	margin-top: 1px;
 }
-.linphoneweb .content .menu nav .calls .list .entry:hover .play {
+.linphoneweb > .content .menu nav .calls .list .entry .state.play {
+	background-image: url('img/play.png');
+}
+.linphoneweb > .content .menu nav .calls .list .entry .state.pause {
+	background-image: url('img/pause.png');
+}
+.linphoneweb > .content .menu nav .calls .list .entry .state.ringing {
+	background-color: #0000FF;
+}
+.linphoneweb > .content .menu nav .calls .list .entry:hover .state {
+	background-repeat: no-repeat;
+}
+.linphoneweb > .content .menu nav .calls .list .entry:hover .state.idle {
+	background-color: #0000FF;
+}
+.linphoneweb > .content .menu nav .calls .list .entry:hover .state.play {
 	background-image: url('img/playHover.png');
-	background-repeat: no-repeat;
 }
-.linphoneweb .content .menu nav .calls .list .entry:hover .pause {
+.linphoneweb > .content .menu nav .calls .list .entry:hover .state.pause {
 	background-image: url('img/pauseHover.png');
-	background-repeat: no-repeat;
 }
-.linphoneweb .content .menu nav .calls .list .entry:hover .ringing {
-	background-image: url('img/call.png');
-	background-repeat: no-repeat;
+.linphoneweb > .content .menu nav .calls .list .entry:hover .state.ringing {
+	background-color: #0000FF;
 }
 
-.linphoneweb .content .menu nav .calls .list .entry {
+
+.linphoneweb > .content .menu nav .calls .list .entry {
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
