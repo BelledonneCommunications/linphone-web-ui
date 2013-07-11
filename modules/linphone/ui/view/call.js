@@ -74,7 +74,7 @@ linphone.ui.view.call = {
 	},
 	hide: function(base) {
 		var data = base.find('> .content .view > .call ').data('qualityTimer');
-		window.clearTimeout(data);
+		window.clearInterval(data);
 	},
 	
 	/* */

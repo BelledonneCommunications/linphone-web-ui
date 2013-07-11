@@ -18,7 +18,7 @@ linphone.ui.video = {
 				core.nativeVideoWindowId = video.window;
 			}, function(base, video) {
 				var core = linphone.ui.getCore(base);
-				core.nativeVideoWindowId = null;
+				core.nativeVideoWindowId = 0;
 			});
 		}
 	},
@@ -32,7 +32,7 @@ linphone.ui.video = {
 				core.nativePreviewWindowId = video.window;
 			}, function(base, video) {
 				var core = linphone.ui.getCore(base);
-				core.nativePreviewWindowId = null;
+				core.nativePreviewWindowId = 0;
 			});
 		}
 	},

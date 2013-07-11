@@ -188,7 +188,7 @@ linphone.ui.core = {
 		linphone.ui.logger.log(base, core + '| Url: ' + message + ' - ' + url);
 		linphone.ui.exceptionHandler(base, function() {
 			base.trigger('displayUrl', [message, url]);
-		})(base);
+		})();
 	},
 	
 	/* Core management */
