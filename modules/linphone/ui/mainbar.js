@@ -11,6 +11,9 @@ linphone.ui.mainbar = {
 		base.find('> .content .mainbar .ringtone .switch .on').click(linphone.ui.exceptionHandler(base, function(event){
 			linphone.ui.mainbar.update(base, 100);
 		}));
+		
+		// Hide until it works
+		base.find('> .content .mainbar .ringtone').hide();
 	},
 	translate: function(base) {
 	},

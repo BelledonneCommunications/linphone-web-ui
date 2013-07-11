@@ -15,8 +15,32 @@ linphone.ui.dialer = {
 			}
 		}));
 		
-		base.find('> .content .dialer .number').click(linphone.ui.exceptionHandler(base, function(){
+		base.find('> .content .dialer .number').click(linphone.ui.exceptionHandler(base, function() {
 			base.find('> .content .dialer .pinpad').toggle();
+		}));
+		
+		base.find('> .content .dialer .pinpad .digit').mousedown(linphone.ui.exceptionHandler(base, function(event) {
+			var target = jQuery(event.target ? event.target : event.srcElement);
+			var digit = target.data('digit');
+			if(typeof digit !== 'undefined' && digit !== null) {
+				var core = linphone.ui.getCore(base);
+				core.playDtmf(digit, 0);
+				var call = core.currentCall;
+				if(call) {
+					core.sendDtmf(call, digit);
+				} else {
+					var address = base.find('> .content .dialer .address');
+					address.val(address.val() + digit);
+					linphone.ui.dialer.moveCaretToEnd(base);
+				}
+			}
+		})).mouseup(linphone.ui.exceptionHandler(base, function(event) {
+			var target = jQuery(event.target ? event.target : event.srcElement);
+			var digit = target.data('digit');
+			if(typeof digit !== 'undefined' && digit !== null) {
+				var core = linphone.ui.getCore(base);
+				core.stopDtmf(digit);
+			}
 		}));
 		
 		base.find('> .content .dialer .pinpad').disableSelection();
@@ -27,6 +51,19 @@ linphone.ui.dialer = {
 	},
 	translate: function(base) {
 		base.find('> .content .dialer .address').watermark(jQuery.i18n.translate('content.dialer.address'), {className: 'watermark', useNative: false});
+	},
+	
+	moveCaretToEnd: function(base) {
+		var address = base.find('> .content .dialer .address');
+		var el = address.get(0);
+		if (typeof el.selectionStart === 'number') {
+			el.selectionStart = el.selectionEnd = el.value.length;
+		} else if (typeof el.createTextRange !== 'undefined') {
+			el.focus();
+			var range = el.createTextRange();
+			range.collapse(false);
+			range.select();
+		}
 	},
 	
 	/* */
