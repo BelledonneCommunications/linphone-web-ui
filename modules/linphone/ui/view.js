@@ -43,7 +43,7 @@ linphone.ui.view = {
 		linphone.ui.logger.log(base, 'Show view: ' + viewName);
 		var div = base.find('> .content .view > .' + viewName);
 		div.zIndex(100);
-		linphone.ui.view.update.apply(this, [base].concat(Array.prototype.slice.call(arguments, 2)));
+		return linphone.ui.view.update.apply(this, [base].concat(Array.prototype.slice.call(arguments, 2)));
 	},
 	hide: function(base, viewName) {
 		linphone.ui.logger.log(base, 'Hide view: ' + viewName);
@@ -54,7 +54,7 @@ linphone.ui.view = {
 			div = linphone.ui.view.top(base);
 		}
 		div.zIndex(0);
-		linphone.ui.view.update.apply(this, [base].concat(Array.prototype.slice.call(arguments, 2)));
+		return linphone.ui.view.update.apply(this, [base].concat(Array.prototype.slice.call(arguments, 2)));
 	},
 	
 	updateIndex: function(base) {
@@ -69,6 +69,7 @@ linphone.ui.view = {
 		return divs;
 	},
 	update: function(base) {
+		var updated = false;
 		var baseArguments = arguments;
 		var cls;
 		var divs = linphone.ui.view.updateIndex(base);
@@ -76,6 +77,7 @@ linphone.ui.view = {
 			var jobject = jQuery(object);
 			if(index ===  (divs.length - 1)) {
 				if(!jobject.is(':visible')) {
+					updated = true;
 					jobject.show(); // Do before calling class function in order to avoid loop
 					cls = jobject.data('linphoneweb-view');
 					if(cls && cls.show) {
@@ -84,6 +86,7 @@ linphone.ui.view = {
 				}
 			} else {
 				if(jobject.is(':visible')) {
+					updated = true;
 					jobject.hide(); // Do before calling class function in order to avoid loop
 					cls = jobject.data('linphoneweb-view');
 					if(cls && cls.hide) {
@@ -92,6 +95,7 @@ linphone.ui.view = {
 				}
 			}
 		});
+		return updated;
 	},
 	top: function(base) {
 		return base.find('> .content .view > div:visible');
