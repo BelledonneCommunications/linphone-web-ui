@@ -62,6 +62,7 @@ linphone.ui.menu = {
 		base.off('callStateChanged', linphone.ui.menu.onCallStateChanged);
 		base.find('> .content .menu').hide();
 	},
+	
 	update: function(base) {
 		var list = base.find('> .content .menu .calls .list');
 		var core = linphone.ui.getCore(base);
@@ -69,10 +70,19 @@ linphone.ui.menu = {
 		var calls = core.calls;
 		for(var i = 0; i < calls.length; ++i) {
 			var call = calls[i];
-			list.append(linphone.ui.template(base, 'menu.calls.list.entry', call));
+			var element = linphone.ui.template(base, 'menu.calls.list.entry', call);
+			var f = function(base, call){
+				return function(){
+					if(linphone.ui.view.show(base,'call',call) === false){
+						linphone.ui.view.call.update(base,call);
+					}
+				};
+			}(base, call);
+			element.click(linphone.ui.exceptionHandler(base, f));
+			list.append(element);
 		}
 	},
-	
+
 	/* Events */
 	onCallStateChanged: function(event, call, state, message) {
 		var base = jQuery(this);

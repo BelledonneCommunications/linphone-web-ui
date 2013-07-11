@@ -33,6 +33,9 @@ linphone.ui.view.call = {
 	
 	/* */
 	show: function(base, call) {
+		linphone.ui.view.call.update(base,call);
+	},
+	update: function(base,call) {
 		var core = linphone.ui.getCore(base);
 		var callView = base.find('> .content .view > .call');
 		var list = callView.find(' .actions');
@@ -42,13 +45,11 @@ linphone.ui.view.call = {
 		list.append(linphone.ui.template(base, 'view.call.actions', core));
 		linphone.ui.view.call.updateMuteButton(base, core.isMicMuted);
 		linphone.ui.view.call.updateVideoButton(base, call.cameraEnabled);
-		
 		var qualityTimer = window.setInterval(function(){
 			linphone.ui.view.call.displayCallQuality(base,call);},
 			1000);
 		linphone.ui.view.call.displayCallQuality(base,call);
 		callView.data('qualityTimer',qualityTimer);
-		
 		/* */
 		base.find('> .content .view > .call .actions .muteEnabled .on').click(linphone.ui.exceptionHandler(base, function(){
 			linphone.ui.view.call.onMuteButton(base,false);
@@ -68,8 +69,6 @@ linphone.ui.view.call = {
 		base.find('> .content .view > .call .actions .pause').click(linphone.ui.exceptionHandler(base, function(){
 			linphone.ui.view.call.onPauseButton(base, call);
 		}));
-	},
-	update: function(base) {
 		
 	},
 	hide: function(base) {
@@ -124,9 +123,7 @@ linphone.ui.view.call = {
 	},
 	onPauseButton: function(base, call) {
 		var core = linphone.ui.getCore(base);
-		
-		if(call.state === linphone.core.enums.callState.Paused ||
-			call.state === linphone.core.enums.callState.PausedByRemote){
+		if(call.state === linphone.core.enums.callState.Paused){
 			core.resumeCall(call);
 		} else {
 			core.pauseCall(call);

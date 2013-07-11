@@ -361,12 +361,21 @@ linphone.ui = {
 		}
 		if(state === linphone.core.enums.callState.Connected){
 			linphone.ui.popup.incall.hide(base, call);
-			linphone.ui.view.show(base, 'call', call);
+			if(linphone.ui.view.show(base,'call',call) === false){
+				linphone.ui.view.call.update(base,call);
+			}
 		}
 		if(state === linphone.core.enums.callState.End){
 			linphone.ui.popup.incall.hide(base, call);
 			linphone.ui.view.call.terminateCall(base, call);
-			linphone.ui.view.hide(base, 'call');
+			var calls = core.calls;
+			if(calls.length === 0){
+				linphone.ui.view.hide(base,'call');
+			} else {
+				if(linphone.ui.view.show(base,'call',calls[0]) === false){
+					linphone.ui.view.call.update(base,calls[0]);
+				}
+			}	
 		}
 	},
 	
