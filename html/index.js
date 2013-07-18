@@ -130,6 +130,8 @@ function __linphone_init(base) {
 		{url: "js/i18n.min.js"},
 		{url: "js/persistent.min.js"},
 		
+		{url: "js/jsonsql-0.1.min.js"},
+		
 		{url: "js/jquery-ui-1.10.3.min.js"},
 		{url: "js/jquery.mousewheel.min.js"},
 		{url: "js/vertical.slider.min.js"},

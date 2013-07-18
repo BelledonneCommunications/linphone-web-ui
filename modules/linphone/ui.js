@@ -470,7 +470,7 @@ linphone.ui = {
 			return core.interpretUrl(uri);
 		},
 		getTimeFormat: function(timestamp) {
-			var date = new Date(parseInt(timestamp) * 1000);
+			var date = new Date(parseInt(timestamp, 10) * 1000);
 			var values = [
 				date.getFullYear(),
 				date.getMonth(),
@@ -492,32 +492,38 @@ linphone.ui = {
 				}
 				return 'UTC' + offset;
 			};
+			function pad(number, length) {
+				var str = '' + number;
+				while (str.length < length) {
+					str = '0' + str;
+				}
+				return str;
+			}
 			var format = jQuery.i18n.translate('global.stringFormat.time');
-			format = format.replace(/yyyy/g, values[0]);
-			format = format.replace(/sss/g, values[7]);
-			format = format.replace(/MM/g, values[1]);
-			format = format.replace(/dd/g, values[2]);
-			format = format.replace(/HH/g, values[3]);
-			format = format.replace(/mm/g, values[4]);
-			format = format.replace(/ss/g, values[5]);
+			format = format.replace(/yyyy/g, pad(values[0], 4));
+			format = format.replace(/sss/g, pad(values[7], 3));
+			format = format.replace(/MM/g, pad(values[1], 2));
+			format = format.replace(/dd/g, pad(values[2], 2));
+			format = format.replace(/HH/g, pad(values[3], 2));
+			format = format.replace(/mm/g, pad(values[4], 2));
+			format = format.replace(/ss/g, pad(values[5], 2));
 			format = format.replace(/Z/g, getTimeZone(values[6]));
 			return format;
 		},
 		getTime: function(base, timestamp) {
-			var ret = jQuery.i18n.skeleton(jQuery.i18n.functionKey('linphone.ui.utils.getTimeFormat'), parseInt(timestamp));
+			var ret = jQuery.i18n.skeleton(jQuery.i18n.functionKey('linphone.ui.utils.getTimeFormat'), parseInt(timestamp, 10));
 			return ret;
 		},
 		getDurationFormat: function(duration) {
 			function pad(number, length) {
-			    var str = '' + number;
-			    while (str.length < length) {
-			        str = '0' + str;
-			    }
-			    return str;
-			
+				var str = '' + number;
+				while (str.length < length) {
+					str = '0' + str;
+				}
+				return str;
 			}
 			var format = jQuery.i18n.translate('global.stringFormat.duration');
-			var totalSeconds = duration;
+			var totalSeconds = parseInt(duration, 10);
 			var seconds = totalSeconds%60;
 			var totalMinutes = Math.floor(totalSeconds/60);
 			var minutes = totalMinutes%60;
@@ -546,7 +552,7 @@ linphone.ui = {
 			return format;
 		},
 		getDuration: function(base, duration) {
-			var ret = jQuery.i18n.skeleton(jQuery.i18n.functionKey('linphone.ui.utils.getDurationFormat'), parseInt(duration));
+			var ret = jQuery.i18n.skeleton(jQuery.i18n.functionKey('linphone.ui.utils.getDurationFormat'), parseInt(duration, 10));
 			return ret;
 		},
 		getUsername: function(base, object) {

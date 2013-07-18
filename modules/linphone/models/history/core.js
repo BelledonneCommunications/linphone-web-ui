@@ -1,7 +1,7 @@
 /**
  * History engine using core
  */
-/*globals linphone */
+/*globals linphone,jsonsql */
 
 linphone.models.history.core = {
 	/*
@@ -39,7 +39,15 @@ linphone.models.history.core.engine.prototype.count = function() {
 linphone.models.history.core.engine.prototype.list = function(filters) {
 	var core = linphone.ui.getCore(this.base);
 	var logs = core.callLogs;
-	return logs;
+	
+	var ret;
+	if(typeof filters === 'string' && filters.length) {
+		filters = filters.replace(/direction/g, 'dir');
+		ret = jsonsql.query('SELECT * FROM json WHERE ' + filters, logs);
+    } else {
+		ret =  logs;
+	}
+	return ret;
 };
 
 
@@ -49,6 +57,8 @@ linphone.models.history.core.engine.prototype.list = function(filters) {
  
 linphone.models.history.core.engine.prototype.read = function(id) {
 	var log = id;
+	
+	// Map to JS object
 	return {
 		from: log.from,
 		to: log.to,
