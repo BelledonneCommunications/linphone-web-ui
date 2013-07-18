@@ -9,16 +9,17 @@
 				<span class="contactStatus">{{context.status}}</span><br>
 				<span class="contactNumber">{{context.number}}</span>
 			</div>
-			<div class="historyInfos">
-				<span>Date :</span> <span class="historyDate">{{context.date}}</span><br>
-				<span>Durée :</span> <span class="historyTime">{{context.duration}}</span><br>
-				<span>Type :</span> <span class="historyType">{{context.type}}</span>
+			<div class="infos">
+				<span class="time"><span class="title" data-i18n="content.view.history.time.title"></span>: {{{LinphoneWeb-Call helpers.utils.getTime context.date}}}</span>
+				<span class="duration"><span class="title" data-i18n="content.view.history.duration.title"></span>: {{{LinphoneWeb-Call helpers.utils.getDuration context.duration}}}</span>
+				<span class="direction"><span class="title" data-i18n="content.view.history.direction.title"></span>: {{{LinphoneWeb-Call helpers.view.history.utils.getCallDirection context.direction}}}</span>
+				<span class="status"><span class="title" data-i18n="content.view.history.status.title"></span>: {{{LinphoneWeb-Call helpers.view.history.utils.getCallStatus context.status}}}</span>
 			</div>
 	
 			<div class="entryActions">
-				<div class="button"><div class="image imageCall"></div></div><!--
+				<div class="button call"><div class="image imageCall"></div></div><!--
 				Avoid issue with inline block in dev mode
-		 		--><div class="button"><div class="image imageChat"></div></div>
+		 		--><div class="button chat"><div class="image imageChat"></div></div>
 				</div>
 			<hr>
 		</div>

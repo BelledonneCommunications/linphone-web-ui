@@ -469,6 +469,86 @@ linphone.ui = {
 			var core = linphone.ui.getCore(base);
 			return core.interpretUrl(uri);
 		},
+		getTimeFormat: function(timestamp) {
+			var date = new Date(parseInt(timestamp) * 1000);
+			var values = [
+				date.getFullYear(),
+				date.getMonth(),
+				date.getDate(),
+				date.getHours(),
+				date.getMinutes(),
+				date.getSeconds(),
+				date.getMilliseconds(),
+				date.getTimezoneOffset()
+			];
+			var getTimeZone = function(offset) {
+				offset = - (offset/60);
+				if(offset > 0) {
+					offset = '+' + offset.toString();
+				} else if(offset < 0) {
+					offset = offset.toString();
+				} else {
+					offset = '';
+				}
+				return 'UTC' + offset;
+			};
+			var format = jQuery.i18n.translate('global.stringFormat.time');
+			format = format.replace(/yyyy/g, values[0]);
+			format = format.replace(/sss/g, values[7]);
+			format = format.replace(/MM/g, values[1]);
+			format = format.replace(/dd/g, values[2]);
+			format = format.replace(/HH/g, values[3]);
+			format = format.replace(/mm/g, values[4]);
+			format = format.replace(/ss/g, values[5]);
+			format = format.replace(/Z/g, getTimeZone(values[6]));
+			return format;
+		},
+		getTime: function(base, timestamp) {
+			var ret = jQuery.i18n.skeleton(jQuery.i18n.functionKey('linphone.ui.utils.getTimeFormat'), parseInt(timestamp));
+			return ret;
+		},
+		getDurationFormat: function(duration) {
+			function pad(number, length) {
+			    var str = '' + number;
+			    while (str.length < length) {
+			        str = '0' + str;
+			    }
+			    return str;
+			
+			}
+			var format = jQuery.i18n.translate('global.stringFormat.duration');
+			var totalSeconds = duration;
+			var seconds = totalSeconds%60;
+			var totalMinutes = Math.floor(totalSeconds/60);
+			var minutes = totalMinutes%60;
+			var totalHours = Math.floor(totalMinutes/60);
+			var hours = totalHours;
+			
+			// Hours
+			if(hours !== 0) {
+				format = format.replace(/\([^\(]*HH[^\)]*\)/g, function(string, offset) { return string.slice(1, -1); });
+			} else {
+				format = format.replace(/\([^\(]*HH[^\)]*\)/g, '');
+			}
+			format = format.replace(/HH/g, pad(hours, 2));
+			
+			// Minutes
+			if(hours !==0 || minutes !== 0) {
+				format = format.replace(/\([^\(]*mm[^\)]*\)/g, function(string, offset) { return string.slice(1, -1); });
+			} else {
+				format = format.replace(/\([^\(]*mm[^\)]*\)/g, '');
+			}
+			format = format.replace(/mm/g, pad(minutes, 2));
+			
+			// Seconds
+			format = format.replace(/\([^\(]*ss[^\)]*\)/g, function(string, offset) { return string.slice(1, -1); });
+			format = format.replace(/ss/g, pad(seconds, 2));
+			return format;
+		},
+		getDuration: function(base, duration) {
+			var ret = jQuery.i18n.skeleton(jQuery.i18n.functionKey('linphone.ui.utils.getDurationFormat'), parseInt(duration));
+			return ret;
+		},
 		getUsername: function(base, object) {
 			var address;
 			if (typeof object === 'string') {

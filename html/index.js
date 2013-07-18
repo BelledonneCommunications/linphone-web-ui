@@ -1,4 +1,4 @@
-function __linphone_init(base) {
+function __linphone_init(base) {	
 	/* @if env='release' */
 	var debug = false;
 	/* @endif */
@@ -104,7 +104,7 @@ function __linphone_init(base) {
 		} ],
 		models: {
 			contacts: new linphone.models.contacts.localStorage.engine('Linphone Web', debug),
-			history: new linphone.models.history.localStorage.engine('Linphone Web', debug),
+			history: new linphone.models.history.core.engine(base, debug)
 		},
 		disableChat: true
 	}

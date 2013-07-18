@@ -40,6 +40,20 @@ linphone.ui.i18n = {
 			en_US : 'Ok',
 			fr_FR : 'Ok'
 		},
+		stringFormat: {
+			time: {
+				en_US : 'MM/dd/yyyy HH:mm:ss',
+				fr_FR : 'dd/MM/yyyy HH:mm:ss'
+			},
+			duration: {
+				en_US : '(HH:)mm:ss',
+				fr_FR : '(HH:)mm:ss'
+			}
+		},
+		unknown: {
+			en_US : 'Unknown',
+			fr_FR : 'Inconnu'
+		},
 		transports: {
 			udp: {
 				en_US : 'UDP',
@@ -316,6 +330,58 @@ linphone.ui.i18n = {
 					miss: {
 						en_US : 'Miss',
 						fr_FR : 'Manqués'
+					}
+				},
+				time: {
+					title: {
+						en_US : 'Date',
+						fr_FR : 'Date'
+					}
+				},
+				duration: {
+					title: {
+						en_US : 'Duration',
+						fr_FR : 'Durée'
+					}
+				},
+				direction: {
+					title: {
+						en_US : 'Direction',
+						fr_FR : 'Direction'
+					},
+					values: {
+						outgoing: {
+							en_US : 'Outgoing',
+							fr_FR : 'Sortant'
+						},
+						incoming: {
+							en_US : 'Incoming',
+							fr_FR : 'Entrant'
+						}
+					}
+				},
+				status: {
+					title: {
+						en_US : 'Status',
+						fr_FR : 'Status'
+					},
+					values: {
+						success: {
+							en_US : 'Success',
+							fr_FR : 'Réussi'
+						},
+						aborted: {
+							en_US : 'Aborted',
+							fr_FR : 'Annulé'
+						},
+						missed: {
+							en_US : 'Missed',
+							fr_FR : 'Manqué'
+						},
+						declined: {
+							en_US : 'Declined',
+							fr_FR : 'Refusé'
+						}
 					}
 				},
 				modify: {

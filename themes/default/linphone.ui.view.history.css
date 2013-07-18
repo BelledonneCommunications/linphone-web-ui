@@ -46,17 +46,18 @@
 	margin-right: 5px;
 	margin-top: 2px;
 }
-.linphoneweb > .content .view > .history .entry .historyInfos {
+.linphoneweb > .content .view > .history .entry .infos {
 	float: left;
 	width: 240px;
 	margin-left: 20px;
 	margin-top: 50px;
 }
-.linphoneweb > .content .view > .history .entry .historyInfos span {
-	display: inline;
-}
-.linphoneweb > .content .view > .history .entry .historyDate, .linphoneweb > .content .view > .history .entry .historyTime, .linphoneweb > .content .view > .history .entry .historyType {
+.linphoneweb > .content .view > .history .entry .infos > span {
+	display: block;
 	color: #5d8398;
+}
+.linphoneweb > .content .view > .history .entry .infos .title {
+	color: #000000;
 }
 .linphoneweb > .content .view > .history .entryActions {
 	position: absolute;

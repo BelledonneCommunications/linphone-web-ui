@@ -179,6 +179,42 @@ linphone.core.enums = {
 		}
 	},
 
+	callDir : {
+		Outgoing: 0,
+		Incoming: 1
+	},
+	getCallDirText : function(value) {
+		switch (value) {
+		case linphone.core.enums.callDir.Outgoing:
+			return "Outgoing";
+		case linphone.core.enums.callDir.Incoming:
+			return "Incoming";
+		default:
+			return "?";
+		}
+	},
+
+	callStatus : {
+		Success: 0,
+		Aborted: 1,
+		Missed: 2,
+		Declined: 3
+	},
+	getCallStatusText : function(value) {
+		switch (value) {
+		case linphone.core.enums.callStatus.Success:
+			return "Success";
+		case linphone.core.enums.callStatus.Aborted:
+			return "Aborted";
+		case linphone.core.enums.callStatus.Missed:
+			return "Missed";
+		case linphone.core.enums.callStatus.Declined:
+			return "Declined";
+		default:
+			return "?";
+		}
+	},
+
 	callState : {
 		Idle : 0,
 		IncomingReceived : 1,
