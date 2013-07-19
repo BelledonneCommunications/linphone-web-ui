@@ -2,16 +2,16 @@
 	<!-- @if env='debug' -->
 	<script id="linphone.ui.view.contacts.list.entry" type="text/x-handlebars-template">
 		<div class="entry">
-			<img src="{{context.img}}" alt="" class="contactImg" />
-			<span class="contactName">{{context.name}}</span><br>
+			<img src="{{context.object.img}}" alt="" class="contactImg" />
+			<span class="contactName"> {{context.object.firstname}} {{context.object.lastname}}</span><br>
 			<span class="imageStatusOnline"></span>
-			<span class="contactStatus">{{context.status}}</span><br />
-			<span class="contactNumber">{{context.number}}<br />Sip number</span>
+			<span class="contactStatus">{{context.object.status}}</span><br />
+			<span class="contactNumber">{{context.address}}<br /></span>
 		
 			<div class="entryActions">
 				<div class="button buttonAction goContact"><div class="image imageModify"></div></div><!--
 				Avoid issue with inline block in dev mode
-				--><div class="button"><div class="image imageCall"></div></div><!--
+				--><div class="callContact button"><div class="image imageCall"></div></div><!--
 				Avoid issue with inline block in dev mode
 				--><div class="button"><div class="image imageChat"></div></div>
 			</div>
@@ -25,7 +25,7 @@
 			Avoid issue with inline block in dev mode
 			--><div class="online button buttonSelect"><div class="text" data-i18n="content.view.contacts.filter.online"></div></div>
 		</div>
-		<div class="floatRight"><div class="button buttonAction"><div class="image imageContactAdd"></div><div class="text" data-i18n="content.view.contacts.add"></div></div></div>
+		<div class="floatRight"><div class="button buttonAction addContact"><div class="image imageContactAdd"></div><div class="text" data-i18n="content.view.contacts.add"></div></div></div>
 		<hr>
 	</div>
 	<div class="list scroll-pane">

@@ -377,6 +377,9 @@ linphone.ui = {
 				}
 			}	
 		}
+		if(state === linphone.core.enums.callState.Error){
+			linphone.ui.popup.error.show(base, message);
+		}
 	},
 	
 	/* Error handling */

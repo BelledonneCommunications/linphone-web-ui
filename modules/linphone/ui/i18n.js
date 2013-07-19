@@ -409,8 +409,20 @@ linphone.ui.i18n = {
 				remove: {
 					en_US : 'Remove contact',
 					fr_FR : 'Supprimer le contact'
+				},
+				lastname: {
+					en_US : 'Last name',
+					fr_FR : 'Nom'
+				},
+				firstname: {
+					en_US : 'First name',
+					fr_FR : 'Prénom'
+				},
+				addressContact: {
+					en_US : 'SIP or phone number',
+					fr_FR : 'SIP ou numéro de télephone'
 				}
-			},
+			},	
 			chat: {
 				send: {
 					en_US : 'Send',
