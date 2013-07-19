@@ -65,6 +65,7 @@ linphone.ui.locale = {
 	},
 	change: function (base, locale) {
 		linphone.ui.persistent(base).locale = locale.locale;
+		linphone.ui.logger.log(base, 'Change locale: ' + locale.locale);
 		jQuery.i18n.change(locale.locale, base);
 		linphone.ui.translate(base);
 	}

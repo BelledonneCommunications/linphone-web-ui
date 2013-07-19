@@ -3,28 +3,28 @@
  */
 /*globals linphone,jsonsql */
 
-linphone.models.history.core = {
-	/*
-	 * Object
-	 */
-	object: {
-		remote: null,
-		local: null,
-		date: null,
-		duration: null,
-		direction: null,
-		status: null
-	},
-	
+linphone.models.history.core = {	
 	/* 
 	 * Engine
 	 */
 	engine: function(base, debug) {
+		linphone.models.history.constructor.call(this);
 		this.base = base;
 		this.debug = debug;
+		
+		// Use base callStateChanged event for engine create event
+		base.on('callStateChanged', { engine: this }, linphone.models.history.core.onCallStateChanged);
+	},
+	
+	/* Call state */
+	onCallStateChanged: function(event, call, state, message) {
+		var that = event.data.engine;
+		if(state === linphone.core.enums.callState.End ||
+			state === linphone.core.enums.callState.Error) {
+			that.onUpdate.fire(linphone.models.history.events.create, call.callLog);
+		}
 	}
 };
-
 
 //
 // List
@@ -60,9 +60,9 @@ linphone.models.history.core.engine.prototype.read = function(id) {
 	
 	// Map to JS object
 	return {
-		from: log.from,
-		to: log.to,
-		remote: log.remoteAddress,
+		from: log.from.asString(),
+		to: log.to.asString(),
+		remote: log.remoteAddress.asString(),
 		date: log.startDate,
 		duration: log.duration,
 		direction: log.dir,

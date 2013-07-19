@@ -106,12 +106,26 @@ linphone.ui.view.history = {
 	show: function(base) {
 		linphone.ui.menu.show(base);
 		linphone.ui.view.history.update(base);
+		var history = base.find('> .content .view > .history');
+		var fct = function() {
+			linphone.ui.view.history.update(base);
+		};
+		history.data('engineOnUpdate', fct);
+		var historyModel = linphone.ui.configuration(base).models.history;
+		historyModel.onUpdate.add(fct);
 	},
 	hide: function(base) {
+		var history = base.find('> .content .view > .history');
+		var fct = history.data('engineOnUpdate');
+		if(fct) {
+			var historyModel = linphone.ui.configuration(base).models.history;
+			historyModel.onUpdate.remove(fct);
+		}
 	},
 	
-	
 	update: function(base) {
+		linphone.ui.logger.log(base, 'History update');
+		
 		var history = base.find('> .content .view > .history');
 		var configuration = linphone.ui.configuration(base);
 		var filter = linphone.ui.view.history.filter.getFilter(base);
@@ -119,10 +133,17 @@ linphone.ui.view.history = {
 		var list = history.find('.list');
 		list.empty();
 		
+		var callWrapper = function(obj) {
+			return function() {
+				linphone.ui.utils.call(base, obj.remote);
+			};
+		};
+		
 		for(var item in data) {
 			var obj = configuration.models.history.read(data[item]);
 			var elem = linphone.ui.template(base, 'view.history.list.entry', obj);
 			jQuery.i18n.update(elem);
+			elem.find('.entryActions .call').click(linphone.ui.exceptionHandler(base, callWrapper(obj)));
 			list.append(elem);
 		}
 		
@@ -131,7 +152,7 @@ linphone.ui.view.history = {
 		});
 		
 		if(linphone.ui.configuration(base).disableChat) {
-			base.find('> .content .view > .history .entryActions .chat').hide();
+			base.find('> .content .view > .history .entry .entryActions .chat').hide();
 		}
 	},
 	

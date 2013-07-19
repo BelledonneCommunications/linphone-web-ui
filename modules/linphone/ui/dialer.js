@@ -68,17 +68,12 @@ linphone.ui.dialer = {
 	
 	/* */
 	call: function(base) {
-		var addressStr = base.find('> .content .dialer .address').val();
-		var address = linphone.ui.utils.formatAddress(base, addressStr);
-		if(address) {
-			var core = linphone.ui.getCore(base);
-			core.inviteAddress_async(address);
-			linphone.ui.logger.log(base, "Call: " + address.asString());
-			
+		var address = base.find('> .content .dialer .address').val();
+		linphone.ui.utils.call(base, address, function() {
 			// Reset input
 			base.find('> .content .dialer .address').val('');
-		} else {
+		}, function() {
 			linphone.ui.popup.error.show(base, 'global.errors.uri.misformatted');
-		}
+		});
 	}
 };
