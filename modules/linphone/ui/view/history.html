@@ -2,12 +2,12 @@
 	<!-- @if env='debug' -->
 	<script id="linphone.ui.view.history.list.entry" type="text/x-handlebars-template">
 		<div class="entry">
-			<div class="profile">
-				<img src="{{context.img}}" alt="" class="contactImg">
-				<span class="contactName">{{context.name}}</span><br>
+			<div class="contact">
+				<img src="{{LinphoneWeb-Call helpers.utils.getAvatar context.remoteAddress}}" alt="" class="avatar">
+				<span class="name">{{LinphoneWeb-Call helpers.utils.getUsername context.remote}}</span><br><!--
 				<span class="imageStatusOnline"></span>
-				<span class="contactStatus">{{context.status}}</span><br>
-				<span class="contactNumber">{{context.number}}</span>
+				<span class="status">{{context.status}}</span><br>-->
+				<span class="number">{{LinphoneWeb-Call helpers.utils.getAddress context.remote}}</span>
 			</div>
 			<div class="infos">
 				<span class="time"><span class="title" data-i18n="content.view.history.time.title"></span>: {{{LinphoneWeb-Call helpers.utils.getTime context.date}}}</span>

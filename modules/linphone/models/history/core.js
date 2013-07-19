@@ -8,8 +8,8 @@ linphone.models.history.core = {
 	 * Object
 	 */
 	object: {
-		from: null,
-		to: null,
+		remote: null,
+		local: null,
 		date: null,
 		duration: null,
 		direction: null,
@@ -62,6 +62,7 @@ linphone.models.history.core.engine.prototype.read = function(id) {
 	return {
 		from: log.from,
 		to: log.to,
+		remote: log.remoteAddress,
 		date: log.startDate,
 		duration: log.duration,
 		direction: log.dir,

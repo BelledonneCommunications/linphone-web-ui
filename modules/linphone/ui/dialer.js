@@ -69,7 +69,7 @@ linphone.ui.dialer = {
 	/* */
 	call: function(base) {
 		var addressStr = base.find('> .content .dialer .address').val();
-		var address = linphone.ui.utils.getAddress(base, addressStr);
+		var address = linphone.ui.utils.formatAddress(base, addressStr);
 		if(address) {
 			var core = linphone.ui.getCore(base);
 			core.inviteAddress_async(address);

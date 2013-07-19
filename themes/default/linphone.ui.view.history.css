@@ -9,36 +9,39 @@
 	padding: 10px;
 	position: relative;
 }
-.linphoneweb > .content .view > .history .entry .profile {
+.linphoneweb > .content .view > .history .entry .contact {
 	float: left;
-	width: 300px;
+	width: 300px; 
 }
-.linphoneweb > .content .view > .history .entry .profile .contactNumber {
-	margin-top: 40px;
-}
-.linphoneweb > .content .view > .history .entry .profile .contactImg {
-	border: 5px solid #e4edf2;
-	float: left;
-	margin-right: 10px;
-}
-.linphoneweb > .content .view > .history .entry .profile .contactName {
-	display: inline-block;
-	margin-top: 7px;
-	line-height: 20px;
-	font-size: 11pt;
-}
-.linphoneweb > .content .view > .history .entry .profile .contactNumber {
+.linphoneweb > .content .view > .history .entry .contact .number {
+	width: 180px;
+	overflow: hidden;
+	text-overflow: ellipsis;
 	color: #5d8398;
 	display: inline-block;
 	margin-top: 20px;
 	line-height: 15px;
 }
-.linphoneweb > .content .view > .history .entry .profile .contactStatus {
+.linphoneweb > .content .view > .history .entry .contact .avatar {
+	border: 5px solid #e4edf2;
+	float: left;
+	margin-right: 10px;
+	width: 100px;
+	height: 100px;
+}
+.linphoneweb > .content .view > .history .entry .contact .name {
+	display: inline-block;
+	margin-top: 7px;
+	line-height: 20px;
+	font-size: 11pt;
+}
+
+.linphoneweb > .content .view > .history .entry .contact .status {
 	color: #7a7a7a;
 	text-transform: uppercase;
 	font-size: 8pt;
 }
-.linphoneweb > .content .view > .history .entry .profile .imageStatusOnline, .linphoneweb > .content .view > .history .entry .profile .imageStatusBusy, .linphoneweb > .content .view > .history .entry .profile .imageStatusAway {
+.linphoneweb > .content .view > .history .entry .contact .imageStatusOnline, .linphoneweb > .content .view > .history .entry .contact .imageStatusBusy, .linphoneweb > .content .view > .history .entry .contact .imageStatusAway {
 	background-repeat: no-repeat;
 	width: 10px;
 	height: 10px;
