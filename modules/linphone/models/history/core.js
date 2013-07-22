@@ -81,4 +81,5 @@ linphone.models.history.core.engine.prototype.update = function(id, object) {
 linphone.models.history.core.engine.prototype.remove = function(id) {
 	var core = linphone.ui.getCore(this.base);
 	core.removeCallLog(id);
+	this.onUpdate.fire(linphone.models.history.events.remove, id);
 };

@@ -1,4 +1,4 @@
-.linphoneweb > .content .view > .history .actions {
+.linphoneweb > .content .view > .history > .actions {
 	padding: 10px 10px 1px 10px;
 	border-bottom: 1px solid #e4edf2;
 	height: 50px;
@@ -62,7 +62,7 @@
 .linphoneweb > .content .view > .history .entry .infos .title {
 	color: #000000;
 }
-.linphoneweb > .content .view > .history .entryActions {
+.linphoneweb > .content .view > .history .entry .actions {
 	position: absolute;
 	right: 10px;
 	bottom: 20px;

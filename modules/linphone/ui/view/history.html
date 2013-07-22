@@ -16,17 +16,19 @@
 				<span class="status"><span class="title" data-i18n="content.view.history.status.title"></span>: {{{LinphoneWeb-Call helpers.view.history.utils.getCallStatus context.status}}}</span>
 			</div>
 	
-			<div class="entryActions">
+			<div class="actions">
 				<div class="button call"><div class="image imageCall"></div></div><!--
 				Avoid issue with inline block in dev mode
-		 		--><div class="button chat"><div class="image imageChat"></div></div>
-				</div>
+		 		--><div class="button chat"><div class="image imageChat"></div></div><!--
+				Avoid issue with inline block in dev mode
+		 		--><div class="button remove buttonAction"><div class="image imageDelete"></div></div>
+			</div>
 			<hr>
 		</div>
 	</script>
 	<!-- @endif -->
 	<div class="actions">
-		<div class="button-group">
+		<div class="filters button-group">
 			<div class="all button buttonSelect"><div class="text" data-i18n="content.view.history.filter.all"></div></div><!--
 			Avoid issue with inline block in dev mode
 			--><div class="incoming button buttonSelect"><div class="text" data-i18n="content.view.history.filter.incoming"></div></div><!--
@@ -35,8 +37,11 @@
 			Avoid issue with inline block in dev mode
 			--><div class="miss button buttonSelect"><div class="text" data-i18n="content.view.history.filter.miss"></div></div>
 		</div>
-		<div class="floatRight"><div class="button buttonAction"><div class="image imageModify"></div><div class="text" data-i18n="content.view.history.modify"></div></div></div>
-		<hr>
+		<div class="floatRight">
+			<div class="button buttonAction modify"><div class="image imageModify"></div><div class="text" data-i18n="content.view.history.modify"></div></div><!--
+			Avoid issue with inline block in dev mode
+			--><div class="button buttonAction save"><div class="image imageSave"></div><div class="text" data-i18n="global.save"></div></div>
+		</div>
 	</div>
 	<div class="list scroll-pane">
 	</div>
