@@ -26,7 +26,7 @@ linphone.ui.view.contacts = {
 			list.append(data[item]);
 		}
 		
-		contacts.find('.addContact').click(linphone.ui.exceptionHandler(base, function(){
+		contacts.find('.actions .addContact').click(linphone.ui.exceptionHandler(base, function(){
 			linphone.ui.view.contact.addContact(base,null,null);
 		}));
 	},

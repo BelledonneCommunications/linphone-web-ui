@@ -33,10 +33,10 @@ linphone.ui.view.history = {
 		}));
 		history.find('> .actions .modify').show();
 		
-		history.find('> .actions .save').click(linphone.ui.exceptionHandler(base, function() {
+		history.find('> .actions .see').click(linphone.ui.exceptionHandler(base, function() {
 			linphone.ui.view.history.exitEdition(base);
 		}));
-		history.find('> .actions .save').hide();
+		history.find('> .actions .see').hide();
 		
 		linphone.ui.view.history.filter.update(base, linphone.ui.view.history.filter.all);
 	},
@@ -116,7 +116,7 @@ linphone.ui.view.history = {
 		if(!linphone.ui.view.history.isEditing(base)) {
 			var history = base.find('> .content .view > .history');
 			history.find('> .actions .modify').hide();
-			history.find('> .actions .save').show();
+			history.find('> .actions .see').show();
 			linphone.ui.view.history.update(base);
 		}
 	},
@@ -125,7 +125,7 @@ linphone.ui.view.history = {
 		if(linphone.ui.view.history.isEditing(base)) {
 			var history = base.find('> .content .view > .history');
 			history.find('> .actions .modify').show();
-			history.find('> .actions .save').hide();
+			history.find('> .actions .see').hide();
 			linphone.ui.view.history.update(base);
 		}
 	},

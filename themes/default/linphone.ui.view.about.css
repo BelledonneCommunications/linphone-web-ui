@@ -3,12 +3,16 @@
 }
 .linphoneweb > .content .view > .about .actions {
 	padding: 10px;
-	float: right;
 	height: 42px;
+	border-bottom: 1px solid #e4edf2;
+}
+.linphoneweb > .content .view > .about .actions .title {
+	font-size: 15pt;
+	float: left;
+	margin-top: 10px;
 }
 .linphoneweb > .content .view > .about .entry {
 	clear: both;
-	border-top: 1px solid #e4edf2;
 	padding: 10px;
 	text-align: center;
 }
