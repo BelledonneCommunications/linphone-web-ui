@@ -16,14 +16,15 @@ linphone.ui.view.contact = {
 			linphone.ui.view.contact.save(base);
 		}));
 		base.find('> .content .view > .contact .addressList .addAddress').click(linphone.ui.exceptionHandler(base, function(){
-			linphone.ui.view.contact.addInput(base,'');
+			linphone.ui.view.contact.addAddress(base,'');
 		}));
+		base.find('> .content .view > .contact .uploadPhoto').hide();
 	},
 	translate: function(base) {
 		var login = base.find('> .content .view > .contact');
 		login.find('.firstname').watermark(jQuery.i18n.translate('content.view.contact.firstname'), {className: 'watermark', useNative: false});
 		login.find('.lastname').watermark(jQuery.i18n.translate('content.view.contact.lastname'), {className: 'watermark', useNative: false});
-		login.find('.addressContact').watermark(jQuery.i18n.translate('content.view.contact.addressContact'), {className: 'watermark', useNative: false});
+		login.find('.addressContact .addressInput').watermark(jQuery.i18n.translate('content.view.contact.addressContact'), {className: 'watermark', useNative: false});
 	},
 	
 	/**/
@@ -36,22 +37,44 @@ linphone.ui.view.contact = {
 		var contact = base.find('> .content .view > .contact .entry');
 		contact.find('.lastname').val('');
 		contact.find('.firstname').val('');
-		contact.find('.addressFirst').val('');
+		contact.find('.addressFirst .addressInput').val('');
 		contact.find('.addressPlus').remove();
 	},
-	addInput: function(base,value){
+	addAddress: function(base,value){
 		var contact = base.find('> .content .view > .contact .entry');
-  		var adresses = contact.find('.addressList .addressContact');
-  		
-  		if(adresses.length < 4){
-  			var newAddress = $(adresses[0]).clone();
-  			newAddress.addClass('addressPlus bigMarginLeft');
-  			newAddress.insertAfter(adresses.last());
-  			newAddress.val(value);
-  			newAddress.watermark(jQuery.i18n.translate('content.view.contact.addressContact'), {className: 'watermark', useNative: false});
-  		}
+		var addresses = contact.find('.addressContact');
+		
+		var removeHandler = function(base,name){
+			return function(){
+				linphone.ui.view.contact.removeAddress(base,name);	
+			};
+		};
+		
+		if(addresses.length < 4){
+			var newAddress = jQuery(addresses[0]).clone();
+			newAddress.addClass('addressPlus');
+			var name = 'address' + (addresses.length);
+			newAddress.addClass(name);
+			newAddress.removeClass('addressFirst');
+			newAddress.insertAfter(addresses.last());
+			newAddress.find('.addressInput').val(value);
+			newAddress.find('.addressInput').watermark(jQuery.i18n.translate('content.view.contact.addressContact'), {className: 'watermark', useNative: false});
+			contact.find('.addressPlus .removeAddress').show();
+			base.find('> .content .view > .contact .addressList .removeAddress').click(linphone.ui.exceptionHandler(base, removeHandler(base,name)));
+		}
+	},
+	removeAddress: function(base,name){
+		var contact = base.find('> .content .view > .contact .entry');
+		
+		//console.log("remove");
 	},
 	
+	addContact: function(base){
+		linphone.ui.view.contact.onSaveContact(base,null,null);
+	},
+	editContact: function(base,id,object){
+		linphone.ui.view.contact.onSaveContact(base,id,object);
+	},
 	onSaveContact: function(base,id,object){
 		var contact = base.find('> .content .view > .contact .entry');
 		linphone.ui.view.contact.clear(base);
@@ -63,9 +86,10 @@ linphone.ui.view.contact = {
 			contact.find('.lastname').val(object.lastname);
 			for(var item in object.address){
 				if(item === '0'){
-					contact.find('.addressFirst').val(object.address[item]);
+					contact.find('.addressFirst .addressInput').val(object.address[item]);
+					contact.find('.addressFirst .removeAddress').hide();
 				} else {
-					linphone.ui.view.contact.addInput(base,object.address[item]);
+					linphone.ui.view.contact.addAddress(base,object.address[item]);
 				}	
 			}
 			contact.find('.contactImg').val('tmp/peter.jpg');
@@ -78,12 +102,12 @@ linphone.ui.view.contact = {
 		var contact = base.find('> .content .view > .contact .entry');
 		var id = base.find('> .content .view > .contact .entry').data('id');
 		var addressList = {};
-		contact.find(' .addressContact').each(function (index, object) {
+		contact.find(' .addressInput').each(function (index, object) {
 			var jobject = jQuery(object);
-			addressList[index] = jobject.val();
-
+			if((jobject.val()).length > 0){
+				addressList[index] = jobject.val();
+			}	
 		});
-		console.log(addressList);
 		var object = {
 			id : id,
 			lastname: contact.find('.lastname').val(),

@@ -1,24 +1,36 @@
 <div class="contact">
 	<div class="actions">
-		<div class="saveContact button"><div class="image imageSave"></div><div class="text" data-i18n="global.save"></div></div><!--
+		<div class="removeContact button buttonAction"><div class="image imageDelete"></div><div class="text" data-i18n="content.view.contact.remove"></div></div><!--
 		Avoid issue with inline block in dev mode
-		--><div class="cancelContact button buttonAction"><div class="image imageClose"></div><div class="text" data-i18n="global.cancel"></div></div><!--
-		Avoid issue with inline block in dev mode
-		--><div class="floatRight">
-			<div class="removeContact button buttonAction"><div class="image imageDelete"></div><div class="text" data-i18n="content.view.contact.remove"></div></div>
+		-->
+		<div class="floatRight">
+			<div class="saveContact button"><div class="image imageSave"></div><div class="text" data-i18n="global.save"></div></div><!--
+			Avoid issue with inline block in dev mode
+			--><div class="cancelContact button buttonAction"><div class="image imageClose"></div><div class="text" data-i18n="global.cancel"></div></div>
 		</div>
 		<hr>
 	</div>
 	<div class="entry">
-		<form >
+		<form>
 			<img src="tmp/marcel.jpg" alt="" class="contactImg">
 			<div class="button buttonAction uploadPhoto"><div class="image imageUpload"></div></div>
-			<input class="firstname floatLeft" type="text" value="">
-			<input class="lastname floatLeft bigMarginLeft" type="text" value="">
-			<div class="addressList">
-				<input class="addressContact addressFirst floatLeft" type="text">
-				<div class="addAddress button buttonAction"><div class="image imageAdd"></div></div>
-			</div>			
+			<div class="contactLabel floatLeft">
+				<label data-i18n="content.view.contact.firstname"></label>
+				<div><input class="firstname" type="text" value=""></div>
+			</div>
+			<div class="contactLabel floatLeft bigMarginLeft">
+				<label data-i18n="content.view.contact.lastname"></label>
+				<div><input class="lastname" type="text" value=""></div>
+			</div>
+			
+			<div class="addressList floatLeft">
+				<div class="addressLabel"><label data-i18n="content.view.contact.addressContact"></label></div>
+				<div class="addressContact addressFirst">
+					<input class="addressInput floatLeft" type="text">
+					<div class="removeAddress button buttonAction"><div class="image imageDelete"></div></div>
+				</div>
+				<div><div class="addAddress button buttonAction"><div class="image imageAdd"></div></div></div>	
+			</div>
 		</form>
 	</div>
 </div>

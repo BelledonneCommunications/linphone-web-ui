@@ -18,6 +18,11 @@
 .linphoneweb .view .contact .entry form .defaut {
 	color: #9ba6ac
 }
+.linphoneweb .view .contact .entry form label {
+	line-height: 20px;
+	text-transform: uppercase;
+	font-weight: bold;
+}
 .linphoneweb .view .contact .entry form .contactImg {
 	border: 5px solid #e4edf2;
 	float: left;
@@ -34,4 +39,13 @@
 	float: left;
 	margin-right: 5px;
 }
-
+.linphoneweb .view .contact .entry form .addressPlus {
+	clear: both;
+}
+.linphoneweb .view .contact .entry form .addressList .addressLabel {
+	clear: both;
+}
+.linphoneweb .view .contact .entry form .addAddress {
+	float: left;
+	clear: both;
+}
