@@ -11,8 +11,8 @@ module.exports = function(grunt) {
 		'linphone.models',
 		'linphone.models.contacts',
 		'linphone.models.history',
-		'linphone.models.contacts.localStorage',
-		'linphone.models.history.localStorage',
+		'linphone.models.contacts.localstorage',
+		'linphone.models.history.localstorage',
 		'linphone.models.history.core'
 	],
 	uiModules = [
