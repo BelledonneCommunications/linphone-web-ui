@@ -30,8 +30,7 @@ linphone.ui.popup.error = {
 			var target = jQuery(event.target ? event.target : event.srcElement);
 			
 			// Close itself
-			linphone.ui.popup.error.hide(base,content);
-			linphone.ui.popup.update(base);
+			linphone.ui.popup.error.hide(base, errorPopup);
 		}));
 		
 		// Append to DOM
@@ -39,14 +38,8 @@ linphone.ui.popup.error = {
 		errorPopup.show();
 		linphone.ui.popup.update(base);
 	},
-	hide: function(base,content){
-		var errorPopup = base.find('> .content .popup > .error').each(function (index, object) {
-			var jobject = jQuery(object);
-			var data=jobject.data('errorPopup');
-			if(errorPopup === data){
-				return jobject;
-			}
-		});
+	hide: function(base, errorPopup) {
 		errorPopup.remove();
+		linphone.ui.popup.update(base);
 	}
 };

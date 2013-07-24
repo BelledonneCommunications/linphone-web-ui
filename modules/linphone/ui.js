@@ -12,7 +12,7 @@ linphone.ui = {
 			running: false
 		}
 	},
-	heartBeatStatus: {
+	networkState: {
 		Undefined: -1,
 		Online: 0,
 		Offline: 1
@@ -200,6 +200,15 @@ linphone.ui = {
 			return fct.apply(this, [this.base].concat(Array.prototype.slice.call(arguments, 1)));
 		});
 		
+		// Run heartbeat
+		if(linphone.ui.configuration(base).heartbeat.enabled) {
+			linphone.ui.startHeartBeat(base);
+		} else {
+			// Assume we are always online
+			var heartbeat = linphone.ui.configuration(base).heartbeat;
+			heartbeat.networkState = linphone.ui.networkState.Online;
+		}
+		
 		linphone.ui.exceptionHandler(base, function() {
 			linphone.ui.uiInit(base);
 			linphone.ui.core.init(base);
@@ -215,11 +224,6 @@ linphone.ui = {
 			// Update locale
 			linphone.ui.locale.update(base);
 		})();
-
-		// Run heartbeat
-		if(linphone.ui.configuration(base).heartbeat.enabled) {
-			linphone.ui.startHeartBeat(base);
-		}
 
 		// Init callback
 		base.on('callStateChanged', linphone.ui.onCallStateChanged); 
@@ -280,7 +284,7 @@ linphone.ui = {
 	startHeartBeat: function(base) {
 		var heartbeat = linphone.ui.configuration(base).heartbeat;
 		if(!heartbeat.running) {
-			heartbeat.status = linphone.ui.heartBeatStatus.Undefined;
+			heartbeat.networkState = linphone.ui.networkState.Undefined;
 			heartbeat.running = true;
 			linphone.ui.heartBeat(base, heartbeat);
 		}
@@ -297,9 +301,9 @@ linphone.ui = {
 			}
 		}
 	},
-	getHeartBeatStatus: function(base) {
+	getNetworkState: function(base) {
 		var heartbeat = linphone.ui.configuration(base).heartbeat;
-		return heartbeat.status;
+		return heartbeat.networkState;
 	},
 	isHeartBeatRunning: function(base) {
 		var heartbeat = linphone.ui.configuration(base).heartbeat;
@@ -311,20 +315,20 @@ linphone.ui = {
 			cache: false,
 			timeout: heartbeat.timeout
 		}).done(function(data){
-			if(heartbeat.status !== linphone.ui.heartBeatStatus.Online) {
-				heartbeat.status = linphone.ui.heartBeatStatus.Online;
-				linphone.ui.logger.debug(base, "Network status changed: Online");
+			if(heartbeat.networkState !== linphone.ui.networkState.Online) {
+				heartbeat.networkState = linphone.ui.networkState.Online;
+				linphone.ui.logger.debug(base, "Network state changed: Online");
 				linphone.ui.exceptionHandler(base, function() {
-					base.trigger('networkStateChanged', [linphone.ui.heartBeatStatus.Online]);
+					base.trigger('networkStateChanged', [linphone.ui.networkState.Online]);
 				})();
 			}
 			linphone.ui._heartBeat(base);
 		}).error(function(jqXHR, textStatus, errorThrown) {
-			if(heartbeat.status !== linphone.ui.heartBeatStatus.Offline) {
-				heartbeat.status = linphone.ui.heartBeatStatus.Offline;
-				linphone.ui.logger.debug(base, "Network status changed: Offline");
+			if(heartbeat.networkState !== linphone.ui.networkState.Offline) {
+				heartbeat.networkState = linphone.ui.networkState.Offline;
+				linphone.ui.logger.debug(base, "Network state changed: Offline");
 				linphone.ui.exceptionHandler(base, function() {
-					base.trigger('networkStateChanged', [linphone.ui.heartBeatStatus.Offline]);
+					base.trigger('networkStateChanged', [linphone.ui.networkState.Offline]);
 				})();
 			}
 			linphone.ui._heartBeat(base);
@@ -341,10 +345,10 @@ linphone.ui = {
 			linphone.ui.heartBeat(base, heartbeat);
 		}, heartbeat.timeout);
 	},
-	onNetworkStateChanged: function(event, status) {
+	onNetworkStateChanged: function(event, state) {
 		/*
 		var base = jQuery(this);
-		if(status === linphone.ui.heartBeatStatus.Online) {
+		if(state === linphone.ui.networkState.Online) {
 			base.find('> .content .offline').hide();
 		} else {
 			base.find('> .content .offline').show();
@@ -377,7 +381,7 @@ linphone.ui = {
 				}
 			}	
 		}
-		if(state === linphone.core.enums.callState.Error){
+		if(state === linphone.core.enums.callState.Error) {
 			linphone.ui.popup.error.show(base, message);
 		}
 	},

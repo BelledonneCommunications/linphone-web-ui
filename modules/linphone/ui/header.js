@@ -173,12 +173,12 @@ linphone.ui.header = {
 		if(typeof proxy === 'undefined' || !proxy) {
 			proxy = linphone.ui.utils.getMainProxyConfig(base);
 		}
-		// If not provided try to use getHeartBeatStatus
+		// If not provided try to use getNetworkState
 		if(typeof network === 'undefined' || !network) {
-			network = linphone.ui.getHeartBeatStatus(base);
+			network = linphone.ui.getNetworkState(base);
 		}
 		
-		if(network === linphone.ui.heartBeatStatus.Online) {
+		if(network === linphone.ui.networkState.Online) {
 			header.find('.offline').hide();
 			if(proxy && proxy.state === linphone.core.enums.registrationState.Ok) {
 				linphone.ui.header.profile.update(base);

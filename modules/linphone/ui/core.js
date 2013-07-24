@@ -414,7 +414,7 @@ linphone.ui.core = {
 				
 				// Set network state
 				if(linphone.ui.isHeartBeatRunning(base)) {
-					core.networkReachable = (linphone.ui.getHeartBeatStatus(base) === linphone.ui.heartBeatStatus.Online);
+					core.networkReachable = (linphone.ui.getNetworkState(base) === linphone.ui.networkState.Online);
 				}
 			
 				// Force network updates (hack)
@@ -443,7 +443,7 @@ linphone.ui.core = {
 		var configuration = linphone.ui.configuration(base);
 		
 		if(linphone.core.isValid(core) && configuration.core.running) {
-			if(status === linphone.ui.heartBeatStatus.Online) {
+			if(status === linphone.ui.networkState.Online) {
 				core.networkReachable = true;
 			} else {
 				core.networkReachable = false;
