@@ -80,7 +80,7 @@ linphone.ui.i18n = {
 				},
 				title: {
 					en_US : 'About',
-					fr_FR : 'A Propos'
+					fr_FR : 'À Propos'
 				},
 				versions: {
 					core : {
@@ -449,6 +449,16 @@ linphone.ui.i18n = {
 			fr_FR : 'Annuler'
 		},
 		errors: {
+			call: {
+				unknown: {
+					en_US : 'Unknown error',
+					fr_FR : 'Erreur inconnue'
+				},
+				user_not_found: {
+					en_US : 'The user "%1" is not found',
+					fr_FR : 'L\'utilisateur "%1" n\'a pas été trouvé'
+				}
+			},
 			uri: {
 				misformatted: {
 					en_US : 'The provided address is not a valid SIP URI',

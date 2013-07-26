@@ -382,7 +382,11 @@ linphone.ui = {
 			}	
 		}
 		if(state === linphone.core.enums.callState.Error) {
-			linphone.ui.popup.error.show(base, message);
+			var tKey = 'global.errors.call.' + linphone.ui.utils.formatToKey(message);
+			if(!jQuery.i18n.defined(tKey)) {
+				tKey = 'global.errors.call.unknown';
+			}
+			linphone.ui.popup.error.show(base, tKey, [linphone.ui.utils.getUsername(base, call.remoteAddress)]);
 		}
 	},
 	
@@ -411,6 +415,17 @@ linphone.ui = {
 	
 	/* Logging functions */
 	logger: {
+		coreHandler: function(base) {
+			return function(level, message) {
+				if(level === "error" || level === "fatal") {
+					linphone.ui.logger.error(base, message);
+				} else if(level === "warning") {
+					linphone.ui.logger.warn(base, message);
+				} else {
+					linphone.ui.logger.log(base, message);
+				}
+			};
+		},
 		log: function(base, message) {
 			var config = {debug: true};
 			if(base) {

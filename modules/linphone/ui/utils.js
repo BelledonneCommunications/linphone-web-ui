@@ -8,6 +8,11 @@ linphone.ui.utils = {
 			complete: "([0-9a-zA-Z-_.!~*'()&=+$,;?/]+)@([0-9a-zA-Z.-]+)"
 		}
 	},
+	formatToKey: function(text) {
+		return text.toLowerCase().
+				replace(/ /g, '_').
+				replace(/\./g, '');
+	},
 	formatAddress: function(base, uri) {
 		var core = linphone.ui.getCore(base);
 		return core.interpretUrl(uri);

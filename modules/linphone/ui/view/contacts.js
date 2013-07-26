@@ -26,9 +26,11 @@ linphone.ui.view.contacts = {
 			list.append(data[item]);
 		}
 		
-		contacts.find('.actions .addContact').click(linphone.ui.exceptionHandler(base, function(){
+		contacts.find('> .actions .addContact').click(linphone.ui.exceptionHandler(base, function(){
 			linphone.ui.view.contact.addContact(base,null,null);
 		}));
+		
+		contacts.find('.actions .filters').hide();
 	},
 	translate: function(base) {
 		

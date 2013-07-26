@@ -362,7 +362,8 @@ linphone.ui.core = {
 			base.find('.window .install').hide(); // Force hide
 			var config = linphone.ui.configuration(base);
 			if(config.debug) {
-				core.logHandler = linphone.ui.logHandler;
+				linphone.ui.logger.log(base, 'Enable core logging');
+				core.logHandler = linphone.ui.logger.coreHandler(base);
 			}
 	
 			linphone.ui.core.addEvent(core, 'globalStateChanged', linphone.ui.core._globalStateChanged);

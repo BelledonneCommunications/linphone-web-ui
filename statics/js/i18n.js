@@ -106,6 +106,19 @@ jQuery.i18n.skeleton = function(text, parameters) {
 	return '<span data-'+jQuery.i18n.translate_key+'="' + text + '"' + pdata + '></span>';
 };
 
+jQuery.i18n.defined = function(text) {
+		var data = jQuery.i18n.data;
+		var parts = text.split('.');
+		while (parts.length && data) {
+			var part = parts.shift();
+			data = data[part];
+		}
+		if (data != null) {
+			data = data[jQuery.i18n.locale];
+		}
+		return data != null;
+}
+
 jQuery.i18n.set = function(element, text, parameters, translate) {
 	if(typeof translate === 'undefined') {
 		translate = true;

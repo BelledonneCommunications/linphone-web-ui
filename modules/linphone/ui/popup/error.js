@@ -11,13 +11,13 @@ linphone.ui.popup.error = {
 	},
 	
 	/**/
-	show: function(base, error_id, error) {
+	show: function(base, error_id, args) {
 		// Create error message
 		var content;
 		if(typeof error_id === 'undefined' || error_id === null) {
-			content = jQuery("<div />").text(error).html();
+			content = jQuery("<div />").text(args).html();
 		} else {
-			content = jQuery.i18n.skeleton(error_id);
+			content = jQuery.i18n.skeleton(error_id, args);
 		}
 		
 		// Generate error popup
