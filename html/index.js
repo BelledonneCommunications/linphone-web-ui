@@ -106,7 +106,8 @@ function __linphone_init(base) {
 			contacts: new linphone.models.contacts.localStorage.engine('Linphone Web', debug),
 			history: new linphone.models.history.core.engine(base, debug)
 		},
-		disableChat: true
+		disableChat: true,
+		disableConference: true
 	}
 
 	config.debug = debug;

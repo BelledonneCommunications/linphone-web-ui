@@ -70,20 +70,21 @@
 	margin-right: 0;
 }
 
-.linphoneweb > .content .view > .call .actions {
+.linphoneweb > .content .view > .call > .actions {
 	text-transform: uppercase;
 	color: #5d8398;
 	position: absolute;
-	bottom: -3px;
+	bottom: 0;
 	display:inline-block;
 	width: 100%;
+	height: 40px;
 }
 
-.linphoneweb > .content .view > .call .actions .pause {
+.linphoneweb > .content .view > .call > .actions .pause {
 	margin-left: 15px;
 }
 
-.linphoneweb > .content .view > .call .actions .conference {
+.linphoneweb > .content .view > .call > .actions .conference {
 	margin-left: 15px;
 	margin-right: 0;
 }

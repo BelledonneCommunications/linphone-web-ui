@@ -102,7 +102,8 @@
 	margin-top: 1px;
 }
 .linphoneweb > .content .middle > .menu nav .calls .list .entry .state.idle {
-	background-color: #0000FF;
+	/* TODO */
+	background-color: inherit;
 }
 .linphoneweb > .content .middle > .menu nav .calls .list .entry .state.play {
 	background-image: url('img/play.png');
@@ -117,7 +118,8 @@
 	background-repeat: no-repeat;
 }
 .linphoneweb > .content .middle > .menu nav .calls .list .entry:hover .state.idle {
-	background-color: #0000FF;
+	/* TODO */
+	background-color: inherit;
 }
 .linphoneweb > .content .middle > .menu nav .calls .list .entry:hover .state.play {
 	background-image: url('img/playHover.png');

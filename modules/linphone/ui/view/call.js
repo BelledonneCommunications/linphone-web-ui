@@ -27,6 +27,7 @@ linphone.ui.view.call = {
 		// Set video/self view
 		linphone.ui.video.addVideoView(base, base.find('> .content .view > .call .video > .content'));
 		linphone.ui.video.addSelfView(base, base.find('> .content .view > .call .video .profile > .content'));
+		
 	},
 	translate: function(base) {
 	},
@@ -51,24 +52,31 @@ linphone.ui.view.call = {
 		linphone.ui.view.call.displayCallQuality(base,call);
 		callView.data('qualityTimer',qualityTimer);
 		/* */
-		base.find('> .content .view > .call .actions .muteEnabled .on').click(linphone.ui.exceptionHandler(base, function(){
+		callView.find('.actions .muteEnabled .on').click(linphone.ui.exceptionHandler(base, function(){
 			linphone.ui.view.call.onMuteButton(base,false);
 		}));
-		base.find('> .content .view > .call .actions .muteEnabled .off').click(linphone.ui.exceptionHandler(base, function(){
+		callView.find('.actions .muteEnabled .off').click(linphone.ui.exceptionHandler(base, function(){
 			linphone.ui.view.call.onMuteButton(base,true);
 		}));
-		base.find('> .content .view > .call .actions .videoEnabled .on').click(linphone.ui.exceptionHandler(base, function(){
+		callView.find('.actions .videoEnabled .on').click(linphone.ui.exceptionHandler(base, function(){
 			linphone.ui.view.call.onVideoButton(base,call,true);
 		}));
-		base.find('> .content .view > .call .actions .videoEnabled .off').click(linphone.ui.exceptionHandler(base, function(){
+		callView.find('.actions .videoEnabled .off').click(linphone.ui.exceptionHandler(base, function(){
 			linphone.ui.view.call.onVideoButton(base,call,false);
 		}));
-		base.find('> .content .view > .call .actions .conference').click(linphone.ui.exceptionHandler(base, function(){
+		callView.find('.actions .conference').click(linphone.ui.exceptionHandler(base, function(){
 			linphone.ui.view.show(base, 'conference');
 		}));
-		base.find('> .content .view > .call .actions .pause').click(linphone.ui.exceptionHandler(base, function(){
+		callView.find('.actions .pause').click(linphone.ui.exceptionHandler(base, function(){
 			linphone.ui.view.call.onPauseButton(base, call);
 		}));
+		callView.find('.actions .hangup').click(linphone.ui.exceptionHandler(base, function(){
+			linphone.ui.view.call.onTerminateButton(base, call);
+		}));
+				
+		if(linphone.ui.configuration(base).disableConference) {
+			base.find('.actions .conference').hide();
+		}
 		
 	},
 	hide: function(base) {
@@ -128,6 +136,10 @@ linphone.ui.view.call = {
 		} else {
 			core.pauseCall(call);
 		}
+	},
+	onTerminateButton: function(base, call) {
+		var core = linphone.ui.getCore(base);
+		core.terminateCall(call);
 	},
 	
 	/* */

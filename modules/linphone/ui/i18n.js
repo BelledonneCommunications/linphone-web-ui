@@ -98,6 +98,10 @@ linphone.ui.i18n = {
 					en_US : 'Conference',
 					fr_FR : 'Conférence'
 				},
+				hangup: {
+					en_US : 'Hang-up',
+					fr_FR : 'Raccrocher'
+				},
 				micro: {
 					en_US : 'Micro',
 					fr_FR : 'Micro'
