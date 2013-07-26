@@ -215,6 +215,9 @@
 .linphoneweb .imageCallOff {
 	background-image: url('img/callOff.png');
 }
+.linphoneweb .imageCallEnd {
+	background-image: url('img/callEnd.png');
+}
 .linphoneweb .imageChat {
 	background-image: url('img/chat.png');
 }
@@ -291,15 +294,15 @@
 .linphoneweb .imageExpand {
 	background-image:url('img/expand.png');
 	background-repeat:no-repeat;
-	width:16px;
-	height:16px;
+	width:14px;
+	height:14px;
 }
 
 .linphoneweb .imageCollapse {
 	background-image:url('img/collapse.png');
 	background-repeat:no-repeat;
-	width:16px;
-	height:16px;
+	width:14px;
+	height:14px;
 }
 
 .linphoneweb .imageStatusOnline {

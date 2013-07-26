@@ -73,9 +73,8 @@
 .linphoneweb > .content .view > .call .actions {
 	text-transform: uppercase;
 	color: #5d8398;
-	line-height: 40px;
 	position: absolute;
-	bottom: 0;
+	bottom: -3px;
 	display:inline-block;
 	width: 100%;
 }

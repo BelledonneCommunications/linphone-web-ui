@@ -111,7 +111,7 @@
 	background-image: url('img/pause.png');
 }
 .linphoneweb > .content .middle > .menu nav .calls .list .entry .state.ringing {
-	background-color: #0000FF;
+	background-image: url('img/ringtoneMainbar.png');
 }
 .linphoneweb > .content .middle > .menu nav .calls .list .entry:hover .state {
 	background-repeat: no-repeat;
@@ -126,7 +126,7 @@
 	background-image: url('img/pauseHover.png');
 }
 .linphoneweb > .content .middle > .menu nav .calls .list .entry:hover .state.ringing {
-	background-color: #0000FF;
+	background-image: url('img/ringtoneMainbar.png');
 }
 
 
