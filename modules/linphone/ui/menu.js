@@ -81,6 +81,11 @@ linphone.ui.menu = {
 			element.click(linphone.ui.exceptionHandler(base, f(base, call)));
 			list.append(element);
 		}
+		
+		list.tooltip({
+			tooltipClass: "linphonewebcls",
+			position: { my: "middle top", at: "middle bottom", collision: "flipfit" }
+		});
 	},
 
 	/* Events */

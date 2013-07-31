@@ -30,10 +30,13 @@
 /* structure */
 /*************/
 
-.linphoneweb {
+.linphoneweb, .linphonewebcls {
 	font-family: 'allerregular', arial, verdana, sans-serif;
 	font-size: 13pt; font-size: 1.3rem;
 	background-color: #e4edf2;
+}
+
+.linphoneweb {
 	min-height: 100%;
 }
 
@@ -405,10 +408,39 @@
 	margin-bottom: 20px;
 }
 
-.loading-bar{
+.linphoneweb .loading-bar{
 	background-image:url('img/loader.gif');
 	background-repeat:no-repeat;
 	width:128px;
 	height:15px;
 	margin:0 auto
+}
+
+.linphonewebcls.ui-tooltip {
+	padding: 4px;
+	position: absolute;
+	z-index: 9999;
+	max-width: 300px;
+	-webkit-box-shadow: 0 0 5px #aaa;
+	box-shadow: 0 0 5px #aaa;
+	border: 1px solid #dddddd;
+	background-color: #000000;
+	color: #eeeeee;
+}
+
+body .linphonewebcls.ui-tooltip {
+	border-width: 1px;
+}
+
+.linphonewebcls.ui-corner-all, .linphonewebcls.ui-corner-bottom, .linphonewebcls.ui-corner-right, .linphonewebcls.ui-corner-br {
+	border-bottom-right-radius: 0;
+}
+.linphonewebcls.ui-corner-all, .linphonewebcls.ui-corner-bottom, .linphonewebcls.ui-corner-left, .linphonewebcls.ui-corner-bl {
+	border-bottom-left-radius: 0;
+}
+.linphonewebcls.ui-corner-all, .linphonewebcls.ui-corner-top, .linphonewebcls.ui-corner-right, .linphonewebcls.ui-corner-tr {
+	border-top-right-radius: 0;
+}
+.linphonewebcls.ui-corner-all, .linphonewebcls.ui-corner-top, .linphonewebcls.ui-corner-left, .linphonewebcls.ui-corner-tl {
+	border-top-left-radius: 0;
 }

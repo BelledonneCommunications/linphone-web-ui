@@ -124,18 +124,23 @@ linphone.ui.utils = {
 		}
 		return 'Unknown';
 	},
-	getAddress: function(base, object) {
+	getAddress: function(base, object, resolve) {
 		var address;
-		if (typeof object === 'string') {
+		if(typeof resolve === 'undefined') {
+			resolve = true;
+		}
+		if(typeof object === 'string') {
 			var core = linphone.ui.getCore(base);
 			address = core.newAddress(object);
 		} else {
 			address = object;
 		}
-		var proxy = linphone.ui.utils.getMainProxyConfig(base);
-		if(proxy) {
-			if(proxy.domain === address.domain) {
-				return address.username;
+		if(resolve) {
+			var proxy = linphone.ui.utils.getMainProxyConfig(base);
+			if(proxy) {
+				if(proxy.domain === address.domain) {
+					return address.username;
+				}
 			}
 		}
 		var uri = address.asStringUriOnly();
