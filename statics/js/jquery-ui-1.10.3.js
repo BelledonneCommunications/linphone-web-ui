@@ -1,6 +1,6 @@
-/*! jQuery UI - v1.10.3 - 2013-07-30
+/*! jQuery UI - v1.10.3 - 2013-07-31
 * http://jqueryui.com
-* Includes: jquery.ui.core.js, jquery.ui.widget.js, jquery.ui.mouse.js, jquery.ui.position.js, jquery.ui.slider.js, jquery.ui.tooltip.js, jquery.ui.effect.js, jquery.ui.effect-highlight.js, jquery.ui.effect-pulsate.js
+* Includes: jquery.ui.core.js, jquery.ui.widget.js, jquery.ui.mouse.js, jquery.ui.position.js, jquery.ui.slider.js, jquery.ui.tooltip.js, jquery.ui.effect.js
 * Copyright 2013 jQuery Foundation and other contributors Licensed MIT */
 
 (function( $, undefined ) {
@@ -3788,92 +3788,5 @@ $.each( baseEasings, function( name, easeIn ) {
 });
 
 })();
-
-})(jQuery);
-(function( $, undefined ) {
-
-$.effects.effect.highlight = function( o, done ) {
-	var elem = $( this ),
-		props = [ "backgroundImage", "backgroundColor", "opacity" ],
-		mode = $.effects.setMode( elem, o.mode || "show" ),
-		animation = {
-			backgroundColor: elem.css( "backgroundColor" )
-		};
-
-	if (mode === "hide") {
-		animation.opacity = 0;
-	}
-
-	$.effects.save( elem, props );
-
-	elem
-		.show()
-		.css({
-			backgroundImage: "none",
-			backgroundColor: o.color || "#ffff99"
-		})
-		.animate( animation, {
-			queue: false,
-			duration: o.duration,
-			easing: o.easing,
-			complete: function() {
-				if ( mode === "hide" ) {
-					elem.hide();
-				}
-				$.effects.restore( elem, props );
-				done();
-			}
-		});
-};
-
-})(jQuery);
-(function( $, undefined ) {
-
-$.effects.effect.pulsate = function( o, done ) {
-	var elem = $( this ),
-		mode = $.effects.setMode( elem, o.mode || "show" ),
-		show = mode === "show",
-		hide = mode === "hide",
-		showhide = ( show || mode === "hide" ),
-
-		// showing or hiding leaves of the "last" animation
-		anims = ( ( o.times || 5 ) * 2 ) + ( showhide ? 1 : 0 ),
-		duration = o.duration / anims,
-		animateTo = 0,
-		queue = elem.queue(),
-		queuelen = queue.length,
-		i;
-
-	if ( show || !elem.is(":visible")) {
-		elem.css( "opacity", 0 ).show();
-		animateTo = 1;
-	}
-
-	// anims - 1 opacity "toggles"
-	for ( i = 1; i < anims; i++ ) {
-		elem.animate({
-			opacity: animateTo
-		}, duration, o.easing );
-		animateTo = 1 - animateTo;
-	}
-
-	elem.animate({
-		opacity: animateTo
-	}, duration, o.easing);
-
-	elem.queue(function() {
-		if ( hide ) {
-			elem.hide();
-		}
-		done();
-	});
-
-	// We just queued up "anims" animations, we need to put them next in the queue
-	if ( queuelen > 1 ) {
-		queue.splice.apply( queue,
-			[ 1, 0 ].concat( queue.splice( queuelen, anims + 1 ) ) );
-	}
-	elem.dequeue();
-};
 
 })(jQuery);

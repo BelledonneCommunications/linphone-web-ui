@@ -63,23 +63,50 @@ linphone.ui.menu = {
 		base.find('> .content .menu').hide();
 	},
 	
+	hightlightAnimation: function (elem) {
+			elem.addClass('highlighted', 2000).removeClass('highlighted', 2000, function() {
+				// Need to detach from callstack in order to avoid deadly loop
+				var timeout = window.setTimeout(function() {
+					window.clearTimeout(timeout);
+					linphone.ui.menu.hightlightAnimation(elem);
+				}, 1);
+			});
+	},
+	
 	update: function(base) {
 		var list = base.find('> .content .menu .calls .list');
 		var core = linphone.ui.getCore(base);
 		list.empty();
 		var calls = core.calls;
-		var f = function(base, call){
+		
+		var f = function(base, call) {
 			return function() {
-				if(linphone.ui.view.show(base,'call',call) === false){
+				if(linphone.ui.view.show(base,'call',call) === false) {
 					linphone.ui.view.call.update(base,call);
 				}
 			};
 		};
+		
 		for(var i = 0; i < calls.length; ++i) {
 			var call = calls[i];
 			var element = linphone.ui.template(base, 'menu.calls.list.entry', call);
 			element.click(linphone.ui.exceptionHandler(base, f(base, call)));
 			list.append(element);
+			
+			// Append animation
+			if(call == core.currentCall) {
+				linphone.ui.menu.hightlightAnimation(element);
+				element.mouseenter(function() {
+					var that = jQuery(this);
+					that.stop(true, true).removeClass('highlighted');
+					that.addClass('hover');
+				});
+				element.mouseleave(function() {
+					var that = jQuery(this);
+					that.stop(true, true).removeClass('hover');
+					linphone.ui.menu.hightlightAnimation(that);
+				});
+			}
 		}
 		
 		list.tooltip({

@@ -48,6 +48,11 @@
 	font-weight: bold;
 }
 
+.linphoneweb > .content .middle > .menu nav .entry.highlighted {
+	background-color: #68250f;
+	border-left: 4px solid #68250f;
+}
+
 .linphoneweb > .content .middle > .menu nav .entry:hover {
 	color: #ffffff;
 	border-left: 4px solid #cf4c29;
