@@ -1,49 +1,6 @@
 /*globals jQuery,linphone*/
 
-linphone.ui.header = {
-	status: {
-		online: {
-			value: linphone.core.enums.status.Online,
-			cls: 'imageStatusOnline',
-			i18n: 'online'
-		},
-		busy: {
-			value: linphone.core.enums.status.Busy,
-			cls: 'imageStatusBusy',
-			i18n: 'busy'
-		},
-		onThePhone: {
-			value: linphone.core.enums.status.OnThePhone,
-			cls: 'imageStatusBusy',
-			i18n: 'onThePhone'
-		},
-		doNotDisturb: {
-			value: linphone.core.enums.status.DoNotDisturb,
-			cls: 'imageStatusBusy',
-			i18n: 'doNotDisturb'
-		},
-		beRightBack: {
-			value: linphone.core.enums.status.BeRightBack,
-			cls: 'imageStatusAway',
-			i18n: 'beRightBack'
-		},
-		away: {
-			value: linphone.core.enums.status.Away,
-			cls: 'imageStatusAway',
-			i18n: 'away'
-		},
-		outToLunch: {
-			value: linphone.core.enums.status.OutToLunch,
-			cls: 'imageStatusAway',
-			i18n: 'outToLunch'
-		},
-		offline: {
-			value: linphone.core.enums.status.Offline,
-			cls: 'imageStatusOffline',
-			i18n: 'offline'
-		}
-	},
-	
+linphone.ui.header = {	
 	/* */
 	init: function(base) {
 		linphone.ui.header.uiInit(base);
@@ -51,6 +8,7 @@ linphone.ui.header = {
 		base.on('networkStateChanged', linphone.ui.header.onNetworkStateChanged);
 	},
 	uiInit: function(base) {
+		var configuration = linphone.ui.configuration(base);
 		var header = base.find('> .header');
 		header.find('.navigation').visible();
 		
@@ -69,21 +27,23 @@ linphone.ui.header = {
 		
 		// Populate status list
 		header.find('.profile .menu .list').empty();
-		// Wrap the function in orther function in order to detach status from the status variable
-		var _updateStatus = function(status) {
-				return function(event) {
-					linphone.ui.logger.log(base, 'Change status to ' + linphone.core.enums.getStatusText(status.value));
-					var core = linphone.ui.getCore(base);
-					core.presenceInfo = status.value;
-					linphone.ui.header.profile.update(base, status);
-					linphone.ui.header.menu.close(base);
-				};
-		};
-		for(var i in linphone.ui.header.status) {
-			var status = linphone.ui.header.status[i];
-			var elem = jQuery('<li/>').html(linphone.ui.template(base, 'header.profile.status', status));
-			elem.click(linphone.ui.exceptionHandler(base, _updateStatus(status)));
-			header.find('.profile .menu .list').append(elem);
+		if(!configuration.disablePresence) {
+			// Wrap the function in orther function in order to detach status from the status variable
+			var _updateStatus = function(status) {
+					return function(event) {
+						linphone.ui.logger.log(base, 'Change status to ' + linphone.core.enums.getStatusText(status.value));
+						var core = linphone.ui.getCore(base);
+						core.presenceInfo = status.value;
+						linphone.ui.header.profile.update(base, status);
+						linphone.ui.header.menu.close(base);
+					};
+			};
+			for(var i in linphone.ui.utils.status) {
+				var status = linphone.ui.utils.status[i];
+				var elem = jQuery('<li/>').html(linphone.ui.template(base, 'header.profile.status', status));
+				elem.click(linphone.ui.exceptionHandler(base, _updateStatus(status)));
+				header.find('.profile .menu .list').append(elem);
+			}
 		}
 		
 		header.find('.profile .menu .logout').click(linphone.ui.exceptionHandler(base, function(event){
@@ -136,12 +96,19 @@ linphone.ui.header = {
 		for(var i = 0; i < locales.length; ++i) {
 			var locale = locales[i];
 			var element = linphone.ui.template(base, 'header.language.list.entry', {
-				lang: locale.name,
-				cls: (locale.locale === jQuery.i18n.locale) ? 'selected': ''
+				name: locale.name,
+				title: locale.title,
+				current: (locale.locale === jQuery.i18n.locale)
 			});
 			element.data('data', locale);
+			
 			list.append(element);
 		}
+		
+		list.tooltip({
+			tooltipClass: "linphonewebcls",
+			position: { my: "left top+10", at: "left bottom", collision: "flipfit" }
+		});
 	},
 	
 	/* Menu */
@@ -202,9 +169,9 @@ linphone.ui.header = {
 	profile: {
 		/* Find eq item to presence info */
 		findStatus: function(value) {
-			var item = linphone.ui.header.status.online;
-			for(var i in linphone.ui.header.status) {
-				var a = linphone.ui.header.status[i];
+			var item = linphone.ui.utils.status.online;
+			for(var i in linphone.ui.utils.status) {
+				var a = linphone.ui.utils.status[i];
 				if(a.value === value) {
 					item = a;
 					break;
@@ -213,11 +180,15 @@ linphone.ui.header = {
 			return item;
 		},
 		update: function(base) {
+			var configuration = linphone.ui.configuration(base);
 			linphone.ui.logger.log(base, 'Header: update profile');
-			var core = linphone.ui.getCore(base);
-			
-			var item = linphone.ui.header.profile.findStatus(core.presenceInfo);
-			base.find('> .header .profile .status').html(linphone.ui.template(base, 'header.profile.status', item));
+			if(!configuration.disablePresence) {
+				var core = linphone.ui.getCore(base);
+				var item = linphone.ui.header.profile.findStatus(core.presenceInfo);
+				base.find('> .header .profile .status').html(linphone.ui.template(base, 'header.profile.status', item));
+			} else {
+				base.find('> .header .profile .status').hide();
+			}
 		}
 	}
 };

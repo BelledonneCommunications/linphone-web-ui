@@ -3,10 +3,12 @@
 	<script id="linphone.ui.view.contacts.list.entry" type="text/x-handlebars-template">
 		<div class="entry">
 			<img src="{{context.object.img}}" alt="" class="contactImg" />
-			<span class="contactName"> {{context.object.firstname}} {{context.object.lastname}}</span><br>
-			<span class="imageStatusOnline"></span>
-			<span class="contactStatus">{{context.object.status}}</span><br />
-			<span class="contactNumber">{{context.address}}<br /></span>
+			<div class="contactName"> {{context.object.firstname}} {{context.object.lastname}}</div>
+			<div class="presence">
+				<span class="{{LinphoneWeb-Call helpers.utils.getStatus context.address 'cls'}}"></span>
+				<span class="contactStatus" data-i18n="global.status.{{LinphoneWeb-Call helpers.utils.getStatus context.address 'i18n'}}"></span>
+			</div>
+			<div class="contactNumber">{{context.address}}</div>
 		
 			<div class="actions">
 				<div class="button buttonAction goContact"><div class="image imageModify"></div></div><!--

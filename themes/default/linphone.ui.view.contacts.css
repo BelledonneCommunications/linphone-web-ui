@@ -15,7 +15,6 @@
 	margin-right: 10px;
 }
 .linphoneweb > .content .view > .contacts .entry .contactName {
-	display: inline-block;
 	margin-top: 7px;
 	line-height: 20px;
 	font-size: 11pt;
@@ -35,8 +34,6 @@
 }
 .linphoneweb > .content .view > .contacts .entry .contactNumber {
 	color: #5d8398;
-	display: inline-block;
-	margin-top: 20px;
 	line-height: 15px;
 }
 .linphoneweb > .content .view > .contacts .entry .actions {

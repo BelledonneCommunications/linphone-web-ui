@@ -97,9 +97,11 @@ function __linphone_init(base) {
 		}],
 		locales: [ {
 			name : 'US',
+			title: 'English',
 			locale : 'en_US'
 		}, {
 			name : 'FR',
+			title : 'Français',
 			locale : 'fr_FR'
 		} ],
 		models: {
@@ -107,7 +109,8 @@ function __linphone_init(base) {
 			history: new linphone.models.history.core.engine(base, debug)
 		},
 		disableChat: true,
-		disableConference: true
+		disableConference: true,
+		disablePresence: true
 	}
 
 	config.debug = debug;

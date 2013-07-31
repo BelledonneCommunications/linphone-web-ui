@@ -85,9 +85,13 @@ linphone.ui.view.contacts = {
 				object : object,
 				address : object.address[0]
 			});	
-			element.find('.entryActions .goContact').click(linphone.ui.exceptionHandler(base,editHandler(base,object)));	
-			element.find('.entryActions .callContact').click(linphone.ui.exceptionHandler(base,callHandler(base,object)));	
+			element.find('.actions .goContact').click(linphone.ui.exceptionHandler(base,editHandler(base,object)));	
+			element.find('.actions .callContact').click(linphone.ui.exceptionHandler(base,callHandler(base,object)));	
 			list.append(element);	
+		}
+		
+		if(configuration.disablePresence) {
+			list.find('.entry .presence').hide();
 		}
 		
 		base.find('> .content .view > .contacts .scroll-pane').each(function(){
@@ -99,7 +103,7 @@ linphone.ui.view.contacts = {
 	
 	onCall: function(base,object){
 		var addressStr = object.address[0];
-		var address = linphone.ui.utils.getAddress(base, addressStr);
+		var address = linphone.ui.utils.formatAddress(base, addressStr);
 		if(address) {
 			var core = linphone.ui.getCore(base);
 			core.inviteAddress_async(address);

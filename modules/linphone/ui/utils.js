@@ -1,6 +1,48 @@
 /*globals jQuery,linphone*/
 
 linphone.ui.utils = {
+	status: {
+		online: {
+			value: linphone.core.enums.status.Online,
+			cls: 'imageStatusOnline',
+			i18n: 'online'
+		},
+		busy: {
+			value: linphone.core.enums.status.Busy,
+			cls: 'imageStatusBusy',
+			i18n: 'busy'
+		},
+		onThePhone: {
+			value: linphone.core.enums.status.OnThePhone,
+			cls: 'imageStatusBusy',
+			i18n: 'onThePhone'
+		},
+		doNotDisturb: {
+			value: linphone.core.enums.status.DoNotDisturb,
+			cls: 'imageStatusBusy',
+			i18n: 'doNotDisturb'
+		},
+		beRightBack: {
+			value: linphone.core.enums.status.BeRightBack,
+			cls: 'imageStatusAway',
+			i18n: 'beRightBack'
+		},
+		away: {
+			value: linphone.core.enums.status.Away,
+			cls: 'imageStatusAway',
+			i18n: 'away'
+		},
+		outToLunch: {
+			value: linphone.core.enums.status.OutToLunch,
+			cls: 'imageStatusAway',
+			i18n: 'outToLunch'
+		},
+		offline: {
+			value: linphone.core.enums.status.Offline,
+			cls: 'imageStatusOffline',
+			i18n: 'offline'
+		}
+	},
 	regex: {
 		sip: {
 			username: "([0-9a-zA-Z-_.!~*'()&=+$,;?/]+)",
@@ -12,10 +54,6 @@ linphone.ui.utils = {
 		return text.toLowerCase().
 				replace(/ /g, '_').
 				replace(/\./g, '');
-	},
-	formatAddress: function(base, uri) {
-		var core = linphone.ui.getCore(base);
-		return core.interpretUrl(uri);
 	},
 	getTimeFormat: function(timestamp) {
 		var date = new Date(parseInt(timestamp, 10) * 1000);
@@ -102,6 +140,17 @@ linphone.ui.utils = {
 	getDuration: function(base, duration) {
 		var ret = jQuery.i18n.skeleton(jQuery.i18n.functionKey('linphone.ui.utils.getDurationFormat'), parseInt(duration, 10));
 		return ret;
+	},
+	formatAddress: function(base, uri) {
+		var core = linphone.ui.getCore(base);
+		return core.interpretUrl(uri);
+	},
+	getStatus: function(base, object, field) {
+		var status = linphone.ui.utils.status.online;
+		if(typeof field === 'undefined') {
+			return status;
+		}
+		return status[field];
 	},
 	getUsername: function(base, object) {
 		var address;

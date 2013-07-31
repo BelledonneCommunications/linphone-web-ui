@@ -111,7 +111,7 @@ linphone.ui.menu = {
 		
 		list.tooltip({
 			tooltipClass: "linphonewebcls",
-			position: { my: "middle top", at: "middle bottom", collision: "flipfit" }
+			position: { my: "middle top+5", at: "middle bottom", collision: "flipfit" }
 		});
 	},
 
