@@ -92,7 +92,7 @@ linphone.ui.view.contact = {
 					linphone.ui.view.contact.addAddress(base,object.address[item]);
 				}	
 			}
-			contact.find('.contactImg').val('tmp/peter.jpg');
+			contact.find('.contactImg').val('style/img/avatar.png');
 		}
 		contact.data('id',id);
 		linphone.ui.view.show(base,'contact');
@@ -113,7 +113,7 @@ linphone.ui.view.contact = {
 			lastname: contact.find('.lastname').val(),
 			firstname:  contact.find('.firstname').val(),
 			address: addressList,
-			img : "tmp/profile-medium.jpg"
+			img : "style/img/avatar.png"
 		};
 
 		if(id === null){

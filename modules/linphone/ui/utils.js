@@ -199,7 +199,7 @@ linphone.ui.utils = {
 		return 'Unknown';
 	},
 	getAvatar: function(base, object) {
-		return 'tmp/marcel.jpg';
+		return 'style/img/avatar.png';
 	},
 	getMainProxyConfig: function(base) {
 		var proxy = null;
