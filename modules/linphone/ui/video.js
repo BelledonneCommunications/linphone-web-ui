@@ -64,11 +64,17 @@ linphone.ui.video = {
 		var functionName = '__linphone_ui_video_loadHandler' + linphone.ui.video.instanceCount;
 		window[functionName] = function (core) {
 			linphone.ui.video._loadHandler(core);
-			window[functionName] = undefined;
+			/* 
+			 * 
+			 * We must keep the function, because if the element is hidden, 
+			 * when it will re-appear this function will be called again.
+			 * 
+			 */
+			/*window[functionName] = undefined;
 			try{
 				delete window[functionName];
 			} catch(e) {
-			}
+			}*/
 		};
 		var video = linphone.ui.template(base, 'object.video', {
 			fct: functionName,

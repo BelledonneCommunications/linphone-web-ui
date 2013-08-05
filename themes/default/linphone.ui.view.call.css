@@ -19,14 +19,14 @@
 }
 .linphoneweb > .content .view > .call .video .profile .resize .expand {
 	position: absolute;
-	left: -16px;
-	top: -16px;
+	left: -14px;
+	top: -14px;
 	cursor: pointer;
 }
 .linphoneweb > .content .view > .call .video .profile .resize .collapse {
 	position: absolute;
-	left: -16px;
-	top: -16px;
+	left: -14px;
+	top: -14px;
 	cursor: pointer;
 }
 
