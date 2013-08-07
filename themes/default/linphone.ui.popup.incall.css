@@ -18,6 +18,8 @@
 	display: block;
 	border: 5px solid #e4edf2;
 	margin: 10px auto;
+	height: 50px;
+	width: 50px;
 }
 .linphoneweb > .content .popup > .incall .contactName {
 	color: #fff;
