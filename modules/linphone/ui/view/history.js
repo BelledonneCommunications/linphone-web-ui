@@ -97,18 +97,18 @@ linphone.ui.view.history = {
 				case linphone.ui.view.history.filter.all:
 				break;
 				case linphone.ui.view.history.filter.incoming:
-					ret = 'direction = ' + linphone.core.enums.callDir.Incoming.toString();
+					ret = 'WHERE (direction = ' + linphone.core.enums.callDir.Incoming.toString() + ')';
 				break;
 				case linphone.ui.view.history.filter.outgoing:
-					ret = 'direction = ' + linphone.core.enums.callDir.Outgoing.toString();
+					ret = 'WHERE (direction = ' + linphone.core.enums.callDir.Outgoing.toString() + ')';
 				break;
 				case linphone.ui.view.history.filter.miss:
-					ret = 'status = ' + linphone.core.enums.callStatus.Missed.toString();
+					ret = 'WHERE (status = ' + linphone.core.enums.callStatus.Missed.toString() + ')';
 				break;
 				default:
 				linphone.ui.logger.error(base, 'Invalid linphone.ui.view.history.filter state');
 			}
-			return ret;
+			return ret + ' ORDER BY date ASC';
 		}
 	},
 	
@@ -192,6 +192,11 @@ linphone.ui.view.history = {
 				elem.find('.actions .remove').css('display','inline-block');
 			} else {
 				elem.find('.actions .remove').hide();
+			}
+			var contact = linphone.ui.utils.getContact(base, obj.remote);
+			if(contact) {
+				var name = linphone.ui.utils.getContactName(base, contact);
+				elem.find('.contact .name').text(name);
 			}
 			list.append(elem);
 		}

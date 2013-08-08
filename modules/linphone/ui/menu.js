@@ -91,6 +91,13 @@ linphone.ui.menu = {
 			var call = calls[i];
 			var element = linphone.ui.template(base, 'menu.calls.list.entry', call);
 			element.click(linphone.ui.exceptionHandler(base, f(base, call)));
+			
+			var contact = linphone.ui.utils.getContact(base, call.remoteAddress);
+			if(contact) {
+				var name = linphone.ui.utils.getContactName(base, contact);
+				element.find('.name').text(name);
+			}
+			
 			list.append(element);
 			
 			// Append animation

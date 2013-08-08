@@ -24,16 +24,21 @@ var jsonsql = {
 		
 	query: function(sql,json){
 
-		var returnfields = sql.match(/^(select)\s+([a-z0-9_\,\.\s\*]+)\s+from\s+([a-z0-9_\.]+)(?: where\s+(.+))?\s*(?:order\sby\s+([a-z0-9_\,]+))?\s*(asc|desc|ascnum|descnum)?\s*(?:limit\s+([0-9_\,]+))?/i);
+		var returnfields = sql.match(/^(select)\s+([a-z0-9_\,\.\s\*]+)\s+from\s+([a-z0-9_\.]+)(?:\s+where\s+\((.+)\))?(?:\s+order\sby\s+([a-z0-9_\,]+))?(\s+asc|desc|ascnum|descnum)?(?:\s+limit\s+([0-9_\,]+))?/i);
 		
 		var ops = { 
 			fields: returnfields[2].replace(/ /g,'').split(','), 
 			from: returnfields[3].replace(/ /g,''), 
-			where: (typeof returnfields[4] === 'undefined')? "true":returnfields[4].replace(/=/g,'=='),
+			where: (typeof returnfields[4] === 'undefined')? "true":returnfields[4],
 			orderby: (typeof returnfields[5] === 'undefined')? []:returnfields[5].replace(/ /g,'').split(','),
 			order: (typeof returnfields[6] === 'undefined')? "asc":returnfields[6],
 			limit: (typeof returnfields[7] === 'undefined')? []:returnfields[7].replace(/ /g,'').split(',')
 		};
+
+		// Reformat for javascript
+		ops.where = ops.where.replace(/([a-z0-9_]+|".*")\s+NOT\s+IN\s+([a-z0-9_]+)/ig, 'isNotIn($1,$2)');
+		ops.where = ops.where.replace(/([a-z0-9_]+|".*")\s+IN\s+([a-z0-9_]+)/ig, 'isIn($1,$2)');
+		ops.where = ops.where.replace(/=/g,'==').replace(/NOT/ig, '!');
 
 		return this.parse(json, ops);		
 	},
@@ -59,9 +64,27 @@ var jsonsql = {
 		if(jsonsql_o.where == "") 
 			jsonsql_o.where = "true";
 		
-		var f = new Function("with(this) { return " + jsonsql_o.where + "}");
+		var isIn = function(value, object) {
+			for(var item in object) {
+				if(object[item] === value) {
+					return true;
+				}
+			}
+			return false;
+		}
+		
+		var isNotIn = function(value, object) {
+			for(var item in object) {
+				if(object[item] === value) {
+					return false;
+				}
+			}
+			return true;
+		}
+		
+		var f = new Function('isIn, isNotIn', "with(this) { return " + jsonsql_o.where + "}");
 		for(var jsonsql_i in jsonsql_scope){
-			if(f.call(jsonsql_scope[jsonsql_i])){
+			if(f.call(jsonsql_scope[jsonsql_i], isIn, isNotIn)){
 				jsonsql_result[jsonsql_rc++] = this.returnFields(jsonsql_scope[jsonsql_i],jsonsql_o.fields);
 			}
 		}

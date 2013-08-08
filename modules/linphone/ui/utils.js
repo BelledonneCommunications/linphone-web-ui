@@ -152,6 +152,30 @@ linphone.ui.utils = {
 		}
 		return status[field];
 	},
+	getContact: function(base, object) {
+		var configuration = linphone.ui.configuration(base);
+		var address;
+		if(typeof object == 'string') {
+			var core = linphone.ui.getCore(base);
+			object = core.newAddress(object);
+			address = object.asStringUriOnly();
+		} else {
+			address = object.asStringUriOnly();
+		}
+		if(address) {
+			var data = configuration.models.contacts.list('WHERE ("' + address + '" IN address)');
+			for(var item in data) {
+				return data[item];
+			}
+		}
+		return null;
+	},
+	getContactName: function(base, contact) {
+		if(contact) {
+			return contact.firstname + ' ' + contact.lastname;
+		}
+		return null;
+	},
 	getUsername: function(base, object) {
 		var address;
 		if (typeof object === 'string') {

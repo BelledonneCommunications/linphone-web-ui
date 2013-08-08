@@ -3,7 +3,7 @@
 	<script id="linphone.ui.view.contacts.list.entry" type="text/x-handlebars-template">
 		<div class="entry">
 			<img src="{{context.object.img}}" alt="" class="contactImg" />
-			<div class="contactName"> {{context.object.firstname}} {{context.object.lastname}}</div>
+			<div class="contactName">{{LinphoneWeb-Call helpers.utils.getContactName context.object}}</div>
 			<div class="presence">
 				<span class="{{LinphoneWeb-Call helpers.utils.getStatus context.address 'cls'}}"></span>
 				<span class="contactStatus" data-i18n="global.status.{{LinphoneWeb-Call helpers.utils.getStatus context.address 'i18n'}}"></span>

@@ -48,7 +48,14 @@ linphone.models.contacts.localStorage.engine.prototype.count = function() {
 };
  
 linphone.models.contacts.localStorage.engine.prototype.list = function(filters) {
-	return this.data.list;
+	var data = this.data.list;
+	var ret;
+	if(typeof filters === 'string' && filters.length) {
+		ret = jsonsql.query('SELECT * FROM json ' + filters, data);
+    } else {
+		ret =  data;
+	}
+	return ret;
 };
 
 

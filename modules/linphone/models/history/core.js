@@ -43,7 +43,8 @@ linphone.models.history.core.engine.prototype.list = function(filters) {
 	var ret;
 	if(typeof filters === 'string' && filters.length) {
 		filters = filters.replace(/direction/g, 'dir');
-		ret = jsonsql.query('SELECT * FROM json WHERE ' + filters, logs);
+		filters = filters.replace(/date/g, 'startDate');
+		ret = jsonsql.query('SELECT * FROM json ' + filters, logs);
     } else {
 		ret =  logs;
 	}
