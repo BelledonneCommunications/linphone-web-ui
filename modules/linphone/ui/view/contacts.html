@@ -1,26 +1,26 @@
 <div class="contacts">
-	<!-- @if env='debug' -->
 	<script id="linphone.ui.view.contacts.list.entry" type="text/x-handlebars-template">
 		<div class="entry">
 			<img src="{{context.object.img}}" alt="" class="contactImg" />
 			<div class="contactName">{{LinphoneWeb-Call helpers.utils.getContactName context.object}}</div>
+			<div class="button buttonAction goContact floatRight"><div class="image imageModify"></div></div>
 			<div class="presence">
 				<span class="{{LinphoneWeb-Call helpers.utils.getStatus context.address 'cls'}}"></span>
 				<span class="contactStatus" data-i18n="global.status.{{LinphoneWeb-Call helpers.utils.getStatus context.address 'i18n'}}"></span>
 			</div>
-			<div class="contactNumber">{{context.address}}</div>
 		
-			<div class="actions">
-				<div class="button buttonAction goContact"><div class="image imageModify"></div></div><!--
-				Avoid issue with inline block in dev mode
-				--><div class="callContact button"><div class="image imageCall"></div></div><!--
-				Avoid issue with inline block in dev mode
-				--><div class="button"><div class="image imageChat"></div></div>
+			<div class="addresses floatLeft">
+				{{#each context.addressList}}
+				<div class="address">
+						<div class="callContact button"><div class="image imageCall"></div></div>
+						<div class="button"><div class="image imageChat"></div></div>
+					<div class="contactNumber">{{this}}</div>		
+				</div>
+				{{/each}}		
 			</div>
 			<hr />
 		</div>
 	</script>
-	<!-- @endif -->
 	<div class="actions">
 		<div class="filters button-group">
 			<div class="all button buttonSelect"><div class="text" data-i18n="content.view.contacts.filter.all"></div></div><!--

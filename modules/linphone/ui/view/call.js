@@ -77,7 +77,6 @@ linphone.ui.view.call = {
 		if(linphone.ui.configuration(base).disableConference) {
 			base.find('.actions .conference').hide();
 		}
-		
 	},
 	hide: function(base) {
 		var data = base.find('> .content .view > .call ').data('qualityTimer');

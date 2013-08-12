@@ -101,7 +101,7 @@ linphone.ui.menu = {
 			list.append(element);
 			
 			// Append animation
-			if(call == core.currentCall) {
+			if(call === core.currentCall) {
 				linphone.ui.menu.hightlightAnimation(element);
 				element.mouseenter(function() {
 					var that = jQuery(this);

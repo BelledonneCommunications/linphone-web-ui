@@ -18,18 +18,19 @@ linphone.ui.view.contact = {
 		base.find('> .content .view > .contact .addressList .addAddress').click(linphone.ui.exceptionHandler(base, function(){
 			linphone.ui.view.contact.addAddress(base,'');
 		}));
-		base.find('> .content .view > .contact .uploadPhoto').hide();
+		base.find('> .content .view > .contact .uploadPhoto').hide();	
 	},
 	translate: function(base) {
-		var login = base.find('> .content .view > .contact');
-		login.find('.firstname').watermark(jQuery.i18n.translate('content.view.contact.firstname'), {className: 'watermark', useNative: false});
-		login.find('.lastname').watermark(jQuery.i18n.translate('content.view.contact.lastname'), {className: 'watermark', useNative: false});
-		login.find('.addressContact .addressInput').watermark(jQuery.i18n.translate('content.view.contact.addressContact'), {className: 'watermark', useNative: false});
+		var contact = base.find('> .content .view > .contact');
+		contact.find('.firstname').watermark(jQuery.i18n.translate('content.view.contact.firstname'), {className: 'watermark', useNative: false});
+		contact.find('.lastname').watermark(jQuery.i18n.translate('content.view.contact.lastname'), {className: 'watermark', useNative: false});
+		contact.find('.addressInput').watermark(jQuery.i18n.translate('content.view.contact.addressContact'), {className: 'watermark', useNative: false});
 	},
 	
 	/**/
 	show: function(base) {
 		linphone.ui.menu.show(base);
+		var contact = base.find('> .content .view > .contact');
 	},
 	hide: function(base) {
 	},
@@ -37,36 +38,29 @@ linphone.ui.view.contact = {
 		var contact = base.find('> .content .view > .contact .entry');
 		contact.find('.lastname').val('');
 		contact.find('.firstname').val('');
-		contact.find('.addressFirst .addressInput').val('');
-		contact.find('.addressPlus').remove();
 	},
 	addAddress: function(base,value){
 		var contact = base.find('> .content .view > .contact .entry');
 		var addresses = contact.find('.addressContact');
 		
-		var removeHandler = function(base,name){
+		var removeHandler = function(base,element){
 			return function(){
-				linphone.ui.view.contact.removeAddress(base,name);	
+				linphone.ui.view.contact.removeAddress(base,element);	
 			};
 		};
-		
-		if(addresses.length < 4){
-			var newAddress = jQuery(addresses[0]).clone();
-			newAddress.addClass('addressPlus');
-			var name = 'address' + (addresses.length);
-			newAddress.addClass(name);
-			newAddress.removeClass('addressFirst');
-			newAddress.insertAfter(addresses.last());
-			newAddress.find('.addressInput').val(value);
-			newAddress.find('.addressInput').watermark(jQuery.i18n.translate('content.view.contact.addressContact'), {className: 'watermark', useNative: false});
-			contact.find('.addressPlus .removeAddress').show();
-			base.find('> .content .view > .contact .addressList .removeAddress').click(linphone.ui.exceptionHandler(base, removeHandler(base,name)));
-		}
+		var list = contact.find('.list');
+		var element = linphone.ui.template(base, 'view.contact.list',{
+			address : value
+		});	
+		element.find('.removeAddress').click(linphone.ui.exceptionHandler(base, function(){
+			linphone.ui.view.contact.removeAddress(base,removeHandler(base,element));
+		}));
+		element.find('addressInput').watermark();
+		list.append(element);
 	},
-	removeAddress: function(base,name){
-		var contact = base.find('> .content .view > .contact .entry');
-		
-		//console.log("remove");
+	removeAddress: function(base,element){
+		var jobject = jQuery(element);
+		jobject.remove();
 	},
 	
 	addContact: function(base){
@@ -77,23 +71,25 @@ linphone.ui.view.contact = {
 	},
 	onSaveContact: function(base,id,object){
 		var contact = base.find('> .content .view > .contact .entry');
+		
 		linphone.ui.view.contact.clear(base);
+		
+		//new account
+		var list = contact.find('.list');
+		list.empty();
 		if(id === null){
+			linphone.ui.view.contact.addAddress(base,'');
 			base.find('> .content .view > .contact .removeContact').hide();
+		//edit account
 		} else {
 			base.find('> .content .view > .contact .removeContact').show();
 			contact.find('.firstname').val(object.firstname);
 			contact.find('.lastname').val(object.lastname);
 			for(var item in object.address){
-				if(item === '0'){
-					contact.find('.addressFirst .addressInput').val(object.address[item]);
-					contact.find('.addressFirst .removeAddress').hide();
-				} else {
-					linphone.ui.view.contact.addAddress(base,object.address[item]);
-				}	
+				linphone.ui.view.contact.addAddress(base,object.address[item]);	
 			}
-			contact.find('.contactImg').val('style/img/avatar.png');
 		}
+		contact.find('.contactImg').val('style/img/avatar.png');
 		contact.data('id',id);
 		linphone.ui.view.show(base,'contact');
 	},

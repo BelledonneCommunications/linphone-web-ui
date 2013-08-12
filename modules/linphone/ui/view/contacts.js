@@ -65,7 +65,7 @@ linphone.ui.view.contacts = {
 		var configuration = linphone.ui.configuration(base);
 		var data = configuration.models.contacts.list();
 		var list = contacts.find('.list');
-		
+
 		var editHandler = function(base,object){
 			return function(){
 				linphone.ui.view.contact.editContact(base,object.id,object);	
@@ -83,11 +83,16 @@ linphone.ui.view.contacts = {
 			var object = data[item];
 			var element = linphone.ui.template(base, 'view.contacts.list.entry',{
 				object : object,
-				address : object.address[0]
+				addressList : object.address
 			});	
-			element.find('.actions .goContact').click(linphone.ui.exceptionHandler(base,editHandler(base,object)));	
-			element.find('.actions .callContact').click(linphone.ui.exceptionHandler(base,callHandler(base,object)));	
-			list.append(element);	
+			element.find(' .goContact').click(linphone.ui.exceptionHandler(base,editHandler(base,object)));	
+			list.append(element);
+			
+			element.find(".address").each(function (index, object){
+				var jobject = jQuery(object);
+				var address = jobject.find(".contactNumber").text();
+				jobject.find(".callContact").click(linphone.ui.exceptionHandler(base,callHandler(base,address)));
+			});	
 		}
 		
 		if(configuration.disablePresence) {
@@ -101,15 +106,10 @@ linphone.ui.view.contacts = {
 	hide: function(base) {
 	},
 	
-	onCall: function(base,object){
-		var addressStr = object.address[0];
-		var address = linphone.ui.utils.formatAddress(base, addressStr);
-		if(address) {
-			var core = linphone.ui.getCore(base);
-			core.inviteAddress_async(address);
-			linphone.ui.logger.log(base, "Call: " + address.asString());
-		} else {
+	onCall: function(base,address){
+		linphone.ui.utils.call(base, address, function() {
+		}, function() {
 			linphone.ui.popup.error.show(base, 'global.errors.uri.misformatted');
-		}
+		});
 	}
 };
