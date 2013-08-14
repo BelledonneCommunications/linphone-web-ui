@@ -1,0 +1,79 @@
+<html>
+<head>
+    <style type="text/css">
+    </style>
+
+    <script type="text/JavaScript">
+        function getCore(name)
+        {
+            return document.getElementById(name);
+        }
+
+        function addEvent(obj, name, func)
+        {
+            if (window.addEventListener) {
+                obj.addEventListener(name, func, false); 
+            } else {
+                obj.attachEvent("on"+name, func);
+            }
+        }
+        
+        /* Basic call */
+        function call(addressStr)
+        {
+        	var core = getCore('core');
+			var address = core.newAddress(addressStr);
+			if(address !== null) {
+				core.inviteAddress_async(address);
+				console.log("Call: " + address.asString());
+			}
+        }
+        
+        /* Registration */
+        function registration(username,password,server){
+        	var core = getCore('core');
+
+			var proxy = core.newProxyConfig();
+			var authinfo = core.newAuthInfo(username, null,password,null,null);
+			
+			core.addAuthInfo(authinfo);
+			proxy.identity = 'sip:' + username + '@sip.linphone.org';
+			proxy.serverAddr = server;
+			proxy.expires = 3600;
+			proxy.registerEnabled = true;
+			core.addProxyConfig(proxy);
+			core.defaultProxy = proxy;
+        }
+        
+        /* Main function */
+        function load()
+        {
+            var core = getCore('core');
+            core.init('local:///.linphonerc');
+            
+            /* Add callback for registration and call state */
+            addEvent(core,"callStateChanged",onCallStateChanged);
+            addEvent(core,"registrationStateChanged",onRegistrationStateChanged);
+            
+            /* Start main loop for receiving notifications and doing background linphonecore work */
+            core.iterateEnabled = true; 
+        }
+        
+        function onCallStateChanged(event, call, state, message)
+        {
+            console.log(message);
+        }
+        
+        function onRegistrationStateChanged(event, proxy, state, message)
+        {
+            console.log(message);
+        }
+    </script>
+</head>
+<body>
+    <object id="core" type="application/x-linphone-web" width="0" height="0" > 
+    	<param name="onload" value="load" /> 
+		Linphone Core 
+	</object>
+</body>
+</html>
