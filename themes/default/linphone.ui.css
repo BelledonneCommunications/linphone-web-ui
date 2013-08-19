@@ -422,6 +422,7 @@
 	z-index: 9999;
 	max-width: 300px;
 	-webkit-box-shadow: 0 0 5px #aaa;
+	-moz-box-shadow: 0 0 5px #aaa;
 	box-shadow: 0 0 5px #aaa;
 	border: 1px solid #dddddd;
 	background-color: #000000;

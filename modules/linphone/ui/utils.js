@@ -155,7 +155,7 @@ linphone.ui.utils = {
 	getContact: function(base, object) {
 		var configuration = linphone.ui.configuration(base);
 		var address;
-		if(typeof object == 'string') {
+		if(typeof object === 'string') {
 			var core = linphone.ui.getCore(base);
 			object = core.newAddress(object);
 			address = object.asStringUriOnly();

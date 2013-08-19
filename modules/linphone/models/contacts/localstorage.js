@@ -1,7 +1,7 @@
 /**
  * Contacts engine using localstorage
  */
-/*globals linphone,PersistentStorage */
+/*globals linphone,PersistentStorage,jsonsql */
 
 linphone.models.contacts.localStorage = {
 	/*

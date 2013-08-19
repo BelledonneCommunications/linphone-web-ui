@@ -48,19 +48,16 @@ linphone.models.history.core.engine.prototype.list = function(filters) {
     } else {
 		ret =  logs;
 	}
-	return ret;
+	
+	return ret.map(linphone.models.history.core.engine.internal2external);
 };
 
-
-//
-// CRUD
-//
- 
-linphone.models.history.core.engine.prototype.read = function(id) {
+linphone.models.history.core.engine.internal2external = function(id) {
 	var log = id;
 	
 	// Map to JS object
 	return {
+		id: id,
 		from: log.from.asString(),
 		to: log.to.asString(),
 		remote: log.remoteAddress.asString(),
@@ -69,6 +66,14 @@ linphone.models.history.core.engine.prototype.read = function(id) {
 		direction: log.dir,
 		status: log.status
 	};
+};
+
+//
+// CRUD
+//
+ 
+linphone.models.history.core.engine.prototype.read = function(id) {
+	return linphone.models.history.core.engine.internal2external(id);
 };
 
 linphone.models.history.core.engine.prototype.create = function(object) {

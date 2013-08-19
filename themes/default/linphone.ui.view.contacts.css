@@ -38,9 +38,11 @@
 	color: #5d8398;
 	line-height: 15px;
 }
+/*
 .linphoneweb > .content .view > .contacts .entry .addresses {
 	
 }
+*/
 .linphoneweb > .content .view > .contacts .scroll-pane {
 	width: 710px;
 	height: 488px; /* 550 - 55(height) - 10(padding top) - 1(padding bot) - 1(border bot) */

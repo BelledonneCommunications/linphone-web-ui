@@ -177,17 +177,16 @@ linphone.ui.view.history = {
 		
 		var removeWrapper = function(obj) {
 			return function() {
-				configuration.models.history.remove(obj);
+				configuration.models.history.remove(obj.id);
 			};
 		};
 		
 		for(var item in data) {
-			var id = data[item];
-			var obj = configuration.models.history.read(id);
+			var obj = data[item];
 			var elem = linphone.ui.template(base, 'view.history.list.entry', obj);
 			jQuery.i18n.update(elem);
 			elem.find('.actions .call').click(linphone.ui.exceptionHandler(base, callWrapper(obj)));
-			elem.find('.actions .remove').click(linphone.ui.exceptionHandler(base, removeWrapper(id)));
+			elem.find('.actions .remove').click(linphone.ui.exceptionHandler(base, removeWrapper(obj)));
 			if(edit) {
 				elem.find('.actions .remove').css('display','inline-block');
 			} else {

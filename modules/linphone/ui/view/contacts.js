@@ -66,16 +66,22 @@ linphone.ui.view.contacts = {
 		var data = configuration.models.contacts.list();
 		var list = contacts.find('.list');
 
-		var editHandler = function(base,object){
+		var editHandler = function(base,object) {
 			return function(){
 				linphone.ui.view.contact.editContact(base,object.id,object);	
 			};
 		};
 		
-		var callHandler = function(base,object){
+		var callHandler = function(base,object) {
 			return function(){
 				linphone.ui.view.contacts.onCall(base,object);	
 			};
+		};
+		
+		var addressHandler = function (index, object) {
+			var jobject = jQuery(object);
+			var address = jobject.find(".contactNumber").text();
+			jobject.find(".callContact").click(linphone.ui.exceptionHandler(base,callHandler(base,address)));
 		};
 		
 		list.empty();
@@ -85,14 +91,10 @@ linphone.ui.view.contacts = {
 				object : object,
 				addressList : object.address
 			});	
-			element.find(' .goContact').click(linphone.ui.exceptionHandler(base,editHandler(base,object)));	
+			element.find(' .goContact').click(linphone.ui.exceptionHandler(base, editHandler(base,object)));	
 			list.append(element);
 			
-			element.find(".address").each(function (index, object){
-				var jobject = jQuery(object);
-				var address = jobject.find(".contactNumber").text();
-				jobject.find(".callContact").click(linphone.ui.exceptionHandler(base,callHandler(base,address)));
-			});	
+			element.find(".address").each(addressHandler);	
 		}
 		
 		if(configuration.disablePresence) {

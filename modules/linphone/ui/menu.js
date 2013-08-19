@@ -79,7 +79,7 @@ linphone.ui.menu = {
 		list.empty();
 		var calls = core.calls;
 		
-		var f = function(base, call) {
+		var clickFunction = function(base, call) {
 			return function() {
 				if(linphone.ui.view.show(base,'call',call) === false) {
 					linphone.ui.view.call.update(base,call);
@@ -87,10 +87,22 @@ linphone.ui.menu = {
 			};
 		};
 		
+		var enterFunction = function() {
+					var that = jQuery(this);
+					that.stop(true, true).removeClass('highlighted');
+					that.addClass('hover');
+		};
+		
+		var leaveFunction = function() {
+					var that = jQuery(this);
+					that.stop(true, true).removeClass('hover');
+					linphone.ui.menu.hightlightAnimation(that);
+		};
+		
 		for(var i = 0; i < calls.length; ++i) {
 			var call = calls[i];
 			var element = linphone.ui.template(base, 'menu.calls.list.entry', call);
-			element.click(linphone.ui.exceptionHandler(base, f(base, call)));
+			element.click(linphone.ui.exceptionHandler(base, clickFunction(base, call)));
 			
 			var contact = linphone.ui.utils.getContact(base, call.remoteAddress);
 			if(contact) {
@@ -103,16 +115,8 @@ linphone.ui.menu = {
 			// Append animation
 			if(call === core.currentCall) {
 				linphone.ui.menu.hightlightAnimation(element);
-				element.mouseenter(function() {
-					var that = jQuery(this);
-					that.stop(true, true).removeClass('highlighted');
-					that.addClass('hover');
-				});
-				element.mouseleave(function() {
-					var that = jQuery(this);
-					that.stop(true, true).removeClass('hover');
-					linphone.ui.menu.hightlightAnimation(that);
-				});
+				element.mouseenter(enterFunction);
+				element.mouseleave(leaveFunction);
 			}
 		}
 		
