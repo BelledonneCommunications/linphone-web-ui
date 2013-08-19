@@ -9,19 +9,26 @@
 	padding: 10px 10px 1px 10px;
 	position: relative;
 }
-.linphoneweb > .content .view > .contacts .entry .contactImg {
+.linphoneweb > .content .view > .contacts .entry .avatar {
 	border: 5px solid #e4edf2;
-	float: left;
 	margin-right: 10px;
 	width: 100px;
 	height: 100px;
+	display: inline-block;
+	vertical-align: top;
 }
-.linphoneweb > .content .view > .contacts .entry .contactName {
+.linphoneweb > .content .view > .contacts .entry .details {
+	width: 550px;
+	display: inline-block;
+	vertical-align: top;
+}
+.linphoneweb > .content .view > .contacts .entry .name {
 	margin-top: 7px;
 	line-height: 20px;
 	font-size: 11pt;
+	display: inline-block;
 }
-.linphoneweb > .content .view > .contacts .entry .contactStatus {
+.linphoneweb > .content .view > .contacts .entry .status {
 	color: #7a7a7a;
 	text-transform: uppercase;
 	font-size: 8pt;
@@ -34,15 +41,23 @@
 	margin-right: 5px;
 	margin-top: 2px;
 }
-.linphoneweb > .content .view > .contacts .entry .contactNumber {
+.linphoneweb > .content .view > .contacts .entry .number {
 	color: #5d8398;
-	line-height: 15px;
+	line-height: 40px;
+	display: inline-block;
 }
-/*
 .linphoneweb > .content .view > .contacts .entry .addresses {
-	
+	clear: both;
+	width: 100%;
 }
-*/
+.linphoneweb > .content .view > .contacts .entry .addresses .address {
+	height: 40px;
+	margin-top: 5px;
+	width: 100%;
+}
+.linphoneweb > .content .view > .contacts .entry .addresses .address .button {
+	float: right;
+}
 .linphoneweb > .content .view > .contacts .scroll-pane {
 	width: 710px;
 	height: 488px; /* 550 - 55(height) - 10(padding top) - 1(padding bot) - 1(border bot) */

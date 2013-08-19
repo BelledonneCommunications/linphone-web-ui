@@ -18,14 +18,6 @@ linphone.ui.view.contacts = {
 		
 		linphone.ui.view.contacts.filter.update(base, linphone.ui.view.contacts.filter.all);
 		
-		var configuration = linphone.ui.configuration(base);
-		var data = configuration.models.contacts.list();
-		var list = contacts.find('.list');
-		
-		for(var item in data) {
-			list.append(data[item]);
-		}
-		
 		contacts.find('> .actions .addContact').click(linphone.ui.exceptionHandler(base, function(){
 			linphone.ui.view.contact.addContact(base,null,null);
 		}));
@@ -63,51 +55,56 @@ linphone.ui.view.contacts = {
 		linphone.ui.menu.show(base);
 		
 		var configuration = linphone.ui.configuration(base);
-		var data = configuration.models.contacts.list();
-		var list = contacts.find('.list');
-
-		var editHandler = function(base,object) {
-			return function(){
-				linphone.ui.view.contact.editContact(base,object.id,object);	
+		configuration.models.contacts.list(null, function(error, data) {
+			//TODO Check error
+			var list = contacts.find('.list');
+	
+			var editHandler = function(base,object) {
+				return function(){
+					linphone.ui.view.contact.editContact(base,object.id,object);	
+				};
 			};
-		};
-		
-		var callHandler = function(base,object) {
-			return function(){
-				linphone.ui.view.contacts.onCall(base,object);	
-			};
-		};
-		
-		var addressHandler = function (index, object) {
-			var jobject = jQuery(object);
-			var address = jobject.find(".contactNumber").text();
-			jobject.find(".callContact").click(linphone.ui.exceptionHandler(base,callHandler(base,address)));
-		};
-		
-		list.empty();
-		for(var item in data) {
-			var object = data[item];
-			var element = linphone.ui.template(base, 'view.contacts.list.entry',{
-				object : object,
-				addressList : object.address
-			});	
-			element.find(' .goContact').click(linphone.ui.exceptionHandler(base, editHandler(base,object)));	
-			list.append(element);
 			
-			element.find(".address").each(addressHandler);	
-		}
-		
-		if(configuration.disablePresence) {
-			list.find('.entry .presence').hide();
-		}
-		
-		base.find('> .content .view > .contacts .scroll-pane').each(function(){
-			linphone.ui.slider(jQuery(this));
+			var callHandler = function(base,object) {
+				return function(){
+					linphone.ui.view.contacts.onCall(base,object);	
+				};
+			};
+			
+			var addressHandler = function (index, object) {
+				var jobject = jQuery(object);
+				var address = jobject.find(".contactNumber").text();
+				jobject.find(".callContact").click(linphone.ui.exceptionHandler(base,callHandler(base,address)));
+			};
+			
+			list.empty();
+			for(var item in data) {
+				var object = data[item];
+				var element = linphone.ui.template(base, 'view.contacts.list.entry',{
+					object : object,
+					addressList : object.address
+				});	
+				element.find(' .goContact').click(linphone.ui.exceptionHandler(base, editHandler(base,object)));	
+				list.append(element);
+				
+				element.find(".address").each(addressHandler);	
+			}
+			
+			if(configuration.disableChat) {
+				base.find('.entry .chatContact').hide();
+			}
+			if(configuration.disablePresence) {
+				list.find('.entry .presence').hide();
+			}
+			
+			base.find('> .content .view > .contacts .scroll-pane').each(function(){
+				linphone.ui.slider(jQuery(this));
+			});
 		});
 	},
 	hide: function(base) {
 	},
-	
+
 	onCall: function(base,address){
 		linphone.ui.utils.call(base, address, function() {
 		}, function() {

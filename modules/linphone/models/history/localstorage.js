@@ -29,12 +29,16 @@ linphone.models.history.localStorage = {
 // List
 //
 
-linphone.models.history.localStorage.engine.prototype.count = function() {
-	return this.data.list.length;
+linphone.models.history.localStorage.engine.prototype.count = function(filters, callback) {
+	if(typeof callback !== 'undefined') {
+		callback(null, this.data.list.length);
+	}
 };
  
-linphone.models.history.localStorage.engine.prototype.list = function(filters) {
-	return this.data.list;
+linphone.models.history.localStorage.engine.prototype.list = function(filters, callback) {
+	if(typeof callback !== 'undefined') {
+		callback(null, this.data.list);
+	}
 };
 
 
@@ -42,14 +46,30 @@ linphone.models.history.localStorage.engine.prototype.list = function(filters) {
 // CRUD
 //
  
-linphone.models.history.localStorage.engine.prototype.read = function(id) {
+linphone.models.history.localStorage.engine.prototype.read = function(id, callback) {
+	// Do nothing
+	if(typeof callback !== 'undefined') {
+		callback("Not implemented", null);
+	}
 };
 
-linphone.models.history.localStorage.engine.prototype.create = function(object) {
+linphone.models.history.localStorage.engine.prototype.create = function(object, callback) {
+	// Do nothing
+	if(typeof callback !== 'undefined') {
+		callback("Not implemented", null);
+	}
 };
  
-linphone.models.history.localStorage.engine.prototype.update = function(id, object) {
+linphone.models.history.localStorage.engine.prototype.update = function(object, callback) {
+	// Do nothing
+	if(typeof callback !== 'undefined') {
+		callback("Not implemented", null);
+	}
 };
 
-linphone.models.history.localStorage.engine.prototype.remove = function(id) {
+linphone.models.history.localStorage.engine.prototype.remove = function(id, callback) {
+	// Do nothing
+	if(typeof callback !== 'undefined') {
+		callback("Not implemented", null);
+	}
 };

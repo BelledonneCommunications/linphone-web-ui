@@ -17,14 +17,23 @@ linphone.models.history.skeleton = {
 	}
 }
 
+
 //
 // List
 //
 
-linphone.models.history.skeleton.engine.prototype.count = function() {
+linphone.models.history.skeleton.engine.prototype.count = function(filters, callback) {
+	// Do nothing
+	if(typeof callback !== 'undefined') {
+		callback("Not implemented", null);
+	}
 };
  
-linphone.models.history.skeleton.engine.prototype.list = function(filters) { 	
+linphone.models.history.skeleton.engine.prototype.list = function(filters, callback) {
+	// Do nothing
+	if(typeof callback !== 'undefined') {
+		callback("Not implemented", null); 
+	}
 };
 
 
@@ -32,14 +41,30 @@ linphone.models.history.skeleton.engine.prototype.list = function(filters) {
 // CRUD
 //
  
-linphone.models.history.skeleton.engine.prototype.read = function(id) {
+linphone.models.history.skeleton.engine.prototype.read = function(id, callback) {
+	// Do nothing
+	if(typeof callback !== 'undefined') {
+		callback("Not implemented", null);
+	}
 };
  		
-linphone.models.history.skeleton.engine.prototype.create = function(object) {
+linphone.models.history.skeleton.engine.prototype.create = function(object, callback) {
+	// Do nothing
+	if(typeof callback !== 'undefined') {
+		callback("Not implemented", null);
+	}
 };
  
-linphone.models.history.skeleton.engine.prototype.update = function(id, object) {
+linphone.models.history.skeleton.engine.prototype.update = function(object, callback) {
+	// Do nothing
+	if(typeof callback !== 'undefined') {
+		callback("Not implemented", null);
+	}
 };
 
-linphone.models.history.skeleton.engine.prototype.remove = function(id) {
+linphone.models.history.skeleton.engine.prototype.remove = function(id, callback) {
+	// Do nothing
+	if(typeof callback !== 'undefined') {
+		callback("Not implemented", null);
+	}
 };

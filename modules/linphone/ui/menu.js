@@ -88,15 +88,22 @@ linphone.ui.menu = {
 		};
 		
 		var enterFunction = function() {
-					var that = jQuery(this);
-					that.stop(true, true).removeClass('highlighted');
-					that.addClass('hover');
+			var that = jQuery(this);
+			that.stop(true, true).removeClass('highlighted');
+			that.addClass('hover');
 		};
 		
 		var leaveFunction = function() {
-					var that = jQuery(this);
-					that.stop(true, true).removeClass('hover');
-					linphone.ui.menu.hightlightAnimation(that);
+			var that = jQuery(this);
+			that.stop(true, true).removeClass('hover');
+			linphone.ui.menu.hightlightAnimation(that);
+		};
+		
+		var updateName = function(error, contact) {
+			if(contact) {
+				var name = linphone.ui.utils.getContactName(base, contact);
+				element.find('.name').text(name);
+			}
 		};
 		
 		for(var i = 0; i < calls.length; ++i) {
@@ -104,11 +111,7 @@ linphone.ui.menu = {
 			var element = linphone.ui.template(base, 'menu.calls.list.entry', call);
 			element.click(linphone.ui.exceptionHandler(base, clickFunction(base, call)));
 			
-			var contact = linphone.ui.utils.getContact(base, call.remoteAddress);
-			if(contact) {
-				var name = linphone.ui.utils.getContactName(base, contact);
-				element.find('.name').text(name);
-			}
+			linphone.ui.utils.getContact(base, call.remoteAddress, updateName);
 			
 			list.append(element);
 			

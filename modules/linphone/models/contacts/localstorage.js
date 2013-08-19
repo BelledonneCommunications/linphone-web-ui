@@ -1,7 +1,7 @@
 /**
  * Contacts engine using localstorage
  */
-/*globals linphone,PersistentStorage,jsonsql */
+/*globals linphone,PersistentStorage,jsonsql,jQuery */
 
 linphone.models.contacts.localStorage = {
 	/*
@@ -36,7 +36,7 @@ linphone.models.contacts.localStorage = {
 // List
 //
 
-linphone.models.contacts.localStorage.engine.prototype.count = function() {
+linphone.models.contacts.localStorage.engine.prototype.count = function(filters, callback) {
 	var size = 0;
 	var key;
 	for (key in this.data.list) {
@@ -44,10 +44,12 @@ linphone.models.contacts.localStorage.engine.prototype.count = function() {
 			size++;
 		} 
 	}
-	return size;
+	if(typeof callback !== 'undefined') {
+		callback(null, size);
+	}
 };
  
-linphone.models.contacts.localStorage.engine.prototype.list = function(filters) {
+linphone.models.contacts.localStorage.engine.prototype.list = function(filters, callback) {
 	var data = this.data.list;
 	var ret;
 	if(typeof filters === 'string' && filters.length) {
@@ -55,7 +57,9 @@ linphone.models.contacts.localStorage.engine.prototype.list = function(filters) 
     } else {
 		ret =  data;
 	}
-	return ret;
+	if(typeof callback !== 'undefined') {
+		callback(null, ret);
+	}
 };
 
 
@@ -63,20 +67,35 @@ linphone.models.contacts.localStorage.engine.prototype.list = function(filters) 
 // CRUD
 //
  
-linphone.models.contacts.localStorage.engine.prototype.read = function(id) {
-	return this.data.list[id];
+linphone.models.contacts.localStorage.engine.prototype.read = function(id, callback) {
+	if(typeof callback !== 'undefined') {
+		callback(null, this.data.list[id]);
+	}
 };
 
-linphone.models.contacts.localStorage.engine.prototype.create = function(object) { 
-	this.data.index = this.data.index +1; 
-	object.id= this.data.index;
+linphone.models.contacts.localStorage.engine.prototype.create = function(object, callback) { 
+	this.data.index = this.data.index + 1; 
+	object.id = this.data.index;
 	this.data.list[this.data.index] = object;
+	if(typeof callback !== 'undefined') {
+		callback(null, true);
+	}
 };
  
-linphone.models.contacts.localStorage.engine.prototype.update = function(id, object) {
-	this.data.list[id] = object;
+linphone.models.contacts.localStorage.engine.prototype.update = function(object, callback) {
+	// Don't care to save id in object
+	var dupObject = jQuery.extend(true, {}, object);
+	delete dupObject.id;
+	
+	this.data.list[object.id] = dupObject;
+	if(typeof callback !== 'undefined') {
+		callback(null, true);
+	}
 };
 
-linphone.models.contacts.localStorage.engine.prototype.remove = function(id) {
+linphone.models.contacts.localStorage.engine.prototype.remove = function(id, callback) {
 	delete this.data.list[id];
+	if(typeof callback !== 'undefined') {
+		callback(null, true);
+	}
 };

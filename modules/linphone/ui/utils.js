@@ -152,7 +152,7 @@ linphone.ui.utils = {
 		}
 		return status[field];
 	},
-	getContact: function(base, object) {
+	getContact: function(base, object, callback) {
 		var configuration = linphone.ui.configuration(base);
 		var address;
 		if(typeof object === 'string') {
@@ -163,12 +163,17 @@ linphone.ui.utils = {
 			address = object.asStringUriOnly();
 		}
 		if(address) {
-			var data = configuration.models.contacts.list('WHERE ("' + address + '" IN address)');
-			for(var item in data) {
-				return data[item];
-			}
+			configuration.models.contacts.list('WHERE ("' + address + '" IN address)', 
+				function(error, data) {
+					for(var item in data) {
+						callback(null, data[item]);
+						return;
+					}
+					callback("Not found", null);
+				}
+			);
 		}
-		return null;
+		callback("Not found", null);
 	},
 	getContactName: function(base, contact) {
 		if(contact) {

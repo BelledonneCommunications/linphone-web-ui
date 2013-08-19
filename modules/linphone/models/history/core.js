@@ -26,31 +26,10 @@ linphone.models.history.core = {
 	}
 };
 
-//
-// List
-//
 
-linphone.models.history.core.engine.prototype.count = function() {
-	var core = linphone.ui.getCore(this.base);
-	var logs = core.callLogs;
-	return logs.length;
-};
- 
-linphone.models.history.core.engine.prototype.list = function(filters) {
-	var core = linphone.ui.getCore(this.base);
-	var logs = core.callLogs;
-	
-	var ret;
-	if(typeof filters === 'string' && filters.length) {
-		filters = filters.replace(/direction/g, 'dir');
-		filters = filters.replace(/date/g, 'startDate');
-		ret = jsonsql.query('SELECT * FROM json ' + filters, logs);
-    } else {
-		ret =  logs;
-	}
-	
-	return ret.map(linphone.models.history.core.engine.internal2external);
-};
+//
+// Internal
+//
 
 linphone.models.history.core.engine.internal2external = function(id) {
 	var log = id;
@@ -68,24 +47,66 @@ linphone.models.history.core.engine.internal2external = function(id) {
 	};
 };
 
+
+//
+// List
+//
+
+linphone.models.history.core.engine.prototype.count = function(filters, callback) {
+	var core = linphone.ui.getCore(this.base);
+	var logs = core.callLogs;
+	if(typeof callback !== 'undefined') {
+		callback(null, logs.length);
+	}
+};
+ 
+linphone.models.history.core.engine.prototype.list = function(filters, callback) {
+	var core = linphone.ui.getCore(this.base);
+	var logs = core.callLogs;
+	
+	var ret;
+	if(typeof filters === 'string' && filters.length) {
+		filters = filters.replace(/direction/g, 'dir');
+		filters = filters.replace(/date/g, 'startDate');
+		ret = jsonsql.query('SELECT * FROM json ' + filters, logs);
+    } else {
+		ret =  logs;
+	}
+	if(typeof callback !== 'undefined') {
+		callback(null, ret.map(linphone.models.history.core.engine.internal2external));
+	}
+};
+
+
 //
 // CRUD
 //
  
-linphone.models.history.core.engine.prototype.read = function(id) {
-	return linphone.models.history.core.engine.internal2external(id);
+linphone.models.history.core.engine.prototype.read = function(id, callback) {
+	if(typeof callback !== 'undefined') {
+		callback(null, linphone.models.history.core.engine.internal2external(id));
+	}
 };
 
-linphone.models.history.core.engine.prototype.create = function(object) {
+linphone.models.history.core.engine.prototype.create = function(object, callback) {
 	// Do nothing
+	if(typeof callback !== 'undefined') {
+		callback("Not implemented", null);
+	}
 };
  
-linphone.models.history.core.engine.prototype.update = function(id, object) {
+linphone.models.history.core.engine.prototype.update = function(object, callback) {
 	// Do nothing
+	if(typeof callback !== 'undefined') {
+		callback("Not implemented", null);
+	}
 };
 
-linphone.models.history.core.engine.prototype.remove = function(id) {
+linphone.models.history.core.engine.prototype.remove = function(id, callback) {
 	var core = linphone.ui.getCore(this.base);
 	core.removeCallLog(id);
 	this.onUpdate.fire(linphone.models.history.events.remove, id);
+	if(typeof callback !== 'undefined') {
+		callback(null, true);
+	}
 };

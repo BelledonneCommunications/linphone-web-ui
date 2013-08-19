@@ -115,7 +115,7 @@ linphone.ui.view.contact = {
 		if(id === null){
 			configuration.models.contacts.create(object);
 		} else {
-			configuration.models.contacts.update(id,object);
+			configuration.models.contacts.update(object);
 		}
 		linphone.ui.view.hide(base, 'contact');
 		linphone.ui.view.show(base, 'contacts');

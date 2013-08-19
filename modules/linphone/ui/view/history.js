@@ -163,50 +163,55 @@ linphone.ui.view.history = {
 		var history = base.find('> .content .view > .history');
 		var configuration = linphone.ui.configuration(base);
 		var filter = linphone.ui.view.history.filter.getFilter(base);
-		var data = configuration.models.history.list(filter);
-		var list = history.find('.list');
-		list.empty();
 		
-		var edit = linphone.ui.view.history.isEditing(base);
-		
-		var callWrapper = function(obj) {
-			return function() {
-				linphone.ui.utils.call(base, obj.remote);
+		configuration.models.history.list(filter, function(error, data) {
+			var list = history.find('.list');
+			list.empty();
+			
+			var edit = linphone.ui.view.history.isEditing(base);
+			
+			var callWrapper = function(obj) {
+				return function() {
+					linphone.ui.utils.call(base, obj.remote);
+				};
 			};
-		};
-		
-		var removeWrapper = function(obj) {
-			return function() {
-				configuration.models.history.remove(obj.id);
+			
+			var removeWrapper = function(obj) {
+				return function() {
+					configuration.models.history.remove(obj.id);
+				};
 			};
-		};
-		
-		for(var item in data) {
-			var obj = data[item];
-			var elem = linphone.ui.template(base, 'view.history.list.entry', obj);
-			jQuery.i18n.update(elem);
-			elem.find('.actions .call').click(linphone.ui.exceptionHandler(base, callWrapper(obj)));
-			elem.find('.actions .remove').click(linphone.ui.exceptionHandler(base, removeWrapper(obj)));
-			if(edit) {
-				elem.find('.actions .remove').css('display','inline-block');
-			} else {
-				elem.find('.actions .remove').hide();
+			
+			var updateName = function(error, contact) {
+					if(contact) {
+						var name = linphone.ui.utils.getContactName(base, contact);
+						elem.find('.contact .name').text(name);
+					}
+			};
+			
+			for(var item in data) {
+				var obj = data[item];
+				var elem = linphone.ui.template(base, 'view.history.list.entry', obj);
+				jQuery.i18n.update(elem);
+				elem.find('.actions .call').click(linphone.ui.exceptionHandler(base, callWrapper(obj)));
+				elem.find('.actions .remove').click(linphone.ui.exceptionHandler(base, removeWrapper(obj)));
+				if(edit) {
+					elem.find('.actions .remove').css('display','inline-block');
+				} else {
+					elem.find('.actions .remove').hide();
+				}
+				linphone.ui.utils.getContact(base, obj.remote, updateName);
+				list.append(elem);
 			}
-			var contact = linphone.ui.utils.getContact(base, obj.remote);
-			if(contact) {
-				var name = linphone.ui.utils.getContactName(base, contact);
-				elem.find('.contact .name').text(name);
+			
+			base.find('> .content .view > .history .scroll-pane').each(function(){
+				linphone.ui.slider(jQuery(this));
+			});
+			
+			if(linphone.ui.configuration(base).disableChat) {
+				base.find('> .content .view > .history .entry .actions .chat').hide();
 			}
-			list.append(elem);
-		}
-		
-		base.find('> .content .view > .history .scroll-pane').each(function(){
-			linphone.ui.slider(jQuery(this));
 		});
-		
-		if(linphone.ui.configuration(base).disableChat) {
-			base.find('> .content .view > .history .entry .actions .chat').hide();
-		}
 	},
 	
 	utils: {
