@@ -73,7 +73,7 @@ linphone.ui.view.contacts = {
 			
 			var addressHandler = function (index, object) {
 				var jobject = jQuery(object);
-				var address = jobject.find(".contactNumber").text();
+				var address = jobject.find(".number").text();
 				jobject.find(".callContact").click(linphone.ui.exceptionHandler(base,callHandler(base,address)));
 			};
 			
