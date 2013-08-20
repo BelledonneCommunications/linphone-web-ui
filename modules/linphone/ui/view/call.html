@@ -1,3 +1,13 @@
+<!--
+ Linphone Web - Web plugin of Linphone an audio/video SIP phone
+ Copyright (c) 2013 Belledonne Communications
+ All rights reserved.
+ 
+
+ Authors:
+ - Yann Diorcet <diorcet.yann@gmail.com>
+ 
+-->
 <div class="call">
 	<div class="video">
 		<div class="content">
@@ -11,6 +21,7 @@
 			</div>
 		</div>
 	</div>
+	<!-- @if env='debug' -->
 	<script id="linphone.ui.view.call.actions" type="text/x-handlebars-template">
 		<img src="style/img/signal0b.png" alt="" class="floatLeft callSignal"><!--
 		Avoid issue with inline block in dev mode
@@ -37,6 +48,7 @@
 		Avoid issue with inline block in dev mode
 		--><div class="floatRight"><div class="button hangup"><div class="image imageCallEnd"></div><div class="text" data-i18n="content.view.call.hangup"></div></div></div>
 	</script>
+	<!-- @endif -->
 	<div class="actions">
 	</div>
 </div>

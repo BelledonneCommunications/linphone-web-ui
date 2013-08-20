@@ -1,4 +1,15 @@
+<!--
+ Linphone Web - Web plugin of Linphone an audio/video SIP phone
+ Copyright (c) 2013 Belledonne Communications
+ All rights reserved.
+ 
+
+ Authors:
+ - Yann Diorcet <diorcet.yann@gmail.com>
+ 
+-->
 <div class="contacts">
+	<!-- @if env='debug' -->
 	<script id="linphone.ui.view.contacts.list.entry" type="text/x-handlebars-template">
 		<div class="entry">
 			<img src="{{context.object.img}}" alt="" class="avatar" />
@@ -23,6 +34,7 @@
 			<hr />
 		</div>
 	</script>
+	<!-- @endif -->
 	<div class="actions">
 		<div class="filters button-group">
 			<div class="all button buttonSelect"><div class="text" data-i18n="content.view.contacts.filter.all"></div></div><!--

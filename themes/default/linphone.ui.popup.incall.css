@@ -1,3 +1,14 @@
+/*!
+ Linphone Web - Web plugin of Linphone an audio/video SIP phone
+ Copyright (c) 2013 Belledonne Communications
+ All rights reserved.
+ 
+
+ Authors:
+ - Yann Diorcet <diorcet.yann@gmail.com>
+ 
+ */
+
 .linphoneweb > .content .popup > .incall {
 	background-color: rgb(35,38,42);
 	background-color: rgba(35,38,42,0.8);

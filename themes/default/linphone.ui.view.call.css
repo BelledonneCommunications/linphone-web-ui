@@ -1,3 +1,14 @@
+/*!
+ Linphone Web - Web plugin of Linphone an audio/video SIP phone
+ Copyright (c) 2013 Belledonne Communications
+ All rights reserved.
+ 
+
+ Authors:
+ - Yann Diorcet <diorcet.yann@gmail.com>
+ 
+ */
+
 .linphoneweb > .content .view > .call {
 	margin: 10px;
 	width: 690px;
@@ -51,8 +62,8 @@
 	position: absolute;
 	bottom: 0;
 	right: 0;
-	width: 210px;
-	height: 156px;
+	width: 212px;
+	height: 159px;
 }
 
 .linphoneweb > .content .view > .call .video .profile.collapsed {

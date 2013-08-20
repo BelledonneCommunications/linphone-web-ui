@@ -1,3 +1,13 @@
+<!--
+ Linphone Web - Web plugin of Linphone an audio/video SIP phone
+ Copyright (c) 2013 Belledonne Communications
+ All rights reserved.
+ 
+
+ Authors:
+ - Yann Diorcet <diorcet.yann@gmail.com>
+ 
+-->
 <div class="contact">
 	<div class="actions">
 		<div class="removeContact button buttonAction"><div class="image imageDelete"></div><div class="text" data-i18n="content.view.contact.remove"></div></div><!--
@@ -28,7 +38,7 @@
 				<div class="list"></div>
 				<div><div class="addAddress button buttonAction"><div class="image imageAdd"></div></div></div>		
 			</div>
-			
+			<!-- @if env='debug' -->
 			<script id="linphone.ui.view.contact.list" type="text/x-handlebars-template">
 				<div>
 					<input class="addressInput floatLeft" value="{{context.address}}" type="text">
@@ -36,7 +46,8 @@
 					Avoid issue with inline block in dev mode
 					-->
 				</div>
-				</script>
+			</script>
+			<!-- @endif -->
 		</form>
 	</div>
 </div>

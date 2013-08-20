@@ -95,10 +95,11 @@ module.exports = function(grunt) {
 		meta: {
 			version: '<%= pkg.version %>',
 			banner: 
-				'/*\n' +
+				'/*!\n' +
 				' * <%= pkg.title || pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("isoDate") %>\n' +
 				'<%= pkg.homepage ? " * " + pkg.homepage + "\\n" : "" %>' +
-				' * Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>; Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %>\n' +
+				' * Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>\n' +
+				' * All rights reserved.\n' +
 				' */\n\n'
 		},
 

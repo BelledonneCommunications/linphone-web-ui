@@ -5,13 +5,12 @@
 	"version": "0.0.1",
 	"homepage": "",
 	"author": {
-		"name": "AUTHORS.txt"
+		"name": "Belledonne Comminucations"
 	},
 	"repository": {
 	},
 	"licenses": [{
-		"type": "GPL",
-		"url": "http://www.opensource.org/licenses/GPL-2.0"
+		"type": "Proprietary"
 	}],
 	"dependencies": {
 		"grunt": "*",

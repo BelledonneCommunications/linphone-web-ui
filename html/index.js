@@ -1,3 +1,14 @@
+/*!
+ Linphone Web - Web plugin of Linphone an audio/video SIP phone
+ Copyright (c) 2013 Belledonne Communications
+ All rights reserved.
+ 
+
+ Authors:
+ - Yann Diorcet <diorcet.yann@gmail.com>
+ 
+ */
+
 function __linphone_init(base) {	
 	/* @if env='release' */
 	var debug = false;
@@ -85,7 +96,7 @@ function __linphone_init(base) {
 		},
 		name: 'Linphone Web',
 		version: '0.0.1.3',
-		copyright: 'Copyright© Belledonne Communications 2013',
+		copyright: 'Copyright© Belledonne Communications 2013. All rights reserved.',
 		links: [{
 			cls: 'support',
 			text: 'support',
