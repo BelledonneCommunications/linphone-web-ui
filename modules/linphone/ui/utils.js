@@ -239,7 +239,7 @@ linphone.ui.utils = {
 		return 'Unknown';
 	},
 	getAvatar: function(base, object) {
-		return 'style/img/avatar.png';
+		return 'style/img/avatar.jpg';
 	},
 	getMainProxyConfig: function(base) {
 		var proxy = null;

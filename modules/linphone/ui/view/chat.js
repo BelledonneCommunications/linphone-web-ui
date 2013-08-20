@@ -22,31 +22,31 @@ linphone.ui.view.chat = {
 		/*
 		var list = base.find('> .content .view > .chat .list');
 		list.append(linphone.ui.template(base, 'view.chat.list.entry.received', {
-			img: 'style/img/avatar.png',
+			img: 'style/img/avatar.jpg',
 			date: "Jeudi 21 Septembre 2012 à 23h33m22s",
 			message: 'aa',
 			name: "Test"
 		}));
 		list.append(linphone.ui.template(base, 'view.chat.list.entry.sent', {
-			img: 'style/img/avatar.png',
+			img: 'style/img/avatar.jpg',
 			date: "Jeudi 21 Septembre 2012 à 23h34m22s",
 			message: 'bb',
 			name: "Test2"
 		}));
 		list.append(linphone.ui.template(base, 'view.chat.list.entry.received', {
-			img: 'style/img/avatar.png',
+			img: 'style/img/avatar.jpg',
 			date: "Jeudi 21 Septembre 2012 à 23h37m22s",
 			message: 'cc',
 			name: "Test3"
 		}));
 		list.append(linphone.ui.template(base, 'view.chat.list.entry.sent', {
-			img: 'style/img/avatar.png',
+			img: 'style/img/avatar.jpg',
 			date: "Jeudi 21 Septembre 2012 à 23h39m22s",
 			message: 'dd',
 			name: "Test4"
 		}));
 		list.append(linphone.ui.template(base, 'view.chat.list.entry.sent', {
-			img: 'style/img/avatar.png',
+			img: 'style/img/avatar.jpg',
 			date: "Jeudi 21 Septembre 2012 à 23h39m22s",
 			message: 'dd',
 			name: "Test5"
