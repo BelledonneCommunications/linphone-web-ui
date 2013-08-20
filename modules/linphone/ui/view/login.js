@@ -226,7 +226,7 @@ linphone.ui.view.login = {
 		}
 	},
 	
-	/* */
+	/* On core events */
 	onAuthInfoRequested: function(event, realm, username) {
 		var base = jQuery(this);
 		var login = base.find('> .content .view > .login');
@@ -234,7 +234,7 @@ linphone.ui.view.login = {
 		
 		var password = login.data('password');
 		if(password && username === login.data('username')) {
-			var authinfo = core.newAuthInfo(username, username, login.data('password'), "", realm);
+			var authinfo = core.newAuthInfo(username, username, password, "", realm);
 			core.addAuthInfo(authinfo);
 			
 			// Reset challenge
