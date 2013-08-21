@@ -25,14 +25,14 @@ function PersistentStorage(name, defaultConfig, timeout, debug) {
 	if(timeout) {
 		this.start(timeout);
 	}
-}
+};
 
 PersistentStorage.prototype.sync = function () {
 	window.localStorage[this.name] = JSON.stringify(this.config);
 	if(this.debug) {
 		linphone.core.log('PersistentStorage | Sync "' + this.name + '"');
 	}
-}
+};
 
 PersistentStorage.prototype.stop = function() {
 	if(this.__timeout) {
@@ -47,7 +47,7 @@ PersistentStorage.prototype.stop = function() {
 			window.detachEvent("onunload", this.fct); 
 		}
 	}
-}
+};
 
 PersistentStorage.prototype.start = function(timeout) {
 	var that = this;
@@ -68,4 +68,4 @@ PersistentStorage.prototype.start = function(timeout) {
 			window.attachEvent("onunload", this.fct); 
 		}
 	}
-}
+};
