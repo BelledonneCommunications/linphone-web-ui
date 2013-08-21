@@ -19,7 +19,11 @@ linphone.core.enums = {
 		Declined : 3,
 		NotFound : 4,
 		NotAnswered : 5,
-		Busy : 6
+		Busy : 6,
+		Media : 7,
+		IOError : 8,
+		DoNotDisturb : 9,
+		Unauthorized : 10
 	},
 	getReasonText : function(value) {
 		switch (value) {
@@ -37,6 +41,14 @@ linphone.core.enums = {
 			return "NotAnswered";
 		case linphone.core.enums.reason.Busy:
 			return "Busy";
+		case linphone.core.enums.reason.Media:
+			return "Media";
+		case linphone.core.enums.reason.IOError:
+			return "IOError";
+		case linphone.core.enums.reason.DoNotDisturb:
+			return "DoNotDisturb";
+		case linphone.core.enums.reason.Unauthorized:
+			return "Unauthorized";
 		default:
 			return "?";
 		}
