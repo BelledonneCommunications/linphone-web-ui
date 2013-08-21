@@ -260,7 +260,9 @@ linphone.ui.view.login = {
 		if(state === linphone.core.enums.registrationState.Ok) {
 			linphone.ui.view.login.done(base);
 		} else if(state === linphone.core.enums.registrationState.Failed) {
-			linphone.ui.view.login.error(base, 'content.view.login.errors.registrationFailed');
+			if(proxy.error !== linphone.core.enums.reason.Unauthorized) {
+				linphone.ui.view.login.error(base, 'content.view.login.errors.registrationFailed');
+			}
 		}
 	}
 };
