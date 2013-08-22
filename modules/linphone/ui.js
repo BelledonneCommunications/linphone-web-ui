@@ -442,7 +442,7 @@ linphone.ui = {
 			if(base) {
 				config = linphone.ui.configuration(base);
 			}
-			if (config.debug && typeof window.console !== 'undefined') {
+			if (config.logs && typeof window.console !== 'undefined') {
 				window.console.log(message);
 			}
 		},
@@ -451,7 +451,7 @@ linphone.ui = {
 			if(base) {
 				config = linphone.ui.configuration(base);
 			}
-			if (config.debug && typeof window.console !== 'undefined') {
+			if (config.logs && typeof window.console !== 'undefined') {
 				window.console.warn(message);
 			}
 		},
@@ -460,7 +460,7 @@ linphone.ui = {
 			if(base) {
 				config = linphone.ui.configuration(base);
 			}
-			if (config.debug && typeof window.console !== 'undefined') {
+			if (config.logs && typeof window.console !== 'undefined') {
 				window.console.error(message);
 			}
 		},
@@ -469,7 +469,7 @@ linphone.ui = {
 			if(base) {
 				config = linphone.ui.configuration(base);
 			}
-			if (config.debug && typeof window.console !== 'undefined') {
+			if (config.logs && typeof window.console !== 'undefined') {
 				window.console.info(message);
 			}
 		},
@@ -478,7 +478,7 @@ linphone.ui = {
 			if(base) {
 				config = linphone.ui.configuration(base);
 			}
-			if (config.debug && typeof window.console !== 'undefined') {
+			if (config.logs && typeof window.console !== 'undefined') {
 				window.console.debug(message);
 			}
 		}

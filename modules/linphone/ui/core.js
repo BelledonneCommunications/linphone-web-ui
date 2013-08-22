@@ -380,7 +380,7 @@ linphone.ui.core = {
 		linphone.ui.exceptionHandler(base, function() {
 			base.find('.window .install').hide(); // Force hide
 			var config = linphone.ui.configuration(base);
-			if(config.debug) {
+			if(config.logs) {
 				linphone.ui.logger.log(base, 'Enable core logging');
 				core.logHandler = linphone.ui.logger.coreHandler(base);
 			}

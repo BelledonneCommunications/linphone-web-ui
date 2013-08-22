@@ -107,12 +107,13 @@ function __linphone_init(base) {
 	}
 
 	config.debug = debug;
+	config.logs = debug;
 	
 	// Enable debug only if lpdebug is set to true	
 	if(jQuery.getUrlVar('lpdebug') === '1' ||
 		jQuery.getUrlVar('lpdebug') === 'true' ||
 		jQuery.getUrlVar('lpdebug') === 'yes') {
-		config.debug = true;
+		config.logs = true;
 	}
 	linphone.ui.init(base, config);
 	linphone.ui.core.load(base);
