@@ -104,7 +104,7 @@ linphone.ui = {
 		linphone.ui.addEvent(core, 'displayMessage', linphone.ui.displayMessage);
 		linphone.ui.addEvent(core, 'displayWarning', linphone.ui.displayWarning);
 		linphone.ui.addEvent(core, 'displayUrl', linphone.ui.displayUrl);
-		var init_count = (typeof linphone.core.data().init_count !== "undefined") ? parseInt(linphone.core.data().init_count) : 0;
+		var init_count = (typeof linphone.core.data().init_count !== "undefined") ? parseInt(linphone.core.data().init_count, 10) : 0;
 		var ret_value = core.init("local:///.linphonerc");
 		if (ret_value !== 0) {
 			linphone.ui.error(base, jQuery.i18n.get('errors.core.' + ret_value));
