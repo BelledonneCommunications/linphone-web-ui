@@ -22,80 +22,62 @@ function __linphone_init(base) {
 			'Windows' : {
 				'x86' : {
 					'Explorer': {
-						file: 'downloads/linphone-web-0.0.1.3-Win32.cab',
-						version: '0,0,1,3'
+						file: 'downloads/linphone-web-0.0.1.4-Win32.cab',
+						version: '0,0,1,4'
 					},
 					'Firefox' : {
-						file: 'downloads/linphone-web-0.0.1.3-Win32.xpi',
+						file: 'downloads/linphone-web-0.0.1.4-Win32.xpi',
 						icon: 'style/images/linphone.png'
 					},
-					'Chrome' : {
-						file: 'downloads/linphone-web-0.0.1.3-Win32.crx'
-					},
-					'DEFAULT' : 'downloads/linphone-web-0.0.1.3-Win32.msi'
+					'DEFAULT' : 'downloads/linphone-web-0.0.1.4-Win32.msi'
 				},
 				'x86_64' : {
 					'Explorer': {
-						file: 'downloads/linphone-web-0.0.1.3-Win32.cab',
-						version: '0,0,1,3'
+						file: 'downloads/linphone-web-0.0.1.4-Win32.cab',
+						version: '0,0,1,4'
 					},
 					'Firefox' : {
-						file: 'downloads/linphone-web-0.0.1.3-Win32.xpi',
+						file: 'downloads/linphone-web-0.0.1.4-Win32.xpi',
 						icon: 'style/images/linphone.png'
 					},
-					'Chrome' : {
-						file: 'downloads/linphone-web-0.0.1.3-Win32.crx'
-					},
-					'DEFAULT' : 'downloads/linphone-web-0.0.1.3-Win32.msi'
+					'DEFAULT' : 'downloads/linphone-web-0.0.1.4-Win32.msi'
 				}
 			},
 			'Linux' : {
 				'x86' : {
 					'Firefox' : {
-						file: 'downloads/linphone-web-0.0.1.3-Linux-x86.xpi',
+						file: 'downloads/linphone-web-0.0.1.4-Linux-x86.xpi',
 						icon: 'style/images/linphone.png'
 					},
-					'Chrome' : {
-						file: 'downloads/linphone-web-0.0.1.3-Linux-x86.crx'
-					},
-					'DEFAULT' : 'downloads/linphone-web-0.0.1.3-Linux-x86.tar.gz'
+					'DEFAULT' : 'downloads/linphone-web-0.0.1.4-Linux-x86.tar.gz'
 				}, 
 				'x86_64' : {
 					'Firefox' : {
-						file: 'downloads/linphone-web-0.0.1.3-Linux-x86_64.xpi',
+						file: 'downloads/linphone-web-0.0.1.4-Linux-x86_64.xpi',
 						icon: 'style/images/linphone.png'
 					},
-					'Chrome' : {
-						file: 'downloads/linphone-web-0.0.1.3-Linux-x86_64.crx'
-					},
-					'DEFAULT' : 'downloads/linphone-web-0.0.1.3-Linux-x86_64.tar.gz'
+					'DEFAULT' : 'downloads/linphone-web-0.0.1.4-Linux-x86_64.tar.gz'
 				}
 			},
 			'Mac' : {
 				'x86' : {
 					'Firefox' : {
-						file: 'downloads/linphone-web-0.0.1.3-Mac-x86.xpi',
+						file: 'downloads/linphone-web-0.0.1.4-Mac-x86.xpi',
 						icon: 'style/images/linphone.png'
 					},
-					'Chrome' : {
-						file: 'downloads/linphone-web-0.0.1.3-Mac-x86.crx'
-					},
-					'DEFAULT' : 'downloads/linphone-web-0.0.1.3-Mac-x86.pkg'
+					'DEFAULT' : 'downloads/linphone-web-0.0.1.4-Mac-x86.pkg'
 				}, 
 				'x86_64' : {
 					'Firefox' : {
-						file: 'downloads/linphone-web-0.0.1.3-Mac-x86_64.xpi',
+						file: 'downloads/linphone-web-0.0.1.4-Mac-x86.xpi',
 						icon: 'style/images/linphone.png'
 					},
-					'Chrome' : {
-						file: 'downloads/linphone-web-0.0.1.3-Mac-x86.crx'
-					},
-					'DEFAULT' : 'downloads/linphone-web-0.0.1.3-Mac-x86_64.pkg'
+					'DEFAULT' : 'downloads/linphone-web-0.0.1.4-Mac-x86.pkg'
 				}
 			}
 		},
 		name: 'Linphone Web',
-		version: '0.0.1.3',
+		version: '0.0.1.4',
 		copyright: 'Copyright© Belledonne Communications 2013. All rights reserved.',
 		links: [{
 			cls: 'support',
