@@ -1,4 +1,4 @@
- /*
+/*!
  * jQuery UI selectmenu dev version
  *
  * Copyright (c) 2009 AUTHORS.txt (http://jqueryui.com/about)

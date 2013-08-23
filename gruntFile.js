@@ -1,3 +1,14 @@
+/*!
+ Linphone Web - Web plugin of Linphone an audio/video SIP phone
+ Copyright (c) 2013 Belledonne Communications
+ All rights reserved.
+ 
+
+ Authors:
+ - Yann Diorcet <diorcet.yann@gmail.com>
+ 
+ */
+
 /*global module:false*/
 module.exports = function(grunt) {
 	coreModules = [

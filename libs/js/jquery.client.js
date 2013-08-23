@@ -1,3 +1,8 @@
+/*!
+ * Modified version of
+ * http://www.stoimen.com/blog/2009/07/16/jquery-browser-and-os-detection-plugin/
+ * "free to use the code with no limitations, it’s completely open/free source"
+ */
 (function() {
 	
 	var BrowserDetect = {

@@ -1,4 +1,4 @@
-/*
+/*!
 * $Workfile: jquery.scrollabletab.js $
 * $Revision: 7 $
 * $Modtime: 8/11/10 16:03 $
