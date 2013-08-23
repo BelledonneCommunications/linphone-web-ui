@@ -317,7 +317,7 @@ module.exports = function(grunt) {
 			theme: {
 				expand: true,
 				src: [
-					 '**'
+					 'img/*.{png,jpg,gif}'
 				],
 				cwd: 'dist/style/',
 				dest: 'dist/style/'
