@@ -59,7 +59,7 @@ linphone.ui.view.plugin = {
 					jQuery.i18n.set(plugin.find('> .text'), 'content.view.plugin.text.auto');
 				} else {
 					plugin.find('.action .download').show();
-					jQuery.i18n.change(plugin.find('> .text'), 'content.view.plugin.text.download');
+					jQuery.i18n.set(plugin.find('> .text'), 'content.view.plugin.text.download');
 				} 
 			break;
 			default:
