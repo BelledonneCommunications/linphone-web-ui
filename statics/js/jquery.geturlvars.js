@@ -1,4 +1,4 @@
-/**
+/*!
  * jQuery.getUrlVars
  *
  * Copyright 2013, Matthew Cobbs

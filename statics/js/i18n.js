@@ -1,3 +1,14 @@
+/*!
+ Linphone Web - Web plugin of Linphone an audio/video SIP phone
+ Copyright (c) 2013 Belledonne Communications
+ All rights reserved.
+ 
+
+ Authors:
+ - Yann Diorcet <diorcet.yann@gmail.com>
+ 
+ */
+
 jQuery.i18n = {};
 jQuery.i18n.locale = '';
 jQuery.i18n.data = {};
@@ -19,7 +30,7 @@ jQuery.i18n.update = function(element, recursive) {
 		element.find('.'+jQuery.i18n.translate_class).remove();
 		var ret = jQuery.i18n.element.call(element, element.data(jQuery.i18n.translate_key), element.data(jQuery.i18n.translate_parameters));
 		element.append(ret);
-	}
+	};
 	if (typeof recursive == "undefined") {
 		recursive = false;
 	}
@@ -36,7 +47,7 @@ jQuery.i18n.update = function(element, recursive) {
 jQuery.i18n.element = function(text, parameters) {
 	var ret = jQuery('<span class="' + jQuery.i18n.translate_class + '"/>').text(jQuery.i18n.translate.call(this, text, parameters));
 	return ret;
-}
+};
 
 jQuery.i18n.translate = function(text, parameters) {
 	var translated_text;
@@ -58,7 +69,7 @@ jQuery.i18n.translate = function(text, parameters) {
 		fct = text.slice(2, -2);
 		var ret = eval(fct);
 		if(typeof ret === 'string') {
-			translated_text = ret
+			translated_text = ret;
 		} else if(typeof ret === 'function') {
 			translated_text = ret.call(this, parameters);
 		} else {
@@ -117,7 +128,7 @@ jQuery.i18n.defined = function(text) {
 			data = data[jQuery.i18n.locale];
 		}
 		return data != null;
-}
+};
 
 jQuery.i18n.set = function(element, text, parameters, translate) {
 	if(typeof translate === 'undefined') {
@@ -132,4 +143,4 @@ jQuery.i18n.set = function(element, text, parameters, translate) {
 	if(translate) {
 		jQuery.i18n.update(element);
 	}
-}
+};

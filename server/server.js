@@ -1,3 +1,14 @@
+/*!
+ Linphone Web - Web plugin of Linphone an audio/video SIP phone
+ Copyright (c) 2013 Belledonne Communications
+ All rights reserved.
+ 
+
+ Authors:
+ - Yann Diorcet <diorcet.yann@gmail.com>
+ 
+ */
+
 var express = require('express');
 var commander = require('commander');
 var https = require('https');
@@ -15,7 +26,7 @@ commander
 app.set('port', commander.port? commander.port: 8888);
 app.set('env', commander.debug? 'debug': 'release');
 app.set('tmp', __dirname + '/tmp/');
-app.set('public', __dirname + '/../dist/')
+app.set('public', __dirname + '/../dist/');
 app.set('tmp', app.get('public') + '/tmp/');
 app.set('expires', (app.get('env') === 'debug')? 0 : 60*60*24*14 * 1000);
 
@@ -51,8 +62,6 @@ app.post('/upload', function(req, res, next) {
       }
     }); 
 });
-
-
 
 module.exports = app.listen(app.get('port'), function() {
   console.log('Express server listening on port ' + app.get('port') + ' env ' + app.get('env'));
