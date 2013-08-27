@@ -479,7 +479,7 @@ linphone.ui = {
 				config = linphone.ui.configuration(base);
 			}
 			if (config.logs && typeof window.console !== 'undefined') {
-				window.console.debug(message);
+				//window.console(message);
 			}
 		}
 	},

@@ -183,7 +183,40 @@ linphone.ui.view.login = {
 		return true;
 	},
 	loginAdvanced: function(base) {
-		return false;
+		var login = base.find('> .content .view > .login');
+		var core = linphone.ui.getCore(base);
+		core.clearProxyConfig();
+		core.clearAllAuthInfo();
+		
+		// Get values
+		var account = login.find('.accountAdvanced .account').val();
+		var password = login.find('.accountAdvanced .password').val();
+		var proxy = login.find('.accountAdvanced .proxy').val();
+		
+		// Check values
+		if (linphone.ui.view.login.state.simple.regex.account.exec(account) === null) {
+			linphone.ui.popup.error.show(base, 'content.view.login.accountSimple.errors.account');
+			return false;
+		}
+		if (linphone.ui.view.login.state.simple.regex.password.exec(password) === null) {
+			linphone.ui.popup.error.show(base, 'content.view.login.accountSimple.errors.password');
+			return false;
+		}
+
+		// Create proxy config
+		var proxyConfig = core.newProxyConfig();
+		
+		// Set values
+		proxyConfig.identity = 'sip:' + account + '@' + proxy;
+		proxyConfig.serverAddr = 'sip:' + proxy;
+		proxyConfig.expires = 3600;
+		proxyConfig.registerEnabled = true;
+		login.data('password', password);
+		login.data('username', account);
+		core.addProxyConfig(proxyConfig);
+		core.defaultProxy = proxyConfig;
+		linphone.ui.view.login.setTimeout(base);
+		return true;
 	},
 	
 	/* Results */
