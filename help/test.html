@@ -52,10 +52,6 @@
 			core.addProxyConfig(proxy);
 			core.defaultProxy = proxy;
         }
-                
-        function download(){
-			window.open(file,'_self');
-        }
 
        	function unload(){
 			var nodes = document.body.childNodes;
@@ -105,6 +101,7 @@
 			config.file = {};
 			if (typeof config.files[browserDetection.os] !== 'undefined') {
 				if(typeof config.files[browserDetection.os][browserDetection.arch] !== 'undefined') {
+					console.log(browserDetection.browser);
 					if (typeof config.files[browserDetection.os][browserDetection.arch][browserDetection.browser] !== 'undefined') {
 						config.file.description = config.files[browserDetection.os][browserDetection.arch][browserDetection.browser];
 						config.file.browser = browserDetection.browser;
@@ -120,10 +117,8 @@
 			if (typeof config.file.description !== 'undefined') {
 				if (config.file.browser === 'Explorer' ) {
 					config.file.codebase = config.file.description.file;
-					console.log(config.file.codebase);
 					if(forceVersion) {
 						config.file.codebase += '#Version=' + config.file.description.version;
-						console.log(config.file.codebase);
 					}
 				}
 			}
@@ -135,13 +130,11 @@
 
 			core = getCore();
 			
-			console.log(core);
-			
 			// Detection of the plugin
 			var ret = detect(config,core);
-			if(ret == 0){
-				window.open(config.file.description.file,'_self');
-				//download(config.file.description.file);		
+			if(ret === 0){
+				// Donwload the plugin
+				window.open(config.file.description, '_self');	
 			} 
         }
         

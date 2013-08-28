@@ -1,82 +1,68 @@
 function getConfig(){  
+	var version_plugin = '0.0.2.0';
+
+	
 	var config = {
 		files: {
 			'Windows' : {
 				'x86' : {
 					'Explorer': {
-						file: 'http://www.linphone.org/weblinphone/downloads/linphone-web-0.0.1.4-Win32.cab',
-						version: '0,0,1,3'
+						file: 'http://www.linphone.org/weblinphone2/downloads/linphone-web-'+ version_plugin +'-Win32.cab',
+						version: '0,0,2,0'
 					},
 					'Firefox' : {
-						file: 'http://www.linphone.org/weblinphone/downloads/linphone-web-0.0.1.4-Win32.xpi',
+						file: 'http://www.linphone.org/weblinphone2/downloads/linphone-web-'+ version_plugin +'-Win32.xpi',
 						icon: 'style/images/linphone.png'
 					},
-					'Chrome' : {
-						file: 'http://www.linphone.org/weblinphone/downloads/linphone-web-0.0.1.4-Win32.msi'
-					},
-					'DEFAULT' : 'http://www.linphone.org/weblinphone/downloads/linphone-web-0.0.1.4-Win32.msi'
+					'DEFAULT' :  'http://www.linphone.org/weblinphone2/downloads/linphone-web-'+ version_plugin +'-Win32.msi'
+						
 				},
 				'x86_64' : {
 					'Explorer': {
-						file: 'http://www.linphone.org/weblinphone/downloads/linphone-web-0.0.1.4-Win32.cab',
-						version: '0,0,1,3'
+						file: 'http://www.linphone.org/weblinphone2/downloads/linphone-web-'+ version_plugin +'-Win32.cab',
+						version: '0,0,2,0'
 					},
 					'Firefox' : {
-						file: 'http://www.linphone.org/weblinphone/downloads/linphone-web-0.0.1.4-Win32.xpi',
+						file: 'http://www.linphone.org/weblinphone2/downloads/linphone-web-'+ version_plugin +'-Win32.xpi',
 						icon: 'style/images/linphone.png'
 					},
-					'Chrome' : {
-						file: 'http://www.linphone.org/weblinphone/downloads/linphone-web-0.0.1.4-Win32.msi'
-					},
-					'DEFAULT' : 'http://www.linphone.org/weblinphone/downloads/linphone-web-0.0.1.4-Win32.msi'
+					'DEFAULT' : 'http://www.linphone.org/weblinphone2/downloads/linphone-web-'+ version_plugin +'-Win32.msi'
 				}
 			},
 			'Linux' : {
 				'x86' : {
 					'Firefox' : {
-						file: 'downloads/linphone-web-0.0.1.3-Linux-x86.xpi',
+						file: 'http://www.linphone.org/weblinphone2/downloads/linphone-web-'+ version_plugin +'-Linux-x86.xpi',
 						icon: 'style/images/linphone.png'
 					},
-					'Chrome' : {
-						file: 'downloads/linphone-web-0.0.1.3-Linux-x86.crx'
-					},
-					'DEFAULT' : 'downloads/linphone-web-0.0.1.3-Linux-x86.tar.gz'
+					'DEFAULT' : 'http://www.linphone.org/weblinphone2/downloads/linphone-web-'+ version_plugin +'-Linux-x86.tar.gz'
 				}, 
 				'x86_64' : {
 					'Firefox' : {
-						file: 'downloads/linphone-web-0.0.1.3-Linux-x86_64.xpi',
+						file: 'http://www.linphone.org/weblinphone2/downloads/linphone-web-'+ version_plugin +'-Linux-x86_64.xpi',
 						icon: 'style/images/linphone.png'
 					},
-					'Chrome' : {
-						file: 'downloads/linphone-web-0.0.1.3-Linux-x86_64.crx'
-					},
-					'DEFAULT' : 'downloads/linphone-web-0.0.1.3-Linux-x86_64.tar.gz'
+					'DEFAULT' : 'http://www.linphone.org/weblinphone2/downloads/linphone-web-'+ version_plugin +'-Linux-x86_64.tar.gz'
 				}
 			},
 			'Mac' : {
 				'x86' : {
 					'Firefox' : {
-						file: 'downloads/linphone-web-0.0.1.3-Mac-x86.xpi',
+						file: 'http://www.linphone.org/weblinphone2/downloads/linphone-web-'+ version_plugin +'-Mac-x86.xpi',
 						icon: 'style/images/linphone.png'
 					},
-					'Chrome' : {
-						file: 'downloads/linphone-web-0.0.1.3-Mac-x86.crx'
-					},
-					'DEFAULT' : 'downloads/linphone-web-0.0.1.3-Mac-x86.pkg'
+					'DEFAULT' : 'http://www.linphone.org/weblinphone2/downloads/linphone-web-'+ version_plugin +'-Mac-x86.pkg'
 				}, 
 				'x86_64' : {
 					'Firefox' : {
-						file: 'downloads/linphone-web-0.0.1.3-Mac-x86_64.xpi',
+						file: 'http://www.linphone.org/weblinphone2/downloads/linphone-web-'+ version_plugin +'-Mac-x86.xpi',
 						icon: 'style/images/linphone.png'
 					},
-					'Chrome' : {
-						file: 'downloads/linphone-web-0.0.1.3-Mac-x86.crx'
-					},
-					'DEFAULT' : 'downloads/linphone-web-0.0.1.3-Mac-x86_64.pkg'
+					'DEFAULT' : 'http://www.linphone.org/weblinphone2/downloads/linphone-web-'+ version_plugin +'-Mac-x86.pkg'
 				}
 			}
 		},
-		version: '0.0.1.4'
+		version: '0.0.2.0'
 
 	}
 	return config;
