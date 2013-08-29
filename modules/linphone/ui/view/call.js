@@ -35,16 +35,18 @@ linphone.ui.view.call = {
 		
 		linphone.ui.view.call.updateVideoProfile(base, true);
 		
-		// Set video/self view
-		linphone.ui.video.addVideoView(base, base.find('> .content .view > .call .video > .content'));
-		linphone.ui.video.addSelfView(base, base.find('> .content .view > .call .video .profile > .content'));
-		
+		// Do not add video views now because of a bug with IE.
+		// They will be added later when starting a call.
 	},
 	translate: function(base) {
 	},
 	
 	/* */
 	show: function(base, call) {
+		// Add video views
+		linphone.ui.video.addVideoView(base, base.find('> .content .view > .call .video > .content'));
+		linphone.ui.video.addSelfView(base, base.find('> .content .view > .call .video .profile > .content'));
+
 		linphone.ui.view.call.update(base,call);
 	},
 	update: function(base,call) {
