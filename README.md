@@ -5,7 +5,7 @@ Prerequisites
 -------------
 
 * graphicsmagick
-
+* MACOSX: put pngquant binary from http://pngquant.org/pngquant.tar.bz2 into the PATH  
 
 Grunt 
 -----
@@ -14,7 +14,7 @@ The web project use [grunt](http://gruntjs.com/) for generate Web resources.
 (depends on npm). You also have to install grunt with the
 following command:
 
-	npm install -g grunt-cli
+    npm install -g grunt-cli
 
     npm install
 
@@ -26,7 +26,7 @@ the following command in the `./Web/` directory:
 
 ### Development
 You can use the grunt argument *develop* in order to create a server at
-[http://localhost:8000](http://localhost:8000) exposing the web resources
+[http://localhost:8888](http://localhost:8888) exposing the web resources
 using the following command:
 
     grunt develop
