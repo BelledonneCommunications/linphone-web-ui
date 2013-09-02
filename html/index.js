@@ -9,7 +9,10 @@
  
  */
 
-function __linphone_init(base) {	
+function __linphone_init(base) {
+	var plugin_version = '0.0.2.0';
+	var windows_plugin_version = plugin_version.replace(/\./g, ',');
+
 	/* @if env='release' */
 	var debug = false;
 	/* @endif */
@@ -22,57 +25,41 @@ function __linphone_init(base) {
 			'Windows' : {
 				'x86' : {
 					'Explorer': {
-						file: 'downloads/linphone-web-0.0.2.0-Win32.cab',
-						version: '0,0,2,0'
+						file: 'downloads/linphone-web-' + plugin_version + '-Win32.cab',
+						version: windows_plugin_version
 					},
-					'Firefox' : {
-						file: 'downloads/linphone-web-0.0.2.0-Win32.xpi',
-						icon: 'style/images/linphone.png'
-					},
-					'DEFAULT' : 'downloads/linphone-web-0.0.2.0-Win32.msi'
+					'DEFAULT' : 'downloads/linphone-web-' + plugin_version + '-Win32.msi'
 				},
 				'x86_64' : {
 					'Explorer': {
-						file: 'downloads/linphone-web-0.0.2.0-Win32.cab',
-						version: '0,0,2,0'
+						file: 'downloads/linphone-web-' + plugin_version + '-Win32.cab',
+						version: windows_plugin_version
 					},
-					'Firefox' : {
-						file: 'downloads/linphone-web-0.0.2.0-Win32.xpi',
-						icon: 'style/images/linphone.png'
-					},
-					'DEFAULT' : 'downloads/linphone-web-0.0.2.0-Win32.msi'
+					'DEFAULT' : 'downloads/linphone-web-' + plugin_version + '-Win32.msi'
 				}
 			},
 			'Linux' : {
 				'x86' : {
 					'Firefox' : {
-						file: 'downloads/linphone-web-0.0.2.0-Linux-x86.xpi',
+						file: 'downloads/linphone-web-' + plugin_version + '-Linux-x86.xpi',
 						icon: 'style/images/linphone.png'
 					},
-					'DEFAULT' : 'downloads/linphone-web-0.0.2.0-Linux-x86.tar.gz'
+					'DEFAULT' : 'downloads/linphone-web-' + plugin_version + '-Linux-x86.tar.gz'
 				}, 
 				'x86_64' : {
 					'Firefox' : {
-						file: 'downloads/linphone-web-0.0.2.0-Linux-x86_64.xpi',
+						file: 'downloads/linphone-web-' + plugin_version + '-Linux-x86_64.xpi',
 						icon: 'style/images/linphone.png'
 					},
-					'DEFAULT' : 'downloads/linphone-web-0.0.2.0-Linux-x86_64.tar.gz'
+					'DEFAULT' : 'downloads/linphone-web-' + plugin_version + '-Linux-x86_64.tar.gz'
 				}
 			},
 			'Mac' : {
 				'x86' : {
-					'Firefox' : {
-						file: 'downloads/linphone-web-0.0.2.0-Mac-x86.xpi',
-						icon: 'style/images/linphone.png'
-					},
-					'DEFAULT' : 'downloads/linphone-web-0.0.2.0-Mac-x86.pkg'
+					'DEFAULT' : 'downloads/linphone-web-' + plugin_version + '-Mac-x86.pkg'
 				}, 
 				'x86_64' : {
-					'Firefox' : {
-						file: 'downloads/linphone-web-0.0.2.0-Mac-x86.xpi',
-						icon: 'style/images/linphone.png'
-					},
-					'DEFAULT' : 'downloads/linphone-web-0.0.2.0-Mac-x86.pkg'
+					'DEFAULT' : 'downloads/linphone-web-' + plugin_version + '-Mac-x86.pkg'
 				}
 			}
 		},
