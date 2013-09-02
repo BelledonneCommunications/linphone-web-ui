@@ -287,8 +287,8 @@ linphone.ui.i18n = {
 			login: {
 				accountAdvanced: {
 					account: {
-						en_US : 'Account',
-						fr_FR : 'Compte'
+						en_US : 'Username',
+						fr_FR : 'Nom d\'utilisateur'
 					},
 					errors: {
 						account: {
@@ -308,9 +308,9 @@ linphone.ui.i18n = {
 						en_US : 'Password',
 						fr_FR : 'Mot de passe'
 					},
-					proxy: {
-						en_US : 'Proxy',
-						fr_FR : 'Proxy'
+					domain: {
+						en_US : 'Domain',
+						fr_FR : 'Domaine'
 					},
 					outband_proxy: {
 						en_US : 'Outband proxy',
@@ -323,8 +323,8 @@ linphone.ui.i18n = {
 				},
 				accountSimple: {
 					account: {
-						en_US : 'Linphone account',
-						fr_FR : 'Compte Linphone'
+						en_US : 'Linphone username',
+						fr_FR : 'Nom d\'utilisateur Linphone'
 					},
 					errors: {
 						account: {

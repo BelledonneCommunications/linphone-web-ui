@@ -22,17 +22,17 @@
 	<form class="accountAdvanced">
 		<input class="account" type="text" value="">
 		<input class="password" type="password" value="">
-		<input class="proxy" type="text" value="">
-		<div class="choice">
+		<input class="domain" type="text" value="">
+		<!--<div class="choice">
 			<span data-i18n="content.view.login.accountAdvanced.outband_proxy"></span>
-			<input type="radio" name="outbandProxy"><label data-i18n="global.on"></label>
-			<input type="radio" name="outbandProxy"><label data-i18n="global.off"></label>
-		</div>
+			<input type="radio" name="outbandProxy" value="on"><label data-i18n="global.on"></label>
+			<input type="radio" name="outbandProxy" value="off" checked="checked"><label data-i18n="global.off"></label>
+		</div> -->
 		<div class="choice">
 			<span data-i18n="content.view.login.accountAdvanced.transport"></span>
-			<input type="radio" name="transport"><label data-i18n="global.transports.udp"></label>
-			<input type="radio" name="transport"><label data-i18n="global.transports.tcp"></label>
-			<input type="radio" name="transport"><label data-i18n="global.transports.tls"></label>
+			<input type="radio" name="transport" checked="selected" value="udp"><label data-i18n="global.transports.udp"></label>
+			<input type="radio" name="transport" value="tcp"><label data-i18n="global.transports.tcp"></label>
+			<input type="radio" name="transport" value="tls"><label data-i18n="global.transports.tls"></label>
 		</div>
 	</form>
 	<div class="actions">

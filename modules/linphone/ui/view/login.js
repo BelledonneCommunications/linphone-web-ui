@@ -61,7 +61,7 @@ linphone.ui.view.login = {
 		login.find('.accountSimple .password').watermark(jQuery.i18n.translate('content.view.login.accountSimple.password'), {className: 'watermark', useNative: false});
 		login.find('.accountAdvanced .account').watermark(jQuery.i18n.translate('content.view.login.accountAdvanced.account'), {className: 'watermark', useNative: false});
 		login.find('.accountAdvanced .password').watermark(jQuery.i18n.translate('content.view.login.accountAdvanced.password'), {className: 'watermark', useNative: false});
-		login.find('.accountAdvanced .proxy').watermark(jQuery.i18n.translate('content.view.login.accountAdvanced.proxy'), {className: 'watermark', useNative: false});
+		login.find('.accountAdvanced .domain').watermark(jQuery.i18n.translate('content.view.login.accountAdvanced.domain'), {className: 'watermark', useNative: false});
 	},
 	
 	/* */
@@ -167,8 +167,11 @@ linphone.ui.view.login = {
 			return false;
 		}
 		
+		
+		
 		// Create proxy config
 		var proxyConfig = core.newProxyConfig();
+		
 		
 		// Set values
 		proxyConfig.identity = 'sip:' + account + '@sip.linphone.org';
@@ -191,7 +194,9 @@ linphone.ui.view.login = {
 		// Get values
 		var account = login.find('.accountAdvanced .account').val();
 		var password = login.find('.accountAdvanced .password').val();
-		var proxy = login.find('.accountAdvanced .proxy').val();
+		var domain = login.find('.accountAdvanced .domain').val();
+		var transport = login.find('input[name=transport]:checked').val();
+		//var outbandProxy = login.find('input[name=outbandProxy]:checked').val();
 		
 		// Check values
 		if (linphone.ui.view.login.state.simple.regex.account.exec(account) === null) {
@@ -207,14 +212,34 @@ linphone.ui.view.login = {
 		var proxyConfig = core.newProxyConfig();
 		
 		// Set values
-		proxyConfig.identity = 'sip:' + account + '@' + proxy;
-		proxyConfig.serverAddr = 'sip:' + proxy;
+		proxyConfig.identity = 'sip:' + account + '@' + domain;
+		proxyConfig.serverAddr = 'sip:' + domain;
 		proxyConfig.expires = 3600;
 		proxyConfig.registerEnabled = true;
 		login.data('password', password);
 		login.data('username', account);
 		core.addProxyConfig(proxyConfig);
 		core.defaultProxy = proxyConfig;
+		
+		// Set transport
+		var transports = core.sipTransports;
+		var port = core.sipPort;
+		
+		transports.udpPort = 0;
+		transports.tcpPort = 0;
+		transports.tlsPort = 0;
+		
+		if(transport === 'udp'){
+			transports.udpPort = port;
+			console.log(transports.udpPort);
+		} else if(transport === 'tcp'){
+			transports.tcpPort = port;
+		} else {
+			transports.tlsPort = port;
+		}
+		
+		core.sipTransports = transports;
+		
 		linphone.ui.view.login.setTimeout(base);
 		return true;
 	},
