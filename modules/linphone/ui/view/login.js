@@ -231,7 +231,6 @@ linphone.ui.view.login = {
 		
 		if(transport === 'udp'){
 			transports.udpPort = port;
-			console.log(transports.udpPort);
 		} else if(transport === 'tcp'){
 			transports.tcpPort = port;
 		} else {
