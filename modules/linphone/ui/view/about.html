@@ -11,7 +11,7 @@
 <div class="about">
 	<!-- @if env='debug' -->
 	<script id="linphone.ui.view.about.link" type="text/x-handlebars-template">
-		<div class="link"><a class="{{context.cls}}" href="{{context.link}}" data-i18n="content.view.about.links.{{context.text}}"></a></div>
+		<div class="link"><a class="{{context.cls}}" href="{{context.link}}" data-i18n="content.view.about.links.{{context.text}}" target="_blank"></a></div>
 	</script>
 	<!-- @endif -->
 	<div class="actions">
@@ -23,6 +23,7 @@
 	<div class="entry">
 		<div class="logoBig"></div>
 		<div class="plugin"><span data-i18n="content.view.about.versions.plugin"></span>: <span class="version"></span></div>
+		<div class="webapp"><span data-i18n="content.view.about.versions.webapp"></span>: <span class="version"></span></div>
 		<div class="core"><span data-i18n="content.view.about.versions.core"></span>: <span class="version"></span></div>
 		<hr/>
 		<div class="links">

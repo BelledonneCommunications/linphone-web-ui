@@ -43,10 +43,13 @@ linphone.ui.view.about = {
 		if(linphone.core.isValid(core)) {
 			about.find('.entry .core').show();
 			about.find('.entry .core .version').text(core.version);
+			about.find('.entry .webapp').show();
+			about.find('.entry .webapp .version').text(configuration.webapp_version);
 			about.find('.entry .plugin').show();
 			about.find('.entry .plugin .version').text(core.pluginVersion);
 		} else {
 			about.find('.entry .core').hide();
+			about.find('.entry .webapp').hide();
 			about.find('.entry .plugin').hide();
 		}
 		
