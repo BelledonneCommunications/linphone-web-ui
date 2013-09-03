@@ -64,7 +64,7 @@ function __linphone_init(base) {
 			}
 		},
 		name: 'Linphone Web',
-		version: '0.0.2.0',
+		version: '0.0.3.0',
 		webapp_version: '0.0.1',
 		copyright: 'Copyright© Belledonne Communications 2013. All rights reserved.',
 		links: [{

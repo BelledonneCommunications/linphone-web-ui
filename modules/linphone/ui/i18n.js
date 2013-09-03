@@ -95,8 +95,12 @@ linphone.ui.i18n = {
 				},
 				versions: {
 					core : {
-						en_US : 'Core verison',
+						en_US : 'Core version',
 						fr_FR : 'Version du cœur'
+					},
+					webapp : {
+						en_US : 'Web app version',
+						fr_FR : 'Version de l\'application web'
 					},
 					plugin : {
 						en_US : 'Plugin version',
@@ -376,6 +380,26 @@ linphone.ui.i18n = {
 					fr_FR : 'Enregistrement en cours, veuillez patienter...'
 				}
 			},
+			install: {
+				title: {
+					en_US : 'How to install',
+					fr_FR : 'Installation'
+				},
+				reload: {
+					en_US : 'Reload',
+					fr_FR : 'Recharger'
+				},
+				text: {
+					install_msi_or_pkg : {
+						en_US : 'Run the installer you just downloaded. If you have a warning message, click on "More info" then "Run anyway". Once the installation finishes, click on "Reload" button below.',
+						fr_FR : 'Éxécutez le fichier que vous venez de télécharger. Si vous voyez un message d\'avertissement, cliquez sur "Plus d\'informations", puis sur "Éxecuter quand même". Une fois l\'installation finie, cliquez sur le bouton "Recharger" ci-dessous.'
+					},
+					install_tar_gz : {
+						en_US : 'If it doesn\'t exist yet, create the .mozilla/plugins/ folder in your home directory (~). Then extract the archive you just downloaded inside this folder. Finally, click on the "Refresh" button below.',
+						fr_FR : 'S\'il n\'existe pas déjà, créez le dossier .mozilla/plugins/ dans votre répertoire maison (~). Ensuite décompressez l\'archive que vous venez de télécharger à l\'intérieur de ce dossier. Pour finir, cliquez sur le bouton "Recharger" ci-dessous.'
+					}
+				}
+			},
 			plugin: {
 				download: {
 					en_US : 'Download',
@@ -391,8 +415,8 @@ linphone.ui.i18n = {
 						fr_FR : 'Le plugin n\'est pas installé. Veuillez attendre et accepter l\'installation automatique du plugin.'
 					},
 					auto_or_update : { // With IE, we can not detect the current version without issue (javascript caching)
-						en_US : 'The plugin is not installed or updated. Please wait and accept the automatic install of the plugin.',
-						fr_FR : 'Le plugin n\'est pas installé ou pas à jour. Veuillez attendre et accepter l\'installation automatique du plugin.'
+						en_US : 'The plugin is not installed or updated. Please wait a few seconds and click on the "Install" button of the popup that will appear at the bottom of this window.',
+						fr_FR : 'Le plugin n\'est pas installé ou pas à jour. Veuillez patienter quelques secondes et cliquez sur le bouton "Installer" de la fenêtre qui va apparaître en bas de votre navigateur.'
 					},
 					download : { // No automatic plugin intallation
 						en_US : 'The plugin is not installed. Please download it using the following button.',

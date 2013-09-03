@@ -40,6 +40,7 @@ module.exports = function(grunt) {
 		'linphone.ui.view',
 		'linphone.ui.view.main',
 		'linphone.ui.view.plugin',
+		'linphone.ui.view.install',
 		'linphone.ui.view.login',
 		'linphone.ui.view.contacts',
 		'linphone.ui.view.contact',

@@ -16,6 +16,7 @@ linphone.ui.view = {
 		linphone.ui.view.uiInit(base);
 		linphone.ui.view.main.init(base);
 		linphone.ui.view.plugin.init(base);
+		linphone.ui.view.install.init(base);
 		linphone.ui.view.login.init(base);
 		linphone.ui.view.contacts.init(base);
 		linphone.ui.view.contact.init(base);
@@ -35,6 +36,7 @@ linphone.ui.view = {
 	},
 	translate: function(base) {
 		linphone.ui.view.plugin.translate(base);
+		linphone.ui.view.install.translate(base);
 		linphone.ui.view.main.translate(base);
 		linphone.ui.view.login.translate(base);
 		linphone.ui.view.contacts.translate(base);

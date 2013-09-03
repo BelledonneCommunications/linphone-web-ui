@@ -22,6 +22,7 @@ linphone.ui.view.plugin = {
 		}));
 		base.find('> .content .view > .plugin .download').click(linphone.ui.exceptionHandler(base, function(){
 			linphone.ui.view.plugin.download(base);
+			linphone.ui.view.show(base, 'install');
 		}));	
 	},
 	translate: function(base) {
