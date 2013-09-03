@@ -303,6 +303,10 @@ linphone.ui.i18n = {
 							en_US : 'The \'password\' field is incorrect',
 							fr_FR : 'L\'entrée \'Mot de passe\' est invalide'
 						},
+						domain: {
+							en_US : 'The \'domain\' field is incorrect',
+							fr_FR : 'L\'entrée \'Domaine\' est invalide'
+						},
 						registrationFailed: {
 							en_US : 'Authentification failure',
 							fr_FR : 'Echec d\'authentification'
@@ -355,12 +359,16 @@ linphone.ui.i18n = {
 				},
 				errors: {
 					registrationFailed: {
-						en_US : 'Authentification failure',
-						fr_FR : 'Echec d\'authentification'
+						en_US : 'Failed to connect to the server',
+						fr_FR : 'Connection au serveur impossible'
 					},
 					registrationTimeout: {
 						en_US : 'Authentification timeout',
 						fr_FR : 'Expiration de l\'authentification'
+					},
+					account: {
+						en_US : 'Invalid username or password ',
+						fr_FR : 'Le nom d\'utilisateur ou le mot de passe est invalide'
 					}
 				},
 				login: {

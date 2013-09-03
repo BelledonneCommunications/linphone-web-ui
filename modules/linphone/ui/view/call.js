@@ -161,21 +161,21 @@ linphone.ui.view.call = {
 	},
 	displayCallQuality: function(base, call) {
 		var quality = call.currentQuality;
-		var signal = base.find('> .content .view > .call .actions .callSignal').addClass('selected');
-		if(quality >= 0 && quality < 1){
-			signal.attr('src','style/img/signal0b.png');
+		var signal = base.find('> .content .view > .call .actions .callSignal');
+		/*if(quality >= 0 && quality < 1){
+			signal.css('background-image',"url('style/img/signal0b.png')"); 
 		}
 		if(quality >= 1 && quality < 2){
-			signal.attr('src','style/img/signal1b.png');
+			signal.css('background-image', "url('style/img/signal1b.png')"); 
 		}
 		if(quality >= 2 && quality < 3){
-			signal.attr('src','style/img/signal2b.png');
+			signal.css('background-image', 'url(style/img/signal2b.png)'); 
 		}
 		if(quality >= 3 && quality < 4){
-			signal.attr('src','style/img/signal3b.png');
+			signal.css('background-image', 'url(\'style/img/signal3b.png\')'); 
 		}
 		if(quality >= 4 && quality < 5){
-			signal.attr('src','style/img/signal4b.png');
-		}
+			signal.css('background-image', 'url(\'style/img/signal4b.png\')'); 
+		}*/
 	}
 };

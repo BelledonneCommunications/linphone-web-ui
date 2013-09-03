@@ -95,6 +95,12 @@
 	margin-left: 15px;
 }
 
+.linphoneweb > .content .view > .call .callSignal {
+	background-image: url('img/signal0b.png');
+	width: 66px;
+	height: 40px;
+}
+
 .linphoneweb > .content .view > .call > .actions .conference {
 	margin-left: 15px;
 	margin-right: 0;

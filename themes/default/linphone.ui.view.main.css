@@ -9,3 +9,14 @@
  
  */
 
+.linphoneweb > .content .view .main {
+	background-color: #5D8398;
+}
+
+.linphoneweb > .content .view .main .logo{
+	height: 550px;
+	width: 710px;
+	background-image: url('img/background_logo.png');
+	background-repeat: no-repeat;
+	background-position: center;
+}
