@@ -445,10 +445,6 @@ linphone.ui.i18n = {
 			1: {
 				en_US : 'Invalid version of Linphone',
 				fr_FR : 'Version invalide de Linphone'
-			},
-			2: {
-				en_US : 'Another instance of Linphone Web is started. Close it',
-				fr_FR : 'Une autre instance de de Linphone Web est démarré. Veuillez fermer celle-ci.'
 			}
 		},
 		exception: {
