@@ -465,6 +465,14 @@ module.exports = function(grunt) {
 				cwd: 'dist/',
 				src: ['**/*'],
 			}
+		},
+		sed : {
+			webappversion: {
+				path: './html/index.js',
+		      	pattern: 'webapp_version: .*,',
+		      	replacement: 'webapp_version: \'<%= pkg.version %>\',',
+      			recursive: false 
+		    }
 		}
 	});
 
@@ -506,6 +514,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks( 'grunt-preprocess' );
 	grunt.loadNpmTasks( 'grunt-oversprite' );
 	grunt.loadNpmTasks( 'grunt-html-validation' );
+	grunt.loadNpmTasks( 'grunt-sed' );
 	
 	// Express server
 	var server;
@@ -601,7 +610,7 @@ module.exports = function(grunt) {
 	);
 	
 	// Compile task
-	grunt.registerTask('compile', ['clean', 'copy', 'extract-handlebars', 'handlebars', 'pre-preprocess', 'preprocess', 'concat', 'oversprite', 'imagemin', 'uglify', 'cssmin', 'htmlmin']);
+	grunt.registerTask('compile', ['clean', 'sed::webappversion', 'copy', 'extract-handlebars', 'handlebars', 'pre-preprocess', 'preprocess', 'concat', 'oversprite', 'imagemin', 'uglify', 'cssmin', 'htmlmin']);
  
 	// Default task
 	grunt.registerTask('default', ['release-env', 'jshint', 'csslint', 'compile', 'clean:release', 'validation']);

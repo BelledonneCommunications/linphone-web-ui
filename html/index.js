@@ -65,7 +65,7 @@ function __linphone_init(base) {
 		},
 		name: 'Linphone Web',
 		version: '0.0.2.0',
-		webapp_version: '0.0.1',
+		webapp_version: '0.0.1', /* Grunt sed task will set the correct value */
 		copyright: 'Copyright© Belledonne Communications 2013. All rights reserved.',
 		links: [{
 			cls: 'support',
