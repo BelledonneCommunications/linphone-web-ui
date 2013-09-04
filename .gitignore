@@ -2,4 +2,4 @@
 /dist
 /node_modules
 /tmp
-/html/version.js
+html/version.js
