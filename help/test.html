@@ -34,6 +34,11 @@
         /* Registration */
         function registration(username,password,server){
         	var core = getCore();
+        	
+        	// Make sure that the previous account isn't still register
+        	core.clearProxyConfig();
+        	core.clearAllAuthInfo();
+        	
 			var proxy = core.newProxyConfig();
 			var authinfo = core.newAuthInfo(username, null,password,null,null);
 			core.addAuthInfo(authinfo);
@@ -44,15 +49,14 @@
 			core.addProxyConfig(proxy);
 			core.defaultProxy = proxy;
         }
-            
+        
+        // Remove the core object
        	function unload(){
-			var nodes = document.body.childNodes;
-			for(var i = 0; i < nodes.length; ++i) {
-				var node = nodes[i];
-				document.body.removeChild(node);	
-			}
+			var core = getCore();
+			delete core;
         }
         
+        // Reload the test
        	function reload(){
 			unload();
 			load();
@@ -79,14 +83,12 @@
 			browserDetection = browserDetect();
 			config.file = {};
 			if (typeof config.files[browserDetection.os] !== 'undefined') {
-				if(typeof config.files[browserDetection.os][browserDetection.arch] !== 'undefined') {
-					if (typeof config.files[browserDetection.os][browserDetection.arch][browserDetection.browser] !== 'undefined') {
-						config.file.description = config.files[browserDetection.os][browserDetection.arch][browserDetection.browser];
-						config.file.browser = browserDetection.browser;
-					} else {
-						config.file.description = config.files[browserDetection.os][browserDetection.arch].DEFAULT;
-						config.file.browser = 'DEFAULT';
-					}
+				if (typeof config.files[browserDetection.os][browserDetection.browser] !== 'undefined') {
+					config.file.description = config.files[browserDetection.os][browserDetection.browser];
+					config.file.browser = browserDetection.browser;
+				} else {
+					config.file.description = config.files[browserDetection.os].DEFAULT;
+					config.file.browser = 'DEFAULT';
 				}
 			}	
 

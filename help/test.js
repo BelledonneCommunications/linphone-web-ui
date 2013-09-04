@@ -1,65 +1,19 @@
 function getConfig(){  
 	var version_plugin = '0.0.2.0';
-
-	
 	var config = {
 		files: {
 			'Windows' : {
-				'x86' : {
-					'Explorer': {
-						file: 'http://www.linphone.org/weblinphone2/downloads/linphone-web-'+ version_plugin +'-Win32.cab',
-						version: '0,0,2,0'
-					},
-					'Firefox' : {
-						file: 'http://www.linphone.org/weblinphone2/downloads/linphone-web-'+ version_plugin +'-Win32.xpi',
-						icon: 'style/images/linphone.png'
-					},
-					'DEFAULT' :  'http://www.linphone.org/weblinphone2/downloads/linphone-web-'+ version_plugin +'-Win32.msi'
-						
+				'Explorer': {
+					file: 'http://web.linphone.org/downloads/linphone-web-'+ version_plugin +'-Win32.cab',
+					version: '0,0,2,0'
 				},
-				'x86_64' : {
-					'Explorer': {
-						file: 'http://www.linphone.org/weblinphone2/downloads/linphone-web-'+ version_plugin +'-Win32.cab',
-						version: '0,0,2,0'
-					},
-					'Firefox' : {
-						file: 'http://www.linphone.org/weblinphone2/downloads/linphone-web-'+ version_plugin +'-Win32.xpi',
-						icon: 'style/images/linphone.png'
-					},
-					'DEFAULT' : 'http://www.linphone.org/weblinphone2/downloads/linphone-web-'+ version_plugin +'-Win32.msi'
-				}
+				'DEFAULT' :  'http://web.linphone.org/downloads/linphone-web-'+ version_plugin +'-Win32.msi'
 			},
 			'Linux' : {
-				'x86' : {
-					'Firefox' : {
-						file: 'http://www.linphone.org/weblinphone2/downloads/linphone-web-'+ version_plugin +'-Linux-x86.xpi',
-						icon: 'style/images/linphone.png'
-					},
-					'DEFAULT' : 'http://www.linphone.org/weblinphone2/downloads/linphone-web-'+ version_plugin +'-Linux-x86.tar.gz'
-				}, 
-				'x86_64' : {
-					'Firefox' : {
-						file: 'http://www.linphone.org/weblinphone2/downloads/linphone-web-'+ version_plugin +'-Linux-x86_64.xpi',
-						icon: 'style/images/linphone.png'
-					},
-					'DEFAULT' : 'http://www.linphone.org/weblinphone2/downloads/linphone-web-'+ version_plugin +'-Linux-x86_64.tar.gz'
-				}
+				'DEFAULT' : 'http://web.linphone.org/downloads/linphone-web-'+ version_plugin +'-Linux-x86.tar.gz'
 			},
 			'Mac' : {
-				'x86' : {
-					'Firefox' : {
-						file: 'http://www.linphone.org/weblinphone2/downloads/linphone-web-'+ version_plugin +'-Mac-x86.xpi',
-						icon: 'style/images/linphone.png'
-					},
-					'DEFAULT' : 'http://www.linphone.org/weblinphone2/downloads/linphone-web-'+ version_plugin +'-Mac-x86.pkg'
-				}, 
-				'x86_64' : {
-					'Firefox' : {
-						file: 'http://www.linphone.org/weblinphone2/downloads/linphone-web-'+ version_plugin +'-Mac-x86.xpi',
-						icon: 'style/images/linphone.png'
-					},
-					'DEFAULT' : 'http://www.linphone.org/weblinphone2/downloads/linphone-web-'+ version_plugin +'-Mac-x86.pkg'
-				}
+				'DEFAULT' : 'http://web.linphone.org/downloads/linphone-web-'+ version_plugin +'-Mac-x86.pkg'
 			}
 		},
 		version: '0.0.2.0'
@@ -169,15 +123,13 @@ function browserDetect() {
 	var object = {
 		browser : null,
 		version : null ,
-		os : null,
-		arch : null
+		os : null
 	};
 	object.browser = searchString(dataBrowser) || "An unknown browser";
 	object.version = searchVersion(navigator.userAgent)
 		|| searchVersion(navigator.appVersion)
 		|| "an unknown version";
 	object.os = searchString(dataOS) || "an unknown OS";
-	object.arch = searchArch();
 	
 	return object;
 }
@@ -193,15 +145,6 @@ function searchString(data) {
 		}
 		else if (dataProp)
 			return data[i].identity;
-	}
-}
-
-function searchArch() {
-	var lcua = navigator.userAgent.toLowerCase();
-	if(lcua.indexOf("linux x86_64") != -1 || lcua.indexOf("win64") != -1) {
-		return "x86_64";
-	} else {
-		return "x86";
 	}
 }
 
