@@ -49,7 +49,7 @@
 			var nodes = document.body.childNodes;
 			for(var i = 0; i < nodes.length; ++i) {
 				var node = nodes[i];
-					document.body.removeChild(node);
+				document.body.removeChild(node);	
 			}
         }
         
@@ -114,6 +114,10 @@
 			} 
         }
         
+        function coreLogHandler(message){
+        	window.console.log(message);
+        }
+        
 		function _loadHandler(core){
 			core.init('local:///.linphonerc');
 			
@@ -121,6 +125,9 @@
             addEvent(core,"callStateChanged",onCallStateChanged);
             addEvent(core,"registrationStateChanged",onRegistrationStateChanged);
             
+            core.logHandler = function(level, message) {
+            	coreLogHandler(message);
+            }
             /* Start main loop for receiving notifications and doing background linphonecore work */
             core.iterateEnabled = true;
             console.log("core handler");
