@@ -6,7 +6,7 @@
 	<script type="text/javascript" src="test.js"></script>
     <script type="text/JavaScript">
     
-    	
+    	/* return the core object */
         function getCore(){
             return document.getElementById('core');
         }
@@ -21,10 +21,7 @@
             }
         }
         
-        /* Basic call 
-         * param : adressStr
-         * 
-         * */
+        /* Basic call */
         function call(addressStr){
         	var core = getCore();
 			var address = core.newAddress(addressStr);
@@ -34,16 +31,11 @@
 			}
         }
         
-        /* Registration 
-         * 
-         * 
-         * 
-         * */
+        /* Registration */
         function registration(username,password,server){
         	var core = getCore();
 			var proxy = core.newProxyConfig();
 			var authinfo = core.newAuthInfo(username, null,password,null,null);
-			
 			core.addAuthInfo(authinfo);
 			proxy.identity = 'sip:' + username + '@' + server;
 			proxy.serverAddr = 'sip:' + server;
@@ -52,7 +44,7 @@
 			core.addProxyConfig(proxy);
 			core.defaultProxy = proxy;
         }
-
+            
        	function unload(){
 			var nodes = document.body.childNodes;
 			for(var i = 0; i < nodes.length; ++i) {
@@ -70,38 +62,24 @@
         function load(){
 			var config = getConfig();
 			var functionName = '__loadHandler';
-			var browserDetection=browserDetect();
-			var core = getCore();
+			var browserDetection;
+			var core;
 			
 			navigator.plugins.refresh(false);
 			window[functionName] = function (core) {
 				_loadHandler(core);
 				/* 
-				 * 
-				 * We must keep the function, because if the element is hidden, 
+				 * We must keep the function, because if the element is hidden (core object), 
 				 * when it will re-appear this function will be called again.
 				 * 
 				 */
-				/*
-				window[functionName] = undefined;
-				try{
-					delete window[functionName];
-				} catch(e) {
-				}
-				*/
 			};
 			
-			// Force version
-			var forceVersion = config.forceVersion;
-			if(typeof forceVersion === 'undefined') {
-				forceVersion = true;
-			}
-			
 			// Find the correct plugin file
+			browserDetection = browserDetect();
 			config.file = {};
 			if (typeof config.files[browserDetection.os] !== 'undefined') {
 				if(typeof config.files[browserDetection.os][browserDetection.arch] !== 'undefined') {
-					console.log(browserDetection.browser);
 					if (typeof config.files[browserDetection.os][browserDetection.arch][browserDetection.browser] !== 'undefined') {
 						config.file.description = config.files[browserDetection.os][browserDetection.arch][browserDetection.browser];
 						config.file.browser = browserDetection.browser;
@@ -112,19 +90,17 @@
 				}
 			}	
 
-			// Specific updates
+			// Specific updates for Internet explorer for download the .cab file
 			config.file.codebase = '';
 			if (typeof config.file.description !== 'undefined') {
 				if (config.file.browser === 'Explorer' ) {
 					config.file.codebase = config.file.description.file;
-					if(forceVersion) {
-						config.file.codebase += '#Version=' + config.file.description.version;
-					}
+					config.file.codebase += '#Version=' + config.file.description.version;
 				}
 			}
 			
-			// Creation of core object
-			var d = document.getElementById('lala');
+			// Creation of core object dynamically in order to add the codebase and the function name for the core object
+			var d = document.getElementById('coreObject');
 			d.innerHTML = '<object id="core" type="application/x-linphone-web" width="0" height="0" codebase=' + config.file.codebase + '>' +
 	 				'<param name="onload" value=' + functionName  + '></object>'
 
@@ -140,6 +116,7 @@
         
 		function _loadHandler(core){
 			core.init('local:///.linphonerc');
+			
             /* Add callback for registration and call state */
             addEvent(core,"callStateChanged",onCallStateChanged);
             addEvent(core,"registrationStateChanged",onRegistrationStateChanged);
@@ -160,7 +137,7 @@
     </script>
 </head>
 <body onload="load()">
-	<div id="lala">
+	<div id="coreObject">
 		
 	</div>
 	<div class="status">
