@@ -161,14 +161,11 @@ linphone.ui.view.login = {
 	},
 	loginSimple: function(base) {
 		var login = base.find('> .content .view > .login');
-		var core = linphone.ui.getCore(base);
-		core.clearProxyConfig();
-		core.clearAllAuthInfo();
-		
+
 		// Get values
 		var account = login.find('.accountSimple .account').val();
 		var password = login.find('.accountSimple .password').val();
-		
+
 		// Check values
 		if (linphone.ui.view.login.state.simple.regex.account.exec(account) === null) {
 			linphone.ui.popup.error.show(base, 'content.view.login.accountSimple.errors.account');
@@ -178,21 +175,25 @@ linphone.ui.view.login = {
 			linphone.ui.popup.error.show(base, 'content.view.login.accountSimple.errors.password');
 			return false;
 		}
+
+		var core = linphone.ui.getCore(base);
+		linphone.ui.core.start(core);
+		core.clearProxyConfig();
+		core.clearAllAuthInfo();
+
 		return linphone.ui.view.login.loginRegistration(base,account,password,"sip.linphone.org",'tls');
 	},
 	loginAdvanced: function(base) {
 		var login = base.find('> .content .view > .login');
 		var core = linphone.ui.getCore(base);
-		core.clearProxyConfig();
-		core.clearAllAuthInfo();
-		
+
 		// Get values
 		var account = login.find('.accountAdvanced .account').val();
 		var password = login.find('.accountAdvanced .password').val();
 		var domain = login.find('.accountAdvanced .domain').val();
 		var transport = login.find('input[name=transport]:checked').val();
 		//var outbandProxy = login.find('input[name=outbandProxy]:checked').val();
-		
+
 		// Check values
 		if (linphone.ui.view.login.state.simple.regex.account.exec(account) === null) {
 			linphone.ui.popup.error.show(base, 'content.view.login.accountSimple.errors.account');
@@ -202,6 +203,12 @@ linphone.ui.view.login = {
 			linphone.ui.popup.error.show(base, 'content.view.login.accountSimple.errors.password');
 			return false;
 		}
+
+		var core = linphone.ui.getCore(base);
+		linphone.ui.core.start(core);
+		core.clearProxyConfig();
+		core.clearAllAuthInfo();
+
 		return linphone.ui.view.login.loginRegistration(base,account,password,domain,transport);
 		
 	},

@@ -60,8 +60,7 @@ linphone.ui.header = {
 		header.find('.profile .menu .logout').click(linphone.ui.exceptionHandler(base, function(event){
 			// Unregister from SIP server
 			var core = linphone.ui.getCore(base);
-			core.clearProxyConfig();
-			core.clearAllAuthInfo();
+			linphone.ui.core.stop(core);
 			
 			// Normally do by callback (but not done)
 			linphone.ui.header.update(base, null);

@@ -351,19 +351,23 @@ linphone.ui.core = {
 		base.find('> .content .loading').hide();
 		linphone.ui.view.show(base, 'plugin', ret);
 	},
-	done: function(base, core) {
+	loaded: function(base, core) {
 		base.find('> .content .loading').hide();
-		
+		linphone.ui.view.show(base, 'login');
+	},
+	started: function(base, core) {
 		var configuration = linphone.ui.configuration(base);
 		configuration.core.running = true;
-		
-		linphone.ui.view.show(base, 'login');
+	},
+	stopped: function(base, core) {
+		var configuration = linphone.ui.configuration(base);
+		configuration.core.running = false;
 	},
 	isRunning: function(base) {
 		var configuration = linphone.ui.configuration(base);
 		return configuration.core.running;
 	},
-	
+
 	/* */
 	_loadHandler: function(core) {
 		if(!linphone.core.isValid(core)) {
@@ -376,7 +380,7 @@ linphone.ui.core = {
 			return;
 		}
 		linphone.ui.logger.log(base, 'Core handler');
-		
+
 		linphone.ui.exceptionHandler(base, function() {
 			base.find('.window .install').hide(); // Force hide
 			var config = linphone.ui.configuration(base);
@@ -384,7 +388,13 @@ linphone.ui.core = {
 				linphone.ui.logger.log(base, 'Enable core logging');
 				core.logHandler = linphone.ui.logger.coreHandler(base);
 			}
-	
+			linphone.ui.core.loaded(base, core);
+		})();
+	},
+
+	start: function(core) {
+		var base = linphone.ui.core.instances[core.magic];
+		linphone.ui.exceptionHandler(base, function() {
 			linphone.ui.core.addEvent(core, 'globalStateChanged', linphone.ui.core._globalStateChanged);
 			linphone.ui.core.addEvent(core, 'callStateChanged', linphone.ui.core._callStateChanged);
 			linphone.ui.core.addEvent(core, 'registrationStateChanged', linphone.ui.core._registrationStateChanged);
@@ -400,54 +410,63 @@ linphone.ui.core = {
 				linphone.ui.error(base, 'errors.core.' + ret_value);
 			} else {
 				init_count++;
-				
+
 				linphone.ui.logger.log(base, 'Sip port: ' + core.sipPort);
-				
-				// Init properties 
+
+				// Init properties
 				core.staticPicture = 'internal:///share/images/nowebcamCIF.jpg';
 				core.ring = 'internal:///share/sounds/linphone/rings/oldphone.wav';
 				core.ringback = 'internal:///share/sounds/linphone/ringback.wav';
 				core.playFile = 'internal:///share/sounds/linphone/rings/toy-mono.wav';
-				core.rootCa = 'internal:///share/linphone/rootca.pem';		
-	
+				core.rootCa = 'internal:///share/linphone/rootca.pem';
+
 				// Set video modes
 				core.videoEnabled = true;
 				core.videoPreviewEnabled = false;
 				core.selfViewEnabled = false;
 				core.usePreviewWindow = true;
-	
+
 				// Init volumes settings
 				var rec_level = (typeof linphone.ui.persistent(base).rec_level !== 'undefined') ? linphone.ui.persistent(base).rec_level : 100;
 				core.recLevel = rec_level;
-	
+
 				var play_level = (typeof linphone.ui.persistent(base).play_level !== 'undefined') ? linphone.ui.persistent(base).play_level : 100;
 				core.playLevel = play_level;
-	
+
 				var ring_level = (typeof linphone.ui.persistent(base).ring_level !== 'undefined') ? linphone.ui.persistent(base).ring_level : 100;
 				core.ringLevel = ring_level;
-	
+
 				linphone.ui.persistent(base).init_count = init_count;
-				
+
 				// Set network state
 				if(linphone.ui.isHeartBeatRunning(base)) {
 					core.networkReachable = (linphone.ui.getNetworkState(base) === linphone.ui.networkState.Online);
 				}
-			
+
 				// Configure to listem on all transport
 				var transports = core.sipTransports;
 				transports.udpPort = -1; //LC_SIP_TRANSPORT_RANDOM
 				transports.tcpPort = -1;
 				transports.tlsPort = -1;
 				core.sipTransports = transports;
-	
+
 				core.iterateEnabled = true;
-				linphone.ui.logger.log(base, 'Core loaded');
-				
-				linphone.ui.core.done(base, core);
+				linphone.ui.logger.log(base, 'Core started');
+
+				linphone.ui.core.started(base, core);
 			}
 		})();
 	},
-	
+
+	stop: function(core) {
+		var base = linphone.ui.core.instances[core.magic];
+		linphone.ui.exceptionHandler(base, function() {
+			linphone.ui.core.stopped(base, core);
+			core.uninit();
+			linphone.ui.logger.log(base, 'Core stopped');
+		})();
+	},
+
 	/* Network events */
 	onNetworkStateChanged: function(event, status) {
 		var base = jQuery(this);
