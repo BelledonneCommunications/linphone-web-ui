@@ -468,9 +468,9 @@ module.exports = function(grunt) {
 		},
 		sed : {
 			webappversion: {
-				path: './html/index.js',
-		      	pattern: 'webapp_version: .*,',
-		      	replacement: 'webapp_version: \'<%= pkg.version %>\',',
+				path: './html/version.js',
+		      	pattern: 'return .*',
+		      	replacement: 'return \'<%= pkg.version %>\';',
       			recursive: false 
 		    }
 		},
