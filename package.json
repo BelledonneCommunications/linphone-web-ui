@@ -2,7 +2,7 @@
 	"name": "linphone-web-ui",
 	"title": "Linphone Web 2",
 	"description": "",
-	"version": "0.0.1",
+	"version": "0.0.0",
 	"homepage": "",
 	"author": {
 		"name": "Belledonne Communications"
@@ -33,6 +33,7 @@
 		"grunt-preprocess": "git://github.com/diorcety/grunt-preprocess.git",
 		"grunt-html-validation": "*",
 		"grunt-sed": "*",
+		"grunt-shell": "*",
 		"express": "*",
 		"commander": "*",
 		"cheerio": "*"
