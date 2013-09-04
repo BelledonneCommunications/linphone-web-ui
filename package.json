@@ -32,7 +32,6 @@
 		"grunt-oversprite": "git://github.com/diorcety/grunt-oversprite.git",
 		"grunt-preprocess": "git://github.com/diorcety/grunt-preprocess.git",
 		"grunt-html-validation": "*",
-		"grunt-sed": "*",
 		"grunt-shell": "*",
 		"express": "*",
 		"commander": "*",

@@ -466,21 +466,18 @@ module.exports = function(grunt) {
 				src: ['**/*'],
 			}
 		},
-		sed : {
-			webappversion: {
-				path: './html/version.js',
-		      	pattern: 'return .*',
-		      	replacement: 'return \'<%= pkg.version %>\';',
-      			recursive: false 
-		    }
-		},
 		shell : {
-			gitdescribe: {
+			git_describe: {
 				command: 'git describe',
 		        options: {
 		        	stdout: true,
 		            callback: set_webapp_version
 		        }
+			},
+			generate_version: {
+				command: function () {
+                	return 'echo \'function getWebAppVersion() { return \'<%= pkg.version %>\'; }\' > ./html/version.js';
+            	}
 			}
 		}
 	});
@@ -528,7 +525,6 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks( 'grunt-preprocess' );
 	grunt.loadNpmTasks( 'grunt-oversprite' );
 	grunt.loadNpmTasks( 'grunt-html-validation' );
-	grunt.loadNpmTasks( 'grunt-sed' );
 	grunt.loadNpmTasks( 'grunt-shell' );
 	
 	// Express server
@@ -625,7 +621,7 @@ module.exports = function(grunt) {
 	);
 	
 	// Compile task
-	grunt.registerTask('compile', ['clean', 'shell:gitdescribe', 'sed:webappversion', 'copy', 'extract-handlebars', 'handlebars', 'pre-preprocess', 'preprocess', 'concat', 'oversprite', 'imagemin', 'uglify', 'cssmin', 'htmlmin']);
+	grunt.registerTask('compile', ['clean', 'shell:git_describe', 'shell:generate_version', 'copy', 'extract-handlebars', 'handlebars', 'pre-preprocess', 'preprocess', 'concat', 'oversprite', 'imagemin', 'uglify', 'cssmin', 'htmlmin']);
  
 	// Default task
 	grunt.registerTask('default', ['release-env', 'jshint', 'csslint', 'compile', 'clean:release', 'validation']);
