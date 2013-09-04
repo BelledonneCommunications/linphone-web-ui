@@ -73,6 +73,6 @@ linphone.ui.view.plugin = {
 	/**/
 	download: function(base) {
 		var config = linphone.ui.configuration(base);
-		window.open(config.file.description);
+		window.location.href = config.file.description;
 	}
 };
