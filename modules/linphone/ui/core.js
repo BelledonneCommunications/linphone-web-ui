@@ -399,10 +399,6 @@ linphone.ui.core = {
 				linphone.ui.logger.log(base, 'Core init error: ' + ret_value);
 				linphone.ui.error(base, 'errors.core.' + ret_value);
 			} else {
-				// Random port at first init
-				if(init_count === 0) {
-					core.sipPort = Math.floor((Math.random()*(65535 - 1024)) + 1024);
-				}
 				init_count++;
 				
 				linphone.ui.logger.log(base, 'Sip port: ' + core.sipPort);
@@ -437,16 +433,12 @@ linphone.ui.core = {
 					core.networkReachable = (linphone.ui.getNetworkState(base) === linphone.ui.networkState.Online);
 				}
 			
-				// Force network updates (hack)
+				// Configure to listem on all transport
 				var transports = core.sipTransports;
-				if(transports.tlsPort !== 0) {
-					transports.udpPort = transports.tlsPort;
-					transports.tlsPort = 0;
-					core.sipTransports = transports;
-					transports.tlsPort = transports.udpPort;
-					transports.udpPort = 0;
-					core.sipTransports = transports;
-				}
+				transports.udpPort = -1; //LC_SIP_TRANSPORT_RANDOM
+				transports.tcpPort = -1;
+				transports.tlsPort = -1;
+				core.sipTransports = transports;
 	
 				core.iterateEnabled = true;
 				linphone.ui.logger.log(base, 'Core loaded');

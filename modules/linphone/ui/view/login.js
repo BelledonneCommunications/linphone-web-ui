@@ -215,29 +215,18 @@ linphone.ui.view.login = {
 		if(domain){
 			proxyConfig.identity = 'sip:' + account + '@' + domain;
 			proxyConfig.serverAddr = 'sip:' + domain;
-			proxyConfig.expires = 3600;
+			if(transport) {
+				if(transport === 'tcp') {
+					proxyConfig.serverAddr+=';transport=tcp';
+				} else if(transport === 'tls') {
+					proxyConfig.serverAddr+=';transport=tls';
+				}  
+			}
+			proxyConfig.expires = 600;
 			proxyConfig.registerEnabled = true;
 			core.addProxyConfig(proxyConfig);
 			core.defaultProxy = proxyConfig;
 			
-			if(transport){
-				// Set transport
-				var transports = core.sipTransports;
-				var port = core.sipPort;
-			
-				transports.udpPort = 0;
-				transports.tcpPort = 0;
-				transports.tlsPort = 0;
-			
-				if(transport === 'udp'){
-					transports.udpPort = port;
-				} else if(transport === 'tcp'){
-					transports.tcpPort = port;
-				} else {
-					transports.tlsPort = port;
-				}
-				core.sipTransports = transports;
-			}
 		} else {
 				linphone.ui.popup.error.show(base, 'content.view.login.accountAdvanced.errors.domain');
 			return false;
