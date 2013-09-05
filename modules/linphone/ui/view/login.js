@@ -166,7 +166,7 @@ linphone.ui.view.login = {
 			linphone.ui.popup.error.show(base, 'content.view.login.accountSimple.errors.password');
 			return false;
 		}
-		return linphone.ui.view.login.loginRegistration(base,account,password,"sip.linphone.org",'udp');
+		return linphone.ui.view.login.loginRegistration(base,account,password,"sip.linphone.org",'tls');
 	},
 	loginAdvanced: function(base) {
 		var login = base.find('> .content .view > .login');
