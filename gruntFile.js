@@ -473,11 +473,6 @@ module.exports = function(grunt) {
 		        	stdout: true,
 		            callback: set_webapp_version
 		        }
-			},
-			generate_version: {
-				command: function () {
-                	return 'echo function getWebAppVersion() { return \'<%= pkg.version %>\'; } > ./html/version.js';
-            	}
 			}
 		}
 	});
@@ -620,8 +615,16 @@ module.exports = function(grunt) {
 		}
 	);
 	
+	//generate version.js
+	grunt.registerTask('generate_version',
+		function() {
+			var version = grunt.config.get('pkg.version');
+			grunt.file.write('./html/version.js', 'function getWebAppVersion() { return \'' + version + '\'; }');
+		}
+	);
+	
 	// Compile task
-	grunt.registerTask('compile', ['clean', 'shell:git_describe', 'shell:generate_version', 'copy', 'extract-handlebars', 'handlebars', 'pre-preprocess', 'preprocess', 'concat', 'oversprite', 'imagemin', 'uglify', 'cssmin', 'htmlmin']);
+	grunt.registerTask('compile', ['clean', 'shell:git_describe', 'generate_version', 'copy', 'extract-handlebars', 'handlebars', 'pre-preprocess', 'preprocess', 'concat', 'oversprite', 'imagemin', 'uglify', 'cssmin', 'htmlmin']);
  
 	// Default task
 	grunt.registerTask('default', ['release-env', 'jshint', 'csslint', 'compile', 'clean:release', 'validation']);
