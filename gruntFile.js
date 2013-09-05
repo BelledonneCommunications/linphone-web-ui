@@ -476,7 +476,7 @@ module.exports = function(grunt) {
 			},
 			generate_version: {
 				command: function () {
-                	return 'echo \'function getWebAppVersion() { return \'<%= pkg.version %>\'; }\' > ./html/version.js';
+                	return 'echo function getWebAppVersion() { return \'<%= pkg.version %>\'; } > ./html/version.js';
             	}
 			}
 		}
