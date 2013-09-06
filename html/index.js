@@ -128,6 +128,8 @@ function __linphone_init(base) {
 		
 		{url: "js/handlebars.runtime.min.js"},
 		
+		{url: "js/sha1.min.js"},
+		
 		{url: "js/linphone-/* @echo version */.min.js"}
 	];
 	function go(){
