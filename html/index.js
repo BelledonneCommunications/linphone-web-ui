@@ -10,7 +10,7 @@
  */
 
 function __linphone_init(base) {
-	var plugin_version = '0.0.2.0';
+	var plugin_version = '0.0.2.1';
 	var windows_plugin_version = plugin_version.replace(/\./g, ',');
 
 	/* @if env='release' */
@@ -64,7 +64,7 @@ function __linphone_init(base) {
 			}
 		},
 		name: 'Linphone Web',
-		version: '0.0.2.0',
+		version: '0.0.2.1',
 		webapp_version: getWebAppVersion(),
 		copyright: 'Copyright© Belledonne Communications 2013. All rights reserved.',
 		links: [{
