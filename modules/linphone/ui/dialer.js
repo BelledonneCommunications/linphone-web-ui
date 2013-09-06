@@ -80,11 +80,13 @@ linphone.ui.dialer = {
 	/* */
 	call: function(base) {
 		var address = base.find('> .content .dialer .address').val();
-		linphone.ui.utils.call(base, address, function() {
+		if(address !== ''){
+			linphone.ui.utils.call(base, address, function() {
 			// Reset input
 			base.find('> .content .dialer .address').val('');
-		}, function() {
-			linphone.ui.popup.error.show(base, 'global.errors.uri.misformatted');
-		});
+			}, function() {
+				linphone.ui.popup.error.show(base, 'global.errors.uri.misformatted');
+			});
+		}
 	}
 };

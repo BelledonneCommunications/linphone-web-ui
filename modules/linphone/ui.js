@@ -380,6 +380,11 @@ linphone.ui = {
 				linphone.ui.view.call.update(base,call);
 			}
 		}
+		if(state === linphone.core.enums.callState.OutgoingRinging) {
+			if(linphone.ui.view.show(base,'call',call) === false){
+				linphone.ui.view.call.update(base,call);
+			}
+		}
 		if(state === linphone.core.enums.callState.End){
 			linphone.ui.popup.incall.hide(base, call);
 			linphone.ui.view.call.terminateCall(base, call);

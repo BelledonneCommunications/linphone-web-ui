@@ -54,6 +54,18 @@ linphone.ui.view.login = {
 				linphone.ui.view.login.login(base);
 			}
 		}));
+		
+		login.find('.domain').keyup(linphone.ui.exceptionHandler(base, function(event) {
+			if(event.which === jQuery.ui.keyCode.ENTER) {
+				linphone.ui.view.login.login(base);
+			}
+		}));
+		
+		login.find('.account').keyup(linphone.ui.exceptionHandler(base, function(event) {
+			if(event.which === jQuery.ui.keyCode.ENTER) {
+				linphone.ui.view.login.login(base);
+			}
+		}));
 	},
 	translate: function(base) {
 		var login = base.find('> .content .view > .login');

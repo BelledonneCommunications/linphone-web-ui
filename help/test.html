@@ -33,12 +33,7 @@
         
         /* Registration */
         function registration(username,password,server){
-        	var core = getCore();
-        	
-        	// Make sure that the previous account isn't still register
-        	core.clearProxyConfig();
-        	core.clearAllAuthInfo();
-        	
+        	var core = getCore();        	
 			var proxy = core.newProxyConfig();
 			var authinfo = core.newAuthInfo(username, null,password,null,null);
 			core.addAuthInfo(authinfo);
@@ -116,19 +111,16 @@
 			} 
         }
         
-        function coreLogHandler(message){
-        	window.console.log(message);
-        }
-        
 		function _loadHandler(core){
-			core.init('local:///.linphonerc');
+			core.init();
 			
             /* Add callback for registration and call state */
             addEvent(core,"callStateChanged",onCallStateChanged);
             addEvent(core,"registrationStateChanged",onRegistrationStateChanged);
             
+            /* Display logs information in the console */
             core.logHandler = function(level, message) {
-            	coreLogHandler(message);
+            	window.console.log(message);
             }
             /* Start main loop for receiving notifications and doing background linphonecore work */
             core.iterateEnabled = true;
