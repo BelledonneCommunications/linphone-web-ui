@@ -392,7 +392,7 @@ linphone.ui.core = {
 		})();
 	},
 
-	start: function(core) {
+	start: function(core, configFilename) {
 		var base = linphone.ui.core.instances[core.magic];
 		linphone.ui.exceptionHandler(base, function() {
 			linphone.ui.core.addEvent(core, 'globalStateChanged', linphone.ui.core._globalStateChanged);
@@ -404,7 +404,7 @@ linphone.ui.core = {
 			linphone.ui.core.addEvent(core, 'displayWarning', linphone.ui.core._displayWarning);
 			linphone.ui.core.addEvent(core, 'displayUrl', linphone.ui.core._displayUrl);
 			var init_count = (typeof linphone.ui.persistent(base).init_count !== 'undefined') ? linphone.ui.persistent(base).init_count : 0;
-			var ret_value = core.init('local:///.linphonerc');
+			var ret_value = core.init(configFilename);
 			if (ret_value !== 0) {
 				linphone.ui.logger.log(base, 'Core init error: ' + ret_value);
 				linphone.ui.error(base, 'errors.core.' + ret_value);
