@@ -215,7 +215,7 @@ linphone.ui.view.login = {
 		// Set auth info
 		if(account){
 			if(password){
-				var authinfo = core.newAuthInfo(account, account, password, "", domain);
+				var authinfo = core.newAuthInfo(account, account, password, null,null);
 				core.addAuthInfo(authinfo);
 			} else {
 				linphone.ui.popup.error.show(base, 'content.view.login.accountSimple.errors.password');
@@ -279,12 +279,12 @@ linphone.ui.view.login = {
 		if(state === linphone.core.enums.registrationState.Ok) {
 			linphone.ui.view.login.done(base);
 		} else if(state === linphone.core.enums.registrationState.Failed) {
-			if(proxy.error !== linphone.core.enums.reason.Unauthorized) {
-				if(proxy.error === linphone.core.enums.reason.BadCredentials) {
-					linphone.ui.view.login.error(base, 'content.view.login.errors.account');
-				} else {
-					linphone.ui.view.login.error(base, 'content.view.login.errors.registrationFailed');
-				}
+			if(	proxy.error === linphone.core.enums.reason.BadCredentials 
+				|| proxy.error === linphone.core.enums.reason.Unauthorized
+				|| proxy.error === linphone.core.enums.reason.NotFound) {
+				linphone.ui.view.login.error(base, 'content.view.login.errors.account');
+			} else {
+				linphone.ui.view.login.error(base, 'content.view.login.errors.registrationFailed');
 			}
 		}
 	}
