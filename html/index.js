@@ -10,8 +10,8 @@
  */
 
 function __linphone_init(base) {
-	var plugin_version = '0.0.2.1';
-	var windows_plugin_version = plugin_version.replace(/\./g, ',');
+	var pluginVersion = '0.0.2.2';
+	var activeXPluginVersion = pluginVersion.replace(/\./g, ',');
 
 	/* @if env='release' */
 	var debug = false;
@@ -25,46 +25,46 @@ function __linphone_init(base) {
 			'Windows' : {
 				'x86' : {
 					'Explorer': {
-						file: 'downloads/linphone-web-' + plugin_version + '-Win32.cab',
-						version: windows_plugin_version
+						file: 'downloads/linphone-web-' + pluginVersion + '-Win32.cab',
+						version: activeXPluginVersion
 					},
-					'DEFAULT' : 'downloads/linphone-web-' + plugin_version + '-Win32.msi'
+					'DEFAULT' : 'downloads/linphone-web-' + pluginVersion + '-Win32.msi'
 				},
 				'x86_64' : {
 					'Explorer': {
-						file: 'downloads/linphone-web-' + plugin_version + '-Win32.cab',
-						version: windows_plugin_version
+						file: 'downloads/linphone-web-' + pluginVersion + '-Win32.cab',
+						version: activeXPluginVersion
 					},
-					'DEFAULT' : 'downloads/linphone-web-' + plugin_version + '-Win32.msi'
+					'DEFAULT' : 'downloads/linphone-web-' + pluginVersion + '-Win32.msi'
 				}
 			},
 			'Linux' : {
 				'x86' : {
 					'Firefox' : {
-						file: 'downloads/linphone-web-' + plugin_version + '-Linux-x86.xpi',
+						file: 'downloads/linphone-web-' + pluginVersion + '-Linux-x86.xpi',
 						icon: 'style/images/linphone.png'
 					},
-					'DEFAULT' : 'downloads/linphone-web-' + plugin_version + '-Linux-x86.tar.gz'
+					'DEFAULT' : 'downloads/linphone-web-' + pluginVersion + '-Linux-x86.tar.gz'
 				}, 
 				'x86_64' : {
 					'Firefox' : {
-						file: 'downloads/linphone-web-' + plugin_version + '-Linux-x86_64.xpi',
+						file: 'downloads/linphone-web-' + pluginVersion + '-Linux-x86_64.xpi',
 						icon: 'style/images/linphone.png'
 					},
-					'DEFAULT' : 'downloads/linphone-web-' + plugin_version + '-Linux-x86_64.tar.gz'
+					'DEFAULT' : 'downloads/linphone-web-' + pluginVersion + '-Linux-x86_64.tar.gz'
 				}
 			},
 			'Mac' : {
 				'x86' : {
-					'DEFAULT' : 'downloads/linphone-web-' + plugin_version + '-Mac-x86.pkg'
+					'DEFAULT' : 'downloads/linphone-web-' + pluginVersion + '-Mac-x86.pkg'
 				}, 
 				'x86_64' : {
-					'DEFAULT' : 'downloads/linphone-web-' + plugin_version + '-Mac-x86.pkg'
+					'DEFAULT' : 'downloads/linphone-web-' + pluginVersion + '-Mac-x86.pkg'
 				}
 			}
 		},
 		name: 'Linphone Web',
-		version: '0.0.2.1',
+		version: pluginVersion,
 		webapp_version: getWebAppVersion(),
 		copyright: 'Copyright© Belledonne Communications 2013. All rights reserved.',
 		links: [{
