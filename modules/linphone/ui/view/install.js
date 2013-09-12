@@ -31,8 +31,10 @@ linphone.ui.view.install = {
 
 		var config = linphone.ui.configuration(base);
 		var install = base.find('> .content .view > .install');
-		if (jQuery.client.os === 'Windows' || jQuery.client.os === 'Mac') {
-			jQuery.i18n.set(install.find('> .text'), 'content.view.install.text.install_msi_or_pkg');
+		if (jQuery.client.os === 'Windows') {
+			jQuery.i18n.set(install.find('> .text'), 'content.view.install.text.install_windows');
+		} else if (jQuery.client.os === 'Mac') {
+			jQuery.i18n.set(install.find('> .text'), 'content.view.install.text.install_mac');
 		} else if (jQuery.client.os === 'Linux') {
 			jQuery.i18n.set(install.find('> .text'), 'content.view.install.text.install_tar_gz');
 		}

@@ -398,9 +398,13 @@ linphone.ui.i18n = {
 					fr_FR : 'Recharger'
 				},
 				text: {
-					install_msi_or_pkg : {
+					install_windows : {
 						en_US : 'Run the installer you just downloaded. If you have a warning message, click on "More info" then "Run anyway". Once the installation finishes, click on "Reload" button below.',
-						fr_FR : 'Éxécutez le fichier que vous venez de télécharger. Si vous voyez un message d\'avertissement, cliquez sur "Plus d\'informations", puis sur "Éxecuter quand même". Une fois l\'installation finie, cliquez sur le bouton "Recharger" ci-dessous.'
+						fr_FR : 'Exécutez le fichier que vous venez de télécharger. Si vous voyez un message d\'avertissement, cliquez sur "Plus d\'informations", puis sur "Exécuter quand même". Une fois l\'installation terminée, cliquez sur le bouton "Recharger" ci-dessous.'
+					},
+					install_mac : {
+						en_US : 'Run the installer you just downloaded. Once the installation finishes, click on "Reload" button below.',
+						fr_FR : 'Exécutez le fichier que vous venez de télécharger. Une fois l\'installation terminée, cliquez sur le bouton "Recharger" ci-dessous.'
 					},
 					install_tar_gz : {
 						en_US : 'If it doesn\'t exist yet, create the .mozilla/plugins/ folder in your home directory (~). Then extract the archive you just downloaded inside this folder. Finally, click on the "Refresh" button below.',
@@ -423,20 +427,20 @@ linphone.ui.i18n = {
 						fr_FR : 'Le plugin n\'est pas installé. Veuillez attendre et accepter l\'installation automatique du plugin.'
 					},
 					auto_or_update : { // With IE, we can not detect the current version without issue (javascript caching)
-						en_US : 'The plugin is not installed or updated. Please wait a few seconds and click on the "Install" button of the popup that will appear at the bottom of this window.',
-						fr_FR : 'Le plugin n\'est pas installé ou pas à jour. Veuillez patienter quelques secondes et cliquez sur le bouton "Installer" de la fenêtre qui va apparaître en bas de votre navigateur.'
+						en_US : 'The plugin is not installed or updated. Please wait a few seconds and click on the "Install" button of the popup that will appear at the bottom of this window. If you have already updated the plugin and still get this message, restart your browser.',
+						fr_FR : 'Le plugin n\'est pas installé ou pas à jour. Veuillez patienter quelques secondes et cliquez sur le bouton "Installer" de la fenêtre qui va apparaître en bas de votre navigateur. Si vous avez déjà mis le plugin à jour et que vous avez toujours ce message, redémarrez votre navigateur.'
 					},
 					download : { // No automatic plugin intallation
 						en_US : 'The plugin is not installed. Please download it using the following button.',
 						fr_FR : 'Le plugin n\'est pas installé. Veuillez le télécharger en utilisant le bouton suivant.'
 					},
 					outdated_download : { // No automatic plugin update
-						en_US : 'The plugin is outdated. Please download it using the following button.',
-						fr_FR : 'Le plugin n\'est pas à jour. Veuillez accepter l\'installation automatique du plugin.'
+						en_US : 'The plugin is outdated. Please download it using the following button. If you have already updated the plugin and still get this message, restart your browser.',
+						fr_FR : 'Le plugin n\'est pas à jour. Veuillez accepter l\'installation automatique du plugin. Si vous avez déjà mis le plugin à jour et que vous avez toujours ce message, redémarrez votre navigateur.'
 					},
 					outdated_auto : { // Automatic plugin update
-						en_US : 'The plugin is outdated. Please wait and accept the automatic install of the plugin.',
-						fr_FR : 'Le plugin n\'est pas à jour. Veuillez attendre et accepter l\'installation automatique du plugin.'
+						en_US : 'The plugin is outdated. Please wait and accept the automatic install of the plugin. If you have already updated the plugin and still get this message, restart your browser.',
+						fr_FR : 'Le plugin n\'est pas à jour. Veuillez attendre et accepter l\'installation automatique du plugin. Si vous avez déjà mis le plugin à jour et que vous avez toujours ce message, redémarrez votre navigateur.'
 					}
 				},
 				title: {
