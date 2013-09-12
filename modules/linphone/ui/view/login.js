@@ -9,7 +9,7 @@
  
  */
 
-/*globals jQuery,linphone*/
+/*globals jQuery,linphone,CryptoJS*/
 
 linphone.ui.view.login = {
 	simpleDomain: "sip.linphone.org",
@@ -230,7 +230,7 @@ linphone.ui.view.login = {
 			}
 
 			return true;
-		})
+		});
 	},
 	loginConfigure: function(base, account, password, domain, transport) {
 		var core = linphone.ui.getCore(base);
@@ -305,9 +305,7 @@ linphone.ui.view.login = {
 			core.config.setString('app', 'identity_hash', hash);
 			linphone.ui.view.login.done(base);
 		} else if(state === linphone.core.enums.registrationState.Failed) {
-			if((proxy.error === linphone.core.enums.reason.BadCredentials)
-				|| (proxy.error === linphone.core.enums.reason.Unauthorized)
-				|| (proxy.error === linphone.core.enums.reason.NotFound)) {
+			if((proxy.error === linphone.core.enums.reason.BadCredentials) || (proxy.error === linphone.core.enums.reason.Unauthorized) || (proxy.error === linphone.core.enums.reason.NotFound)) {
 				linphone.ui.view.login.error(base, 'content.view.login.errors.account');
 			} else {
 				linphone.ui.view.login.error(base, 'content.view.login.errors.registrationFailed');
