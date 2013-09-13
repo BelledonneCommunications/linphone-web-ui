@@ -42,23 +42,31 @@ function __linphone_init(base) {
 				'x86' : {
 					'Firefox' : {
 						file: 'downloads/linphone-web-' + pluginVersion + '-Linux-x86.xpi',
-						icon: 'style/images/linphone.png'
+						icon: 'style/img/linphone.png'
 					},
 					'DEFAULT' : 'downloads/linphone-web-' + pluginVersion + '-Linux-x86.tar.gz'
 				}, 
 				'x86_64' : {
 					'Firefox' : {
 						file: 'downloads/linphone-web-' + pluginVersion + '-Linux-x86_64.xpi',
-						icon: 'style/images/linphone.png'
+						icon: 'style/img/linphone.png'
 					},
 					'DEFAULT' : 'downloads/linphone-web-' + pluginVersion + '-Linux-x86_64.tar.gz'
 				}
 			},
 			'Mac' : {
 				'x86' : {
+					'Firefox' : {
+						file: 'downloads/linphone-web-' + pluginVersion + '-Mac-x86.xpi',
+						icon: 'style/img/linphone.png'
+					},
 					'DEFAULT' : 'downloads/linphone-web-' + pluginVersion + '-Mac-x86.pkg'
 				}, 
 				'x86_64' : {
+					'Firefox' : {
+						file: 'downloads/linphone-web-' + pluginVersion + '-Mac-x86.xpi',
+						icon: 'style/img/linphone.png'
+					},
 					'DEFAULT' : 'downloads/linphone-web-' + pluginVersion + '-Mac-x86.pkg'
 				}
 			}
@@ -92,7 +100,7 @@ function __linphone_init(base) {
 		disableChat: true,
 		disableConference: true,
 		disablePresence: true
-	}
+	};
 
 	config.debug = debug;
 	config.logs = debug;
