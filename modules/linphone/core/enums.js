@@ -96,6 +96,24 @@ linphone.core.enums = {
 		}
 	},
 
+	subscribePolicy : {
+		Wait : 0,
+		Deny : 1,
+		Accept : 2
+	},
+	getSubscribePolicyText : function(value) {
+		switch (value) {
+		case linphone.core.enums.subscribePolicy.Wait:
+			return "Wait";
+		case linphone.core.enums.subscribePolicy.Deny:
+			return "Deny";
+		case linphone.core.enums.subscribePolicy.Accept:
+			return "Accept";
+		default:
+			return "?";
+		}
+	},
+
 	firewallPolicy : {
 		NoFirewall : 0,
 		UseNatAddress : 1,
