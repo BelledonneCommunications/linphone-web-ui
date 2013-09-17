@@ -157,9 +157,7 @@ linphone.ui.view.call = {
 			linphone.ui.view.call.removeVideo(base,call);
 		}
 	},
-	startVideo: function(base,call){
-		var core = linphone.ui.getCore(base);
-		// Add video views
+	addVideo: function(base,call){
 		linphone.ui.video.addVideoView(base, base.find('> .content .view > .call .video > .content'));
 	},
 	removeVideo: function(base,call){

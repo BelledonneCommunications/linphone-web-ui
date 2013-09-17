@@ -371,9 +371,6 @@ linphone.ui = {
 	onCallStateChanged: function(event, call, state, message) {
 		var base = jQuery(this);
 		var core = linphone.ui.getCore(base);
-		var remoteParams = call.remoteParams;
-		var currentParams = call.currentParams;
-		var videoPolicy = core.videoPolicy;
 
 		if(state === linphone.core.enums.callState.IncomingReceived){
 			linphone.ui.popup.incall.show(base, call);
@@ -386,7 +383,7 @@ linphone.ui = {
 			//linphone.ui.view.call.startTimer(base,call);
 		}
 		if(state === linphone.core.enums.callState.UpdatedByRemote){
-			if(remoteParams.videoEnabled === true && currentParams.videoEnabled === false && videoPolicy.automaticallyAccept === false){
+			if(call.remoteParams.videoEnabled === true && call.currentParams.videoEnabled === false && core.videoPolicy.automaticallyAccept === false){
 				linphone.ui.popup.video.show(base, call);
 				var timeout=window.setTimeout(function() {
 					linphone.ui.popup.video.hide(base,base.find('> .content .popup .video'));
@@ -401,8 +398,8 @@ linphone.ui = {
 
 		}
 		if(state === linphone.core.enums.callState.StreamsRunning){
-			if(remoteParams.videoEnabled === true && currentParams.videoEnabled === true){
-				linphone.ui.view.call.startVideo(base,call);
+			if(call.remoteParams.videoEnabled === true && call.currentParams.videoEnabled === true){
+				linphone.ui.view.call.addVideo(base,call);
 			}
 		}
 		if(state === linphone.core.enums.callState.End){
