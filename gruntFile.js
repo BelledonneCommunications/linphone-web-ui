@@ -56,7 +56,8 @@ module.exports = function(grunt) {
 		'linphone.ui.popup',
 		'linphone.ui.popup.incall',
 		'linphone.ui.popup.outcall',
-		'linphone.ui.popup.error'
+		'linphone.ui.popup.error',
+		'linphone.ui.popup.video'
 	],
 	htmlFiles = [
 		'index.html',
