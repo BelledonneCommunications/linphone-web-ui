@@ -563,7 +563,7 @@ module.exports = function(grunt) {
 			grunt.config.set('tmp', 'dist/');
 			
 			// Append debug env
-			grunt.config.set('server.script', grunt.config.get('server.script').concat([ '-p', '8888', '-d']));
+			grunt.config.set('server.script', grunt.config.get('server.script').concat([ '-p', '9999', '-d']));
 		}
 	);
 	grunt.registerTask('release-env', 
@@ -573,7 +573,7 @@ module.exports = function(grunt) {
 
 			
 			// Append release env
-			grunt.config.set('server.script', grunt.config.get('server.script').concat([ '-p', '8888']));
+			grunt.config.set('server.script', grunt.config.get('server.script').concat([ '-p', '9999']));
 		}
 	);
 	grunt.registerTask('extract-handlebars', 
