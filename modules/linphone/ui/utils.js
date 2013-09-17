@@ -249,6 +249,14 @@ linphone.ui.utils = {
 		}
 		return proxy;
 	},
+	acceptUpdate: function(base,call,accept){
+		var core = linphone.ui.getCore(base);
+		var currentParams = call.currentParams;
+		if(accept === true){
+			currentParams.videoEnabled = true;
+		}
+		core.acceptCallUpdate(call,currentParams);
+	},
 	call: function(base, object, success, failure) {
 		var address;
 		if (typeof object === 'string') {

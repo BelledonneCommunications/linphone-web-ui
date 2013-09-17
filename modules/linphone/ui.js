@@ -371,6 +371,10 @@ linphone.ui = {
 	onCallStateChanged: function(event, call, state, message) {
 		var base = jQuery(this);
 		var core = linphone.ui.getCore(base);
+		var remoteParams = call.remoteParams;
+		var currentParams = call.currentParams;
+		var videoPolicy = core.videoPolicy;
+
 		if(state === linphone.core.enums.callState.IncomingReceived){
 			linphone.ui.popup.incall.show(base, call);
 		}
@@ -379,10 +383,26 @@ linphone.ui = {
 			if(linphone.ui.view.show(base,'call',call) === false){
 				linphone.ui.view.call.update(base,call);
 			}
+			//linphone.ui.view.call.startTimer(base,call);
 		}
-		if(state === linphone.core.enums.callState.OutgoingRinging) {
-			if(linphone.ui.view.show(base,'call',call) === false){
-				linphone.ui.view.call.update(base,call);
+		if(state === linphone.core.enums.callState.UpdatedByRemote){
+			if(remoteParams.videoEnabled === true && currentParams.videoEnabled === false && videoPolicy.automaticallyAccept === false){
+				linphone.ui.popup.video.show(base, call);
+				var timeout=window.setTimeout(function() {
+					linphone.ui.popup.video.hide(base,base.find('> .content .popup .video'));
+					linphone.ui.utils.acceptUpdate(base,call,false);	
+				},
+				3000);
+				window.clearInterval(timeout);
+			} else {
+				linphone.ui.view.call.removeVideo(base,call);
+				linphone.ui.view.call.update(base,false);
+			}
+
+		}
+		if(state === linphone.core.enums.callState.StreamsRunning){
+			if(remoteParams.videoEnabled === true && currentParams.videoEnabled === true){
+				linphone.ui.view.call.startVideo(base,call);
 			}
 		}
 		if(state === linphone.core.enums.callState.End){

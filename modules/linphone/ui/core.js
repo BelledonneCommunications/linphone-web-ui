@@ -424,7 +424,13 @@ linphone.ui.core = {
 				core.videoEnabled = true;
 				core.videoPreviewEnabled = false;
 				core.selfViewEnabled = false;
-				core.usePreviewWindow = true;
+				core.usePreviewWindow = false;
+				
+				// Set video policy
+				var videoPolicy = core.videoPolicy;
+				videoPolicy.automaticallyAccept = false;
+				videoPolicy.automaticallyInitiate = false;
+				core.videoPolicy = videoPolicy;
 
 				// Init volumes settings
 				var rec_level = (typeof linphone.ui.persistent(base).rec_level !== 'undefined') ? linphone.ui.persistent(base).rec_level : 100;

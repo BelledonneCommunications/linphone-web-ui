@@ -19,22 +19,6 @@ linphone.ui.view.call = {
 		var call = base.find('> .content .view > .call');
 		call.data('linphoneweb-view', linphone.ui.view.call);
 		
-		/* Resizable */
-		call.find('.video .profile').mouseenternear(linphone.ui.exceptionHandler(base, function (event) {
-			call.find('.video .profile .resize').show();
-		}), 40);
-		call.find('.video .profile').mouseleavenear(linphone.ui.exceptionHandler(base, function (event) {
-			call.find('.video .profile .resize').hide();
-		}), 40);
-		call.find('.video .profile .resize .collapse').click(linphone.ui.exceptionHandler(base, function(event) {
-			linphone.ui.view.call.updateVideoProfile(base, false);
-		}));
-		call.find('.video .profile .resize .expand').click(linphone.ui.exceptionHandler(base, function(event) {
-			linphone.ui.view.call.updateVideoProfile(base, true);
-		}));
-		
-		linphone.ui.view.call.updateVideoProfile(base, true);
-		
 		// Do not add video views now because of a bug with IE.
 		// They will be added later when starting a call.
 	},
@@ -43,10 +27,23 @@ linphone.ui.view.call = {
 	
 	/* */
 	show: function(base, call) {
-		// Add video views
-		linphone.ui.video.addVideoView(base, base.find('> .content .view > .call .video > .content'));
+		var core = linphone.ui.getCore(base);
+		var callView= base.find('> .content .view > .call');
+		/* Resizable */
+		/*callView.find('.video .profile').mouseenternear(linphone.ui.exceptionHandler(base, function (event) {
+			callView.find('.video .profile .resize').show();
+		}), 40);
+		callView.find('.video .profile').mouseleavenear(linphone.ui.exceptionHandler(base, function (event) {
+			callView.find('.video .profile .resize').hide();
+		}), 40);
+		callView.find('.video .profile .resize .collapse').click(linphone.ui.exceptionHandler(base, function(event) {
+			linphone.ui.view.call.updateVideoProfile(base, false);
+		}));
+		callView.find('.video .profile .resize .expand').click(linphone.ui.exceptionHandler(base, function(event) {
+			linphone.ui.view.call.updateVideoProfile(base, true);
+		}));
 		linphone.ui.video.addSelfView(base, base.find('> .content .view > .call .video .profile > .content'));
-
+		linphone.ui.view.call.updateVideoProfile(base, true);*/
 		linphone.ui.view.call.update(base,call);
 	},
 	update: function(base,call) {
@@ -58,12 +55,8 @@ linphone.ui.view.call = {
 		list.empty();
 		list.append(linphone.ui.template(base, 'view.call.actions', core));
 		linphone.ui.view.call.updateMuteButton(base, core.isMicMuted);
-		linphone.ui.view.call.updateVideoButton(base, call.cameraEnabled);
-		var qualityTimer = window.setInterval(function(){
-			linphone.ui.view.call.displayCallQuality(base,call);},
-			1000);
-		linphone.ui.view.call.displayCallQuality(base,call);
-		callView.data('qualityTimer',qualityTimer);
+		linphone.ui.view.call.updateVideoButton(base,false);
+		
 		/* */
 		callView.find('.actions .muteEnabled .on').click(linphone.ui.exceptionHandler(base, function(){
 			linphone.ui.view.call.onMuteButton(base,false);
@@ -92,8 +85,7 @@ linphone.ui.view.call = {
 		}
 	},
 	hide: function(base) {
-		var data = base.find('> .content .view > .call ').data('qualityTimer');
-		window.clearInterval(data);
+	
 	},
 	
 	/* */
@@ -127,6 +119,8 @@ linphone.ui.view.call = {
 			base.find('> .content .view > .call .actions .videoEnabled .on').removeClass('selected');
 		}
 	},
+	
+	/* */
 	onMuteButton: function(base, button) {
 		var core = linphone.ui.getCore(base);
 		
@@ -134,12 +128,8 @@ linphone.ui.view.call = {
 		linphone.ui.view.call.updateMuteButton(base,button);
 	},
 	onVideoButton: function(base, call, button) {
-		var core = linphone.ui.getCore(base);
-		
-		/*var callParams =  call.currentParams;
-		callParams.enabledVideo = button ;
-		core.updateCall(call,callParams);*/
 		linphone.ui.view.call.updateVideoButton(base,button);
+		linphone.ui.view.call.enableVideo(base,call,button);
 	},
 	onPauseButton: function(base, call) {
 		var core = linphone.ui.getCore(base);
@@ -155,27 +145,59 @@ linphone.ui.view.call = {
 	},
 	
 	/* */
+	enableVideo: function(base,call,isEnabled){
+		var core = linphone.ui.getCore(base);
+		var callParams = call.currentParams;
+		
+		core.videoEnabled = isEnabled;
+		callParams.videoEnabled = isEnabled;
+		core.updateCall(call,callParams);
+		
+		if(isEnabled === false){
+			linphone.ui.view.call.removeVideo(base,call);
+		}
+	},
+	startVideo: function(base,call){
+		var core = linphone.ui.getCore(base);
+		// Add video views
+		linphone.ui.video.addVideoView(base, base.find('> .content .view > .call .video > .content'));
+	},
+	removeVideo: function(base,call){
+		linphone.ui.video.removeView(base, base.find('> .content .view > .call .video > .content'));
+	},
+	
+	/* */
+	startTimer: function(base,call){
+		var callView = base.find('> .content .view > .call');
+		var qualityTimer = window.setInterval(function(){
+			linphone.ui.view.call.displayCallQuality(base,call);},
+			1000);
+		callView.data('qualityTimer',qualityTimer);
+	},
+	
 	terminateCall: function(base, call){
 		var core = linphone.ui.getCore(base);
-		core.muteMic = false;
+		//var data = base.find('> .content .view > .call ').data('qualityTimer');
+		//window.clearInterval(data);
+		
 	},
 	displayCallQuality: function(base, call) {
 		var quality = call.currentQuality;
 		var signal = base.find('> .content .view > .call .actions .callSignal');
-		/*if(quality >= 0 && quality < 1){
-			signal.css('background-image',"url('style/img/signal0b.png')"); 
+		if(quality >= 0 && quality < 1){
+			signal.css({'background-image': 'url("style/img/signal0b.png")'});
 		}
 		if(quality >= 1 && quality < 2){
-			signal.css('background-image', "url('style/img/signal1b.png')"); 
+			signal.css({'background-image': 'url("style/img/signal1b.png")'});
 		}
 		if(quality >= 2 && quality < 3){
-			signal.css('background-image', 'url(style/img/signal2b.png)'); 
+			signal.css({'background-image': 'url("style/img/signal2b.png")'});
 		}
 		if(quality >= 3 && quality < 4){
-			signal.css('background-image', 'url(\'style/img/signal3b.png\')'); 
+			signal.css({'background-image': 'url("style/img/signal3b.png")'});
 		}
 		if(quality >= 4 && quality < 5){
-			signal.css('background-image', 'url(\'style/img/signal4b.png\')'); 
-		}*/
+			signal.css({'background-image': 'url("style/img/signal4b.png")'});
+		}
 	}
 };

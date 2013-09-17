@@ -1,0 +1,26 @@
+<!--
+ Linphone Web - Web plugin of Linphone an audio/video SIP phone
+ Copyright (c) 2013 Belledonne Communications
+ All rights reserved.
+ 
+
+ Authors:
+ - Yann Diorcet <diorcet.yann@gmail.com>
+ 
+-->
+<!-- @if env='debug' -->
+<script id="linphone.ui.popup.video" type="text/x-handlebars-template">
+	<div class="video">
+ 		<span class="title" data-i18n="content.popup.video.title"></span>
+ 		<img src="{{LinphoneWeb-Call helpers.utils.getAvatar context.remoteAddress}}" alt="" class="contactImg">
+		<div class="contactName">
+			{{LinphoneWeb-Call helpers.utils.getUsername context.remoteAddress}}
+			<div class="message" data-i18n="content.popup.video.message"></div>
+		</div>
+ 		<div class="actions">
+ 			<div class="videoIn"><div class="image imageCall"></div></div>
+ 			<div class="videoOff"><div class="image imageCallOff"></div></div>
+ 		</div>
+ 	</div>	
+ </script>
+ <!-- @endif -->

@@ -41,6 +41,14 @@
 	cursor: pointer;
 }
 
+.linphoneweb > .content .view > .call .contactView {
+	height: 150px;
+	width: 150px;
+	background-image: url('img/avatar.jpg');
+	background-repeat: no-repeat;
+	margin: auto;
+}
+
 .linphoneweb > .content .view > .call .video .content {
 	overflow: hidden;
 	position: absolute;
