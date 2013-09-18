@@ -416,10 +416,15 @@ linphone.ui = {
 		}
 		if(state === linphone.core.enums.callState.Error) {
 			var tKey = 'global.errors.call.' + linphone.ui.utils.formatToKey(message);
+			var args = null;
 			if(!jQuery.i18n.defined(tKey)) {
 				tKey = 'global.errors.call.unknown';
+			} else {
+				if (tKey === 'global.errors.call.user_is_busy' || tKey === 'global.errors.call.user_not_found') {
+					args = [linphone.ui.utils.getUsername(base, call.remoteAddress)];
+				}
 			}
-			linphone.ui.popup.error.show(base, tKey, [linphone.ui.utils.getUsername(base, call.remoteAddress)]);
+			linphone.ui.popup.error.show(base, tKey, args);
 		}
 	},
 	

@@ -507,6 +507,10 @@ linphone.ui.i18n = {
 		},
 		errors: {
 			call: {
+				request_timeout: {
+					en_US : 'Request timeout',
+					fr_FR : 'Temps d’attente d\'une réponse du serveur écoulé'
+				},
 				unknown: {
 					en_US : 'Unknown error',
 					fr_FR : 'Erreur inconnue'
