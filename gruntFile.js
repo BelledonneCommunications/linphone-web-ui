@@ -423,27 +423,27 @@ module.exports = function(grunt) {
 			},
 			allJS: {
 				files: ['<%= concat.coreJS.dest %>', '<%= concat.uiJS.dest %>', '<%= concat.uiTmplJS.dest %>'],
-				tasks: ['concat:allJS', 'uglify:allJS']
+				tasks: ['shell:git_describe_short' ,'concat:allJS', 'uglify:allJS']
 			},
 			coreJS: {
 				files: coreJSFiles,
-				tasks: ['concat:coreJS', 'uglify:coreJS']
+				tasks: ['shell:git_describe_short' ,'concat:coreJS', 'uglify:coreJS']
 			},
 			modelsJS: {
 				files: modelsJSFiles,
-				tasks: ['concat:modelsJS', 'uglify:modelsJS']
+				tasks: ['shell:git_describe_short' ,'concat:modelsJS', 'uglify:modelsJS']
 			},
 			uiJS: {
 				files: uiJSFiles,
-				tasks: ['concat:uiJS', 'uglify:uiJS']
+				tasks: ['shell:git_describe_short' ,'concat:uiJS', 'uglify:uiJS']
 			},
 			uiTmplJS: {
 				files: '<%= handlebars.uiTmplJS.dest %>',
-				tasks: ['concat:uiTmplJS', 'uglify:uiTmplJS']
+				tasks: ['shell:git_describe_short' ,'concat:uiTmplJS', 'uglify:uiTmplJS']
 			},
 			uiCSS: {
 				files: uiCSSFiles,
-				tasks: ['concat:uiCSS', 'cssmin:uiCSS']
+				tasks: ['shell:git_describe_short' ,'concat:uiCSS', 'cssmin:uiCSS']
 			},
 			htmlFinal: {
 				files: ['<%= preprocess.html.dest %>'],
@@ -460,7 +460,7 @@ module.exports = function(grunt) {
 		compress: {
 			release: {
 				options: {
-					archive: '<%= pkg.name %>-<%= pkg.version %>.zip'
+					archive: '<%= pkg.name %>-<%= pkg.webversion %>.zip'
 				},
 				expand: true,
 				cwd: 'dist/',
@@ -474,11 +474,23 @@ module.exports = function(grunt) {
 		        	stdout: true,
 		            callback: set_webapp_version
 		        }
+			},
+			git_describe_short: {
+				command: 'git describe --abbrev=0',
+		        options: {
+		        	stdout: true,
+		            callback: set_package_version
+		        }
 			}
 		}
 	});
 	
 	function set_webapp_version(err, stdout, stderr, cb) {
+		grunt.config.set('pkg.webversion', stdout.replace(/(\r\n|\n|\r)/gm,"")); // Remove line breaks from stdout
+		cb();
+	}
+	
+	function set_package_version(err, stdout, stderr, cb) {
 		grunt.config.set('pkg.version', stdout.replace(/(\r\n|\n|\r)/gm,"")); // Remove line breaks from stdout
 		cb();
 	}
@@ -619,13 +631,13 @@ module.exports = function(grunt) {
 	//generate version.js
 	grunt.registerTask('generate_version',
 		function() {
-			var version = grunt.config.get('pkg.version');
+			var version = grunt.config.get('pkg.webversion');
 			grunt.file.write('./html/version.js', 'function getWebAppVersion() { return \'' + version + '\'; }');
 		}
 	);
 	
 	// Compile task
-	grunt.registerTask('compile', ['clean', 'shell:git_describe', 'generate_version', 'copy', 'extract-handlebars', 'handlebars', 'pre-preprocess', 'preprocess', 'concat', 'oversprite', 'imagemin', 'uglify', 'cssmin', 'htmlmin']);
+	grunt.registerTask('compile', ['clean', 'shell:git_describe', 'shell:git_describe_short' ,'generate_version', 'copy', 'extract-handlebars', 'handlebars', 'pre-preprocess', 'preprocess', 'concat', 'oversprite', 'imagemin', 'uglify', 'cssmin', 'htmlmin']);
  
 	// Default task
 	grunt.registerTask('default', ['release-env', 'jshint', 'csslint', 'compile', 'clean:release', 'validation']);
