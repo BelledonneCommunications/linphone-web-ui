@@ -249,10 +249,10 @@ linphone.ui.utils = {
 		}
 		return proxy;
 	},
-	acceptUpdate: function(base,call,accept){
+	acceptUpdate: function(base,call,enableVideo){
 		var core = linphone.ui.getCore(base);
 		var currentParams = call.currentParams;
-		if(accept === true){
+		if(enableVideo === true){
 			currentParams.videoEnabled = true;
 		}
 		core.acceptCallUpdate(call,currentParams);

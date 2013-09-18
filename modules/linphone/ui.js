@@ -386,14 +386,15 @@ linphone.ui = {
 			if(call.remoteParams.videoEnabled === true && call.currentParams.videoEnabled === false && core.videoPolicy.automaticallyAccept === false){
 				linphone.ui.popup.video.show(base, call);
 				var timeout=window.setTimeout(function() {
+					window.clearInterval(timeout);
 					linphone.ui.popup.video.hide(base,base.find('> .content .popup .video'));
-					linphone.ui.utils.acceptUpdate(base,call,false);	
+					linphone.ui.utils.acceptUpdate(base,call,false);
 				},
-				3000);
-				window.clearInterval(timeout);
+				5000);
 			} else {
-				linphone.ui.view.call.removeVideo(base,call);
-				linphone.ui.view.call.update(base,false);
+				linphone.ui.utils.acceptUpdate(base, call, false);
+				linphone.ui.view.call.removeVideo(base, call);
+				linphone.ui.view.call.update(base, false);
 			}
 
 		}

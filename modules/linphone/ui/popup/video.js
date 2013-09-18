@@ -43,19 +43,13 @@ linphone.ui.popup.video = {
 	
 	/* */
 	decline: function(base, call, element){
-		var core = linphone.ui.getCore(base);
-		var params = call.currentParams;
-		
+		linphone.ui.utils.acceptUpdate(base, call, false);
 		linphone.ui.popup.video.hide(base,element);
+		linphone.ui.view.call.updateVideoButton(base,false);
 	},
 	accept: function(base, call, element){
-		var core = linphone.ui.getCore(base);
-		
-
+		linphone.ui.utils.acceptUpdate(base, call, true);
 		linphone.ui.popup.video.hide(base,element);
 		linphone.ui.view.call.updateVideoButton(base,true);
-		linphone.ui.view.call.enableVideo(base,call,true);
-		var params = call.currentParams;
-		core.acceptCallUpdate(call,params);
 	}
 };
