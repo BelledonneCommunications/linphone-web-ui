@@ -94,7 +94,7 @@ function __linphone_init(base) {
 			locale : 'fr_FR'
 		} ],
 		models: {
-			contacts: new linphone.models.contacts.localStorage.engine('Linphone Web', debug),
+			contacts: new linphone.models.contacts.core.engine(base, debug),
 			history: new linphone.models.history.core.engine(base, debug)
 		},
 		disableChat: true,

@@ -30,24 +30,10 @@
 				<div><input class="firstname" type="text" value=""></div>
 			</div>
 			<div class="label floatLeft bigMarginLeft">
-				<label data-i18n="content.view.contact.lastname"></label>
-				<div><input class="lastname" type="text" value=""></div>
+				<label data-i18n="content.view.contact.addressContact"></label>
+				<div><input class="addressInput floatLeft" value="" type="text"></div>
+				<!--<div><div class="addAddress button buttonAction"><div class="image imageAdd"></div></div></div>	-->
 			</div>
-			<div class="addressList floatLeft">
-				<div class="addressLabel"><label data-i18n="content.view.contact.addressContact"></label></div>
-				<div class="list"></div>
-				<div><div class="addAddress button buttonAction"><div class="image imageAdd"></div></div></div>		
-			</div>
-			<!-- @if env='debug' -->
-			<script id="linphone.ui.view.contact.list" type="text/x-handlebars-template">
-				<div>
-					<input class="addressInput floatLeft" value="{{context.address}}" type="text">
-					<div class="removeAddress floatLeft button buttonAction"><div class="image imageDelete"></div></div><!--
-					Avoid issue with inline block in dev mode
-					-->
-				</div>
-			</script>
-			<!-- @endif -->
 		</form>
 	</div>
 </div>

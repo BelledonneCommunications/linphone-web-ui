@@ -186,9 +186,9 @@ linphone.ui.utils = {
 		}
 		callback("Not found", null);
 	},
-	getContactName: function(base, contact) {
-		if(contact) {
-			return contact.firstname + ' ' + contact.lastname;
+	getContactName: function(base, friend) {
+		if(friend) {
+			return friend.name;
 		}
 		return null;
 	},

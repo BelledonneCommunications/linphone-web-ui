@@ -23,6 +23,7 @@ module.exports = function(grunt) {
 		'linphone.models.contacts',
 		'linphone.models.history',
 		'linphone.models.contacts.localstorage',
+		'linphone.models.contacts.core',
 		'linphone.models.history.localstorage',
 		'linphone.models.history.core'
 	],
@@ -173,19 +174,19 @@ module.exports = function(grunt) {
 			},
 			coreJS: {
 				dest: '<%= tmp %>/js/linphone-core-<%= pkg.version %>.js',
-				src: [coreJSFiles]
+				src: ['shell:git_describe_short' , coreJSFiles]
 			},
 			modelsJS: {
 				dest: '<%= tmp %>/js/linphone-models-<%= pkg.version %>.js',
-				src: [modelsJSFiles]
+				src: ['shell:git_describe_short' , modelsJSFiles]
 			},
 			uiJS: {
 				dest: '<%= tmp %>/js/linphone-ui-<%= pkg.version %>.js',
-				src: [uiJSFiles]
+				src: ['shell:git_describe_short' , uiJSFiles]
 			},
 			uiTmplJS: {
 				dest: '<%= tmp %>/js/linphone-ui-tmpl-<%= pkg.version %>.js',
-				src: ['<%= handlebars.uiTmplJS.dest %>']
+				src: ['shell:git_describe_short' , '<%= handlebars.uiTmplJS.dest %>']
 			},
 			allJS: {
 				dest: '<%= tmp %>/js/linphone-<%= pkg.version %>.js',

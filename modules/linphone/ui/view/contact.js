@@ -26,9 +26,6 @@ linphone.ui.view.contact = {
 		base.find('> .content .view > .contact .saveContact').click(linphone.ui.exceptionHandler(base, function(){
 			linphone.ui.view.contact.save(base);
 		}));
-		base.find('> .content .view > .contact .addressList .addAddress').click(linphone.ui.exceptionHandler(base, function(){
-			linphone.ui.view.contact.addAddress(base,'');
-		}));
 		base.find('> .content .view > .contact .uploadPhoto').hide();	
 	},
 	translate: function(base) {
@@ -49,29 +46,7 @@ linphone.ui.view.contact = {
 		var contact = base.find('> .content .view > .contact .entry');
 		contact.find('.lastname').val('');
 		contact.find('.firstname').val('');
-	},
-	addAddress: function(base,value){
-		var contact = base.find('> .content .view > .contact .entry');
-		var addresses = contact.find('.addressContact');
-		
-		var removeHandler = function(base,element){
-			return function(){
-				linphone.ui.view.contact.removeAddress(base,element);	
-			};
-		};
-		var list = contact.find('.list');
-		var element = linphone.ui.template(base, 'view.contact.list',{
-			address : value
-		});	
-		element.find('.removeAddress').click(linphone.ui.exceptionHandler(base, function(){
-			linphone.ui.view.contact.removeAddress(base,removeHandler(base,element));
-		}));
-		element.find('addressInput').watermark();
-		list.append(element);
-	},
-	removeAddress: function(base,element){
-		var jobject = jQuery(element);
-		jobject.remove();
+		contact.find('.addressInput').val('');
 	},
 	
 	addContact: function(base){
@@ -80,62 +55,64 @@ linphone.ui.view.contact = {
 	editContact: function(base,id,object){
 		linphone.ui.view.contact.onSaveContact(base,id,object);
 	},
-	onSaveContact: function(base,id,object){
+	onSaveContact: function(base,id,friend){
 		var contact = base.find('> .content .view > .contact .entry');
 		
 		linphone.ui.view.contact.clear(base);
 		
-		//new account
 		var list = contact.find('.list');
 		list.empty();
-		if(id === null){
-			linphone.ui.view.contact.addAddress(base,'');
+		
+		//new account
+		if(friend === null){
 			base.find('> .content .view > .contact .removeContact').hide();
+			
 		//edit account
 		} else {
 			base.find('> .content .view > .contact .removeContact').show();
-			contact.find('.firstname').val(object.firstname);
-			contact.find('.lastname').val(object.lastname);
-			for(var item in object.address){
-				linphone.ui.view.contact.addAddress(base,object.address[item]);	
-			}
+			contact.find('.firstname').val(friend.name);
+			contact.find('.addressInput').val(friend.address.asStringUriOnly());
 		}
 		contact.find('.contactImg').val('style/img/avatar.jpg');
-		contact.data('id',id);
 		linphone.ui.view.show(base,'contact');
 	},
 	save: function(base) {
-		var configuration = linphone.ui.configuration(base);
 		var contact = base.find('> .content .view > .contact .entry');
-		var id = base.find('> .content .view > .contact .entry').data('id');
-		var addressList = {};
-		contact.find(' .addressInput').each(function (index, object) {
-			var jobject = jQuery(object);
-			if((jobject.val()).length > 0){
-				addressList[index] = jobject.val();
-			}	
-		});
-		var object = {
-			id : id,
-			lastname: contact.find('.lastname').val(),
-			firstname:  contact.find('.firstname').val(),
-			address: addressList,
-			img : "style/img/avatar.jpg"
-		};
+		var configuration = linphone.ui.configuration(base);
+        var core = linphone.ui.getCore(base);
+		var addressVal = contact.find('.addressInput').val();
 
-		if(id === null){
-			configuration.models.contacts.create(object);
-		} else {
-			configuration.models.contacts.update(object);
+		// Create Linphone Friend
+		var address = linphone.ui.utils.formatAddress(base,addressVal);
+		if(typeof address !== 'undefined') {
+			var friend = core.getFriendByAddress(address.asString());
+		
+			if (friend !== null){
+			//Edit contact
+				friend.edit();	
+			} else {
+			//Create contact
+				friend = core.newFriend(address.asString());
+				friend.name =  contact.find('.firstname').val();
+				friend.subscribesEnabled = false;
+				friend.incSubscribePolicy = linphone.core.enums.subscribePolicy.Deny;
+				configuration.models.contacts.create(friend);	
+			}   
 		}
 		linphone.ui.view.hide(base, 'contact');
 		linphone.ui.view.show(base, 'contacts');
 	},
 	remove: function(base){
+        var contact = base.find('> .content .view > .contact .entry');
 		var configuration = linphone.ui.configuration(base);
-		var id = base.find('> .content .view > .contact .entry').data('id');
-
-		configuration.models.contacts.remove(id);
+        var core = linphone.ui.getCore(base);
+        var addressVal = contact.find('.addressInput').val();
+        
+        var address = linphone.ui.utils.formatAddress(base,addressVal);
+		if(typeof address !== 'undefined') {
+			var friend = core.getFriendByAddress(address.asString());
+			configuration.models.contacts.remove(friend);	
+		}
 		linphone.ui.view.hide(base, 'contact');
 		linphone.ui.view.show(base, 'contacts');
 	}

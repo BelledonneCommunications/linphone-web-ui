@@ -64,10 +64,11 @@ linphone.ui.view.contacts = {
 	show: function(base) {
 		var contacts = base.find('> .content .view > .contacts');
 		linphone.ui.menu.show(base);
-		
+		var core = linphone.ui.getCore(base);
 		var configuration = linphone.ui.configuration(base);
-		configuration.models.contacts.list(null, function(error, data) {
+		//configuration.models.contacts.list(null, function(error, data) {
 			//TODO Check error
+			var data = core.getFriendList();
 			var list = contacts.find('.list');
 	
 			var editHandler = function(base,object) {
@@ -90,12 +91,12 @@ linphone.ui.view.contacts = {
 			
 			list.empty();
 			for(var item in data) {
-				var object = data[item];
+				var friend = data[item];
 				var element = linphone.ui.template(base, 'view.contacts.list.entry',{
-					object : object,
-					addressList : object.address
+					friend : friend,
+					address : friend.address.asStringUriOnly()
 				});	
-				element.find(' .goContact').click(linphone.ui.exceptionHandler(base, editHandler(base,object)));	
+				element.find(' .goContact').click(linphone.ui.exceptionHandler(base, editHandler(base,friend)));	
 				list.append(element);
 				
 				element.find(".address").each(addressHandler);	
@@ -111,7 +112,7 @@ linphone.ui.view.contacts = {
 			base.find('> .content .view > .contacts .scroll-pane').each(function(){
 				linphone.ui.slider(jQuery(this));
 			});
-		});
+		//});
 	},
 	hide: function(base) {
 	},

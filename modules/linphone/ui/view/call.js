@@ -50,12 +50,16 @@ linphone.ui.view.call = {
 		var core = linphone.ui.getCore(base);
 		var callView = base.find('> .content .view > .call');
 		var list = callView.find(' .actions');
+		var contact = callView.find(' .contactView');
 		
 		linphone.ui.menu.show(base);
 		list.empty();
+		contact.empty();
+		contact.append(linphone.ui.template(base, 'view.call.contact', call));
 		list.append(linphone.ui.template(base, 'view.call.actions', core));
 		linphone.ui.view.call.updateMuteButton(base, core.isMicMuted);
 		linphone.ui.view.call.updateVideoButton(base,false);
+		
 		
 		/* */
 		callView.find('.actions .muteEnabled .on').click(linphone.ui.exceptionHandler(base, function(){
@@ -128,7 +132,6 @@ linphone.ui.view.call = {
 		linphone.ui.view.call.updateMuteButton(base,button);
 	},
 	onVideoButton: function(base, call, button) {
-		linphone.ui.view.call.updateVideoButton(base,button);
 		linphone.ui.view.call.enableVideo(base,call,button);
 	},
 	onPauseButton: function(base, call) {
@@ -155,6 +158,8 @@ linphone.ui.view.call = {
 		
 		if(isEnabled === false){
 			linphone.ui.view.call.removeVideo(base,call);
+		} else {
+			linphone.ui.view.call.updateVideoButton(base,isEnabled);
 		}
 	},
 	addVideo: function(base,call){

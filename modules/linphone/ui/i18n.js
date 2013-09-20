@@ -78,8 +78,8 @@ linphone.ui.i18n = {
 			},
 			video: {
 				title: {
-						en_US : 'Outgoing Call',
-						fr_FR : 'Appel sortant'
+						en_US : 'Video',
+						fr_FR : 'Vidéo'
 				},
 				message: {
 						en_US : 'proposed to start video. Do you accept ?',

@@ -42,6 +42,8 @@
 }
 
 .linphoneweb > .content .view > .call .contactView {
+	border: 5px solid #e4edf2;
+	margin-right: 10px;
 	height: 150px;
 	width: 150px;
 	background-image: url('img/avatar.jpg');
@@ -116,4 +118,10 @@
 
 .linphoneweb > .content .view > .call .actions div {
 	display:inline-block;
+}
+
+.linphoneweb > .content .view > .call .contactView .address {
+	line-height: 40px;
+	font-size: 11pt;
+	text-align: center;
 }
