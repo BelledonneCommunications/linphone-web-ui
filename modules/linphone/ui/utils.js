@@ -70,7 +70,7 @@ linphone.ui.utils = {
 		var date = new Date(parseInt(timestamp, 10) * 1000);
 		var values = [
 			date.getFullYear(),
-			date.getMonth(),
+			date.getMonth() + 1,
 			date.getDate(),
 			date.getHours(),
 			date.getMinutes(),
