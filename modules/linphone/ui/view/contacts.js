@@ -30,7 +30,7 @@ linphone.ui.view.contacts = {
 		linphone.ui.view.contacts.filter.update(base, linphone.ui.view.contacts.filter.all);
 		
 		contacts.find('> .actions .addContact').click(linphone.ui.exceptionHandler(base, function(){
-			linphone.ui.view.contact.addContact(base,null,null);
+			linphone.ui.view.contact.addContact(base);
 		}));
 		
 		contacts.find('.actions .filters').hide();
@@ -66,14 +66,13 @@ linphone.ui.view.contacts = {
 		linphone.ui.menu.show(base);
 		var core = linphone.ui.getCore(base);
 		var configuration = linphone.ui.configuration(base);
-		//configuration.models.contacts.list(null, function(error, data) {
+		configuration.models.contacts.list(linphone.ui.view.contacts.filter, function(error, data) {
 			//TODO Check error
-			var data = core.getFriendList();
 			var list = contacts.find('.list');
 	
 			var editHandler = function(base,object) {
 				return function(){
-					linphone.ui.view.contact.editContact(base,object.id,object);	
+					linphone.ui.view.contact.editContact(base,object);	
 				};
 			};
 			
@@ -112,7 +111,7 @@ linphone.ui.view.contacts = {
 			base.find('> .content .view > .contacts .scroll-pane').each(function(){
 				linphone.ui.slider(jQuery(this));
 			});
-		//});
+		});
 	},
 	hide: function(base) {
 	},

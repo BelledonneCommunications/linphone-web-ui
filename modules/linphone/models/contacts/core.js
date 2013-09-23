@@ -54,14 +54,29 @@ linphone.models.contacts.core.engine.prototype.read = function(id, callback) {
 
 linphone.models.contacts.core.engine.prototype.create = function(object, callback) {
     var core = linphone.ui.getCore(this.base);
-    core.addFriend(object);
+    var friend =  object.friend;
+	var address = object.address;
+	var name = object.name;
+	
+	friend.address = address;
+    friend.name =  name;
+	friend.subscribesEnabled = false;
+	friend.incSubscribePolicy = linphone.core.enums.subscribePolicy.Deny;
+    core.addFriend(friend);
     if(typeof callback !== 'undefined') {
         callback(null, true);
     }
 };
  
 linphone.models.contacts.core.engine.prototype.update = function(object, callback) {
-    
+	var friend =  object.friend;
+	var address = object.address;
+	var name = object.name;
+	
+    friend.edit();
+	friend.address = address;
+	friend.name = name;
+	friend.done();
     if(typeof callback !== 'undefined') {
         callback("Not implemented", null);
     }
