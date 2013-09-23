@@ -83,37 +83,39 @@ linphone.ui.view.contact = {
         var core = linphone.ui.getCore(base);
 		var addressVal = contact.find('.addressInput').val();
 		var data = contact.data('friend');
-		var friend;
 		var name = contact.find('.firstname').val();
+		var friend;
+		var address;
 
-		// Create Linphone Friend
-		var address = linphone.ui.utils.formatAddress(base,addressVal);
-		if(name === ''){
-			name = address.username;
-		}
-		if(address !== null){
-			if (data !== null){
-			//Edit contact
-				friend = core.getFriendByAddress(data.address.asStringUriOnly());
-				configuration.models.contacts.update({
-					friend :  friend,
-					address : address,
-					name : name
-				});	
-			} else {
-			//Create contact
-				friend = core.newFriend(address.asString());
-				configuration.models.contacts.create({
-					friend :  friend,
-					address : address,
-					name : name
-				});	
+		if(addressVal !== ''){
+			address = linphone.ui.utils.formatAddress(base,addressVal);
+			if(name === ''){
+				name = address.username;
 			}
-			linphone.ui.view.hide(base, 'contact');
-			linphone.ui.view.show(base, 'contacts');
-		} else {
-			//linphone.ui.popup.error.show();
-			linphone.ui.view.contact.onSaveContact(base,data);
+			if(address !== null){
+				if (data !== null){
+				//Edit contact
+					friend = core.getFriendByAddress(data.address.asStringUriOnly());
+					configuration.models.contacts.update({
+						friend :  friend,
+						address : address,
+						name : name
+					});	
+				} else {
+				//Create contact
+					friend = core.newFriend(address.asString());
+					configuration.models.contacts.create({
+						friend :  friend,
+						address : address,
+						name : name
+					});	
+				}
+				linphone.ui.view.hide(base, 'contact');
+				linphone.ui.view.show(base, 'contacts');
+			} else {
+				//linphone.ui.popup.error.show();
+				linphone.ui.view.contact.onSaveContact(base,data);
+			}
 		}
 	},
 	remove: function(base){

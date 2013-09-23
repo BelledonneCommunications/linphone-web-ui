@@ -144,6 +144,7 @@ linphone.ui.view.call = {
 	},
 	onTerminateButton: function(base, call) {
 		var core = linphone.ui.getCore(base);
+		linphone.ui.view.call.enableVideo(base,call,false);
 		core.terminateCall(call);
 	},
 	
@@ -151,14 +152,12 @@ linphone.ui.view.call = {
 	enableVideo: function(base,call,isEnabled){
 		var core = linphone.ui.getCore(base);
 		var callParams = call.currentParams;
-		
-		core.videoEnabled = isEnabled;
+
 		callParams.videoEnabled = isEnabled;
 		core.updateCall(call,callParams);
 		
 		if(isEnabled === false){
 			linphone.ui.view.call.removeVideo(base,call);
-		} else {
 			linphone.ui.view.call.updateVideoButton(base,isEnabled);
 		}
 	},

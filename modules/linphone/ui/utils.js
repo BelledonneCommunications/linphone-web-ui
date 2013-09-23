@@ -154,10 +154,7 @@ linphone.ui.utils = {
 	},
 	formatAddress: function(base, uri) {
 		var core = linphone.ui.getCore(base);
-		if(uri !== ''){
-			return core.interpretUrl(uri);
-		}
-		return null;
+		return core.interpretUrl(uri);
 	},
 	getStatus: function(base, object, field) {
 		var status = linphone.ui.utils.status.online;

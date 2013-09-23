@@ -385,22 +385,22 @@ linphone.ui = {
 		if(state === linphone.core.enums.callState.UpdatedByRemote){
 			if(call.remoteParams.videoEnabled === true && call.currentParams.videoEnabled === false && core.videoPolicy.automaticallyAccept === false){
 				linphone.ui.popup.video.show(base, call);
-				var timeout=window.setTimeout(function() {
-					window.clearInterval(timeout);
-					linphone.ui.popup.video.hide(base,base.find('> .content .popup .video'));
-					linphone.ui.utils.acceptUpdate(base,call,false);
+				var timeout=setTimeout(function() {
+					clearInterval(timeout);
+					linphone.ui.popup.video.hide(base,call);
 				},
 				5000);
 			} else {
-				linphone.ui.utils.acceptUpdate(base, call, false);
 				linphone.ui.view.call.removeVideo(base, call);
-				linphone.ui.view.call.update(base, false);
+				linphone.ui.utils.acceptUpdate(base, call, false);
+				linphone.ui.view.call.update(base, call);
 			}
 
 		}
 		if(state === linphone.core.enums.callState.StreamsRunning){
 			if(call.remoteParams.videoEnabled === true && call.currentParams.videoEnabled === true){
 				linphone.ui.view.call.addVideo(base,call);
+				linphone.ui.view.call.updateVideoButton(base,true);
 			}
 		}
 		if(state === linphone.core.enums.callState.End){

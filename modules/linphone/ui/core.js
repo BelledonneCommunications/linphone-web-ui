@@ -423,7 +423,7 @@ linphone.ui.core = {
 				// Set video modes
 				core.videoEnabled = true;
 				core.videoPreviewEnabled = false;
-				core.selfViewEnabled = false;
+				core.selfViewEnabled = true;
 				core.usePreviewWindow = false;
 				
 				// Set video policy
