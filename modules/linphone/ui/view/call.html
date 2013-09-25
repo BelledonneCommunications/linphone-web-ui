@@ -9,6 +9,14 @@
  
 -->
 <div class="call">
+	<script id="linphone.ui.view.call.contact" type="text/x-handlebars-template">
+		<div>
+			<img src="{{LinphoneWeb-Call helpers.utils.getAvatar context.remoteAddress}}" alt="" class="avatar" />
+			<div class="address">{{LinphoneWeb-Call helpers.utils.getAddress context.remoteAddress}}</div>
+		</div>
+	</script>
+	<div class="contactView">
+	</div>
 	<div class="video">
 		<div class="content">
 		</div>
@@ -23,7 +31,7 @@
 	</div>
 	<!-- @if env='debug' -->
 	<script id="linphone.ui.view.call.actions" type="text/x-handlebars-template">
-		<div class="floatLeft callSignal"></div><!--
+		<div class="floatLeft"><div class="callSignal"></div></div><!--
 		Avoid issue with inline block in dev mode
 		--><div class="buttonSelectDescription floatLeft"><div class="image imageVideo"></div><div class="text" data-i18n="content.view.call.video"></div></div><!--
 		Avoid issue with inline block in dev mode

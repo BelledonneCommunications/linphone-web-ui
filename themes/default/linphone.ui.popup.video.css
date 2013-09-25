@@ -1,0 +1,69 @@
+/*!
+ Linphone Web - Web plugin of Linphone an audio/video SIP phone
+ Copyright (c) 2013 Belledonne Communications
+ All rights reserved.
+ 
+
+ Authors:
+ - Yann Diorcet <diorcet.yann@gmail.com>
+ 
+ */
+
+.linphoneweb > .content .popup > .video {
+	background-color: rgb(35,38,42);
+	background-color: rgba(35,38,42,0.8);
+	width: 160px;
+	position: absolute;
+	left: 50%; 
+	margin-left: -80px;
+	top: 100px;
+	padding: 10px;
+	text-align: center;
+}
+.linphoneweb > .content .popup > .video .title {
+	color: #b3bfc5;
+	text-transform: uppercase;
+	font-size: 9pt;
+}
+.linphoneweb > .content .popup > .video .contactName {
+	color: #fff;
+	font-size: 11pt;
+}
+.linphoneweb > .content .popup > .video .contactImg {
+	display: block;
+	border: 5px solid #e4edf2;
+	margin: 10px auto;
+	height: 50px;
+	width: 50px;
+}
+
+.linphoneweb > .content .popup > .video .actions {
+	margin: 20px 5px 0 5px;
+}
+.linphoneweb > .content .popup > .video .actions .videoIn {
+	background: #809f12;
+	width: 70px;
+	height: 40px;
+	float: left;
+}
+.linphoneweb > .content .popup > .video .actions .videoIn:hover {
+	background: #a7ba65;
+	cursor: pointer;
+}
+.linphoneweb > .content .popup > .video .actions .videoIn .imageCall {
+	margin-left: 15px;
+}
+
+.linphoneweb > .content .popup > .video .actions .videoOff {
+	background: #9f1212;
+	width: 70px;
+	height: 40px;
+	float: right;
+}
+.linphoneweb > .content .popup > .video .actions .videoOff:hover {
+	background: #c45a5a;
+	cursor: pointer;
+}
+.linphoneweb > .content .popup > .video .actions .videoOff .imageCallOff {
+	margin-left: 15px;
+}     

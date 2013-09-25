@@ -23,6 +23,7 @@ module.exports = function(grunt) {
 		'linphone.models.contacts',
 		'linphone.models.history',
 		'linphone.models.contacts.localstorage',
+		'linphone.models.contacts.core',
 		'linphone.models.history.localstorage',
 		'linphone.models.history.core'
 	],
@@ -56,7 +57,8 @@ module.exports = function(grunt) {
 		'linphone.ui.popup',
 		'linphone.ui.popup.incall',
 		'linphone.ui.popup.outcall',
-		'linphone.ui.popup.error'
+		'linphone.ui.popup.error',
+		'linphone.ui.popup.video'
 	],
 	htmlFiles = [
 		'index.html',
@@ -172,19 +174,19 @@ module.exports = function(grunt) {
 			},
 			coreJS: {
 				dest: '<%= tmp %>/js/linphone-core-<%= pkg.version %>.js',
-				src: [coreJSFiles]
+				src: ['shell:git_describe_short' , coreJSFiles]
 			},
 			modelsJS: {
 				dest: '<%= tmp %>/js/linphone-models-<%= pkg.version %>.js',
-				src: [modelsJSFiles]
+				src: ['shell:git_describe_short' , modelsJSFiles]
 			},
 			uiJS: {
 				dest: '<%= tmp %>/js/linphone-ui-<%= pkg.version %>.js',
-				src: [uiJSFiles]
+				src: ['shell:git_describe_short' , uiJSFiles]
 			},
 			uiTmplJS: {
 				dest: '<%= tmp %>/js/linphone-ui-tmpl-<%= pkg.version %>.js',
-				src: ['<%= handlebars.uiTmplJS.dest %>']
+				src: ['shell:git_describe_short' , '<%= handlebars.uiTmplJS.dest %>']
 			},
 			allJS: {
 				dest: '<%= tmp %>/js/linphone-<%= pkg.version %>.js',
@@ -422,27 +424,27 @@ module.exports = function(grunt) {
 			},
 			allJS: {
 				files: ['<%= concat.coreJS.dest %>', '<%= concat.uiJS.dest %>', '<%= concat.uiTmplJS.dest %>'],
-				tasks: ['concat:allJS', 'uglify:allJS']
+				tasks: ['shell:git_describe_short' ,'concat:allJS', 'uglify:allJS']
 			},
 			coreJS: {
 				files: coreJSFiles,
-				tasks: ['concat:coreJS', 'uglify:coreJS']
+				tasks: ['shell:git_describe_short' ,'concat:coreJS', 'uglify:coreJS']
 			},
 			modelsJS: {
 				files: modelsJSFiles,
-				tasks: ['concat:modelsJS', 'uglify:modelsJS']
+				tasks: ['shell:git_describe_short' ,'concat:modelsJS', 'uglify:modelsJS']
 			},
 			uiJS: {
 				files: uiJSFiles,
-				tasks: ['concat:uiJS', 'uglify:uiJS']
+				tasks: ['shell:git_describe_short' ,'concat:uiJS', 'uglify:uiJS']
 			},
 			uiTmplJS: {
 				files: '<%= handlebars.uiTmplJS.dest %>',
-				tasks: ['concat:uiTmplJS', 'uglify:uiTmplJS']
+				tasks: ['shell:git_describe_short' ,'concat:uiTmplJS', 'uglify:uiTmplJS']
 			},
 			uiCSS: {
 				files: uiCSSFiles,
-				tasks: ['concat:uiCSS', 'cssmin:uiCSS']
+				tasks: ['shell:git_describe_short' ,'concat:uiCSS', 'cssmin:uiCSS']
 			},
 			htmlFinal: {
 				files: ['<%= preprocess.html.dest %>'],
@@ -459,7 +461,7 @@ module.exports = function(grunt) {
 		compress: {
 			release: {
 				options: {
-					archive: '<%= pkg.name %>-<%= pkg.version %>.zip'
+					archive: '<%= pkg.name %>-<%= pkg.webversion %>.zip'
 				},
 				expand: true,
 				cwd: 'dist/',
@@ -473,11 +475,23 @@ module.exports = function(grunt) {
 		        	stdout: true,
 		            callback: set_webapp_version
 		        }
+			},
+			git_describe_short: {
+				command: 'git describe --abbrev=0',
+		        options: {
+		        	stdout: true,
+		            callback: set_package_version
+		        }
 			}
 		}
 	});
 	
 	function set_webapp_version(err, stdout, stderr, cb) {
+		grunt.config.set('pkg.webversion', stdout.replace(/(\r\n|\n|\r)/gm,"")); // Remove line breaks from stdout
+		cb();
+	}
+	
+	function set_package_version(err, stdout, stderr, cb) {
 		grunt.config.set('pkg.version', stdout.replace(/(\r\n|\n|\r)/gm,"")); // Remove line breaks from stdout
 		cb();
 	}
@@ -562,7 +576,7 @@ module.exports = function(grunt) {
 			grunt.config.set('tmp', 'dist/');
 			
 			// Append debug env
-			grunt.config.set('server.script', grunt.config.get('server.script').concat([ '-p', '8888', '-d']));
+			grunt.config.set('server.script', grunt.config.get('server.script').concat([ '-p', '9999', '-d']));
 		}
 	);
 	grunt.registerTask('release-env', 
@@ -572,7 +586,7 @@ module.exports = function(grunt) {
 
 			
 			// Append release env
-			grunt.config.set('server.script', grunt.config.get('server.script').concat([ '-p', '8888']));
+			grunt.config.set('server.script', grunt.config.get('server.script').concat([ '-p', '9999']));
 		}
 	);
 	grunt.registerTask('extract-handlebars', 
@@ -618,13 +632,13 @@ module.exports = function(grunt) {
 	//generate version.js
 	grunt.registerTask('generate_version',
 		function() {
-			var version = grunt.config.get('pkg.version');
+			var version = grunt.config.get('pkg.webversion');
 			grunt.file.write('./html/version.js', 'function getWebAppVersion() { return \'' + version + '\'; }');
 		}
 	);
 	
 	// Compile task
-	grunt.registerTask('compile', ['clean', 'shell:git_describe', 'generate_version', 'copy', 'extract-handlebars', 'handlebars', 'pre-preprocess', 'preprocess', 'concat', 'oversprite', 'imagemin', 'uglify', 'cssmin', 'htmlmin']);
+	grunt.registerTask('compile', ['clean', 'shell:git_describe', 'shell:git_describe_short' ,'generate_version', 'copy', 'extract-handlebars', 'handlebars', 'pre-preprocess', 'preprocess', 'concat', 'oversprite', 'imagemin', 'uglify', 'cssmin', 'htmlmin']);
  
 	// Default task
 	grunt.registerTask('default', ['release-env', 'jshint', 'csslint', 'compile', 'clean:release', 'validation']);

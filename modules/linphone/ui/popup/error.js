@@ -33,7 +33,7 @@ linphone.ui.popup.error = {
 		
 		// Generate error popup
 		var list = base.find('> .content .popup');
-		var errorPopup = linphone.ui.template(base, 'view.popup.error', {
+		var errorPopup = linphone.ui.template(base, 'popup.error', {
 			content: content
 		});
 		errorPopup.data('errorPopup',content);

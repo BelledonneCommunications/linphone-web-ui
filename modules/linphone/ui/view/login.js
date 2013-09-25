@@ -228,9 +228,8 @@ linphone.ui.view.login = {
 				linphone.ui.core.start(core, configFilename);
 				linphone.ui.view.login.loginConfigure(base, account, password, domain, transport);
 			}
-
-			return true;
 		});
+		return true;
 	},
 	loginConfigure: function(base, account, password, domain, transport) {
 		var core = linphone.ui.getCore(base);
@@ -287,22 +286,24 @@ linphone.ui.view.login = {
 		var base = jQuery(this);
 		var login = base.find('> .content .view > .login');
 		var core = linphone.ui.getCore(base);
-		if(state === linphone.core.enums.registrationState.Ok) {
-			// Get values
-			var account = '';
-			var password = '';
-			var domain = '';
-			if (linphone.ui.view.login.isSimpleState(base)) {
-				account = login.find('.accountSimple .account').val();
-				password = login.find('.accountSimple .password').val();
-				domain = linphone.ui.view.login.simpleDomain;
-			} else {
-				account = login.find('.accountAdvanced .account').val();
-				password = login.find('.accountAdvanced .password').val();
-				domain = login.find('.accountAdvanced .domain').val();
+		if (state === linphone.core.enums.registrationState.Ok) {
+			if (core.config.getString('app', 'identity_hash', '') === '') {
+				// Get values
+				var account = '';
+				var password = '';
+				var domain = '';
+				if (linphone.ui.view.login.isSimpleState(base)) {
+					account = login.find('.accountSimple .account').val();
+					password = login.find('.accountSimple .password').val();
+					domain = linphone.ui.view.login.simpleDomain;
+				} else {
+					account = login.find('.accountAdvanced .account').val();
+					password = login.find('.accountAdvanced .password').val();
+					domain = login.find('.accountAdvanced .domain').val();
+				}
+				var hash = linphone.ui.view.login.computeHash(account, password, domain);
+				core.config.setString('app', 'identity_hash', hash);
 			}
-			var hash = linphone.ui.view.login.computeHash(account, password, domain);
-			core.config.setString('app', 'identity_hash', hash);
 			linphone.ui.view.login.done(base);
 		} else if(state === linphone.core.enums.registrationState.Failed) {
 			if((proxy.error === linphone.core.enums.reason.BadCredentials) || (proxy.error === linphone.core.enums.reason.Unauthorized) || (proxy.error === linphone.core.enums.reason.NotFound)) {

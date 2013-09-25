@@ -30,7 +30,7 @@ linphone.ui.view.contacts = {
 		linphone.ui.view.contacts.filter.update(base, linphone.ui.view.contacts.filter.all);
 		
 		contacts.find('> .actions .addContact').click(linphone.ui.exceptionHandler(base, function(){
-			linphone.ui.view.contact.addContact(base,null,null);
+			linphone.ui.view.contact.addContact(base);
 		}));
 		
 		contacts.find('.actions .filters').hide();
@@ -64,15 +64,15 @@ linphone.ui.view.contacts = {
 	show: function(base) {
 		var contacts = base.find('> .content .view > .contacts');
 		linphone.ui.menu.show(base);
-		
+		var core = linphone.ui.getCore(base);
 		var configuration = linphone.ui.configuration(base);
-		configuration.models.contacts.list(null, function(error, data) {
+		configuration.models.contacts.list(linphone.ui.view.contacts.filter, function(error, data) {
 			//TODO Check error
 			var list = contacts.find('.list');
 	
 			var editHandler = function(base,object) {
 				return function(){
-					linphone.ui.view.contact.editContact(base,object.id,object);	
+					linphone.ui.view.contact.editContact(base,object);	
 				};
 			};
 			
@@ -90,12 +90,12 @@ linphone.ui.view.contacts = {
 			
 			list.empty();
 			for(var item in data) {
-				var object = data[item];
+				var friend = data[item];
 				var element = linphone.ui.template(base, 'view.contacts.list.entry',{
-					object : object,
-					addressList : object.address
+					friend : friend,
+					address : friend.address.asStringUriOnly()
 				});	
-				element.find(' .goContact').click(linphone.ui.exceptionHandler(base, editHandler(base,object)));	
+				element.find(' .goContact').click(linphone.ui.exceptionHandler(base, editHandler(base,friend)));	
 				list.append(element);
 				
 				element.find(".address").each(addressHandler);	

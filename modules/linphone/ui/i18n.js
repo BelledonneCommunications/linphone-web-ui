@@ -75,6 +75,16 @@ linphone.ui.i18n = {
 						en_US : 'Outgoing Call',
 						fr_FR : 'Appel sortant'
 				}
+			},
+			video: {
+				title: {
+						en_US : 'Video',
+						fr_FR : 'Vidéo'
+				},
+				message: {
+						en_US : 'proposed to start video. Do you accept ?',
+						fr_FR : 'propose de démarrer la vidéo avec vous. Acceptez-vous ?'
+				}
 			}
 		},
 		view: {
@@ -497,6 +507,10 @@ linphone.ui.i18n = {
 		},
 		errors: {
 			call: {
+				request_timeout: {
+					en_US : 'Request timeout',
+					fr_FR : 'Temps d’attente d\'une réponse du serveur écoulé'
+				},
 				unknown: {
 					en_US : 'Unknown error',
 					fr_FR : 'Erreur inconnue'

@@ -14,42 +14,17 @@
 linphone.ui.utils = {
 	status: {
 		online: {
-			value: linphone.core.enums.status.Online,
+			value: linphone.core.enums.presenceActivityType.Online,
 			cls: 'imageStatusOnline',
 			i18n: 'online'
 		},
 		busy: {
-			value: linphone.core.enums.status.Busy,
+			value: linphone.core.enums.presenceActivityType.Busy,
 			cls: 'imageStatusBusy',
 			i18n: 'busy'
 		},
-		onThePhone: {
-			value: linphone.core.enums.status.OnThePhone,
-			cls: 'imageStatusBusy',
-			i18n: 'onThePhone'
-		},
-		doNotDisturb: {
-			value: linphone.core.enums.status.DoNotDisturb,
-			cls: 'imageStatusBusy',
-			i18n: 'doNotDisturb'
-		},
-		beRightBack: {
-			value: linphone.core.enums.status.BeRightBack,
-			cls: 'imageStatusAway',
-			i18n: 'beRightBack'
-		},
-		away: {
-			value: linphone.core.enums.status.Away,
-			cls: 'imageStatusAway',
-			i18n: 'away'
-		},
-		outToLunch: {
-			value: linphone.core.enums.status.OutToLunch,
-			cls: 'imageStatusAway',
-			i18n: 'outToLunch'
-		},
 		offline: {
-			value: linphone.core.enums.status.Offline,
+			value: linphone.core.enums.presenceActivityType.Offline,
 			cls: 'imageStatusOffline',
 			i18n: 'offline'
 		}
@@ -70,7 +45,7 @@ linphone.ui.utils = {
 		var date = new Date(parseInt(timestamp, 10) * 1000);
 		var values = [
 			date.getFullYear(),
-			date.getMonth(),
+			date.getMonth() + 1,
 			date.getDate(),
 			date.getHours(),
 			date.getMinutes(),
@@ -156,12 +131,14 @@ linphone.ui.utils = {
 		var core = linphone.ui.getCore(base);
 		return core.interpretUrl(uri);
 	},
-	getStatus: function(base, object, field) {
-		var status = linphone.ui.utils.status.online;
-		if(typeof field === 'undefined') {
-			return status;
-		}
-		return status[field];
+	getStatus: function(base, friend) {
+		//var presence = friend.presenceModel;
+		//console.log(presence);
+		//var status = presence.basicStatus;
+		//if(typeof field === 'undefined') {
+		//	return status;
+		//}
+		return "online";
 	},
 	getContact: function(base, object, callback) {
 		var configuration = linphone.ui.configuration(base);
@@ -186,9 +163,9 @@ linphone.ui.utils = {
 		}
 		callback("Not found", null);
 	},
-	getContactName: function(base, contact) {
-		if(contact) {
-			return contact.firstname + ' ' + contact.lastname;
+	getContactName: function(base, friend) {
+		if(friend) {
+			return friend.name;
 		}
 		return null;
 	},
@@ -248,6 +225,14 @@ linphone.ui.utils = {
 			proxy = core.defaultProxy;
 		}
 		return proxy;
+	},
+	acceptUpdate: function(base,call,enableVideo){
+		var core = linphone.ui.getCore(base);
+		var currentParams = call.currentParams;
+		if(enableVideo === true){
+			currentParams.videoEnabled = true;
+		}
+		core.acceptCallUpdate(call,currentParams);
 	},
 	call: function(base, object, success, failure) {
 		var address;

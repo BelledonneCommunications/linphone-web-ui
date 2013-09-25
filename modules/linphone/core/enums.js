@@ -54,43 +54,130 @@ linphone.core.enums = {
 		}
 	},
 
-	status : {
-          Offline : 0,
-          Online : 1,
-          Busy : 2,
-          BeRightBack : 3,
-          Away : 4,
-          OnThePhone : 5,
-          OutToLunch : 6,
-          DoNotDisturb : 7,
-          Moved : 8,
-          AltService : 9,
-          Pending : 10
+	subscribePolicy : {
+		Wait : 0,
+		Deny : 1,
+		Accept : 2
 	},
-	getStatusText : function(value) {
+	getSubscribePolicyText : function(value) {
 		switch (value) {
-		case linphone.core.enums.status.Offline:
+		case linphone.core.enums.subscribePolicy.Wait:
+			return "Wait";
+		case linphone.core.enums.subscribePolicy.Deny:
+			return "Deny";
+		case linphone.core.enums.subscribePolicy.Accept:
+			return "Accept";
+		default:
+			return "?";
+		}
+	},
+
+	presenceBasicStatus : {
+		Open : 0,
+		Closed : 1
+	},
+	getPresenceBasicStatus : function(value) {
+		switch (value) {
+		case linphone.core.enums.presenceBasicStatus.Open:
+			return "Open";
+		case linphone.core.enums.presenceBasicStatus.Closed:
+			return "Closed";
+		default:
+			return "?";
+		}
+	},
+
+	presenceActivityType : {
+		Offline : 0,
+		Online : 1,
+		Appointment : 2,
+		Away : 3,
+		Breakfast : 4,
+		Busy : 5,
+		Dinner : 6,
+		Holiday : 7,
+		InTransit : 8,
+		LookingForWork : 9,
+		Lunch : 10,
+		Meal : 11,
+		Meeting : 12,
+		OnThePhone : 13,
+		Other : 14,
+		Performance : 15,
+		PermanentAbsence : 16,
+		Playing : 17,
+		Presentation : 18,
+		Shopping : 19,
+		Sleeping : 20,
+		Spectator : 21,
+		Steering : 22,
+		Travel : 23,
+		TV : 24,
+		Unknown : 25,
+		Vacation : 26,
+		Working : 27,
+		Worship : 28
+	},
+	getPresenceActivityType : function(value) {
+		switch (value) {
+		case linphone.core.enums.presenceActivityType.Offline:
 			return "Offline";
-		case linphone.core.enums.status.Online:
+		case linphone.core.enums.presenceActivityType.Online:
 			return "Online";
-		case linphone.core.enums.status.Busy:
-			return "Busy";
-		case linphone.core.enums.status.BeRightBack:
-			return "BeRightBack";
-		case linphone.core.enums.status.Away:
+		case linphone.core.enums.presenceActivityType.Appointment:
+			return "Appointment";
+		case linphone.core.enums.presenceActivityType.Away:
 			return "Away";
-		case linphone.core.enums.status.OnThePhone:
+		case linphone.core.enums.presenceActivityType.Breakfast:
+			return "Breakfast";
+		case linphone.core.enums.presenceActivityType.Busy:
+			return "Busy";
+		case linphone.core.enums.presenceActivityType.Dinner:
+			return "Dinner";
+		case linphone.core.enums.presenceActivityType.Holiday:
+			return "Holiday";
+		case linphone.core.enums.presenceActivityType.InTransit:
+			return "InTransit";
+		case linphone.core.enums.presenceActivityType.LookingForWork:
+			return "LookingForWork";
+		case linphone.core.enums.presenceActivityType.Lunch:
+			return "Lunch";
+		case linphone.core.enums.presenceActivityType.Meal:
+			return "Meal";
+		case linphone.core.enums.presenceActivityType.Meeting:
+			return "Meeting";
+		case linphone.core.enums.presenceActivityType.OnThePhone:
 			return "OnThePhone";
-		case linphone.core.enums.status.OutToLunch:
-			return "OutToLunch";
-		case linphone.core.enums.status.DoNotDisturb:
-			return "DoNotDisturb";
-		case linphone.core.enums.status.Moved:
-			return "Moved";
-		case linphone.core.enums.status.AltService:
-			return "AltService";
-		case linphone.core.enums.status.Pending:
-			return "Pending";
+		case linphone.core.enums.presenceActivityType.Other:
+			return "Other";
+		case linphone.core.enums.presenceActivityType.Performance:
+			return "Performance";
+		case linphone.core.enums.presenceActivityType.PermanentAbsence:
+			return "PermanentAbsence";
+		case linphone.core.enums.presenceActivityType.Playing:
+			return "Playing";
+		case linphone.core.enums.presenceActivityType.Presentation:
+			return "Presentation";
+		case linphone.core.enums.presenceActivityType.Shopping:
+			return "Shopping";
+		case linphone.core.enums.presenceActivityType.Sleeping:
+			return "Sleeping";
+		case linphone.core.enums.presenceActivityType.Spectator:
+			return "Spectator";
+		case linphone.core.enums.presenceActivityType.Steering:
+			return "Steering";
+		case linphone.core.enums.presenceActivityType.Travel:
+			return "Travel";
+		case linphone.core.enums.presenceActivityType.TV:
+			return "TV";
+		case linphone.core.enums.presenceActivityType.Unknown:
+			return "Unknown";
+		case linphone.core.enums.presenceActivityType.Vacation:
+			return "Vacation";
+		case linphone.core.enums.presenceActivityType.Working:
+			return "Working";
+		case linphone.core.enums.presenceActivityType.Worship:
+			return "Worship";
 		default:
 			return "?";
 		}

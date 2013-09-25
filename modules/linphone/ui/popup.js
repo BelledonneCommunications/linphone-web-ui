@@ -17,6 +17,7 @@ linphone.ui.popup = {
 		linphone.ui.popup.incall.init(base);
 		linphone.ui.popup.outcall.init(base);
 		linphone.ui.popup.error.init(base);
+		linphone.ui.popup.video.init(base);
 	},
 	uiInit: function(base) {
 	},
@@ -24,6 +25,7 @@ linphone.ui.popup = {
 		linphone.ui.popup.incall.translate(base);
 		linphone.ui.popup.outcall.translate(base);
 		linphone.ui.popup.error.translate(base);
+		linphone.ui.popup.video.translate(base);
 	},
 	
 	/* TODO: Remove */

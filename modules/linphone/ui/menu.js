@@ -74,16 +74,6 @@ linphone.ui.menu = {
 		base.find('> .content .menu').hide();
 	},
 	
-	hightlightAnimation: function (elem) {
-			elem.addClass('highlighted', 2000).removeClass('highlighted', 2000, function() {
-				// Need to detach from callstack in order to avoid deadly loop
-				var timeout = window.setTimeout(function() {
-					window.clearTimeout(timeout);
-					linphone.ui.menu.hightlightAnimation(elem);
-				}, 1);
-			});
-	},
-	
 	update: function(base) {
 		var list = base.find('> .content .menu .calls .list');
 		var core = linphone.ui.getCore(base);
@@ -100,14 +90,14 @@ linphone.ui.menu = {
 		
 		var enterFunction = function() {
 			var that = jQuery(this);
-			that.stop(true, true).removeClass('highlighted');
+			that.removeClass('highlighted');
 			that.addClass('hover');
 		};
 		
 		var leaveFunction = function() {
 			var that = jQuery(this);
-			that.stop(true, true).removeClass('hover');
-			linphone.ui.menu.hightlightAnimation(that);
+			that.removeClass('hover');
+			that.addClass('highlighted');
 		};
 		
 		var updateName = function(error, contact) {
@@ -128,7 +118,8 @@ linphone.ui.menu = {
 			
 			// Append animation
 			if(call === core.currentCall) {
-				linphone.ui.menu.hightlightAnimation(element);
+				element.removeClass('hover');
+				element.addClass('highlighted');
 				element.mouseenter(enterFunction);
 				element.mouseleave(leaveFunction);
 			}

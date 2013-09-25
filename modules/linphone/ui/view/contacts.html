@@ -12,23 +12,24 @@
 	<!-- @if env='debug' -->
 	<script id="linphone.ui.view.contacts.list.entry" type="text/x-handlebars-template">
 		<div class="entry">
-			<img src="{{context.object.img}}" alt="" class="avatar" />
+			<img src="{{helpers.utils.getAvatar}}" alt="" class="avatar" />
 			<div class="details">
-				<div class="name">{{LinphoneWeb-Call helpers.utils.getContactName context.object}}</div>
+				<div class="name">{{LinphoneWeb-Call helpers.utils.getContactName context.friend}}</div>
 				<div class="button buttonAction goContact floatRight"><div class="image imageModify"></div></div>
 				<div class="presence">
-					<span class="{{LinphoneWeb-Call helpers.utils.getStatus context.address 'cls'}}"></span>
+					<span class="{{LinphoneWeb-Call helpers.utils.getStatus context.friend}}"></span>
 					<span class="status" data-i18n="global.status.{{LinphoneWeb-Call helpers.utils.getStatus context.address 'i18n'}}"></span>
 				</div>
 			
 				<div class="addresses floatLeft">
-					{{#each context.addressList}}
+					
 					<div class="address">
-						<div class="number">{{this}}</div>
+						<div class="number">{{{context.address}}}</div>
 						<div class="chatContact button"><div class="image imageChat"></div></div>
 						<div class="callContact button"><div class="image imageCall"></div></div>
 					</div>
-					{{/each}}		
+					<!--{{#each context.addressList}}-->
+					<!--{{/each}} -->	
 				</div>
 			</div>
 			<hr />

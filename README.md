@@ -26,7 +26,7 @@ the following command in the `./Web/` directory:
 
 ### Development
 You can use the grunt argument *develop* in order to create a server at
-[http://localhost:8888](http://localhost:8888) exposing the web resources
+[http://localhost:9999](http://localhost:9999) exposing the web resources
 using the following command:
 
     grunt develop
