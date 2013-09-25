@@ -15,7 +15,7 @@ linphone.ui = {
 	defaultConfiguration: {
 		debug: false,
 		heartbeat: {
-			enabled: true,
+			enabled: false,
 			url: 'hb',
 			timeout: 5000
 		},
@@ -375,12 +375,15 @@ linphone.ui = {
 		if(state === linphone.core.enums.callState.IncomingReceived){
 			linphone.ui.popup.incall.show(base, call);
 		}
+		if(state === linphone.core.enums.callState.OutgoingRinging){
+			linphone.ui.popup.outcall.show(base, call);
+		}
 		if(state === linphone.core.enums.callState.Connected){
 			linphone.ui.popup.incall.hide(base, call);
+			linphone.ui.popup.outcall.hide(base, call);
 			if(linphone.ui.view.show(base,'call',call) === false){
 				linphone.ui.view.call.update(base,call);
 			}
-			//linphone.ui.view.call.startTimer(base,call);
 		}
 		if(state === linphone.core.enums.callState.UpdatedByRemote){
 			if(call.remoteParams.videoEnabled === true && call.currentParams.videoEnabled === false && core.videoPolicy.automaticallyAccept === false){
@@ -405,6 +408,7 @@ linphone.ui = {
 		}
 		if(state === linphone.core.enums.callState.End){
 			linphone.ui.popup.incall.hide(base, call);
+			linphone.ui.popup.outcall.hide(base, call);
 			linphone.ui.view.call.terminateCall(base, call);
 			var calls = core.calls;
 			if(calls.length === 0){
@@ -416,6 +420,7 @@ linphone.ui = {
 			}	
 		}
 		if(state === linphone.core.enums.callState.Error) {
+			linphone.ui.popup.outcall.hide(base, call);
 			var tKey = 'global.errors.call.' + linphone.ui.utils.formatToKey(message);
 			var args = null;
 			if(!jQuery.i18n.defined(tKey)) {

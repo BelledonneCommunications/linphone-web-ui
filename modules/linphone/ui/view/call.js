@@ -59,7 +59,8 @@ linphone.ui.view.call = {
 		list.append(linphone.ui.template(base, 'view.call.actions', core));
 		linphone.ui.view.call.updateMuteButton(base, core.isMicMuted);
 		linphone.ui.view.call.updateVideoButton(base,false);
-		
+		//linphone.ui.view.call.stopTimer(base,call);
+		//linphone.ui.view.call.startTimer(base,call);
 		
 		/* */
 		callView.find('.actions .muteEnabled .on').click(linphone.ui.exceptionHandler(base, function(){
@@ -89,7 +90,7 @@ linphone.ui.view.call = {
 		}
 	},
 	hide: function(base) {
-	
+		//linphone.ui.view.call.stopTimer(base,call);
 	},
 	
 	/* */
@@ -145,6 +146,7 @@ linphone.ui.view.call = {
 	onTerminateButton: function(base, call) {
 		var core = linphone.ui.getCore(base);
 		linphone.ui.view.call.enableVideo(base,call,false);
+		//linphone.ui.view.call.stopTimer(base,call);
 		core.terminateCall(call);
 	},
 	
@@ -176,16 +178,19 @@ linphone.ui.view.call = {
 			1000);
 		callView.data('qualityTimer',qualityTimer);
 	},
+	stopTimer: function(base,call){
+		var data = base.find('> .content .view > .call ').data('qualityTimer');
+		window.clearInterval(data);
+	},
 	
 	terminateCall: function(base, call){
 		var core = linphone.ui.getCore(base);
-		//var data = base.find('> .content .view > .call ').data('qualityTimer');
-		//window.clearInterval(data);
 		
 	},
 	displayCallQuality: function(base, call) {
 		var quality = call.currentQuality;
 		var signal = base.find('> .content .view > .call .actions .callSignal');
+		//console.log(quality);
 		if(quality >= 0 && quality < 1){
 			signal.css({'background-image': 'url("style/img/signal0b.png")'});
 		}

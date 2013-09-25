@@ -8,23 +8,15 @@
  - Yann Diorcet <diorcet.yann@gmail.com>
  
 -->
-<div class="outcall">
-	<span class="title" data-i18n="content.popup.outcall.title"></span>
-	<img src="style/img/avatar.jpg" alt="" class="contactImg">
-	<span class="contactName">Peter</span>
-	<div class="actions">
-		<div class="callOff"><div class="image imageCallOff"></div></div>
-	</div>
-</div>
 <!-- @if env='debug' -->
-<script id="linphone.ui.view.popup.outcall" type="text/x-handlebars-template">
+<script id="linphone.ui.popup.outcall" type="text/x-handlebars-template">
 	<div class="outcall">
-		<span class="title" data-i18n="content.popup.outcall.title"></span>
-		<img src="style/img/avatar.jpg" alt="" class="contactImg">
-		<span class="contactName">Peter</span>
-		<div class="actions">
-			<div class="callOff"><div class="image imageCallOff"></div></div>
-		</div>
-	</div>
-</script>
-<!-- @endif -->
+ 		<span class="title" data-i18n="content.popup.outcall.title"></span>
+		<img src="{{LinphoneWeb-Call helpers.utils.getAvatar context.remoteAddress}}" alt="" class="contactImg">
+		<span class="contactName">{{LinphoneWeb-Call helpers.utils.getUsername context.remoteAddress}}</span>
+ 		<div class="actions">
+ 			<div class="callOff"><div class="image imageCallOff"></div></div>
+ 		</div>
+ 	</div>	
+ </script>
+ <!-- @endif -->
