@@ -51,7 +51,17 @@ linphone.ui.view.call = {
 		var callView = base.find('> .content .view > .call');
 		var list = callView.find(' .actions');
 		var contact = callView.find(' .contactView');
+		var data = base.find('> .content .view > .call ').data('currentCall');
 		
+		if(typeof call === 'undefined'){
+			if(typeof data !== 'undefined'){
+				call = data;
+			} else {
+				linphone.ui.view.hide(base,call);
+				linphone.ui.view.show(base, 'main');
+			}	
+		}
+		callView.data('currentCall',call);
 		linphone.ui.menu.show(base);
 		list.empty();
 		contact.empty();

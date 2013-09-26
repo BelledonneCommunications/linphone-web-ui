@@ -9,6 +9,9 @@
  
 -->
 <div class="login">
+	<script id="linphone.ui.view.login.createAccount" type="text/x-handlebars-template">
+		<div class="link"><a class="{{context.cls}}" href="{{context.link}}" data-i18n="content.view.login.create" target="_blank"></a></div>
+	</script>
 	<div class="logo"></div>
 	<div class="title" data-i18n="content.view.login.title"></div>
 	<div class="wait">
@@ -37,7 +40,7 @@
 	</form>
 	<div class="actions">
 		<div class="button login"><div class="text" data-i18n="content.view.login.login"></div></div>
-		<div class="link" data-i18n="content.view.login.create"></div>
+		<div class="link createAccount"></div>
 		<div class="link advanced" data-i18n="content.view.login.advanced"></div>
 		<div class="link simple" data-i18n="content.view.login.simple"></div>
 	</div>

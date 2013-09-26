@@ -151,15 +151,14 @@ linphone.ui.utils = {
 			address = object.asStringUriOnly();
 		}
 		if(address) {
-			configuration.models.contacts.list('WHERE ("' + address + '" IN address)', 
-				function(error, data) {
-					for(var item in data) {
-						callback(null, data[item]);
-						return;
+			configuration.models.contacts.list('WHERE ("' + address + '" IN address)', function(error, data) {
+				for(var item in data) {
+					if(data[item].address === address){
+						callback(null,data[item]);
 					}
-					callback("Not found", null);
 				}
-			);
+				return callback("Not found", null);
+			});
 		}
 		callback("Not found", null);
 	},

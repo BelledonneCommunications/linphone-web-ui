@@ -82,7 +82,9 @@ linphone.ui.view.login = {
 	/* */
 	show: function(base) {
 		var core = linphone.ui.getCore(base);
-
+		var configuration = linphone.ui.configuration(base);
+		var login = base.find('> .content .view > .login');
+		
 		// Get first proxy
 		var proxy = linphone.ui.utils.getMainProxyConfig(base);
 
@@ -91,6 +93,12 @@ linphone.ui.view.login = {
 			linphone.ui.login(base, true);
 			return;
 		}
+
+		var link = login.find('.createAccount');
+		link.empty();
+		var linphoneAccount = configuration.linphone_account;
+		var elem = linphone.ui.template(base, 'view.login.createAccount', linphoneAccount);
+		link.append(elem);	
 
 		linphone.ui.menu.hide(base);
 		linphone.ui.view.login.reset(base);

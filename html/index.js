@@ -75,6 +75,10 @@ function __linphone_init(base) {
 		version: pluginVersion,
 		webapp_version: getWebAppVersion(),
 		copyright: 'Copyright© Belledonne Communications 2013. All rights reserved.',
+		linphone_account: {
+			cls: 'createAccount',
+			link: 'https://www.linphone.org/eng/linphone/register-a-linphone-account.html'
+		},
 		links: [{
 			cls: 'support',
 			text: 'support',
