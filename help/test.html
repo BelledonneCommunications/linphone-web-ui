@@ -26,7 +26,7 @@
         	var core = getCore();
 			var address = core.newAddress(addressStr);
 			if(address !== null) {
-				core.inviteAddress_async(address);
+				core.inviteAddress(address);
 				console.log("Call: " + address.asString());
 			}
         }

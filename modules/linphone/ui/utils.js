@@ -243,7 +243,7 @@ linphone.ui.utils = {
 		
 		if(address) {
 			var core = linphone.ui.getCore(base);
-			core.inviteAddress_async(address);
+			core.inviteAddress(address);
 			linphone.ui.logger.log(base, "Call: " + address.asString());
 			if(typeof success !== 'undefined') {
 				success();

@@ -357,14 +357,12 @@ linphone.ui = {
 		}, heartbeat.timeout);
 	},
 	onNetworkStateChanged: function(event, state) {
-		/*
 		var base = jQuery(this);
 		if(state === linphone.ui.networkState.Online) {
 			base.find('> .content .offline').hide();
 		} else {
 			base.find('> .content .offline').show();
 		}
-		*/
 	},
 	
 	/* Call state */
@@ -404,6 +402,16 @@ linphone.ui = {
 			if(call.remoteParams.videoEnabled === true && call.currentParams.videoEnabled === true){
 				linphone.ui.view.call.addVideo(base,call);
 				linphone.ui.view.call.updateVideoButton(base,true);
+			}
+		}
+		if(state === linphone.core.enums.callState.PausedByRemote){
+			if(call.remoteParams.videoEnabled === true && call.currentParams.videoEnabled === true){
+				linphone.ui.view.call.removeVideo(base, call);
+			}
+		}
+		if(state === linphone.core.enums.callState.Paused){
+			if(call.remoteParams.videoEnabled === true && call.currentParams.videoEnabled === true){
+				linphone.ui.view.call.removeVideo(base, call);
 			}
 		}
 		if(state === linphone.core.enums.callState.End){

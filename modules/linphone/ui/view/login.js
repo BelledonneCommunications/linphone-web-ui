@@ -24,8 +24,9 @@ linphone.ui.view.login = {
 		},
 		advanced: {
 				regex: {
-					account: new RegExp(linphone.ui.utils.regex.sip.complete),
-					password: new RegExp("(.*)")
+					account: new RegExp(linphone.ui.utils.regex.sip.username),
+					password: new RegExp("(.*)"),
+					domain: new RegExp(linphone.ui.utils.regex.sip.domain)
 				}
 		}
 	},
@@ -179,18 +180,17 @@ linphone.ui.view.login = {
 	},
 	loginSimple: function(base) {
 		var login = base.find('> .content .view > .login');
-
+		
 		// Get values
 		var account = login.find('.accountSimple .account').val();
 		var password = login.find('.accountSimple .password').val();
 		var domain = linphone.ui.view.login.simpleDomain;
 		var transport = linphone.ui.view.login.simpleTransport;
-
+		
 		return linphone.ui.view.login.loginRegister(base, account, password, domain, transport);
 	},
 	loginAdvanced: function(base) {
 		var login = base.find('> .content .view > .login');
-		var core = linphone.ui.getCore(base);
 
 		// Get values
 		var account = login.find('.accountAdvanced .account').val();
@@ -198,7 +198,7 @@ linphone.ui.view.login = {
 		var domain = login.find('.accountAdvanced .domain').val();
 		var transport = login.find('input[name=transport]:checked').val();
 		//var outbandProxy = login.find('input[name=outbandProxy]:checked').val();
-
+		
 		return linphone.ui.view.login.loginRegister(base, account, password, domain, transport);
 	},
 
@@ -210,6 +210,19 @@ linphone.ui.view.login = {
 		}
 		if (linphone.ui.view.login.state.simple.regex.password.exec(password) === null) {
 			linphone.ui.popup.error.show(base, 'content.view.login.accountSimple.errors.password');
+			return false;
+		}
+		
+		if (linphone.ui.view.login.state.advanced.regex.account.exec(account) === null) {
+			linphone.ui.popup.error.show(base, 'content.view.login.accountAdvanced.errors.account');
+			return false;
+		}
+		if (linphone.ui.view.login.state.advanced.regex.password.exec(password) === null) {
+			linphone.ui.popup.error.show(base, 'content.view.login.accountAdvanced.errors.password');
+			return false;
+		}
+		if (linphone.ui.view.login.state.advanced.regex.domain.exec(domain) === null) {
+			linphone.ui.popup.error.show(base, 'content.view.login.accountAdvanced.errors.domain');
 			return false;
 		}
 
@@ -245,6 +258,14 @@ linphone.ui.view.login = {
 		// Create proxy config
 		var proxyConfig = core.newProxyConfig();
 
+		// Activate ICE 
+		if(linphone.ui.view.login.isSimpleState(base)){
+			core.stunServer = "stun.linphone.org";
+			core.firewallPolicy = linphone.core.enums.firewallPolicy.UseIce;
+		} else {
+			core.firewallPolicy = linphone.core.enums.firewallPolicy.NoFirewall;
+		}
+		
 		// Set auth info
 		var authinfo = core.newAuthInfo(account, account, password, null, null);
 		core.addAuthInfo(authinfo);
@@ -252,6 +273,7 @@ linphone.ui.view.login = {
 		// Set proxy values
 		proxyConfig.identity = 'sip:' + account + '@' + domain;
 		proxyConfig.serverAddr = 'sip:' + domain;
+		
 		if(transport) {
 			if(transport === 'tcp') {
 				proxyConfig.serverAddr+=';transport=tcp';
@@ -261,8 +283,13 @@ linphone.ui.view.login = {
 		}
 		proxyConfig.expires = 600;
 		proxyConfig.registerEnabled = true;
-		core.addProxyConfig(proxyConfig);
-		core.defaultProxy = proxyConfig;
+		var ret = core.addProxyConfig(proxyConfig);
+		if(ret === 0){
+			core.defaultProxy = proxyConfig;
+		} else {
+			linphone.ui.view.login.error(base, 'content.view.login.errors.registrationFailed');
+			linphone.ui.core.stop(core);
+		}
 	},
 
 	/* Results */

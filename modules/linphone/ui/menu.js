@@ -107,21 +107,23 @@ linphone.ui.menu = {
 			}
 		};
 		
-		for(var i = 0; i < calls.length; ++i) {
-			var call = calls[i];
-			var element = linphone.ui.template(base, 'menu.calls.list.entry', call);
-			element.click(linphone.ui.exceptionHandler(base, clickFunction(base, call)));
-			
-			linphone.ui.utils.getContact(base, call.remoteAddress, updateName);
-			
-			list.append(element);
-			
-			// Append animation
-			if(call === core.currentCall) {
-				element.removeClass('hover');
-				element.addClass('highlighted');
-				element.mouseenter(enterFunction);
-				element.mouseleave(leaveFunction);
+		if(typeof calls !== 'undifined'){
+			for(var i = 0; i < calls.length; ++i) {
+				var call = calls[i];
+				var element = linphone.ui.template(base, 'menu.calls.list.entry', call);
+				element.click(linphone.ui.exceptionHandler(base, clickFunction(base, call)));
+				
+				linphone.ui.utils.getContact(base, call.remoteAddress, updateName);
+				
+				list.append(element);
+				
+				// Append animation
+				if(call === core.currentCall) {
+					element.removeClass('hover');
+					element.addClass('highlighted');
+					element.mouseenter(enterFunction);
+					element.mouseleave(leaveFunction);
+				}
 			}
 		}
 		
