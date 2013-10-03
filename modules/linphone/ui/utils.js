@@ -153,8 +153,10 @@ linphone.ui.utils = {
 		if(address) {
 			configuration.models.contacts.list('WHERE ("' + address + '" IN address)', function(error, data) {
 				for(var item in data) {
-					if(data[item].address === address){
-						callback(null,data[item]);
+					if(data[item].address.asStringUriOnly() === address){
+						return callback(null,data[item]);
+					} else {
+						return callback("Not found", null);
 					}
 				}
 				return callback("Not found", null);
@@ -162,9 +164,9 @@ linphone.ui.utils = {
 		}
 		callback("Not found", null);
 	},
-	getContactName: function(base, friend) {
-		if(friend) {
-			return friend.name;
+	getContactName: function(base, contact) {
+		if(contact) {
+			return contact.name;
 		}
 		return null;
 	},
@@ -179,6 +181,7 @@ linphone.ui.utils = {
 		if(!address) {
 			return String(object);
 		}
+		
 		var displayName = address.displayName;
 		if(displayName) {
 			return displayName;
@@ -230,6 +233,8 @@ linphone.ui.utils = {
 		var currentParams = call.currentParams;
 		if(enableVideo === true){
 			currentParams.videoEnabled = true;
+		} else {
+			currentParams.videoEnabled = false;
 		}
 		core.acceptCallUpdate(call,currentParams);
 	},

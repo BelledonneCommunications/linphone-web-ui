@@ -399,7 +399,8 @@ linphone.ui = {
 
 		}
 		if(state === linphone.core.enums.callState.StreamsRunning){
-			if(call.remoteParams.videoEnabled === true && call.currentParams.videoEnabled === true){
+			linphone.ui.view.call.activateVideoButton(base,call,true);
+			if(call.currentParams.videoEnabled === true){
 				linphone.ui.view.call.addVideo(base,call);
 				linphone.ui.view.call.updateVideoButton(base,true);
 			}

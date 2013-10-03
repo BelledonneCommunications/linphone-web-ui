@@ -119,7 +119,7 @@ linphone.ui.view.history = {
 				default:
 				linphone.ui.logger.error(base, 'Invalid linphone.ui.view.history.filter state');
 			}
-			return ret + ' ORDER BY date ASC';
+			return ret + ' ORDER BY date DESC';
 		}
 	},
 	
@@ -194,10 +194,10 @@ linphone.ui.view.history = {
 			};
 			
 			var updateName = function(error, contact) {
-					if(contact) {
-						var name = linphone.ui.utils.getContactName(base, contact);
-						elem.find('.contact .name').text(name);
-					}
+				if(contact) {
+					var name = linphone.ui.utils.getContactName(base, contact);
+					elem.find('.contact .name').text(name);
+				}
 			};
 			
 			for(var item in data) {

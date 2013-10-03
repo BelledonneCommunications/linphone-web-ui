@@ -24,7 +24,7 @@ var jsonsql = {
 		
 	query: function(sql,json){
 
-		var returnfields = sql.match(/^(select)\s+([a-z0-9_\,\.\s\*]+)\s+from\s+([a-z0-9_\.]+)(?:\s+where\s+\((.+)\))?(?:\s+order\sby\s+([a-z0-9_\,]+))?(\s+asc|desc|ascnum|descnum)?(?:\s+limit\s+([0-9_\,]+))?/i);
+		var returnfields = sql.match(/^(select)\s+([a-z0-9_\,\.\s\*]+)\s+from\s+([a-z0-9_\.]+)(?:\s+where\s+\((.+)\))?\s*(?:order\sby\s+([a-z0-9_\,]+))?\s*(asc|desc|ascnum|descnum)?\s*(?:limit\s+([0-9_\,]+))?/i);
 		
 		var ops = { 
 			fields: returnfields[2].replace(/ /g,'').split(','), 
@@ -113,7 +113,7 @@ var jsonsql = {
 		result.sort(function(a,b){	
 			switch(order.toLowerCase()){
 				case "desc": return (eval('a.'+ orderby[0] +' < b.'+ orderby[0]))? 1:-1;
-				case "asc":  return (eval('a.'+ orderby[0] +' > b.'+ orderby[0]))? 1:-1;
+				case "asc": return (eval('a.'+ orderby[0] +' > b.'+ orderby[0]))? 1:-1;
 				case "descnum": return (eval('a.'+ orderby[0] +' - b.'+ orderby[0]));
 				case "ascnum":  return (eval('b.'+ orderby[0] +' - a.'+ orderby[0]));
 			}

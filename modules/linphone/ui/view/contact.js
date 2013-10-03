@@ -84,7 +84,6 @@ linphone.ui.view.contact = {
 		var addressVal = contact.find('.addressInput').val();
 		var data = contact.data('friend');
 		var name = contact.find('.firstname').val();
-		var friend;
 		var address;
 
 		if(addressVal !== ''){
@@ -95,17 +94,14 @@ linphone.ui.view.contact = {
 			if(address !== null){
 				if (data !== null){
 				//Edit contact
-					friend = core.getFriendByAddress(data.address.asStringUriOnly());
 					configuration.models.contacts.update({
-						friend :  friend,
+						friend : data,
 						address : address,
 						name : name
 					});	
 				} else {
 				//Create contact
-					friend = core.newFriend(address.asString());
 					configuration.models.contacts.create({
-						friend :  friend,
 						address : address,
 						name : name
 					});	

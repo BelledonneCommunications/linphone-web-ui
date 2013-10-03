@@ -19,5 +19,6 @@
 	background-image: url('img/backgroundLogo.png');
 	background-repeat: no-repeat;
 	margin-left: auto;
-	margin-right: auto;
+	position: relative;
+	top: 40px;
 }

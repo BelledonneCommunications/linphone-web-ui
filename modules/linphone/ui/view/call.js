@@ -73,17 +73,12 @@ linphone.ui.view.call = {
 		//linphone.ui.view.call.startTimer(base,call);
 		
 		/* */
+		linphone.ui.view.call.activateVideoButton(base,call,true);
 		callView.find('.actions .muteEnabled .on').click(linphone.ui.exceptionHandler(base, function(){
 			linphone.ui.view.call.onMuteButton(base,false);
 		}));
 		callView.find('.actions .muteEnabled .off').click(linphone.ui.exceptionHandler(base, function(){
 			linphone.ui.view.call.onMuteButton(base,true);
-		}));
-		callView.find('.actions .videoEnabled .on').click(linphone.ui.exceptionHandler(base, function(){
-			linphone.ui.view.call.onVideoButton(base,call,true);
-		}));
-		callView.find('.actions .videoEnabled .off').click(linphone.ui.exceptionHandler(base, function(){
-			linphone.ui.view.call.onVideoButton(base,call,false);
 		}));
 		callView.find('.actions .conference').click(linphone.ui.exceptionHandler(base, function(){
 			linphone.ui.view.show(base, 'conference');
@@ -143,6 +138,9 @@ linphone.ui.view.call = {
 		linphone.ui.view.call.updateMuteButton(base,button);
 	},
 	onVideoButton: function(base, call, button) {
+		if(button){
+			linphone.ui.view.call.activateVideoButton(base,call,false);
+		}
 		linphone.ui.view.call.enableVideo(base,call,button);
 	},
 	onPauseButton: function(base, call) {
@@ -180,6 +178,21 @@ linphone.ui.view.call = {
 		linphone.ui.video.removeView(base, base.find('> .content .view > .call .video > .content'));
 	},
 	
+	activateVideoButton: function(base,call,isActivated){
+		var callView= base.find('> .content .view > .call');
+		if(isActivated){
+			callView.find('.actions .videoEnabled .on').click(linphone.ui.exceptionHandler(base, function(){
+				linphone.ui.view.call.onVideoButton(base,call,true);
+			}));
+			callView.find('.actions .videoEnabled .off').click(linphone.ui.exceptionHandler(base, function(){
+				linphone.ui.view.call.onVideoButton(base,call,false);
+			}));	
+		} else {
+			base.find('> .content .view > .call .actions .videoEnabled .on').unbind("click");
+			base.find('> .content .view > .call .actions .videoEnabled .off').unbind("click");
+		}
+	},
+	
 	/* */
 	startTimer: function(base,call){
 		var callView = base.find('> .content .view > .call');
@@ -195,6 +208,7 @@ linphone.ui.view.call = {
 	
 	terminateCall: function(base, call){
 		var core = linphone.ui.getCore(base);
+		core.micMute = false;
 		
 	},
 	displayCallQuality: function(base, call) {

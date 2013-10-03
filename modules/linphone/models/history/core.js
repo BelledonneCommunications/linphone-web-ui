@@ -51,7 +51,7 @@ linphone.models.history.core.engine.internal2external = function(id) {
 		from: log.from.asString(),
 		to: log.to.asString(),
 		remote: log.remoteAddress.asString(),
-		date: log.startDate,
+		date: parseInt(log.startDate),
 		duration: log.duration,
 		direction: log.dir,
 		status: log.status
