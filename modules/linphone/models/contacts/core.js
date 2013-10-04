@@ -36,7 +36,7 @@ linphone.models.contacts.core.engine.prototype.list = function(filters, callback
     var friends = core.getFriendList();
     
     var ret;
-   	ret = friends;
+	ret = friends;
     if(typeof callback !== 'undefined') {
         callback(null, ret);
     }
@@ -79,7 +79,7 @@ linphone.models.contacts.core.engine.prototype.update = function(object, callbac
 	var name = object.name;
 
     friend.edit();
-  	address.displayName = name;
+	address.displayName = name;
 	friend.address = address;
 	friend.name = name;
 	friend.done();
