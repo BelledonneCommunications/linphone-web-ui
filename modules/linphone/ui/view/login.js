@@ -250,7 +250,7 @@ linphone.ui.view.login = {
 					linphone.ui.core.start(core, configFilename);
 					core.clearProxyConfig();
 					core.clearAllAuthInfo();
-					linphone.ui.view.login.loginConfigure(base, account, password, domain, transport);
+					linphone.ui.view.login.loginConfigure(base, account, password, domain, transport, proxy, outbandProxy);
 				} else {
 					linphone.ui.popup.error.show(base, 'content.view.login.accountSimple.errors.password');
 					return false;
@@ -284,7 +284,7 @@ linphone.ui.view.login = {
 		// Set proxy values
 		proxyConfig.identity = 'sip:' + account + '@' + domain;
 		
-		if(proxy !== null){
+		if(proxy !== null && proxy !== ''){
 			proxyConfig.serverAddr = 'sip:' + proxy;
 		} else {
 			proxyConfig.serverAddr = 'sip:' + domain;
