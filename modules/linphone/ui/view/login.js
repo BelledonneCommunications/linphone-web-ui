@@ -65,6 +65,12 @@ linphone.ui.view.login = {
 			}
 		}));
 
+		login.find('.proxy').keyup(linphone.ui.exceptionHandler(base, function(event) {
+			if(event.which === jQuery.ui.keyCode.ENTER) {
+				linphone.ui.view.login.login(base);
+			}
+		}));
+
 		login.find('.account').keyup(linphone.ui.exceptionHandler(base, function(event) {
 			if(event.which === jQuery.ui.keyCode.ENTER) {
 				linphone.ui.view.login.login(base);
@@ -78,6 +84,7 @@ linphone.ui.view.login = {
 		login.find('.accountAdvanced .account').watermark(jQuery.i18n.translate('content.view.login.accountAdvanced.account'), {className: 'watermark', useNative: false});
 		login.find('.accountAdvanced .password').watermark(jQuery.i18n.translate('content.view.login.accountAdvanced.password'), {className: 'watermark', useNative: false});
 		login.find('.accountAdvanced .domain').watermark(jQuery.i18n.translate('content.view.login.accountAdvanced.domain'), {className: 'watermark', useNative: false});
+		login.find('.accountAdvanced .proxy').watermark(jQuery.i18n.translate('content.view.login.accountAdvanced.proxy'), {className: 'watermark', useNative: false});
 	},
 
 	/* */
@@ -116,6 +123,9 @@ linphone.ui.view.login = {
 		login.find('.accountAdvanced .account').val('');
 		login.find('.accountAdvanced .password').val('');
 		login.find('.accountAdvanced .domain').val('');
+		login.find('.accountAdvanced .proxy').val('');
+		login.find('input[name=transport][value="udp"]').prop('checked', 'checked');
+		login.find('input[name=outbandProxy][value="off"]').prop('checked', 'checked');
 	},
 	update: function(base, state) {
 		if(linphone.ui.view.login.isLocked(base)) {
@@ -187,7 +197,7 @@ linphone.ui.view.login = {
 		var domain = linphone.ui.view.login.simpleDomain;
 		var transport = linphone.ui.view.login.simpleTransport;
 		
-		return linphone.ui.view.login.loginRegister(base, account, password, domain, transport);
+		return linphone.ui.view.login.loginRegister(base, account, password, domain, transport, null, false);
 	},
 	loginAdvanced: function(base) {
 		var login = base.find('> .content .view > .login');
@@ -197,12 +207,13 @@ linphone.ui.view.login = {
 		var password = login.find('.accountAdvanced .password').val();
 		var domain = login.find('.accountAdvanced .domain').val();
 		var transport = login.find('input[name=transport]:checked').val();
-		//var outbandProxy = login.find('input[name=outbandProxy]:checked').val();
+		var proxy = login.find('.accountAdvanced .proxy').val();
+		var outbandProxy = login.find('input[name=outbandProxy]:checked').val();
 		
-		return linphone.ui.view.login.loginRegister(base, account, password, domain, transport);
+		return linphone.ui.view.login.loginRegister(base, account, password, domain, transport, proxy, outbandProxy);
 	},
 
-	loginRegister: function(base, account, password, domain, transport) {
+	loginRegister: function(base, account, password, domain, transport, proxy, outbandProxy) {
 		// Check values
 		if (linphone.ui.view.login.state.simple.regex.account.exec(account) === null) {
 			linphone.ui.popup.error.show(base, 'content.view.login.accountSimple.errors.account');
@@ -247,12 +258,12 @@ linphone.ui.view.login = {
 			} else {
 				linphone.ui.view.login.lock(base);
 				linphone.ui.core.start(core, configFilename);
-				linphone.ui.view.login.loginConfigure(base, account, password, domain, transport);
+				linphone.ui.view.login.loginConfigure(base, account, password, domain, transport, proxy, outbandProxy);
 			}
 		});
 		return true;
 	},
-	loginConfigure: function(base, account, password, domain, transport) {
+	loginConfigure: function(base, account, password, domain, transport, proxy, outbandProxy) {
 		var core = linphone.ui.getCore(base);
 
 		// Create proxy config
@@ -272,7 +283,16 @@ linphone.ui.view.login = {
 
 		// Set proxy values
 		proxyConfig.identity = 'sip:' + account + '@' + domain;
-		proxyConfig.serverAddr = 'sip:' + domain;
+		
+		if(proxy !== null){
+			proxyConfig.serverAddr = 'sip:' + proxy;
+		} else {
+			proxyConfig.serverAddr = 'sip:' + domain;
+		}
+		
+		if(outbandProxy){
+			proxyConfig.route = proxy;
+		}
 		
 		if(transport) {
 			if(transport === 'tcp') {

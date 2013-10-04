@@ -330,6 +330,10 @@ linphone.ui.i18n = {
 						en_US : 'Domain',
 						fr_FR : 'Domaine'
 					},
+					proxy: {
+						en_US : 'Proxy (optional)',
+						fr_FR : 'Proxy (optionnel)'
+					},
 					outband_proxy: {
 						en_US : 'Outband proxy',
 						fr_FR : 'Proxy sortant'
