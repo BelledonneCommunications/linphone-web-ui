@@ -42,14 +42,14 @@ function __linphone_init(base) {
 				'x86' : {
 					'Firefox' : {
 						file: 'downloads/linphone-web-' + pluginVersion + '-Linux-x86.xpi',
-						icon: 'style/img/linphone.png'
+						icon: 'style/img/linphone.ico'
 					},
 					'DEFAULT' : 'downloads/linphone-web-' + pluginVersion + '-Linux-x86.tar.gz'
 				}, 
 				'x86_64' : {
 					'Firefox' : {
 						file: 'downloads/linphone-web-' + pluginVersion + '-Linux-x86_64.xpi',
-						icon: 'style/img/linphone.png'
+						icon: 'style/img/linphone.ico'
 					},
 					'DEFAULT' : 'downloads/linphone-web-' + pluginVersion + '-Linux-x86_64.tar.gz'
 				}
@@ -58,14 +58,14 @@ function __linphone_init(base) {
 				'x86' : {
 					'Firefox' : {
 						file: 'downloads/linphone-web-' + pluginVersion + '-Mac-x86.xpi',
-						icon: 'style/img/linphone.png'
+						icon: 'style/img/linphone.ico'
 					},
 					'DEFAULT' : 'downloads/linphone-web-' + pluginVersion + '-Mac-x86.pkg'
 				}, 
 				'x86_64' : {
 					'Firefox' : {
 						file: 'downloads/linphone-web-' + pluginVersion + '-Mac-x86.xpi',
-						icon: 'style/img/linphone.png'
+						icon: 'style/img/linphone.ico'
 					},
 					'DEFAULT' : 'downloads/linphone-web-' + pluginVersion + '-Mac-x86.pkg'
 				}
@@ -82,11 +82,11 @@ function __linphone_init(base) {
 		links: [{
 			cls: 'support',
 			text: 'support',
-			link: 'https://www.linphone.org/eng/linphone/support.html',
+			link: 'https://www.linphone.org/eng/linphone/support.html'
 		},{
 			cls: 'sales',
 			text: 'sales',
-			link: 'http://www.belledonne-communications.com/contact.html',
+			link: 'http://www.belledonne-communications.com/contact.html'
 		}],
 		locales: [ {
 			name : 'US',

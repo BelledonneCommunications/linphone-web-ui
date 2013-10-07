@@ -26,7 +26,7 @@ function PersistentStorage(name, defaultConfig, timeout, debug) {
 			}
 		}
 	} catch(ex) {
-		linphone.ui.logger.error(base, 'PersistentStorage | Can\'t read persistent storage, reset!');
+		linphone.ui.logger.error(null, 'PersistentStorage | Can\'t read persistent storage, reset!');
 	}
 	this.sync();
 	if(timeout) {
@@ -71,7 +71,7 @@ PersistentStorage.prototype.start = function(timeout) {
 		this.__timeout = window.setInterval(this.fct, timeout);
 		if (window.addEventListener) { 
 			window.addEventListener("unload", this.fct, false); 
-		} else if (w.attachEvent) { 
+		} else if (window.attachEvent) { 
 			window.attachEvent("onunload", this.fct); 
 		}
 	}
