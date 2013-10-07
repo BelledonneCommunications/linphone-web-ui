@@ -25,7 +25,7 @@ linphone.models.contacts.core = {
 
 linphone.models.contacts.core.engine.prototype.count = function(filters, callback) {
     var core = linphone.ui.getCore(this.base);
-    var friends = core.getFriendList();
+    var friends = core.friendList;
     if(typeof callback !== 'undefined') {
         callback(null, friends.length);
     }
@@ -33,7 +33,7 @@ linphone.models.contacts.core.engine.prototype.count = function(filters, callbac
  
 linphone.models.contacts.core.engine.prototype.list = function(filters, callback) {
     var core = linphone.ui.getCore(this.base);
-    var friends = core.getFriendList();
+    var friends = core.friendList;
     
     var ret;
 	ret = friends;

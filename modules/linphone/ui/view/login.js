@@ -238,9 +238,8 @@ linphone.ui.view.login = {
 		}
 
 		var core = linphone.ui.getCore(base);
-		var fileManager = core.getFileManager();
 		var configFilename = 'local:///.linphonerc_' + account + '@' + domain;
-		fileManager.exists(configFilename, function(exist, error) {
+		core.fileManager.exists(configFilename, function(exist, error) {
 			if (exist) {
 				var config = core.newLpConfig(configFilename);
 				var hash = linphone.ui.view.login.computeHash(account, password, domain);
