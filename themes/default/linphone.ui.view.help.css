@@ -24,3 +24,27 @@
 	float: left;
 	margin-top: 10px;
 }
+
+.linphoneweb > .content .view > .help .entry {
+	clear: both;
+	padding: 50px;
+	text-align: left;
+	font-size: 1em;
+}
+
+.linphoneweb > .content .view > .help .entry .firstLine {
+	margin-bottom: 20px;
+}
+
+.linphoneweb > .content .view > .help .entry .subTitle {
+	text-align: left;
+	font-size: 1.5em;
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+
+.linphoneweb > .content .view > .help .entry .endLine {
+	margin-top: 40px;
+	text-align: center;
+}
+

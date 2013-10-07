@@ -216,6 +216,42 @@ linphone.ui.i18n = {
 				title: {
 					en_US : 'Help',
 					fr_FR : 'Aide'
+				},
+				firstLine: {
+					en_US : 'Linphone web is web app to place both audio and video calls to anyone with a sip address through internet.',
+					fr_FR : 'Linphone web est une application internet permettant de passer des appels audio et vidéo en utilisant une adresse SIP.'
+				},
+				gettingStarted: {
+					en_US : 'Getting started',
+					fr_FR : 'Pour commencer'
+				},
+				linphoneWebPlugin: {
+					en_US : 'Linphone web requires the Linphone-Web plugin to be installed. Just follow installation instructions.',
+					fr_FR : 'Pour utiliser Linphone Web, le plugin Linphone-Web doit être installé. Il suffit de suivre les instructions d\'installation.'
+				},
+				SIPAccount: {
+					en_US : 'Login with a SIP account',
+					fr_FR : 'Se connecter avec un compte SIP'
+				},
+				SIPAccountInstr: {
+					en_US : 'You can simply create a sip account from',
+					fr_FR : 'Vous pouvez facilement créer un compte SIP à partir du lien  '
+				},
+				SIPAccountInstrEnd: {
+					en_US : 'Advanced users can use their own sip account from any sip service.',
+					fr_FR : 'Les utilisateurs avancés peuvent utiliser leur propre compte SIP.'
+				},
+				call: {
+					en_US : 'Place call',
+					fr_FR : 'Passer un appel'
+				},
+				callInstruction: {
+					en_US : 'After logging in, just type either a sip address (sip:john@sip.linphone.org)  or just your friend login name if on the same domain (I.E just ‘john’) ',
+					fr_FR : 'Une fois connecté, il suffit de taper dans la barre d\'adresse soit une adresse SIP (sip: john@sip.linphone.org) soit le nom d\'utilisateur de votre contact s\'il s\'agit du même domaine (ex: juste ‘john’)'
+				},
+				lastLine: {
+					en_US : 'For more information, visit our web site at',
+					fr_FR : 'Pour plus d\'information, visitez notre site web à l\'adresse '
 				}
 			},
 			history: {
