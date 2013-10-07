@@ -270,12 +270,12 @@ linphone.ui.view.login = {
 		var proxyConfig = core.newProxyConfig();
 
 		// Activate ICE 
-		/*if(linphone.ui.view.login.isSimpleState(base)){
+		if(linphone.ui.view.login.isSimpleState(base)){
 			core.stunServer = "stun.linphone.org";
 			core.firewallPolicy = linphone.core.enums.firewallPolicy.UseIce;
 		} else {
 			core.firewallPolicy = linphone.core.enums.firewallPolicy.NoFirewall;
-		}*/
+		}
 		
 		// Set auth info
 		var authinfo = core.newAuthInfo(account, account, password, null, null);
