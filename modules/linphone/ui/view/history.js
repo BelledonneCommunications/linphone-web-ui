@@ -137,7 +137,7 @@ linphone.ui.view.history = {
 			var history = base.find('> .content .view > .history');
 			history.find('> .actions .modify').show();
 			history.find('> .actions .see').hide();
-			linphone.ui.view.history.update(base);
+			//linphone.ui.view.history.update(base);
 		}
 	},
 	
