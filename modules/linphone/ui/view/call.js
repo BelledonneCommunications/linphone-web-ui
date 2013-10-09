@@ -111,13 +111,13 @@ linphone.ui.view.call = {
 			call.find('.video .profile').addClass('collapsed');
 		}
 	},
-	updateMuteButton: function(base, isMicMuted) {
-		if(isMicMuted === true){
-			base.find('> .content .view > .call .actions .muteEnabled .off').addClass('selected');
-			base.find('> .content .view > .call .actions .muteEnabled .on').removeClass('selected');
-		} else {
+	updateMuteButton: function(base, isMicEnabled) {
+		if(isMicEnabled === true){
 			base.find('> .content .view > .call .actions .muteEnabled .on').addClass('selected');
 			base.find('> .content .view > .call .actions .muteEnabled .off').removeClass('selected');
+		} else {
+			base.find('> .content .view > .call .actions .muteEnabled .off').addClass('selected');
+			base.find('> .content .view > .call .actions .muteEnabled .on').removeClass('selected');
 		}
 	},
 	updateVideoButton: function(base, isVideoEnabled) {
@@ -134,8 +134,8 @@ linphone.ui.view.call = {
 	onMuteButton: function(base, button) {
 		var core = linphone.ui.getCore(base);
 		
-		core.muteMic = button;
-		linphone.ui.view.call.updateMuteButton(base,button);
+		core.enableMic = !button;
+		linphone.ui.view.call.updateMuteButton(base,!button);
 	},
 	onVideoButton: function(base, call, button) {
 		if(button){

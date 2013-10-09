@@ -421,7 +421,8 @@ linphone.ui.core = {
 				core.rootCa = 'internal:///share/linphone/rootca.pem';
 
 				// Set video modes
-				core.videoEnabled = true;
+				core.videoCaptureEnabled = true;
+				core.videoDisplayEnabled = true;
 				core.videoPreviewEnabled = false;
 				core.selfViewEnabled = true;
 				core.usePreviewWindow = false;
