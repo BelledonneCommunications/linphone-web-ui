@@ -10,7 +10,7 @@
  */
 
 function __linphone_init(base) {
-	var pluginVersion = '0.0.2.8';
+	var pluginVersion = '0.0.2.9';
 	var activeXPluginVersion = pluginVersion.replace(/\./g, ',');
 
 	/* @if env='release' */
