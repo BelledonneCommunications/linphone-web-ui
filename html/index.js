@@ -123,6 +123,7 @@ function __linphone_init(base) {
 (function(w, d, s) {
 	var scripts = [
 		{url: "js/jquery-1.10.1.min.js"},
+		{url: "js/analytics.js"},
 		{url: "js/jquery.client.min.js"},
 		
 		{url: "js/i18n.min.js"},

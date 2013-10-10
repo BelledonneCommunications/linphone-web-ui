@@ -1,0 +1,58 @@
+<!--
+ Linphone Web - Web plugin of Linphone an audio/video SIP phone
+ Copyright (c) 2013 Belledonne Communications
+ All rights reserved.
+-->
+
+<html>
+<head>
+    <style type="text/css">
+    </style>
+    
+    <script type="text/JavaScript">
+    
+    	/* return the core object */
+        function getCore(){
+            return document.getElementById('core');
+        }
+        
+        /* Basic call */
+        function call(addressStr){
+        	var core = getCore();
+			var address = core.newAddress(addressStr);
+			if(address !== null) {
+				core.inviteAddress(address);
+				console.log("Call: " + address.asString());
+			}
+        }
+	        
+		function loadHandler(){
+			var core = getCore();
+			core.init();
+				
+	        /* Add callback for registration and call state */
+	        addEvent(core,"callStateChanged",onCallStateChanged);
+	            
+	        /* Display logs information in the console */
+	        core.logHandler = function(level, message) {
+	           	window.console.log(message);
+	        }
+	        
+	        /* Start main loop for receiving notifications and doing background linphonecore work */
+	        core.iterateEnabled = true;
+		}
+	        
+		/* Callback that display call states */
+		function onCallStateChanged(event, call, state, message){
+			console.log(message);
+		}
+    </script>
+    
+</head>
+</head>
+<body>
+	<object id="core" type="application/x-linphone-web" width="0" height="0">
+	 	<param name="onload" value='main'>
+	</object>
+</body>
+</html>

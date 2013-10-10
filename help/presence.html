@@ -81,9 +81,6 @@
 	        addEvent(core,"registrationStateChanged",onRegistrationStateChanged);
 	        addEvent(core,"notifyPresenceReceived",onNotifyPresenceReceived);
 	        addEvent(core,"newSubscriptionRequested",onNewSubscriptionRequested);
-	        
-	        registration("margrox","lala12","sip.linphone.org");
-	        addFriend("sip:margaux@sip.linphone.org");
 	       	
 	        /* Start main loop for receiving notifications and doing background linphonecore work */
 	        core.iterateEnabled = true;
