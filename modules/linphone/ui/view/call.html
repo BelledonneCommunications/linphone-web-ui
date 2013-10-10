@@ -9,12 +9,14 @@
  
 -->
 <div class="call">
+	<!-- @if env='debug' -->
 	<script id="linphone.ui.view.call.contact" type="text/x-handlebars-template">
 		<div>
 			<img src="{{LinphoneWeb-Call helpers.utils.getAvatar context.remoteAddress}}" alt="" class="avatar" />
 			<div class="address">{{LinphoneWeb-Call helpers.utils.getAddress context.remoteAddress}}</div>
 		</div>
 	</script>
+	<!-- @endif -->
 	<div class="contactView">
 	</div>
 	<div class="video">

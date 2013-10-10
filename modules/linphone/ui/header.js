@@ -136,7 +136,11 @@ linphone.ui.header = {
 	/* Proxy config updating */
 	onRegistrationStateChanged: function(event, proxy, state, message) {
 		var base = jQuery(this);
-		linphone.ui.header.update(base, proxy, null);
+		if(state === linphone.core.enums.registrationState.Failed) {
+			linphone.ui.header.update(base, proxy,linphone.ui.networkState.Offline);
+		} else {
+			linphone.ui.header.update(base, proxy, null);
+		}	
 	},
 	onNetworkStateChanged: function(event, status) {
 		var base = jQuery(this);
