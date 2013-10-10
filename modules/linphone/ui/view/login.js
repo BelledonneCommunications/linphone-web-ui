@@ -93,6 +93,8 @@ linphone.ui.view.login = {
 		var configuration = linphone.ui.configuration(base);
 		var login = base.find('> .content .view > .login');
 		
+		base.on('registrationStateChanged', linphone.ui.view.login.onRegistrationStateChanged);
+		
 		// Get first proxy
 		var proxy = linphone.ui.utils.getMainProxyConfig(base);
 
@@ -113,6 +115,7 @@ linphone.ui.view.login = {
 		linphone.ui.view.login.update(base, linphone.ui.view.login.state.simple);
 	},
 	hide: function(base) {
+		base.off('registrationStateChanged', linphone.ui.view.login.onRegistrationStateChanged);
 	},
 
 	/* */
