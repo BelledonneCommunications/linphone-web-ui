@@ -1,0 +1,114 @@
+<!--
+ Linphone Web - Web plugin of Linphone an audio/video SIP phone
+ Copyright (c) 2013 Belledonne Communications
+ All rights reserved.
+-->
+
+<html>
+<head>
+    <style type="text/css">
+    </style>
+    
+    <script type="text/javascript" src="test.js"></script>
+    <script type="text/JavaScript">
+    
+    	/* return the core object */
+        function getCore(){
+            return document.getElementById('core');
+        }
+        
+        /* Registration */
+        function registration(username,password,server){
+        	var core = getCore();
+        	
+        	/*create proxy config*/        	
+			var proxy = core.newProxyConfig();
+			
+			/*create authentication structure from identity*/
+			var authinfo = core.newAuthInfo(username, null,password,null,null);
+			/*add authentication info to LinphoneCore*/
+			core.addAuthInfo(authinfo);
+			
+			/*configure proxy entries*/
+			proxy.identity = 'sip:' + username + '@' + server; /*set identity with user name and domain*/
+			proxy.serverAddr = 'sip:' + server; /* we assume domain = proxy server address*/
+			proxy.publishEnabled = true; /* enable presence satus publication for this proxy*/
+			proxy.registerEnabled = true; /*activate registration for this proxy config*/
+			core.addProxyConfig(proxy); /*add proxy config to linphone core*/
+			core.defaultProxy = proxy; /*set to default proxy*/
+        }
+        
+         
+        /* Add Friend */
+        function addFriend(addressStr){
+        	var friend = core.newFriendWithAddress(addressStr); /*creates friend object from addressStr*/
+        	
+        	friend.subscribesEnabled = true;  /*configure this friend to emit SUBSCRIBE message after being added to LinphoneCore*/
+			friend.incSubscribePolicy = 2;  /* Accept incoming subscription request for this friend*/
+			core.addFriend(friend); /* add my friend to the buddy list, initiate SUBSCRIBE message*/
+        }
+        
+        
+  
+   		function changeActivity(activity){
+			var core = getCore();
+			
+			var presenceModel = core.presenceModel;
+			presenceModel.setActivity(Activity, null); /*set my status with my activity*/
+			core.presenceModel = presenceModel;
+		}
+   		
+		function printFriendPresence(lf) {
+			var model = lf.presenceModel;
+			if (model !== null) {
+				console.log("Basic status: " + model.basicStatus);
+				console.log("Activity: " + model.activity);
+			} else {
+				console.log("Friend " + lf.name + " is offline.");
+			}
+		}
+		
+		function main(){
+			var core = getCore();
+			core.init();
+				
+			 /* Display logs information in the console */
+	        core.logHandler = function(level, message) {
+	           	window.console.log(message);
+	        }
+	        
+	        /* Add callback for registration and presence */
+	        addEvent(core,"registrationStateChanged",onRegistrationStateChanged);
+	        addEvent(core,"notifyPresenceReceived",onNotifyPresenceReceived);
+	        addEvent(core,"newSubscriptionRequested",onNewSubscriptionRequested);
+	        
+	        registration("margrox","lala12","sip.linphone.org");
+	        addFriend("sip:margaux@sip.linphone.org");
+	       	
+	        /* Start main loop for receiving notifications and doing background linphonecore work */
+	        core.iterateEnabled = true;
+	        
+	         
+		}
+
+		function onRegistrationStateChanged(event, proxy, state, message){
+        	console.log(message);
+       		if(state === 2){
+            	changeActivity(14);    
+            }
+        }
+        function onNotifyPresenceReceived(event, proxy, state, message){
+            console.log(message);
+        }
+        function onNewSubscriptionRequested(event, proxy, state, message){
+            console.log(message);
+        }
+    </script>
+    
+</head>
+<body>
+	<object id="core" type="application/x-linphone-web" width="0" height="0">
+	 	<param name="onload" value='main'>
+	</object>
+</body>
+</html>
