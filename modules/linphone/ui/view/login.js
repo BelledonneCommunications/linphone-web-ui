@@ -114,8 +114,7 @@ linphone.ui.view.login = {
 		linphone.ui.view.login.reset(base);
 		linphone.ui.view.login.update(base, linphone.ui.view.login.state.simple);
 	},
-	hide: function(base) {
-		base.off('registrationStateChanged', linphone.ui.view.login.onRegistrationStateChanged);
+	hide: function(base) {	
 	},
 
 	/* */
@@ -329,7 +328,8 @@ linphone.ui.view.login = {
 	done: function(base) {
 		var login = base.find('> .content .view > .login');
 		var core = linphone.ui.getCore(base);
-
+		
+		base.off('registrationStateChanged', linphone.ui.view.login.onRegistrationStateChanged);
 		linphone.ui.view.login.unlock(base);
 
 		// Force if we are still on this view
