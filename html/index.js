@@ -87,6 +87,10 @@ function __linphone_init(base) {
 			cls: 'sales',
 			text: 'sales',
 			link: 'http://www.belledonne-communications.com/contact.html'
+		},{
+			cls: 'license ',
+			text: 'license',
+			link: 'http://www.gnu.org/licenses/agpl-3.0.html'
 		}],
 		locales: [ {
 			name : 'US',

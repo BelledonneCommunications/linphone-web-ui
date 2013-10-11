@@ -97,6 +97,10 @@ linphone.ui.i18n = {
 					support : {
 						en_US : 'Support service',
 						fr_FR : 'Service support'
+					},
+					license : {
+						en_US : 'License',
+						fr_FR : 'Licence'
 					}
 				},
 				title: {
