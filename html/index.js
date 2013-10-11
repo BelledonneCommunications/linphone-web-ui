@@ -87,6 +87,10 @@ function __linphone_init(base) {
 			cls: 'sales',
 			text: 'sales',
 			link: 'http://www.belledonne-communications.com/contact.html'
+		},{
+			cls: 'license ',
+			text: 'license',
+			link: 'http://www.gnu.org/licenses/agpl-3.0.html'
 		}],
 		locales: [ {
 			name : 'US',
@@ -123,8 +127,8 @@ function __linphone_init(base) {
 (function(w, d, s) {
 	var scripts = [
 		{url: "js/jquery-1.10.1.min.js"},
-		{url: "js/analytics.min.js"},
 		{url: "js/jquery.client.min.js"},
+		{url: "js/analytics.min.js"},
 		
 		{url: "js/i18n.min.js"},
 		{url: "js/persistent.min.js"},
