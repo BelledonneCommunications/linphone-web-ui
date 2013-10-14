@@ -9,7 +9,8 @@
     <style type="text/css">
     </style>
     
-    <script type="text/javascript" src="test.js"></script>
+    <script type="text/javascript" src="utils.js"></script>
+    <script type="text/javascript" src="linphone.js"></script>
     <script type="text/JavaScript">
     
     	/* return the core object */
@@ -44,28 +45,26 @@
         	var friend = core.newFriendWithAddress(addressStr); /*creates friend object from addressStr*/
         	
         	friend.subscribesEnabled = true;  /*configure this friend to emit SUBSCRIBE message after being added to LinphoneCore*/
-			friend.incSubscribePolicy = 2;  /* Accept incoming subscription request for this friend*/
+			friend.incSubscribePolicy = linphone.SubscribePolicy.Accept;  /* Accept incoming subscription request for this friend*/
 			core.addFriend(friend); /* add my friend to the buddy list, initiate SUBSCRIBE message*/
         }
         
-        
-  
-   		function changeActivity(activity){
-			var core = getCore();
-			
-			var presenceModel = core.presenceModel;
-			presenceModel.setActivity(Activity, null); /*set my status with my activity*/
-			core.presenceModel = presenceModel;
-		}
-   		
-		function printFriendPresence(lf) {
-			var model = lf.presenceModel;
-			if (model !== null) {
-				console.log("Basic status: " + model.basicStatus);
+        function printFriendPresence(core, friend){
+        	var model = friend.presenceModel;
+        	if(model !== null){
+        		console.log("Basic status: " + model.basicStatus);
 				console.log("Activity: " + model.activity);
 			} else {
-				console.log("Friend " + lf.name + " is offline.");
+				console.log("Friend " + friend.name + " is offline.");
 			}
+        }
+        
+   		function changeActivity(activity){
+			var core = getCore();
+
+			var presenceModel = core.presenceModel;
+			presenceModel.setActivity(activity, null); /*set my status with my activity*/
+			core.presenceModel = presenceModel; /*set the new presence model*/
 		}
 		
 		function main(){
@@ -84,21 +83,17 @@
 	       	
 	        /* Start main loop for receiving notifications and doing background linphonecore work */
 	        core.iterateEnabled = true;
-	        
-	         
+	             
 		}
 
 		function onRegistrationStateChanged(event, proxy, state, message){
         	console.log(message);
-       		if(state === 2){
-            	changeActivity(14);    
-            }
         }
-        function onNotifyPresenceReceived(event, proxy, state, message){
-            console.log(message);
+        function onNotifyPresenceReceived(core, friend){
+        	printFriendPresence(core,friend);
         }
-        function onNewSubscriptionRequested(event, proxy, state, message){
-            console.log(message);
+        function onNewSubscriptionRequested(core, friend, url){
+        	console.log();
         }
     </script>
     
