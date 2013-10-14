@@ -1,0 +1,20 @@
+Linphone Web Ui Tutorials
+=========================
+
+Presence
+-------------
+
+*Prerequisites : plugin installed
+
+1. Launch presece.html
+2. In the JavaScript Console
+
+	- resgiter with your sip account : 
+		registration("username","password","domain");
+	
+	- add a friend :
+		addFriend("sip:Friend address");
+	
+	- change your presence 
+		changeActivity(activity) for example linphone.PresenceActivityType.Working 
+		(All the activities are present in the file linphone.js)
