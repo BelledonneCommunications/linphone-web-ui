@@ -1,9 +1,3 @@
-<!--
- Linphone Web - Web plugin of Linphone an audio/video SIP phone
- Copyright (c) 2013 Belledonne Communications
- All rights reserved.
--->
-
 <html>
 <head>
     <style type="text/css">
@@ -37,22 +31,11 @@
 			core.defaultProxy = proxy; /*set to default proxy*/
         }
         
-        /* Basic call */
-        function call(addressStr){
-        	var core = getCore();
-			var address = core.newAddress(addressStr);
-			if(address !== null) {
-				core.inviteAddress(address);
-				console.log("Call: " + address.asString());
-			}
-        }
-	        
 		function loadHandler(){
 			var core = getCore();
 			core.init();
 				
 	        /* Add callback for registration and call state */
-	        addEvent(core,"callStateChanged",onCallStateChanged);
 	        addEvent(core,"registrationStateChanged",onRegistrationStateChanged);
 	           
 	        /* Display logs information in the console */
@@ -65,9 +48,6 @@
 		}
 	        
 		/* Callback that display call states */
-		function onCallStateChanged(event, call, state, message){
-			console.log(message);
-		}
 		function onRegistrationStateChanged(event, proxy, state, message){
         	console.log(message);
         }
@@ -75,14 +55,6 @@
     
 </head>
 <body>
-	<form action="url_page_suivante" method="get" name="formSaisie">
-  <p>
-    <label for="prenom">Saisissez votre prénom :</label>
-    <input type="text" name="prenom" id="prenom" />
-
-    <input type="submit" value="Ok" />
-  </p>
-</form>
 	<object id="core" type="application/x-linphone-web" width="0" height="0">
 	 	<param name="onload" value='main'>
 	</object>

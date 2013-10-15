@@ -1,15 +1,31 @@
 Linphone Web Ui Tutorials
 =========================
 
+
+Call
+-------------
+
+*Prerequisites : plugin installed
+
+1. Launch call.html
+2. In the JavaScript Console
+
+	- register with your sip account : 
+		registration("username","password","domain");
+	
+	- place a call :
+		call("address sip of your contact"); 
+
+
 Presence
 -------------
 
 *Prerequisites : plugin installed
 
-1. Launch presece.html
+1. Launch presence.html
 2. In the JavaScript Console
 
-	- resgiter with your sip account : 
+	- register with your sip account : 
 		registration("username","password","domain");
 	
 	- add a friend :
