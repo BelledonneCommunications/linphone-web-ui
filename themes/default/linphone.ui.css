@@ -24,14 +24,14 @@
 @font-face {
 	font-family: 'allerregular';
 	src: url('font/aller_rg-webfont.eot');
-	src: url('font/aller_rg-webfont.eot?#iefix') format('embedded-opentype'), url('font/aller_rg-webfont.woff') format('woff'), url('font/aller_rg-webfont.ttf') format('truetype'), url('font/aller_rg-webfont.svg#allerregular') format('svg');
+	src: url('font/aller_rg-webfont.woff') format('woff'), url('font/aller_rg-webfont.ttf') format('truetype'), url('font/aller_rg-webfont.svg#allerregular') format('svg'), url('font/aller_rg-webfont.eot?#iefix') format('embedded-opentype') ;
 	font-weight: normal;
 	font-style: normal;
 }
 @font-face {
 	font-family: 'allerregular';
 	src: url('font/aller_std_bd-webfont.eot');
-	src: url('font/aller_std_bd-webfont.eot?#iefix') format('embedded-opentype'), url('font/aller_std_bd-webfont.woff') format('woff'), url('font/aller_std_bd-webfont.ttf') format('truetype'), url('font/aller_std_bd-webfont.svg#allerbold') format('svg');
+	src: url('font/aller_std_bd-webfont.woff') format('woff'), url('font/aller_std_bd-webfont.ttf') format('truetype'), url('font/aller_std_bd-webfont.svg#allerbold') format('svg'), url('font/aller_std_bd-webfont.eot?#iefix') format('embedded-opentype');
 	font-weight: bold;
 	font-style: normal;
 }
