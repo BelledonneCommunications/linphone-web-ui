@@ -26,7 +26,10 @@ function PersistentStorage(name, defaultConfig, timeout, debug) {
 			}
 		}
 	} catch(ex) {
+		this.config.init_count = 'undefined';
+		this.config.locale = 'undefined';
 		linphone.ui.logger.error(null, 'PersistentStorage | Can\'t read persistent storage, reset!');
+		return;
 	}
 	this.sync();
 	if(timeout) {
