@@ -145,7 +145,7 @@ linphone.ui.view.call = {
 	},
 	onPauseButton: function(base, call) {
 		var core = linphone.ui.getCore(base);
-		if(call.state === linphone.core.enums.callState.Paused){
+		if(call.state === linphone.CallState.Paused){
 			core.resumeCall(call);
 		} else {
 			core.pauseCall(call);

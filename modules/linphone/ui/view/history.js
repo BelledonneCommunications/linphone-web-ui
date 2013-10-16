@@ -108,13 +108,13 @@ linphone.ui.view.history = {
 				case linphone.ui.view.history.filter.all:
 				break;
 				case linphone.ui.view.history.filter.incoming:
-					ret = 'WHERE (direction = ' + linphone.core.enums.callDir.Incoming.toString() + ')';
+					ret = 'WHERE (direction = ' + linphone.getCallDirText(linphone.CallDir.Incoming) + ')';
 				break;
 				case linphone.ui.view.history.filter.outgoing:
-					ret = 'WHERE (direction = ' + linphone.core.enums.callDir.Outgoing.toString() + ')';
+					ret = 'WHERE (direction = ' + linphone.getCallDirText(linphone.CallDir.Outgoing) + ')';
 				break;
 				case linphone.ui.view.history.filter.miss:
-					ret = 'WHERE (status = ' + linphone.core.enums.callStatus.Missed.toString() + ')';
+					ret = 'WHERE (status = ' + linphone.getCallDirText(linphone.CallStatus.Missed) + ')';
 				break;
 				default:
 				linphone.ui.logger.error(base, 'Invalid linphone.ui.view.history.filter state');
@@ -227,7 +227,7 @@ linphone.ui.view.history = {
 	
 	utils: {
 		getCallDirection: function(base, direction) {
-			var statusTxt = linphone.core.enums.getCallDirText(direction).toLowerCase();
+			var statusTxt = linphone.getCallDirText(direction).toLowerCase();
 			var ret = jQuery.i18n.skeleton('global.unknown');
 			if(statusTxt !== '?') {
 				ret = jQuery.i18n.skeleton('content.view.history.direction.values.' + statusTxt);
@@ -235,7 +235,7 @@ linphone.ui.view.history = {
 			return ret;
 		},
 		getCallStatus: function(base, status) {
-			var statusTxt = linphone.core.enums.getCallStatusText(status).toLowerCase();
+			var statusTxt = linphone.getCallStatusText(status).toLowerCase();
 			var ret = jQuery.i18n.skeleton('global.unknown');
 			if(statusTxt !== '?') {
 				ret = jQuery.i18n.skeleton('content.view.history.status.values.' + statusTxt);

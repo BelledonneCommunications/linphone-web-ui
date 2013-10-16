@@ -99,7 +99,7 @@ linphone.ui.view.login = {
 		var proxy = linphone.ui.utils.getMainProxyConfig(base);
 
 		// Test if already registered
-		if(proxy && proxy.state === linphone.core.enums.registrationState.Ok) {
+		if(proxy && proxy.state === linphone.RegistrationState.Ok) {
 			linphone.ui.login(base, true);
 			return;
 		}
@@ -273,9 +273,9 @@ linphone.ui.view.login = {
 		// Activate ICE 
 		if(linphone.ui.view.login.isSimpleState(base)){
 			core.stunServer = "stun.linphone.org";
-			core.firewallPolicy = linphone.core.enums.firewallPolicy.UseIce;
+			core.firewallPolicy = linphone.FirewallPolicy.UseIce;
 		} else {
-			core.firewallPolicy = linphone.core.enums.firewallPolicy.NoFirewall;
+			core.firewallPolicy = linphone.FirewallPolicy.NoFirewall;
 		}
 		
 		// Set auth info
@@ -343,7 +343,7 @@ linphone.ui.view.login = {
 		var base = jQuery(this);
 		var login = base.find('> .content .view > .login');
 		var core = linphone.ui.getCore(base);
-		if (state === linphone.core.enums.registrationState.Ok) {
+		if (state === linphone.RegistrationState.Ok) {
 			if (core.config.getString('app', 'identity_hash', '') === '') {
 				// Get values
 				var account = '';
@@ -362,8 +362,8 @@ linphone.ui.view.login = {
 				core.config.setString('app', 'identity_hash', hash);
 			}
 			linphone.ui.view.login.done(base);
-		} else if(state === linphone.core.enums.registrationState.Failed) {
-			if((proxy.error === linphone.core.enums.reason.BadCredentials) || (proxy.error === linphone.core.enums.reason.Unauthorized) || (proxy.error === linphone.core.enums.reason.NotFound)) {
+		} else if(state === linphone.RegistrationState.Failed) {
+			if((proxy.error === linphone.Reason.BadCredentials) || (proxy.error === linphone.Reason.Unauthorized) || (proxy.error === linphone.Reason.NotFound)) {
 				linphone.ui.view.login.error(base, 'content.view.login.errors.account');
 			} else {
 				linphone.ui.view.login.error(base, 'content.view.login.errors.registrationFailed');

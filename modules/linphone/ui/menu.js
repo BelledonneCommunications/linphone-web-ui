@@ -140,13 +140,13 @@ linphone.ui.menu = {
 	},
 	
 	getCallStateClass: function(base, object) {
-		if(object === linphone.core.enums.callState.Idle || object === linphone.core.enums.callState.OutgoingInit || object === linphone.core.enums.callState.OutgoingProgress) {
+		if(object === linphone.CallState.Idle || object === linphone.CallState.OutgoingInit || object === linphone.CallState.OutgoingProgress) {
 			return 'idle';
 		}
-		if(object === linphone.core.enums.callState.PausedByRemote || object === linphone.core.enums.callState.Paused){
+		if(object === linphone.CallState.PausedByRemote || object === linphone.CallState.Paused){
 			return 'pause';
 		} 
-		if(object === linphone.core.enums.callState.IncomingReceived || object === linphone.core.enums.callState.OutgoingRinging){
+		if(object === linphone.CallState.IncomingReceived || object === linphone.CallState.OutgoingRinging){
 			return 'ringing';
 		}
 		return 'play';

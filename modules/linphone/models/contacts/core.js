@@ -65,7 +65,7 @@ linphone.models.contacts.core.engine.prototype.create = function(object, callbac
 	friend.address = address;
 	friend.name = name;
 	friend.subscribesEnabled = false;
-	friend.incSubscribePolicy = linphone.core.enums.subscribePolicy.Deny;
+	friend.incSubscribePolicy = linphone.SubscribePolicy.Deny;
 	friend.done();
     core.addFriend(friend);
     if(typeof callback !== 'undefined') {

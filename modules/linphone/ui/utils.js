@@ -12,23 +12,23 @@
 /*globals jQuery,linphone*/
 
 linphone.ui.utils = {
-	status: {
+	/*status: {
 		online: {
-			value: linphone.core.enums.presenceActivityType.Online,
+			value: linphone.PresenceActivityType.Online,
 			cls: 'imageStatusOnline',
 			i18n: 'online'
 		},
 		busy: {
-			value: linphone.core.enums.presenceActivityType.Busy,
+			value: linphone.PresenceActivityType.Busy,
 			cls: 'imageStatusBusy',
 			i18n: 'busy'
 		},
 		offline: {
-			value: linphone.core.enums.presenceActivityType.Offline,
+			value: linphone.PresenceActivityType.Offline,
 			cls: 'imageStatusOffline',
 			i18n: 'offline'
 		}
-	},
+	},*/
 	regex: {
 		sip: {
 			username: "([0-9a-zA-Z-_.!~*'()&=+$,;?/]+)",
