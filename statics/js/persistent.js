@@ -22,6 +22,10 @@ function PersistentStorage(name, defaultConfig, timeout, debug) {
 		if (typeof window.localStorage !== 'undefined') {
 			if (typeof window.localStorage[this.name] !== 'undefined') {
 				this.config = JSON.parse(window.localStorage[this.name]);
+				if(this.config === null){
+					this.config = {};
+					return;
+				}
 				sync = false;
 			}
 		}
