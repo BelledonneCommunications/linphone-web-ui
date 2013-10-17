@@ -392,8 +392,12 @@ linphone.ui = {
 				},
 				5000);
 			} else {
-				linphone.ui.view.call.removeVideo(base, call);
-				linphone.ui.utils.acceptUpdate(base, call, false);
+				if(call.remoteParams.videoEnabled === true && call.currentParams.videoEnabled === true) {
+					linphone.ui.utils.acceptUpdate(base, call, true);
+				} else {
+					linphone.ui.view.call.removeVideo(base, call);
+					linphone.ui.utils.acceptUpdate(base, call, false);
+				}
 				linphone.ui.view.call.update(base, call);
 			}
 
