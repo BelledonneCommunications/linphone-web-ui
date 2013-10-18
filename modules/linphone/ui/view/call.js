@@ -154,7 +154,6 @@ linphone.ui.view.call = {
 	onTerminateButton: function(base, call) {
 		var core = linphone.ui.getCore(base);
 		core.terminateCall(call);
-		linphone.ui.view.call.removeVideo(base,call);
 	},
 	
 	/* */

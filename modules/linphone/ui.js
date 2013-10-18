@@ -423,6 +423,7 @@ linphone.ui = {
 			linphone.ui.popup.incall.hide(base, call);
 			linphone.ui.popup.outcall.hide(base, call);
 			linphone.ui.view.call.terminateCall(base, call);
+			linphone.ui.view.call.removeVideo(base,call);
 			var calls = core.calls;
 			if(calls.length === 0){
 				linphone.ui.view.hide(base,'call');

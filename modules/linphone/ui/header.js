@@ -136,7 +136,8 @@ linphone.ui.header = {
 	/* Proxy config updating */
 	onRegistrationStateChanged: function(event, proxy, state, message) {
 		var base = jQuery(this);
-		if(proxy.error === linphone.Reason.IOError) {
+
+		if(proxy.error === linphone.Reason.IOError && !linphone.ui.view.top(base).hasClass("login")) {
 			linphone.ui.header.update(base, proxy,linphone.ui.networkState.Offline);
 		} else {
 			linphone.ui.header.update(base, proxy, null);
