@@ -373,7 +373,7 @@ linphone.ui = {
 		if(state === linphone.CallState.IncomingReceived){
 			linphone.ui.popup.incall.show(base, call);
 		}
-		if(state === linphone.CallState.OutgoingRinging){
+		if(state === linphone.CallState.OutgoingInit){
 			linphone.ui.popup.outcall.show(base, call);
 		}
 		if(state === linphone.CallState.Connected){

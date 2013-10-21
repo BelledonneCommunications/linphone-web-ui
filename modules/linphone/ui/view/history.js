@@ -114,7 +114,7 @@ linphone.ui.view.history = {
 					ret = 'WHERE (direction = ' + linphone.getCallDirText(linphone.CallDir.Outgoing) + ')';
 				break;
 				case linphone.ui.view.history.filter.miss:
-					ret = 'WHERE (status = ' + linphone.getCallDirText(linphone.CallStatus.Missed) + ')';
+					ret = 'WHERE (status = ' + linphone.getCallStatusText(linphone.CallStatus.Missed) + ')';
 				break;
 				default:
 				linphone.ui.logger.error(base, 'Invalid linphone.ui.view.history.filter state');
