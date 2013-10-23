@@ -108,13 +108,13 @@ linphone.ui.view.history = {
 				case linphone.ui.view.history.filter.all:
 				break;
 				case linphone.ui.view.history.filter.incoming:
-					ret = 'WHERE (direction = ' + linphone.getCallDirText(linphone.CallDir.Incoming) + ')';
+					ret = 'WHERE (direction = ' + linphone.CallDir.Incoming + ')';
 				break;
 				case linphone.ui.view.history.filter.outgoing:
-					ret = 'WHERE (direction = ' + linphone.getCallDirText(linphone.CallDir.Outgoing) + ')';
+					ret = 'WHERE (direction = ' + linphone.CallDir.Outgoing + ')';
 				break;
 				case linphone.ui.view.history.filter.miss:
-					ret = 'WHERE (status = ' + linphone.getCallStatusText(linphone.CallStatus.Missed) + ')';
+					ret = 'WHERE (status = ' + linphone.CallStatus.Missed + ')';
 				break;
 				default:
 				linphone.ui.logger.error(base, 'Invalid linphone.ui.view.history.filter state');
@@ -137,7 +137,7 @@ linphone.ui.view.history = {
 			var history = base.find('> .content .view > .history');
 			history.find('> .actions .modify').show();
 			history.find('> .actions .see').hide();
-			//linphone.ui.view.history.update(base);
+			linphone.ui.view.history.update(base);
 		}
 	},
 	
@@ -175,6 +175,8 @@ linphone.ui.view.history = {
 		var configuration = linphone.ui.configuration(base);
 		var filter = linphone.ui.view.history.filter.getFilter(base);
 		
+		console.dir(filter);
+		
 		configuration.models.history.list(filter, function(error, data) {
 			var list = history.find('.list');
 			list.empty();
@@ -202,6 +204,7 @@ linphone.ui.view.history = {
 			
 			for(var item in data) {
 				var obj = data[item];
+				console.log(obj.direction);
 				var elem = linphone.ui.template(base, 'view.history.list.entry', obj);
 				jQuery.i18n.update(elem);
 				elem.find('.actions .call').click(linphone.ui.exceptionHandler(base, callWrapper(obj)));
