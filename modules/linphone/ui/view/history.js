@@ -175,8 +175,6 @@ linphone.ui.view.history = {
 		var configuration = linphone.ui.configuration(base);
 		var filter = linphone.ui.view.history.filter.getFilter(base);
 		
-		console.dir(filter);
-		
 		configuration.models.history.list(filter, function(error, data) {
 			var list = history.find('.list');
 			list.empty();
@@ -204,7 +202,6 @@ linphone.ui.view.history = {
 			
 			for(var item in data) {
 				var obj = data[item];
-				console.log(obj.direction);
 				var elem = linphone.ui.template(base, 'view.history.list.entry', obj);
 				jQuery.i18n.update(elem);
 				elem.find('.actions .call').click(linphone.ui.exceptionHandler(base, callWrapper(obj)));
