@@ -39,15 +39,10 @@ linphone.ui.view.history = {
 			linphone.ui.view.history.update(base);
 		}));
 		
-		history.find('> .actions .modify').click(linphone.ui.exceptionHandler(base, function() {
-			linphone.ui.view.history.enterEdition(base);
+		history.find('> .actions .delete').click(linphone.ui.exceptionHandler(base, function() {
+			linphone.ui.view.history.deleteHistory(base);
 		}));
-		history.find('> .actions .modify').show();
-		
-		history.find('> .actions .see').click(linphone.ui.exceptionHandler(base, function() {
-			linphone.ui.view.history.exitEdition(base);
-		}));
-		history.find('> .actions .see').hide();
+		history.find('> .actions .delete').show();
 		
 		linphone.ui.view.history.filter.update(base, linphone.ui.view.history.filter.all);
 	},
@@ -123,27 +118,11 @@ linphone.ui.view.history = {
 		}
 	},
 	
-	enterEdition: function(base) {
-		if(!linphone.ui.view.history.isEditing(base)) {
-			var history = base.find('> .content .view > .history');
-			history.find('> .actions .modify').hide();
-			history.find('> .actions .see').show();
-			linphone.ui.view.history.update(base);
-		}
-	},
-	
-	exitEdition: function(base) {
-		if(linphone.ui.view.history.isEditing(base)) {
-			var history = base.find('> .content .view > .history');
-			history.find('> .actions .modify').show();
-			history.find('> .actions .see').hide();
-			linphone.ui.view.history.update(base);
-		}
-	},
-	
-	isEditing: function(base) {
-		var history = base.find('> .content .view > .history');
-		return !history.find('> .actions .modify').is(':visible');
+	deleteHistory: function(base) {
+		var core = linphone.ui.getCore(base);
+		core.clearCallLogs();
+		
+		linphone.ui.view.history.show(base);
 	},
 	
 	/**/
@@ -179,8 +158,6 @@ linphone.ui.view.history = {
 			var list = history.find('.list');
 			list.empty();
 			
-			var edit = linphone.ui.view.history.isEditing(base);
-			
 			var callWrapper = function(obj) {
 				return function() {
 					linphone.ui.utils.call(base, obj.remote);
@@ -206,11 +183,6 @@ linphone.ui.view.history = {
 				jQuery.i18n.update(elem);
 				elem.find('.actions .call').click(linphone.ui.exceptionHandler(base, callWrapper(obj)));
 				elem.find('.actions .remove').click(linphone.ui.exceptionHandler(base, removeWrapper(obj)));
-				if(edit) {
-					elem.find('.actions .remove').css('display','inline-block');
-				} else {
-					elem.find('.actions .remove').hide();
-				}
 				linphone.ui.utils.getContact(base, obj.remote, updateName);
 				list.append(elem);
 			}

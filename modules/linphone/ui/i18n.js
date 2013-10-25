@@ -281,6 +281,10 @@ linphone.ui.i18n = {
 						fr_FR : 'Durée'
 					}
 				},
+				call: {
+					en_US : 'Call',
+					fr_FR : 'Appel'
+				},
 				filter: {
 					all: {
 						en_US : 'All',
@@ -299,9 +303,9 @@ linphone.ui.i18n = {
 						fr_FR : 'Sortants'
 					}
 				},
-				modify: {
-					en_US : 'Modify history',
-					fr_FR : 'Modifier l\'historique'
+				remove: {
+					en_US : 'Delete history',
+					fr_FR : 'Supprimer l\'historique'
 				},
 				see: {
 					en_US : 'See history',
