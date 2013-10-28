@@ -421,7 +421,8 @@ linphone.ui.core = {
 				core.rootCa = 'internal:///share/linphone/rootca.pem';
 
 				// Set video modes
-				core.videoEnabled = true;
+				core.videoCaptureEnabled = true;
+				core.videoDisplayEnabled = true;
 				core.videoPreviewEnabled = false;
 				core.selfViewEnabled = true;
 				core.usePreviewWindow = false;
@@ -448,6 +449,8 @@ linphone.ui.core = {
 				if(linphone.ui.isHeartBeatRunning(base)) {
 					core.networkReachable = (linphone.ui.getNetworkState(base) === linphone.ui.networkState.Online);
 				}
+				
+				core.enablePayloadType(core.findPayloadType("opus",48000,1),false);
 
 				// Configure to listem on all transport
 				var transports = core.sipTransports;

@@ -357,14 +357,12 @@ linphone.ui = {
 		}, heartbeat.timeout);
 	},
 	onNetworkStateChanged: function(event, state) {
-		/*
 		var base = jQuery(this);
 		if(state === linphone.ui.networkState.Online) {
 			base.find('> .content .offline').hide();
 		} else {
 			base.find('> .content .offline').show();
 		}
-		*/
 	},
 	
 	/* Call state */
@@ -372,20 +370,20 @@ linphone.ui = {
 		var base = jQuery(this);
 		var core = linphone.ui.getCore(base);
 
-		if(state === linphone.core.enums.callState.IncomingReceived){
+		if(state === linphone.CallState.IncomingReceived){
 			linphone.ui.popup.incall.show(base, call);
 		}
-		if(state === linphone.core.enums.callState.OutgoingRinging){
+		if(state === linphone.CallState.OutgoingInit){
 			linphone.ui.popup.outcall.show(base, call);
 		}
-		if(state === linphone.core.enums.callState.Connected){
+		if(state === linphone.CallState.Connected){
 			linphone.ui.popup.incall.hide(base, call);
 			linphone.ui.popup.outcall.hide(base, call);
 			if(linphone.ui.view.show(base,'call',call) === false){
 				linphone.ui.view.call.update(base,call);
 			}
 		}
-		if(state === linphone.core.enums.callState.UpdatedByRemote){
+		if(state === linphone.CallState.UpdatedByRemote){
 			if(call.remoteParams.videoEnabled === true && call.currentParams.videoEnabled === false && core.videoPolicy.automaticallyAccept === false){
 				linphone.ui.popup.video.show(base, call);
 				var timeout=setTimeout(function() {
@@ -394,22 +392,38 @@ linphone.ui = {
 				},
 				5000);
 			} else {
-				linphone.ui.view.call.removeVideo(base, call);
-				linphone.ui.utils.acceptUpdate(base, call, false);
+				if(call.remoteParams.videoEnabled === true && call.currentParams.videoEnabled === true) {
+					linphone.ui.utils.acceptUpdate(base, call, true);
+				} else {
+					linphone.ui.view.call.removeVideo(base, call);
+					linphone.ui.utils.acceptUpdate(base, call, false);
+				}
 				linphone.ui.view.call.update(base, call);
 			}
 
 		}
-		if(state === linphone.core.enums.callState.StreamsRunning){
-			if(call.remoteParams.videoEnabled === true && call.currentParams.videoEnabled === true){
+		if(state === linphone.CallState.StreamsRunning){
+			linphone.ui.view.call.activateVideoButton(base,call,true);
+			if(call.currentParams.videoEnabled === true){
 				linphone.ui.view.call.addVideo(base,call);
 				linphone.ui.view.call.updateVideoButton(base,true);
 			}
 		}
-		if(state === linphone.core.enums.callState.End){
+		if(state === linphone.CallState.PausedByRemote){
+			if(call.remoteParams.videoEnabled === true && call.currentParams.videoEnabled === true){
+				linphone.ui.view.call.removeVideo(base, call);
+			}
+		}
+		if(state === linphone.CallState.Paused){
+			if(call.remoteParams.videoEnabled === true && call.currentParams.videoEnabled === true){
+				linphone.ui.view.call.removeVideo(base, call);
+			}
+		}
+		if(state === linphone.CallState.End){
 			linphone.ui.popup.incall.hide(base, call);
 			linphone.ui.popup.outcall.hide(base, call);
 			linphone.ui.view.call.terminateCall(base, call);
+			linphone.ui.view.call.removeVideo(base,call);
 			var calls = core.calls;
 			if(calls.length === 0){
 				linphone.ui.view.hide(base,'call');
@@ -419,7 +433,7 @@ linphone.ui = {
 				}
 			}	
 		}
-		if(state === linphone.core.enums.callState.Error) {
+		if(state === linphone.CallState.Error) {
 			linphone.ui.popup.outcall.hide(base, call);
 			var tKey = 'global.errors.call.' + linphone.ui.utils.formatToKey(message);
 			var args = null;

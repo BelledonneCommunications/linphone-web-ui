@@ -16,7 +16,7 @@
 .linphoneweb > .content .view > .login {
 	background-color: rgb(228, 237, 242);
 	overflow: auto;
-	min-height: 600px;
+	min-height: 700px;
 }
 
 .linphoneweb > .content .view > .login .logo {
@@ -97,6 +97,9 @@
 
 .linphoneweb > .content .view > .login .link:hover {
 	color: #d97459;
+}
+.linphoneweb > .content .view > .login .link .createAccount{
+	text-decoration: none;
 }
 
 .linphoneweb > .content .view > .login .wait > div, .linphoneweb > .content .view > .login .wait > span {

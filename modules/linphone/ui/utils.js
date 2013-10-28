@@ -12,23 +12,23 @@
 /*globals jQuery,linphone*/
 
 linphone.ui.utils = {
-	status: {
+	/*status: {
 		online: {
-			value: linphone.core.enums.presenceActivityType.Online,
+			value: linphone.PresenceActivityType.Online,
 			cls: 'imageStatusOnline',
 			i18n: 'online'
 		},
 		busy: {
-			value: linphone.core.enums.presenceActivityType.Busy,
+			value: linphone.PresenceActivityType.Busy,
 			cls: 'imageStatusBusy',
 			i18n: 'busy'
 		},
 		offline: {
-			value: linphone.core.enums.presenceActivityType.Offline,
+			value: linphone.PresenceActivityType.Offline,
 			cls: 'imageStatusOffline',
 			i18n: 'offline'
 		}
-	},
+	},*/
 	regex: {
 		sip: {
 			username: "([0-9a-zA-Z-_.!~*'()&=+$,;?/]+)",
@@ -151,21 +151,22 @@ linphone.ui.utils = {
 			address = object.asStringUriOnly();
 		}
 		if(address) {
-			configuration.models.contacts.list('WHERE ("' + address + '" IN address)', 
-				function(error, data) {
-					for(var item in data) {
-						callback(null, data[item]);
-						return;
+			configuration.models.contacts.list('WHERE ("' + address + '" IN address)', function(error, data) {
+				for(var item in data) {
+					if(data[item].address.asStringUriOnly() === address){
+						return callback(null,data[item]);
+					} else {
+						return callback("Not found", null);
 					}
-					callback("Not found", null);
 				}
-			);
+				return callback("Not found", null);
+			});
 		}
 		callback("Not found", null);
 	},
-	getContactName: function(base, friend) {
-		if(friend) {
-			return friend.name;
+	getContactName: function(base, contact) {
+		if(contact) {
+			return contact.name;
 		}
 		return null;
 	},
@@ -180,6 +181,7 @@ linphone.ui.utils = {
 		if(!address) {
 			return String(object);
 		}
+		
 		var displayName = address.displayName;
 		if(displayName) {
 			return displayName;
@@ -231,6 +233,8 @@ linphone.ui.utils = {
 		var currentParams = call.currentParams;
 		if(enableVideo === true){
 			currentParams.videoEnabled = true;
+		} else {
+			currentParams.videoEnabled = false;
 		}
 		core.acceptCallUpdate(call,currentParams);
 	},
@@ -244,7 +248,7 @@ linphone.ui.utils = {
 		
 		if(address) {
 			var core = linphone.ui.getCore(base);
-			core.inviteAddress_async(address);
+			core.inviteAddress(address);
 			linphone.ui.logger.log(base, "Call: " + address.asString());
 			if(typeof success !== 'undefined') {
 				success();

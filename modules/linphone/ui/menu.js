@@ -107,21 +107,23 @@ linphone.ui.menu = {
 			}
 		};
 		
-		for(var i = 0; i < calls.length; ++i) {
-			var call = calls[i];
-			var element = linphone.ui.template(base, 'menu.calls.list.entry', call);
-			element.click(linphone.ui.exceptionHandler(base, clickFunction(base, call)));
-			
-			linphone.ui.utils.getContact(base, call.remoteAddress, updateName);
-			
-			list.append(element);
-			
-			// Append animation
-			if(call === core.currentCall) {
-				element.removeClass('hover');
-				element.addClass('highlighted');
-				element.mouseenter(enterFunction);
-				element.mouseleave(leaveFunction);
+		if(typeof calls !== 'undifined'){
+			for(var i = 0; i < calls.length; ++i) {
+				var call = calls[i];
+				var element = linphone.ui.template(base, 'menu.calls.list.entry', call);
+				element.click(linphone.ui.exceptionHandler(base, clickFunction(base, call)));
+				
+				linphone.ui.utils.getContact(base, call.remoteAddress, updateName);
+				
+				list.append(element);
+				
+				// Append animation
+				if(call === core.currentCall) {
+					element.removeClass('hover');
+					element.addClass('highlighted');
+					element.mouseenter(enterFunction);
+					element.mouseleave(leaveFunction);
+				}
 			}
 		}
 		
@@ -138,13 +140,13 @@ linphone.ui.menu = {
 	},
 	
 	getCallStateClass: function(base, object) {
-		if(object === linphone.core.enums.callState.Idle || object === linphone.core.enums.callState.OutgoingInit || object === linphone.core.enums.callState.OutgoingProgress) {
+		if(object === linphone.CallState.Idle || object === linphone.CallState.OutgoingInit || object === linphone.CallState.OutgoingProgress) {
 			return 'idle';
 		}
-		if(object === linphone.core.enums.callState.PausedByRemote || object === linphone.core.enums.callState.Paused){
+		if(object === linphone.CallState.PausedByRemote || object === linphone.CallState.Paused){
 			return 'pause';
 		} 
-		if(object === linphone.core.enums.callState.IncomingReceived || object === linphone.core.enums.callState.OutgoingRinging){
+		if(object === linphone.CallState.IncomingReceived || object === linphone.CallState.OutgoingRinging){
 			return 'ringing';
 		}
 		return 'play';

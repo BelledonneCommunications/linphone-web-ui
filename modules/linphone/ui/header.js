@@ -42,7 +42,7 @@ linphone.ui.header = {
 			// Wrap the function in orther function in order to detach status from the status variable
 			var _updateStatus = function(status) {
 					return function(event) {
-						linphone.ui.logger.log(base, 'Change status to ' + linphone.core.enums.getStatusText(status.value));
+						linphone.ui.logger.log(base, 'Change status to ' + linphone.getStatusText(status.value));
 						var core = linphone.ui.getCore(base);
 						core.presenceInfo = status.value;
 						linphone.ui.header.profile.update(base, status);
@@ -136,7 +136,12 @@ linphone.ui.header = {
 	/* Proxy config updating */
 	onRegistrationStateChanged: function(event, proxy, state, message) {
 		var base = jQuery(this);
-		linphone.ui.header.update(base, proxy, null);
+
+		if(proxy.error === linphone.Reason.IOError && !linphone.ui.view.top(base).hasClass("login")) {
+			linphone.ui.header.update(base, proxy,linphone.ui.networkState.Offline);
+		} else {
+			linphone.ui.header.update(base, proxy, null);
+		}	
 	},
 	onNetworkStateChanged: function(event, status) {
 		var base = jQuery(this);
@@ -157,7 +162,7 @@ linphone.ui.header = {
 		
 		if(network === linphone.ui.networkState.Online) {
 			header.find('.offline').hide();
-			if(proxy && proxy.state === linphone.core.enums.registrationState.Ok) {
+			if(proxy && proxy.state === linphone.RegistrationState.Ok) {
 				linphone.ui.header.profile.update(base);
 				header.find('.empty').hide();
 				header.find('.profile').show();

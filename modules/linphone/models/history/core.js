@@ -30,8 +30,8 @@ linphone.models.history.core = {
 	/* Call state */
 	onCallStateChanged: function(event, call, state, message) {
 		var that = event.data.engine;
-		if(state === linphone.core.enums.callState.End ||
-			state === linphone.core.enums.callState.Error) {
+		if(state === linphone.CallState.End ||
+			state === linphone.CallState.Error) {
 			that.onUpdate.fire(linphone.models.history.events.create, call.callLog);
 		}
 	}

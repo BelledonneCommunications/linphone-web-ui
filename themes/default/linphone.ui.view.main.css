@@ -14,10 +14,12 @@
 }
 
 .linphoneweb > .content .view .main .logo{
-	height: 497px;
-	width: 550px;
+	height: 420px;
+	width: 464px;
 	background-image: url('img/backgroundLogo.png');
 	background-repeat: no-repeat;
 	margin-left: auto;
 	margin-right: auto;
+	position: relative;
+	top: 40px;
 }

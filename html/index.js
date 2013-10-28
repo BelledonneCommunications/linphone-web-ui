@@ -10,7 +10,7 @@
  */
 
 function __linphone_init(base) {
-	var pluginVersion = '0.0.2.5';
+	var pluginVersion = '0.0.2.10';
 	var activeXPluginVersion = pluginVersion.replace(/\./g, ',');
 
 	/* @if env='release' */
@@ -42,14 +42,14 @@ function __linphone_init(base) {
 				'x86' : {
 					'Firefox' : {
 						file: 'downloads/linphone-web-' + pluginVersion + '-Linux-x86.xpi',
-						icon: 'style/img/linphone.png'
+						icon: 'style/img/linphone.ico'
 					},
 					'DEFAULT' : 'downloads/linphone-web-' + pluginVersion + '-Linux-x86.tar.gz'
 				}, 
 				'x86_64' : {
 					'Firefox' : {
 						file: 'downloads/linphone-web-' + pluginVersion + '-Linux-x86_64.xpi',
-						icon: 'style/img/linphone.png'
+						icon: 'style/img/linphone.ico'
 					},
 					'DEFAULT' : 'downloads/linphone-web-' + pluginVersion + '-Linux-x86_64.tar.gz'
 				}
@@ -58,14 +58,14 @@ function __linphone_init(base) {
 				'x86' : {
 					'Firefox' : {
 						file: 'downloads/linphone-web-' + pluginVersion + '-Mac-x86.xpi',
-						icon: 'style/img/linphone.png'
+						icon: 'style/img/linphone.ico'
 					},
 					'DEFAULT' : 'downloads/linphone-web-' + pluginVersion + '-Mac-x86.pkg'
 				}, 
 				'x86_64' : {
 					'Firefox' : {
 						file: 'downloads/linphone-web-' + pluginVersion + '-Mac-x86.xpi',
-						icon: 'style/img/linphone.png'
+						icon: 'style/img/linphone.ico'
 					},
 					'DEFAULT' : 'downloads/linphone-web-' + pluginVersion + '-Mac-x86.pkg'
 				}
@@ -75,14 +75,22 @@ function __linphone_init(base) {
 		version: pluginVersion,
 		webapp_version: getWebAppVersion(),
 		copyright: 'Copyright© Belledonne Communications 2013. All rights reserved.',
+		linphone_account: {
+			cls: 'createAccount',
+			link: 'https://www.linphone.org/eng/linphone/register-a-linphone-account.html'
+		},
 		links: [{
 			cls: 'support',
 			text: 'support',
-			link: 'https://www.linphone.org/eng/linphone/support.html',
+			link: 'https://www.linphone.org/eng/linphone/support.html'
 		},{
 			cls: 'sales',
 			text: 'sales',
-			link: 'http://www.belledonne-communications.com/contact.html',
+			link: 'http://www.belledonne-communications.com/contact.html'
+		},{
+			cls: 'license ',
+			text: 'license',
+			link: 'http://www.gnu.org/licenses/agpl-3.0.html'
 		}],
 		locales: [ {
 			name : 'US',
@@ -120,6 +128,7 @@ function __linphone_init(base) {
 	var scripts = [
 		{url: "js/jquery-1.10.1.min.js"},
 		{url: "js/jquery.client.min.js"},
+		{url: "js/analytics.min.js"},
 		
 		{url: "js/i18n.min.js"},
 		{url: "js/persistent.min.js"},

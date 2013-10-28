@@ -22,11 +22,18 @@ function PersistentStorage(name, defaultConfig, timeout, debug) {
 		if (typeof window.localStorage !== 'undefined') {
 			if (typeof window.localStorage[this.name] !== 'undefined') {
 				this.config = JSON.parse(window.localStorage[this.name]);
+				if(this.config === null){
+					this.config = {};
+					return;
+				}
 				sync = false;
 			}
 		}
 	} catch(ex) {
-		linphone.ui.logger.error(base, 'PersistentStorage | Can\'t read persistent storage, reset!');
+		this.config.init_count = 'undefined';
+		this.config.locale = 'undefined';
+		linphone.ui.logger.error(null, 'PersistentStorage | Can\'t read persistent storage, reset!');
+		return;
 	}
 	this.sync();
 	if(timeout) {
@@ -71,7 +78,7 @@ PersistentStorage.prototype.start = function(timeout) {
 		this.__timeout = window.setInterval(this.fct, timeout);
 		if (window.addEventListener) { 
 			window.addEventListener("unload", this.fct, false); 
-		} else if (w.attachEvent) { 
+		} else if (window.attachEvent) { 
 			window.attachEvent("onunload", this.fct); 
 		}
 	}

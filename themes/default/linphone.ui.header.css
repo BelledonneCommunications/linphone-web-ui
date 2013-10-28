@@ -181,7 +181,8 @@
 	cursor: pointer;
 }
 .linphoneweb .header .profile .menu .logout .imageLogout {
-	background: url('img/logout.png') no-repeat;
+	background-image: url('img/logout.png');
+	background-repeat: no-repeat;
 	width: 10px;
 	height: 11px;
 	margin-top: 1px;

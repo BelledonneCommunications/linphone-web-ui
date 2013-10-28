@@ -25,7 +25,7 @@ linphone.models.contacts.core = {
 
 linphone.models.contacts.core.engine.prototype.count = function(filters, callback) {
     var core = linphone.ui.getCore(this.base);
-    var friends = core.getFriendList();
+    var friends = core.friendList;
     if(typeof callback !== 'undefined') {
         callback(null, friends.length);
     }
@@ -33,9 +33,10 @@ linphone.models.contacts.core.engine.prototype.count = function(filters, callbac
  
 linphone.models.contacts.core.engine.prototype.list = function(filters, callback) {
     var core = linphone.ui.getCore(this.base);
-    var friends = core.getFriendList();
+    var friends = core.friendList;
     
-    var ret = friends;
+    var ret;
+	ret = friends;
     if(typeof callback !== 'undefined') {
         callback(null, ret);
     }
@@ -54,14 +55,18 @@ linphone.models.contacts.core.engine.prototype.read = function(id, callback) {
 
 linphone.models.contacts.core.engine.prototype.create = function(object, callback) {
     var core = linphone.ui.getCore(this.base);
-    var friend =  object.friend;
+    var friend;
 	var address = object.address;
 	var name = object.name;
 	
+	address.displayName = name;
+	friend = core.newFriend(address.asString());
+	friend.edit();
 	friend.address = address;
-    friend.name =  name;
+	friend.name = name;
 	friend.subscribesEnabled = false;
-	friend.incSubscribePolicy = linphone.core.enums.subscribePolicy.Deny;
+	friend.incSubscribePolicy = linphone.SubscribePolicy.Deny;
+	friend.done();
     core.addFriend(friend);
     if(typeof callback !== 'undefined') {
         callback(null, true);
@@ -69,11 +74,12 @@ linphone.models.contacts.core.engine.prototype.create = function(object, callbac
 };
  
 linphone.models.contacts.core.engine.prototype.update = function(object, callback) {
-	var friend =  object.friend;
+	var friend = object.friend;
 	var address = object.address;
 	var name = object.name;
-	
+
     friend.edit();
+	address.displayName = name;
 	friend.address = address;
 	friend.name = name;
 	friend.done();

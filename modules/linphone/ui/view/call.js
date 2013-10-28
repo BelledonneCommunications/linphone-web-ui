@@ -51,29 +51,34 @@ linphone.ui.view.call = {
 		var callView = base.find('> .content .view > .call');
 		var list = callView.find(' .actions');
 		var contact = callView.find(' .contactView');
+		var data = base.find('> .content .view > .call ').data('currentCall');
 		
+		if(typeof call === 'undefined'){
+			if(typeof data !== 'undefined'){
+				call = data;
+			} else {
+				linphone.ui.view.hide(base,call);
+				linphone.ui.view.show(base, 'main');
+			}	
+		}
+		callView.data('currentCall',call);
 		linphone.ui.menu.show(base);
 		list.empty();
 		contact.empty();
 		contact.append(linphone.ui.template(base, 'view.call.contact', call));
 		list.append(linphone.ui.template(base, 'view.call.actions', core));
-		linphone.ui.view.call.updateMuteButton(base, core.isMicMuted);
+		linphone.ui.view.call.updateMuteButton(base, core.micEnabled);
 		linphone.ui.view.call.updateVideoButton(base,false);
 		//linphone.ui.view.call.stopTimer(base,call);
 		//linphone.ui.view.call.startTimer(base,call);
 		
 		/* */
+		linphone.ui.view.call.activateVideoButton(base,call,true);
 		callView.find('.actions .muteEnabled .on').click(linphone.ui.exceptionHandler(base, function(){
 			linphone.ui.view.call.onMuteButton(base,false);
 		}));
 		callView.find('.actions .muteEnabled .off').click(linphone.ui.exceptionHandler(base, function(){
 			linphone.ui.view.call.onMuteButton(base,true);
-		}));
-		callView.find('.actions .videoEnabled .on').click(linphone.ui.exceptionHandler(base, function(){
-			linphone.ui.view.call.onVideoButton(base,call,true);
-		}));
-		callView.find('.actions .videoEnabled .off').click(linphone.ui.exceptionHandler(base, function(){
-			linphone.ui.view.call.onVideoButton(base,call,false);
 		}));
 		callView.find('.actions .conference').click(linphone.ui.exceptionHandler(base, function(){
 			linphone.ui.view.show(base, 'conference');
@@ -106,13 +111,13 @@ linphone.ui.view.call = {
 			call.find('.video .profile').addClass('collapsed');
 		}
 	},
-	updateMuteButton: function(base, isMicMuted) {
-		if(isMicMuted === true){
-			base.find('> .content .view > .call .actions .muteEnabled .off').addClass('selected');
-			base.find('> .content .view > .call .actions .muteEnabled .on').removeClass('selected');
-		} else {
+	updateMuteButton: function(base, isMicEnabled) {
+		if(isMicEnabled === true){
 			base.find('> .content .view > .call .actions .muteEnabled .on').addClass('selected');
 			base.find('> .content .view > .call .actions .muteEnabled .off').removeClass('selected');
+		} else {
+			base.find('> .content .view > .call .actions .muteEnabled .off').addClass('selected');
+			base.find('> .content .view > .call .actions .muteEnabled .on').removeClass('selected');
 		}
 	},
 	updateVideoButton: function(base, isVideoEnabled) {
@@ -129,15 +134,18 @@ linphone.ui.view.call = {
 	onMuteButton: function(base, button) {
 		var core = linphone.ui.getCore(base);
 		
-		core.muteMic = button;
-		linphone.ui.view.call.updateMuteButton(base,button);
+		core.micEnabled = !button;
+		linphone.ui.view.call.updateMuteButton(base,!button);
 	},
 	onVideoButton: function(base, call, button) {
+		if(button){
+			linphone.ui.view.call.activateVideoButton(base,call,false);
+		}
 		linphone.ui.view.call.enableVideo(base,call,button);
 	},
 	onPauseButton: function(base, call) {
 		var core = linphone.ui.getCore(base);
-		if(call.state === linphone.core.enums.callState.Paused){
+		if(call.state === linphone.CallState.Paused){
 			core.resumeCall(call);
 		} else {
 			core.pauseCall(call);
@@ -145,8 +153,6 @@ linphone.ui.view.call = {
 	},
 	onTerminateButton: function(base, call) {
 		var core = linphone.ui.getCore(base);
-		linphone.ui.view.call.enableVideo(base,call,false);
-		//linphone.ui.view.call.stopTimer(base,call);
 		core.terminateCall(call);
 	},
 	
@@ -170,6 +176,21 @@ linphone.ui.view.call = {
 		linphone.ui.video.removeView(base, base.find('> .content .view > .call .video > .content'));
 	},
 	
+	activateVideoButton: function(base,call,isActivated){
+		var callView= base.find('> .content .view > .call');
+		if(isActivated){
+			callView.find('.actions .videoEnabled .on').click(linphone.ui.exceptionHandler(base, function(){
+				linphone.ui.view.call.onVideoButton(base,call,true);
+			}));
+			callView.find('.actions .videoEnabled .off').click(linphone.ui.exceptionHandler(base, function(){
+				linphone.ui.view.call.onVideoButton(base,call,false);
+			}));	
+		} else {
+			base.find('> .content .view > .call .actions .videoEnabled .on').unbind("click");
+			base.find('> .content .view > .call .actions .videoEnabled .off').unbind("click");
+		}
+	},
+	
 	/* */
 	startTimer: function(base,call){
 		var callView = base.find('> .content .view > .call');
@@ -185,6 +206,7 @@ linphone.ui.view.call = {
 	
 	terminateCall: function(base, call){
 		var core = linphone.ui.getCore(base);
+		core.micMute = false;
 		
 	},
 	displayCallQuality: function(base, call) {
