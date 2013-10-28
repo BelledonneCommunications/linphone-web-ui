@@ -22,10 +22,14 @@ linphone.ui.menu = {
 		base.find('> .content .menu ul li').disableSelection();
 		
 		base.find('> .content .menu .history').click(linphone.ui.exceptionHandler(base, function() {
+			base.find('> .content .menu .history').addClass('active');
+			base.find('> .content .menu .contacts').removeClass('active');
 			linphone.ui.view.show(base, 'history');
 		}));
 		
 		base.find('> .content .menu .contacts').click(linphone.ui.exceptionHandler(base, function() {
+			base.find('> .content .menu .contacts').addClass('active');
+			base.find('> .content .menu .history').removeClass('active');
 			linphone.ui.view.show(base, 'contacts');
 		}));
 		
@@ -64,7 +68,12 @@ linphone.ui.menu = {
 	show: function(base) {
 		base.on('callStateChanged', linphone.ui.menu.onCallStateChanged);
 		linphone.ui.menu.update(base);
+		
 		base.find('> .content .menu').show();
+		if(!linphone.ui.view.top(base).hasClass("history") && !linphone.ui.view.top(base).hasClass("contacts")){
+			base.find('> .content .menu .contacts').removeClass('active');
+			base.find('> .content .menu .history').removeClass('active');
+		}
 		base.find('> .content .menu .scroll-pane').each(function(){
 			linphone.ui.slider(jQuery(this));
 		});

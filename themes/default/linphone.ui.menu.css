@@ -48,6 +48,11 @@
 	background-color: #34393f;
 	cursor: pointer;
 }
+.linphoneweb>.content .middle>.menu nav li a:hover, .linphoneweb>.content .middle>.menu nav li.active a{
+	color: #ffffff;
+	background-color: #34393f;
+	cursor: pointer;
+}
 
 .linphoneweb > .content .middle > .menu nav .entry {
 	color: #616973;

@@ -29,6 +29,7 @@ linphone.ui.view.call = {
 	show: function(base, call) {
 		var core = linphone.ui.getCore(base);
 		var callView= base.find('> .content .view > .call');
+		
 		/* Resizable */
 		/*callView.find('.video .profile').mouseenternear(linphone.ui.exceptionHandler(base, function (event) {
 			callView.find('.video .profile .resize').show();
