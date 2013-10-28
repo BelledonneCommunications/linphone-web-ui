@@ -139,7 +139,6 @@ linphone.ui.view.history = {
 	},
 	hide: function(base) {
 		var history = base.find('> .content .view > .history');
-		linphone.ui.view.history.exitEdition(base);
 		var fct = history.data('engineOnUpdate');
 		if(fct) {
 			var historyModel = linphone.ui.configuration(base).models.history;
