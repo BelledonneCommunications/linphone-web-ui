@@ -167,6 +167,10 @@
 	background: #5d8398;
 	color: #fff;
 }
+.linphoneweb .buttonSelect.inactive{
+	background:#e4edf2;
+	color:#C2C2C2
+}
 .linphoneweb .buttonSelect+ .buttonSelect {
 	border-left: 1px solid #d0dce2;
 }

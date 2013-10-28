@@ -185,9 +185,15 @@ linphone.ui.view.call = {
 			callView.find('.actions .videoEnabled .off').click(linphone.ui.exceptionHandler(base, function(){
 				linphone.ui.view.call.onVideoButton(base,call,false);
 			}));	
+			
+			
+			base.find('> .content .view > .call .actions .videoEnabled .off').removeClass('inactive');
+			base.find('> .content .view > .call .actions .videoEnabled .on').removeClass('inactive');
 		} else {
 			base.find('> .content .view > .call .actions .videoEnabled .on').unbind("click");
 			base.find('> .content .view > .call .actions .videoEnabled .off').unbind("click");
+			base.find('> .content .view > .call .actions .videoEnabled .off').addClass('inactive');
+			base.find('> .content .view > .call .actions .videoEnabled .on').addClass('inactive');
 		}
 	},
 	
