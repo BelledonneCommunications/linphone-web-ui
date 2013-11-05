@@ -47,6 +47,8 @@ linphone.ui.view.contact = {
 		contact.find('.lastname').val('');
 		contact.find('.firstname').val('');
 		contact.find('.addressInput').val('');
+		contact.find('.showPresence').prop('checked', false);
+		contact.find('.allowPresence').prop('checked', false);
 	},
 	
 	addContact: function(base){
@@ -72,6 +74,13 @@ linphone.ui.view.contact = {
 			contact.find('.firstname').val(friend.name);
 			contact.find('.addressInput').val(friend.address.asStringUriOnly());
 			contact.data('friend',friend);
+			contact.find('.showPresence').prop('checked', friend.subscribesEnabled);
+			if(friend.incSubscribePolicy  === linphone.SubscribePolicy.Accept){
+				contact.find('.allowPresence').prop('checked',true);
+			} else {
+				contact.find('.allowPresence').prop('checked',false);
+			}
+			
 		}
 		contact.find('.contactImg').val('style/img/avatar.jpg');
 		
@@ -84,7 +93,17 @@ linphone.ui.view.contact = {
 		var addressVal = contact.find('.addressInput').val();
 		var data = contact.data('friend');
 		var name = contact.find('.firstname').val();
+		var showPresence = false;
+		var allowPresence = linphone.SubscribePolicy.Deny;
 		var address;
+		
+		if(contact.find('.showPresence').is(':checked')){
+			showPresence = true;
+		}
+		
+		if(contact.find('.allowPresence').is(':checked')){
+			allowPresence = linphone.SubscribePolicy.Accept;
+		}
 
 		if(addressVal !== ''){
 			address = linphone.ui.utils.formatAddress(base,addressVal);
@@ -97,13 +116,18 @@ linphone.ui.view.contact = {
 					configuration.models.contacts.update({
 						friend : data,
 						address : address,
-						name : name
+						name : name,
+						showPresence : showPresence,
+						allowPresence : allowPresence
+						
 					});	
 				} else {
 				//Create contact
 					configuration.models.contacts.create({
 						address : address,
-						name : name
+						name : name,
+						showPresence : showPresence,
+						allowPresence : allowPresence
 					});	
 				}
 				linphone.ui.view.hide(base, 'contact');

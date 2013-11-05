@@ -42,9 +42,11 @@ linphone.ui.header = {
 			// Wrap the function in orther function in order to detach status from the status variable
 			var _updateStatus = function(status) {
 					return function(event) {
-						linphone.ui.logger.log(base, 'Change status to ' + linphone.getStatusText(status.value));
+						linphone.ui.logger.log(base, 'Change status to ' + linphone.getPresenceActivityTypeText(status.value));
 						var core = linphone.ui.getCore(base);
-						core.presenceInfo = status.value;
+						var presenceModel = core.presenceModel;
+						presenceModel.setActivity(status.value, null); /*set my status with my activity*/
+						core.presenceModel = presenceModel; 
 						linphone.ui.header.profile.update(base, status);
 						linphone.ui.header.menu.close(base);
 					};
@@ -183,11 +185,13 @@ linphone.ui.header = {
 	/* Profile */
 	profile: {
 		/* Find eq item to presence info */
-		findStatus: function(value) {
+		findStatus: function(core) {
+			var presenceModel = core.presenceModel;
+			var value = linphone.getPresenceActivityTypeText(presenceModel.activity.type);
 			var item = linphone.ui.utils.status.online;
 			for(var i in linphone.ui.utils.status) {
 				var a = linphone.ui.utils.status[i];
-				if(a.value === value) {
+				if(linphone.getPresenceActivityTypeText(a.value) === value) {
 					item = a;
 					break;
 				}
@@ -199,7 +203,7 @@ linphone.ui.header = {
 			linphone.ui.logger.log(base, 'Header: update profile');
 			if(!configuration.disablePresence) {
 				var core = linphone.ui.getCore(base);
-				var item = linphone.ui.header.profile.findStatus(core.presenceInfo);
+				var item = linphone.ui.header.profile.findStatus(core);
 				base.find('> .header .profile .status').html(linphone.ui.template(base, 'header.profile.status', item));
 			} else {
 				base.find('> .header .profile .status').hide();

@@ -17,8 +17,8 @@
 				<div class="name">{{LinphoneWeb-Call helpers.utils.getContactName context.friend}}</div>
 				<div class="button buttonAction goContact floatRight"><div class="image imageModify"></div></div>
 				<div class="presence">
-					<span class="{{LinphoneWeb-Call helpers.utils.getStatus context.friend}}"></span>
-					<span class="status" data-i18n="global.status.{{LinphoneWeb-Call helpers.utils.getStatus context.address 'i18n'}}"></span>
+					<div class="image {{context.status.cls}}"></div>
+					<span class="status" data-i18n="global.status.{{context.status.i18n 'i18n'}}"></span>
 				</div>
 			
 				<div class="addresses floatLeft">

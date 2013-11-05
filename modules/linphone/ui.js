@@ -239,6 +239,8 @@ linphone.ui = {
 		// Init callback
 		base.on('callStateChanged', linphone.ui.onCallStateChanged); 
 		base.on('networkStateChanged', linphone.ui.onNetworkStateChanged);
+		base.on('notifyPresenceReceived', linphone.ui.onNotifyPresenceReceived);
+		base.on('newSubscriptionRequested', linphone.ui.onSubscriptionRequested);
 	},
 	uiInit: function(base) {
 		// Disable selection on buttons
@@ -364,6 +366,19 @@ linphone.ui = {
 			base.find('> .content .offline').show();
 		}
 	},
+	
+	onNotifyPresenceReceived: function(core, friend){
+		var base = jQuery(this);
+		var presenceModel = friend.presenceModel;
+		
+       	if(presenceModel !== null){
+        	linphone.ui.view.contacts.show(base);
+		}
+   	},
+   	
+    onNewSubscriptionRequested: function(core, friend, url){
+    	
+    },
 	
 	/* Call state */
 	onCallStateChanged: function(event, call, state, message) {

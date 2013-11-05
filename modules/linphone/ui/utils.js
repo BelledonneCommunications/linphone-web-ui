@@ -12,23 +12,33 @@
 /*globals jQuery,linphone*/
 
 linphone.ui.utils = {
-	/*status: {
+	status: {
 		online: {
-			value: linphone.PresenceActivityType.Online,
+			value: 1,
 			cls: 'imageStatusOnline',
-			i18n: 'online'
+			i18n: 'Online'
 		},
 		busy: {
-			value: linphone.PresenceActivityType.Busy,
+			value: 5,
 			cls: 'imageStatusBusy',
-			i18n: 'busy'
+			i18n: 'Busy'
+		},
+		away: {
+			value: 3,
+			cls: 'imageStatusAway',
+			i18n: 'Away'
+		},
+		onThePhone: {
+			value: 13,
+			cls: 'imageStatusAway',
+			i18n: 'OnThePhone'
 		},
 		offline: {
-			value: linphone.PresenceActivityType.Offline,
+			value: 0,
 			cls: 'imageStatusOffline',
-			i18n: 'offline'
+			i18n: 'Offline'
 		}
-	},*/
+	},
 	regex: {
 		sip: {
 			username: "([0-9a-zA-Z-_.!~*'()&=+$,;?/]+)",
@@ -132,13 +142,18 @@ linphone.ui.utils = {
 		return core.interpretUrl(uri);
 	},
 	getStatus: function(base, friend) {
-		//var presence = friend.presenceModel;
-		//console.log(presence);
-		//var status = presence.basicStatus;
-		//if(typeof field === 'undefined') {
-		//	return status;
-		//}
-		return "online";
+		if(friend.subscribesEnabled){
+			var presenceModel = friend.presenceModel;
+       		if(presenceModel !== null){
+       			for(var i in linphone.ui.utils.status) {
+					var item = linphone.ui.utils.status[i];
+					if(item.value === presenceModel.activity.type) {
+						return item;
+					}
+				}
+			}
+		}
+		return linphone.ui.utils.status.offline;
 	},
 	getContact: function(base, object, callback) {
 		var configuration = linphone.ui.configuration(base);

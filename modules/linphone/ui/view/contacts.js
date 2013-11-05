@@ -93,11 +93,12 @@ linphone.ui.view.contacts = {
 				var friend = data[item];
 				var element = linphone.ui.template(base, 'view.contacts.list.entry',{
 					friend : friend,
-					address : friend.address.asStringUriOnly()
+					address : friend.address.asStringUriOnly(),
+					status : linphone.ui.utils.getStatus(base,friend)
 				});	
 				element.find(' .goContact').click(linphone.ui.exceptionHandler(base, editHandler(base,friend)));	
 				list.append(element);
-				
+	
 				element.find(".address").each(addressHandler);	
 			}
 			

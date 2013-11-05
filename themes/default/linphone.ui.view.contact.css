@@ -19,7 +19,7 @@
 	padding: 10px;
 	position: relative
 }
-.linphoneweb .view .contact .entry form input {
+.linphoneweb .view .contact .entry form input[type="text"]  {
 	border: 1px solid #adbbc2;
 	width: 230px;
 	height: 40px;
@@ -57,7 +57,7 @@
 	float: left;
 	margin-right: 5px;
 }
-.linphoneweb .view .contact .entry form .addressPlus {
+.linphoneweb .view .contact .entry form .contactPresence input {
 	clear: both;
 }
 .linphoneweb .view .contact .entry form .addressLabel {

@@ -44,7 +44,10 @@
 	text-transform: uppercase;
 	font-size: 8pt;
 }
-.linphoneweb > .content .view > .contacts .entry .imageStatusOnline, .linphoneweb > .content .view > .contacts .entry .imageStatusBusy, .linphoneweb > .content .view > .contacts .entry .imageStatusAway {
+.linphoneweb > .content .view > .contacts .entry .imageStatusOnline, 
+.linphoneweb > .content .view > .contacts .entry .imageStatusBusy, 
+.linphoneweb > .content .view > .contacts .entry .imageStatusAway, 
+.linphoneweb > .content .view > .contacts .entry .imageStatusOffline {
 	background-repeat: no-repeat;
 	width: 10px;
 	height: 10px;

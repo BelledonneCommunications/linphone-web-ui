@@ -140,6 +140,36 @@ linphone.ui.core = {
 			base.trigger('authInfoRequested', [realm, username]);
 		})();
 	},
+	_notifyPresenceReceived: function(core, friend) {
+		if(!linphone.core.isValid(core)) {
+			linphone.ui.logger.error(null, '_displayStatus fail: \'core\' object is invalid');
+			return;
+		}
+		var base = linphone.ui.core.instances[core.magic];
+		if(!linphone.ui.isValid(base)) {
+			linphone.ui.logger.error(null, '_notifyPresenceReceived fail: can\'t retrieve data associated to the \'core\' object');
+			return;
+		}
+		//linphone.ui.logger.log(base, core + '| Presence: ' + fr + ', ' + username);
+		linphone.ui.exceptionHandler(base, function() {
+			base.trigger('notifyPresenceReceived', [core, friend]);
+		})();
+	},
+	_newSubscriptionRequested: function(core, friend, url) {
+		if(!linphone.core.isValid(core)) {
+			linphone.ui.logger.error(null, '_displayStatus fail: \'core\' object is invalid');
+			return;
+		}
+		var base = linphone.ui.core.instances[core.magic];
+		if(!linphone.ui.isValid(base)) {
+			linphone.ui.logger.error(null, '_newSubscriptionRequested fail: can\'t retrieve data associated to the \'core\' object');
+			return;
+		}
+		//linphone.ui.logger.log(base, core + '| Auth: ' + realm + ', ' + username);
+		linphone.ui.exceptionHandler(base, function() {
+			base.trigger('newSubscriptionRequested', [core, friend, url]);
+		})();
+	},
 	_displayStatus: function(core, message) {
 		if(!linphone.core.isValid(core)) {
 			linphone.ui.logger.error(null, '_displayStatus fail: \'core\' object is invalid');
@@ -399,6 +429,8 @@ linphone.ui.core = {
 			linphone.ui.core.addEvent(core, 'callStateChanged', linphone.ui.core._callStateChanged);
 			linphone.ui.core.addEvent(core, 'registrationStateChanged', linphone.ui.core._registrationStateChanged);
 			linphone.ui.core.addEvent(core, 'authInfoRequested', linphone.ui.core._authInfoRequested);
+			linphone.ui.core.addEvent(core, 'notifyPresenceReceived', linphone.ui.core._notifyPresenceReceived);
+			linphone.ui.core.addEvent(core, 'newSubscriptionRequested', linphone.ui.core._newSubscriptionRequested);
 			linphone.ui.core.addEvent(core, 'displayStatus', linphone.ui.core._displayStatus);
 			linphone.ui.core.addEvent(core, 'displayMessage', linphone.ui.core._displayMessage);
 			linphone.ui.core.addEvent(core, 'displayWarning', linphone.ui.core._displayWarning);
@@ -419,7 +451,7 @@ linphone.ui.core = {
 				core.ringback = 'internal:///share/sounds/linphone/ringback.wav';
 				core.playFile = 'internal:///share/sounds/linphone/rings/toy-mono.wav';
 				core.rootCa = 'internal:///share/linphone/rootca.pem';
-
+		
 				// Set video modes
 				core.videoCaptureEnabled = true;
 				core.videoDisplayEnabled = true;
@@ -461,8 +493,8 @@ linphone.ui.core = {
 
 				core.iterateEnabled = true;
 				linphone.ui.logger.log(base, 'Core started');
-
 				linphone.ui.core.started(base, core);
+
 			}
 		})();
 	},

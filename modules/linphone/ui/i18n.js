@@ -596,37 +596,121 @@ linphone.ui.i18n = {
 			fr_FR : 'Enregistrer'
 		},
 		status: {
-			away: {
+			Appointment: {
+				en_US : 'Appointment',
+				fr_FR : 'En rendez-vous'
+			},
+			Away: {
 				en_US : 'Away',
 				fr_FR : 'Absent'
 			},
-			beRightBack: {
-				en_US : 'Be right back',
-				fr_FR : 'Reviens tout de suite'
+			Breakfast: {
+				en_US : 'Breakfast',
+				fr_FR : ''
 			},
-			busy: {
+			Busy: {
 				en_US : 'Busy',
 				fr_FR : 'Occupé'
 			},
-			doNotDisturb: {
-				en_US : 'Do not disturb',
-				fr_FR : 'Ne pas déranger'
+			Dinner: {
+				en_US : 'Dinner',
+				fr_FR : ''
 			},
-			offline: {
+			Holiday: {
+				en_US : 'Holiday',
+				fr_FR : ''
+			},
+			InTransit: {
+				en_US : 'In transit',
+				fr_FR : ''
+			},
+			LookingForWork: {
+				en_US : 'Looking for work',
+				fr_FR : ''
+			},
+			Lunch: {
+				en_US : 'Lunch',
+				fr_FR : 'A table'
+			},
+			Meal: {
+				en_US : 'Meal',
+				fr_FR : ''
+			},
+			Meeting: {
+				en_US : 'Meeting',
+				fr_FR : 'En réunion'
+			},
+			Offline: {
 				en_US : 'Offline',
-				fr_FR : 'Déconnecté'
+				fr_FR : 'Hors ligne'
 			},
-			onThePhone: {
-				en_US : 'On the phone',
-				fr_FR : 'Au téléphone'
-			},
-			online: {
+			Online: {
 				en_US : 'Online',
 				fr_FR : 'Disponible'
 			},
-			outToLunch: {
-				en_US : 'Out to lunch',
-				fr_FR : 'En train de manger'
+			OnThePhone: {
+				en_US : 'On the phone',
+				fr_FR : 'Au téléphone'
+			},
+			Other: {
+				en_US : 'Other',
+				fr_FR : 'Autre'
+			},
+			Performance: {
+				en_US : 'Performance',
+				fr_FR : ''
+			},
+			PermanentAbsence: {
+				en_US : 'PermanentAbsence',
+				fr_FR : ''
+			},
+			Playing: {
+				en_US : 'Playing',
+				fr_FR : ''
+			},
+			Presentation: {
+				en_US : 'Presentation',
+				fr_FR : ''
+			},
+			Shopping: {
+				en_US : 'Shopping',
+				fr_FR : ''
+			},
+			Sleeping: {
+				en_US : 'Sleeping',
+				fr_FR : ''
+			},
+			Spectator: {
+				en_US : 'Spectator',
+				fr_FR : ''
+			},
+			Steering: {
+				en_US : 'Steering',
+				fr_FR : ''
+			},
+			Travel: {
+				en_US : 'Travel',
+				fr_FR : ''
+			},
+			TV: {
+				en_US : 'TV',
+				fr_FR : ''
+			},
+			Unknown: {
+				en_US : 'Unknown',
+				fr_FR : ''
+			},
+			Vacation: {
+				en_US : 'Vacation',
+				fr_FR : ''
+			},
+			Working: {
+				en_US : 'Working',
+				fr_FR : ''
+			},
+			Worship: {
+				en_US : 'Worship',
+				fr_FR : ''
 			}
 		},
 		stringFormat: {

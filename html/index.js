@@ -107,8 +107,8 @@ function __linphone_init(base) {
 		},
 		disableChat: true,
 		disableConference: true,
-		disablePresence: true
-	}
+		disablePresence: false
+	};
 
 	config.debug = debug;
 	config.logs = debug;

@@ -64,8 +64,8 @@ linphone.models.contacts.core.engine.prototype.create = function(object, callbac
 	friend.edit();
 	friend.address = address;
 	friend.name = name;
-	friend.subscribesEnabled = false;
-	friend.incSubscribePolicy = linphone.SubscribePolicy.Deny;
+	friend.subscribesEnabled = object.showPresence;
+	friend.incSubscribePolicy = object.allowPresence;
 	friend.done();
     core.addFriend(friend);
     if(typeof callback !== 'undefined') {
@@ -82,6 +82,8 @@ linphone.models.contacts.core.engine.prototype.update = function(object, callbac
 	address.displayName = name;
 	friend.address = address;
 	friend.name = name;
+	friend.subscribesEnabled = object.showPresence;
+	friend.incSubscribePolicy = object.allowPresence;
 	friend.done();
     if(typeof callback !== 'undefined') {
         callback("Not implemented", null);
