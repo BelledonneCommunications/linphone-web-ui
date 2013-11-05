@@ -371,15 +371,15 @@ linphone.ui = {
 		var base = jQuery(this);
 		var presenceModel = friend.presenceModel;
 		
-       	if(presenceModel !== null){
-        	linphone.ui.view.contacts.show(base);
+		if(presenceModel !== null){
+			linphone.ui.view.contacts.show(base);
 		}
-   	},
-   	
+	},
+
     onNewSubscriptionRequested: function(core, friend, url){
-    	
+
     },
-	
+
 	/* Call state */
 	onCallStateChanged: function(event, call, state, message) {
 		var base = jQuery(this);

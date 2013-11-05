@@ -144,8 +144,8 @@ linphone.ui.utils = {
 	getStatus: function(base, friend) {
 		if(friend.subscribesEnabled){
 			var presenceModel = friend.presenceModel;
-       		if(presenceModel !== null){
-       			for(var i in linphone.ui.utils.status) {
+			if(presenceModel !== null){
+				for(var i in linphone.ui.utils.status) {
 					var item = linphone.ui.utils.status[i];
 					if(item.value === presenceModel.activity.type) {
 						return item;
