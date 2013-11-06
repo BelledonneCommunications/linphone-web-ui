@@ -653,7 +653,7 @@ module.exports = function(grunt) {
 	//generate version.js
 	grunt.registerTask('generate_version',
 		function() {
-			var version = grunt.config.get('pkg.webversion');
+			var version = grunt.config.get('pkg.version');
 			grunt.file.write('./html/version.js', 'function getWebAppVersion() { return \'' + version + '\'; }');
 		}
 	);
