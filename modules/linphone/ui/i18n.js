@@ -586,6 +586,10 @@ linphone.ui.i18n = {
 				user_not_found: {
 					en_US : 'The user "%1" is not found',
 					fr_FR : 'L\'utilisateur "%1" n\'a pas été trouvé'
+				},
+				incompatible_media_parameters: {
+					en_US : 'Incompatible media parameters',
+					fr_FR : 'Paramètres medias incompatibles'
 				}
 			},
 			uri: {
