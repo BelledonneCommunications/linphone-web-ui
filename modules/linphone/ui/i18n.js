@@ -192,6 +192,18 @@ linphone.ui.i18n = {
 				remove: {
 					en_US : 'Remove contact',
 					fr_FR : 'Supprimer le contact'
+				},
+				presence: {
+					en_US : 'Presence',
+					fr_FR : 'Présence'
+				},
+				showPresence: {
+					en_US : 'Show this contact presence status',
+					fr_FR : 'Voir l\'état de présence de ce contact'
+				},
+				allowPresence: {
+					en_US : 'Allow this contact to see my presence status',
+					fr_FR : 'Autoriser ce contact à voir ma présence'
 				}
 			},
 			contacts: {
