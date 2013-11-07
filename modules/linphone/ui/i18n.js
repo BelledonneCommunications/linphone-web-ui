@@ -119,6 +119,10 @@ linphone.ui.i18n = {
 					plugin : {
 						en_US : 'Plugin version',
 						fr_FR : 'Version du plugin'
+					},
+					rootfs : {
+						en_US : 'Rootfs version',
+						fr_FR : 'Version du rootfs'
 					}
 				}
 			},

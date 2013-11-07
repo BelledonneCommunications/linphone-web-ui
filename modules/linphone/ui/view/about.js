@@ -47,10 +47,13 @@ linphone.ui.view.about = {
 			about.find('.entry .webapp .version').text(configuration.webapp_version);
 			about.find('.entry .plugin').show();
 			about.find('.entry .plugin .version').text(core.pluginVersion);
+			about.find('.entry .rootfs').show();
+			about.find('.entry .rootfs .version').text(core.rootfsVersion);
 		} else {
 			about.find('.entry .core').hide();
 			about.find('.entry .webapp').hide();
 			about.find('.entry .plugin').hide();
+			about.find('.entry .rootfs').hide();
 		}
 		
 		// Update link list
