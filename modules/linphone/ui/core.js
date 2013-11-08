@@ -483,6 +483,8 @@ linphone.ui.core = {
 				}
 				
 				core.enablePayloadType(core.findPayloadType("opus",48000,1),false);
+				core.enablePayloadType(core.findPayloadType("G729",8000,1),true);
+				core.enablePayloadType(core.findPayloadType("H264",90000,1),true);
 
 				// Configure to listem on all transport
 				var transports = core.sipTransports;
