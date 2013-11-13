@@ -279,7 +279,7 @@ linphone.ui.view.login = {
 		}
 		
 		// Set auth info
-		var authinfo = core.newAuthInfo(account, account, password, null, null);
+		var authinfo = core.newAuthInfo(account, account, password, null, null, null);
 		core.addAuthInfo(authinfo);
 
 		// Set proxy values
@@ -337,7 +337,7 @@ linphone.ui.view.login = {
 	},
 
 	/* On core events */
-	onAuthInfoRequested: function(event, realm, username) {
+	onAuthInfoRequested: function(event, realm, username, domain) {
 	},
 	onRegistrationStateChanged: function(event, proxy, state, message) {
 		var base = jQuery(this);

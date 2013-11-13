@@ -124,7 +124,7 @@ linphone.ui.core = {
 			base.trigger('callStateChanged', [call, state, message]);
 		})();
 	},
-	_authInfoRequested: function(core, realm, username) {
+	_authInfoRequested: function(core, realm, username, domain) {
 		if(!linphone.core.isValid(core)) {
 			linphone.ui.logger.error(null, '_displayStatus fail: \'core\' object is invalid');
 			return;
@@ -134,10 +134,10 @@ linphone.ui.core = {
 			linphone.ui.logger.error(null, '_authInfoRequested fail: can\'t retrieve data associated to the \'core\' object');
 			return;
 		}
-		linphone.ui.logger.log(base, core + '| Auth: ' + realm + ', ' + username);
+		linphone.ui.logger.log(base, core + '| Auth: ' + realm + ', ' + username + ', ' + domain );
 		linphone.ui.exceptionHandler(base, function() {
 
-			base.trigger('authInfoRequested', [realm, username]);
+			base.trigger('authInfoRequested', [realm, username, domain]);
 		})();
 	},
 	_notifyPresenceReceived: function(core, friend) {
@@ -483,8 +483,12 @@ linphone.ui.core = {
 				}
 				
 				core.enablePayloadType(core.findPayloadType("opus",48000,1),false);
-				core.enablePayloadType(core.findPayloadType("G729",8000,1),true);
-				core.enablePayloadType(core.findPayloadType("H264",90000,1),true);
+				
+				// Enable G729 && H264
+				var g729 = core.findPayloadType("G729",8000,1);
+				if(g729 !== null) core.enablePayloadType(p,true);
+				var h264 = core.findPayloadType("H264",90000,1);
+				if(h264 !== null) core.enablePayloadType(h264,true);
 
 				// Configure to listem on all transport
 				var transports = core.sipTransports;
