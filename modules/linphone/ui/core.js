@@ -486,9 +486,13 @@ linphone.ui.core = {
 				
 				// Enable G729 && H264
 				var g729 = core.findPayloadType("G729",8000,1);
-				if(g729 !== null) core.enablePayloadType(p,true);
+				if(g729 !== null) { 
+					core.enablePayloadType(g729,true); 
+				}
 				var h264 = core.findPayloadType("H264",90000,1);
-				if(h264 !== null) core.enablePayloadType(h264,true);
+				if(h264 !== null) {
+					core.enablePayloadType(h264,true);
+				}
 
 				// Configure to listem on all transport
 				var transports = core.sipTransports;
