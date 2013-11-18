@@ -72,7 +72,7 @@ linphone.ui.view.plugin = {
 			jQuery.i18n.set(plugin.find('> .text'), 'content.view.plugin.text.mobile_application');
 			return;
 		}
-       plugin.find('.action .reload').show();
+		plugin.find('.action .reload').show();
 		switch(ret) {
 			case linphone.ui.core.detectionStatus.Outdated:
 				if (config.file.browser === 'Explorer') {

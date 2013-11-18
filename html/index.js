@@ -98,12 +98,12 @@ function __linphone_init(base) {
 				text: 'windows_phone',
 				appLink: 'http://www.windowsphone.com/fr-FR/store/app/linphone/99661466-8c5c-489b-a567-569c1f480d29'
 			},
-			'iOS' : {
+			iOS : {
 				cls: 'iOS',
 				text: 'iOS',
 				appLink: 'https://itunes.apple.com/app/linphone/id360065638?mt=8'
 			},
-			'android' : {
+			android : {
 				cls: 'android',
 				text: 'android',
 				appLink: 'https://play.google.com/store/apps/details?id=org.linphone'
