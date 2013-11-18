@@ -41,7 +41,7 @@ linphone.ui.core = {
 		}
 		
 		var config = linphone.ui.configuration(base);
-		
+	
 		// Force version
 		var forceVersion = config.forceVersion;
 		if(typeof forceVersion === 'undefined') {
@@ -482,7 +482,7 @@ linphone.ui.core = {
 					core.networkReachable = (linphone.ui.getNetworkState(base) === linphone.ui.networkState.Online);
 				}
 				
-				core.enablePayloadType(core.findPayloadType("opus",48000,1),false);
+			//	core.enablePayloadType(core.findPayloadType("opus",48000,1),true);
 				
 				// Enable G729 && H264
 				var g729 = core.findPayloadType("G729",8000,1);

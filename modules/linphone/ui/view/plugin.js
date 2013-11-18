@@ -35,9 +35,44 @@ linphone.ui.view.plugin = {
 		if(typeof ret === 'undefined' || ret === null) {
 			return;
 		}
+			
 		var config = linphone.ui.configuration(base);
 		var plugin = base.find('> .content .view > .plugin');
+		var link = plugin.find('.link');
 		plugin.find('.action .download').hide();
+		plugin.find('.action .reload').hide();
+		
+		if (navigator.userAgent.match(/Android/i)){
+			//Create a link to donwload the application in GooglePlay	
+			link.empty(); 
+			var elem = linphone.ui.template(base, 'view.plugin.link', config.appLinks.android);
+			link.append(elem);
+			jQuery.i18n.set(plugin.find('> .text'), 'content.view.plugin.text.mobile_application');  	
+			return;
+		}
+		
+		if (navigator.userAgent.match(/iPhone/i) ||
+			navigator.userAgent.match(/iPad/i) ||
+            navigator.userAgent.match(/iPod/i)){
+            //Create a link to donwload the application in apple store	
+			link.empty(); 
+			var elem = linphone.ui.template(base, 'view.plugin.link', config.appLinks.iOS);
+			link.append(elem);
+			jQuery.i18n.set(plugin.find('> .text'), 'content.view.plugin.text.mobile_application');  	
+			return;
+        }
+        
+       if (navigator.userAgent.match(/Windows Phone/i) || 
+        	navigator.userAgent.match(/ZuneWP7/i)){
+        	//Create a link to donwload the application in microsoft store		
+        	link.empty(); 
+			var elem = linphone.ui.template(base, 'view.plugin.link', config.appLinks.windows_phone);
+			link.append(elem);
+			jQuery.i18n.set(plugin.find('> .text'), 'content.view.plugin.text.mobile_application');  	
+			return;
+		}
+       
+       	plugin.find('.action .reload').show();
 		switch(ret) {
 			case linphone.ui.core.detectionStatus.Outdated:
 				if (config.file.browser === 'Explorer') {

@@ -515,6 +515,24 @@ linphone.ui.i18n = {
 					outdated_auto : { // Automatic plugin update
 						en_US : 'The plugin is outdated. Please wait and accept the automatic install of the plugin. If you have already updated the plugin and still get this message, restart your browser.',
 						fr_FR : 'Le plugin n\'est pas à jour. Veuillez attendre et accepter l\'installation automatique du plugin. Si vous avez déjà mis le plugin à jour et que vous avez toujours ce message, redémarrez votre navigateur.'
+					},
+					mobile_application: {
+						en_US : 'Linphone web is not avalaible on this platform, you can download the Linphone mobile application here :',
+						fr_FR : 'Linphone web n\'est pas disponible sur cette plateforme, vous pouvez télécharger l\'application mobile Linphone à l\'adresse suivante : '
+					}
+				},
+				links: {
+					android : { // GooglePlay Store link
+						en_US : 'Linphone on Google Play',
+						fr_FR : 'Linphone sur Google Play'
+					},
+					iOS : { // AppleStore Store link
+						en_US : 'Linphone on AppStore',
+						fr_FR : 'Linphone sur l\'AppStore'
+					},
+					windows_phone : { // AppleStore Store link
+						en_US : 'Linphone on WindowsPhone Store',
+						fr_FR : 'Linphone sur le Store WindowsPhone'
 					}
 				},
 				title: {
