@@ -39,13 +39,14 @@ linphone.ui.view.plugin = {
 		var config = linphone.ui.configuration(base);
 		var plugin = base.find('> .content .view > .plugin');
 		var link = plugin.find('.link');
+		var elem;
 		plugin.find('.action .download').hide();
 		plugin.find('.action .reload').hide();
 		
 		if (navigator.userAgent.match(/Android/i)){
 			//Create a link to donwload the application in GooglePlay	
 			link.empty(); 
-			var elem = linphone.ui.template(base, 'view.plugin.link', config.appLinks.android);
+			elem = linphone.ui.template(base, 'view.plugin.link', config.appLinks.android);
 			link.append(elem);
 			jQuery.i18n.set(plugin.find('> .text'), 'content.view.plugin.text.mobile_application');  	
 			return;
@@ -56,7 +57,7 @@ linphone.ui.view.plugin = {
             navigator.userAgent.match(/iPod/i)){
             //Create a link to donwload the application in apple store	
 			link.empty(); 
-			var elem = linphone.ui.template(base, 'view.plugin.link', config.appLinks.iOS);
+			elem = linphone.ui.template(base, 'view.plugin.link', config.appLinks.iOS);
 			link.append(elem);
 			jQuery.i18n.set(plugin.find('> .text'), 'content.view.plugin.text.mobile_application');  	
 			return;
@@ -66,7 +67,7 @@ linphone.ui.view.plugin = {
         	navigator.userAgent.match(/ZuneWP7/i)){
         	//Create a link to donwload the application in microsoft store		
         	link.empty(); 
-			var elem = linphone.ui.template(base, 'view.plugin.link', config.appLinks.windows_phone);
+			elem = linphone.ui.template(base, 'view.plugin.link', config.appLinks.windows_phone);
 			link.append(elem);
 			jQuery.i18n.set(plugin.find('> .text'), 'content.view.plugin.text.mobile_application');  	
 			return;
