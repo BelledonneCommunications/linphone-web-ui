@@ -52,9 +52,7 @@ linphone.ui.view.plugin = {
 			return;
 		}
 		
-		if (navigator.userAgent.match(/iPhone/i) ||
-		navigator.userAgent.match(/iPad/i) ||
-        navigator.userAgent.match(/iPod/i)){
+		if ((/iphone|ipad|ipod/i.test(navigator.userAgent.toLowerCase()))){
             //Create a link to donwload the application in apple store	
 			link.empty(); 
 			elem = linphone.ui.template(base, 'view.plugin.link', config.appLinks.iOS);
