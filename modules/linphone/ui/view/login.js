@@ -281,27 +281,29 @@ linphone.ui.view.login = {
 		// Set auth info
 		var authinfo = core.newAuthInfo(account, account, password, null, null, null);
 		core.addAuthInfo(authinfo);
-
+		
 		// Set proxy values
 		proxyConfig.identity = 'sip:' + account + '@' + domain;
 		
 		if(proxy !== null && proxy !== ''){
-			proxyConfig.serverAddr = 'sip:' + proxy;
+			proxyConfig.serverAddr = proxy;
 		} else {
-			proxyConfig.serverAddr = 'sip:' + domain;
+			proxyConfig.serverAddr = domain;
 		}
-		
+
+		var serverAddr = core.newAddress(proxyConfig.serverAddr);
+	
+		if(transport === 'tcp') {
+			serverAddr.transport = linphone.TransportType.Tcp;
+		} else if(transport === 'tls') {
+			serverAddr.transport = linphone.TransportType.Tls;
+		}
+		proxyConfig.serverAddr = serverAddr.asString();
+
 		if(outbandProxy){
-			proxyConfig.route = proxy;
+			proxyConfig.route = proxyConfig.serverAddr;
 		}
 		
-		if(transport) {
-			if(transport === 'tcp') {
-				proxyConfig.serverAddr+=';transport=tcp';
-			} else if(transport === 'tls') {
-				proxyConfig.serverAddr+=';transport=tls';
-			}
-		}
 		proxyConfig.expires = 600;
 		proxyConfig.registerEnabled = true;
 		var ret = core.addProxyConfig(proxyConfig);

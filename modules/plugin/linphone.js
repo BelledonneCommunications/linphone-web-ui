@@ -2,7 +2,6 @@
 
 /*globals linphone*/
 
-
 /**
  * Enum representing the direction of a call. 
  * @readonly
@@ -438,6 +437,15 @@ linphone.getIceStateText = function(value) {
  * @readonly
 **/
 /**
+ * Returns true if address refers to a secure location (sips) 
+ * @member {boolean} external:LinphoneAddress#secure
+ * @readonly
+**/
+/**
+ * Set a transport. 
+ * @member {linphone.TransportType} external:LinphoneAddress#transport
+**/
+/**
  * Sets the username. 
  * @member {string} external:LinphoneAddress#username
 **/
@@ -485,6 +493,12 @@ linphone.getIceStateText = function(value) {
  * @external LinphoneAuthInfo
 **/
 /**
+ * Set domain for which this authentication is valid. This should not be necessary because realm is supposed
+ * to be unique and sufficient. However, many SIP servers don't set realm correctly, then domain has to
+ * be used to distinguish between several SIP account bearing the same username. 
+ * @member {string} external:LinphoneAuthInfo#domain
+**/
+/**
  * Sets ha1. 
  * @member {string} external:LinphoneAuthInfo#ha1
 **/
@@ -493,7 +507,7 @@ linphone.getIceStateText = function(value) {
  * @member {string} external:LinphoneAuthInfo#passwd
 **/
 /**
- * Sets realm. 
+ * Set realm. 
  * @member {string} external:LinphoneAuthInfo#realm
 **/
 /**
@@ -641,6 +655,12 @@ linphone.getIceStateText = function(value) {
  * paused while receiving the transfer request, the transfer immediately occurs. 
  * @function external:LinphoneCall#hasTransferPending
  * @returns {boolean} 
+**/
+
+/**
+ * Request remote side to send us a Video Fast Update. 
+ * @function external:LinphoneCall#sendVfuRequest
+ * @returns {void} 
 **/
 
 /**
@@ -941,6 +961,17 @@ linphone.getIceStateText = function(value) {
  * @member {external:LinphoneAddress} external:LinphoneChatRoom#peerAddress
  * @readonly
 **/
+/**
+ * Tells whether the remote is currently composing a message. 
+ * @member {boolean} external:LinphoneChatRoom#remoteComposing
+ * @readonly
+**/
+
+/**
+ * Notify the destination of the chat message being composed that the user is typing a new message. 
+ * @function external:LinphoneChatRoom#compose
+ * @returns {void} 
+**/
 
 /**
  * Create a message attached to a dedicated chat room; 
@@ -1071,7 +1102,13 @@ linphone.getIceStateText = function(value) {
  * @member {number} external:LinphoneCore#deviceRotation
 **/
 /**
- * Sets maximum available download bandwidth
+ * Enable or disable DNS SRV resolution. 
+ * @member {boolean} external:LinphoneCore#dnsSrvEnabled
+**/
+/**
+ * Sets maximum available download bandwidth This is IP bandwidth, in kbit/s. This information is used signaled
+ * to other parties during calls (within SDP messages) so that the remote end can have sufficient knowledge
+ * to properly configure its audio & video codec output bitrate to not overflow available bandwidth.
  * @member {number} external:LinphoneCore#downloadBandwidth
 **/
 /**
@@ -1283,7 +1320,9 @@ linphone.getIceStateText = function(value) {
  * @readonly
 **/
 /**
- * Sets maximum available upload bandwidth
+ * Sets maximum available upload bandwidth This is IP bandwidth, in kbit/s. This information is used by liblinphone
+ * together with remote side available bandwidth signaled in SDP messages to properly configure audio &
+ * video codec's output bitrate.
  * @member {number} external:LinphoneCore#uploadBandwidth
 **/
 /**
@@ -1484,10 +1523,13 @@ linphone.getIceStateText = function(value) {
 **/
 
 /**
- * Retrieves a LinphoneAuthInfo previously entered into the LinphoneCore. 
+ * Find authentication info matching realm, username, domain criterias. First of all, (realm,username) pair
+ * are searched. If multiple results (which should not happen because realm are supposed to be unique),
+ * then domain is added to the search. 
  * @function external:LinphoneCore#findAuthInfo
- * @param {string} realm - 
- * @param {string} username - 
+ * @param {string} realm - the authentication 'realm' (optional) 
+ * @param {string} username - the SIP username to be authenticated (mandatory) 
+ * @param {string} sip_domain - the SIP domain name (optional) 
  * @returns {external:LinphoneAuthInfo} 
 **/
 
@@ -1496,6 +1538,13 @@ linphone.getIceStateText = function(value) {
  * @function external:LinphoneCore#findCallFromUri
  * @param {string} uri - which should match call remote uri 
  * @returns {external:LinphoneCall} 
+**/
+
+/**
+ * Search a LinphoneFriend by its address. 
+ * @function external:LinphoneCore#findFriend
+ * @param {external:LinphoneAddress} addr - The address to use to search the friend. 
+ * @returns {external:LinphoneFriend} 
 **/
 
 /**
@@ -1534,13 +1583,6 @@ linphone.getIceStateText = function(value) {
  * @function external:LinphoneCore#getDefaultProxy
  * @param {external:LinphoneProxyConfig} config - 
  * @returns {number} 
-**/
-
-/**
- * Search a LinphoneFriend by its address. 
- * @function external:LinphoneCore#getFriendByAddress
- * @param {string} addr - The address to use to search the friend. 
- * @returns {external:LinphoneFriend} 
 **/
 
 /**
@@ -1639,10 +1681,11 @@ linphone.getIceStateText = function(value) {
  * Create an authentication information with default values from Linphone core. 
  * @function external:LinphoneCore#newAuthInfo
  * @param {string} username - String containing the username part of the authentication credentials 
- * @param {string} userid - String containing the username to use to calculate the authentication digest 
- * @param {string} passwd - String containing the password part of the authentication credentials 
- * @param {string} ha1 - String containing a hash of the password 
- * @param {string} realm - String used to discriminate different SIP domains 
+ * @param {string} userid - String containing the username to use to calculate the authentication digest (optional) 
+ * @param {string} passwd - String containing the password of the authentication credentials (optional, either passwd or ha1 must be set) 
+ * @param {string} ha1 - String containing a ha1 hash of the password (optional, either passwd or ha1 must be set) 
+ * @param {string} realm - String used to discriminate different SIP authentication domains (optional) 
+ * @param {string} domain - 
  * @returns {external:LinphoneAuthInfo} 
 **/
 
@@ -2033,6 +2076,7 @@ linphone.getIceStateText = function(value) {
  * @property {external:LinphoneCore} lc - the LinphoneCore 
  * @property {string} realm - the realm (domain) on which authentication is required. 
  * @property {string} username - the username that needs to be authenticated. Application shall reply to this callback using 
+ * @property {string} domain - 
 **/
 
 /**
@@ -2113,6 +2157,14 @@ linphone.getIceStateText = function(value) {
  * @property {external:LinphoneCore} lc - the LinphoneCore 
  * @property {external:LinphoneCall} call - the call whose info message belongs to. 
  * @property {external:LinphoneInfoMessage} msg - the info message. 
+**/
+
+/**
+ * Is composing notification event prototype.
+ * @event external:LinphoneCore#isComposingReceived
+ * @type {object}
+ * @property {external:LinphoneCore} lc -  object 
+ * @property {external:LinphoneChatRoom} room -  involved in the conversation. 
 **/
 
 /**
@@ -2660,6 +2712,11 @@ linphone.getIceStateText = function(value) {
  * @member {string} external:LinphoneProxyConfig#contactParameters
 **/
 /**
+ * Set optional contact parameters that will be added to the contact information sent in the registration,
+ * inside the URI. 
+ * @member {string} external:LinphoneProxyConfig#contactUriParameters
+**/
+/**
  * Get the 
  * @member {external:LinphoneCore} external:LinphoneProxyConfig#core
  * @readonly
@@ -2753,6 +2810,11 @@ linphone.getIceStateText = function(value) {
 /**
  * 
  * @external LinphoneTunnel
+**/
+/**
+ * Tells whether tunnel auto detection is enabled. 
+ * @member {boolean} external:LinphoneTunnel#autoDetectEnabled
+ * @readonly
 **/
 
 /**
@@ -2899,10 +2961,26 @@ linphone.getIceStateText = function(value) {
 **/
 
 /**
+ * Loads a dictionary into a section of the lpconfig. If the section doesn't exist it is created. Overwrites
+ * existing keys, creates non-existing keys. 
+ * @function external:LpConfig#loadDictToSection
+ * @param {string} section - 
+ * @param {external:LinphoneDictionary} dict - 
+ * @returns {void} 
+**/
+
+/**
  * Reads a user config file and fill the LpConfig with the read config values.
  * @function external:LpConfig#readFile
  * @param {string} filename - The filename of the config file to read to fill the LpConfig 
  * @returns {number} 
+**/
+
+/**
+ * Converts a config section into a dictionary. 
+ * @function external:LpConfig#sectionToDict
+ * @param {string} section - 
+ * @returns {external:LinphoneDictionary} 
 **/
 
 /**
@@ -3484,7 +3562,7 @@ linphone.PublishState = {
 	*/
 	None : 0,
 	/**
-	 * An outgoing subcription was created 
+	 * An outgoing publish was created and submitted 
 	*/
 	Progress : 1,
 	/**
@@ -3563,9 +3641,9 @@ linphone.Reason = {
 	*/
 	Busy : 6,
 	/**
-	 * Incompatible media 
+	 * Unsupported content 
 	*/
-	Media : 7,
+	UnsupportedContent : 7,
 	/**
 	 * Transport error: connection failures, disconnections etc... 
 	*/
@@ -3581,7 +3659,11 @@ linphone.Reason = {
 	/**
 	 * Operation like call update rejected by peer 
 	*/
-	NotAcceptable : 11
+	NotAcceptable : 11,
+	/**
+	 * Operation could not be executed by server or remote client because it didn't have any context for it 
+	*/
+	NoMatch : 12
 };
 /**
  * Get the name of a value of the Reason enum as a string.
@@ -3604,8 +3686,8 @@ linphone.getReasonText = function(value) {
 		return "NotAnswered";
 	case linphone.Reason.Busy:
 		return "Busy";
-	case linphone.Reason.Media:
-		return "Media";
+	case linphone.Reason.UnsupportedContent:
+		return "UnsupportedContent";
 	case linphone.Reason.IOError:
 		return "IOError";
 	case linphone.Reason.DoNotDisturb:
@@ -3614,6 +3696,8 @@ linphone.getReasonText = function(value) {
 		return "Unauthorized";
 	case linphone.Reason.NotAcceptable:
 		return "NotAcceptable";
+	case linphone.Reason.NoMatch:
+		return "NoMatch";
 	default:
 		return "?";
 	}
@@ -3779,7 +3863,11 @@ linphone.SubscriptionState = {
 	/**
 	 * Subscription encountered an error, indicated by 
 	*/
-	Error : 6
+	Error : 6,
+	/**
+	 * Subscription is about to expire, only sent if [sip]->refresh_generic_subscribe property is set to 0. 
+	*/
+	Expiring : 7
 };
 /**
  * Get the name of a value of the SubscriptionState enum as a string.
@@ -3802,6 +3890,42 @@ linphone.getSubscriptionStateText = function(value) {
 		return "Terminated";
 	case linphone.SubscriptionState.Error:
 		return "Error";
+	case linphone.SubscriptionState.Expiring:
+		return "Expiring";
+	default:
+		return "?";
+	}
+};
+
+/* Wrapper generated by lp-gen-wrappers, do not edit*/
+
+
+/**
+ * Enum describing transport type for LinphoneAddress. 
+ * @readonly
+ * @enum {number}
+**/
+linphone.TransportType = {
+	Udp : 0,
+	Tcp : 1,
+	Tls : 2,
+	Dtls : 3
+};
+/**
+ * Get the name of a value of the TransportType enum as a string.
+ * @function linphone#getTransportTypeText
+ * @param { number } value - One of the values of the TransportType enum.
+**/
+linphone.getTransportTypeText = function(value) {
+	switch (value) {
+	case linphone.TransportType.Udp:
+		return "Udp";
+	case linphone.TransportType.Tcp:
+		return "Tcp";
+	case linphone.TransportType.Tls:
+		return "Tls";
+	case linphone.TransportType.Dtls:
+		return "Dtls";
 	default:
 		return "?";
 	}

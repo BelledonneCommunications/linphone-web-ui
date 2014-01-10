@@ -26,6 +26,7 @@
 		"grunt-contrib-nodeunit": "~0.2.1",
 		"grunt-contrib-csslint": "~0.1.2",
 		"grunt-contrib-livereload": "~0.1.2",
+		"jpegtran-bin": "0.2.0",
 		"grunt-contrib-imagemin": "~0.3.0",
 		"grunt-contrib-compress": "~0.5.2",
 		"grunt-contrib-handlebars": "~0.5.11",
