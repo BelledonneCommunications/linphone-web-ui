@@ -28,12 +28,18 @@ linphone.ui.core = {
 	
 	/* Init */
 	init: function(base) {
-
+		var isIE11 = !!navigator.userAgent.match(/Trident\/7\./);
 		/* addEvent following Browser */
 		if (jQuery.client.browser !== 'Explorer') {
-			linphone.ui.core._addEvent = function(obj, name, func) {
-				obj.addEventListener(name, func, false);
-			};
+			if (isIE11) {
+				linphone.ui.core._addEvent = function(obj, name, func) {
+					obj['on' + name] = func;
+				};
+			} else {
+				linphone.ui.core._addEvent = function(obj, name, func) {
+					obj.addEventListener(name, func, false);
+				};
+			}
 		} else {
 			linphone.ui.core._addEvent = function(obj, name, func) {
 				obj.attachEvent('on' + name, func);
