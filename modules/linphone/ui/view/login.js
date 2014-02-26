@@ -309,6 +309,7 @@ linphone.ui.view.login = {
 		var ret = core.addProxyConfig(proxyConfig);
 		if(ret === 0){
 			core.defaultProxy = proxyConfig;
+			core.iterateEnabled = true;
 		} else {
 			linphone.ui.view.login.error(base, 'content.view.login.errors.registrationFailed');
 			linphone.ui.core.stop(core);

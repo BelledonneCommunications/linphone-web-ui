@@ -507,10 +507,8 @@ linphone.ui.core = {
 				transports.tlsPort = -1;
 				core.sipTransports = transports;
 
-				core.iterateEnabled = true;
 				linphone.ui.logger.log(base, 'Core started');
 				linphone.ui.core.started(base, core);
-
 			}
 		})();
 	},
