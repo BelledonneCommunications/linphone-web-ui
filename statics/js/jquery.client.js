@@ -94,6 +94,12 @@
 			},
 			{
 				string: navigator.userAgent,
+				subString: "Trident",
+				identity: "Explorer",
+				versionSearch: "Trident"
+			},
+			{
+				string: navigator.userAgent,
 				subString: "Gecko",
 				identity: "Mozilla",
 				versionSearch: "rv"
