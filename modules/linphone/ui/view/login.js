@@ -210,6 +210,9 @@ linphone.ui.view.login = {
 			return login.find('input[name=outbandProxy]:checked').val();
 		}
 	},
+	getConfigFilename: function(base) {
+		return 'local:///.linphonerc_' + linphone.ui.view.login.getAccount(base) + '@' + linphone.ui.view.login.getDomain(base);
+	},
 	computeHash: function(base) {
 		var account = linphone.ui.view.login.getAccount(base);
 		var password = linphone.ui.view.login.getPassword(base);
@@ -263,7 +266,7 @@ linphone.ui.view.login = {
 		var core = linphone.ui.getCore(base);
 		var account = linphone.ui.view.login.getAccount(base);
 		var domain = linphone.ui.view.login.getDomain(base);
-		var configFilename = 'local:///.linphonerc_' + account + '@' + domain;
+		var configFilename = linphone.ui.view.login.getConfigFilename(base);
 		core.fileManager.exists(configFilename, function(exist, error) {
 			var config = core.newLpConfig(configFilename);
 			if (exist) {
@@ -380,11 +383,15 @@ linphone.ui.view.login = {
 			linphone.ui.view.login.done(base);
 		} else if(state === linphone.RegistrationState.Failed) {
 			if((proxy.error === linphone.Reason.BadCredentials) || (proxy.error === linphone.Reason.Unauthorized) || (proxy.error === linphone.Reason.NotFound)) {
-				linphone.ui.view.login.error(base, 'content.view.login.errors.account');
+				var configFilename = linphone.ui.view.login.getConfigFilename(base);
+				linphone.ui.core.stop(core);
+				core.fileManager.remove(configFilename, function(success, msg) {
+					linphone.ui.view.login.error(base, 'content.view.login.errors.account');
+				});
 			} else {
+				linphone.ui.core.stop(core);
 				linphone.ui.view.login.error(base, 'content.view.login.errors.registrationFailed');
 			}
-			linphone.ui.core.stop(core);
 		}
 	}
 };
