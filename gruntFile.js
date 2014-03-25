@@ -317,7 +317,7 @@ module.exports = function(grunt) {
 				}
 			},
 			statics: {
-				files: grunt.file.expandMapping(['*.css', '**/*.css'], 'dist/', {
+				files: grunt.file.expandMapping(['*.css', '**/*.css', '**/*.xml'], 'dist/', {
 					cwd: 'statics',
 					rename: function(dest, matchedSrcPath, options) {
 						return path.join(dest, matchedSrcPath).replace('.css', '.min.css');
@@ -385,7 +385,8 @@ module.exports = function(grunt) {
 					'!*.js',
 					'!**/*.js',
 					'!*.css',
-					'!**/*.css'
+					'!**/*.css',
+					'!**/*.xml'
 				],
 				cwd: 'statics/',
 				dest: 'dist/'
@@ -407,6 +408,14 @@ module.exports = function(grunt) {
 				],
 				cwd: 'statics/',
 				dest: '<%= tmp %>/'
+			},
+			statics_xml: {
+				expand: true,
+				src: [
+					'**/*.xml'
+				],
+				cwd: 'statics/',
+				dest:'<%= tmp %>/conf/'
 			},
 			html: {
 				expand: true,

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns="http://www.linphone.org/xsds/lpconfig.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.linphone.org/xsds/lpconfig.xsd lpconfig.xsd">
+  <section name="proxy_default_values">
+    <entry name="reg_proxy">&lt;sip:sip.linphone.org;transport=tls&gt;</entry>
+    <entry name="reg_identity">sip:?@sip.linphone.org</entry>
+    <entry name="reg_expires">600</entry>
+    <entry name="reg_sendregister">1</entry>
+    <entry name="publish">0</entry>
+    <entry name="dial_escape_plus">0</entry>
+  </section>
+  <section name="net">
+    <entry name="firewall_policy" overwrite="true">ice</entry>
+    <entry name="stun_server" overwrite="true">stun.linphone.org</entry>
+  </section>
+  <section name="sip">
+    <entry name="sip_port" overwrite="true">-1</entry>
+    <entry name="sip_tcp_port" overwrite="true">-1</entry>
+    <entry name="sip_tls_port" overwrite="true">-1</entry>
+  </section>
+  <section name="video">
+    <entry name="automatically_initiate" overwrite="true">0</entry>
+    <entry name="automatically_accept" overwrite="true">0</entry>
+    <entry name="capture" overwrite="true">1</entry>
+    <entry name="display" overwrite="true">1</entry>
+    <entry name="self_view" overwrite="true">1</entry>
+    <entry name="show_local" overwrite="true">0</entry>
+  </section>
+</config>
