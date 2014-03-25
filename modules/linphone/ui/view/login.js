@@ -13,7 +13,7 @@
 
 linphone.ui.view.login = {
 	simpleDomain: "sip.linphone.org",
-	simpleTransport: 'tls',
+	remoteProvisioningUriBase: window.location.protocol + "//" + window.location.host + "/conf/",
 
 	state: {
 		simple: {
@@ -34,8 +34,6 @@ linphone.ui.view.login = {
 	/* */
 	init: function(base) {
 		linphone.ui.view.login.uiInit(base);
-		base.on('authInfoRequested', linphone.ui.view.login.onAuthInfoRequested); 
-		base.on('registrationStateChanged', linphone.ui.view.login.onRegistrationStateChanged);
 	},
 	uiInit: function(base) {
 		var login = base.find('> .content .view > .login');
@@ -92,29 +90,21 @@ linphone.ui.view.login = {
 		var core = linphone.ui.getCore(base);
 		var configuration = linphone.ui.configuration(base);
 		var login = base.find('> .content .view > .login');
-		
-		base.on('registrationStateChanged', linphone.ui.view.login.onRegistrationStateChanged);
-		
-		// Get first proxy
-		var proxy = linphone.ui.utils.getMainProxyConfig(base);
 
-		// Test if already registered
-		if(proxy && proxy.state === linphone.RegistrationState.Ok) {
-			linphone.ui.login(base, true);
-			return;
-		}
+		base.on('globalStateChanged', linphone.ui.view.login.onGlobalStateChanged);
+		base.on('registrationStateChanged', linphone.ui.view.login.onRegistrationStateChanged);
 
 		var link = login.find('.createAccount');
 		link.empty();
 		var linphoneAccount = configuration.linphone_account;
 		var elem = linphone.ui.template(base, 'view.login.createAccount', linphoneAccount);
-		link.append(elem);	
+		link.append(elem);
 
 		linphone.ui.menu.hide(base);
 		linphone.ui.view.login.reset(base);
 		linphone.ui.view.login.update(base, linphone.ui.view.login.state.simple);
 	},
-	hide: function(base) {	
+	hide: function(base) {
 	},
 
 	/* */
@@ -172,144 +162,179 @@ linphone.ui.view.login = {
 		return login.find('.accountSimple').is(':visible');
 	},
 
-	computeHash: function(account, password, domain) {
+	getAccount: function(base) {
+		var login = base.find('> .content .view > .login');
+		if (linphone.ui.view.login.isSimpleState(base)) {
+			return login.find('.accountSimple .account').val();
+		} else {
+			return login.find('.accountAdvanced .account').val();
+		}
+	},
+	getPassword: function(base) {
+		var login = base.find('> .content .view > .login');
+		if (linphone.ui.view.login.isSimpleState(base)) {
+			return login.find('.accountSimple .password').val();
+		} else {
+			return login.find('.accountAdvanced .password').val();
+		}
+	},
+	getDomain: function(base) {
+		var login = base.find('> .content .view > .login');
+		if (linphone.ui.view.login.isSimpleState(base)) {
+			return linphone.ui.view.login.simpleDomain;
+		} else {
+			return login.find('.accountAdvanced .domain').val();
+		}
+	},
+	getTransport: function(base) {
+		var login = base.find('> .content .view > .login');
+		if (linphone.ui.view.login.isSimpleState(base)) {
+			return null;
+		} else {
+			return login.find('input[name=transport]:checked').val();
+		}
+	},
+	getProxy: function(base) {
+		var login = base.find('> .content .view > .login');
+		if (linphone.ui.view.login.isSimpleState(base)) {
+			return null;
+		} else {
+			return login.find('.accountAdvanced .proxy').val();
+		}
+	},
+	getOutbandProxy: function(base) {
+		var login = base.find('> .content .view > .login');
+		if (linphone.ui.view.login.isSimpleState(base)) {
+			return false;
+		} else {
+			return login.find('input[name=outbandProxy]:checked').val();
+		}
+	},
+	computeHash: function(base) {
+		var account = linphone.ui.view.login.getAccount(base);
+		var password = linphone.ui.view.login.getPassword(base);
+		var domain = linphone.ui.view.login.getDomain(base);
 		return CryptoJS.SHA1(account + '@' + domain + ':' + password).toString(CryptoJS.enc.Hex);
 	},
-	login: function(base){
-		if(linphone.ui.view.login.isLocked(base)) {
-			return;
-		}
-		var login = base.find('> .content .view > .login');
-		var ret;
-		if(login.find('.accountSimple').is(':visible')) {
-			linphone.ui.view.login.loginSimple(base);
-		} else {
-			linphone.ui.view.login.loginAdvanced(base);
-		}
-		if(ret) {
-			linphone.ui.view.login.lock(base);
-		}
-	},
-	loginSimple: function(base) {
-		var login = base.find('> .content .view > .login');
-		
-		// Get values
-		var account = login.find('.accountSimple .account').val();
-		var password = login.find('.accountSimple .password').val();
-		var domain = linphone.ui.view.login.simpleDomain;
-		var transport = linphone.ui.view.login.simpleTransport;
-		
-		return linphone.ui.view.login.loginRegister(base, account, password, domain, transport, null, false);
-	},
-	loginAdvanced: function(base) {
-		var login = base.find('> .content .view > .login');
-
-		// Get values
-		var account = login.find('.accountAdvanced .account').val();
-		var password = login.find('.accountAdvanced .password').val();
-		var domain = login.find('.accountAdvanced .domain').val();
-		var transport = login.find('input[name=transport]:checked').val();
-		var proxy = login.find('.accountAdvanced .proxy').val();
-		var outbandProxy = login.find('input[name=outbandProxy]:checked').val();
-		
-		return linphone.ui.view.login.loginRegister(base, account, password, domain, transport, proxy, outbandProxy);
-	},
-
-	loginRegister: function(base, account, password, domain, transport, proxy, outbandProxy) {
-		// Check values
-		if (linphone.ui.view.login.state.simple.regex.account.exec(account) === null) {
-			linphone.ui.popup.error.show(base, 'content.view.login.accountSimple.errors.account');
-			return false;
-		}
-		if (linphone.ui.view.login.state.simple.regex.password.exec(password) === null) {
-			linphone.ui.popup.error.show(base, 'content.view.login.accountSimple.errors.password');
-			return false;
-		}
-		
-		if (linphone.ui.view.login.state.advanced.regex.account.exec(account) === null) {
-			linphone.ui.popup.error.show(base, 'content.view.login.accountAdvanced.errors.account');
-			return false;
-		}
-		if (linphone.ui.view.login.state.advanced.regex.password.exec(password) === null) {
-			linphone.ui.popup.error.show(base, 'content.view.login.accountAdvanced.errors.password');
-			return false;
-		}
-		if (linphone.ui.view.login.state.advanced.regex.domain.exec(domain) === null) {
-			linphone.ui.popup.error.show(base, 'content.view.login.accountAdvanced.errors.domain');
-			return false;
-		}
-
-		var core = linphone.ui.getCore(base);
-		var configFilename = 'local:///.linphonerc_' + account + '@' + domain;
-		core.fileManager.exists(configFilename, function(exist, error) {
-			if (exist) {
-				var config = core.newLpConfig(configFilename);
-				var hash = linphone.ui.view.login.computeHash(account, password, domain);
-				var storedHash = config.getString('app', 'identity_hash', '');
-				if ((storedHash === '') || (hash === storedHash)) {
-					linphone.ui.view.login.lock(base);
-					linphone.ui.core.start(core, configFilename);
-					core.clearProxyConfig();
-					core.clearAllAuthInfo();
-					linphone.ui.view.login.loginConfigure(base, account, password, domain, transport, proxy, outbandProxy);
-				} else {
-					linphone.ui.popup.error.show(base, 'content.view.login.accountSimple.errors.password');
-					return false;
-				}
-			} else {
-				linphone.ui.view.login.lock(base);
-				linphone.ui.core.start(core, configFilename);
-				linphone.ui.view.login.loginConfigure(base, account, password, domain, transport, proxy, outbandProxy);
+	checkLoginInformation: function(base) {
+		var account = linphone.ui.view.login.getAccount(base);
+		var password = linphone.ui.view.login.getPassword(base);
+		if (linphone.ui.view.login.isSimpleState(base)) {
+			if (linphone.ui.view.login.state.simple.regex.account.exec(account) === null) {
+				linphone.ui.popup.error.show(base, 'content.view.login.accountSimple.errors.account');
+				return false;
 			}
-		});
+			if (linphone.ui.view.login.state.simple.regex.password.exec(password) === null) {
+				linphone.ui.popup.error.show(base, 'content.view.login.accountSimple.errors.password');
+				return false;
+			}
+		} else {
+			var domain = linphone.ui.view.login.getDomain(base);
+			if (linphone.ui.view.login.state.advanced.regex.account.exec(account) === null) {
+				linphone.ui.popup.error.show(base, 'content.view.login.accountAdvanced.errors.account');
+				return false;
+			}
+			if (linphone.ui.view.login.state.advanced.regex.password.exec(password) === null) {
+				linphone.ui.popup.error.show(base, 'content.view.login.accountAdvanced.errors.password');
+				return false;
+			}
+			if (linphone.ui.view.login.state.advanced.regex.domain.exec(domain) === null) {
+				linphone.ui.popup.error.show(base, 'content.view.login.accountAdvanced.errors.domain');
+				return false;
+			}
+		}
 		return true;
 	},
-	loginConfigure: function(base, account, password, domain, transport, proxy, outbandProxy) {
+	login: function(base){
+		if (linphone.ui.view.login.isLocked(base)) {
+			return;
+		}
+		if (linphone.ui.view.login.checkLoginInformation(base)) {
+			linphone.ui.view.login.loginRegister(base);
+		}
+	},
+	startCore: function(base, configFilename) {
 		var core = linphone.ui.getCore(base);
+		linphone.ui.view.login.lock(base);
+		linphone.ui.core.start(core, configFilename);
+		core.iterateEnabled = true;
+	},
+	loginRegister: function(base) {
+		var core = linphone.ui.getCore(base);
+		var account = linphone.ui.view.login.getAccount(base);
+		var domain = linphone.ui.view.login.getDomain(base);
+		var configFilename = 'local:///.linphonerc_' + account + '@' + domain;
+		core.fileManager.exists(configFilename, function(exist, error) {
+			var config = core.newLpConfig(configFilename);
+			if (exist) {
+				var password = linphone.ui.view.login.getPassword(base);
+				var hash = linphone.ui.view.login.computeHash(base);
+				var storedHash = config.getString('app', 'identity_hash', '');
+				if ((storedHash === '') || (hash === storedHash)) {
+					linphone.ui.view.login.startCore(base, configFilename);
+				} else {
+					linphone.ui.popup.error.show(base, 'content.view.login.accountSimple.errors.password');
+				}
+			} else {
+				var uri = linphone.ui.view.login.remoteProvisioningUriBase;
+				if (linphone.ui.view.login.isSimpleState(base)) {
+					uri += 'simple.xml';
+				} else {
+					uri += 'advanced.xml';
+				}
+				config.setString('misc', 'config-uri', uri);
+				config.sync();
+				linphone.ui.view.login.startCore(base, configFilename);
+			}
+		});
+	},
+	loginConfigure: function(base) {
+		var core = linphone.ui.getCore(base);
+		var account = linphone.ui.view.login.getAccount(base);
+		var password = linphone.ui.view.login.getPassword(base);
+		var domain = linphone.ui.view.login.getDomain(base);
+
+		// Create auth info
+		var authinfo = core.newAuthInfo(account, account, password, null, domain, domain);
+		core.addAuthInfo(authinfo);
 
 		// Create proxy config
-		var proxyConfig = core.newProxyConfig();
+		var proxyConfig = core.createProxyConfig();
+		var address = core.newAddress(proxyConfig.identity);
+		address.username = account;
 
-		// Activate ICE 
-		if(linphone.ui.view.login.isSimpleState(base)){
-			core.stunServer = "stun.linphone.org";
-			core.firewallPolicy = linphone.FirewallPolicy.UseIce;
+		if (linphone.ui.view.login.isSimpleState(base)) {
+			proxyConfig.identity = address.asString();
 		} else {
-			core.firewallPolicy = linphone.FirewallPolicy.NoFirewall;
-		}
-		
-		// Set auth info
-		var authinfo = core.newAuthInfo(account, account, password, null, null, null);
-		core.addAuthInfo(authinfo);
-		
-		// Set proxy values
-		proxyConfig.identity = 'sip:' + account + '@' + domain;
-		
-		if(proxy !== null && proxy !== ''){
-			proxyConfig.serverAddr = proxy;
-		} else {
-			proxyConfig.serverAddr = domain;
+			var domain = linphone.ui.view.login.getDomain(base);
+			var transport = linphone.ui.view.login.getTransport(base);
+			var proxy = linphone.ui.view.login.getProxy(base);
+
+			address.domain = domain;
+			proxyConfig.identity = address.asString();
+
+			if (proxy !== null && proxy !== '') {
+				proxyConfig.serverAddr = proxy;
+			} else {
+				proxyConfig.serverAddr = domain;
+			}
+			address = core.newAddress(proxyConfig.serverAddr);
+			if (transport === 'tcp') {
+				address.transport = linphone.TransportType.Tcp;
+			} else if (transport === 'tls') {
+				address.transport = linphone.TransportType.Tls;
+			} else {
+				address.transport = linphone.TransportType.Udp;
+			}
+			proxyConfig.serverAddr = address.asString();
+			if (linphone.ui.view.login.getOutbandProxy(base)) {
+				proxyConfig.route = proxyConfig.serverAddr;
+			}
 		}
 
-		var serverAddr = core.newAddress(proxyConfig.serverAddr);
-	
-		if(transport === 'tcp') {
-			serverAddr.transport = linphone.TransportType.Tcp;
-		} else if(transport === 'tls') {
-			serverAddr.transport = linphone.TransportType.Tls;
-		}
-		proxyConfig.serverAddr = serverAddr.asString();
-
-		if(outbandProxy){
-			proxyConfig.route = proxyConfig.serverAddr;
-		}
-		
-		proxyConfig.expires = 600;
-		proxyConfig.registerEnabled = true;
 		var ret = core.addProxyConfig(proxyConfig);
-		if(ret === 0){
+		if (ret === 0) {
 			core.defaultProxy = proxyConfig;
-			core.iterateEnabled = true;
 		} else {
 			linphone.ui.view.login.error(base, 'content.view.login.errors.registrationFailed');
 			linphone.ui.core.stop(core);
@@ -318,20 +343,13 @@ linphone.ui.view.login = {
 
 	/* Results */
 	error: function(base, error) {
-		var login = base.find('> .content .view > .login');
-		var core = linphone.ui.getCore(base);
-
 		linphone.ui.view.login.unlock(base);
-
-		core.clearProxyConfig();
-		core.clearAllAuthInfo();
-
 		linphone.ui.popup.error.show(base, error);
 	},
 	done: function(base) {
 		var login = base.find('> .content .view > .login');
-		var core = linphone.ui.getCore(base);
-		
+
+		base.off('globalStateChanged', linphone.ui.view.login.onGlobalStateChanged);
 		base.off('registrationStateChanged', linphone.ui.view.login.onRegistrationStateChanged);
 		linphone.ui.view.login.unlock(base);
 
@@ -340,7 +358,15 @@ linphone.ui.view.login = {
 	},
 
 	/* On core events */
-	onAuthInfoRequested: function(event, realm, username, domain) {
+	onGlobalStateChanged: function(event, state, message) {
+		if (state === linphone.GlobalState.On) {
+			var base = jQuery(this);
+			var core = linphone.ui.getCore(base);
+			if (core.defaultProxy === null) {
+				/* The proxy config has not yet been created, configure the login */
+				linphone.ui.view.login.loginConfigure(base);
+			}
+		}
 	},
 	onRegistrationStateChanged: function(event, proxy, state, message) {
 		var base = jQuery(this);
@@ -348,20 +374,7 @@ linphone.ui.view.login = {
 		var core = linphone.ui.getCore(base);
 		if (state === linphone.RegistrationState.Ok) {
 			if (core.config.getString('app', 'identity_hash', '') === '') {
-				// Get values
-				var account = '';
-				var password = '';
-				var domain = '';
-				if (linphone.ui.view.login.isSimpleState(base)) {
-					account = login.find('.accountSimple .account').val();
-					password = login.find('.accountSimple .password').val();
-					domain = linphone.ui.view.login.simpleDomain;
-				} else {
-					account = login.find('.accountAdvanced .account').val();
-					password = login.find('.accountAdvanced .password').val();
-					domain = login.find('.accountAdvanced .domain').val();
-				}
-				var hash = linphone.ui.view.login.computeHash(account, password, domain);
+				var hash = linphone.ui.view.login.computeHash(base);
 				core.config.setString('app', 'identity_hash', hash);
 			}
 			linphone.ui.view.login.done(base);

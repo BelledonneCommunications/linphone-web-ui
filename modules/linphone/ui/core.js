@@ -459,53 +459,14 @@ linphone.ui.core = {
 				core.rootCa = 'internal:///share/linphone/rootca.pem';
 		
 				// Set video modes
-				core.videoCaptureEnabled = true;
-				core.videoDisplayEnabled = true;
-				core.videoPreviewEnabled = false;
-				core.selfViewEnabled = true;
 				core.usePreviewWindow = false;
 				
-				// Set video policy
-				var videoPolicy = core.videoPolicy;
-				videoPolicy.automaticallyAccept = false;
-				videoPolicy.automaticallyInitiate = false;
-				core.videoPolicy = videoPolicy;
-
-				// Init volumes settings
-				var rec_level = (typeof linphone.ui.persistent(base).rec_level !== 'undefined') ? linphone.ui.persistent(base).rec_level : 100;
-				core.recLevel = rec_level;
-
-				var play_level = (typeof linphone.ui.persistent(base).play_level !== 'undefined') ? linphone.ui.persistent(base).play_level : 100;
-				core.playLevel = play_level;
-
-				var ring_level = (typeof linphone.ui.persistent(base).ring_level !== 'undefined') ? linphone.ui.persistent(base).ring_level : 100;
-				core.ringLevel = ring_level;
-
 				linphone.ui.persistent(base).init_count = init_count;
 
 				// Set network state
 				if(linphone.ui.isHeartBeatRunning(base)) {
 					core.networkReachable = (linphone.ui.getNetworkState(base) === linphone.ui.networkState.Online);
 				}
-				
-			//	core.enablePayloadType(core.findPayloadType("opus",48000,1),true);
-				
-				// Enable G729 && H264
-				var g729 = core.findPayloadType("G729",8000,1);
-				if(g729 !== null) { 
-					core.enablePayloadType(g729,true); 
-				}
-				var h264 = core.findPayloadType("H264",90000,1);
-				if(h264 !== null) {
-					core.enablePayloadType(h264,true);
-				}
-
-				// Configure to listem on all transport
-				var transports = core.sipTransports;
-				transports.udpPort = -1; //LC_SIP_TRANSPORT_RANDOM
-				transports.tcpPort = -1;
-				transports.tlsPort = -1;
-				core.sipTransports = transports;
 
 				linphone.ui.logger.log(base, 'Core started');
 				linphone.ui.core.started(base, core);
