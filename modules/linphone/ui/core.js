@@ -464,20 +464,8 @@ linphone.ui.core = {
 				linphone.ui.error(base, 'errors.core.' + ret_value);
 			} else {
 				init_count++;
-
-				linphone.ui.logger.log(base, 'Sip port: ' + core.sipPort);
-
-				// Init properties
-				core.staticPicture = 'internal:///share/images/nowebcamCIF.jpg';
-				core.ring = 'internal:///share/sounds/linphone/rings/oldphone.wav';
-				core.ringback = 'internal:///share/sounds/linphone/ringback.wav';
-				core.playFile = 'internal:///share/sounds/linphone/rings/toy-mono.wav';
-				core.rootCa = 'internal:///share/linphone/rootca.pem';
-		
-				// Set video modes
-				core.usePreviewWindow = false;
-				
 				linphone.ui.persistent(base).init_count = init_count;
+				core.rootCa = 'internal:///share/linphone/rootca.pem';
 
 				// Set network state
 				if(linphone.ui.isHeartBeatRunning(base)) {

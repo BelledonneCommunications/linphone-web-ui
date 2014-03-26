@@ -367,6 +367,14 @@ linphone.ui.view.login = {
 		if (state === linphone.GlobalState.On) {
 			var base = jQuery(this);
 			var core = linphone.ui.getCore(base);
+
+			// Init sound and image properties
+			core.staticPicture = 'internal:///share/images/nowebcamCIF.jpg';
+			core.ring = 'internal:///share/sounds/linphone/rings/oldphone.wav';
+			core.ringback = 'internal:///share/sounds/linphone/ringback.wav';
+			core.playFile = 'internal:///share/sounds/linphone/rings/toy-mono.wav';
+			core.usePreviewWindow = false;
+
 			if (core.defaultProxy === null) {
 				/* The proxy config has not yet been created, configure the login */
 				linphone.ui.view.login.loginConfigure(base);
