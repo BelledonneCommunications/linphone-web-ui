@@ -91,6 +91,7 @@ linphone.ui.view.login = {
 		var configuration = linphone.ui.configuration(base);
 		var login = base.find('> .content .view > .login');
 
+		base.on('authInfoRequested', linphone.ui.view.login.onAuthInfoRequested);
 		base.on('globalStateChanged', linphone.ui.view.login.onGlobalStateChanged);
 		base.on('registrationStateChanged', linphone.ui.view.login.onRegistrationStateChanged);
 
@@ -297,11 +298,6 @@ linphone.ui.view.login = {
 		var password = linphone.ui.view.login.getPassword(base);
 		var domain = linphone.ui.view.login.getDomain(base);
 
-		// Create auth info
-		var authinfo = core.newAuthInfo(account, account, password, null, domain, domain);
-		core.addAuthInfo(authinfo);
-
-		// Create proxy config
 		var proxyConfig = core.createProxyConfig();
 		var address = core.newAddress(proxyConfig.identity);
 		address.username = account;
@@ -352,6 +348,7 @@ linphone.ui.view.login = {
 	done: function(base) {
 		var login = base.find('> .content .view > .login');
 
+		base.off('authInfoRequested', linphone.ui.view.login.onAuthInfoRequested);
 		base.off('globalStateChanged', linphone.ui.view.login.onGlobalStateChanged);
 		base.off('registrationStateChanged', linphone.ui.view.login.onRegistrationStateChanged);
 		linphone.ui.view.login.unlock(base);
@@ -361,6 +358,12 @@ linphone.ui.view.login = {
 	},
 
 	/* On core events */
+	onAuthInfoRequested: function(event, realm, username, domain) {
+		var base = jQuery(this);
+		var core = linphone.ui.getCore(base);
+		var authinfo = core.newAuthInfo(username, username, linphone.ui.view.login.getPassword(base), null, realm, domain);
+		core.addAuthInfo(authinfo);
+	},
 	onGlobalStateChanged: function(event, state, message) {
 		if (state === linphone.GlobalState.On) {
 			var base = jQuery(this);
@@ -382,13 +385,13 @@ linphone.ui.view.login = {
 			}
 			linphone.ui.view.login.done(base);
 		} else if(state === linphone.RegistrationState.Failed) {
-			if((proxy.error === linphone.Reason.BadCredentials) || (proxy.error === linphone.Reason.Unauthorized) || (proxy.error === linphone.Reason.NotFound)) {
+			if((proxy.error === linphone.Reason.BadCredentials) || (proxy.error === linphone.Reason.NotFound)) {
 				var configFilename = linphone.ui.view.login.getConfigFilename(base);
 				linphone.ui.core.stop(core);
 				core.fileManager.remove(configFilename, function(success, msg) {
 					linphone.ui.view.login.error(base, 'content.view.login.errors.account');
 				});
-			} else {
+			} else if (proxy.error !== linphone.Reason.Unauthorized) {
 				linphone.ui.core.stop(core);
 				linphone.ui.view.login.error(base, 'content.view.login.errors.registrationFailed');
 			}
