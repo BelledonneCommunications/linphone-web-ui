@@ -296,7 +296,6 @@ linphone.ui.view.login = {
 		var core = linphone.ui.getCore(base);
 		var account = linphone.ui.view.login.getAccount(base);
 		var password = linphone.ui.view.login.getPassword(base);
-		var domain = linphone.ui.view.login.getDomain(base);
 
 		var proxyConfig = core.createProxyConfig();
 		var address = core.newAddress(proxyConfig.identity);
