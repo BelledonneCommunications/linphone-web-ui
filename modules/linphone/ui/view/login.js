@@ -13,7 +13,7 @@
 
 linphone.ui.view.login = {
 	simpleDomain: "sip.linphone.org",
-	remoteProvisioningUriBase: window.location.protocol + "//" + window.location.host + "/conf/",
+	remoteProvisioningUriBase: window.location.protocol + "//" + window.location.host + window.location.pathname + "conf/",
 
 	state: {
 		simple: {
