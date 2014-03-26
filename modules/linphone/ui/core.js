@@ -314,8 +314,8 @@ linphone.ui.core = {
 						linphone.ui.core.load(base);
 					}, function(){});
 			}
-			return linphone.ui.core.detectionStatus.NotInstalled;
 		}
+		return linphone.ui.core.detectionStatus.NotInstalled;
 	},
 	unload: function(base) {
 		linphone.ui.exceptionHandler(base, function() {
