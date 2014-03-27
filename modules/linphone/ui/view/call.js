@@ -18,7 +18,7 @@ linphone.ui.view.call = {
 	uiInit: function(base) {
 		var call = base.find('> .content .view > .call');
 		call.data('linphoneweb-view', linphone.ui.view.call);
-		
+
 		// Do not add video views now because of a bug with IE.
 		// They will be added later when starting a call.
 	},
@@ -27,9 +27,15 @@ linphone.ui.view.call = {
 
 	/* */
 	show: function(base, call) {
-		//var core = linphone.ui.getCore(base);
-		//var callView= base.find('> .content .view > .call');
-		
+		var core = linphone.ui.getCore(base);
+		var callView= base.find('> .content .view > .call');
+		var actions = callView.find(' .actions');
+		actions.empty();
+		actions.append(linphone.ui.template(base, 'view.call.actions', core));
+
+		var signal = base.find('> .content .view > .call .actions .callSignal');
+		signal.addClass('imageSignal3b');
+
 		base.on('callStatsUpdated', linphone.ui.view.call.onCallStatsUpdated);
 		/* Resizable */
 		/*callView.find('.video .profile').mouseenternear(linphone.ui.exceptionHandler(base, function (event) {
@@ -51,10 +57,9 @@ linphone.ui.view.call = {
 	update: function(base,call) {
 		var core = linphone.ui.getCore(base);
 		var callView = base.find('> .content .view > .call');
-		var list = callView.find(' .actions');
 		var contact = callView.find(' .contactView');
 		var data = base.find('> .content .view > .call ').data('currentCall');
-		
+
 		if(typeof call === 'undefined'){
 			if(typeof data !== 'undefined'){
 				call = data;
@@ -65,10 +70,8 @@ linphone.ui.view.call = {
 		}
 		callView.data('currentCall',call);
 		linphone.ui.menu.show(base);
-		list.empty();
 		contact.empty();
 		contact.append(linphone.ui.template(base, 'view.call.contact', call));
-		list.append(linphone.ui.template(base, 'view.call.actions', core));
 		linphone.ui.view.call.updateMuteButton(base, core.micEnabled);
 		linphone.ui.view.call.updateVideoButton(base,false);
 
@@ -204,20 +207,21 @@ linphone.ui.view.call = {
 	displayCallQuality: function(base, call) {
 		var quality = call.currentQuality;
 		var signal = base.find('> .content .view > .call .actions .callSignal');
-		if(quality >= 0 && quality < 1){
-			signal.css({'background-image': 'url("style/img/signal0b.png")'});
-		}
-		if(quality >= 1 && quality < 2){
-			signal.css({'background-image': 'url("style/img/signal1b.png")'});
-		}
-		if(quality >= 2 && quality < 3){
-			signal.css({'background-image': 'url("style/img/signal2b.png")'});
-		}
-		if(quality >= 3 && quality < 4){
-			signal.css({'background-image': 'url("style/img/signal3b.png")'});
-		}
-		if(quality >= 4 && quality < 5){
-			signal.css({'background-image': 'url("style/img/signal4b.png")'});
+		signal.removeClass('imageSignal0b');
+		signal.removeClass('imageSignal1b');
+		signal.removeClass('imageSignal2b');
+		signal.removeClass('imageSignal3b');
+		signal.removeClass('imageSignal4b');
+		if (quality >= 1 && quality < 2) {
+			signal.addClass('imageSignal1b');
+		} else if (quality >= 2 && quality < 3) {
+			signal.addClass('imageSignal2b');
+		} else if (quality >= 3 && quality < 4) {
+			signal.addClass('imageSignal3b');
+		} else if (quality >= 4 && quality < 5) {
+			signal.addClass('imageSignal4b');
+		} else {
+			signal.addClass('imageSignal0b');
 		}
 	},
 	onCallStatsUpdated: function(event, call, stats) {

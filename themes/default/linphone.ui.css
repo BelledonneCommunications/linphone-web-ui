@@ -336,6 +336,26 @@
 	background-image: url('img/statusOffline.png');
 }
 
+.linphoneweb .imageSignal0b {
+	background-image: url('img/signal0b.png');
+}
+
+.linphoneweb .imageSignal1b {
+	background-image: url('img/signal1b.png');
+}
+
+.linphoneweb .imageSignal2b {
+	background-image: url('img/signal2b.png');
+}
+
+.linphoneweb .imageSignal3b {
+	background-image: url('img/signal3b.png');
+}
+
+.linphoneweb .imageSignal4b {
+	background-image: url('img/signal4b.png');
+}
+
 
 /*************/
 /* scrollbar */
