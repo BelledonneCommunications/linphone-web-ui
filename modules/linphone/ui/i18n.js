@@ -431,6 +431,10 @@ linphone.ui.i18n = {
 					en_US : 'Create Linphone account',
 					fr_FR : 'Créer un compte Linphone'
 				},
+				rememberMe: {
+					en_US : 'Remember me',
+					fr_FR : 'Se souvenir de moi'
+				},
 				errors: {
 					registrationFailed: {
 						en_US : 'Failed to connect to the server',

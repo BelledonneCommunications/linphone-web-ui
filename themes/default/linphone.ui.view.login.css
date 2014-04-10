@@ -87,6 +87,10 @@
 	clear: both;
 	cursor: pointer;
 }
+.linphoneweb > .content .view > .login .rememberMe {
+	margin-bottom: 10px;
+	clear: both;
+}
 .linphoneweb > .content .view > .login.disabled .link {
 	cursor: default;
 	

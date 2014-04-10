@@ -273,6 +273,11 @@ linphone.ui = {
 		// Update configuration
 		var configuration = linphone.ui.configuration(base);
 		
+		var dtExpire = new Date();
+		dtExpire.setTime(dtExpire.getTime() -1);
+		
+		linphone.ui.utils.setCookie("linphone-configfilename",'',dtExpire,'/');	
+		
 		linphone.ui.mainbar.hide(base);
 		if(configuration.login) {
 			linphone.ui.popup.clear(base);

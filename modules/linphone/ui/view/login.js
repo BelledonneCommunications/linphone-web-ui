@@ -38,7 +38,7 @@ linphone.ui.view.login = {
 	uiInit: function(base) {
 		var login = base.find('> .content .view > .login');
 		login.data('linphoneweb-view', linphone.ui.view.login);
-
+		
 		login.find('.actions .advanced').click(linphone.ui.exceptionHandler(base, function(event) {	
 			linphone.ui.view.login.update(base, linphone.ui.view.login.state.advanced);
 		}));
@@ -101,6 +101,12 @@ linphone.ui.view.login = {
 		var elem = linphone.ui.template(base, 'view.login.createAccount', linphoneAccount);
 		link.append(elem);
 
+		var configFile = linphone.ui.utils.readCookie("linphone-configfilename");
+		if(configFile){
+			linphone.ui.view.login.update(base, linphone.ui.view.login.state.automaticallyConnect);
+			linphone.ui.view.login.startCore(base, configFile);
+		}
+
 		linphone.ui.menu.hide(base);
 		linphone.ui.view.login.reset(base);
 		linphone.ui.view.login.update(base, linphone.ui.view.login.state.simple);
@@ -119,6 +125,7 @@ linphone.ui.view.login = {
 		login.find('.accountAdvanced .proxy').val('');
 		login.find('input[name=transport][value="udp"]').prop('checked', 'checked');
 		login.find('input[name=outbandProxy][value="off"]').prop('checked', 'checked');
+		login.find('.actions .rememberMe').prop('checked',false);
 	},
 	update: function(base, state) {
 		if(linphone.ui.view.login.isLocked(base)) {
@@ -128,12 +135,19 @@ linphone.ui.view.login = {
 		switch(state) {
 			case linphone.ui.view.login.state.simple:
 				login.find('.accountSimple').show();
+				login.find('.actions').show();
 				login.find('.accountAdvanced').hide();
 				login.find('.actions .advanced').show();
 				login.find('.actions .simple').hide();
 			break;
+			case linphone.ui.view.login.state.automaticallyConnect:
+				login.find('.accountSimple').hide();
+				login.find('.accountAdvanced').hide();
+				login.find('.actions').hide();
+			break;
 			case linphone.ui.view.login.state.advanced:
 				login.find('.accountAdvanced').show();
+				login.find('.actions').show();
 				login.find('.accountSimple').hide();
 				login.find('.actions .simple').show();
 				login.find('.actions .advanced').hide();
@@ -147,12 +161,15 @@ linphone.ui.view.login = {
 		login.find('.wait').show();
 		login.addClass('disabled');
 		login.find('form input').prop('disabled', true);
+		login.find('.actions input').prop('disabled', true);
+
 	},
 	unlock: function(base) {
 		var login = base.find('> .content .view > .login');
 		login.find('.wait').hide();
 		login.removeClass('disabled');
 		login.find('form input').prop('disabled', false);
+		login.find('.actions input').prop('disabled', false);
 	},
 	isLocked: function(base) {
 		var login = base.find('> .content .view > .login');
@@ -389,6 +406,11 @@ linphone.ui.view.login = {
 			if (core.config.getString('app', 'identity_hash', '') === '') {
 				var hash = linphone.ui.view.login.computeHash(base);
 				core.config.setString('app', 'identity_hash', hash);
+			}
+			if(login.find('.actions .rememberMe').is(':checked')){
+				var dtExpire = new Date();
+				dtExpire.setTime(dtExpire.getTime() + 3600 * 1000 * 24 * 365);
+				linphone.ui.utils.setCookie("linphone-configfilename",linphone.ui.view.login.getConfigFilename(base),dtExpire,'/');
 			}
 			linphone.ui.view.login.done(base);
 		} else if(state === linphone.RegistrationState.Failed) {

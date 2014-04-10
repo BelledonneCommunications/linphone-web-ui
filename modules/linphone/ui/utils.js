@@ -273,5 +273,29 @@ linphone.ui.utils = {
 				failure();
 			}
 		}
+	},
+	setCookie: function(nom, valeur, expire, chemin, domaine, securite){
+		document.cookie = nom + ' = ' + valeur + '  ' +
+			((expire === undefined) ? '' : ('; expires = ' + expire.toGMTString())) +
+			((chemin === undefined) ? '' : ('; path = ' + chemin)) +
+			((domaine === undefined) ? '' : ('; domain = ' + domaine)) +
+			((securite === true) ? '; secure' : '');
+	},
+	readCookie: function(name){
+		if(document.cookie.length === 0){
+			return null;
+		}
+			
+		var regSepCookie = new RegExp('(; )', 'g');
+		var cookies = document.cookie.split(regSepCookie);
+		
+		for(var i = 0; i < cookies.length; i++){
+			var regInfo = new RegExp('=', 'g');
+			var infos = cookies[i].split(regInfo);
+			if(infos[0] === name){
+				return infos[1];
+			}
+		}
+		return null;	
 	}
 };
