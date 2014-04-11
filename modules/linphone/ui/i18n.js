@@ -601,15 +601,15 @@ linphone.ui.i18n = {
 					en_US : 'Unknown error',
 					fr_FR : 'Erreur inconnue'
 				},
-				user_is_busy: {
+				busy_here: {
 					en_US : 'The user "%1" is busy',
 					fr_FR : 'L\'utilisateur "%1" est occupé'
 				},
-				user_not_found: {
+				not_found: {
 					en_US : 'The user "%1" is not found',
 					fr_FR : 'L\'utilisateur "%1" n\'a pas été trouvé'
 				},
-				incompatible_media_parameters: {
+				not_acceptable_here: {
 					en_US : 'Incompatible media parameters',
 					fr_FR : 'Paramètres medias incompatibles'
 				}

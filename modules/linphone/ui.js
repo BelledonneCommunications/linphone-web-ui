@@ -460,7 +460,7 @@ linphone.ui = {
 			if(!jQuery.i18n.defined(tKey)) {
 				tKey = 'global.errors.call.unknown';
 			} else {
-				if (tKey === 'global.errors.call.user_is_busy' || tKey === 'global.errors.call.user_not_found' || 'global.errors.call.incompatible_media_parameters') {
+				if (tKey === 'global.errors.call.busy_here' || tKey === 'global.errors.call.not_found') {
 					args = [linphone.ui.utils.getUsername(base, call.remoteAddress)];
 				}
 			}

@@ -31,6 +31,12 @@ linphone.ui.popup.error = {
 			content = jQuery.i18n.skeleton(error_id, args);
 		}
 		
+		//Remove older error popup
+		var element =  linphone.ui.popup.error.getErrorPopup(base, content);
+		if(element !== null){
+			element.remove();
+		}
+		
 		// Generate error popup
 		var list = base.find('> .content .popup');
 		var errorPopup = linphone.ui.template(base, 'popup.error', {
@@ -52,5 +58,15 @@ linphone.ui.popup.error = {
 	hide: function(base, errorPopup) {
 		errorPopup.remove();
 		linphone.ui.popup.update(base);
+	},
+	getErrorPopup: function(base,content){
+		var data = base.find('> .content .popup > .error').each(function (index, object) {
+			var jobject = jQuery(object);
+			var contentData=jobject.data('errorPopup');
+			if(content === contentData){
+				return jobject;
+			}
+		});
+		return data;
 	}
 };
