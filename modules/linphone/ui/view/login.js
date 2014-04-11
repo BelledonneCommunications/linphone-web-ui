@@ -162,7 +162,6 @@ linphone.ui.view.login = {
 		login.addClass('disabled');
 		login.find('form input').prop('disabled', true);
 		login.find('.actions input').prop('disabled', true);
-
 	},
 	unlock: function(base) {
 		var login = base.find('> .content .view > .login');
@@ -378,7 +377,25 @@ linphone.ui.view.login = {
 		var base = jQuery(this);
 		var core = linphone.ui.getCore(base);
 		var authinfo = core.newAuthInfo(username, username, linphone.ui.view.login.getPassword(base), null, realm, domain);
-		core.addAuthInfo(authinfo);
+		if (core.authInfoList.length === 0){	
+			core.addAuthInfo(authinfo);
+		} else {
+			var configFilename = linphone.ui.view.login.getConfigFilename(base);
+			var proxyList = core.proxyConfigList;
+			var proxy = proxyList[0];
+			if((proxy.error === linphone.Reason.BadCredentials) || (proxy.error === linphone.Reason.NotFound)) {
+				linphone.ui.core.stop(core);
+				core.fileManager.remove(configFilename, function(success, msg) {
+					linphone.ui.view.login.error(base, 'content.view.login.errors.account');
+				});
+			} else if (proxy.error === linphone.Reason.Unauthorized) {
+				linphone.ui.core.stop(core);
+				core.fileManager.remove(configFilename, function(success, msg) {
+					linphone.ui.view.login.error(base, 'content.view.login.errors.registrationFailed');
+				});
+			}
+			
+		}
 	},
 	onGlobalStateChanged: function(event, state, message) {
 		if (state === linphone.GlobalState.On) {
