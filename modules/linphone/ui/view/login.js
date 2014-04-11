@@ -101,10 +101,18 @@ linphone.ui.view.login = {
 		var elem = linphone.ui.template(base, 'view.login.createAccount', linphoneAccount);
 		link.append(elem);
 
-		var configFile = linphone.ui.utils.readCookie("linphone-configfilename");
-		if(configFile){
-			linphone.ui.view.login.update(base, linphone.ui.view.login.state.automaticallyConnect);
-			linphone.ui.view.login.startCore(base, configFile);
+		var configFileName = linphone.ui.utils.readCookie("linphone-configfilename");
+		if(configFileName){
+			core.fileManager.exists(configFileName, function(exist, error) {
+				if(exist){
+					linphone.ui.view.login.update(base, linphone.ui.view.login.state.automaticallyConnect);
+					linphone.ui.view.login.startCore(base, configFileName);
+				} else {
+					var dtExpire = new Date();
+					dtExpire.setTime(dtExpire.getTime() -1);
+					linphone.ui.utils.setCookie("linphone-configfilename",'',dtExpire,'/');	
+				}
+			});
 		}
 
 		linphone.ui.menu.hide(base);
