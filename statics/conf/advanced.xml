@@ -6,6 +6,10 @@
     <entry name="publish">0</entry>
     <entry name="dial_escape_plus">0</entry>
   </section>
+  <section name="rtp">
+    <entry name="audio_rtp_port" overwrite="true">-1</entry>
+    <entry name="video_rtp_port" overwrite="true">-1</entry>
+  </section>
   <section name="sip">
     <entry name="sip_port" overwrite="true">-1</entry>
     <entry name="sip_tcp_port" overwrite="true">-1</entry>
