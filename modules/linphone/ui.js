@@ -39,7 +39,7 @@ linphone.ui = {
 	},
 	getCoreNull: function(target) {
 		var base = linphone.ui.getBase(target);
-		var table = base.find('> .objecttable')
+		var table = base.find('> .objecttable');
 		var nodes = table.get(0).childNodes;
 		
 		// jQuery and embedded objects are not friends: use DOM
