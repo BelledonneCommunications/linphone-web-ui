@@ -383,7 +383,8 @@ linphone.ui.core = {
 			});
 			linphone.ui.core.instances[linphone.ui.core.instanceCount] = base;
 			linphone.ui.core.instanceCount = linphone.ui.core.instanceCount + 1;
-			base.append(core);
+			var table = base.find('> .objecttable');
+			table.append(core);
 	
 			var ret = linphone.ui.core.detect(base);
 			if(ret !== linphone.ui.core.detectionStatus.Installed) {
