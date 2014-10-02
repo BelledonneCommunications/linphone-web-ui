@@ -1,3 +1,4 @@
+/*globals linphone*/
 linphone.ChatMessageState = {
 	/**
 	 * Initial state 
