@@ -339,12 +339,13 @@ linphone.ui.core = {
 			base.find('> .content .loading').show();
 	
 			// jQuery and embedded objects are not friends: use DOM
-			var nodes = base.get(0).childNodes;
+			var table = base.find('> .objecttable').get(0);
+			var nodes = table.childNodes;
 			for(var i = 0; i < nodes.length; ++i) {
 				var node = nodes[i];
 				var obj = jQuery(node);
 				if(obj.hasClass('core')) {
-					base.get(0).removeChild(node);
+					table.removeChild(node);
 					delete linphone.ui.core.instances[node.magic];
 				}
 			}
