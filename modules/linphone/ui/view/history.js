@@ -176,11 +176,18 @@ linphone.ui.view.history = {
 				}
 			};
 			
+			var chatHandler = function(base, object) {
+				return function(){
+					linphone.ui.view.show(base, 'chat', object.remote);
+				};
+			};
+			
 			for(var item in data) {
 				var obj = data[item];
 				var elem = linphone.ui.template(base, 'view.history.list.entry', obj);
 				jQuery.i18n.update(elem);
 				elem.find('.actions .call').click(linphone.ui.exceptionHandler(base, callWrapper(obj)));
+				elem.find('.actions .chat').click(linphone.ui.exceptionHandler(base, chatHandler(base, obj)));
 				elem.find('.actions .remove').click(linphone.ui.exceptionHandler(base, removeWrapper(obj)));
 				linphone.ui.utils.getContact(base, obj.remote, updateName);
 				list.append(elem);
