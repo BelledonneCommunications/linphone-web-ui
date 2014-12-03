@@ -72,8 +72,9 @@ linphone.ui.view.chat = {
 	update: function(base, contact) {
 		var chat = base.find('> .content .view > .chat');
 		var core = linphone.ui.getCore(base);
-		var actions = chat.find(' .actions');	
-		var chatRoom = core.getChatRoomFromUri(contact);
+		var actions = chat.find(' .actions');
+		var addr = linphone.ui.utils.formatAddress(base, contact);
+		var chatRoom = core.getChatRoom(addr);
 		
 		linphone.ui.menu.update(base,chatRoom);	
 		
