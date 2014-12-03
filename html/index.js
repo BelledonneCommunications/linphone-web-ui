@@ -122,7 +122,7 @@ function __linphone_init(base) {
 			contacts: new linphone.models.contacts.core.engine(base, debug),
 			history: new linphone.models.history.core.engine(base, debug)
 		},
-		disableChat: true,
+		disableChat: false,
 		disableConference: true,
 		disablePresence: false
 	};

@@ -58,12 +58,59 @@ linphone.ui.view.chat = {
 	},
 	
 	/**/
-	show: function(base) {
-		linphone.ui.menu.show(base);
-		base.find('> .content .view > .chat .scroll-pane').each(function(){
+	show: function(base, contact) {
+		var chat = base.find('> .content .view > .chat');
+		
+		chat.find('.actions .scroll-pane').each(function(){
 			linphone.ui.slider(jQuery(this));
 		});
+			
+		base.on('messageReceived', linphone.ui.view.chat.onMessageReceived);
+		linphone.ui.view.chat.update(base,contact);
 	},
+	
+	update: function(base, contact) {
+		var chat = base.find('> .content .view > .chat');
+		var core = linphone.ui.getCore(base);
+		var actions = chat.find(' .actions');	
+		var chatRoom = core.getChatRoomFromUri(contact);
+		
+		linphone.ui.menu.update(base,chatRoom);	
+		
+		var sendMessage = function(base, contact) {
+			return function(){		
+				//TODO
+			};
+		};
+			
+		chat.data('contact',contact);		
+		
+		//actions.empty();	
+		chat.find('.actions .sendChat').click(linphone.ui.exceptionHandler(base,sendMessage(base,contact)));
+		//actions.append(linphone.ui.template(base, 'view.chat.actions', contact));
+	},
+	
 	hide: function(base) {
+		base.off('messageReceived', linphone.ui.view.chat.onMessageReceived);
+	},
+	
+	onMessageReceived: function(event, room, message){		
+		var base = jQuery(this);
+		var chat = base.find('> .content .view > .chat');
+		
+		var contact = chat.data('contact');
+		
+		if(contact === message.fromAddress.asString()){
+			//Display message received
+		}
+	},
+	
+	displaySendMessage: function(base,contact, message){
+		var chat = base.find('> .content .view > .chat');
+		var core = linphone.ui.getCore(base);
+	},
+	
+	onMsgStateChanged: function(chatMsg, state) {
+		//Message state
 	}
 };

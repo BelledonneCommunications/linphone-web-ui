@@ -82,10 +82,17 @@ linphone.ui.view.contacts = {
 				};
 			};
 			
+			var chatHandler = function(base,object) {
+				return function(){
+					linphone.ui.view.show(base, 'chat', object);
+				};
+			};
+			
 			var addressHandler = function (index, object) {
 				var jobject = jQuery(object);
 				var address = jobject.find(".number").text();
 				jobject.find(".callContact").click(linphone.ui.exceptionHandler(base,callHandler(base,address)));
+				jobject.find(".chatContact").click(linphone.ui.exceptionHandler(base,chatHandler(base,address)));
 			};
 			
 			list.empty();

@@ -33,7 +33,7 @@ linphone.ui.menu = {
 			linphone.ui.view.show(base, 'contacts');
 		}));
 		
-		var list = base.find('> .content .menu .chat .list');
+		/*var list = base.find('> .content .menu .chat .list');
 		list.append(linphone.ui.template(base, 'menu.chat.list.entry', {
 			name: 'Cunégonde',
 			unreadMessage: 0
@@ -41,7 +41,7 @@ linphone.ui.menu = {
 		list.append(linphone.ui.template(base, 'menu.chat.list.entry', {
 			name: 'Roger',
 			unreadMessage: 21
-		}));
+		}));*/
 		
 		// Must refresh mouse events
 		base.find('> .content .menu .list .entry').mouseover(linphone.ui.exceptionHandler(base, function() {
@@ -67,6 +67,7 @@ linphone.ui.menu = {
 	/* */
 	show: function(base) {
 		base.on('callStateChanged', linphone.ui.menu.onCallStateChanged);
+		base.on('messageReceived', linphone.ui.menu.onMessageReceived);
 		linphone.ui.menu.update(base);
 		
 		base.find('> .content .menu').show();
@@ -80,6 +81,7 @@ linphone.ui.menu = {
 	},
 	hide: function(base) {
 		base.off('callStateChanged', linphone.ui.menu.onCallStateChanged);
+		base.off('messageReceived', linphone.ui.menu.onMessageReceived);
 		base.find('> .content .menu').hide();
 	},
 	
@@ -116,6 +118,12 @@ linphone.ui.menu = {
 			}
 		};
 		
+		var startChat = function(base, room) {
+			return function() {
+				linphone.ui.view.show(base,'chat',room);
+			};
+		};
+		
 		if(typeof calls !== 'undifined'){
 			for(var i = 0; i < calls.length; ++i) {
 				var call = calls[i];
@@ -136,14 +144,31 @@ linphone.ui.menu = {
 			}
 		}
 		
-		list.tooltip({
-			tooltipClass: "linphonewebcls",
-			position: { my: "middle top+5", at: "middle bottom", collision: "flipfit" }
-		});
+		var rooms = core.chatRooms;
+		var chatList = base.find('> .content .menu .chat .list');
+		chatList.empty();
+		
+		if(typeof rooms !== 'undifined' && rooms != null){
+			for(var i = 0; i < rooms.length; ++i) {
+				var room = rooms[i];
+		
+				var element = linphone.ui.template(base, 'menu.chat.list.entry', {
+					name: room.peerAddress.username,
+					unreadMessage: 0
+				});
+				element.click(linphone.ui.exceptionHandler(base, startChat(base, room)));
+				chatList.append(element);
+			}
+		}
 	},
 
 	/* Events */
 	onCallStateChanged: function(event, call, state, message) {
+		var base = jQuery(this);
+		linphone.ui.menu.update(base);
+	},
+	
+	onMessageReceived: function(event, room, message){
 		var base = jQuery(this);
 		linphone.ui.menu.update(base);
 	},

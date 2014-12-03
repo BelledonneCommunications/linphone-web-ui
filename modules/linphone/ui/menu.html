@@ -15,11 +15,10 @@
 	</script>
 	<script id="linphone.ui.menu.chat.list.entry" type="text/x-handlebars-template">
 		<li class="entry">
-			<a>{{context.name}}
-				{{#if context.unreadMessage}}
-				<span class="numberMessage">{{context.unreadMessage}}</span>
-				{{/if}}
-			</a>
+			<span class="name">{{context.name}}</span>
+			{{#if context.unreadMessage}}
+			<span class="numberMessage">{{context.unreadMessage}}</span>
+			{{/if}}
 		</li>
 	</script>
 	<!-- @endif -->

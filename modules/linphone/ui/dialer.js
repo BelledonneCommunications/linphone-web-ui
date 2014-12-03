@@ -20,6 +20,10 @@ linphone.ui.dialer = {
 			linphone.ui.dialer.call(base);
 		}));
 		
+		base.find('> .content .dialer .chat').click(linphone.ui.exceptionHandler(base, function() {
+			linphone.ui.dialer.chat(base);
+		}));
+		
 		base.find('> .content .dialer .address').keyup(linphone.ui.exceptionHandler(base, function(event) {
 			if(event.which === jQuery.ui.keyCode.ENTER) {
 				linphone.ui.dialer.call(base);
@@ -87,6 +91,16 @@ linphone.ui.dialer = {
 			}, function() {
 				linphone.ui.popup.error.show(base, 'global.errors.uri.misformatted');
 			});
+		}
+	},
+	
+	chat: function(base) {
+		var address = base.find('> .content .dialer .address').val();
+		
+		if(address !== ''){			
+			linphone.ui.view.show(base, 'chat', linphone.ui.utils.formatAddress(base, address));
+			// Reset input
+			base.find('> .content .dialer .address').val('');
 		}
 	}
 };

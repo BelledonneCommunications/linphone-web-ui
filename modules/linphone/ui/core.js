@@ -252,6 +252,21 @@ linphone.ui.core = {
 			base.trigger('callStatsUpdated', [call, stats]);
 		})();
 	},
+	_messageReceived: function(core, room, message) {
+		if(!linphone.core.isValid(core)) {
+			linphone.ui.logger.error(null, '_messageReceived fail: \'core\' object is invalid');
+			return;
+		}
+		var base = linphone.ui.core.instances[core.magic];
+		if(!linphone.ui.isValid(base)) {
+			linphone.ui.logger.error(null, '_messageReceived fail: can\'t retrieve data associated to the \'core\' object');
+			return;
+		}
+		linphone.ui.logger.log(base, core + '| Message received' + ':' + message);
+		linphone.ui.exceptionHandler(base, function() {
+			base.trigger('messageReceived', [room, message]);
+		})();
+	},
 	
 	/* Core management */
 	outdated: function(actual, plugin) {
@@ -278,7 +293,7 @@ linphone.ui.core = {
 		linphone.ui.logger.log(base, 'Core detection ...');
 		var core = linphone.ui.getCore(base);
 		var config = linphone.ui.configuration(base);
-		if (linphone.core.isValid(core)) {
+		if (linphone.core.isValid(core)) {			
 			if(!linphone.ui.core.outdated(config.version, core.pluginVersion)) {
 				linphone.ui.logger.log(base, 'Core detection: Ok');
 				return linphone.ui.core.detectionStatus.Installed;
@@ -459,6 +474,7 @@ linphone.ui.core = {
 			linphone.ui.core.addEvent(core, 'displayWarning', linphone.ui.core._displayWarning);
 			linphone.ui.core.addEvent(core, 'displayUrl', linphone.ui.core._displayUrl);
 			linphone.ui.core.addEvent(core, 'callStatsUpdated', linphone.ui.core._callStatsUpdated);
+			linphone.ui.core.addEvent(core, 'messageReceived', linphone.ui.core._messageReceived);
 			var init_count = (typeof linphone.ui.persistent(base).init_count !== 'undefined') ? linphone.ui.persistent(base).init_count : 0;
 			var ret_value = core.init(configFilename);
 			if (ret_value !== 0) {
