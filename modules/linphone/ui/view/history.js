@@ -178,7 +178,7 @@ linphone.ui.view.history = {
 			
 			var chatHandler = function(base, object) {
 				return function(){
-					linphone.ui.view.show(base, 'chat', object.remote);
+					linphone.ui.view.show(base, 'chat', linphone.ui.utils.getChatRoom(base, object.remote));
 				};
 			};
 			

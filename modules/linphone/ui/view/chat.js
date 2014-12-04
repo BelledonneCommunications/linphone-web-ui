@@ -58,7 +58,7 @@ linphone.ui.view.chat = {
 	},
 	
 	/**/
-	show: function(base, contact) {
+	show: function(base, room) {
 		var chat = base.find('> .content .view > .chat');
 		
 		chat.find('.actions .scroll-pane').each(function(){
@@ -66,33 +66,42 @@ linphone.ui.view.chat = {
 		});
 			
 		base.on('messageReceived', linphone.ui.view.chat.onMessageReceived);
-		linphone.ui.view.chat.update(base,contact);
+		base.on('isComposingReceived', linphone.ui.view.chat.isComposingReceived);
+		linphone.ui.view.chat.update(base,room);
 	},
 	
-	update: function(base, contact) {
+	update: function(base, room) {
 		var chat = base.find('> .content .view > .chat');
 		var core = linphone.ui.getCore(base);
 		var actions = chat.find(' .actions');
-		var addr = linphone.ui.utils.formatAddress(base, contact);
-		var chatRoom = core.getChatRoom(addr);
 		
-		linphone.ui.menu.update(base,chatRoom);	
+		var contact = room.peerAddress.asStringUriOnly();
+
+		base.find('> .content .menu').data('contact',contact);	
+		linphone.ui.menu.show(base,room);	
 		
-		var sendMessage = function(base, contact) {
+		var sendMessage = function(base, room) {
 			return function(){		
 				//TODO
+				var core = linphone.ui.getCore(base);
+				var chatMsg;
+				//var message = room.newMessage(chatMsg);
+				//linphone.ui.core.addEvent(message, "msgStateChanged", linphone.ui.view.chat.onMsgStateChanged);
+				//room.sendChatMessage(message);
+				//linphone.ui.view.chat.displaySendMessage(base,room,message);
 			};
 		};
 			
-		chat.data('contact',contact);		
+		chat.data('contact',room.peerAddress);		
 		
-		//actions.empty();	
-		chat.find('.actions .sendChat').click(linphone.ui.exceptionHandler(base,sendMessage(base,contact)));
+		//actions.empty();		
 		//actions.append(linphone.ui.template(base, 'view.chat.actions', contact));
+		chat.find('.actions .sendChat').click(linphone.ui.exceptionHandler(base,sendMessage(base,room)));
 	},
 	
 	hide: function(base) {
 		base.off('messageReceived', linphone.ui.view.chat.onMessageReceived);
+		base.off('isComposingReceived', linphone.ui.view.chat.onMessageReceived);
 	},
 	
 	onMessageReceived: function(event, room, message){		
@@ -111,7 +120,16 @@ linphone.ui.view.chat = {
 		var core = linphone.ui.getCore(base);
 	},
 	
-	onMsgStateChanged: function(chatMsg, state) {
+	onMsgStateChanged: function(event, message, state) {
 		//Message state
+	},
+	
+	isComposingReceived: function(event, room) {
+		if(room.remoteComposing) {
+			//TODO
+			//console.log(room.peerAddress.username + " is composing");
+		} else {
+			//TODO
+		}	
 	}
 };

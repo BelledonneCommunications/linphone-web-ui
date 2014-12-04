@@ -69,6 +69,12 @@
 	border-left: 4px solid #68250f;
 }
 
+.linphoneweb > .content .middle > .menu nav .entry.active {
+	color: #ffffff;
+	background-color: #34393f;
+	cursor: pointer;
+}
+
 .linphoneweb > .content .middle > .menu nav .entry:hover {
 	color: #ffffff;
 	border-left: 4px solid #cf4c29;

@@ -84,7 +84,7 @@ linphone.ui.view.contacts = {
 			
 			var chatHandler = function(base,object) {
 				return function(){
-					linphone.ui.view.show(base, 'chat', object);
+					linphone.ui.view.show(base, 'chat', linphone.ui.utils.getChatRoom(base,object));
 				};
 			};
 			

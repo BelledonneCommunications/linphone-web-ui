@@ -24,12 +24,15 @@ linphone.ui.menu = {
 		base.find('> .content .menu .history').click(linphone.ui.exceptionHandler(base, function() {
 			base.find('> .content .menu .history').addClass('active');
 			base.find('> .content .menu .contacts').removeClass('active');
+			base.find('> .content .menu').data('contact','undifined');
 			linphone.ui.view.show(base, 'history');
+			
 		}));
 		
 		base.find('> .content .menu .contacts').click(linphone.ui.exceptionHandler(base, function() {
 			base.find('> .content .menu .contacts').addClass('active');
 			base.find('> .content .menu .history').removeClass('active');
+			base.find('> .content .menu').data('contact','undifined');
 			linphone.ui.view.show(base, 'contacts');
 		}));
 		
@@ -82,6 +85,7 @@ linphone.ui.menu = {
 	hide: function(base) {
 		base.off('callStateChanged', linphone.ui.menu.onCallStateChanged);
 		base.off('messageReceived', linphone.ui.menu.onMessageReceived);
+		base.off('isComposingReceived', linphone.ui.menu.isComposingReceived);
 		base.find('> .content .menu').hide();
 	},
 	
@@ -120,7 +124,9 @@ linphone.ui.menu = {
 		
 		var startChat = function(base, room) {
 			return function() {
-				linphone.ui.view.show(base,'chat',room);
+				if(linphone.ui.view.show(base,'chat',room) === false) {
+					linphone.ui.view.chat.update(base,room);
+				}
 			};
 		};
 		
@@ -148,6 +154,8 @@ linphone.ui.menu = {
 		var chatList = base.find('> .content .menu .chat .list');
 		chatList.empty();
 		
+		var contact = base.find('> .content .menu').data("contact");
+		
 		if(typeof rooms !== 'undifined' && rooms != null){
 			for(var i = 0; i < rooms.length; ++i) {
 				var room = rooms[i];
@@ -158,6 +166,10 @@ linphone.ui.menu = {
 				});
 				element.click(linphone.ui.exceptionHandler(base, startChat(base, room)));
 				chatList.append(element);
+				
+				if(contact != 'undifined' && contact === room.peerAddress.asStringUriOnly()){
+					element.addClass('active');
+				}
 			}
 		}
 	},
@@ -170,7 +182,14 @@ linphone.ui.menu = {
 	
 	onMessageReceived: function(event, room, message){
 		var base = jQuery(this);
-		linphone.ui.menu.update(base);
+		if(!room.remoteComposing){
+			linphone.ui.menu.update(base);
+		}		
+	},
+	
+	isComposingReceived: function(event, room){
+		var base = jQuery(this);
+		//TODO
 	},
 	
 	getCallStateClass: function(base, object) {

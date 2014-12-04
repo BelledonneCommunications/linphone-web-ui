@@ -155,6 +155,18 @@ linphone.ui.utils = {
 		}
 		return linphone.ui.utils.status.offline;
 	},
+	getChatRoom: function(base, object){
+		var core = linphone.ui.getCore(base);
+		var address;
+		
+		if(typeof object === 'string') {
+			address = linphone.ui.utils.formatAddress(base, object);
+		} else {
+			address = object;
+		}
+		
+		return core.getChatRoom(address);
+	},
 	getContact: function(base, object, callback) {
 		var configuration = linphone.ui.configuration(base);
 		var address;
