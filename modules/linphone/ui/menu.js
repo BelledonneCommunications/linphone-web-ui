@@ -157,17 +157,17 @@ linphone.ui.menu = {
 		var contact = base.find('> .content .menu').data("contact");
 		
 		if(typeof rooms !== 'undifined' && rooms != null){
-			for(var i = 0; i < rooms.length; ++i) {
+			for(i = 0; i < rooms.length; ++i) {
 				var room = rooms[i];
 		
-				var element = linphone.ui.template(base, 'menu.chat.list.entry', {
+				element = linphone.ui.template(base, 'menu.chat.list.entry', {
 					name: room.peerAddress.username,
 					unreadMessage: 0
 				});
 				element.click(linphone.ui.exceptionHandler(base, startChat(base, room)));
 				chatList.append(element);
 				
-				if(contact != 'undifined' && contact === room.peerAddress.asStringUriOnly()){
+				if(contact !== 'undifined' && contact === room.peerAddress.asStringUriOnly()){
 					element.addClass('active');
 				}
 			}
