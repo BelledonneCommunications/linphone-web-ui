@@ -36,16 +36,6 @@ linphone.ui.menu = {
 			linphone.ui.view.show(base, 'contacts');
 		}));
 		
-		/*var list = base.find('> .content .menu .chat .list');
-		list.append(linphone.ui.template(base, 'menu.chat.list.entry', {
-			name: 'Cunégonde',
-			unreadMessage: 0
-		}));
-		list.append(linphone.ui.template(base, 'menu.chat.list.entry', {
-			name: 'Roger',
-			unreadMessage: 21
-		}));*/
-		
 		// Must refresh mouse events
 		base.find('> .content .menu .list .entry').mouseover(linphone.ui.exceptionHandler(base, function() {
 			jQuery(this).append('<span class="closeContact"></span>');
@@ -172,6 +162,16 @@ linphone.ui.menu = {
 				}
 			}
 		}
+        	var list = base.find('> .content .menu .chat .list');
+		list.append(linphone.ui.template(base, 'menu.chat.list.entry', {
+			name: 'Cunégonde',
+			unreadMessage: 0
+		}));
+		list.append(linphone.ui.template(base, 'menu.chat.list.entry', {
+			name: 'Roger',
+			unreadMessage: 21
+		}));
+		
 	},
 
 	/* Events */

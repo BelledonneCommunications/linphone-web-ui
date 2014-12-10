@@ -103,8 +103,9 @@
 	font-size: 9pt;
 	width: 20px;
 	height: 14px;
-	position: absolute;
-	top: 4px;
+	display:block;
+    float:right;
+    top: 4px;
 	margin-left: 10px;
 	padding-left: 3px;
 	padding-top: 1px;

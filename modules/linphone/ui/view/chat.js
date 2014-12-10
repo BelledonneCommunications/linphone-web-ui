@@ -19,30 +19,30 @@ linphone.ui.view.chat = {
 		base.find('> .content .view > .chat').data('linphoneweb-view', linphone.ui.view.chat);
 		
 		/* Samples */
-		/*
+		
 		var list = base.find('> .content .view > .chat .list');
 		list.append(linphone.ui.template(base, 'view.chat.list.entry.received', {
 			img: 'style/img/avatar.jpg',
 			date: "Jeudi 21 Septembre 2012 à 23h33m22s",
-			message: 'aa',
+			message: 'Ut auctor nisl vel metus venenatis faucibus. Cras euismod egestas fringilla. Aliquam efficitur risus vestibulum nibh vulputate consequat. Mauris at tempus justo. Fusce quis tincidunt neque. Sed quis tincidunt ipsum. Nunc commodo elit non ante placerat ornare ut ac sem.',
 			name: "Test"
 		}));
 		list.append(linphone.ui.template(base, 'view.chat.list.entry.sent', {
 			img: 'style/img/avatar.jpg',
 			date: "Jeudi 21 Septembre 2012 à 23h34m22s",
-			message: 'bb',
+			message: 'Ut auctor nisl vel metus venenatis faucibus. Cras euismod egestas fringilla. Aliquam efficitur risus vestibulum nibh vulputate consequat. Mauris at tempus justo. Fusce quis tincidunt neque. Sed quis tincidunt ipsum. Nunc commodo elit non ante placerat ornare ut ac sem.Ut auctor nisl vel metus venenatis faucibus. Cras euismod egestas fringilla. Aliquam efficitur risus vestibulum nibh vulputate consequat. Mauris at tempus justo. Fusce quis tincidunt neque. Sed quis tincidunt ipsum. Nunc commodo elit non ante placerat ornare ut ac sem.',
 			name: "Test2"
 		}));
 		list.append(linphone.ui.template(base, 'view.chat.list.entry.received', {
 			img: 'style/img/avatar.jpg',
 			date: "Jeudi 21 Septembre 2012 à 23h37m22s",
-			message: 'cc',
+			message: 'Ut auctor nisl vel metus venenatis faucibus. Cras euismod egestas fringilla. Aliquam efficitur risus vestibulum nibh vulputate consequat. Mauris at tempus justo. Fusce quis tincidunt neque. Sed quis tincidunt ipsum. Nunc commodo elit non ante placerat ornare ut ac sem.',
 			name: "Test3"
 		}));
 		list.append(linphone.ui.template(base, 'view.chat.list.entry.sent', {
 			img: 'style/img/avatar.jpg',
 			date: "Jeudi 21 Septembre 2012 à 23h39m22s",
-			message: 'dd',
+			message: 'Ut auctor nisl vel metus venenatis faucibus. Cras euismod egestas fringilla. Aliquam efficitur risus vestibulum nibh vulputate consequat. Mauris at tempus justo. Fusce quis tincidunt neque. Sed quis tincidunt ipsum. Nunc commodo elit non ante placerat ornare ut ac sem.',
 			name: "Test4"
 		}));
 		list.append(linphone.ui.template(base, 'view.chat.list.entry.sent', {
@@ -51,7 +51,7 @@ linphone.ui.view.chat = {
 			message: 'dd',
 			name: "Test5"
 		}));
-		*/
+		
 	},
 	translate: function(base) {
 		

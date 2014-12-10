@@ -48,6 +48,13 @@
 	line-height: 14pt;
 	margin-top: 10px;
 }
+
+.linphoneweb > .content .view > .chat .status {
+    padding-left: 10px;
+    margin-top: 10px;
+    color: #5d8398;
+    font-style: italic;
+}    
 .linphoneweb > .content .view > .chat .actions {
 	position: absolute;
 	bottom: 10px;
