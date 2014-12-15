@@ -149,8 +149,8 @@ linphone.ui.menu = {
 		if(typeof rooms !== 'undifined' && rooms != null){
 			for(var j = 0; j < rooms.length; ++j) {
 				var room = rooms[j];
-		
-				var elem = linphone.ui.template(base, 'menu.chat.list.entry', {
+				var elem;	
+				elem = linphone.ui.template(base, 'menu.chat.list.entry', {
 					name: room.peerAddress.username,
 					unreadMessage: 0
 				});
@@ -160,18 +160,10 @@ linphone.ui.menu = {
 				if(contact !== 'undifined' && contact === room.peerAddress.asStringUriOnly()){
 					elem.addClass('active');
 				}
+				
+				
 			}
 		}
-        	var list = base.find('> .content .menu .chat .list');
-		list.append(linphone.ui.template(base, 'menu.chat.list.entry', {
-			name: 'Cunégonde',
-			unreadMessage: 0
-		}));
-		list.append(linphone.ui.template(base, 'menu.chat.list.entry', {
-			name: 'Roger',
-			unreadMessage: 21
-		}));
-		
 	},
 
 	/* Events */
@@ -189,7 +181,7 @@ linphone.ui.menu = {
 	
 	isComposingReceived: function(event, room){
 		var base = jQuery(this);
-		//TODO
+		//linphone.ui.menu.update(base);
 	},
 	
 	getCallStateClass: function(base, object) {

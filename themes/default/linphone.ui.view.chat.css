@@ -63,29 +63,16 @@
 }
 /*.linphoneweb > .content .view > .chat .messageToSend {
 	border: 1px solid #adbbc2;
-	height: 80px;
-	margin-bottom: 20px;
-	padding-left: 10px;
-	margin-right: 10px;
-	font-size: 11pt;
-	line-height: 14pt;
 }*/
 .linphoneweb > .content .view > .chat .scroll-pane {
 	width: 710px;
 	height: 360px;
-	border-bottom: 1px solid #e4edf2;
 }
 .linphoneweb > .content .view > .chat .scroll-content {
 	width: 700px;
+	height: 70px;
+	border: 1px solid #adbbc2;
 }
-
-/*.linphoneweb > .content .view > .chat .messageToSend .scroll-pane {
-	width: 670px;
-	height: 80px;
-}
-.linphoneweb > .content .view > .chat .messageToSend .scroll-content {
-	width: 650px;
-}*/
 
 .linphoneweb > .content .view > .chat .messageToSend textarea {
 	border: 1px solid #adbbc2;
@@ -97,5 +84,9 @@
     font-family:'allerregular', arial, verdana, sans-serif;
     width:670px;
     text-align:left;
+    resize:none;
 }
-.linphoneweb > .content .view > .chat .messageToSend textarea:focus {border:1px solid #adbbc2; outline: none !important;}
+.linphoneweb > .content .view > .chat .messageToSend textarea:focus {
+	border:1px solid #adbbc2; 
+	outline: none;
+}

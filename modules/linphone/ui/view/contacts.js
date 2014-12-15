@@ -65,6 +65,15 @@ linphone.ui.view.contacts = {
 		var contacts = base.find('> .content .view > .contacts');
 		linphone.ui.menu.show(base);
 		var core = linphone.ui.getCore(base);
+		
+		base.find('> .content .view > .contacts .scroll-pane').each(function(){
+				linphone.ui.slider(jQuery(this));
+		});
+		
+	},
+	update: function(base) {
+		var contacts = base.find('> .content .view > .contacts');
+		var core = linphone.ui.getCore(base);
 		var configuration = linphone.ui.configuration(base);
 		configuration.models.contacts.list(linphone.ui.view.contacts.filter, function(error, data) {
 			//TODO Check error

@@ -156,6 +156,10 @@ linphone.ui.i18n = {
 				send_file: {
 					en_US : 'Send file',
 					fr_FR : 'Envoyer un fichier'
+				},
+				is_composing: {
+					en_US : 'Remote is composing ...',
+					fr_FR : 'Remote is composing ....'
 				}
 			},
 			conference: {

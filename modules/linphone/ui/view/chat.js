@@ -17,41 +17,6 @@ linphone.ui.view.chat = {
 	},
 	uiInit: function(base) {
 		base.find('> .content .view > .chat').data('linphoneweb-view', linphone.ui.view.chat);
-		
-		/* Samples */
-		
-		var list = base.find('> .content .view > .chat .list');
-		list.append(linphone.ui.template(base, 'view.chat.list.entry.received', {
-			img: 'style/img/avatar.jpg',
-			date: "Jeudi 21 Septembre 2012 à 23h33m22s",
-			message: 'Ut auctor nisl vel metus venenatis faucibus. Cras euismod egestas fringilla. Aliquam efficitur risus vestibulum nibh vulputate consequat. Mauris at tempus justo. Fusce quis tincidunt neque. Sed quis tincidunt ipsum. Nunc commodo elit non ante placerat ornare ut ac sem.',
-			name: "Test"
-		}));
-		list.append(linphone.ui.template(base, 'view.chat.list.entry.sent', {
-			img: 'style/img/avatar.jpg',
-			date: "Jeudi 21 Septembre 2012 à 23h34m22s",
-			message: 'Ut auctor nisl vel metus venenatis faucibus. Cras euismod egestas fringilla. Aliquam efficitur risus vestibulum nibh vulputate consequat. Mauris at tempus justo. Fusce quis tincidunt neque. Sed quis tincidunt ipsum. Nunc commodo elit non ante placerat ornare ut ac sem.Ut auctor nisl vel metus venenatis faucibus. Cras euismod egestas fringilla. Aliquam efficitur risus vestibulum nibh vulputate consequat. Mauris at tempus justo. Fusce quis tincidunt neque. Sed quis tincidunt ipsum. Nunc commodo elit non ante placerat ornare ut ac sem.',
-			name: "Test2"
-		}));
-		list.append(linphone.ui.template(base, 'view.chat.list.entry.received', {
-			img: 'style/img/avatar.jpg',
-			date: "Jeudi 21 Septembre 2012 à 23h37m22s",
-			message: 'Ut auctor nisl vel metus venenatis faucibus. Cras euismod egestas fringilla. Aliquam efficitur risus vestibulum nibh vulputate consequat. Mauris at tempus justo. Fusce quis tincidunt neque. Sed quis tincidunt ipsum. Nunc commodo elit non ante placerat ornare ut ac sem.',
-			name: "Test3"
-		}));
-		list.append(linphone.ui.template(base, 'view.chat.list.entry.sent', {
-			img: 'style/img/avatar.jpg',
-			date: "Jeudi 21 Septembre 2012 à 23h39m22s",
-			message: 'Ut auctor nisl vel metus venenatis faucibus. Cras euismod egestas fringilla. Aliquam efficitur risus vestibulum nibh vulputate consequat. Mauris at tempus justo. Fusce quis tincidunt neque. Sed quis tincidunt ipsum. Nunc commodo elit non ante placerat ornare ut ac sem.',
-			name: "Test4"
-		}));
-		list.append(linphone.ui.template(base, 'view.chat.list.entry.sent', {
-			img: 'style/img/avatar.jpg',
-			date: "Jeudi 21 Septembre 2012 à 23h39m22s",
-			message: 'dd',
-			name: "Test5"
-		}));
-		
 	},
 	translate: function(base) {
 		
@@ -59,12 +24,16 @@ linphone.ui.view.chat = {
 	
 	/**/
 	show: function(base, room) {
-		var chat = base.find('> .content .view > .chat .list');
-		
-        base.find('> .content .view > .chat .scroll-pane').each(function(){
+		var chat = base.find('> .content .view > .chat');
+
+        chat.find('> .content .view > .chat .scroll-pane').each(function(){
 				linphone.ui.slider(jQuery(this));
-			});
-			
+		});
+		
+		var list = base.find('> .content .view > .chat .list');
+		list.empty();	
+		
+		chat.find('.status').hide();
 		base.on('messageReceived', linphone.ui.view.chat.onMessageReceived);
 		base.on('isComposingReceived', linphone.ui.view.chat.isComposingReceived);
 		linphone.ui.view.chat.update(base,room);
@@ -74,50 +43,80 @@ linphone.ui.view.chat = {
 		var chat = base.find('> .content .view > .chat');
 		var core = linphone.ui.getCore(base);
 		var actions = chat.find(' .actions');
+		actions.empty();
+		
+		var list = base.find('> .content .view > .chat .list');
+		list.empty();	
 		
 		var contact = room.peerAddress.asStringUriOnly();
-
 		base.find('> .content .menu').data('contact',contact);	
-		linphone.ui.menu.show(base,room);	
+		linphone.ui.menu.show(base);
 		
+		
+	
 		var sendMessage = function(base, room) {
 			return function(){		
-				//TODO
 				var core = linphone.ui.getCore(base);
-				var chatMsg;
-				//var message = room.newMessage(chatMsg);
-				//linphone.ui.core.addEvent(message, "msgStateChanged", linphone.ui.view.chat.onMsgStateChanged);
-				//room.sendChatMessage(message);
-				//linphone.ui.view.chat.displaySendMessage(base,room,message);
+				var chatMsg = chat.find('.messageToSend .textArea').val();
+				var message = room.newMessage(chatMsg);
+				linphone.ui.core.addEvent(message, "msgStateChanged", linphone.ui.view.chat.onMsgStateChanged);
+				room.sendChatMessage(message);
+				chat.find('.messageToSend .textArea').val('');
+				linphone.ui.view.chat.displaySendMessage(base,room,message);
 			};
 		};
 			
 		chat.data('contact',room.peerAddress);		
-		
-		//actions.empty();		
-		//actions.append(linphone.ui.template(base, 'view.chat.actions', contact));
+	
+		actions.append(linphone.ui.template(base, 'view.chat.actions', contact));
+		var textArea = actions.find('.messageToSend .textArea');
+		textArea.val('');
+		textArea.focus(function() {
+			//room.compose();
+		});
 		chat.find('.actions .sendChat').click(linphone.ui.exceptionHandler(base,sendMessage(base,room)));
 	},
 	
 	hide: function(base) {
 		base.off('messageReceived', linphone.ui.view.chat.onMessageReceived);
-		base.off('isComposingReceived', linphone.ui.view.chat.onMessageReceived);
+		base.off('isComposingReceived', linphone.ui.view.chat.isComposingReceived);
+	},
+	
+	displaySendMessage: function(base,room, message){
+		var chat = base.find('> .content .view > .chat');
+		var core = linphone.ui.getCore(base);
+		var list = base.find('> .content .view > .chat .list');
+		var proxy = linphone.ui.utils.getMainProxyConfig(base);
+		
+		list.append(linphone.ui.template(base, 'view.chat.list.entry.sent', {
+			img: 'style/img/avatar.jpg',
+			date: linphone.ui.utils.getTimeFormat(message.time),
+			message: message.text,
+			name: linphone.ui.utils.getUsername(base, proxy.identity) + ":"
+		}));
+	},
+	
+	displayReceivedMessage: function(base,contact, message){
+		var chat = base.find('> .content .view > .chat');
+		var core = linphone.ui.getCore(base);
+		var list = base.find('> .content .view > .chat .list');
+		
+		list.append(linphone.ui.template(base, 'view.chat.list.entry.received', {
+			img: 'style/img/avatar.jpg',
+			date: linphone.ui.utils.getTimeFormat(message.time),
+			message: message.text,
+			name: message.peerAddress.username + ":"
+		}));
 	},
 	
 	onMessageReceived: function(event, room, message){		
 		var base = jQuery(this);
-		var chat = base.find('> .content .view > .chat');
+		var chat = base.find('> .content .view > .chat');	
 		
-		var contact = chat.data('contact');
-		
-		if(contact === message.fromAddress.asString()){
-			//Display message received
+		var contact = chat.data('contact');	
+		if(contact.asString() === message.fromAddress.asString()){
+			linphone.ui.view.chat.displayReceivedMessage(base,contact,message);	
 		}
-	},
-	
-	displaySendMessage: function(base,contact, message){
-		var chat = base.find('> .content .view > .chat');
-		var core = linphone.ui.getCore(base);
 	},
 	
 	onMsgStateChanged: function(event, message, state) {
@@ -125,11 +124,16 @@ linphone.ui.view.chat = {
 	},
 	
 	isComposingReceived: function(event, room) {
-		if(room.remoteComposing) {
-			//TODO
-			//console.log(room.peerAddress.username + " is composing");
+		var base = jQuery(this);
+		var chat = base.find('> .content .view > .chat');
+		var core = linphone.ui.getCore(base);
+		var status = chat.find('.status');
+		var contact = chat.data('contact');	
+		
+		if(room.remoteComposing && contact.asString() === room.peerAddress.asString()) {
+			status.show();
 		} else {
-			//TODO
+			status.hide();
 		}	
 	}
 };

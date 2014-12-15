@@ -37,14 +37,13 @@
 	<!-- @endif -->
 	<div class="list scroll-pane">
 	</div>
-    <div class="status">
-    Marcel est en train d'envoyer un message ...
+    <div class="status" data-i18n="content.view.chat.is_composing">
     </div>
-	<div class="actions">
+	<script id="linphone.ui.view.chat.actions" type="text/x-handlebars-template">
 		<div class="messageToSend">
-				<textarea> </textarea>
+			<textarea class="textArea"> </textarea>
 		</div>
-		<div class="button">
+		<div class="button sendChat">
 			<div class="image imageSend"></div>
 			<div class="text" data-i18n="content.view.chat.send"></div>
 		</div><!--
@@ -53,5 +52,9 @@
 			<div class="image imageUpload"></div>
 			<div class="text" data-i18n="content.view.chat.send_file"></div>
 		</div>
+	</script>
+	<!-- @if env='debug' -->
+	<div class="actions">
 	</div>
+	<!-- @endif -->
 </div>
