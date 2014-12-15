@@ -59,11 +59,11 @@ linphone.ui.view.chat = {
 	
 	/**/
 	show: function(base, room) {
-		var chat = base.find('> .content .view > .chat');
+		var chat = base.find('> .content .view > .chat .list');
 		
-		chat.find('.actions .scroll-pane').each(function(){
-			linphone.ui.slider(jQuery(this));
-		});
+        base.find('> .content .view > .chat .scroll-pane').each(function(){
+				linphone.ui.slider(jQuery(this));
+			});
 			
 		base.on('messageReceived', linphone.ui.view.chat.onMessageReceived);
 		base.on('isComposingReceived', linphone.ui.view.chat.isComposingReceived);
