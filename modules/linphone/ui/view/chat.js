@@ -96,6 +96,8 @@ linphone.ui.view.chat = {
 			textArea.val('');
 			textArea.focus();
 		}
+		room.markAsRead();
+		linphone.ui.menu.update(base);
 	},
 	
 	displayHistory: function(base, room){
@@ -161,7 +163,9 @@ linphone.ui.view.chat = {
 		
 		var contact = chat.data('contact');	
 		if(contact.asString() === message.fromAddress.asString()){
-			linphone.ui.view.chat.displayReceivedMessage(base,room,message);	
+			linphone.ui.view.chat.displayReceivedMessage(base,room,message);
+			room.markAsRead();
+			linphone.ui.menu.update(base);
 		}
 	},
 	

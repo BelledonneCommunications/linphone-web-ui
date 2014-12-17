@@ -89,7 +89,7 @@ linphone.ui.menu = {
 			return function() {
 				if(linphone.ui.view.show(base,'call',call) === false) {
 					linphone.ui.view.call.update(base,call);
-				}
+				}		
 			};
 		};
 		

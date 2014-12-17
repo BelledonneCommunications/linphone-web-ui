@@ -29,29 +29,7 @@ linphone.ui.view.call = {
 	show: function(base, call) {
 		var core = linphone.ui.getCore(base);
 		var callView= base.find('> .content .view > .call');
-		var actions = callView.find(' .actions');
-		actions.empty();
-		actions.append(linphone.ui.template(base, 'view.call.actions', core));
 
-		var signal = base.find('> .content .view > .call .actions .callSignal');
-		signal.addClass('imageSignal3b');
-
-		base.on('callStatsUpdated', linphone.ui.view.call.onCallStatsUpdated);
-		/* Resizable */
-		/*callView.find('.video .profile').mouseenternear(linphone.ui.exceptionHandler(base, function (event) {
-			callView.find('.video .profile .resize').show();
-		}), 40);
-		callView.find('.video .profile').mouseleavenear(linphone.ui.exceptionHandler(base, function (event) {
-			callView.find('.video .profile .resize').hide();
-		}), 40);
-		callView.find('.video .profile .resize .collapse').click(linphone.ui.exceptionHandler(base, function(event) {
-			linphone.ui.view.call.updateVideoProfile(base, false);
-		}));
-		callView.find('.video .profile .resize .expand').click(linphone.ui.exceptionHandler(base, function(event) {
-			linphone.ui.view.call.updateVideoProfile(base, true);
-		}));
-		linphone.ui.video.addSelfView(base, base.find('> .content .view > .call .video .profile > .content'));
-		linphone.ui.view.call.updateVideoProfile(base, true);*/
 		linphone.ui.view.call.update(base,call);
 	},
 	update: function(base,call) {
@@ -59,6 +37,15 @@ linphone.ui.view.call = {
 		var callView = base.find('> .content .view > .call');
 		var contact = callView.find(' .contactView');
 		var data = base.find('> .content .view > .call ').data('currentCall');
+
+		var actions = callView.find(' .actions');
+		actions.empty();
+		actions.append(linphone.ui.template(base, 'view.call.actions', core));
+		
+		var signal = base.find('> .content .view > .call .actions .callSignal');
+		signal.addClass('imageSignal3b');
+
+		base.on('callStatsUpdated', linphone.ui.view.call.onCallStatsUpdated);
 
 		if(typeof call === 'undefined'){
 			if(typeof data !== 'undefined'){
@@ -203,6 +190,9 @@ linphone.ui.view.call = {
 		var core = linphone.ui.getCore(base);
 		core.micMute = false;
 		base.off('callStatsUpdated', linphone.ui.view.call.onCallStatsUpdated);
+	},
+	displayTime: function(base, call) {
+		var time = call.duration;
 	},
 	displayCallQuality: function(base, call) {
 		var quality = call.currentQuality;
