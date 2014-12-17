@@ -83,6 +83,12 @@ linphone.ui.view.call = {
 		if(linphone.ui.configuration(base).disableConference) {
 			base.find('.actions .conference').hide();
 		}
+		
+		if(call.currentParams.videoEnabled){
+			linphone.ui.view.call.addVideo(base,call);
+		} else {
+			linphone.ui.view.call.removeVideo(base,call);
+		}
 	},
 	hide: function(base) {
 	},
