@@ -159,7 +159,7 @@ linphone.ui.i18n = {
 				},
 				is_composing: {
 					en_US : 'Remote is composing ...',
-					fr_FR : 'Remote is composing ....'
+					fr_FR : 'Votre correspondant est en train d\'écrire...'
 				}
 			},
 			conference: {

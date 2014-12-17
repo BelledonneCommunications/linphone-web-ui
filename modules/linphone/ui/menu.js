@@ -144,24 +144,25 @@ linphone.ui.menu = {
 		var chatList = base.find('> .content .menu .chat .list');
 		chatList.empty();
 		
-		var contact = base.find('> .content .menu').data("contact");
+		var contact = base.find('> .content .menu').data('contact');
 		
-		if(typeof rooms !== 'undifined' && rooms != null){
+		if(typeof rooms !== 'undifined' && rooms !== null){
 			for(var j = 0; j < rooms.length; ++j) {
 				var room = rooms[j];
 				var elem;	
+
 				elem = linphone.ui.template(base, 'menu.chat.list.entry', {
 					name: room.peerAddress.username,
-					unreadMessage: 0
+					unreadMessage: room.unreadMessagesCount
 				});
 				elem.click(linphone.ui.exceptionHandler(base, startChat(base, room)));
 				chatList.append(elem);
 				
-				if(contact !== 'undifined' && contact === room.peerAddress.asStringUriOnly()){
-					elem.addClass('active');
-				}
-				
-				
+				if(contact !== 'undifined' && contact !== null){
+					if(contact === room.peerAddress.asStringUriOnly()){
+						elem.addClass('active');
+					}
+				}			
 			}
 		}
 	},

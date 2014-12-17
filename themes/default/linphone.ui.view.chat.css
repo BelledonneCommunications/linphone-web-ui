@@ -47,6 +47,7 @@
 	font-size: 11pt;
 	line-height: 14pt;
 	margin-top: 10px;
+	white-space: pre;
 }
 
 .linphoneweb > .content .view > .chat .status {

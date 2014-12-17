@@ -103,10 +103,11 @@ linphone.ui.view.login = {
 
 		var configFileName = linphone.ui.utils.readCookie("linphone-configfilename");
 		if(configFileName){
+			var chatDbFilename = linphone.ui.utils.readCookie("linphone-dbfilename");
 			core.fileManager.exists(configFileName, function(exist, error) {
 				if(exist){
 					linphone.ui.view.login.update(base, linphone.ui.view.login.state.automaticallyConnect);
-					linphone.ui.view.login.startCore(base, configFileName);
+					linphone.ui.view.login.startCore(base, configFileName, chatDbFilename);
 				} else {
 					var dtExpire = new Date();
 					dtExpire.setTime(dtExpire.getTime() -1);
@@ -316,7 +317,7 @@ linphone.ui.view.login = {
 				}
 				config.setString('misc', 'config-uri', uri);
 				config.sync();
-				linphone.ui.view.login.startCore(base, configFilename);
+				linphone.ui.view.login.startCore(base, configFilename,chatDbFilename);
 			}
 		});
 	},
@@ -440,6 +441,7 @@ linphone.ui.view.login = {
 				var dtExpire = new Date();
 				dtExpire.setTime(dtExpire.getTime() + 3600 * 1000 * 24 * 365);
 				linphone.ui.utils.setCookie("linphone-configfilename",linphone.ui.view.login.getConfigFilename(base),dtExpire,'/');
+				linphone.ui.utils.setCookie("linphone-dbfilename",linphone.ui.view.login.getChatDatabaseFilename(base),dtExpire,'/');
 			}
 			linphone.ui.view.login.done(base);
 		} else if(state === linphone.RegistrationState.Failed) {

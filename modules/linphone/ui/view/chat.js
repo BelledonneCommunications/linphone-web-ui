@@ -30,56 +30,86 @@ linphone.ui.view.chat = {
 				linphone.ui.slider(jQuery(this));
 		});
 		
-		var list = base.find('> .content .view > .chat .list');
-		list.empty();	
-		
 		chat.find('.status').hide();
+	
+		//Add callbacks on chatroom
 		base.on('messageReceived', linphone.ui.view.chat.onMessageReceived);
 		base.on('isComposingReceived', linphone.ui.view.chat.isComposingReceived);
+		
 		linphone.ui.view.chat.update(base,room);
 	},
 	
 	update: function(base, room) {
-		var chat = base.find('> .content .view > .chat');
 		var core = linphone.ui.getCore(base);
+		
+		var chat = base.find('> .content .view > .chat');		
 		var actions = chat.find(' .actions');
-		actions.empty();
-		
 		var list = base.find('> .content .view > .chat .list');
-		list.empty();	
 		
-		var contact = room.peerAddress.asStringUriOnly();
-		base.find('> .content .menu').data('contact',contact);	
+		actions.empty();
+		list.empty();	
+
+		//Display chat history		
+		linphone.ui.view.chat.displayHistory(base, room);
+		room.markAsRead();
+		
+		chat.data('contact',room.peerAddress);	
+		base.find('> .content .menu').data('contact',room.peerAddress.asStringUriOnly());	
 		linphone.ui.menu.show(base);
 		
-		
-	
 		var sendMessage = function(base, room) {
 			return function(){		
-				var core = linphone.ui.getCore(base);
-				var chatMsg = chat.find('.messageToSend .textArea').val();
-				var message = room.newMessage(chatMsg);
-				linphone.ui.core.addEvent(message, "msgStateChanged", linphone.ui.view.chat.onMsgStateChanged);
-				room.sendChatMessage(message);
-				chat.find('.messageToSend .textArea').val('');
-				linphone.ui.view.chat.displaySendMessage(base,room,message);
+				linphone.ui.view.chat.sendChatMessage(base,room);
 			};
 		};
-			
-		chat.data('contact',room.peerAddress);		
-	
-		actions.append(linphone.ui.template(base, 'view.chat.actions', contact));
+
+		actions.append(linphone.ui.template(base, 'view.chat.actions', room.peerAddress));
+		
+		//Init text area
 		var textArea = actions.find('.messageToSend .textArea');
 		textArea.val('');
+		textArea.focus();
 		textArea.focus(function() {
 			//room.compose();
 		});
+		
 		chat.find('.actions .sendChat').click(linphone.ui.exceptionHandler(base,sendMessage(base,room)));
 	},
 	
 	hide: function(base) {
 		base.off('messageReceived', linphone.ui.view.chat.onMessageReceived);
 		base.off('isComposingReceived', linphone.ui.view.chat.isComposingReceived);
+	},
+	
+	sendChatMessage: function(base,room){
+		var chat = base.find('> .content .view > .chat');
+		var core = linphone.ui.getCore(base);
+		var textArea = chat.find('.messageToSend .textArea');
+		var chatMsg = textArea.val();
+		if(chatMsg !== ''){
+			var message = room.newMessage(chatMsg);	
+			linphone.ui.core.addEvent(message, "msgStateChanged", linphone.ui.view.chat.onMsgStateChanged);
+			room.sendChatMessage(message);
+			linphone.ui.view.chat.displaySendMessage(base,room,message);
+			
+			//Reinit textArea
+			textArea.val('');
+			textArea.focus();
+		}
+	},
+	
+	displayHistory: function(base, room){
+		var chats = room.getHistoryRange(0,-1);
+		
+		for(var i = 0; i < chats.length; ++i) {
+			var chat = chats[i];
+			if(chat.outgoing){
+				linphone.ui.view.chat.displaySendMessage(base, room, chat);
+			} else {
+				linphone.ui.view.chat.displayReceivedMessage(base, room, chat);
+			}
+		}	
+		linphone.ui.view.chat.scrollDown(base);
 	},
 	
 	displaySendMessage: function(base,room, message){
@@ -94,9 +124,11 @@ linphone.ui.view.chat = {
 			message: message.text,
 			name: linphone.ui.utils.getUsername(base, proxy.identity) + ":"
 		}));
+		
+		linphone.ui.view.chat.scrollDown(base);
 	},
 	
-	displayReceivedMessage: function(base,contact, message){
+	displayReceivedMessage: function(base,room, message){
 		var chat = base.find('> .content .view > .chat');
 		var core = linphone.ui.getCore(base);
 		var list = base.find('> .content .view > .chat .list');
@@ -107,6 +139,20 @@ linphone.ui.view.chat = {
 			message: message.text,
 			name: message.peerAddress.username + ":"
 		}));
+
+		linphone.ui.view.chat.scrollDown(base);
+	},
+	
+	scrollDown: function(base){
+		var list = base.find('> .content .view > .chat .scroll-pane');
+		
+		var child = list.children();
+		var heightTot = 0;
+		for(var i =0; i < child.length; i++){
+			heightTot += child[i].scrollHeight;
+		}
+
+		list.scrollTop(heightTot);
 	},
 	
 	onMessageReceived: function(event, room, message){		
@@ -115,7 +161,7 @@ linphone.ui.view.chat = {
 		
 		var contact = chat.data('contact');	
 		if(contact.asString() === message.fromAddress.asString()){
-			linphone.ui.view.chat.displayReceivedMessage(base,contact,message);	
+			linphone.ui.view.chat.displayReceivedMessage(base,room,message);	
 		}
 	},
 	
@@ -123,10 +169,11 @@ linphone.ui.view.chat = {
 		//Message state
 	},
 	
-	isComposingReceived: function(event, room) {
+	isComposingReceived: function(event, room){	
 		var base = jQuery(this);
-		var chat = base.find('> .content .view > .chat');
 		var core = linphone.ui.getCore(base);
+		var chat = base.find('> .content .view > .chat');
+		
 		var status = chat.find('.status');
 		var contact = chat.data('contact');	
 		
