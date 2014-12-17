@@ -69,8 +69,8 @@ linphone.ui.view.chat = {
 		var textArea = actions.find('.messageToSend .textArea');
 		textArea.val('');
 		textArea.focus();
-		textArea.focus(function() {
-			//room.compose();
+		textArea.keypress(function() {
+			room.compose();	
 		});
 		
 		chat.find('.actions .sendChat').click(linphone.ui.exceptionHandler(base,sendMessage(base,room)));
