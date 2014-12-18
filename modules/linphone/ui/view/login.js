@@ -104,6 +104,11 @@ linphone.ui.view.login = {
 		var configFileName = linphone.ui.utils.readCookie("linphone-configfilename");
 		if(configFileName){
 			var chatDbFilename = linphone.ui.utils.readCookie("linphone-dbfilename");
+			core.fileManager.exists(chatDbFilename, function(exist, error){
+				if(!exist){
+					chatDbFilename = linphone.ui.view.login.getChatDatabaseFilename(base);
+				}
+			});
 			core.fileManager.exists(configFileName, function(exist, error) {
 				if(exist){
 					linphone.ui.view.login.update(base, linphone.ui.view.login.state.automaticallyConnect);
