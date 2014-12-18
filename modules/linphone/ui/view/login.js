@@ -101,14 +101,11 @@ linphone.ui.view.login = {
 		var elem = linphone.ui.template(base, 'view.login.createAccount', linphoneAccount);
 		link.append(elem);
 
-		var configFileName = linphone.ui.utils.readCookie("linphone-configfilename");
-		if(configFileName){
-			var chatDbFilename = linphone.ui.utils.readCookie("linphone-dbfilename");
-			core.fileManager.exists(chatDbFilename, function(exist, error){
-				if(!exist){
-					chatDbFilename = linphone.ui.view.login.getChatDatabaseFilename(base);
-				}
-			});
+		var username = linphone.ui.utils.readCookie("linphone-username");
+		var domain = linphone.ui.utils.readCookie("linphone-domain");
+		if(username !== 'undifined' && domain !== 'undifined'){
+			var configFileName = 'local:///.linphonerc_' + username + '@' + domain;
+			var chatDbFilename = 'local:///.chatdb_' + username + '@' + domain;
 			core.fileManager.exists(configFileName, function(exist, error) {
 				if(exist){
 					linphone.ui.view.login.update(base, linphone.ui.view.login.state.automaticallyConnect);
@@ -116,7 +113,8 @@ linphone.ui.view.login = {
 				} else {
 					var dtExpire = new Date();
 					dtExpire.setTime(dtExpire.getTime() -1);
-					linphone.ui.utils.setCookie("linphone-configfilename",'',dtExpire,'/');	
+					linphone.ui.utils.setCookie("linphone-username",'',dtExpire,'/');	
+					linphone.ui.utils.setCookie("linphone-domain",'',dtExpire,'/');
 				}
 			});
 		}
@@ -445,8 +443,8 @@ linphone.ui.view.login = {
 			if(login.find('.actions .rememberMe').is(':checked')){
 				var dtExpire = new Date();
 				dtExpire.setTime(dtExpire.getTime() + 3600 * 1000 * 24 * 365);
-				linphone.ui.utils.setCookie("linphone-configfilename",linphone.ui.view.login.getConfigFilename(base),dtExpire,'/');
-				linphone.ui.utils.setCookie("linphone-dbfilename",linphone.ui.view.login.getChatDatabaseFilename(base),dtExpire,'/');
+				linphone.ui.utils.setCookie("linphone-username",linphone.ui.view.login.getAccount(base),dtExpire,'/');
+				linphone.ui.utils.setCookie("linphone-domain",linphone.ui.view.login.getDomain(base),dtExpire,'/');
 			}
 			linphone.ui.view.login.done(base);
 		} else if(state === linphone.RegistrationState.Failed) {

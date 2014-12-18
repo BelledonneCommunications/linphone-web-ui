@@ -277,7 +277,8 @@ linphone.ui = {
 		var dtExpire = new Date();
 		dtExpire.setTime(dtExpire.getTime() -1);
 		
-		linphone.ui.utils.setCookie("linphone-configfilename",'',dtExpire,'/');	
+		linphone.ui.utils.setCookie("linphone-username",'',dtExpire,'/');
+		linphone.ui.utils.setCookie("linphone-domain",'',dtExpire,'/');
 		
 		linphone.ui.mainbar.hide(base);
 		if(configuration.login) {
