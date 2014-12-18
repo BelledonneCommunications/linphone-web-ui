@@ -39,6 +39,7 @@
 	</div>
     <div class="status" data-i18n="content.view.chat.is_composing">
     </div>
+    <!-- @if env='debug' -->
 	<script id="linphone.ui.view.chat.actions" type="text/x-handlebars-template">
 		<div class="messageToSend">
 			<textarea class="textArea"> </textarea>
@@ -53,8 +54,7 @@
 			<div class="text" data-i18n="content.view.chat.send_file"></div>
 		</div>
 	</script>
-	<!-- @if env='debug' -->
+	<!-- @endif -->
 	<div class="actions">
 	</div>
-	<!-- @endif -->
 </div>
