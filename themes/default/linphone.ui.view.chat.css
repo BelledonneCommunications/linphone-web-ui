@@ -47,6 +47,7 @@
 	font-size: 11pt;
 	line-height: 14pt;
 	margin-top: 10px;
+	word-wrap: break-word;
 	white-space: pre;
 }
 

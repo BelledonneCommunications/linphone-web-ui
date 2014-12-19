@@ -25,10 +25,6 @@ linphone.ui.view.chat = {
 	/**/
 	show: function(base, room) {
 		var chat = base.find('> .content .view > .chat');
-
-        chat.find('> .content .view > .chat .scroll-pane').each(function(){
-				linphone.ui.slider(jQuery(this));
-		});
 		
 		chat.find('.status').hide();
 	
@@ -37,11 +33,11 @@ linphone.ui.view.chat = {
 		base.on('isComposingReceived', linphone.ui.view.chat.isComposingReceived);
 		
 		linphone.ui.view.chat.update(base,room);
+		
 	},
 	
 	update: function(base, room) {
-		var core = linphone.ui.getCore(base);
-		
+		var core = linphone.ui.getCore(base);	
 		var chat = base.find('> .content .view > .chat');		
 		var actions = chat.find(' .actions');
 		var list = base.find('> .content .view > .chat .list');
@@ -50,10 +46,17 @@ linphone.ui.view.chat = {
 		list.empty();	
 
 		//Display chat history		
+		if(typeof room === 'undefined'){
+			room = chat.data('room');	
+		} else {
+			chat.data('room',room);	
+		}
+		
 		linphone.ui.view.chat.displayHistory(base, room);
 		room.markAsRead();
+			
+		chat.data('contact',room.peerAddress);
 		
-		chat.data('contact',room.peerAddress);	
 		base.find('> .content .menu').data('contact',room.peerAddress.asStringUriOnly());	
 		linphone.ui.menu.show(base);
 		
@@ -71,6 +74,10 @@ linphone.ui.view.chat = {
 		textArea.focus();
 		textArea.keypress(function() {
 			room.compose();	
+		});
+		
+		chat.find('> .content .view > .chat .scroll-pane').each(function(){
+				linphone.ui.slider(jQuery(this));
 		});
 		
 		chat.find('.actions .sendChat').click(linphone.ui.exceptionHandler(base,sendMessage(base,room)));

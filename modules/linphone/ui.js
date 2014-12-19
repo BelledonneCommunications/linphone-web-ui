@@ -379,7 +379,7 @@ linphone.ui = {
 		var presenceModel = friend.presenceModel;
 		
 		if(presenceModel !== null){
-			linphone.ui.view.contacts.show(base);
+			linphone.ui.view.contacts.update(base);
 		}
 	},
 
