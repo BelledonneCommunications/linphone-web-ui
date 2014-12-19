@@ -356,6 +356,15 @@
 	background-image: url('img/signal4b.png');
 }
 
+.linphoneweb .imageSendChat {
+	background-image: url('img/sendChat.png');
+}
+.linphoneweb .imageInProgress {
+	background-image: url('img/inProgress.png');
+}
+.linphoneweb .imageErrorMessage {
+	background-image: url('img/errorMessage.png');
+}
 
 /*************/
 /* scrollbar */

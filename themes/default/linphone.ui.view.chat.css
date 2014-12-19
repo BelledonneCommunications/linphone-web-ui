@@ -62,9 +62,7 @@
 	left: 0;
 	padding-left: 10px;
 }
-/*.linphoneweb > .content .view > .chat .messageToSend {
-	border: 1px solid #adbbc2;
-}*/
+
 .linphoneweb > .content .view > .chat .scroll-pane {
 	width: 710px;
 	height: 360px;
@@ -90,4 +88,18 @@
 .linphoneweb > .content .view > .chat .messageToSend textarea:focus {
 	border:1px solid #adbbc2; 
 	outline: none;
+}
+
+.linphoneweb > .content .view > .chat .scroll-pane .image{width:26px; height:26px}
+.linphoneweb > .content .view > .chat .scroll-pane .stateMessage{float:right; margin-top:11px}
+
+.linphoneweb > .content .view > .chat .scroll-pane .buttonAction:hover{cursor:normal; background: #5d8398}
+
+.linphoneweb > .content .view > .chat .scroll-pane .imageErrorMessage:hover:before{
+    content: 'RENVOYER';
+    background: #d97459;
+    line-height: 26px;  
+    padding: 0 5px;
+    float: left;
+    margin-left: 26px;
 }
