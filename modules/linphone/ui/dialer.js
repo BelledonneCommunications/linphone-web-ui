@@ -96,9 +96,20 @@ linphone.ui.dialer = {
 	
 	chat: function(base) {
 		var address = base.find('> .content .dialer .address').val();
+		var core = linphone.ui.getCore(base);
 		
-		if(address !== ''){			
-			linphone.ui.view.show(base, 'chat', linphone.ui.utils.formatAddress(base, address));
+		linphone.ui.view.show(base, 'error', 'error_id', "error");
+		
+		if(address !== ''){
+			var contact = linphone.ui.utils.formatAddress(base, address);
+			var room = core.getChatRoom(contact);
+			if(typeof room !== 'undefined' && room != null){
+				if(linphone.ui.view.show(base,'chat',room) === false) {
+					linphone.ui.view.chat.update(base,room);
+				}
+			} else {
+				linphone.ui.popup.error.show(base, 'global.errors.uri.misformatted');
+			}
 			// Reset input
 			base.find('> .content .dialer .address').val('');
 		}

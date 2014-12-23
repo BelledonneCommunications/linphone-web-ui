@@ -51,6 +51,22 @@ linphone.ui.utils = {
 				replace(/ /g, '_').
 				replace(/\./g, '');
 	},
+	getChatStateImg: function(state) {
+		var img = '';
+		switch (state) {
+			case linphone.ChatMessageState.Delivered:
+				img = 'imageSendChat';
+				break;
+			case linphone.ChatMessageState.InProgress:
+				img = 'imageInProgress';
+				break;
+			case linphone.ChatMessageState.NotDelivered:
+				img = 'imageErrorMessage';
+				break;
+		}
+		
+		return img;
+	},
 	getTimeFormat: function(timestamp) {
 		var date = new Date(parseInt(timestamp, 10) * 1000);
 		var values = [

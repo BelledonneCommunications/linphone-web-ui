@@ -94,7 +94,7 @@ linphone.ui.view.chat = {
 		var textArea = chat.find('.messageToSend .textArea');
 		var chatMsg = textArea.val();
 		if(chatMsg !== ''){
-			var message = room.newMessage(chatMsg);	
+			var message = room.newMessage(chatMsg);
 			linphone.ui.core.addEvent(message, "msgStateChanged", linphone.ui.view.chat.onMsgStateChanged);
 			room.sendChatMessage(message);
 			linphone.ui.view.chat.displaySendMessage(base,room,message);
@@ -121,7 +121,7 @@ linphone.ui.view.chat = {
 		linphone.ui.view.chat.scrollDown(base);
 	},
 	
-	displaySendMessage: function(base,room, message){
+	displaySendMessage: function(base,room, message, state){
 		var chat = base.find('> .content .view > .chat');
 		var core = linphone.ui.getCore(base);
 		var list = base.find('> .content .view > .chat .list');
@@ -131,6 +131,7 @@ linphone.ui.view.chat = {
 			img: 'style/img/avatar.jpg',
 			date: linphone.ui.utils.getTimeFormat(message.time),
 			message: message.text,
+			state: linphone.ui.utils.getChatStateImg(message.state),
 			name: linphone.ui.utils.getUsername(base, proxy.identity) + ":"
 		}));
 		
@@ -176,7 +177,7 @@ linphone.ui.view.chat = {
 		}
 	},
 	
-	onMsgStateChanged: function(event, message, state) {
+	onMsgStateChanged: function(message, state) {
 		//Message state
 	},
 	
@@ -184,7 +185,6 @@ linphone.ui.view.chat = {
 		var base = jQuery(this);
 		var core = linphone.ui.getCore(base);
 		var chat = base.find('> .content .view > .chat');
-		
 		var status = chat.find('.status');
 		var contact = chat.data('contact');	
 		

@@ -57,10 +57,10 @@ function __linphone_init(base) {
 			'Mac' : {
 				'x86' : {
 					'Firefox' : {
-						file: 'downloads/linphone-web-' + pluginVersion + '-Mac-x86.xpi',
+						file: 'downloads/linphone-web-' + pluginVersion + '-Mac-x86_64.xpi',
 						icon: 'style/img/linphone.ico'
 					},
-					'DEFAULT' : 'downloads/linphone-web-' + pluginVersion + '-Mac-x86.pkg'
+					'DEFAULT' : 'downloads/linphone-web-' + pluginVersion + '-Mac-x86_64.pkg'
 				}, 
 				'x86_64' : {
 					'Firefox' : {

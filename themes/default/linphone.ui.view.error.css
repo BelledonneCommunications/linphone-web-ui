@@ -13,8 +13,7 @@
 	text-align: center;
 	background-color: rgb(228, 237, 242);
 	overflow: auto;
-	padding: 0 30px 30px;
-	width: 890px;
+	padding: 0 0 30px;
 }
 .linphoneweb > .content .view > .error .title {
 	font-size:18pt;
