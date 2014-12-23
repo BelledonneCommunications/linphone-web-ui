@@ -92,7 +92,7 @@
 }
 
 .linphoneweb > .content .view > .chat .scroll-pane .image{width:26px; height:26px}
-.linphoneweb > .content .view > .chat .scroll-pane .stateMessage{float:right; margin-top:11px}
+.linphoneweb > .content .view > .chat .scroll-pane .stateMessage{visibility:hidden;float:right; margin-top:11px}
 
 .linphoneweb > .content .view > .chat .scroll-pane .buttonAction:hover{cursor:normal; background: #5d8398}
 
