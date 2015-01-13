@@ -501,6 +501,7 @@ linphone.ui.core = {
 				linphone.ui.persistent(base).init_count = init_count;
 				core.rootCa = 'internal:///share/linphone/rootca.pem';
 				core.chatDatabasePath = chatDbFilename;
+				core.fileTransferServer = "https://www.linphone.org:444/lft.php";
 
 				// Set network state
 				if(linphone.ui.isHeartBeatRunning(base)) {

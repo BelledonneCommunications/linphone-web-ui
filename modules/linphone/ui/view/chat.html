@@ -17,6 +17,7 @@
 				<div class="date">{{context.date}}</div>
 				<div class="contactName">{{context.name}}</div>
 				<div class="message">{{context.message}}</div>
+				<div class="download" data-i18n="content.view.chat.download_file" ><div class="button buttonAction"></div></div>
 			</div>
 			<hr>
 		</div>
@@ -30,7 +31,7 @@
 				<div class="date">{{context.date}}</div>
 				<div class="contactName">{{context.name}}</div>
 				<div class="stateMessage"><div class="button buttonAction"><div class="image {{context.state}}"></div></div></div>
-				<div class="message">{{context.message}}</div>	
+				<div class="message">{{context.message}}</div>		
 			</div>
 			<hr>
 		</div>
@@ -50,9 +51,9 @@
 			<div class="text" data-i18n="content.view.chat.send"></div>
 		</div><!--
 		Avoid issue with inline block in dev mode
-		--><div class="button buttonAction">
+		--><div class="button buttonAction sendImage">
 			<div class="image imageUpload"></div>
-			<div class="text" data-i18n="content.view.chat.send_file"></div>
+			<div data-i18n="content.view.chat.send_file"><input class="fileName" type="file" /></div>
 		</div>
 	</script>
 	<!-- @endif -->

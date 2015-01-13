@@ -98,8 +98,6 @@ linphone.ui.dialer = {
 		var address = base.find('> .content .dialer .address').val();
 		var core = linphone.ui.getCore(base);
 		
-		linphone.ui.view.show(base, 'error', 'error_id', "error");
-		
 		if(address !== ''){
 			var contact = linphone.ui.utils.formatAddress(base, address);
 			var room = core.getChatRoom(contact);

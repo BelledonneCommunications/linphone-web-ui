@@ -358,9 +358,11 @@
 
 .linphoneweb .imageSendChat {
 	background-image: url('img/sendChat.png');
+	cursor: default;
 }
 .linphoneweb .imageInProgress {
 	background-image: url('img/inProgress.png');
+	cursor: default;
 }
 .linphoneweb .imageErrorMessage {
 	background-image: url('img/errorMessage.png');

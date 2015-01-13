@@ -67,6 +67,12 @@ linphone.ui.utils = {
 		
 		return img;
 	},
+	getChatSentFile: function(fileTransferInformation) {
+		return jQuery.i18n.translate('content.view.chat.sent_file') + fileTransferInformation.name + " - " + fileTransferInformation.size + " octets";
+	},
+	getChatReceivedFile: function(fileTransferInformation) {
+		return jQuery.i18n.translate('content.view.chat.received_file') + fileTransferInformation.name + " - " + fileTransferInformation.size + " octets";
+	},
 	getTimeFormat: function(timestamp) {
 		var date = new Date(parseInt(timestamp, 10) * 1000);
 		var values = [
@@ -104,7 +110,6 @@ linphone.ui.utils = {
 		format = format.replace(/dd/g, pad(values[2], 2));
 		format = format.replace(/HH/g, pad(values[3], 2));
 		format = format.replace(/mm/g, pad(values[4], 2));
-		format = format.replace(/ss/g, pad(values[5], 2));
 		format = format.replace(/Z/g, getTimeZone(values[6]));
 		return format;
 	},

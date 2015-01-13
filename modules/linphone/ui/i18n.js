@@ -160,6 +160,18 @@ linphone.ui.i18n = {
 				is_composing: {
 					en_US : 'Remote is composing ...',
 					fr_FR : 'Votre correspondant est en train d\'écrire...'
+				},
+				download_file: {
+					en_US : 'Download',
+					fr_FR : 'Télécharger'
+				},
+				sent_file: {
+					en_US : 'File sent : ',
+					fr_FR : 'Fichier envoyé : '
+				},
+				received_file: {
+					en_US : 'File received : ',
+					fr_FR : 'Fichier reçu : '
 				}
 			},
 			conference: {
@@ -765,8 +777,8 @@ linphone.ui.i18n = {
 				fr_FR : '(HH:)mm:ss'
 			},
 			time: {
-				en_US : 'MM/dd/yyyy HH:mm:ss',
-				fr_FR : 'dd/MM/yyyy HH:mm:ss'
+				en_US : 'MM/dd/yyyy, HH:mm',
+				fr_FR : 'dd/MM/yyyy, HH:mm'
 			}
 		},
 		transports: {

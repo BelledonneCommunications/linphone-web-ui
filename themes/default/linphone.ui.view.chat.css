@@ -91,12 +91,27 @@
 	outline: none;
 }
 
-.linphoneweb > .content .view > .chat .scroll-pane .image{width:26px; height:26px}
-.linphoneweb > .content .view > .chat .scroll-pane .stateMessage{visibility:hidden;float:right; margin-top:11px}
+.linphoneweb > .content .view > .chat .scroll-pane .image {
+	width:26px; 
+	height:26px
+}
 
-.linphoneweb > .content .view > .chat .scroll-pane .buttonAction:hover{cursor:normal; background: #5d8398}
+.linphoneweb > .content .view > .chat .scroll-pane .entrySend .sentImage {
+	width: 200px;
+	height : auto;
+}
 
-.linphoneweb > .content .view > .chat .scroll-pane .imageErrorMessage:hover:before{
+.linphoneweb > .content .view > .chat .scroll-pane .stateMessage {
+	float:right; 
+	margin-top:11px
+}
+
+.linphoneweb > .content .view > .chat .scroll-pane .buttonAction:hover {
+	cursor:normal; 
+	background: #5d8398
+}
+
+.linphoneweb > .content .view > .chat .scroll-pane .imageErrorMessage:hover:before {
     content: 'RENVOYER';
     background: #d97459;
     line-height: 26px;  
