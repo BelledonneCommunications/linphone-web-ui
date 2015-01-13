@@ -189,6 +189,7 @@ linphone.ui.view.chat = {
 		var core = linphone.ui.getCore(base);
 		var list = base.find('> .content .view > .chat .list');
 		var proxy = linphone.ui.utils.getMainProxyConfig(base);
+		var element;
 		
 		//Display message with file
 		if(message.fileTransferInformation !== null){
@@ -198,7 +199,7 @@ linphone.ui.view.chat = {
 				result = '<div><img src="'+ content +'" class = "sentImage"></div>';
 			}
 
-			var element = linphone.ui.template(base, 'view.chat.list.entry.sent', {
+			element = linphone.ui.template(base, 'view.chat.list.entry.sent', {
 				img: 'style/img/avatar.jpg',
 				date: linphone.ui.utils.getTimeFormat(message.time),
 				message: linphone.ui.utils.getChatSentFile(message.fileTransferInformation) ,
@@ -208,7 +209,7 @@ linphone.ui.view.chat = {
 			
 			element.find('.message').append(result);
 		} else {
-			var element = linphone.ui.template(base, 'view.chat.list.entry.sent', {
+			element = linphone.ui.template(base, 'view.chat.list.entry.sent', {
 				img: 'style/img/avatar.jpg',
 				date: linphone.ui.utils.getTimeFormat(message.time),
 				message: message.text,
