@@ -106,7 +106,7 @@
 	margin-top:11px
 }
 
-.linphoneweb > .content .view > .chat .scroll-pane .buttonAction{position:relative}
+.linphoneweb > .content .view > .chat .buttonAction{position:relative}
 .linphoneweb > .content .view > .chat .scroll-pane .buttonAction:hover {
 	cursor:normal; 
 	background: #5d8398
@@ -153,6 +153,11 @@ width:80px;
 height:80px;
 display:table-cell;
 vertical-align:middle;    
+}
+
+.linphoneweb > .content .view > .chat .fileUpload .fileUploadPreviewMiddle img{
+	width:80px;
+	height:80px;    
 }
 
 .linphoneweb > .content .view > .chat .fileUpload .fileUploadName{

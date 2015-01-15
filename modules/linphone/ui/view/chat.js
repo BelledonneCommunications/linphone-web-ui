@@ -65,13 +65,15 @@ linphone.ui.view.chat = {
 			};
 		};
 		
-		var sendFileMessage = function(base, room) {
+		var uploadFile = function(base, room) {
 			return function(){		
-				linphone.ui.view.chat.sendFileMessage(base,room);
+				linphone.ui.view.chat.displayUploadFile(base,room);
 			};
 		};
 
 		actions.append(linphone.ui.template(base, 'view.chat.actions', room.peerAddress));
+		actions.find('.fileUpload').hide();
+		actions.find('.messageToSend').show();
 		
 		//Init text area
 		var textArea = actions.find('.messageToSend .textArea');
@@ -93,7 +95,7 @@ linphone.ui.view.chat = {
 		});
 		
 		chat.find('.actions .sendChat').click(linphone.ui.exceptionHandler(base,sendMessage(base,room)));		
-		chat.find('.actions .sendImage').click(linphone.ui.exceptionHandler(base,sendFileMessage(base,room)));
+		chat.find('.actions .sendImage').change(linphone.ui.exceptionHandler(base,uploadFile(base,room)));
 	},
 	
 	hide: function(base) {
@@ -121,14 +123,19 @@ linphone.ui.view.chat = {
 		linphone.ui.menu.update(base);
 	},
 	
-	sendFileMessage: function(base,room){
+	displayUploadFile: function(base,room){
 		var chat = base.find('> .content .view > .chat');
 		var core = linphone.ui.getCore(base);
-		var input = chat.find('.sendImage .fileName');
+		var input = chat.find('.inputFile .fileName');
 		var file = input.prop('files')[0];
+		var actions = base.find('.actions');
+		
+		actions.find('.fileUpload').show();
+		actions.find('.messageToSend').hide();
 
 		var reader = new FileReader();
-		reader.onload = function(e) {
+		reader.onloadend = function(e) {
+			
 			var content = core.createContent();
 			var splitted_type = file.type.split("/");
 			content.name = file.name;
@@ -138,18 +145,63 @@ linphone.ui.view.chat = {
 			var message = room.newFileTransferMessage(content);
 			if(content.type === 'image'){
 				message.appdata = window.btoa(reader.result);
-			}	
-			room.sendChatMessage(message);
-			linphone.ui.core.addEvent(message,'msgStateChanged', linphone.ui.view.chat.onMsgStateChanged);
-			linphone.ui.core.addEvent(message,'fileTransferProgressIndication', linphone.ui.view.chat.onSendFileTransferProgressIndication);
+			}
+			
+			if(message.fileTransferInformation.type === 'image'){
+				var contentFile = 'data:image/'+ content.subtype + ';base64,' + content.buffer ;
+				result = '<div><img src="'+ contentFile +'" class = "sentImage"></div>';
+			}
+	
+			element = linphone.ui.template(base, 'view.chat.actions.fileUpload', {
+				name: file.name,
+				size: file.size
+			});
+			element.find('.fileUploadPreviewMiddle').append(result);
+			
+			var sendFileMessage = function(base,room, message) {
+				return function(){
+					linphone.ui.view.chat.sendFileMessage(base,room,message);
+				};
+			};
+			
+			var cancelMessage = function(base, room, message) {
+				return function(){
+					input.replaceWith(input.val('').clone(true));
+					linphone.ui.view.chat.clearFileUpload(base);
+					
+				};
+			};
+			
+			actions.find('.fileUpload').append(element);
+			actions.find('.fileUpload .fileUploadActions .sendUploadFile').click(linphone.ui.exceptionHandler(base,sendFileMessage(base,room,message)));
+			actions.find('.fileUpload .fileUploadActions .cancelUploadFile').click(linphone.ui.exceptionHandler(base,cancelMessage(base,message)));
+						
 			input.replaceWith(input.val('').clone(true));
 		};
 		
-		room.markAsRead();
+		
 		
 		if(typeof file !== 'undefined'){
 			reader.readAsBinaryString(file);
 		}	
+	},
+	
+	clearFileUpload: function(base) {
+		var chat = base.find('> .content .view > .chat');
+		var actions = base.find('.actions');
+		
+		actions.find('.fileUpload').empty();
+		actions.find('.fileUpload').hide();
+		actions.find('.messageToSend').show();
+	},
+	
+	sendFileMessage: function(base,room,message){
+		room.sendChatMessage(message);
+			
+		linphone.ui.core.addEvent(message,'msgStateChanged', linphone.ui.view.chat.onMsgStateChanged);
+		linphone.ui.core.addEvent(message,'fileTransferProgressIndication', linphone.ui.view.chat.onSendFileTransferProgressIndication);
+		
+		room.markAsRead();
 	},
 	
 	resendChatMessage: function(base,message,element){
@@ -296,6 +348,13 @@ linphone.ui.view.chat = {
 		
 		var list = base.find('> .content .view > .chat .scroll-pane .entrySend');
 		
+		
+		if(message.fileTransferInformation !== null){
+			if(state === linphone.ChatMessageState.FileTransferDone || state === linphone.ChatMessageState.Delivered || state === linphone.ChatMessageState.NotDelivered){
+				linphone.ui.view.chat.clearFileUpload(base);
+			}
+		}
+		
 		if(state === linphone.ChatMessageState.FileTransferDone){
 			linphone.ui.view.chat.displaySendMessage(base,message.room,message);
 		}
@@ -314,7 +373,7 @@ linphone.ui.view.chat = {
 			if(date === linphone.ui.utils.getTimeFormat(message.time) && (mess === message.text || (message.fileTransferInformation !== null && mess.indexOf(message.fileTransferInformation.name) > 0))){
 				child.find('.infos .stateMessage .image').removeClass('imageInProgress');
 				child.find('.infos .stateMessage .image').addClass(linphone.ui.utils.getChatStateImg(state));
-			
+
 				if(state === linphone.ChatMessageState.NotDelivered){
 					child.find('.infos .stateMessage .imageErrorMessage').click(linphone.ui.exceptionHandler(base,resendMessage(base,message,child)));
 				}
@@ -326,6 +385,8 @@ linphone.ui.view.chat = {
 	onSendFileTransferProgressIndication: function(message, content, offset, total) {
 		var core = message.chatRoom.core;
 		var base = linphone.ui.core.instances[core.magic];
+		
+		var progress = Math.round((offset * 100.0) / total) + "%";
 	},
 	
 	onRecvFileTransferProgressIndication: function(chatMsg, content, offset, total) {
