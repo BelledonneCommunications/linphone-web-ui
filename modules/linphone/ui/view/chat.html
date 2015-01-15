@@ -44,19 +44,36 @@
     <!-- @if env='debug' -->
 	<script id="linphone.ui.view.chat.actions" type="text/x-handlebars-template">
 		<div class="messageToSend">
-			<textarea class="textArea"> </textarea>
-		</div>
+		<!--	<textarea class="textArea"> </textarea>-->
+<!-- NOUVEAU CODE POUR TRANSFERT DE FICHIER -->
+<div class="fileUpload">
+<div class="fileUploadPreview"><div class="fileUploadPreviewMiddle"><img src="http://static.wamiz.fr/images/news/medium/chat-potte-shrek-07.jpg" width="80px" height="80px"></div></div>
+<div class="fileUploadName">test.png</p></div>
+<div class="fileUploadSize">3.56 KB
+    <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+    <div class="progress-bar progress-bar-success" style="width:0%;"></div></div>
+</div>
+<div class="fileUploadActions">
+    <div class="button floatLeft"><div class="image imageUpload"></div><div class="text">Envoyer</div></div>
+    <div class="button buttonAction"><div class="image imageDelete"></div></div>
+</div>    
+        		</div>
+
+        
+        
 		<div class="button sendChat">
 			<div class="image imageSend"></div>
 			<div class="text" data-i18n="content.view.chat.send"></div>
 		</div><!--
 		Avoid issue with inline block in dev mode
-		--><div class="button buttonAction sendImage">
+		-->
+        <div class="button buttonAction sendImage">
 			<div class="image imageUpload"></div>
-			<div data-i18n="content.view.chat.send_file"><input class="fileName" type="file" /></div>
+			<div class="inputFile text" data-i18n="content.view.chat.send_file"><input class="fileName" type="file" /></div>
 		</div>
 	</script>
 	<!-- @endif -->
 	<div class="actions">
 	</div>
 </div>
+
