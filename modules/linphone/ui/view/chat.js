@@ -134,8 +134,7 @@ linphone.ui.view.chat = {
 		actions.find('.messageToSend').hide();
 
 		var reader = new FileReader();
-		reader.onloadend = function(e) {
-			
+		reader.onloadend = function(e) {		
 			var content = core.createContent();
 			var splitted_type = file.type.split("/");
 			content.name = file.name;
@@ -148,7 +147,7 @@ linphone.ui.view.chat = {
 			}
 			
 			if(message.fileTransferInformation.type === 'image'){
-				var contentFile = 'data:image/'+ content.subtype + ';base64,' + content.buffer ;
+				var contentFile = 'data:image/'+ splitted_type[1] + ';base64,' + window.btoa(reader.result) ;
 				result = '<div><img src="'+ contentFile +'" class = "sentImage"></div>';
 			}
 	
@@ -161,13 +160,14 @@ linphone.ui.view.chat = {
 			var sendFileMessage = function(base,room, message) {
 				return function(){
 					linphone.ui.view.chat.sendFileMessage(base,room,message);
+					input.replaceWith(input.val('').clone(true));
 				};
 			};
 			
 			var cancelMessage = function(base, room, message) {
 				return function(){
-					input.replaceWith(input.val('').clone(true));
 					linphone.ui.view.chat.clearFileUpload(base);
+					input.replaceWith(input.val('').clone(true));
 					
 				};
 			};
@@ -175,8 +175,8 @@ linphone.ui.view.chat = {
 			actions.find('.fileUpload').append(element);
 			actions.find('.fileUpload .fileUploadActions .sendUploadFile').click(linphone.ui.exceptionHandler(base,sendFileMessage(base,room,message)));
 			actions.find('.fileUpload .fileUploadActions .cancelUploadFile').click(linphone.ui.exceptionHandler(base,cancelMessage(base,message)));
-						
-			input.replaceWith(input.val('').clone(true));
+			
+	
 		};
 		
 		
