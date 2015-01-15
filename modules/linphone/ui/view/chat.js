@@ -387,6 +387,7 @@ linphone.ui.view.chat = {
 		var base = linphone.ui.core.instances[core.magic];
 		
 		var progress = Math.round((offset * 100.0) / total) + "%";
+        $('.progress-bar').css('width',progress);
 	},
 	
 	onRecvFileTransferProgressIndication: function(chatMsg, content, offset, total) {

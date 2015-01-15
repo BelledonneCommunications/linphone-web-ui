@@ -181,6 +181,12 @@ background-color: #f5f5f5;
 border:1px solid #adbbc2;
 }
 
+.linphoneweb > .content .view > .chat .fileUpload .progress-bar{
+background-color: #adbbc2;
+height:20px;
+width:0%
+}
+
 
 .linphoneweb > .content .view > .chat .fileUpload .fileUploadActions{
 float:left;
