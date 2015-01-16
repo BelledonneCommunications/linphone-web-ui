@@ -537,11 +537,11 @@ linphone.ui.i18n = {
 						fr_FR : 'Le plugin n\'est pas à jour. Veuillez attendre et accepter l\'installation automatique du plugin. Si vous avez déjà mis le plugin à jour et que vous avez toujours ce message, redémarrez votre navigateur.'
 					},
 					mobile_application: {
-						en_US : 'Linphone web is not avalaible on this platform, you can download the Linphone mobile application here :',
+						en_US : 'Linphone web is not available on this platform, you can download the Linphone mobile application here :',
 						fr_FR : 'Linphone web n\'est pas disponible sur cette plateforme, vous pouvez télécharger l\'application mobile Linphone à l\'adresse suivante : '
 					},
 					mobile_others: {
-						en_US : 'Linphone web is not avalaible on this platform.',
+						en_US : 'Linphone web is not available on this platform.',
 						fr_FR : 'Linphone web n\'est pas disponible sur cette plateforme.'
 					}
 				},
