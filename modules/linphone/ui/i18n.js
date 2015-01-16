@@ -539,6 +539,10 @@ linphone.ui.i18n = {
 					mobile_application: {
 						en_US : 'Linphone web is not avalaible on this platform, you can download the Linphone mobile application here :',
 						fr_FR : 'Linphone web n\'est pas disponible sur cette plateforme, vous pouvez télécharger l\'application mobile Linphone à l\'adresse suivante : '
+					},
+					mobile_others: {
+						en_US : 'Linphone web is not avalaible on this platform.',
+						fr_FR : 'Linphone web n\'est pas disponible sur cette plateforme.'
 					}
 				},
 				links: {

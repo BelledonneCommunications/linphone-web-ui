@@ -70,6 +70,11 @@ linphone.ui.view.plugin = {
 			jQuery.i18n.set(plugin.find('> .text'), 'content.view.plugin.text.mobile_application');
 			return;
 		}
+		if (navigator.userAgent.match(/Mobile|Firefox/i)){
+			//Create a link to donwload the application in microsoft store		
+			jQuery.i18n.set(plugin.find('> .text'), 'content.view.plugin.text.mobile_others');
+			return;
+		}
 		plugin.find('.action .reload').show();
 		switch(ret) {
 			case linphone.ui.core.detectionStatus.Outdated:

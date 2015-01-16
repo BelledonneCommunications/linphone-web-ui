@@ -141,23 +141,23 @@ width:180px
 }
 
 .linphoneweb > .content .view > .chat .fileUpload{
-height:80px;
-width:670px;
-margin-bottom: 20px;
-border: 1px solid #adbbc2;
-padding:10px
+	height:80px;
+	width:670px;
+	margin-bottom: 20px;
+	border: 1px solid #adbbc2;
+	padding:10px
 }
 
 .linphoneweb > .content .view > .chat .fileUpload .fileUploadPreview{
-float:left;
-margin-right:20px;
+	float:left;
+	margin-right:20px;
 }
 
 .linphoneweb > .content .view > .chat .fileUpload .fileUploadPreviewMiddle{
-width:80px;
-height:80px;
-display:table-cell;
-vertical-align:middle;    
+	width:80px;
+	height:80px;
+	display:table-cell;
+	vertical-align:middle;    
 }
 
 .linphoneweb > .content .view > .chat .fileUpload .fileUploadPreviewMiddle img{
@@ -166,35 +166,33 @@ vertical-align:middle;
 }
 
 .linphoneweb > .content .view > .chat .fileUpload .fileUploadName{
-float:left;
-margin-right:20px;
-width:180px; 
-padding-top:20px
+	float:left;
+	margin-right:20px;
+	width:180px; 
+	padding-top:20px
 }
 
 .linphoneweb > .content .view > .chat .fileUpload .fileUploadSize{
-float:left;
-margin-right:20px;
-width:180px;
-padding-top:20px
+	float:left;
+	margin-right:20px;
+	width:180px;
+	padding-top:20px
 }
 .linphoneweb > .content .view > .chat .fileUpload .progress{
-height: 20px;
-margin-top: 10px;
-overflow: hidden;
-background-color: #f5f5f5;
-border:1px solid #adbbc2;
+	height: 20px;
+	margin-top: 10px;
+	overflow: hidden;
+	background-color: #f5f5f5;
+	border:1px solid #adbbc2;
 }
 
 .linphoneweb > .content .view > .chat .fileUpload .progress-bar{
-background-color: #adbbc2;
-height:20px;
-width:0%
+	background-color: #adbbc2;
+	height:20px;
 }
 
 
 .linphoneweb > .content .view > .chat .fileUpload .fileUploadActions{
-float:left;
-padding-top:30px    
+	padding-top:30px    
 }
 

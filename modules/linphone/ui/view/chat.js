@@ -146,12 +146,14 @@ linphone.ui.view.chat = {
 				message.appdata = window.btoa(reader.result);
 			}
 			
+			var result;
+			
 			if(message.fileTransferInformation.type === 'image'){
 				var contentFile = 'data:image/'+ splitted_type[1] + ';base64,' + window.btoa(reader.result) ;
 				result = '<div><img src="'+ contentFile +'" class = "sentImage"></div>';
 			}
 	
-			element = linphone.ui.template(base, 'view.chat.actions.fileUpload', {
+			var element = linphone.ui.template(base, 'view.chat.actions.fileUpload', {
 				name: file.name,
 				size: file.size
 			});
@@ -385,9 +387,10 @@ linphone.ui.view.chat = {
 	onSendFileTransferProgressIndication: function(message, content, offset, total) {
 		var core = message.chatRoom.core;
 		var base = linphone.ui.core.instances[core.magic];
+		var chat = base.find('> .content .view > .chat');
 		
 		var progress = Math.round((offset * 100.0) / total) + "%";
-        $('.progress-bar').css('width',progress);
+        chat.find('.fileUpload .fileUploadSize .progress-bar').css('width',progress);
 	},
 	
 	onRecvFileTransferProgressIndication: function(chatMsg, content, offset, total) {
