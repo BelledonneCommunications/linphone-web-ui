@@ -56,12 +56,12 @@ linphone.ui.utils = {
 		switch (state) {
 			case linphone.ChatMessageState.Delivered:
 				img = 'imageSendChat';
-				break;
-			case linphone.ChatMessageState.InProgress:
-				img = 'imageInProgress';
-				break;
-			case linphone.ChatMessageState.NotDelivered:
-				img = 'imageErrorMessage';
+			break;
+		case linphone.ChatMessageState.InProgress:
+			img = 'imageInProgress';
+			break;
+		case linphone.ChatMessageState.NotDelivered:
+			img = 'imageErrorMessage';
 				break;
 		}
 		
@@ -114,20 +114,20 @@ linphone.ui.utils = {
 		return format;
 	},
 	formatFileSize: function (bytes) {
-            if (typeof bytes !== 'number') {
-            	if(typeof bytes === 'string'){
-            		bytes = parseInt(bytes);
-            	} else {
-            		return '';
-            	}         
-            }
-            if (bytes >= 1000000000) {
-                return (bytes / 1000000000).toFixed(2) + ' GB';
-            }
-            if (bytes >= 1000000) {
-                return (bytes / 1000000).toFixed(2) + ' MB';
-            }
-            return (bytes / 1000).toFixed(2) + ' KB';
+		if (typeof bytes !== 'number') {
+			if(typeof bytes === 'string'){
+				bytes = parseInt(bytes,10);
+			} else {
+				return '';
+			}         
+		}
+		if (bytes >= 1000000000) {
+			return (bytes / 1000000000).toFixed(2) + ' GB';
+		}
+		if (bytes >= 1000000) {
+			return (bytes / 1000000).toFixed(2) + ' MB';
+		}
+		return (bytes / 1000).toFixed(2) + ' KB';
     },
 	getTime: function(base, timestamp) {
 		var ret = jQuery.i18n.skeleton(jQuery.i18n.functionKey('linphone.ui.utils.getTimeFormat'), parseInt(timestamp, 10));
