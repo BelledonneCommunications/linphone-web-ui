@@ -139,7 +139,7 @@ linphone.ui.view.chat = {
 			var bytes = new Uint8Array(reader.result);
 			var length = bytes.byteLength;
 			for (var i = 0; i < length; i++) {
-			  binary += String.fromCharCode(bytes[i]);
+				binary += String.fromCharCode(bytes[i]);
 			}
 	
 			var content = core.createContent();
@@ -188,9 +188,7 @@ linphone.ui.view.chat = {
 			
 	
 		};
-		
-		console.log(input);
-		
+
 		if(typeof file !== 'undefined' && input.prop('files').length === 1){
 			reader.readAsArrayBuffer(file);
 		}	
