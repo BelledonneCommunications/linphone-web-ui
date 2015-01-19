@@ -162,7 +162,7 @@ linphone.ui.view.chat = {
 	
 			var element = linphone.ui.template(base, 'view.chat.actions.fileUpload', {
 				name: file.name,
-				size: file.size
+				size: linphone.ui.utils.formatFileSize(file.size)
 			});
 			element.find('.fileUploadPreviewMiddle').append(result);
 			

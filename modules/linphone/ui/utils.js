@@ -68,10 +68,10 @@ linphone.ui.utils = {
 		return img;
 	},
 	getChatSentFile: function(fileTransferInformation) {
-		return jQuery.i18n.translate('content.view.chat.sent_file') + fileTransferInformation.name + " - " + fileTransferInformation.size + " octets";
+		return jQuery.i18n.translate('content.view.chat.sent_file') + fileTransferInformation.name + " - " + linphone.ui.utils.formatFileSize(fileTransferInformation.size) + "";
 	},
 	getChatReceivedFile: function(fileTransferInformation) {
-		return jQuery.i18n.translate('content.view.chat.received_file') + fileTransferInformation.name + " - " + fileTransferInformation.size + " octets";
+		return jQuery.i18n.translate('content.view.chat.received_file') + fileTransferInformation.name + " - " + linphone.ui.utils.formatFileSize(fileTransferInformation.size) +"";
 	},
 	getTimeFormat: function(timestamp) {
 		var date = new Date(parseInt(timestamp, 10) * 1000);
@@ -113,6 +113,22 @@ linphone.ui.utils = {
 		format = format.replace(/Z/g, getTimeZone(values[6]));
 		return format;
 	},
+	formatFileSize: function (bytes) {
+            if (typeof bytes !== 'number') {
+            	if(typeof bytes === 'string'){
+            		bytes = parseInt(bytes);
+            	} else {
+            		return '';
+            	}         
+            }
+            if (bytes >= 1000000000) {
+                return (bytes / 1000000000).toFixed(2) + ' GB';
+            }
+            if (bytes >= 1000000) {
+                return (bytes / 1000000).toFixed(2) + ' MB';
+            }
+            return (bytes / 1000).toFixed(2) + ' KB';
+    },
 	getTime: function(base, timestamp) {
 		var ret = jQuery.i18n.skeleton(jQuery.i18n.functionKey('linphone.ui.utils.getTimeFormat'), parseInt(timestamp, 10));
 		return ret;
