@@ -117,7 +117,7 @@
 	background: #5d8398
 }
 
-.linphoneweb > .content .view > .chat .scroll-pane .imageErrorMessage:hover:before {
+.linphoneweb > .content .view > .chat .scroll-pane .resendMessage:hover:before {
     content: 'RENVOYER';
     background: #d97459;
     line-height: 26px;  
@@ -126,18 +126,16 @@
     margin-left: 26px;
 }
 
-
-
 .linphoneweb > .content .view > .chat .actions .button .inputFile input {
-position: absolute;
-top: 0;
-right: 0;
-margin: 0;
-opacity: 0;
--ms-filter: 'alpha(opacity=0)';
-font-size: 30px;
-cursor: pointer;
-width:180px
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 0;
+	opacity: 0;
+	-ms-filter: 'alpha(opacity=0)';
+	font-size: 30px;
+	cursor: pointer;
+	width:180px
 }
 
 .linphoneweb > .content .view > .chat .fileUpload{
@@ -169,7 +167,11 @@ width:180px
 	float:left;
 	margin-right:20px;
 	width:180px; 
-	padding-top:20px
+	padding-top:20px;
+	overflow: hidden;
+	-o-text-overflow: ellipsis;
+	text-overflow: ellipsis;
+	padding-bottom: 10px;
 }
 
 .linphoneweb > .content .view > .chat .fileUpload .fileUploadSize{
@@ -190,7 +192,6 @@ width:180px
 	background-color: #adbbc2;
 	height:20px;
 }
-
 
 .linphoneweb > .content .view > .chat .fileUpload .fileUploadActions{
 	padding-top:30px    

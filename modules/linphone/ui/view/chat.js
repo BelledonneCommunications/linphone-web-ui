@@ -204,6 +204,11 @@ linphone.ui.view.chat = {
 	},
 	
 	sendFileMessage: function(base,room,message){
+		var chat = base.find('> .content .view > .chat');
+		var actions = base.find('.actions');
+		
+		actions.find('.fileUpload .fileUploadActions .cancelUploadFile').hide();
+		
 		room.sendChatMessage(message);
 			
 		linphone.ui.core.addEvent(message,'msgStateChanged', linphone.ui.view.chat.onMsgStateChanged);
@@ -218,8 +223,7 @@ linphone.ui.view.chat = {
 		var room = message.chatRoom;
 		
 		var list = chat.find('.list');
-		element.remove();
-		
+		element.remove();	
 		var resentMessage = room.newMessage(message.text);
 		room.deleteMessage(message);
 		room.sendChatMessage(resentMessage);	
@@ -286,7 +290,8 @@ linphone.ui.view.chat = {
 		
 		list.append(element);
 		
-		if(message.state === linphone.ChatMessageState.NotDelivered){
+		if(message.state === linphone.ChatMessageState.NotDelivered && message.fileTransferInformation === null){
+			element.find('.infos .stateMessage .image').addClass('resendMessage');
 			element.find('.stateMessage .imageErrorMessage').click(linphone.ui.exceptionHandler(base,resendMessage(base,message,element)));
 		}
 		
@@ -308,9 +313,11 @@ linphone.ui.view.chat = {
 			});
 			
 			element.find('.download').show();
-			element.find('.download').click(linphone.ui.exceptionHandler(base, function() {
-				window.open(message.externalBodyUrl, '_blank'); 
-			}));
+			element.find('.download').attr({
+				'download': message.fileTransferInformation.name,
+				'href': message.externalBodyUrl,
+				'target': '_blank'
+			});
 		} else {
 			element = linphone.ui.template(base, 'view.chat.list.entry.received', {
 				img: 'style/img/avatar.jpg',
@@ -382,10 +389,10 @@ linphone.ui.view.chat = {
 				child.find('.infos .stateMessage .image').removeClass('imageInProgress');
 				child.find('.infos .stateMessage .image').addClass(linphone.ui.utils.getChatStateImg(state));
 
-				if(state === linphone.ChatMessageState.NotDelivered){
-					child.find('.infos .stateMessage .imageErrorMessage').click(linphone.ui.exceptionHandler(base,resendMessage(base,message,child)));
-				}
-				
+				if(state === linphone.ChatMessageState.NotDelivered && message.fileTransferInformation === null){
+					child.find('.infos .stateMessage .image').addClass('resendMessage');
+					child.find('.infos .stateMessage .imageErrorMessage').click(linphone.ui.exceptionHandler(base,resendMessage(base,message,child)));				
+				}			
 			}
 		}
 	},
