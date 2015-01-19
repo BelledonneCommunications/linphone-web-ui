@@ -134,22 +134,29 @@ linphone.ui.view.chat = {
 		actions.find('.messageToSend').hide();
 
 		var reader = new FileReader();
-		reader.onloadend = function(e) {		
+		reader.onloadend = function(e) {
+			var binary = "";
+			var bytes = new Uint8Array(reader.result);
+			var length = bytes.byteLength;
+			for (var i = 0; i < length; i++) {
+			  binary += String.fromCharCode(bytes[i]);
+			}
+	
 			var content = core.createContent();
 			var splitted_type = file.type.split("/");
 			content.name = file.name;
 			content.type = splitted_type[0];
 			content.subtype = splitted_type[1];
-			content.buffer = window.btoa(reader.result);
+			content.buffer = window.btoa(binary);
 			var message = room.newFileTransferMessage(content);
 			if(content.type === 'image'){
-				message.appdata = window.btoa(reader.result);
+				message.appdata = window.btoa(binary);
 			}
 			
 			var result;
 			
 			if(message.fileTransferInformation.type === 'image'){
-				var contentFile = 'data:image/'+ splitted_type[1] + ';base64,' + window.btoa(reader.result) ;
+				var contentFile = 'data:image/'+ splitted_type[1] + ';base64,' + window.btoa(binary) ;
 				result = '<div><img src="'+ contentFile +'" class = "sentImage"></div>';
 			}
 	
@@ -174,6 +181,7 @@ linphone.ui.view.chat = {
 				};
 			};
 			
+			actions.find('.fileUpload').empty();
 			actions.find('.fileUpload').append(element);
 			actions.find('.fileUpload .fileUploadActions .sendUploadFile').click(linphone.ui.exceptionHandler(base,sendFileMessage(base,room,message)));
 			actions.find('.fileUpload .fileUploadActions .cancelUploadFile').click(linphone.ui.exceptionHandler(base,cancelMessage(base,message)));
@@ -181,10 +189,10 @@ linphone.ui.view.chat = {
 	
 		};
 		
+		console.log(input);
 		
-		
-		if(typeof file !== 'undefined'){
-			reader.readAsBinaryString(file);
+		if(typeof file !== 'undefined' && input.prop('files').length === 1){
+			reader.readAsArrayBuffer(file);
 		}	
 	},
 	
