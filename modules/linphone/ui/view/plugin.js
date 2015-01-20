@@ -70,7 +70,7 @@ linphone.ui.view.plugin = {
 			jQuery.i18n.set(plugin.find('> .text'), 'content.view.plugin.text.mobile_application');
 			return;
 		}
-		if (navigator.userAgent.match(/Mobile|Firefox/i)){
+		if (navigator.userAgent.match(/Mobile/i)){
 			//Create a link to donwload the application in microsoft store		
 			jQuery.i18n.set(plugin.find('> .text'), 'content.view.plugin.text.mobile_others');
 			return;
