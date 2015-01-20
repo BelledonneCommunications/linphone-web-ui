@@ -86,11 +86,14 @@ linphone.ui.view.plugin = {
 					jQuery.i18n.set(plugin.find('> .text'), 'content.view.plugin.text.outdated_auto');
 					if (jQuery.client.os === "Windows"){
 						jQuery.i18n.set(plugin.find('> .textChrome'), 'content.view.plugin.text.auto_chrome_windows');
+						plugin.find('.action .download').show();
 					} else if (jQuery.client.os === "Mac"){
 						jQuery.i18n.set(plugin.find('> .textChrome'), 'content.view.plugin.text.auto_chrome_mac');
+						plugin.find('.action .download').show();
 					} else {
 						jQuery.i18n.set(plugin.find('> .textChrome'), 'content.view.plugin.text.auto_chrome_linux');
 					}
+					
 				} else {
 					plugin.find('.action .download').show();
 					jQuery.i18n.set(plugin.find('> .text'), 'content.view.plugin.text.outdated_download');
@@ -105,11 +108,14 @@ linphone.ui.view.plugin = {
 					jQuery.i18n.set(plugin.find('> .text'), 'content.view.plugin.text.auto');
 					if (jQuery.client.os === "Windows"){
 						jQuery.i18n.set(plugin.find('> .textChrome'), 'content.view.plugin.text.auto_chrome_windows');
+						plugin.find('.action .download').show();
 					} else if (jQuery.client.os === "Mac"){
 						jQuery.i18n.set(plugin.find('> .textChrome'), 'content.view.plugin.text.auto_chrome_mac');
+						plugin.find('.action .download').show();
 					} else {
 						jQuery.i18n.set(plugin.find('> .textChrome'), 'content.view.plugin.text.auto_chrome_linux');
 					}
+					
 				} else {
 					plugin.find('.action .download').show();
 					jQuery.i18n.set(plugin.find('> .text'), 'content.view.plugin.text.download');
