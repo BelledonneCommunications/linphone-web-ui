@@ -135,7 +135,7 @@
 	-ms-filter: 'alpha(opacity=0)';
 	font-size: 30px;
 	cursor: pointer;
-	width:180px
+	width:100%;
 }
 
 .linphoneweb > .content .view > .chat .fileUpload{
