@@ -346,5 +346,9 @@ linphone.ui.utils = {
 			}
 		}
 		return null;	
+	},
+	getIEVersion: function() {
+		var myNav = navigator.userAgent.toLowerCase();
+		return (myNav.indexOf('msie') !== -1) ? parseInt(myNav.split('msie')[1],10) : false;
 	}
 };

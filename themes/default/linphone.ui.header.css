@@ -12,6 +12,7 @@
 .linphoneweb > .header {
 	background: #23262a;
 	height: 70px;
+	min-width: 940px;
 }
 
 .linphoneweb > .header > .content {

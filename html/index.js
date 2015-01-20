@@ -123,6 +123,7 @@ function __linphone_init(base) {
 			history: new linphone.models.history.core.engine(base, debug)
 		},
 		disableChat: false,
+		disableChatFileTransfert: false,
 		disableConference: true,
 		disablePresence: false
 	};

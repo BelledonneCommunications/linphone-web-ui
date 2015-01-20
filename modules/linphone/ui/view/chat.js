@@ -75,6 +75,10 @@ linphone.ui.view.chat = {
 		actions.find('.fileUpload').hide();
 		actions.find('.messageToSend').show();
 		
+		if(linphone.ui.configuration(base).disableChatFileTransfert) {
+			chat.find('.actions .sendImage').hide();
+		}
+		
 		//Init text area
 		var textArea = actions.find('.messageToSend .textArea');
 		textArea.val('');

@@ -45,6 +45,7 @@
 	font-family: 'allerregular', arial, verdana, sans-serif;
 	font-size: 13pt; font-size: 1.3rem;
 	background-color: #e4edf2;
+	overflow: scroll;
 }
 
 .linphoneweb {
