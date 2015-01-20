@@ -82,8 +82,15 @@ linphone.ui.view.plugin = {
 					jQuery.i18n.set(plugin.find('> .text'), 'content.view.plugin.text.outdated_auto');
 				} else if (config.file.browser === 'Firefox') {
 					jQuery.i18n.set(plugin.find('> .text'), 'content.view.plugin.text.outdated_auto');
-				} else if (config.file.browser === 'Chrome') {
+				} else if (jQuery.client.browser === 'Chrome') {
 					jQuery.i18n.set(plugin.find('> .text'), 'content.view.plugin.text.outdated_auto');
+					if (jQuery.client.os === "Windows"){
+						jQuery.i18n.set(plugin.find('> .textChrome'), 'content.view.plugin.text.auto_chrome_windows');
+					} else if (jQuery.client.os === "Mac"){
+						jQuery.i18n.set(plugin.find('> .textChrome'), 'content.view.plugin.text.auto_chrome_mac');
+					} else {
+						jQuery.i18n.set(plugin.find('> .textChrome'), 'content.view.plugin.text.auto_chrome_linux');
+					}
 				} else {
 					plugin.find('.action .download').show();
 					jQuery.i18n.set(plugin.find('> .text'), 'content.view.plugin.text.outdated_download');
@@ -94,8 +101,15 @@ linphone.ui.view.plugin = {
 					jQuery.i18n.set(plugin.find('> .text'), 'content.view.plugin.text.auto_or_update');
 				} else if (config.file.browser === 'Firefox') {
 					jQuery.i18n.set(plugin.find('> .text'), 'content.view.plugin.text.auto');
-				} else if (config.file.browser === 'Chrome') {
+				} else if (jQuery.client.browser === 'Chrome') {
 					jQuery.i18n.set(plugin.find('> .text'), 'content.view.plugin.text.auto');
+					if (jQuery.client.os === "Windows"){
+						jQuery.i18n.set(plugin.find('> .textChrome'), 'content.view.plugin.text.auto_chrome_windows');
+					} else if (jQuery.client.os === "Mac"){
+						jQuery.i18n.set(plugin.find('> .textChrome'), 'content.view.plugin.text.auto_chrome_mac');
+					} else {
+						jQuery.i18n.set(plugin.find('> .textChrome'), 'content.view.plugin.text.auto_chrome_linux');
+					}
 				} else {
 					plugin.find('.action .download').show();
 					jQuery.i18n.set(plugin.find('> .text'), 'content.view.plugin.text.download');

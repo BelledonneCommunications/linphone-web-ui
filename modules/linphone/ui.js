@@ -111,10 +111,6 @@ linphone.ui = {
 		jQuery.extend(fconfig, config);
 		base.data('LinphoneWebConfig', fconfig);
 
-		if(linphone.ui.utils.getIEVersion === 9){
-			linphone.ui.configuration(base).disableChatFileTransfert = true;
-		}
-
 		/* Get persistent storage */
 		base.data('LinphoneWebPersistent', new PersistentStorage(fconfig.name, {}, 10000, fconfig.debug));
 		

@@ -520,6 +520,18 @@ linphone.ui.i18n = {
 						en_US : 'The plugin is not installed. Please wait and accept the automatic install of the plugin.',
 						fr_FR : 'Le plugin n\'est pas installé. Veuillez attendre et accepter l\'installation automatique du plugin.'
 					},
+					auto_chrome_mac : { 
+						en_US : 'Due to Google Chrome NPAPI plugin removal in September 2015, linphone-web preferred browsers are Firefox or Safari.',
+						fr_FR : 'En raison de la suppression du support de la NPAPI par Chrome en Septembre 2015, les navigateurs recommandés par linphone-web sont Firefox ou Safari'
+					},
+					auto_chrome_windows : { 
+						en_US : 'Due to Google Chrome NPAPI plugin removal in September 2015, linphone-web preferred browsers are Firefox or Internet Explorer.',
+						fr_FR : 'En raison de la suppression du support de la NPAPI par Chrome en Septembre 2015, les navigateurs recommandés par linphone-web sont Firefox ou Internet Explorer '
+					},
+					auto_chrome_linux : { 
+						en_US : 'Due to Google Chrome NPAPI plugin withdrawal, linphone-web preferred browser is Firefox.',
+						fr_FR : 'En raison de la suppression du support de la NPAPI par Chrome, le navigateur recommandé par linphone-web est Firefox'
+					},
 					auto_or_update : { // With IE, we can not detect the current version without issue (javascript caching)
 						en_US : 'The plugin is not installed or updated. Please wait a few seconds and click on the "Install" button of the popup that will appear at the bottom of this window. If you have already updated the plugin and still get this message, restart your browser.',
 						fr_FR : 'Le plugin n\'est pas installé ou pas à jour. Veuillez patienter quelques secondes et cliquez sur le bouton "Installer" de la fenêtre qui va apparaître en bas de votre navigateur. Si vous avez déjà mis le plugin à jour et que vous avez toujours ce message, redémarrez votre navigateur.'
