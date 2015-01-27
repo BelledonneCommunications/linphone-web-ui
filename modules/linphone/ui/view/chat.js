@@ -187,6 +187,7 @@ linphone.ui.view.chat = {
 			
 			actions.find('.fileUpload').empty();
 			actions.find('.fileUpload').append(element);
+			actions.find('.fileUpload .fileUploadSize .progress-bar').css('width',0);
 			actions.find('.fileUpload .fileUploadActions .sendUploadFile').click(linphone.ui.exceptionHandler(base,sendFileMessage(base,room,message)));
 			actions.find('.fileUpload .fileUploadActions .cancelUploadFile').click(linphone.ui.exceptionHandler(base,cancelMessage(base,message)));
 			

@@ -23,6 +23,15 @@
 	height: 100px;
 	margin: 30px auto;
 }
+
+.linphoneweb > .content .view > .install > .imageChrome {
+	background-image: url('img/imageChrome.png');
+	background-repeat: no-repeat;
+	width: 294px;
+	height: 207px;
+	margin: 10px auto;
+}
+
 .linphoneweb > .content .view > .install > .title {
 	font-size: 18pt;
 	margin-bottom: 20px;
