@@ -245,6 +245,9 @@ linphone.ui.view.login = {
 	getChatDatabaseFilename: function(base) {
 		return 'local:///.chatdb_' + linphone.ui.view.login.getAccount(base) + '@' + linphone.ui.view.login.getDomain(base);
 	},
+	getUserCertificatesPath: function(base) {
+		return 'local:///.usercerts_' + linphone.ui.view.login.getAccount(base) + '@' + linphone.ui.view.login.getDomain(base);
+	},
 	computeHash: function(base) {
 		var account = linphone.ui.view.login.getAccount(base);
 		var password = linphone.ui.view.login.getPassword(base);
@@ -300,6 +303,7 @@ linphone.ui.view.login = {
 		var domain = linphone.ui.view.login.getDomain(base);
 		var configFilename = linphone.ui.view.login.getConfigFilename(base);
 		var chatDbFilename = linphone.ui.view.login.getChatDatabaseFilename(base);
+		var userCertificatesPath = linphone.ui.view.login.getUserCertificatesPath(base);
 		core.fileManager.exists(configFilename, function(exist, error) {
 			var config = core.newLpConfig(configFilename);
 			if (exist) {
@@ -320,7 +324,7 @@ linphone.ui.view.login = {
 				}
 				config.setString('misc', 'config-uri', uri);
 				config.sync();
-				linphone.ui.view.login.startCore(base, configFilename,chatDbFilename);
+				linphone.ui.view.login.startCore(base, configFilename, chatDbFilename, userCertificatesPath);
 			}
 		});
 	},

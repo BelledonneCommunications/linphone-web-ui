@@ -475,7 +475,7 @@ linphone.ui.core = {
 		})();
 	},
 
-	start: function(core, configFilename, chatDbFilename) {
+	start: function(core, configFilename, chatDbFilename, userCertificatesPath) {
 		var base = linphone.ui.core.instances[core.magic];
 		linphone.ui.exceptionHandler(base, function() {
 			linphone.ui.core.addEvent(core, 'globalStateChanged', linphone.ui.core._globalStateChanged);
@@ -501,6 +501,7 @@ linphone.ui.core = {
 				linphone.ui.persistent(base).init_count = init_count;
 				core.rootCa = 'internal:///share/linphone/rootca.pem';
 				core.chatDatabasePath = chatDbFilename;
+				core.userCertificatesPath = userCertificatesPath;
 				core.fileTransferServer = "https://www.linphone.org:444/lft.php";
 
 				// Set network state
