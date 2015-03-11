@@ -103,7 +103,7 @@ linphone.ui.view.login = {
 
 		var username = linphone.ui.utils.readCookie("linphone-username");
 		var domain = linphone.ui.utils.readCookie("linphone-domain");
-		if(username !== 'undifined' && domain !== 'undifined'){
+		if(username && typeof username !== 'undefined' && domain && typeof domain !== 'undefined'){
 			var configFileName = 'local:///.linphonerc_' + username + '@' + domain;
 			var chatDbFilename = 'local:///.chatdb_' + username + '@' + domain;
 			core.fileManager.exists(configFileName, function(exist, error) {

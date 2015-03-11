@@ -334,7 +334,7 @@ linphone.ui.utils = {
 		if(document.cookie.length === 0){
 			return null;
 		}
-			
+
 		var regSepCookie = new RegExp('(; )', 'g');
 		var cookies = document.cookie.split(regSepCookie);
 		
@@ -345,7 +345,7 @@ linphone.ui.utils = {
 				return infos[1];
 			}
 		}
-		return null;	
+		return null;
 	},
 	getIEVersion: function() {
 		var myNav = navigator.userAgent.toLowerCase();
