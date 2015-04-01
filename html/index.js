@@ -74,6 +74,7 @@ function __linphone_init(base) {
 		name: 'Linphone Web',
 		version: pluginVersion,
 		webapp_version: getWebAppVersion(),
+		mimetype: 'x-linphone-web',
 		copyright: 'Copyright© Belledonne Communications 2013. All rights reserved.',
 		linphone_account: {
 			cls: 'createAccount',
@@ -132,10 +133,13 @@ function __linphone_init(base) {
 	config.logs = debug;
 	
 	// Enable debug only if lpdebug is set to true	
-	if(jQuery.getUrlVar('lpdebug') === '1' ||
+	if (jQuery.getUrlVar('lpdebug') === '1' ||
 		jQuery.getUrlVar('lpdebug') === 'true' ||
 		jQuery.getUrlVar('lpdebug') === 'yes') {
 		config.logs = true;
+	}
+	if (typeof jQuery.getUrlVar('mimetype') !== 'undefined') {
+		config.mimetype = jQuery.getUrlVar('mimetype');
 	}
 	linphone.ui.init(base, config);
 	linphone.ui.core.load(base);

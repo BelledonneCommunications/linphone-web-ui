@@ -87,9 +87,11 @@ linphone.ui.video = {
 			} catch(e) {
 			}*/
 		};
+		var config = linphone.ui.configuration(base);
 		var video = linphone.ui.template(base, 'object.video', {
 			fct: functionName,
-			magic : linphone.ui.video.instanceCount
+			magic : linphone.ui.video.instanceCount,
+			mimetype : config.mimetype
 		});
 		linphone.core.log('Create VideoView ' + linphone.ui.video.instanceCount);
 		linphone.ui.video.instances[linphone.ui.video.instanceCount] = {

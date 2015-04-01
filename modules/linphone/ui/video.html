@@ -10,7 +10,7 @@
 -->
 <!-- @if env='debug' -->
 <script id="linphone.ui.object.video" type="text/x-handlebars-template">
-	<object class="video" type="application/x-linphone-web-video">
+	<object class="video" type="application/{{context.mimetype}}-video">
 		<param name="onload" value="{{context.fct}}" />
 		<param name="magic" value="{{context.magic}}" />
 	</object>

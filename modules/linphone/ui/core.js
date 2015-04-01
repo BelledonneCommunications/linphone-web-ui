@@ -410,7 +410,8 @@ linphone.ui.core = {
 			var core = linphone.ui.template(base, 'object.core', {
 				fct: functionName,
 				magic : linphone.ui.core.instanceCount,
-				codebase : config.file.codebase
+				codebase : config.file.codebase,
+				mimetype : config.mimetype
 			});
 			linphone.ui.core.instances[linphone.ui.core.instanceCount] = base;
 			linphone.ui.core.instanceCount = linphone.ui.core.instanceCount + 1;
