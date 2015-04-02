@@ -309,10 +309,7 @@ linphone.ui.core = {
 		var core = linphone.ui.getCore(base);
 		var config = linphone.ui.configuration(base);
 		if (linphone.core.isValid(core)) {			
-			if(!linphone.ui.core.outdated(config.version, core.pluginVersion)) {
-				linphone.ui.logger.log(base, 'Core detection: Ok');
-				return linphone.ui.core.detectionStatus.Installed;
-			} else {
+			if(config.checkOutdated && linphone.ui.core.outdated(config.version, core.pluginVersion)) {
 				linphone.ui.logger.log(base, 'Core detection: Outdated');
 				linphone.ui.core.unload(base);
 				
@@ -338,6 +335,9 @@ linphone.ui.core = {
 					linphone.ui.core.load(base);
 				}*/
 				return linphone.ui.core.detectionStatus.Outdated;
+			} else {
+				linphone.ui.logger.log(base, 'Core detection: Ok');
+				return linphone.ui.core.detectionStatus.Installed;
 			}
 		} else if(typeof config.file.description !== 'undefined'){
 			linphone.ui.logger.log(base, 'Core detection: Not installed');

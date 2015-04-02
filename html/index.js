@@ -123,6 +123,7 @@ function __linphone_init(base) {
 			contacts: new linphone.models.contacts.core.engine(base, debug),
 			history: new linphone.models.history.core.engine(base, debug)
 		},
+		checkOutdated: true,
 		disableChat: false,
 		disableChatFileTransfert: false,
 		disableConference: true,
@@ -140,6 +141,7 @@ function __linphone_init(base) {
 	}
 	if (typeof jQuery.getUrlVar('mimetype') !== 'undefined') {
 		config.mimetype = jQuery.getUrlVar('mimetype');
+		config.checkOutdated = false;
 	}
 	linphone.ui.init(base, config);
 	linphone.ui.core.load(base);
