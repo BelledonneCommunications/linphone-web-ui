@@ -172,6 +172,8 @@ linphone.ui.view.call = {
 	},
 
 	activateVideoButton: function(base,call,isActivated){
+		base.find('> .content .view > .call .actions .videoEnabled .on').off('click');
+		base.find('> .content .view > .call .actions .videoEnabled .off').off('click');
 		var callView= base.find('> .content .view > .call');
 		if(isActivated){
 			callView.find('.actions .videoEnabled .on').click(linphone.ui.exceptionHandler(base, function(){
@@ -185,10 +187,8 @@ linphone.ui.view.call = {
 			base.find('> .content .view > .call .actions .videoEnabled .off').removeClass('inactive');
 			base.find('> .content .view > .call .actions .videoEnabled .on').removeClass('inactive');
 		} else {
-			base.find('> .content .view > .call .actions .videoEnabled .on').unbind("click");
-			base.find('> .content .view > .call .actions .videoEnabled .off').unbind("click");
-			base.find('> .content .view > .call .actions .videoEnabled .off').addClass('inactive');
 			base.find('> .content .view > .call .actions .videoEnabled .on').addClass('inactive');
+			base.find('> .content .view > .call .actions .videoEnabled .off').addClass('inactive');
 		}
 	},
 
