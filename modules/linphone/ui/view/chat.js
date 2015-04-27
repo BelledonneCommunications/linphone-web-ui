@@ -309,20 +309,36 @@ linphone.ui.view.chat = {
 		var list = base.find('> .content .view > .chat .list');
 		
 		var element;
-		if (message.fileTransferInformation !== null) {
-			element = linphone.ui.template(base, 'view.chat.list.entry.received', {
-				img: 'style/img/avatar.jpg',
-				date: linphone.ui.utils.getTimeFormat(message.time),
-				message: linphone.ui.utils.getChatReceivedFile(message.fileTransferInformation),
-				name: message.peerAddress.username + ":"
-			});
-			
-			element.find('.download').show();
-			element.find('.download').attr({
-				'download': message.fileTransferInformation.name,
-				'href': message.externalBodyUrl,
-				'target': '_blank'
-			});
+		if (message.fileTransferInformation !== null || message.externalBodyUrl !== null) {
+			if(message.fileTransferInformation !== null){
+				element = linphone.ui.template(base, 'view.chat.list.entry.received', {
+					img: 'style/img/avatar.jpg',
+					date: linphone.ui.utils.getTimeFormat(message.time),
+					message: linphone.ui.utils.getChatReceivedFile(message.fileTransferInformation),
+					name: message.peerAddress.username + ":"
+				});
+				
+				element.find('.download').show();
+				element.find('.download').attr({
+					'download': message.fileTransferInformation.name,
+					'href': message.externalBodyUrl,
+					'target': '_blank'
+				});
+			} else {
+				element = linphone.ui.template(base, 'view.chat.list.entry.received', {
+					img: 'style/img/avatar.jpg',
+					date: linphone.ui.utils.getTimeFormat(message.time),
+					message: "",
+					name: message.peerAddress.username + ":"
+				});
+				
+				element.find('.download').show();
+				element.find('.download').attr({
+					'download': "",
+					'href': message.externalBodyUrl,
+					'target': '_blank'
+				});
+			}			
 		} else {
 			element = linphone.ui.template(base, 'view.chat.list.entry.received', {
 				img: 'style/img/avatar.jpg',
