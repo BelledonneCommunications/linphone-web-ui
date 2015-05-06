@@ -510,6 +510,24 @@ linphone.ui.i18n = {
 					}
 				}
 			},
+			browserdownload: {
+				firefox : {
+					en_US : 'Download Firefox',
+					fr_FR : 'Télécharger Firefox'
+				},
+				ie : {
+					en_US : 'Download Internet Explorer',
+					fr_FR : 'Télécharger Internet Explorer'
+				}
+			},
+			chromesponsor : {
+				en_US : 'A solution not using the NPAPI is currently evaluated. Please contact ',
+				fr_FR : 'Une solution n\'utilisant pas la NPAPI est actuellement en cours d\'évaluation. Veuillez contacter '
+			},
+			chromesponsorEnd : {
+				en_US : ' if you are interested in sponsoring this project.',
+				fr_FR : ' si vous souhaitez soutenir ce projet.'
+			},
 			plugin: {
 				download: {
 					en_US : 'Download',
@@ -525,16 +543,16 @@ linphone.ui.i18n = {
 						fr_FR : 'Le plugin n\'est pas installé. Veuillez attendre et accepter l\'installation automatique du plugin.'
 					},
 					auto_chrome_mac : { 
-						en_US : '*Due to Google Chrome NPAPI plugin removal in September 2015, linphone-web preferred browsers are Firefox or Safari.',
-						fr_FR : '*En raison de la suppression du support de la NPAPI par Chrome prévu pour Septembre 2015, les navigateurs recommandés par linphone-web sont Firefox ou Safari'
+						en_US : 'Due to recent removal of NPAPI support in Google Chrome, linphone-web no longer works with this browser. We invite you to switch to Firefox or Safari.',
+						fr_FR : 'En raison de la suppression récente du support de la NPAPI dans Google Chrome, linphone-web ne fonctionne plus avec ce navigateur. Nous vous invitons à passer à Firefox ou à Safari.'
 					},
 					auto_chrome_windows : { 
-						en_US : '*Due to Google Chrome NPAPI plugin removal in September 2015, linphone-web preferred browsers are Firefox or Internet Explorer.',
-						fr_FR : '*En raison de la suppression du support de la NPAPI par Chrome prévu pour Septembre 2015, les navigateurs recommandés par linphone-web sont Firefox ou Internet Explorer '
+						en_US : 'Due to recent removal of NPAPI support in Google Chrome, linphone-web no longer works with this browser. We invite you to switch to Firefox or Internet Explorer.',
+						fr_FR : 'En raison de la suppression récente du support de la NPAPI dans Google Chrome, linphone-web ne fonctionne plus avec ce navigateur. Nous vous invitons à passer à Firefox ou à Internet Explorer.'
 					},
 					auto_chrome_linux : { 
-						en_US : '*Due to Google Chrome NPAPI plugin withdrawal, linphone-web preferred browser is Firefox.',
-						fr_FR : '*En raison de la suppression du support de la NPAPI par Chrome, le navigateur recommandé par linphone-web est Firefox'
+						en_US : 'Due to recent removal of NPAPI support in Google Chrome, linphone-web no longer works with this browser. We invite you to switch to Firefox.',
+						fr_FR : 'En raison de la suppression récente du support de la NPAPI dans Google Chrome, linphone-web ne fonctionne plus avec ce navigateur. Nous vous invitons à passer à Firefox.'
 					},
 					auto_or_update : { // With IE, we can not detect the current version without issue (javascript caching)
 						en_US : 'The plugin is not installed or updated. Please wait a few seconds and click on the "Install" button of the popup that will appear at the bottom of this window. If you have already updated the plugin and still get this message, restart your browser.',

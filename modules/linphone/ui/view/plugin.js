@@ -23,7 +23,13 @@ linphone.ui.view.plugin = {
 		base.find('> .content .view > .plugin .download').click(linphone.ui.exceptionHandler(base, function(){
 			linphone.ui.view.plugin.download(base);
 			linphone.ui.view.show(base, 'install');
-		}));	
+		}));
+		base.find('> .content .view > .plugin .browserdownload .firefox').click(linphone.ui.exceptionHandler(base, function(){
+			window.open('https://www.mozilla.org/firefox/desktop/', '_blank');
+		}));
+		base.find('> .content .view > .plugin .browserdownload .ie').click(linphone.ui.exceptionHandler(base, function(){
+			window.open('http://windows.microsoft.com/en-us/internet-explorer/download-ie', '_blank');
+		}));
 	},
 	translate: function(base) {
 		
@@ -42,6 +48,7 @@ linphone.ui.view.plugin = {
 		var elem;
 		plugin.find('.action .download').hide();
 		plugin.find('.action .reload').hide();
+		plugin.find('.chromesponsor').hide();
 		
 		if (navigator.userAgent.match(/Android/i)){
 			//Create a link to donwload the application in GooglePlay	
@@ -76,6 +83,8 @@ linphone.ui.view.plugin = {
 			return;
 		}
 		plugin.find('.action .reload').show();
+		plugin.find('.browserdownload .firefox').hide();
+		plugin.find('.browserdownload .ie').hide();
 		switch(ret) {
 			case linphone.ui.core.detectionStatus.Outdated:
 				if (config.file.browser === 'Explorer') {
@@ -83,17 +92,19 @@ linphone.ui.view.plugin = {
 				} else if (config.file.browser === 'Firefox') {
 					jQuery.i18n.set(plugin.find('> .text'), 'content.view.plugin.text.outdated_auto');
 				} else if (jQuery.client.browser === 'Chrome') {
-					jQuery.i18n.set(plugin.find('> .text'), 'content.view.plugin.text.outdated_download');
+					plugin.find('> .text').hide();
+					plugin.find('.action').hide();
+					plugin.find('.chromesponsor').show();
 					if (jQuery.client.os === "Windows"){
 						jQuery.i18n.set(plugin.find('> .textChrome'), 'content.view.plugin.text.auto_chrome_windows');
-						plugin.find('.action .download').show();
+						plugin.find('.browserdownload .firefox').show();
+						plugin.find('.browserdownload .ie').show();
 					} else if (jQuery.client.os === "Mac"){
 						jQuery.i18n.set(plugin.find('> .textChrome'), 'content.view.plugin.text.auto_chrome_mac');
-						plugin.find('.action .download').show();
+						plugin.find('.browserdownload .firefox').show();
 					} else {
 						jQuery.i18n.set(plugin.find('> .textChrome'), 'content.view.plugin.text.auto_chrome_linux');
-					}
-					
+					}					
 				} else {
 					plugin.find('.action .download').show();
 					jQuery.i18n.set(plugin.find('> .text'), 'content.view.plugin.text.outdated_download');
@@ -105,17 +116,19 @@ linphone.ui.view.plugin = {
 				} else if (config.file.browser === 'Firefox') {
 					jQuery.i18n.set(plugin.find('> .text'), 'content.view.plugin.text.auto');
 				} else if (jQuery.client.browser === 'Chrome') {
-					jQuery.i18n.set(plugin.find('> .text'), 'content.view.plugin.text.download');
+					plugin.find('> .text').hide();
+					plugin.find('.action').hide();
+					plugin.find('.chromesponsor').show();
 					if (jQuery.client.os === "Windows"){
 						jQuery.i18n.set(plugin.find('> .textChrome'), 'content.view.plugin.text.auto_chrome_windows');
-						plugin.find('.action .download').show();
+						plugin.find('.browserdownload .firefox').show();
+						plugin.find('.browserdownload .ie').show();
 					} else if (jQuery.client.os === "Mac"){
 						jQuery.i18n.set(plugin.find('> .textChrome'), 'content.view.plugin.text.auto_chrome_mac');
-						plugin.find('.action .download').show();
+						plugin.find('.browserdownload .firefox').show();
 					} else {
 						jQuery.i18n.set(plugin.find('> .textChrome'), 'content.view.plugin.text.auto_chrome_linux');
 					}
-					
 				} else {
 					plugin.find('.action .download').show();
 					jQuery.i18n.set(plugin.find('> .text'), 'content.view.plugin.text.download');
