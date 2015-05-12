@@ -17,7 +17,6 @@ linphone.ui.view.install = {
 	},
 	uiInit: function(base) {
 		base.find('> .content .view > .install').data('linphoneweb-view', linphone.ui.view.install);
-		base.find('> .content .view > .install .imageChrome').hide();
 		base.find('> .content .view > .install .reload').click(linphone.ui.exceptionHandler(base, function(){
 			linphone.ui.core.reload(base);
 		}));
@@ -33,20 +32,9 @@ linphone.ui.view.install = {
 		var config = linphone.ui.configuration(base);
 		var install = base.find('> .content .view > .install');
 		if (jQuery.client.os === 'Windows') {
-			if (jQuery.client.browser === 'Chrome') {
-				install.find('.imageChrome').show();
-				jQuery.i18n.set(install.find('> .text'), 'content.view.install.text.install_mac_chrome');
-			} else {
-				jQuery.i18n.set(install.find('> .text'), 'content.view.install.text.install_windows');
-			}
-			
+			jQuery.i18n.set(install.find('> .text'), 'content.view.install.text.install_windows');
 		} else if (jQuery.client.os === 'Mac') {
-			if (jQuery.client.browser === 'Chrome') {
-				install.find('.imageChrome').show();
-				jQuery.i18n.set(install.find('> .text'), 'content.view.install.text.install_mac_chrome');
-			} else {
-				jQuery.i18n.set(install.find('> .text'), 'content.view.install.text.install_mac');
-			}
+			jQuery.i18n.set(install.find('> .text'), 'content.view.install.text.install_mac');
 		} else if (jQuery.client.os === 'Linux') {
 			jQuery.i18n.set(install.find('> .text'), 'content.view.install.text.install_tar_gz');
 		}

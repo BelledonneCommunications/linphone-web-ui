@@ -500,10 +500,6 @@ linphone.ui.i18n = {
 						en_US : 'Run the installer you just downloaded. Once the installation finishes, click on "Reload" button below.',
 						fr_FR : 'Exécutez le fichier que vous venez de télécharger. Une fois l\'installation terminée, cliquez sur le bouton "Recharger" ci-dessous.'
 					},
-					install_mac_chrome : {
-						en_US : 'Run the installer you just downloaded. Once the installation finishes, make sure the plugin is  activated and click on "Reload" button below.',
-						fr_FR : 'Exécutez le fichier que vous venez de télécharger. Une fois l\'installation terminée, verifier que le plugin est bien activé et cliquez sur le bouton "Recharger" ci-dessous.'
-					},
 					install_tar_gz : {
 						en_US : 'If it doesn\'t exist yet, create the .mozilla/plugins/ folder in your home directory (~). Then extract the archive you just downloaded inside this folder. Finally, click on the "Refresh" button below.',
 						fr_FR : 'S\'il n\'existe pas déjà, créez le dossier .mozilla/plugins/ dans votre répertoire maison (~). Ensuite décompressez l\'archive que vous venez de télécharger à l\'intérieur de ce dossier. Pour finir, cliquez sur le bouton "Recharger" ci-dessous.'
