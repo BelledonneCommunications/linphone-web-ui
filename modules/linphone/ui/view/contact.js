@@ -30,8 +30,7 @@ linphone.ui.view.contact = {
 	},
 	translate: function(base) {
 		var contact = base.find('> .content .view > .contact');
-		contact.find('.firstname').watermark(jQuery.i18n.translate('content.view.contact.firstname'), {className: 'watermark', useNative: false});
-		contact.find('.lastname').watermark(jQuery.i18n.translate('content.view.contact.lastname'), {className: 'watermark', useNative: false});
+		contact.find('.name').watermark(jQuery.i18n.translate('content.view.contact.name'), {className: 'watermark', useNative: false});
 		contact.find('.addressInput').watermark(jQuery.i18n.translate('content.view.contact.addressContact'), {className: 'watermark', useNative: false});
 	},
 	
@@ -44,8 +43,7 @@ linphone.ui.view.contact = {
 	},
 	clear: function(base){
 		var contact = base.find('> .content .view > .contact .entry');
-		contact.find('.lastname').val('');
-		contact.find('.firstname').val('');
+		contact.find('.name').val('');
 		contact.find('.addressInput').val('');
 		contact.find('.showPresence').prop('checked', false);
 		contact.find('.allowPresence').prop('checked', false);
@@ -71,7 +69,7 @@ linphone.ui.view.contact = {
 		//edit account
 		} else {
 			base.find('> .content .view > .contact .removeContact').show();
-			contact.find('.firstname').val(friend.name);
+			contact.find('.name').val(friend.name);
 			contact.find('.addressInput').val(friend.address.asStringUriOnly());
 			contact.data('friend',friend);
 			contact.find('.showPresence').prop('checked', friend.subscribesEnabled);
@@ -92,7 +90,7 @@ linphone.ui.view.contact = {
         var core = linphone.ui.getCore(base);
 		var addressVal = contact.find('.addressInput').val();
 		var data = contact.data('friend');
-		var name = contact.find('.firstname').val();
+		var name = contact.find('.name').val();
 		var showPresence = false;
 		var allowPresence = linphone.SubscribePolicy.Deny;
 		var address;

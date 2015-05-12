@@ -197,12 +197,8 @@ linphone.ui.i18n = {
 					en_US : 'SIP or phone number',
 					fr_FR : 'SIP ou numéro de télephone'
 				},
-				firstname: {
-					en_US : 'First name',
-					fr_FR : 'Prénom'
-				},
-				lastname: {
-					en_US : 'Last name',
+				name: {
+					en_US : 'Name',
 					fr_FR : 'Nom'
 				},
 				remove: {
