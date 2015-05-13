@@ -240,13 +240,25 @@ linphone.ui.view.login = {
 		}
 	},
 	getConfigFilename: function(base) {
-		return 'local:///.linphonerc_' + linphone.ui.view.login.getAccount(base) + '@' + linphone.ui.view.login.getDomain(base);
+		if (linphone.ui.view.login.isSimpleState(base)) {
+			return 'local:///.linphonerc_' + linphone.ui.view.login.getAccount(base);
+		} else {
+			return 'local:///.linphonerc_' + linphone.ui.view.login.getAccount(base) + '@' + linphone.ui.view.login.getDomain(base);
+		}
 	},
 	getChatDatabaseFilename: function(base) {
-		return 'local:///.chatdb_' + linphone.ui.view.login.getAccount(base) + '@' + linphone.ui.view.login.getDomain(base);
+		if (linphone.ui.view.login.isSimpleState(base)) {
+			return 'local:///.chatdb_' + linphone.ui.view.login.getAccount(base);
+		} else {
+			return 'local:///.chatdb_' + linphone.ui.view.login.getAccount(base) + '@' + linphone.ui.view.login.getDomain(base);
+		}
 	},
 	getUserCertificatesPath: function(base) {
-		return 'local:///.usercerts_' + linphone.ui.view.login.getAccount(base) + '@' + linphone.ui.view.login.getDomain(base);
+		if (linphone.ui.view.login.isSimpleState(base)) {
+			return 'local:///.usercerts_' + linphone.ui.view.login.getAccount(base);
+		} else {
+			return 'local:///.usercerts_' + linphone.ui.view.login.getAccount(base) + '@' + linphone.ui.view.login.getDomain(base);
+		}
 	},
 	computeHash: function(base) {
 		var account = linphone.ui.view.login.getAccount(base);
@@ -306,7 +318,7 @@ linphone.ui.view.login = {
 		var userCertificatesPath = linphone.ui.view.login.getUserCertificatesPath(base);
 		core.fileManager.exists(configFilename, function(exist, error) {
 			var config = core.newLpConfig(configFilename);
-			if (exist) {
+			if (exist && linphone.ui.view.login.isSimpleState(base)) {
 				var password = linphone.ui.view.login.getPassword(base);
 				var hash = linphone.ui.view.login.computeHash(base);
 				var storedHash = config.getString('app', 'identity_hash', '');
@@ -321,6 +333,8 @@ linphone.ui.view.login = {
 					uri += 'simple.xml';
 				} else {
 					uri += 'advanced.xml';
+					config.cleanSection('proxy_0');
+					config.cleanSection('auth_info_0');
 				}
 				config.setString('misc', 'config-uri', uri);
 				config.sync();
