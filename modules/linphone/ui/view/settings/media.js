@@ -57,6 +57,7 @@ linphone.ui.view.settings.media = {
 
 		
 		// Sound
+		core.reloadSoundDevices();
 		var sound_devices = core.soundDevices;
 		for ( var sound_index in sound_devices) {
 			var sound_device = sound_devices[sound_index];
@@ -84,6 +85,7 @@ linphone.ui.view.settings.media = {
 		media.find('.devices .record select').val(selected_capture_device);
 
 		// Video
+		core.reloadVideoDevices();
 		var video_devices = linphone.ui.view.settings.media.unique(core.videoDevices);
 		for ( var video_index in video_devices) {
 			var video_device = video_devices[video_index];
