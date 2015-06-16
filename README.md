@@ -18,8 +18,8 @@ following command:
 
     npm install
 
-When theses tools are installed you have to "compile" the Web project using
-the following command in the `./Web/` directory:
+When these tools are installed you have to "compile" the Web project using
+the following command:
 
     grunt
 
